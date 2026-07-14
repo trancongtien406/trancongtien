@@ -43,3 +43,13 @@ next-env.d.ts
 /lib/generated/prisma
 
 package-lock.json
+
+# local databases
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# runtime uploads
+/uploads
+/public/uploads

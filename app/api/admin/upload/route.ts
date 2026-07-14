@@ -3,6 +3,7 @@ import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { requireAdmin } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import { getUploadDir, getUploadUrl, safeUploadName } from "@/lib/uploads";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -19,12 +20,12 @@ export async function POST(req: Request) {
     }
 
     const bytes = Buffer.from(await file.arrayBuffer());
-    const safeName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, "_")}`;
-    const dir = path.join(process.cwd(), "public", "uploads");
+    const safeName = safeUploadName(file.name);
+    const dir = getUploadDir();
     await mkdir(dir, { recursive: true });
     await writeFile(path.join(dir, safeName), bytes);
 
-    const url = `/uploads/${safeName}`;
+    const url = getUploadUrl(safeName);
     const media = await prisma.media.create({
       data: {
         filename: file.name,
