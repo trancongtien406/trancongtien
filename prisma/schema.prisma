@@ -1,0 +1,254 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum ContentStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum ContentType {
+  PAGE
+  BLOG
+  PROJECT
+  SERVICE
+  RESOURCE
+  TESTIMONIAL
+  PROCESS
+}
+
+enum BookingStatus {
+  NEW
+  CONTACTED
+  SCHEDULED
+  DONE
+  CANCELLED
+}
+
+enum NotificationChannel {
+  EMAIL
+  SMS
+  SYSTEM
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         String   @default("ADMIN")
+  avatarUrl    String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  posts        Post[]
+  media        Media[]
+  notifications Notification[]
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+  posts       Post[]
+  projects    Project[]
+}
+
+model Post {
+  id          String        @id @default(cuid())
+  title       String
+  slug        String        @unique
+  excerpt     String
+  content     String
+  coverUrl    String?
+  tags        String        @default("[]")
+  status      ContentStatus @default(DRAFT)
+  readTime    String        @default("5 phút đọc")
+  publishedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  authorId    String?
+  author      User?         @relation(fields: [authorId], references: [id])
+  categoryId  String?
+  category    Category?     @relation(fields: [categoryId], references: [id])
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  title       String
+  slug        String        @unique
+  category    String
+  description String
+  content     String        @default("")
+  coverUrl    String?
+  features    String        @default("[]")
+  stack       String        @default("[]")
+  role        String?
+  timeframe   String?
+  platform    String?
+  tone        String        @default("bg-violet-50")
+  status      ContentStatus @default(PUBLISHED)
+  sortOrder   Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  categoryId  String?
+  categoryRef Category?     @relation(fields: [categoryId], references: [id])
+}
+
+model Service {
+  id          String        @id @default(cuid())
+  number      String
+  title       String
+  slug        String        @unique
+  description String
+  items       String        @default("[]")
+  color       String        @default("bg-blue-50 text-blue-600")
+  status      ContentStatus @default(PUBLISHED)
+  sortOrder   Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Resource {
+  id          String        @id @default(cuid())
+  title       String
+  slug        String        @unique
+  category    String
+  description String
+  meta        String?
+  coverUrl    String?
+  downloadUrl String?
+  free        Boolean       @default(true)
+  status      ContentStatus @default(PUBLISHED)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Testimonial {
+  id        String        @id @default(cuid())
+  quote     String
+  name      String
+  role      String
+  avatarUrl String?
+  status    ContentStatus @default(PUBLISHED)
+  sortOrder Int           @default(0)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+model ProcessStep {
+  id        String        @id @default(cuid())
+  step      String
+  title     String
+  tasks     String
+  time      String
+  status    ContentStatus @default(PUBLISHED)
+  sortOrder Int           @default(0)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+model Booking {
+  id          String        @id @default(cuid())
+  name        String
+  email       String
+  phone       String?
+  projectType String?
+  budget      String?
+  timeline    String?
+  message     String
+  status      BookingStatus @default(NEW)
+  scheduledAt DateTime?
+  notes       String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Media {
+  id           String   @id @default(cuid())
+  filename     String
+  url          String
+  alt          String   @default("")
+  mimeType     String
+  size         Int      @default(0)
+  uploadedById String?
+  uploadedBy   User?    @relation(fields: [uploadedById], references: [id])
+  createdAt    DateTime @default(now())
+}
+
+model SiteSetting {
+  id           String @id @default("default")
+  siteName     String @default("TRAN CONG TIEN")
+  tagline      String @default("Product Engineering Studio")
+  email        String @default("trancongtien406@gmail.com")
+  phone        String @default("+84 382 802 406")
+  location     String @default("Đà Nẵng, Việt Nam")
+  zaloUrl      String @default("https://zalo.me/0382802406")
+  notifyEmail  String @default("trancongtien406@gmail.com")
+  notifyPhone  String @default("+84382802406")
+  seoTitle     String?
+  seoDescription String?
+  logoUrl      String?
+  faviconUrl   String?
+}
+
+model Notification {
+  id        String              @id @default(cuid())
+  title     String
+  body      String
+  channel   NotificationChannel @default(SYSTEM)
+  read      Boolean             @default(false)
+  meta      String              @default("{}")
+  userId    String?
+  user      User?               @relation(fields: [userId], references: [id])
+  createdAt DateTime            @default(now())
+}
+
+model PageContent {
+  id        String        @id @default(cuid())
+  key       String        @unique
+  title     String
+  body      String        @default("")
+  data      String        @default("{}")
+  status    ContentStatus @default(PUBLISHED)
+  updatedAt DateTime      @updatedAt
+  createdAt DateTime      @default(now())
+}
+
+model Faq {
+  id        String        @id @default(cuid())
+  question  String
+  answer    String
+  status    ContentStatus @default(PUBLISHED)
+  sortOrder Int           @default(0)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+model CoreValue {
+  id          String        @id @default(cuid())
+  title       String
+  description String
+  status      ContentStatus @default(PUBLISHED)
+  sortOrder   Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model JourneyItem {
+  id          String        @id @default(cuid())
+  year        String
+  title       String
+  description String
+  status      ContentStatus @default(PUBLISHED)
+  sortOrder   Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}

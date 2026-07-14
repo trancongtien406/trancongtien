@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <defs>
+    <linearGradient id="tf" x1="6" y1="6" x2="26" y2="28" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF4D6D"/>
+      <stop offset="0.55" stop-color="#E879F9"/>
+      <stop offset="1" stop-color="#A78BFA"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="8" fill="#12233F"/>
+  <rect x="7" y="8" width="14.5" height="4.4" rx="2.2" fill="url(#tf)"/>
+  <rect x="20.5" y="6.8" width="4.8" height="2.6" rx="1.3" fill="#FBCFE8"/>
+  <path d="M13.6 13c0-.7.55-1.25 1.25-1.25h1.9c.7 0 1.25.55 1.25 1.25v9c0 1.1-.9 2-2 2h-.45c-1.1 0-2-.9-2-2v-9z" fill="url(#tf)"/>
+  <ellipse cx="16" cy="25" rx="1.8" ry="1.1" fill="#C4B5FD"/>
+</svg>
