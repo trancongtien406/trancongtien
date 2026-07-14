@@ -82,7 +82,7 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="prose-article mt-8 space-y-4 text-base leading-relaxed text-ink-muted">
             <p>{post.excerpt}</p>
             <div
-              className="admin-prose space-y-3 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-ink [&_h3]:font-display [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-ink [&_img]:my-4 [&_img]:rounded-2xl [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5"
+              className="admin-prose space-y-5 [&_a]:font-semibold [&_a]:text-brand [&_blockquote]:border-l-4 [&_blockquote]:border-brand [&_blockquote]:bg-brand-soft/50 [&_blockquote]:px-5 [&_blockquote]:py-4 [&_blockquote]:italic [&_blockquote]:text-ink-muted [&_h2]:pt-4 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:leading-tight [&_h2]:text-ink [&_h3]:pt-2 [&_h3]:font-display [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-ink [&_img]:my-6 [&_img]:rounded-2xl [&_li]:pl-1 [&_ol]:list-decimal [&_ol]:space-y-2 [&_ol]:pl-6 [&_p]:text-ink-muted [&_strong]:font-semibold [&_strong]:text-ink [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-6"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
             <h2 className="font-display text-2xl font-bold text-ink">
