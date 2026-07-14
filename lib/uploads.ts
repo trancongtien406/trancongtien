@@ -17,5 +17,5 @@ export function safeUploadName(filename: string) {
 }
 
 export function getUploadUrl(filename: string) {
-  return `/api/uploads/${filename}`;
+  return `/uploads/${filename}`;
 }
