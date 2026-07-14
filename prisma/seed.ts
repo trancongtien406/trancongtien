@@ -29,6 +29,17 @@ async function main() {
     },
   });
 
+  const caseStudyHtml = ({
+    problem,
+    solution,
+    result,
+  }: {
+    problem: string;
+    solution: string;
+    result: string;
+  }) =>
+    `<h2>Bài toán</h2><p>${problem}</p><h2>Giải pháp</h2><p>${solution}</p><h2>Kết quả</h2><p>${result}</p>`;
+
   await prisma.siteSetting.upsert({
     where: { id: "default" },
     update: {},
@@ -38,9 +49,9 @@ async function main() {
       notifyPhone: process.env.NOTIFY_PHONE || "+84382802406",
       logoUrl: "/icon.png",
       faviconUrl: "/favicon.ico",
-      seoTitle: "TRAN CONG TIEN | Product Engineering Studio",
+      seoTitle: "TRAN CONG TIEN | Full-stack Developer & AI Agent Builder",
       seoDescription:
-        "Studio kỹ thuật sản phẩm giúp startup biến ý tưởng thành sản phẩm số thực tế.",
+        "Full-stack developer tại Đà Nẵng chuyên thiết kế website, app ứng dụng và hệ thống AI Agent thực tế.",
     },
   });
 
@@ -48,7 +59,7 @@ async function main() {
     { name: "Tự duy sản phẩm", slug: "tu-duy-san-pham" },
     { name: "Kiến trúc hệ thống", slug: "kien-truc-he-thong" },
     { name: "Frontend", slug: "frontend" },
-    { name: "AI & Sản phẩm", slug: "ai-san-pham" },
+    { name: "AI Agent", slug: "ai-san-pham" },
   ];
   for (const c of cats) {
     await prisma.category.upsert({
@@ -72,58 +83,69 @@ async function main() {
   const posts = [
     {
       slug: "kien-truc-microservices",
-      title: "Kiến trúc Microservices cho startup: Khi nào nên và không nên?",
+      title: "Kiến trúc Full-stack cho MVP: Bắt đầu gọn nhưng vẫn dễ mở rộng",
       excerpt:
-        "Phân tích thực chiến về khi nào tách service mang lại giá trị, và khi nào monolith vẫn thông minh hơn.",
+        "Cách chọn kiến trúc web/app cho giai đoạn đầu: monolith có tổ chức, API rõ ràng và database đủ linh hoạt để scale.",
       content:
-        "## Tổng quan\nMicroservices không phải mặc định cho mọi startup.\n\n## Khi nào nên\n- Team lớn, domain rõ\n- Scale độc lập\n\n## Khi nào không\n- MVP giai đoạn sớm\n- Team nhỏ",
+        "## Bài toán\nStartup cần ship nhanh nhưng vẫn sợ code thành nợ kỹ thuật.\n\n## Cách tiếp cận\n- Bắt đầu bằng monolith có module rõ\n- Tách API boundary từ sớm\n- Chuẩn hóa auth, logging và background job\n\n## Khi nào tách service\nChỉ tách khi domain đã rõ, team đủ người và bottleneck thật sự xuất hiện.",
       coverUrl: "/images/illustrations/services-devices.png",
-      tags: JSON.stringify(["Kiến trúc", "Backend"]),
+      coverAlt:
+        "Mockup nhiều thiết bị hiển thị giao diện web app full-stack cho MVP startup",
+      tags: JSON.stringify(["Full-stack", "MVP", "Architecture"]),
       categoryId: arch?.id,
       readTime: "8 phút đọc",
     },
     {
       slug: "nextjs-14-app-router",
-      title: "Next.js App Router trong sản phẩm thật: Bài học sau 3 dự án",
+      title: "Xây dashboard bằng Next.js: Những pattern tôi dùng trong dự án thật",
       excerpt:
-        "Những pattern hiệu quả với Server Components, caching và SEO khi dùng App Router ở production.",
+        "Tổ chức Server Components, route handlers, upload media và SEO để dashboard quản trị chạy ổn định trong production.",
       content:
-        "## Server Components\nƯu tiên RSC cho trang nội dung.\n\n## Caching\nHiểu revalidate và force-dynamic khi có upload.",
+        "## Server Components\nDùng Server Components cho trang đọc dữ liệu và Client Components cho phần tương tác.\n\n## Mutation\nRoute handlers phù hợp khi cần toast, modal và refresh trong dashboard.\n\n## SEO\nMetadata, sitemap và schema nên được chuẩn hóa thành helper dùng lại.",
       coverUrl: "/images/illustrations/blog-hero-desk.png",
-      tags: JSON.stringify(["Next.js", "Frontend"]),
+      coverAlt:
+        "Không gian làm việc với laptop hiển thị dashboard quản trị Next.js",
+      tags: JSON.stringify(["Next.js", "Dashboard", "Full-stack"]),
       categoryId: frontend?.id,
       readTime: "10 phút đọc",
     },
     {
       slug: "clean-code-product",
-      title: "Clean Code không đủ: Tư duy sản phẩm trong từng pull request",
+      title: "Thiết kế app trước khi code: Flow, wireframe và trạng thái rỗng",
       excerpt:
-        "Kết hợp kỹ thuật sạch với mục tiêu kinh doanh để mỗi thay đổi tạo ra giá trị đo được.",
-      content: "## Outcome over output\nMỗi PR nên trả lời: giá trị người dùng là gì?",
+        "Một checklist ngắn để biến ý tưởng app thành flow rõ ràng trước khi bắt đầu frontend/backend.",
+      content:
+        "## Tại sao cần thiết kế trước\nApp tốt không chỉ đẹp mà còn rõ đường đi cho người dùng.\n\n## Checklist\n- User flow chính\n- Empty/error/loading states\n- Permission và edge cases\n- Component reuse\n\n## Kết quả\nDev nhanh hơn vì ít phải đổi hướng giữa chừng.",
       coverUrl: "/images/illustrations/process-roadmap.png",
-      tags: JSON.stringify(["Clean Code", "Product"]),
+      coverAlt: "Roadmap thiết kế app từ user flow đến wireframe và prototype",
+      tags: JSON.stringify(["App Design", "UI/UX", "Product"]),
       categoryId: product?.id,
       readTime: "7 phút đọc",
     },
     {
       slug: "ai-trong-product",
-      title: "Đưa AI vào sản phẩm mà không phá UX",
+      title: "Xây AI Agent cho doanh nghiệp: Bắt đầu từ workflow, không phải model",
       excerpt:
-        "Checklist thực tế để tích hợp AI features có kiểm soát rủi ro, chi phí và trải nghiệm.",
-      content: "## Nguyên tắc\nAI hỗ trợ, không thay thế quyết định chính của UX.",
+        "Cách xác định nhiệm vụ, dữ liệu, guardrails và giao diện để AI Agent tạo giá trị thật.",
+      content:
+        "## Bắt đầu từ workflow\nAI Agent nên giải quyết một quy trình cụ thể: tìm kiếm tài liệu, soạn báo giá, chăm sóc lead hoặc hỗ trợ vận hành.\n\n## Thành phần cần có\n- Knowledge base\n- Tool/API integration\n- Logging và human review\n- Guardrails về dữ liệu\n\n## Đo hiệu quả\nĐo thời gian tiết kiệm, tỷ lệ hoàn thành và chi phí mỗi tác vụ.",
       coverUrl: "/images/illustrations/projects-hero-devices.png",
-      tags: JSON.stringify(["AI", "UX"]),
+      coverAlt:
+        "Mockup thiết bị hiển thị hệ thống AI Agent cho workflow doanh nghiệp",
+      tags: JSON.stringify(["AI Agent", "Automation", "Workflow"]),
       categoryId: ai?.id,
       readTime: "9 phút đọc",
     },
     {
       slug: "mvp-roadmap",
-      title: "Xây MVP trong 6 tuần: Khung làm việc tôi dùng với startup",
+      title: "Xây MVP web/app trong 6 tuần: Roadmap gọn cho startup",
       excerpt:
-        "Từ discovery đến launch — khung ưu tiên tính năng và tránh scope creep.",
-      content: "## Tuần 1-2 Discovery\n## Tuần 3-5 Build\n## Tuần 6 Launch",
+        "Từ discovery đến launch: cách ưu tiên tính năng, stack và phạm vi để không trượt scope.",
+      content:
+        "## Tuần 1: Discovery\nChốt bài toán, user flow, scope và metric.\n\n## Tuần 2: Design\nWireframe, UI kit nhỏ và prototype.\n\n## Tuần 3-5: Build\nFrontend, backend, auth, dashboard và tích hợp chính.\n\n## Tuần 6: Launch\nQA, deploy, tracking và kế hoạch iteration.",
       coverUrl: "/images/illustrations/about-outdoors.png",
-      tags: JSON.stringify(["MVP", "Startup"]),
+      coverAlt: "Workspace ngoài trời minh họa roadmap xây MVP web app trong 6 tuần",
+      tags: JSON.stringify(["MVP", "Startup", "Web App"]),
       categoryId: product?.id,
       readTime: "6 phút đọc",
     },
@@ -148,10 +170,18 @@ async function main() {
       title: "Fashion Move",
       category: "Marketplace",
       description:
-        "Marketplace thời trang kết nối seller và buyer với trải nghiệm realtime.",
-      content:
-        "## Bài toán\nKết nối người bán và người mua thời trang.\n\n## Giải pháp\nApp Flutter + NestJS API + Socket realtime.",
+        "Marketplace thời trang đa nền tảng cho seller đăng sản phẩm, chat realtime và quản lý đơn hàng.",
+      content: caseStudyHtml({
+        problem:
+          "Seller cần một kênh bán hàng mobile-first, buyer cần trải nghiệm tìm kiếm và trao đổi nhanh.",
+        solution:
+          "Xây app Flutter, API NestJS, dashboard seller và realtime chat bằng Socket.io.",
+        result:
+          "Luồng đăng sản phẩm, chat và checkout được gom vào một trải nghiệm mượt trên mobile.",
+      }),
       coverUrl: "/images/illustrations/projects-hero-devices.png",
+      coverAlt:
+        "Mockup marketplace thời trang Fashion Move trên mobile và dashboard web",
       features: JSON.stringify([
         "Seller dashboard",
         "Realtime chat",
@@ -165,7 +195,7 @@ async function main() {
         "AWS S3",
         "Socket.io",
       ]),
-      role: "Product Engineer",
+      role: "Full-stack Developer",
       timeframe: "03/2024 – 08/2024",
       platform: "iOS, Android, Web",
       tone: "bg-violet-50",
@@ -175,9 +205,19 @@ async function main() {
       slug: "smart-booking",
       title: "Smart Booking System",
       category: "Booking",
-      description: "Hệ thống đặt lịch thông minh cho spa, clinic và dịch vụ.",
-      content: "## Booking flow\nCalendar multi-staff + Stripe + reminders.",
+      description:
+        "Web app đặt lịch cho spa/clinic với quản lý nhân sự, nhắc lịch tự động và dashboard doanh thu.",
+      content: caseStudyHtml({
+        problem:
+          "Dịch vụ có nhiều nhân sự, nhiều khung giờ và tỷ lệ khách quên lịch cao.",
+        solution:
+          "Xây booking flow, calendar multi-staff, email/SMS reminder và thanh toán online.",
+        result:
+          "Admin theo dõi lịch theo ngày, giảm thao tác thủ công và dễ mở rộng chi nhánh.",
+      }),
       coverUrl: "/images/illustrations/services-devices.png",
+      coverAlt:
+        "Giao diện web app đặt lịch Smart Booking với calendar và dashboard doanh thu",
       features: JSON.stringify([
         "Calendar multi-staff",
         "SMS/Email reminders",
@@ -201,9 +241,18 @@ async function main() {
       slug: "sales-crm",
       title: "Sales CRM Dashboard",
       category: "CRM / SaaS",
-      description: "CRM theo dõi pipeline, KPI và dự báo doanh thu.",
-      content: "## Dashboard\nKanban + charts + RBAC.",
+      description:
+        "Dashboard CRM cho đội sales quản lý lead, pipeline, KPI và lịch sử chăm sóc khách hàng.",
+      content: caseStudyHtml({
+        problem:
+          "Sales team cần nhìn rõ trạng thái lead và ưu tiên follow-up mỗi ngày.",
+        solution: "Xây Kanban pipeline, KPI chart, RBAC và activity timeline.",
+        result:
+          "Quản lý có dashboard tổng quan, nhân viên có checklist lead cần xử lý.",
+      }),
       coverUrl: "/images/illustrations/blog-hero-desk.png",
+      coverAlt:
+        "Dashboard Sales CRM hiển thị pipeline lead KPI và lịch sử chăm sóc khách hàng",
       features: JSON.stringify([
         "Kanban pipeline",
         "KPI charts",
@@ -221,9 +270,19 @@ async function main() {
       slug: "photo-booth",
       title: "Photo Booth App",
       category: "Mobile App",
-      description: "App chụp ảnh sự kiện với filter và in Bluetooth.",
-      content: "## Offline-first\nHive storage + Bluetooth printing.",
+      description:
+        "Ứng dụng mobile chụp ảnh sự kiện, áp filter, lưu offline và in Bluetooth ngay tại booth.",
+      content: caseStudyHtml({
+        problem:
+          "Sự kiện cần app chạy ổn định dù mạng yếu và in ảnh nhanh cho khách.",
+        solution:
+          "Xây app Flutter offline-first, lưu local, quản lý event pack và kết nối Bluetooth printer.",
+        result:
+          "Booth vận hành độc lập, ảnh được xử lý và in ngay tại điểm check-in.",
+      }),
       coverUrl: "/images/illustrations/about-outdoors.png",
+      coverAlt:
+        "Ứng dụng Photo Booth mobile chụp ảnh sự kiện và in Bluetooth tại booth",
       features: JSON.stringify([
         "Camera filters",
         "Bluetooth printing",
@@ -240,10 +299,20 @@ async function main() {
     {
       slug: "ai-search",
       title: "AI Search Engine",
-      category: "AI Solution",
-      description: "Tìm kiếm ngữ nghĩa tài liệu nội bộ bằng vector DB.",
-      content: "## Pipeline\nIngest → Embed → Qdrant → Rank.",
+      category: "AI Agent",
+      description:
+        "AI Agent tìm kiếm tài liệu nội bộ bằng vector search, trả lời theo nguồn và hỗ trợ đội vận hành.",
+      content: caseStudyHtml({
+        problem:
+          "Tài liệu nội bộ rải rác khiến nhân sự mất thời gian tìm quy trình và câu trả lời.",
+        solution:
+          "Xây ingestion pipeline, embedding, vector search và API trả lời có trích nguồn.",
+        result:
+          "Nhân sự có thể hỏi bằng ngôn ngữ tự nhiên và nhận câu trả lời gắn với tài liệu gốc.",
+      }),
       coverUrl: "/images/illustrations/process-roadmap.png",
+      coverAlt:
+        "Sơ đồ AI Search Engine tìm kiếm tài liệu nội bộ bằng vector search",
       features: JSON.stringify([
         "Semantic search",
         "Ingestion pipeline",
@@ -588,8 +657,8 @@ async function main() {
     },
     {
       year: "2022",
-      title: "Product Engineering",
-      description: "Kết hợp tư duy sản phẩm với kỹ thuật trong dự án startup.",
+      title: "Full-stack Development",
+      description: "Kết hợp frontend, backend và tư duy sản phẩm trong dự án startup.",
       sortOrder: 4,
     },
     {
@@ -600,8 +669,8 @@ async function main() {
     },
     {
       year: "2024–Nay",
-      title: "Product Engineering Studio",
-      description: "Đồng hành startup từ ý tưởng đến sản phẩm và tăng trưởng.",
+      title: "Full-stack, App & AI Agent",
+      description: "Đồng hành startup xây dựng website, app ứng dụng, AI Agent và tăng trưởng.",
       sortOrder: 6,
     },
   ];

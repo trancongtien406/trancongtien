@@ -74,7 +74,7 @@ const projectTypes = [
   "Web App / SaaS",
   "Mobile App",
   "Marketplace",
-  "AI Solution",
+  "AI Agent / Automation",
   "Tư vấn / Audit",
   "Khác",
 ];

@@ -31,6 +31,7 @@ export default async function BlogPostPage({ params }: Props) {
   if (!post) notFound();
 
   const cover = post.coverUrl || "/images/illustrations/blog-hero-desk.png";
+  const coverAlt = post.coverAlt || `Hình minh họa bài viết: ${post.title}`;
   const tags = parseJsonArray(post.tags);
   const date = (post.publishedAt || post.createdAt).toLocaleDateString("vi-VN");
 
@@ -71,7 +72,7 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-3xl">
             <Image
               src={cover}
-              alt={`Hình minh họa bài viết: ${post.title}`}
+              alt={coverAlt}
               fill
               className="object-cover"
               priority

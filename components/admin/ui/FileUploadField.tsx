@@ -5,13 +5,23 @@ import Image from "next/image";
 import { ImagePlus, Loader2, Trash2, Upload } from "lucide-react";
 import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
+import { AdminDialog } from "@/components/admin/ui/AdminDialog";
+
+type UploadedMedia = {
+  id?: string;
+  url: string;
+  filename?: string;
+  alt?: string;
+};
 
 type Props = {
   value?: string;
-  onChange: (url: string) => void;
+  onChange: (url: string, media?: UploadedMedia) => void;
   alt?: string;
   label?: string;
   className?: string;
+  promptAlt?: boolean;
+  altDialogTitle?: string;
 };
 
 export function FileUploadField({
@@ -20,23 +30,27 @@ export function FileUploadField({
   alt = "",
   label = "Ảnh / File",
   className,
+  promptAlt = false,
+  altDialogTitle = "SEO alt text cho ảnh",
 }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [dragging, setDragging] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [pendingFile, setPendingFile] = useState<File | null>(null);
+  const [draftAlt, setDraftAlt] = useState("");
 
-  async function upload(file: File) {
+  async function upload(file: File, imageAlt = alt || file.name) {
     setLoading(true);
     setError("");
     try {
       const fd = new FormData();
       fd.set("file", file);
-      fd.set("alt", alt || file.name);
+      fd.set("alt", imageAlt.trim() || file.name);
       const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
       if (!res.ok) throw new Error("Upload thất bại");
       const data = await res.json();
-      onChange(data.media.url as string);
+      onChange(data.media.url as string, data.media as UploadedMedia);
       toast.success("Upload thành công");
     } catch (e) {
       const message = e instanceof Error ? e.message : "Upload thất bại";
@@ -49,7 +63,13 @@ export function FileUploadField({
 
   function onFiles(files: FileList | null) {
     const file = files?.[0];
-    if (file) void upload(file);
+    if (!file) return;
+    if (promptAlt) {
+      setDraftAlt(alt || file.name.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " "));
+      setPendingFile(file);
+      return;
+    }
+    void upload(file);
   }
 
   return (
@@ -127,9 +147,56 @@ export function FileUploadField({
         type="file"
         accept="image/*"
         className="hidden"
-        onChange={(e) => onFiles(e.target.files)}
+        onChange={(e) => {
+          onFiles(e.target.files);
+          e.target.value = "";
+        }}
       />
       {error ? <p className="text-xs text-rose-600">{error}</p> : null}
+      <AdminDialog
+        open={!!pendingFile}
+        onClose={() => setPendingFile(null)}
+        title={altDialogTitle}
+        description="Mô tả ảnh ngắn gọn, tự nhiên. Google Images và screen reader sẽ đọc nội dung này."
+        size="md"
+        footer={
+          <div className="flex justify-end gap-2">
+            <button
+              type="button"
+              onClick={() => setPendingFile(null)}
+              className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold"
+            >
+              Hủy
+            </button>
+            <button
+              type="button"
+              disabled={loading || !pendingFile}
+              onClick={() => {
+                if (!pendingFile) return;
+                const file = pendingFile;
+                setPendingFile(null);
+                void upload(file, draftAlt);
+              }}
+              className="rounded-xl bg-brand px-4 py-2 text-sm font-semibold text-white disabled:opacity-60"
+            >
+              {loading ? "Đang upload..." : "Upload ảnh"}
+            </button>
+          </div>
+        }
+      >
+        <label className="block text-sm">
+          <span className="font-medium text-slate-700">Alt text</span>
+          <textarea
+            value={draftAlt}
+            onChange={(e) => setDraftAlt(e.target.value)}
+            className="mt-1.5 min-h-24 w-full rounded-xl border border-slate-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand/20"
+            placeholder="Ví dụ: Dashboard quản trị booking với biểu đồ doanh thu và lịch hẹn"
+          />
+        </label>
+        <p className="mt-2 text-xs text-slate-500">
+          File: {pendingFile?.name}. Tránh nhồi keyword; hãy mô tả đúng nội dung ảnh.
+        </p>
+      </AdminDialog>
     </div>
   );
 }

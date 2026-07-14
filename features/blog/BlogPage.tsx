@@ -20,6 +20,7 @@ export type BlogListItem = {
   tags: string[];
   category: string;
   image: string;
+  imageAlt: string;
 };
 
 const categories = [
@@ -27,7 +28,7 @@ const categories = [
   "Tự duy sản phẩm",
   "Kiến trúc hệ thống",
   "Frontend",
-  "AI & Sản phẩm",
+  "AI Agent",
 ] as const;
 
 const popularTopics = [
@@ -35,7 +36,7 @@ const popularTopics = [
   "Kiến trúc hệ thống",
   "Next.js",
   "Clean Code",
-  "AI trong Product",
+  "AI Agent",
 ];
 
 export function BlogPage({ posts }: { posts: BlogListItem[] }) {
@@ -67,8 +68,8 @@ export function BlogPage({ posts }: { posts: BlogListItem[] }) {
               Chia sẻ kiến thức, kinh nghiệm thực chiến
             </h1>
             <p className="max-w-xl text-base leading-relaxed text-ink-muted sm:text-lg">
-              Ghi chép từ các dự án product engineering thực tế — kiến trúc,
-              frontend, AI và tư duy sản phẩm.
+              Ghi chép từ các dự án full-stack thực tế — kiến trúc,
+              frontend, thiết kế app, AI Agent và tư duy sản phẩm.
             </p>
             <label className="relative block max-w-lg">
               <span className="sr-only">Tìm bài viết</span>
@@ -153,7 +154,7 @@ export function BlogPage({ posts }: { posts: BlogListItem[] }) {
                   <div className="relative aspect-[16/11] overflow-hidden rounded-xl sm:aspect-auto sm:min-h-[160px]">
                     <Image
                       src={post.image}
-                      alt={`Ảnh minh họa: ${post.title}`}
+                      alt={post.imageAlt}
                       fill
                       className="object-cover"
                       sizes="220px"
@@ -231,7 +232,7 @@ export function BlogPage({ posts }: { posts: BlogListItem[] }) {
               />
               <h2 className="mt-3 font-semibold text-ink">Giới thiệu</h2>
               <p className="mt-2 text-sm text-ink-muted">
-                Product Engineer — giúp startup biến ý tưởng thành sản phẩm thực tế.
+                Full-stack Developer — giúp startup biến ý tưởng thành website, app và AI Agent thực tế.
               </p>
               <Link
                 href="/ve-toi"

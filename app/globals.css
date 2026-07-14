@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  color-scheme: light;
   --surface: #ffffff;
   --surface-muted: #f8fafc;
   --surface-soft: #f1f5f9;
@@ -15,6 +16,22 @@
   --footer: #0b1120;
   --success: #10b981;
   --warning: #f59e0b;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --surface: #0f172a;
+  --surface-muted: #111827;
+  --surface-soft: #1e293b;
+  --ink: #f8fafc;
+  --ink-muted: #cbd5e1;
+  --ink-subtle: #94a3b8;
+  --brand: #60a5fa;
+  --brand-dark: #3b82f6;
+  --brand-soft: #172554;
+  --brand-glow: #1e3a8a;
+  --border: #334155;
+  --footer: #020617;
 }
 
 @theme inline {
@@ -44,6 +61,95 @@ body {
   background: var(--surface);
   color: var(--ink);
   font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+}
+
+html[data-theme="dark"] body {
+  background:
+    radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), transparent 32rem),
+    var(--surface);
+}
+
+html[data-theme="dark"] .bg-white,
+html[data-theme="dark"] .bg-white\/90,
+html[data-theme="dark"] .bg-white\/95 {
+  background-color: var(--surface-soft);
+}
+
+html[data-theme="dark"] input,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select {
+  background-color: var(--surface-soft);
+  color: var(--ink);
+}
+
+html[data-theme="dark"] .shadow-slate-200\/60,
+html[data-theme="dark"] .shadow-brand\/20,
+html[data-theme="dark"] .shadow-brand\/25 {
+  --tw-shadow-color: rgba(0, 0, 0, 0.35);
+}
+
+[data-admin-ui] {
+  color: #0f172a;
+}
+
+html[data-theme="dark"] [data-admin-ui] {
+  color-scheme: dark;
+  color: #e2e8f0;
+}
+
+html[data-theme="dark"] [data-admin-ui] .bg-\[\#F4F7FB\] {
+  background-color: #0f172a;
+}
+
+html[data-theme="dark"] [data-admin-ui] .bg-white,
+html[data-theme="dark"] [data-admin-ui] .bg-white\/90,
+html[data-theme="dark"] [data-admin-ui] .bg-white\/95 {
+  background-color: #111827;
+}
+
+html[data-theme="dark"] [data-admin-ui] .bg-slate-50,
+html[data-theme="dark"] [data-admin-ui] .bg-slate-50\/80,
+html[data-theme="dark"] [data-admin-ui] .bg-slate-50\/70,
+html[data-theme="dark"] [data-admin-ui] .bg-slate-100 {
+  background-color: #1e293b;
+}
+
+html[data-theme="dark"] [data-admin-ui] .hover\:bg-slate-50:hover,
+html[data-theme="dark"] [data-admin-ui] .hover\:bg-slate-50\/70:hover,
+html[data-theme="dark"] [data-admin-ui] .hover\:bg-slate-100:hover,
+html[data-theme="dark"] [data-admin-ui] .hover\:bg-white:hover {
+  background-color: #1e293b;
+}
+
+html[data-theme="dark"] [data-admin-ui] input,
+html[data-theme="dark"] [data-admin-ui] textarea,
+html[data-theme="dark"] [data-admin-ui] select {
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+
+html[data-theme="dark"] [data-admin-ui] .border-slate-100,
+html[data-theme="dark"] [data-admin-ui] .border-slate-200,
+html[data-theme="dark"] [data-admin-ui] .border-slate-300 {
+  border-color: #334155;
+}
+
+html[data-theme="dark"] [data-admin-ui] .text-slate-900,
+html[data-theme="dark"] [data-admin-ui] .text-slate-800,
+html[data-theme="dark"] [data-admin-ui] .text-slate-700 {
+  color: #f8fafc;
+}
+
+html[data-theme="dark"] [data-admin-ui] .text-slate-600,
+html[data-theme="dark"] [data-admin-ui] .text-slate-500,
+html[data-theme="dark"] [data-admin-ui] .text-slate-400 {
+  color: #94a3b8;
+}
+
+html[data-theme="dark"] [data-admin-ui] .shadow-sm,
+html[data-theme="dark"] [data-admin-ui] .shadow-xl,
+html[data-theme="dark"] [data-admin-ui] .shadow-2xl {
+  --tw-shadow-color: rgba(0, 0, 0, 0.35);
 }
 
 h1,

@@ -16,6 +16,7 @@ export type PostFormData = {
   excerpt: string;
   content: string;
   coverUrl: string;
+  coverAlt: string;
   status: string;
   readTime: string;
   categoryId: string;
@@ -40,6 +41,7 @@ export function PostForm({
       excerpt: "",
       content: "",
       coverUrl: "",
+      coverAlt: "",
       status: "DRAFT",
       readTime: "5 phút đọc",
       categoryId: "",
@@ -57,6 +59,7 @@ export function PostForm({
       excerpt: form.excerpt,
       content: form.content,
       coverUrl: form.coverUrl,
+      coverAlt: form.coverAlt,
       status: form.status,
       readTime: form.readTime,
       categoryId: form.categoryId || null,
@@ -178,9 +181,28 @@ export function PostForm({
             <FileUploadField
               label="Ảnh cover"
               value={form.coverUrl}
-              alt={form.title}
-              onChange={(url) => setForm((f) => ({ ...f, coverUrl: url }))}
+              alt={form.coverAlt || form.title}
+              promptAlt
+              altDialogTitle="Alt SEO cho ảnh cover bài viết"
+              onChange={(url, media) =>
+                setForm((f) => ({
+                  ...f,
+                  coverUrl: url,
+                  coverAlt: media?.alt || f.coverAlt || f.title,
+                }))
+              }
             />
+            <label className="mt-3 block text-sm font-medium">
+              Alt ảnh cover
+              <textarea
+                value={form.coverAlt}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, coverAlt: e.target.value }))
+                }
+                className="mt-1.5 min-h-20 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-brand/20"
+                placeholder="Mô tả ảnh ngắn gọn để tối ưu SEO và accessibility"
+              />
+            </label>
           </AdminCard>
           <AdminCard className="space-y-3">
             <label className="block text-sm font-medium">

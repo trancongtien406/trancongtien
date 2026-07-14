@@ -67,8 +67,8 @@ export function AboutPage({
               <span className="text-brand">{siteConfig.fullName}.</span>
             </h1>
             <p className="max-w-xl text-base leading-relaxed text-ink-muted sm:text-lg">
-              Product Engineer giúp startup và doanh nghiệp biến ý tưởng thành
-              sản phẩm số — với tư duy sản phẩm rõ ràng và kỹ thuật vững chắc.
+              Full-stack Developer giúp startup và doanh nghiệp thiết kế website,
+              app ứng dụng, hệ thống AI Agent và sản phẩm số thực tế.
             </p>
             <div className="flex flex-wrap gap-3">
               <Button href="/lien-he" iconRight={<ArrowRight className="size-4" />}>
@@ -102,8 +102,8 @@ export function AboutPage({
           </div>
           <div className="relative mx-auto w-full max-w-md">
             <Image
-              src="/images/avatars/portrait-hero.png"
-              alt={`${siteConfig.fullName} — chân dung Product Engineer`}
+              src={siteConfig.personImage}
+              alt={`${siteConfig.fullName} — chân dung Full-stack Developer và AI Agent Builder`}
               width={640}
               height={800}
               className="aspect-[4/5] w-full rounded-3xl object-cover object-top shadow-2xl"
@@ -129,7 +129,7 @@ export function AboutPage({
           <div className="lg:col-span-2">
             <SectionEyebrow>Câu chuyện của tôi</SectionEyebrow>
             <h2 className="mt-3 font-display text-3xl font-bold text-ink">
-              Vì sao tôi làm Product Engineering
+              Vì sao tôi làm Full-stack, App và AI Agent
             </h2>
             <div className="mt-5 space-y-4 text-sm leading-relaxed text-ink-muted sm:text-base">
               <p>
@@ -138,8 +138,8 @@ export function AboutPage({
                 dùng và cách đo lường giá trị.
               </p>
               <p>
-                Product Engineering Studio là nơi tôi kết hợp tư duy sản phẩm với
-                kỹ thuật end-to-end để giúp đội ngũ ship nhanh hơn, ít rủi ro hơn.
+                Tôi kết hợp tư duy sản phẩm với kỹ thuật full-stack, thiết kế app
+                và tự động hóa bằng AI Agent để giúp đội ngũ ship nhanh hơn, ít rủi ro hơn.
               </p>
             </div>
             <blockquote className="mt-6 rounded-2xl bg-brand-soft p-5 text-sm italic text-ink-muted">

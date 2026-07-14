@@ -54,7 +54,7 @@ export function Footer() {
           <div className="lg:col-span-4">
             <Logo variant="dark" />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-400">
-              Product Engineering Studio. From Idea to Product — đồng hành cùng
+              Full-stack Developer & AI Agent Builder — đồng hành cùng
               startup và doanh nghiệp xây dựng sản phẩm số bền vững.
             </p>
             <div className="mt-5 flex flex-wrap gap-2">

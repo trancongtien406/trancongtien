@@ -68,6 +68,7 @@ model Post {
   excerpt     String
   content     String
   coverUrl    String?
+  coverAlt    String?
   tags        String        @default("[]")
   status      ContentStatus @default(DRAFT)
   readTime    String        @default("5 phút đọc")
@@ -88,6 +89,7 @@ model Project {
   description String
   content     String        @default("")
   coverUrl    String?
+  coverAlt    String?
   features    String        @default("[]")
   stack       String        @default("[]")
   role        String?
@@ -186,7 +188,7 @@ model Media {
 model SiteSetting {
   id           String @id @default("default")
   siteName     String @default("TRAN CONG TIEN")
-  tagline      String @default("Product Engineering Studio")
+  tagline      String @default("Full-stack Developer & AI Agent Builder")
   email        String @default("trancongtien406@gmail.com")
   phone        String @default("+84 382 802 406")
   location     String @default("Đà Nẵng, Việt Nam")

@@ -1,31 +1,124 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
-import { Pencil, Plus, Trash2 } from "lucide-react";
-import toast from "react-hot-toast";
 import {
   AdminCard,
   AdminPageHeader,
   StatusBadge,
 } from "@/components/admin/AdminChrome";
-import { AdminToolbar } from "@/components/admin/ui/AdminToolbar";
 import { AdminDialog } from "@/components/admin/ui/AdminDialog";
+import { AdminToolbar } from "@/components/admin/ui/AdminToolbar";
+import { RichTextEditor } from "@/components/admin/editor/RichTextEditor";
 import { FileUploadField } from "@/components/admin/ui/FileUploadField";
 import { toSlug } from "@/lib/admin/slug";
+import { cn } from "@/lib/utils";
+import { Check, ChevronDown, Pencil, Plus, Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useMemo, useState } from "react";
+import toast from "react-hot-toast";
 
 export type FieldDef = {
   key: string;
   label: string;
-  type?: "text" | "textarea" | "select" | "number" | "upload" | "checkbox";
+  type?:
+    | "text"
+    | "textarea"
+    | "richtext"
+    | "select"
+    | "multi-select"
+    | "number"
+    | "upload"
+    | "checkbox";
   options?: Array<{ value: string; label: string }>;
   placeholder?: string;
   slugFrom?: string;
+  altKey?: string;
+  promptAlt?: boolean;
+  span?: "full";
 };
 
 type Row = Record<string, string | number | boolean | null | undefined> & {
   id: string;
 };
+
+function splitList(value: string) {
+  return value
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function MultiSelectField({
+  label,
+  value,
+  options,
+  placeholder,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  options: Array<{ value: string; label: string }>;
+  placeholder?: string;
+  onChange: (value: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const selected = splitList(value);
+
+  function toggle(optionValue: string) {
+    const next = selected.includes(optionValue)
+      ? selected.filter((item) => item !== optionValue)
+      : [...selected, optionValue];
+    onChange(next.join(", "));
+  }
+
+  return (
+    <div className="relative text-sm sm:col-span-2">
+      <span className="font-medium text-slate-700">{label}</span>
+      <button
+        type="button"
+        onClick={() => setOpen((current) => !current)}
+        className="mt-1.5 flex min-h-11 w-full items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2 text-left outline-none transition focus:ring-2 focus:ring-brand/20"
+      >
+        <span className="flex min-w-0 flex-1 flex-wrap gap-1.5">
+          {selected.length > 0 ? (
+            selected.map((item) => (
+              <span
+                key={item}
+                className="inline-flex rounded-full bg-brand-soft px-2.5 py-1 text-xs font-semibold text-brand"
+              >
+                {item}
+              </span>
+            ))
+          ) : (
+            <span className="text-slate-400">{placeholder || "Chọn nhiều mục"}</span>
+          )}
+        </span>
+        <ChevronDown className="size-4 shrink-0 text-slate-400" />
+      </button>
+
+      {open ? (
+        <div className="absolute z-[90] mt-2 max-h-64 w-full overflow-y-auto rounded-2xl border border-slate-200 bg-white p-2 shadow-xl">
+          {options.map((option) => {
+            const checked = selected.includes(option.value);
+            return (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => toggle(option.value)}
+                className={cn(
+                  "flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm transition hover:bg-slate-50",
+                  checked && "bg-brand-soft text-brand",
+                )}
+              >
+                <span>{option.label}</span>
+                {checked ? <Check className="size-4" /> : null}
+              </button>
+            );
+          })}
+        </div>
+      ) : null}
+    </div>
+  );
+}
 
 export function EntityCrudManager({
   entity,
@@ -67,8 +160,10 @@ export function EntityCrudManager({
     setEditingId(null);
     const initial: Record<string, string> = { status: "PUBLISHED", sortOrder: "0" };
     fields.forEach((f) => {
+      if (initial[f.key] !== undefined) return;
       if (f.type === "checkbox") initial[f.key] = "true";
       else initial[f.key] = "";
+      if (f.altKey && initial[f.altKey] === undefined) initial[f.altKey] = "";
     });
     setForm(initial);
     setOpen(true);
@@ -79,6 +174,7 @@ export function EntityCrudManager({
     const initial: Record<string, string> = {};
     fields.forEach((f) => {
       initial[f.key] = String(row[f.key] ?? "");
+      if (f.altKey) initial[f.altKey] = String(row[f.altKey] ?? "");
     });
     setForm(initial);
     setOpen(true);
@@ -261,13 +357,24 @@ export function EntityCrudManager({
       >
         <div className="grid gap-3 sm:grid-cols-2">
           {fields.map((f) => {
+            const fullSpan = f.span === "full" ? "sm:col-span-2" : "";
             if (f.type === "upload") {
               return (
                 <div key={f.key} className="sm:col-span-2">
                   <FileUploadField
                     label={f.label}
                     value={form[f.key] || ""}
-                    onChange={(url) => setField(f.key, url)}
+                    alt={(f.altKey ? form[f.altKey] : "") || form.title || ""}
+                    promptAlt={f.promptAlt}
+                    onChange={(url, media) => {
+                      setField(f.key, url);
+                      if (f.altKey) {
+                        setField(
+                          f.altKey,
+                          media?.alt || form[f.altKey] || form.title || "",
+                        );
+                      }
+                    }}
                   />
                 </div>
               );
@@ -285,15 +392,30 @@ export function EntityCrudManager({
                 </label>
               );
             }
+            if (f.type === "richtext") {
+              return (
+                <div key={f.key} className="sm:col-span-2">
+                  <p className="mb-1.5 text-sm font-medium text-slate-700">
+                    {f.label}
+                  </p>
+                  <RichTextEditor
+                    value={form[f.key] || ""}
+                    onChange={(html) => setField(f.key, html)}
+                    placeholder={f.placeholder}
+                  />
+                </div>
+              );
+            }
             if (f.type === "select") {
               return (
-                <label key={f.key} className="block text-sm">
+                <label key={f.key} className={cn("block text-sm", fullSpan)}>
                   <span className="font-medium text-slate-700">{f.label}</span>
                   <select
                     value={form[f.key] || ""}
                     onChange={(e) => setField(f.key, e.target.value)}
                     className="mt-1.5 h-11 w-full rounded-xl border border-slate-200 px-3 outline-none focus:ring-2 focus:ring-brand/20"
                   >
+                    <option value="">Chọn {f.label.toLowerCase()}</option>
                     {(f.options || []).map((o) => (
                       <option key={o.value} value={o.value}>
                         {o.label}
@@ -301,6 +423,18 @@ export function EntityCrudManager({
                     ))}
                   </select>
                 </label>
+              );
+            }
+            if (f.type === "multi-select") {
+              return (
+                <MultiSelectField
+                  key={f.key}
+                  label={f.label}
+                  value={form[f.key] || ""}
+                  options={f.options || []}
+                  placeholder={f.placeholder}
+                  onChange={(value) => setField(f.key, value)}
+                />
               );
             }
             if (f.type === "checkbox") {
@@ -318,7 +452,7 @@ export function EntityCrudManager({
               );
             }
             return (
-              <label key={f.key} className="block text-sm">
+              <label key={f.key} className={cn("block text-sm", fullSpan)}>
                 <span className="font-medium text-slate-700">{f.label}</span>
                 <input
                   type={f.type === "number" ? "number" : "text"}

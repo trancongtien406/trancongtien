@@ -72,6 +72,7 @@ async function createEntity(entity: Entity, data: Record<string, unknown>) {
           description: String(data.description || ""),
           content: String(data.content || ""),
           coverUrl: data.coverUrl ? String(data.coverUrl) : null,
+          coverAlt: data.coverAlt ? String(data.coverAlt) : null,
           features: asJsonArray(data.features),
           stack: asJsonArray(data.stack),
           role: data.role ? String(data.role) : null,
@@ -188,6 +189,9 @@ async function updateEntity(
           ...(data.content !== undefined ? { content: String(data.content) } : {}),
           ...(data.coverUrl !== undefined
             ? { coverUrl: data.coverUrl ? String(data.coverUrl) : null }
+            : {}),
+          ...(data.coverAlt !== undefined
+            ? { coverAlt: data.coverAlt ? String(data.coverAlt) : null }
             : {}),
           ...(data.features !== undefined
             ? { features: asJsonArray(data.features) }

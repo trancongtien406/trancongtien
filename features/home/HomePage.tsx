@@ -33,6 +33,7 @@ export type HomeData = {
     title: string;
     description: string;
     coverUrl: string;
+    coverAlt: string;
   }>;
   process: Array<{ step: string; title: string; description: string }>;
   testimonials: Array<{ quote: string; name: string; role: string }>;
@@ -83,8 +84,8 @@ export function HomePage({ data }: { data: HomeData }) {
             <div className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-brand/20 via-violet-200/30 to-transparent blur-2xl" />
             <div className="relative overflow-hidden rounded-[1.75rem] bg-slate-900 shadow-2xl shadow-brand/20">
               <Image
-                src="/images/avatars/portrait-hero.png"
-                alt="Trần Công Tiến — Product Engineer"
+                src={siteConfig.personImage}
+                alt="Trần Công Tiến, Full-stack Developer và AI Agent Builder tại Đà Nẵng"
                 width={720}
                 height={900}
                 priority
@@ -157,7 +158,7 @@ export function HomePage({ data }: { data: HomeData }) {
                 <div className="relative aspect-[16/10] overflow-hidden bg-surface-soft">
                   <Image
                     src={project.coverUrl}
-                    alt={`Giao diện dự án ${project.title}`}
+                    alt={project.coverAlt}
                     fill
                     sizes="(max-width:768px) 100vw, 33vw"
                     className="object-cover transition duration-500 hover:scale-105"

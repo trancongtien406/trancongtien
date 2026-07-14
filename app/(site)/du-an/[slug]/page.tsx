@@ -35,6 +35,7 @@ export default async function ProjectDetailPage({ params }: Props) {
   const stack = parseJsonArray(project.stack);
   const cover =
     project.coverUrl || "/images/illustrations/projects-hero-devices.png";
+  const coverAlt = project.coverAlt || `Mockup chi tiết dự án ${project.title}`;
 
   return (
     <>
@@ -105,7 +106,7 @@ export default async function ProjectDetailPage({ params }: Props) {
             <div className={`overflow-hidden rounded-3xl ${project.tone}`}>
               <Image
                 src={cover}
-                alt={`Mockup chi tiết dự án ${project.title}`}
+                alt={coverAlt}
                 width={900}
                 height={700}
                 className="w-full object-cover"
@@ -117,17 +118,10 @@ export default async function ProjectDetailPage({ params }: Props) {
             <h2 className="font-display text-2xl font-bold text-ink">
               Case study
             </h2>
-            {project.content.split("\n").map((line, i) => {
-              if (line.startsWith("## ")) {
-                return (
-                  <h3 key={i} className="font-display text-xl font-bold text-ink">
-                    {line.replace("## ", "")}
-                  </h3>
-                );
-              }
-              if (!line.trim()) return null;
-              return <p key={i}>{line}</p>;
-            })}
+            <div
+              className="admin-prose space-y-3 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-ink [&_h3]:font-display [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-ink [&_img]:my-4 [&_img]:rounded-2xl [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5"
+              dangerouslySetInnerHTML={{ __html: project.content }}
+            />
           </div>
         </Container>
         <CtaBanner title="Bạn muốn xây sản phẩm tương tự?" />

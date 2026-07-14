@@ -12,7 +12,7 @@ export const dynamic = "force-dynamic";
 export const metadata = buildMetadata({
   title: "Liên hệ",
   description:
-    "Đặt lịch tư vấn miễn phí với Trần Công Tiến — Product Engineering Studio tại Đà Nẵng. Phản hồi trong 24 giờ.",
+    "Đặt lịch tư vấn miễn phí với Trần Công Tiến — Full-stack Developer, thiết kế app ứng dụng và AI Agent tại Đà Nẵng. Phản hồi trong 24 giờ.",
   path: "/lien-he",
 });
 

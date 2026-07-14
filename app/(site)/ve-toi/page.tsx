@@ -7,9 +7,9 @@ export const dynamic = "force-dynamic";
 
 export const metadata = buildMetadata({
   title: "Về tôi",
-  description: `Giới thiệu ${siteConfig.fullName} — Product Engineer tại Product Engineering Studio. Câu chuyện, giá trị cốt lõi và hành trình nghề nghiệp.`,
+  description: `Giới thiệu ${siteConfig.fullName} — Full-stack Developer, thiết kế app ứng dụng và xây dựng AI Agent tại Đà Nẵng. Câu chuyện, giá trị cốt lõi và hành trình nghề nghiệp.`,
   path: "/ve-toi",
-  image: "/images/avatars/portrait-hero.png",
+  image: siteConfig.personImage,
 });
 
 export default async function Page() {
@@ -30,10 +30,14 @@ export default async function Page() {
         data={{
           "@context": "https://schema.org",
           "@type": "Person",
+          "@id": `${siteConfig.url}/#person`,
           name: siteConfig.fullName,
-          jobTitle: "Product Engineer",
+          alternateName: [siteConfig.name, siteConfig.brand],
+          jobTitle: "Full-stack Developer",
+          image: `${siteConfig.url}${siteConfig.personImage}`,
           worksFor: {
             "@type": "Organization",
+            "@id": `${siteConfig.url}/#organization`,
             name: siteConfig.brand,
           },
           url: `${siteConfig.url}/ve-toi`,

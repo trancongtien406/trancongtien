@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export const metadata = buildMetadata({
   title: "Tài nguyên",
   description:
-    "Kiến thức, template miễn phí, UI Kit, checklist và công cụ hỗ trợ product engineering — PRD, estimate, architecture guide.",
+    "Kiến thức, template miễn phí, UI Kit, checklist và công cụ hỗ trợ full-stack development, thiết kế app, AI Agent — PRD, estimate, architecture guide.",
   path: "/tai-nguyen",
 });
 

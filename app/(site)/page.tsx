@@ -11,8 +11,8 @@ import { siteConfig } from "@/lib/site";
 export const dynamic = "force-dynamic";
 
 export const metadata = buildMetadata({
-  title: siteConfig.brand,
-  description: siteConfig.description,
+  title: siteConfig.fullName,
+  description: `${siteConfig.fullName} (${siteConfig.name}) — Full-stack Developer tại Đà Nẵng, thiết kế website, app ứng dụng, hệ thống AI Agent, Web, Mobile & Cloud cho startup và doanh nghiệp.`,
   path: "/",
 });
 
@@ -41,6 +41,7 @@ export default async function Page() {
           title: p.title,
           description: p.description,
           coverUrl: p.coverUrl || "/images/illustrations/services-devices.png",
+          coverAlt: p.coverAlt || `Giao diện dự án ${p.title}`,
         })),
         process: process.map((s) => ({
           step: s.step,

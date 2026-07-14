@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export const metadata = buildMetadata({
   title: "Dự án",
   description:
-    "Portfolio sản phẩm: Marketplace, Booking, CRM/SaaS, Mobile App và AI Solution do Trần Công Tiến xây dựng.",
+    "Portfolio sản phẩm: Marketplace, Booking, CRM/SaaS, Mobile App, thiết kế app ứng dụng và AI Agent do Trần Công Tiến xây dựng.",
   path: "/du-an",
   image: "/images/illustrations/projects-hero-devices.png",
 });
@@ -26,6 +26,7 @@ export default async function Page() {
     platform: p.platform || "",
     tone: p.tone,
     coverUrl: p.coverUrl || "/images/illustrations/services-devices.png",
+    coverAlt: p.coverAlt || `Mockup giao diện dự án ${p.title}`,
   }));
 
   return (

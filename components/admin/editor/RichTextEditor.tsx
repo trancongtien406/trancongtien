@@ -5,7 +5,7 @@ import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
 import Placeholder from "@tiptap/extension-placeholder";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Bold,
   Heading2,
@@ -19,6 +19,7 @@ import {
   Redo2,
   Undo2,
 } from "lucide-react";
+import { AdminDialog } from "@/components/admin/ui/AdminDialog";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -61,6 +62,9 @@ export function RichTextEditor({
   placeholder = "Viết nội dung bài viết...",
 }: Props) {
   const fileRef = useRef<HTMLInputElement>(null);
+  const [pendingFile, setPendingFile] = useState<File | null>(null);
+  const [draftAlt, setDraftAlt] = useState("");
+  const [uploading, setUploading] = useState(false);
 
   const editor = useEditor({
     immediatelyRender: false,
@@ -87,15 +91,24 @@ export function RichTextEditor({
     }
   }, [value, editor]);
 
-  async function uploadImage(file: File) {
+  async function uploadImage(file: File, imageAlt: string) {
     if (!editor) return;
+    setUploading(true);
     const fd = new FormData();
     fd.set("file", file);
-    fd.set("alt", file.name);
-    const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
-    if (!res.ok) return;
-    const data = await res.json();
-    editor.chain().focus().setImage({ src: data.media.url, alt: file.name }).run();
+    fd.set("alt", imageAlt.trim() || file.name);
+    try {
+      const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
+      if (!res.ok) return;
+      const data = await res.json();
+      editor
+        .chain()
+        .focus()
+        .setImage({ src: data.media.url, alt: data.media.alt || imageAlt })
+        .run();
+    } finally {
+      setUploading(false);
+    }
   }
 
   if (!editor) {
@@ -105,8 +118,9 @@ export function RichTextEditor({
   }
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
-      <div className="flex flex-wrap gap-1 border-b border-slate-100 bg-slate-50 px-2 py-2">
+    <>
+      <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
+        <div className="flex flex-wrap gap-1 border-b border-slate-100 bg-slate-50 px-2 py-2">
         <ToolBtn
           title="Đậm"
           active={editor.isActive("bold")}
@@ -182,19 +196,67 @@ export function RichTextEditor({
         <ToolBtn title="Redo" onClick={() => editor.chain().focus().redo().run()}>
           <Redo2 className="size-4" />
         </ToolBtn>
+        </div>
+        <EditorContent editor={editor} />
+        <input
+          ref={fileRef}
+          type="file"
+          accept="image/*"
+          className="hidden"
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            if (file) {
+              setDraftAlt(file.name.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " "));
+              setPendingFile(file);
+            }
+            e.target.value = "";
+          }}
+        />
       </div>
-      <EditorContent editor={editor} />
-      <input
-        ref={fileRef}
-        type="file"
-        accept="image/*"
-        className="hidden"
-        onChange={(e) => {
-          const file = e.target.files?.[0];
-          if (file) void uploadImage(file);
-          e.target.value = "";
-        }}
-      />
-    </div>
+      <AdminDialog
+        open={!!pendingFile}
+        onClose={() => setPendingFile(null)}
+        title="Alt SEO cho ảnh trong nội dung"
+        description="Mỗi ảnh trong bài viết nên có mô tả riêng để tốt hơn cho SEO ảnh và accessibility."
+        size="md"
+        footer={
+          <div className="flex justify-end gap-2">
+            <button
+              type="button"
+              onClick={() => setPendingFile(null)}
+              className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold"
+            >
+              Hủy
+            </button>
+            <button
+              type="button"
+              disabled={uploading || !pendingFile}
+              onClick={() => {
+                if (!pendingFile) return;
+                const file = pendingFile;
+                setPendingFile(null);
+                void uploadImage(file, draftAlt);
+              }}
+              className="rounded-xl bg-brand px-4 py-2 text-sm font-semibold text-white disabled:opacity-60"
+            >
+              {uploading ? "Đang upload..." : "Chèn ảnh"}
+            </button>
+          </div>
+        }
+      >
+        <label className="block text-sm">
+          <span className="font-medium text-slate-700">Alt text</span>
+          <textarea
+            value={draftAlt}
+            onChange={(e) => setDraftAlt(e.target.value)}
+            className="mt-1.5 min-h-24 w-full rounded-xl border border-slate-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand/20"
+            placeholder="Ví dụ: Sơ đồ luồng dữ liệu giữa ứng dụng Next.js và AI Agent"
+          />
+        </label>
+        <p className="mt-2 text-xs text-slate-500">
+          File: {pendingFile?.name}. Viết mô tả tự nhiên, đừng nhồi keyword.
+        </p>
+      </AdminDialog>
+    </>
   );
 }

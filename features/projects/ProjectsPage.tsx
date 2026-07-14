@@ -25,6 +25,7 @@ export type ProjectListItem = {
   platform: string;
   tone: string;
   coverUrl: string;
+  coverAlt: string;
 };
 
 const filters = [
@@ -33,7 +34,7 @@ const filters = [
   "Booking",
   "CRM / SaaS",
   "Mobile App",
-  "AI Solution",
+  "AI Agent",
   "Web App",
 ] as const;
 
@@ -133,7 +134,7 @@ export function ProjectsPage({ projects }: { projects: ProjectListItem[] }) {
                 >
                   <Image
                     src={project.coverUrl}
-                    alt={`Mockup giao diện dự án ${project.title}`}
+                    alt={project.coverAlt}
                     fill
                     className="object-cover opacity-90"
                     sizes="280px"

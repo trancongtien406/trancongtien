@@ -25,6 +25,7 @@ export default async function EditPostPage({ params }: Props) {
         excerpt: post.excerpt,
         content: post.content,
         coverUrl: post.coverUrl || "",
+        coverAlt: post.coverAlt || "",
         status: post.status,
         readTime: post.readTime,
         categoryId: post.categoryId || "",

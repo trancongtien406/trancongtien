@@ -6,7 +6,7 @@ export function OrgGraph({ className }: { className?: string }) {
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       role="img"
-      aria-label="Sơ đồ luồng Product Engineering: Discovery đến Growth"
+      aria-label="Sơ đồ luồng phát triển full-stack, app và AI Agent: Discovery đến Growth"
     >
       <rect width="640" height="420" rx="24" fill="#F8FAFC" />
       <path
@@ -57,7 +57,7 @@ export function OrgGraph({ className }: { className?: string }) {
         fontWeight="700"
         fontFamily="system-ui,sans-serif"
       >
-        Product Engineering Studio
+        Full-stack, App & AI Agent
       </text>
       <text
         x="320"

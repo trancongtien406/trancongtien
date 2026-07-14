@@ -105,7 +105,7 @@ export function Logo({
               isDark ? "text-slate-400" : "text-ink-subtle",
             )}
           >
-            Product Engineering Studio
+            Full-stack Developer & AI Agent
           </span>
         </div>
       ) : null}
