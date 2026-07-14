@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 type Category = { id: string; name: string };
 type PostData = {
@@ -37,7 +38,6 @@ export function PostEditor({
     categoryId: "",
     tags: "",
   });
-  const [msg, setMsg] = useState("");
   const [uploading, setUploading] = useState(false);
 
   function loadPost(id: string) {
@@ -65,17 +65,16 @@ export function PostEditor({
     const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
     setUploading(false);
     if (!res.ok) {
-      setMsg("Upload thất bại");
+      toast.error("Upload thất bại");
       return;
     }
     const data = await res.json();
     setForm((f) => ({ ...f, coverUrl: data.media.url }));
-    setMsg("Đã upload ảnh cover");
+    toast.success("Đã upload ảnh cover");
   }
 
   async function save(e: React.FormEvent) {
     e.preventDefault();
-    setMsg("");
     const payload = {
       ...(editingId ? { id: editingId } : {}),
       title: form.title,
@@ -97,17 +96,21 @@ export function PostEditor({
       body: JSON.stringify(payload),
     });
     if (!res.ok) {
-      setMsg("Lưu thất bại");
+      toast.error("Lưu thất bại");
       return;
     }
-    setMsg("Đã lưu thành công");
+    toast.success(editingId ? "Đã cập nhật bài viết" : "Đã tạo bài viết");
     router.refresh();
   }
 
   async function remove() {
     if (!editingId) return;
     if (!confirm("Xóa bài viết này?")) return;
-    await fetch(`/api/admin/posts?id=${editingId}`, { method: "DELETE" });
+    const res = await fetch(`/api/admin/posts?id=${editingId}`, { method: "DELETE" });
+    if (!res.ok) {
+      toast.error("Xóa bài viết thất bại");
+      return;
+    }
     setEditingId("");
     setForm({
       title: "",
@@ -120,6 +123,7 @@ export function PostEditor({
       categoryId: "",
       tags: "",
     });
+    toast.success("Đã xóa bài viết");
     router.refresh();
   }
 
@@ -254,7 +258,6 @@ export function PostEditor({
             </button>
           ) : null}
         </div>
-        {msg ? <p className="text-sm text-emerald-600">{msg}</p> : null}
       </form>
     </div>
   );

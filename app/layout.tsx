@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Be_Vietnam_Pro, Plus_Jakarta_Sans } from "next/font/google";
 import { JsonLd, organizationJsonLd, buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
+import { ToastProvider } from "@/components/common/ToastProvider";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -23,14 +24,6 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     path: "/",
   }),
-  icons: {
-    icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/icon.png", type: "image/png", sizes: "512x512" },
-    ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
-    shortcut: ["/favicon.svg"],
-  },
   manifest: "/site.webmanifest",
 };
 
@@ -47,6 +40,7 @@ export default function RootLayout({
       <body id="top" className="min-h-full flex flex-col bg-surface text-ink font-sans">
         <JsonLd data={organizationJsonLd()} />
         {children}
+        <ToastProvider />
       </body>
     </html>
   );

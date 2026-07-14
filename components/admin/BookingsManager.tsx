@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Eye } from "lucide-react";
+import toast from "react-hot-toast";
 import {
   AdminCard,
   AdminPageHeader,
@@ -51,14 +52,21 @@ export function BookingsManager({ bookings }: { bookings: BookingRow[] }) {
   async function save() {
     if (!selected) return;
     setSaving(true);
-    const fd = new FormData();
-    fd.set("id", selected.id);
-    fd.set("status", nextStatus);
-    if (scheduledAt) fd.set("scheduledAt", scheduledAt);
-    await fetch("/api/admin/bookings", { method: "POST", body: fd });
-    setSaving(false);
-    setSelected(null);
-    router.refresh();
+    try {
+      const fd = new FormData();
+      fd.set("id", selected.id);
+      fd.set("status", nextStatus);
+      if (scheduledAt) fd.set("scheduledAt", scheduledAt);
+      const res = await fetch("/api/admin/bookings", { method: "POST", body: fd });
+      if (!res.ok) throw new Error("Cập nhật liên hệ thất bại");
+      toast.success("Đã cập nhật liên hệ");
+      setSelected(null);
+      router.refresh();
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Cập nhật liên hệ thất bại");
+    } finally {
+      setSaving(false);
+    }
   }
 
   return (

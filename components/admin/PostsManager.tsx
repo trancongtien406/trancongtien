@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { Eye, Pencil, Plus, Trash2 } from "lucide-react";
+import toast from "react-hot-toast";
 import {
   AdminCard,
   AdminPageHeader,
@@ -54,10 +55,17 @@ export function PostsManager({
   async function remove(id: string) {
     if (!confirm("Xóa bài viết này?")) return;
     setDeleting(true);
-    await fetch(`/api/admin/posts?id=${id}`, { method: "DELETE" });
-    setDeleting(false);
-    setPreview(null);
-    router.refresh();
+    try {
+      const res = await fetch(`/api/admin/posts?id=${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error("Xóa bài viết thất bại");
+      toast.success("Đã xóa bài viết");
+      setPreview(null);
+      router.refresh();
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Xóa bài viết thất bại");
+    } finally {
+      setDeleting(false);
+    }
   }
 
   return (

@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { ImagePlus, Loader2, Trash2, Upload } from "lucide-react";
+import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -36,8 +37,11 @@ export function FileUploadField({
       if (!res.ok) throw new Error("Upload thất bại");
       const data = await res.json();
       onChange(data.media.url as string);
+      toast.success("Upload thành công");
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Upload thất bại");
+      const message = e instanceof Error ? e.message : "Upload thất bại";
+      setError(message);
+      toast.error(message);
     } finally {
       setLoading(false);
     }

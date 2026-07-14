@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Admin | TRAN CONG TIEN",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
 export default function AdminRootLayout({
   children,
 }: {

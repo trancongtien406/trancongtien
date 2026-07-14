@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { RefreshCw, Save } from "lucide-react";
+import toast from "react-hot-toast";
 import { AdminCard, AdminPageHeader } from "@/components/admin/AdminChrome";
 import { FileUploadField } from "@/components/admin/ui/FileUploadField";
 import { RichTextEditor } from "@/components/admin/editor/RichTextEditor";
@@ -32,7 +33,6 @@ export function PostForm({
   const isEdit = !!initial?.id;
   const [slugLocked, setSlugLocked] = useState(isEdit);
   const [saving, setSaving] = useState(false);
-  const [msg, setMsg] = useState("");
   const [form, setForm] = useState<PostFormData>(
     initial || {
       title: "",
@@ -47,16 +47,9 @@ export function PostForm({
     },
   );
 
-  useEffect(() => {
-    if (!slugLocked && form.title) {
-      setForm((f) => ({ ...f, slug: toSlug(f.title) }));
-    }
-  }, [form.title, slugLocked]);
-
   async function save(e: React.FormEvent) {
     e.preventDefault();
     setSaving(true);
-    setMsg("");
     const payload = {
       ...(isEdit ? { id: initial?.id } : {}),
       title: form.title,
@@ -72,20 +65,28 @@ export function PostForm({
         .map((t) => t.trim())
         .filter(Boolean),
     };
-    const res = await fetch("/api/admin/posts", {
-      method: isEdit ? "PUT" : "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    setSaving(false);
-    if (!res.ok) {
-      setMsg("Lưu thất bại. Kiểm tra slug trùng hoặc dữ liệu.");
-      return;
+    try {
+      const res = await fetch("/api/admin/posts", {
+        method: isEdit ? "PUT" : "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) {
+        throw new Error("Lưu thất bại. Kiểm tra slug trùng hoặc dữ liệu.");
+      }
+      const data = await res.json();
+      toast.success(isEdit ? "Đã cập nhật bài viết" : "Đã tạo bài viết");
+      router.push(`/admin/posts/${data.post.id}`);
+      router.refresh();
+    } catch (error) {
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Lưu thất bại. Kiểm tra slug trùng hoặc dữ liệu.",
+      );
+    } finally {
+      setSaving(false);
     }
-    const data = await res.json();
-    setMsg("Đã lưu thành công");
-    router.push(`/admin/posts/${data.post.id}`);
-    router.refresh();
   }
 
   return (
@@ -114,7 +115,14 @@ export function PostForm({
               <input
                 required
                 value={form.title}
-                onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
+                onChange={(e) => {
+                  const title = e.target.value;
+                  setForm((f) => ({
+                    ...f,
+                    title,
+                    slug: slugLocked ? f.slug : toSlug(title),
+                  }));
+                }}
                 className="mt-1.5 h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none focus:ring-2 focus:ring-brand/20"
               />
             </label>
@@ -221,7 +229,6 @@ export function PostForm({
               />
             </label>
           </AdminCard>
-          {msg ? <p className="text-sm text-emerald-600">{msg}</p> : null}
         </div>
       </form>
     </>

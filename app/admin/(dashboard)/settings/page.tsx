@@ -2,36 +2,54 @@ import {
   AdminCard,
   AdminPageHeader,
 } from "@/components/admin/AdminChrome";
+import { SettingsForm } from "@/components/admin/SettingsForm";
+import type { SettingsActionState } from "@/components/admin/SettingsForm";
 import { prisma } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 
 export const dynamic = "force-dynamic";
 
-async function saveSettings(formData: FormData) {
+async function saveSettings(
+  _state: SettingsActionState,
+  formData: FormData,
+): Promise<SettingsActionState> {
   "use server";
-  await prisma.siteSetting.upsert({
-    where: { id: "default" },
-    update: {
-      siteName: String(formData.get("siteName") || ""),
-      tagline: String(formData.get("tagline") || ""),
-      email: String(formData.get("email") || ""),
-      phone: String(formData.get("phone") || ""),
-      location: String(formData.get("location") || ""),
-      zaloUrl: String(formData.get("zaloUrl") || ""),
-      notifyEmail: String(formData.get("notifyEmail") || ""),
-      notifyPhone: String(formData.get("notifyPhone") || ""),
-      seoTitle: String(formData.get("seoTitle") || ""),
-      seoDescription: String(formData.get("seoDescription") || ""),
-    },
-    create: {
-      id: "default",
-      siteName: String(formData.get("siteName") || ""),
-      notifyEmail: String(formData.get("notifyEmail") || ""),
-      notifyPhone: String(formData.get("notifyPhone") || ""),
-    },
-  });
-  revalidatePath("/");
-  revalidatePath("/admin/settings");
+  try {
+    await prisma.siteSetting.upsert({
+      where: { id: "default" },
+      update: {
+        siteName: String(formData.get("siteName") || ""),
+        tagline: String(formData.get("tagline") || ""),
+        email: String(formData.get("email") || ""),
+        phone: String(formData.get("phone") || ""),
+        location: String(formData.get("location") || ""),
+        zaloUrl: String(formData.get("zaloUrl") || ""),
+        notifyEmail: String(formData.get("notifyEmail") || ""),
+        notifyPhone: String(formData.get("notifyPhone") || ""),
+        seoTitle: String(formData.get("seoTitle") || ""),
+        seoDescription: String(formData.get("seoDescription") || ""),
+      },
+      create: {
+        id: "default",
+        siteName: String(formData.get("siteName") || ""),
+        notifyEmail: String(formData.get("notifyEmail") || ""),
+        notifyPhone: String(formData.get("notifyPhone") || ""),
+      },
+    });
+    revalidatePath("/");
+    revalidatePath("/admin/settings");
+    return {
+      ok: true,
+      message: "Đã lưu cài đặt",
+      submittedAt: Date.now(),
+    };
+  } catch {
+    return {
+      ok: false,
+      message: "Lưu cài đặt thất bại",
+      submittedAt: Date.now(),
+    };
+  }
 }
 
 function Field({
@@ -83,7 +101,7 @@ export default async function AdminSettingsPage() {
         subtitle="Thông tin site, SEO và kênh nhận thông báo đặt lịch"
       />
 
-      <form action={saveSettings} className="mx-auto max-w-3xl space-y-4">
+      <SettingsForm action={saveSettings}>
         <AdminCard>
           <h2 className="mb-4 font-display text-lg font-bold text-slate-900">
             Thông tin thương hiệu
@@ -141,16 +159,7 @@ export default async function AdminSettingsPage() {
             />
           </div>
         </AdminCard>
-
-        <div className="flex justify-end">
-          <button
-            type="submit"
-            className="inline-flex h-11 items-center rounded-xl bg-brand px-6 text-sm font-semibold text-white hover:bg-brand-dark"
-          >
-            Lưu cài đặt
-          </button>
-        </div>
-      </form>
+      </SettingsForm>
     </>
   );
 }

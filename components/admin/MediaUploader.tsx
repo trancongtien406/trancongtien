@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export function MediaUploader() {
   const router = useRouter();
   const [alt, setAlt] = useState("");
-  const [msg, setMsg] = useState("");
 
   async function onUpload(file: File) {
     const fd = new FormData();
@@ -14,10 +14,10 @@ export function MediaUploader() {
     fd.set("alt", alt || file.name);
     const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
     if (!res.ok) {
-      setMsg("Upload thất bại");
+      toast.error("Upload thất bại");
       return;
     }
-    setMsg("Upload thành công");
+    toast.success("Upload thành công");
     setAlt("");
     router.refresh();
   }
@@ -42,7 +42,6 @@ export function MediaUploader() {
           }}
         />
       </label>
-      {msg ? <p className="text-sm text-emerald-600">{msg}</p> : null}
     </div>
   );
 }

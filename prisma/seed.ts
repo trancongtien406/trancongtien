@@ -36,7 +36,7 @@ async function main() {
       id: "default",
       notifyEmail: process.env.NOTIFY_EMAIL || email,
       notifyPhone: process.env.NOTIFY_PHONE || "+84382802406",
-      logoUrl: "/images/logo/logo-mark.svg",
+      logoUrl: "/icon.png",
       faviconUrl: "/favicon.ico",
       seoTitle: "TRAN CONG TIEN | Product Engineering Studio",
       seoDescription:

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import { Logo } from "@/components/common/Logo";
 
 export function LoginForm() {
@@ -23,9 +24,12 @@ export function LoginForm() {
     setLoading(false);
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
-      setError(data.error || "Đăng nhập thất bại");
+      const message = data.error || "Đăng nhập thất bại";
+      setError(message);
+      toast.error(message);
       return;
     }
+    toast.success("Đăng nhập thành công");
     router.push("/admin");
     router.refresh();
   }

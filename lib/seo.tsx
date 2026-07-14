@@ -13,7 +13,7 @@ export function buildMetadata({
   title,
   description,
   path = "/",
-  image = "/images/avatars/portrait-hero.png",
+  image = "/og-image.png",
   type = "website",
 }: BuildMetadataInput): Metadata {
   const url = `${siteConfig.url}${path}`;
@@ -23,6 +23,11 @@ export function buildMetadata({
       : `${title} | ${siteConfig.name}`;
 
   return {
+    applicationName: siteConfig.brand,
+    authors: [{ name: siteConfig.fullName, url: siteConfig.url }],
+    creator: siteConfig.fullName,
+    publisher: siteConfig.brand,
+    category: "technology",
     title: fullTitle,
     description,
     metadataBase: new URL(siteConfig.url),
@@ -42,7 +47,17 @@ export function buildMetadata({
       description,
       images: [image],
     },
-    robots: { index: true, follow: true },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
   };
 }
 

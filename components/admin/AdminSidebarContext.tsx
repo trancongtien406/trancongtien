@@ -21,12 +21,11 @@ const Ctx = createContext<SidebarCtx | null>(null);
 
 export function AdminSidebarProvider({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
-  const [collapsed, setCollapsed] = useState(false);
-
-  useEffect(() => {
-    const stored = localStorage.getItem("admin-sidebar-collapsed");
-    if (stored === "1") setCollapsed(true);
-  }, []);
+  const [collapsed, setCollapsed] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      localStorage.getItem("admin-sidebar-collapsed") === "1",
+  );
 
   useEffect(() => {
     localStorage.setItem("admin-sidebar-collapsed", collapsed ? "1" : "0");

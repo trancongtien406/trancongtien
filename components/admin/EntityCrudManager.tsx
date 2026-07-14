@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Pencil, Plus, Trash2 } from "lucide-react";
+import toast from "react-hot-toast";
 import {
   AdminCard,
   AdminPageHeader,
@@ -50,7 +51,6 @@ export function EntityCrudManager({
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState(false);
-  const [msg, setMsg] = useState("");
 
   const filtered = useMemo(() => {
     return rows.filter((r) => {
@@ -71,7 +71,6 @@ export function EntityCrudManager({
       else initial[f.key] = "";
     });
     setForm(initial);
-    setMsg("");
     setOpen(true);
   }
 
@@ -82,7 +81,6 @@ export function EntityCrudManager({
       initial[f.key] = String(row[f.key] ?? "");
     });
     setForm(initial);
-    setMsg("");
     setOpen(true);
   }
 
@@ -99,35 +97,43 @@ export function EntityCrudManager({
 
   async function save() {
     setSaving(true);
-    setMsg("");
     const payload: Record<string, unknown> = { ...form };
     if (form.sortOrder !== undefined) payload.sortOrder = Number(form.sortOrder || 0);
     if (form.free !== undefined) payload.free = form.free === "true";
 
-    const res = await fetch("/api/admin/entity", {
-      method: editingId ? "PUT" : "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        entity,
-        id: editingId || undefined,
-        data: payload,
-      }),
-    });
-    setSaving(false);
-    if (!res.ok) {
-      setMsg("Lưu thất bại");
-      return;
+    try {
+      const res = await fetch("/api/admin/entity", {
+        method: editingId ? "PUT" : "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          entity,
+          id: editingId || undefined,
+          data: payload,
+        }),
+      });
+      if (!res.ok) throw new Error("Lưu thất bại");
+      toast.success(editingId ? "Đã cập nhật mục" : "Đã thêm mục mới");
+      setOpen(false);
+      router.refresh();
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Lưu thất bại");
+    } finally {
+      setSaving(false);
     }
-    setOpen(false);
-    router.refresh();
   }
 
   async function remove(id: string) {
     if (!confirm("Xóa mục này?")) return;
-    await fetch(`/api/admin/entity?entity=${entity}&id=${id}`, {
-      method: "DELETE",
-    });
-    router.refresh();
+    try {
+      const res = await fetch(`/api/admin/entity?entity=${entity}&id=${id}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error("Xóa thất bại");
+      toast.success("Đã xóa mục");
+      router.refresh();
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Xóa thất bại");
+    }
   }
 
   const hasStatus = fields.some((f) => f.key === "status");
@@ -324,7 +330,6 @@ export function EntityCrudManager({
               </label>
             );
           })}
-          {msg ? <p className="text-sm text-rose-600 sm:col-span-2">{msg}</p> : null}
         </div>
       </AdminDialog>
     </>
