@@ -46,6 +46,20 @@ export function buildMetadata({
     ],
     metadataBase: new URL(siteConfig.url),
     alternates: { canonical: url },
+    icons: {
+      icon: [
+        { url: "/favicon.ico?v=20260714", sizes: "any" },
+        { url: "/icon.png?v=20260714", type: "image/png", sizes: "512x512" },
+      ],
+      apple: [
+        {
+          url: "/apple-icon.png?v=20260714",
+          type: "image/png",
+          sizes: "180x180",
+        },
+      ],
+      shortcut: ["/favicon.ico?v=20260714"],
+    },
     openGraph: {
       title: fullTitle,
       description,
