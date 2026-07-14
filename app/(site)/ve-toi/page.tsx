@@ -1,5 +1,6 @@
 import { AboutPage } from "@/features/about/AboutPage";
 import { getCoreValues, getJourneyItems } from "@/lib/content";
+import { prisma } from "@/lib/db";
 import { breadcrumbJsonLd, buildMetadata, JsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
@@ -13,9 +14,10 @@ export const metadata = buildMetadata({
 });
 
 export default async function Page() {
-  const [values, journey] = await Promise.all([
+  const [values, journey, setting] = await Promise.all([
     getCoreValues(),
     getJourneyItems(),
+    prisma.siteSetting.findUnique({ where: { id: "default" } }),
   ]);
 
   return (
@@ -51,6 +53,7 @@ export default async function Page() {
         }}
       />
       <AboutPage
+        cvUrl={setting?.cvUrl || ""}
         values={values.map((v) => ({
           title: v.title,
           description: v.description,

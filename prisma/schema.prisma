@@ -199,6 +199,7 @@ model SiteSetting {
   seoDescription String?
   logoUrl      String?
   faviconUrl   String?
+  cvUrl        String?
 }
 
 model Notification {

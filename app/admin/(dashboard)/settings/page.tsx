@@ -2,6 +2,7 @@ import {
   AdminCard,
   AdminPageHeader,
 } from "@/components/admin/AdminChrome";
+import { SettingsFileUploadField } from "@/components/admin/SettingsFileUploadField";
 import { SettingsForm } from "@/components/admin/SettingsForm";
 import type { SettingsActionState } from "@/components/admin/SettingsForm";
 import { prisma } from "@/lib/db";
@@ -28,12 +29,14 @@ async function saveSettings(
         notifyPhone: String(formData.get("notifyPhone") || ""),
         seoTitle: String(formData.get("seoTitle") || ""),
         seoDescription: String(formData.get("seoDescription") || ""),
+        cvUrl: String(formData.get("cvUrl") || ""),
       },
       create: {
         id: "default",
         siteName: String(formData.get("siteName") || ""),
         notifyEmail: String(formData.get("notifyEmail") || ""),
         notifyPhone: String(formData.get("notifyPhone") || ""),
+        cvUrl: String(formData.get("cvUrl") || ""),
       },
     });
     revalidatePath("/");
@@ -123,6 +126,19 @@ export default async function AdminSettingsPage() {
               hint="Dùng cho nút Zalo nổi trên website"
             />
           </div>
+        </AdminCard>
+
+        <AdminCard>
+          <h2 className="mb-4 font-display text-lg font-bold text-slate-900">
+            File CV
+          </h2>
+          <SettingsFileUploadField
+            name="cvUrl"
+            label="Upload CV"
+            defaultValue={setting?.cvUrl}
+            accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            hint="Frontend sẽ tải trực tiếp file này, không chuyển hướng sang trang liên hệ."
+          />
         </AdminCard>
 
         <AdminCard>

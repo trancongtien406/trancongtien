@@ -12,6 +12,7 @@ type ButtonProps = {
   iconLeft?: React.ReactNode;
   iconRight?: React.ReactNode;
   external?: boolean;
+  download?: boolean | string;
 };
 
 const variants = {
@@ -40,6 +41,7 @@ export function Button({
   iconLeft,
   iconRight,
   external,
+  download,
 }: ButtonProps) {
   const classes = cn(
     "inline-flex items-center justify-center font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2",
@@ -57,13 +59,14 @@ export function Button({
   );
 
   if (href) {
-    if (external) {
+    if (external || download) {
       return (
         <a
           href={href}
           className={classes}
-          target="_blank"
-          rel="noopener noreferrer"
+          target={external ? "_blank" : undefined}
+          rel={external ? "noopener noreferrer" : undefined}
+          download={download}
         >
           {content}
         </a>

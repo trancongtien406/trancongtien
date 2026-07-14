@@ -52,9 +52,11 @@ const aboutStats = [
 export function AboutPage({
   values,
   journey,
+  cvUrl,
 }: {
   values: ValueItem[];
   journey: JourneyEntry[];
+  cvUrl?: string;
 }) {
   return (
     <>
@@ -75,11 +77,13 @@ export function AboutPage({
                 Đặt lịch trò chuyện
               </Button>
               <Button
-                href="/lien-he"
+                href={cvUrl || "#"}
                 variant="secondary"
                 iconLeft={<Download className="size-4" />}
+                download
+                className={!cvUrl ? "pointer-events-none opacity-60" : undefined}
               >
-                Tải CV của tôi
+                {cvUrl ? "Tải CV của tôi" : "CV chưa cập nhật"}
               </Button>
             </div>
             <div className="flex gap-2 pt-2">

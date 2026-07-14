@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { ImagePlus, Loader2, Trash2, Upload } from "lucide-react";
+import { FileText, ImagePlus, Loader2, Trash2, Upload } from "lucide-react";
 import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
 import { AdminDialog } from "@/components/admin/ui/AdminDialog";
@@ -22,6 +22,7 @@ type Props = {
   className?: string;
   promptAlt?: boolean;
   altDialogTitle?: string;
+  accept?: string;
 };
 
 export function FileUploadField({
@@ -32,6 +33,7 @@ export function FileUploadField({
   className,
   promptAlt = false,
   altDialogTitle = "SEO alt text cho ảnh",
+  accept = "image/*",
 }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [dragging, setDragging] = useState(false);
@@ -72,13 +74,28 @@ export function FileUploadField({
     void upload(file);
   }
 
+  const isImageValue = value
+    ? /\.(avif|gif|jpe?g|png|svg|webp)(\?.*)?$/i.test(value)
+    : false;
+
   return (
     <div className={cn("space-y-2", className)}>
       <p className="text-sm font-medium text-slate-700">{label}</p>
       {value ? (
         <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
           <div className="relative aspect-[16/9]">
-            <Image src={value} alt={alt || "Uploaded"} fill className="object-cover" />
+            {isImageValue ? (
+              <Image src={value} alt={alt || "Uploaded"} fill className="object-cover" />
+            ) : (
+              <div className="flex h-full items-center justify-center bg-white">
+                <div className="flex flex-col items-center gap-2 text-slate-500">
+                  <FileText className="size-10" />
+                  <span className="max-w-[80%] truncate text-xs font-medium">
+                    {value.split("/").pop()}
+                  </span>
+                </div>
+              </div>
+            )}
           </div>
           <div className="flex items-center justify-between gap-2 border-t border-slate-100 bg-white px-3 py-2">
             <p className="truncate text-xs text-slate-500">{value}</p>
@@ -145,7 +162,7 @@ export function FileUploadField({
       <input
         ref={inputRef}
         type="file"
-        accept="image/*"
+        accept={accept}
         className="hidden"
         onChange={(e) => {
           onFiles(e.target.files);
