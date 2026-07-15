@@ -1,14 +1,7 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
 import { JsonLd, siteIdentityJsonLd, buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
-
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: "--font-plus-jakarta",
-  subsets: ["latin", "vietnamese"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   ...buildMetadata({
@@ -47,7 +40,7 @@ export default function RootLayout({
     <html
       lang="vi"
       suppressHydrationWarning
-      className={`${plusJakarta.variable} h-full antialiased`}
+      className="h-full antialiased"
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
