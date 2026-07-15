@@ -4,7 +4,7 @@ import { FloatingActions } from "@/components/floating/FloatingActions";
 import { prisma } from "@/lib/db";
 import { siteConfig } from "@/lib/site";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export default async function SiteLayout({
   children,

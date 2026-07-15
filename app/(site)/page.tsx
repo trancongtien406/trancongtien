@@ -8,7 +8,7 @@ import {
 import { buildMetadata, homePageJsonLd, JsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export const metadata = buildMetadata({
   title: siteConfig.fullName,

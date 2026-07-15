@@ -1,20 +1,12 @@
 import type { Metadata } from "next";
-import { Be_Vietnam_Pro, Plus_Jakarta_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import { JsonLd, siteIdentityJsonLd, buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
-import { ToastProvider } from "@/components/common/ToastProvider";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
   subsets: ["latin", "vietnamese"],
-  display: "swap",
-});
-
-const beVietnam = Be_Vietnam_Pro({
-  variable: "--font-be-vietnam",
-  subsets: ["latin", "vietnamese"],
-  weight: ["500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -55,7 +47,7 @@ export default function RootLayout({
     <html
       lang="vi"
       suppressHydrationWarning
-      className={`${plusJakarta.variable} ${beVietnam.variable} h-full antialiased`}
+      className={`${plusJakarta.variable} h-full antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
@@ -63,7 +55,6 @@ export default function RootLayout({
       <body id="top" className="min-h-full flex flex-col bg-surface text-ink font-sans">
         <JsonLd data={siteIdentityJsonLd()} />
         {children}
-        <ToastProvider />
       </body>
     </html>
   );
