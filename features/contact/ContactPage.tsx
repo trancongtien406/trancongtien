@@ -98,7 +98,7 @@ export function ContactPage({ faqs }: { faqs: FaqItem[] }) {
 
   return (
     <>
-      <section className="border-b border-border bg-gradient-to-b from-brand-soft/40 to-surface">
+      <section className="border-b border-border bg-linear-to-b from-brand-soft/40 to-surface">
         <Container className="grid items-center gap-10 py-14 lg:grid-cols-2 lg:py-20">
           <div className="space-y-6">
             <SectionEyebrow>Liên hệ</SectionEyebrow>
@@ -357,7 +357,7 @@ export function ContactPage({ faqs }: { faqs: FaqItem[] }) {
             <iframe
               title="Bản đồ Đà Nẵng, Việt Nam"
               src="https://maps.google.com/maps?q=Da%20Nang%20Vietnam&t=&z=12&ie=UTF8&iwloc=&output=embed"
-              className="h-[320px] w-full grayscale-[20%]"
+              className="h-80 w-full grayscale-20"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />

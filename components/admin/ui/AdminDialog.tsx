@@ -47,7 +47,7 @@ export function AdminDialog({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[80] flex items-end justify-center sm:items-center sm:p-4">
+    <div className="fixed inset-0 z-80 flex items-end justify-center sm:items-center sm:p-4">
       <button
         type="button"
         aria-label="Đóng overlay"
@@ -59,7 +59,7 @@ export function AdminDialog({
         aria-modal="true"
         aria-labelledby="admin-dialog-title"
         className={cn(
-          "relative z-[81] flex max-h-[92vh] w-full flex-col overflow-hidden rounded-t-3xl border border-slate-200 bg-white shadow-2xl sm:rounded-3xl",
+          "relative z-81 flex max-h-[92vh] w-full flex-col overflow-hidden rounded-t-3xl border border-slate-200 bg-white shadow-2xl sm:rounded-3xl",
           sizes[size],
         )}
       >

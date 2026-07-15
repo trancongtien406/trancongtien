@@ -102,7 +102,7 @@ export function ResourcesPage({
 }) {
   return (
     <>
-      <section className="border-b border-border bg-gradient-to-b from-brand-soft/40 to-surface">
+      <section className="border-b border-border bg-linear-to-b from-brand-soft/40 to-surface">
         <Container className="py-14 lg:py-20">
           <Breadcrumbs
             items={[
@@ -216,7 +216,7 @@ export function ResourcesPage({
                 key={resource.title}
                 className="overflow-hidden rounded-2xl border border-border bg-surface"
               >
-                <div className="flex aspect-[4/3] items-center justify-center bg-brand-soft">
+                <div className="flex aspect-4/3 items-center justify-center bg-brand-soft">
                   <FileText className="size-10 text-brand" />
                 </div>
                 <div className="p-4">
@@ -260,7 +260,7 @@ export function ResourcesPage({
                 className="overflow-hidden rounded-2xl border border-border bg-surface"
               >
                 <Link href={`/blog/${post.slug}`} className="block">
-                  <div className="relative aspect-[16/10]">
+                  <div className="relative aspect-8/5">
                     <Image
                       src={post.image}
                       alt={`Hình minh họa bài viết: ${post.title}`}

@@ -60,7 +60,7 @@ export function AboutPage({
 }) {
   return (
     <>
-      <section className="border-b border-border bg-gradient-to-b from-brand-soft/40 to-surface">
+      <section className="border-b border-border bg-linear-to-b from-brand-soft/40 to-surface">
         <Container className="grid items-center gap-10 py-14 lg:grid-cols-2 lg:py-20">
           <div className="space-y-6">
             <SectionEyebrow>Về tôi</SectionEyebrow>
@@ -110,7 +110,7 @@ export function AboutPage({
               alt={`${siteConfig.fullName} — chân dung Full-stack Developer và AI Agent Builder`}
               width={640}
               height={800}
-              className="aspect-[4/5] w-full rounded-3xl object-cover object-top shadow-2xl"
+              className="aspect-4/5 w-full rounded-3xl object-cover object-top shadow-2xl"
               priority
             />
             <div className="absolute -right-3 top-8 hidden w-44 space-y-3 sm:block">
@@ -225,7 +225,7 @@ export function AboutPage({
                 alt="Khung cảnh núi non lúc hoàng hôn — sở thích du lịch và khám phá"
                 width={800}
                 height={500}
-                className="aspect-[16/10] w-full object-cover"
+                className="aspect-8/5 w-full object-cover"
               />
             </div>
             <p className="mt-4 text-center text-sm italic text-ink-muted">

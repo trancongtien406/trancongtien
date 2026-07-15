@@ -76,7 +76,7 @@ const methods = [
 export function ProcessPage({ steps }: { steps: Step[] }) {
   return (
     <>
-      <section className="border-b border-border bg-gradient-to-b from-brand-soft/40 to-surface">
+      <section className="border-b border-border bg-linear-to-b from-brand-soft/40 to-surface">
         <Container className="py-14 lg:py-20">
           <Breadcrumbs
             items={[

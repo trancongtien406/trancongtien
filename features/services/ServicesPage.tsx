@@ -59,7 +59,7 @@ export function ServicesPage({
 }) {
   return (
     <>
-      <section className="border-b border-border bg-gradient-to-b from-brand-soft/50 to-surface">
+      <section className="border-b border-border bg-linear-to-b from-brand-soft/50 to-surface">
         <Container className="grid items-center gap-10 py-14 lg:grid-cols-2 lg:py-20">
           <div className="space-y-6">
             <SectionEyebrow>Dịch vụ</SectionEyebrow>

@@ -73,7 +73,7 @@ function SidebarNav({
       <aside
         className={cn(
           "fixed inset-y-0 left-0 z-50 flex h-dvh flex-col border-r border-white/10 bg-[#0B1220] text-slate-300 transition-[width,transform] duration-200",
-          collapsed ? "w-[76px]" : "w-64",
+          collapsed ? "w-19" : "w-64",
           open ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
         )}
       >
@@ -178,7 +178,7 @@ function ChromeInner({
       <div
         className={cn(
           "flex min-h-dvh flex-col transition-[padding] duration-200",
-          collapsed ? "lg:pl-[76px]" : "lg:pl-64",
+          collapsed ? "lg:pl-19" : "lg:pl-64",
         )}
       >
         <header className="sticky top-0 z-30 flex h-16 shrink-0 items-center justify-between gap-3 border-b border-slate-200 bg-white/90 px-3 backdrop-blur sm:px-5">

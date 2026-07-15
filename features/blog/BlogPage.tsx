@@ -60,7 +60,7 @@ export function BlogPage({ posts }: { posts: BlogListItem[] }) {
 
   return (
     <>
-      <section className="border-b border-border bg-gradient-to-b from-brand-soft/40 to-surface">
+      <section className="border-b border-border bg-linear-to-b from-brand-soft/40 to-surface">
         <Container className="grid items-center gap-10 py-14 lg:grid-cols-2 lg:py-20">
           <div className="space-y-6">
             <SectionEyebrow>Blog</SectionEyebrow>
@@ -114,7 +114,7 @@ export function BlogPage({ posts }: { posts: BlogListItem[] }) {
               alt="Không gian làm việc với laptop hiển thị dashboard phân tích dữ liệu"
               width={900}
               height={700}
-              className="aspect-[4/3] w-full object-cover"
+              className="aspect-4/3 w-full object-cover"
               priority
             />
           </div>
@@ -151,7 +151,7 @@ export function BlogPage({ posts }: { posts: BlogListItem[] }) {
                   key={post.slug}
                   className="grid gap-5 overflow-hidden rounded-2xl border border-border bg-surface p-4 shadow-sm sm:grid-cols-[220px_1fr] sm:p-5"
                 >
-                  <div className="relative aspect-[16/11] overflow-hidden rounded-xl sm:aspect-auto sm:min-h-[160px]">
+                  <div className="relative aspect-16/11 overflow-hidden rounded-xl sm:aspect-auto sm:min-h-40">
                     <Image
                       src={post.image}
                       alt={post.imageAlt}

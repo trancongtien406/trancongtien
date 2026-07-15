@@ -6,7 +6,7 @@ import { Logo } from "@/components/common/Logo";
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-[70vh] items-center bg-gradient-to-b from-brand-soft/40 to-surface">
+    <div className="flex min-h-[70vh] items-center bg-linear-to-b from-brand-soft/40 to-surface">
       <Container className="py-16 text-center">
         <div className="mx-auto mb-6 flex justify-center">
           <Logo showText={false} size={56} />

@@ -44,7 +44,7 @@ export function FloatingActions({
   }, []);
 
   return (
-    <div className="pointer-events-none fixed bottom-5 right-4 z-[60] flex flex-col items-center gap-3 sm:bottom-7 sm:right-6">
+    <div className="pointer-events-none fixed bottom-5 right-4 z-60 flex flex-col items-center gap-3 sm:bottom-7 sm:right-6">
       <a
         href={zaloUrl}
         target="_blank"

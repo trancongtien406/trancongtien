@@ -69,7 +69,7 @@ export default async function BlogPostPage({ params }: Props) {
           <p className="mt-3 text-sm text-ink-subtle">
             {date} · {post.readTime} · {post.author?.name || siteConfig.fullName}
           </p>
-          <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-3xl">
+          <div className="relative mt-8 aspect-video overflow-hidden rounded-3xl">
             <Image
               src={cover}
               alt={coverAlt}

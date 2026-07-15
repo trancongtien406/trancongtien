@@ -55,7 +55,7 @@ export function ProjectsPage({ projects }: { projects: ProjectListItem[] }) {
 
   return (
     <>
-      <section className="border-b border-border bg-gradient-to-b from-brand-soft/40 to-surface">
+      <section className="border-b border-border bg-linear-to-b from-brand-soft/40 to-surface">
         <Container className="grid items-center gap-10 py-14 lg:grid-cols-2 lg:py-20">
           <div className="space-y-6">
             <SectionEyebrow>Dự án</SectionEyebrow>
@@ -128,7 +128,7 @@ export function ProjectsPage({ projects }: { projects: ProjectListItem[] }) {
               >
                 <div
                   className={cn(
-                    "relative min-h-[200px] p-6 lg:min-h-full",
+                    "relative min-h-50 p-6 lg:min-h-full",
                     project.tone,
                   )}
                 >

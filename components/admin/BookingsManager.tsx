@@ -97,7 +97,7 @@ export function BookingsManager({ bookings }: { bookings: BookingRow[] }) {
       />
       <AdminCard className="mt-4 overflow-hidden p-0 sm:p-0">
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[800px] text-left text-sm">
+          <table className="w-full min-w-200 text-left text-sm">
             <thead className="bg-slate-50 text-xs uppercase text-slate-500">
               <tr>
                 <th className="px-4 py-3">Khách</th>

@@ -96,7 +96,7 @@ function MultiSelectField({
       </button>
 
       {open ? (
-        <div className="absolute z-[90] mt-2 max-h-64 w-full overflow-y-auto rounded-2xl border border-slate-200 bg-white p-2 shadow-xl">
+        <div className="absolute z-90 mt-2 max-h-64 w-full overflow-y-auto rounded-2xl border border-slate-200 bg-white p-2 shadow-xl">
           {options.map((option) => {
             const checked = selected.includes(option.value);
             return (
@@ -275,7 +275,7 @@ export function EntityCrudManager({
 
       <AdminCard className="mt-4 overflow-hidden p-0 sm:p-0">
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[640px] text-left text-sm">
+          <table className="w-full min-w-160 text-left text-sm">
             <thead className="bg-slate-50 text-xs uppercase text-slate-500">
               <tr>
                 {columns.map((c) => (

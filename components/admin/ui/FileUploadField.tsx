@@ -83,14 +83,14 @@ export function FileUploadField({
       <p className="text-sm font-medium text-slate-700">{label}</p>
       {value ? (
         <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
-          <div className="relative aspect-[16/9]">
+          <div className="relative aspect-video">
             {isImageValue ? (
               <Image src={value} alt={alt || "Uploaded"} fill className="object-cover" />
             ) : (
               <div className="flex h-full items-center justify-center bg-white">
                 <div className="flex flex-col items-center gap-2 text-slate-500">
                   <FileText className="size-10" />
-                  <span className="max-w-[80%] truncate text-xs font-medium">
+                  <span className="max-w-4/5 truncate text-xs font-medium">
                     {value.split("/").pop()}
                   </span>
                 </div>

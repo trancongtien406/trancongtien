@@ -34,7 +34,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/80 bg-surface/90 backdrop-blur-md">
-      <Container className="flex h-[72px] items-center justify-between gap-4">
+      <Container className="flex h-18 items-center justify-between gap-4">
         <Link href="/" aria-label="Tran Cong Tien — Trang chủ" className="shrink-0">
           <Logo />
         </Link>
@@ -59,7 +59,7 @@ export function Header() {
               >
                 {link.label}
                 {active ? (
-                  <span className="absolute inset-x-3 -bottom-[1px] h-0.5 rounded-full bg-brand" />
+                  <span className="absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-brand" />
                 ) : null}
               </Link>
             );

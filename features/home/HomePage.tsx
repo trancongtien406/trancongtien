@@ -49,7 +49,7 @@ export function HomePage({ data }: { data: HomeData }) {
 
   return (
     <>
-      <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-brand-soft/60 via-surface to-surface">
+      <section className="relative overflow-hidden border-b border-border bg-linear-to-b from-brand-soft/60 via-surface to-surface">
         <Container className="grid items-center gap-10 py-14 lg:grid-cols-2 lg:gap-12 lg:py-20">
           <div className="animate-fade-up space-y-6">
             <span className="inline-flex rounded-full bg-brand-soft px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-brand">
@@ -81,15 +81,17 @@ export function HomePage({ data }: { data: HomeData }) {
             </ul>
           </div>
           <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-            <div className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-brand/20 via-violet-200/30 to-transparent blur-2xl" />
+            <div className="absolute -inset-6 rounded-4xl bg-linear-to-br from-brand/20 via-violet-200/30 to-transparent blur-2xl" />
             <div className="relative overflow-hidden rounded-[1.75rem] bg-slate-900 shadow-2xl shadow-brand/20">
               <Image
                 src={siteConfig.personImage}
                 alt="Trần Công Tiến, Full-stack Developer và AI Agent Builder tại Đà Nẵng"
                 width={720}
                 height={900}
-                priority
-                className="aspect-[4/5] w-full object-cover object-top"
+                loading="eager"
+                fetchPriority="high"
+                sizes="(max-width: 1023px) calc(100vw - 2rem), 50vw"
+                className="aspect-4/5 w-full object-cover object-top"
               />
             </div>
             <div className="absolute -right-2 top-10 hidden w-48 space-y-3 sm:block lg:-right-4">
@@ -155,7 +157,7 @@ export function HomePage({ data }: { data: HomeData }) {
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {data.projects.map((project) => (
               <article key={project.slug} className="overflow-hidden rounded-2xl border border-border bg-surface transition hover:shadow-lg">
-                <div className="relative aspect-[16/10] overflow-hidden bg-surface-soft">
+                <div className="relative aspect-8/5 overflow-hidden bg-surface-soft">
                   <Image
                     src={project.coverUrl}
                     alt={project.coverAlt}

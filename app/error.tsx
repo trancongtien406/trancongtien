@@ -17,7 +17,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="flex min-h-[70vh] items-center bg-gradient-to-b from-rose-50 to-surface">
+    <div className="flex min-h-[70vh] items-center bg-linear-to-b from-rose-50 to-surface">
       <Container className="py-16 text-center">
         <div className="mx-auto mb-6 flex justify-center">
           <Logo showText={false} size={56} />
