@@ -634,7 +634,7 @@ async function main() {
         "Prototype",
         "Design system",
       ]),
-      color: "bg-emerald-50 text-emerald-600",
+      color: "bg-emerald-50 text-emerald-700",
       sortOrder: 2,
     },
     {
@@ -664,7 +664,7 @@ async function main() {
         "Bảo mật",
         "Performance",
       ]),
-      color: "bg-orange-50 text-orange-600",
+      color: "bg-orange-50 text-orange-700",
       sortOrder: 4,
     },
     {
@@ -679,7 +679,7 @@ async function main() {
         "Tối ưu chi phí",
         "Roadmap dài hạn",
       ]),
-      color: "bg-pink-50 text-pink-600",
+      color: "bg-pink-50 text-pink-700",
       sortOrder: 5,
     },
   ];
