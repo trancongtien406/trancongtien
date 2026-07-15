@@ -56,7 +56,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/dieu-khoan", priority: 0.4, images: [] },
   ].map((route) => ({
     url: `${siteConfig.url}${route.path}`,
-    lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: route.priority,
     images: route.images.map(absoluteImageUrl),

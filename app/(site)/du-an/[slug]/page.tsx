@@ -7,7 +7,7 @@ import { Container } from "@/components/common/Container";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { TechBadge } from "@/components/common/TechBadge";
 import { getProjectBySlug, parseJsonArray } from "@/lib/content";
-import { buildMetadata, JsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, buildMetadata, JsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
@@ -36,6 +36,7 @@ export default async function ProjectDetailPage({ params }: Props) {
   const cover =
     project.coverUrl || "/images/illustrations/projects-hero-devices.png";
   const coverAlt = project.coverAlt || `Mockup chi tiết dự án ${project.title}`;
+  const projectUrl = `${siteConfig.url}/du-an/${project.slug}`;
 
   return (
     <>
@@ -43,11 +44,29 @@ export default async function ProjectDetailPage({ params }: Props) {
         data={{
           "@context": "https://schema.org",
           "@type": "CreativeWork",
+          "@id": `${projectUrl}/#creative-work`,
           name: project.title,
           description: project.description,
-          image: `${siteConfig.url}${cover}`,
-          author: { "@type": "Person", name: siteConfig.fullName },
+          url: projectUrl,
+          inLanguage: "vi-VN",
+          dateCreated: project.createdAt.toISOString(),
+          dateModified: project.updatedAt.toISOString(),
+          image: new URL(cover, siteConfig.url).toString(),
+          author: {
+            "@type": "Person",
+            "@id": `${siteConfig.url}/#person`,
+            name: siteConfig.fullName,
+            url: `${siteConfig.url}/ve-toi`,
+          },
+          mainEntityOfPage: projectUrl,
         }}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Trang chủ", path: "/" },
+          { name: "Dự án", path: "/du-an" },
+          { name: project.title, path: `/du-an/${project.slug}` },
+        ])}
       />
       <article>
         <Container className="py-12 sm:py-16">

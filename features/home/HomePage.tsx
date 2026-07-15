@@ -56,12 +56,14 @@ export function HomePage({ data }: { data: HomeData }) {
               Studio kỹ thuật sản phẩm
             </span>
             <h1 className="font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]">
-              Biến ý tưởng của bạn thành sản phẩm{" "}
-              <span className="text-brand">thực tế.</span>
+              <span className="text-brand">{siteConfig.fullName}</span>
+              <span className="mt-2 block text-2xl sm:text-3xl lg:text-4xl">
+                Full-stack Developer &amp; AI Agent Builder
+              </span>
             </h1>
             <p className="max-w-xl text-base leading-relaxed text-ink-muted sm:text-lg">
-              Đồng hành cùng startup và doanh nghiệp từ khám phá ý tưởng đến thiết
-              kế, phát triển và tối ưu sản phẩm số mang lại giá trị bền vững.
+              Biến ý tưởng thành sản phẩm thực tế — đồng hành cùng startup và
+              doanh nghiệp từ khám phá, thiết kế đến phát triển và tối ưu sản phẩm số.
             </p>
             <div className="flex flex-wrap gap-3">
               <Button href="/lien-he" size="lg" iconRight={<ArrowRight className="size-4" />}>

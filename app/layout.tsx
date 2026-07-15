@@ -25,6 +25,11 @@ export const metadata: Metadata = {
     path: "/",
   }),
   manifest: "/site.webmanifest",
+  verification: {
+    other: {
+      "msvalidate.01": "1F727722FDD48782B6C231BAB19AA707",
+    },
+  },
 };
 
 export default function RootLayout({

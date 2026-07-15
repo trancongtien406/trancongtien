@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { Container } from "@/components/common/Container";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { getPostBySlug, parseJsonArray } from "@/lib/content";
-import { buildMetadata, JsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, buildMetadata, JsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
@@ -21,6 +21,8 @@ export async function generateMetadata({ params }: Props) {
     description: post.excerpt,
     path: `/blog/${post.slug}`,
     image: post.coverUrl || "/images/illustrations/blog-hero-desk.png",
+    imageWidth: post.coverUrl?.startsWith("/images/blog/") ? 1600 : undefined,
+    imageHeight: post.coverUrl?.startsWith("/images/blog/") ? 900 : undefined,
     type: "article",
   });
 }
@@ -34,6 +36,8 @@ export default async function BlogPostPage({ params }: Props) {
   const coverAlt = post.coverAlt || `Hình minh họa bài viết: ${post.title}`;
   const tags = parseJsonArray(post.tags);
   const date = (post.publishedAt || post.createdAt).toLocaleDateString("vi-VN");
+  const postUrl = `${siteConfig.url}/blog/${post.slug}`;
+  const imageUrl = new URL(cover, siteConfig.url).toString();
 
   return (
     <>
@@ -44,13 +48,28 @@ export default async function BlogPostPage({ params }: Props) {
           headline: post.title,
           description: post.excerpt,
           datePublished: post.publishedAt?.toISOString() || post.createdAt.toISOString(),
+          dateModified: post.updatedAt.toISOString(),
+          inLanguage: "vi-VN",
           author: {
             "@type": "Person",
+            "@id": `${siteConfig.url}/#person`,
             name: post.author?.name || siteConfig.fullName,
+            url: `${siteConfig.url}/ve-toi`,
           },
-          image: `${siteConfig.url}${cover}`,
-          mainEntityOfPage: `${siteConfig.url}/blog/${post.slug}`,
+          publisher: { "@id": `${siteConfig.url}/#organization` },
+          image: imageUrl,
+          mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": postUrl,
+          },
         }}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Trang chủ", path: "/" },
+          { name: "Blog", path: "/blog" },
+          { name: post.title, path: `/blog/${post.slug}` },
+        ])}
       />
       <article>
         <Container className="max-w-3xl py-12 sm:py-16">

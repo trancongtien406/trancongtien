@@ -1,13 +1,15 @@
 import Image from "next/image";
 import {
   ArrowRight,
-  Camera,
+  BadgeCheck,
+  BriefcaseBusiness,
+  CalendarDays,
   Download,
-  Dumbbell,
+  Goal,
   Mail,
-  Music,
   Plane,
-  BookOpen,
+  ShieldCheck,
+  Volleyball,
 } from "lucide-react";
 import { Button } from "@/components/common/Button";
 import {
@@ -29,25 +31,49 @@ type ValueItem = { title: string; description: string };
 type JourneyEntry = { year: string; title: string; description: string };
 
 const floatingCards = [
-  { title: "Tư duy sản phẩm", text: "Bài toán trước công nghệ" },
-  { title: "Kỹ thuật vững chắc", text: "Code sạch, dễ scale" },
-  { title: "Đồng hành dài hạn", text: "Không dừng ở bàn giao" },
+  { title: "Uy tín", text: "Nói thật, làm thật" },
+  { title: "Đúng sản phẩm", text: "Bài toán trước công nghệ" },
+  { title: "Có trách nhiệm", text: "Theo sát đến cùng" },
 ];
 
 const hobbies = [
-  { icon: BookOpen, label: "Đọc sách" },
-  { icon: Dumbbell, label: "Gym" },
+  { icon: Volleyball, label: "Cầu lông" },
+  { icon: Goal, label: "Đá bóng" },
   { icon: Plane, label: "Du lịch" },
-  { icon: Music, label: "Âm nhạc" },
-  { icon: Camera, label: "Nhiếp ảnh" },
+  { icon: BadgeCheck, label: "Trải nghiệm cuộc sống" },
 ];
 
-const aboutStats = [
-  { value: siteConfig.stats.projects, label: "Dự án hoàn thành" },
-  { value: siteConfig.stats.domains, label: "Lĩnh vực kinh nghiệm" },
-  { value: siteConfig.stats.years, label: "Năm kinh nghiệm" },
-  { value: siteConfig.stats.satisfaction, label: "Khách hàng hài lòng" },
+const principles = [
+  {
+    icon: ShieldCheck,
+    title: "Uy tín trong cam kết",
+    description:
+      "Trao đổi rõ phạm vi, tiến độ và rủi ro; không hứa những điều sản phẩm không thể đáp ứng.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "Làm đúng sản phẩm",
+    description:
+      "Bắt đầu từ nhu cầu người dùng và mục tiêu kinh doanh trước khi quyết định công nghệ.",
+  },
+  {
+    icon: BriefcaseBusiness,
+    title: "Có trách nhiệm đến cùng",
+    description:
+      "Chủ động theo sát từ lúc làm rõ ý tưởng, phát triển, triển khai đến khi sản phẩm vận hành.",
+  },
 ];
+
+function getAge(birthDate: string) {
+  const today = new Date();
+  const birth = new Date(`${birthDate}T00:00:00`);
+  let age = today.getFullYear() - birth.getFullYear();
+  const hasNotHadBirthday =
+    today.getMonth() < birth.getMonth() ||
+    (today.getMonth() === birth.getMonth() && today.getDate() < birth.getDate());
+  if (hasNotHadBirthday) age -= 1;
+  return age;
+}
 
 export function AboutPage({
   values,
@@ -69,9 +95,19 @@ export function AboutPage({
               <span className="text-brand">{siteConfig.fullName}.</span>
             </h1>
             <p className="max-w-xl text-base leading-relaxed text-ink-muted sm:text-lg">
-              Full-stack Developer giúp startup và doanh nghiệp thiết kế website,
-              app ứng dụng, hệ thống AI Agent và sản phẩm số thực tế.
+              Solo Full-stack Developer tại Đà Nẵng, nhận freelance và hợp đồng
+              dự án cho startup, cá nhân — từ website, backend, mobile app đến AI.
             </p>
+            <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-ink-muted">
+              <span className="inline-flex items-center gap-2">
+                <CalendarDays className="size-4 text-brand" />
+                Sinh ngày 04/06/2003 · {getAge(siteConfig.birthDate)} tuổi
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <BriefcaseBusiness className="size-4 text-brand" />
+                Bắt đầu làm sản phẩm từ 2023
+              </span>
+            </div>
             <div className="flex flex-wrap gap-3">
               <Button href="/lien-he" iconRight={<ArrowRight className="size-4" />}>
                 Đặt lịch trò chuyện
@@ -104,7 +140,7 @@ export function AboutPage({
               ))}
             </div>
           </div>
-          <div className="relative mx-auto w-full max-w-md">
+          <figure className="relative mx-auto w-full max-w-md">
             <Image
               src={siteConfig.personImage}
               alt={`${siteConfig.fullName} — chân dung Full-stack Developer và AI Agent Builder`}
@@ -113,6 +149,9 @@ export function AboutPage({
               className="aspect-4/5 w-full rounded-3xl object-cover object-top shadow-2xl"
               priority
             />
+            <figcaption className="mt-3 text-center text-sm text-ink-muted">
+              {siteConfig.fullName} — {siteConfig.tagline} tại Đà Nẵng
+            </figcaption>
             <div className="absolute -right-3 top-8 hidden w-44 space-y-3 sm:block">
               {floatingCards.map((card) => (
                 <div
@@ -124,7 +163,7 @@ export function AboutPage({
                 </div>
               ))}
             </div>
-          </div>
+          </figure>
         </Container>
       </section>
 
@@ -133,58 +172,99 @@ export function AboutPage({
           <div className="lg:col-span-2">
             <SectionEyebrow>Câu chuyện của tôi</SectionEyebrow>
             <h2 className="mt-3 font-display text-3xl font-bold text-ink">
-              Vì sao tôi làm Full-stack, App và AI Agent
+              Một người có thể đi cùng sản phẩm từ ý tưởng đến vận hành
             </h2>
             <div className="mt-5 space-y-4 text-sm leading-relaxed text-ink-muted sm:text-base">
               <p>
-                Tôi bắt đầu từ lập trình web, rồi nhận ra sản phẩm thành công
-                không chỉ đến từ code đẹp — mà từ việc hiểu đúng bài toán, người
-                dùng và cách đo lường giá trị.
+                Tôi sinh năm 2003, bắt đầu đại học vào năm 2021 và chính thức làm
+                sản phẩm từ năm 2023. Điểm xuất phát của tôi là website với Next.js,
+                sau đó mở rộng sang backend bằng Node.js, NestJS, Python và Java.
               </p>
               <p>
-                Tôi kết hợp tư duy sản phẩm với kỹ thuật full-stack, thiết kế app
-                và tự động hóa bằng AI Agent để giúp đội ngũ ship nhanh hơn, ít rủi ro hơn.
+                Để có thể xây dựng một sản phẩm trọn vẹn, tôi tiếp tục học mobile
+                với Flutter, Dart và BLoC; làm việc với PostgreSQL, MySQL, MongoDB
+                và ứng dụng Python vào các bài toán AI. Tôi hướng tới khả năng của
+                một solo developer: hiểu và thực hiện toàn bộ hành trình từ giao diện,
+                backend, dữ liệu, mobile đến triển khai.
+              </p>
+              <p>
+                Tôi muốn đồng hành với startup và cá nhân ở nhiều bài toán thực tế
+                như CRM, booking, e-commerce, landing page và các sản phẩm số mới.
+                Điều quan trọng nhất với tôi không phải làm thật nhiều tính năng,
+                mà là làm đúng sản phẩm và chịu trách nhiệm với điều mình đã cam kết.
               </p>
             </div>
             <blockquote className="mt-6 rounded-2xl bg-brand-soft p-5 text-sm italic text-ink-muted">
-              “Công nghệ chỉ mạnh khi phục vụ đúng vấn đề — và đúng người dùng.”
+              “A ship in harbor is safe, but that is not what ships are built for.”
             </blockquote>
           </div>
           <div className="lg:col-span-3">
-            <SectionHeading title="Giá trị cốt lõi" />
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              {values.map((value) => (
+            <SectionHeading title="Điều tôi đặt lên hàng đầu" />
+            <div className="mt-6 grid gap-4">
+              {principles.map(({ icon: Icon, title, description }) => (
                 <article
-                  key={value.title}
-                  className="rounded-2xl border border-border bg-surface p-5"
+                  key={title}
+                  className="flex gap-4 rounded-2xl border border-border bg-surface p-5"
                 >
-                  <h3 className="font-semibold text-ink">{value.title}</h3>
-                  <p className="mt-2 text-sm text-ink-muted">{value.description}</p>
+                  <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-brand-soft text-brand">
+                    <Icon className="size-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-ink">{title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-ink-muted">
+                      {description}
+                    </p>
+                  </div>
                 </article>
               ))}
             </div>
+            {values.length > 0 ? (
+              <div className="mt-8">
+                <h3 className="font-display text-xl font-bold text-ink">
+                  Cách tôi làm việc mỗi ngày
+                </h3>
+                <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                  {values.slice(0, 4).map((value) => (
+                    <div
+                      key={value.title}
+                      className="rounded-2xl bg-surface-muted p-4"
+                    >
+                      <p className="text-sm font-semibold text-ink">{value.title}</p>
+                      <p className="mt-1 text-xs leading-relaxed text-ink-muted">
+                        {value.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
           </div>
         </Container>
       </section>
 
       <section className="bg-surface-muted py-16 sm:py-20">
-        <Container className="grid gap-10 lg:grid-cols-2">
-          <div>
-            <SectionHeading title="Công nghệ tôi làm việc" />
+        <Container className="grid gap-10 lg:grid-cols-5">
+          <div className="lg:col-span-3">
+            <SectionHeading title="Công nghệ tôi sử dụng" />
             <TechLogoGrid names={[...ABOUT_TECHS]} className="mt-6" />
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            {aboutStats.map((stat) => (
-              <div
-                key={stat.label}
-                className="rounded-2xl border border-border bg-surface p-5 text-center"
-              >
-                <p className="font-display text-3xl font-bold text-brand">
-                  {stat.value}
-                </p>
-                <p className="mt-1 text-sm text-ink-muted">{stat.label}</p>
-              </div>
-            ))}
+          <div className="lg:col-span-2">
+            <SectionHeading title="Phạm vi tôi có thể đảm nhận" />
+            <ul className="mt-6 space-y-3 text-sm leading-relaxed text-ink-muted">
+              {[
+                "Frontend website và landing page với Next.js, React, TypeScript",
+                "Backend API với Node.js, NestJS, Python hoặc Java",
+                "Mobile app Flutter theo kiến trúc BLoC",
+                "Cơ sở dữ liệu PostgreSQL, MySQL và MongoDB",
+                "Tích hợp AI bằng Python vào sản phẩm và quy trình",
+                "Các hệ thống CRM, booking, e-commerce và sản phẩm theo yêu cầu",
+              ].map((item) => (
+                <li key={item} className="flex gap-3">
+                  <BadgeCheck className="mt-0.5 size-4 shrink-0 text-brand" />
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         </Container>
       </section>
@@ -229,7 +309,7 @@ export function AboutPage({
               />
             </div>
             <p className="mt-4 text-center text-sm italic text-ink-muted">
-              “Đi nhiều, đọc nhiều — để nhìn sản phẩm với góc nhìn rộng hơn.”
+              Tôi thích vận động, đi đây đó và trải nghiệm cuộc sống ngoài màn hình.
             </p>
           </div>
         </Container>

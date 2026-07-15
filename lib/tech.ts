@@ -35,6 +35,9 @@ const TECH_BY_NAME: Record<string, Omit<TechItem, "name">> = {
   OpenAI: { logo: "/images/tech/openai.svg", color: "#412991" },
   FastAPI: { logo: "/images/tech/fastapi.svg", color: "#009688" },
   "Chart.js": { logo: "/images/tech/chartjs.svg", color: "#FF6384" },
+  Java: { logo: "/images/tech/java.svg", color: "#ED8B00" },
+  MySQL: { logo: "/images/tech/mysql.svg", color: "#4479A1" },
+  BLoC: { logo: "/images/tech/bloc.svg", color: "#00A7E1" },
 };
 
 export function getTech(name: string): TechItem {
@@ -56,14 +59,17 @@ export const ABOUT_TECHS = [
   "React",
   "TypeScript",
   "Tailwind CSS",
-  "Vue.js",
   "Node.js",
   "NestJS",
+  "Python",
+  "Java",
   "Flutter",
+  "Dart",
+  "BLoC",
   "PostgreSQL",
+  "MySQL",
   "MongoDB",
-  "AWS",
-  "Figma",
+  "OpenAI",
 ] as const;
 
 export const PROCESS_TECH_GROUPS = [

@@ -5,7 +5,7 @@ import {
   getPublishedServices,
   getPublishedTestimonials,
 } from "@/lib/content";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, homePageJsonLd, JsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
@@ -25,8 +25,10 @@ export default async function Page() {
   ]);
 
   return (
-    <HomePage
-      data={{
+    <>
+      <JsonLd data={homePageJsonLd()} />
+      <HomePage
+        data={{
         services: services.map((s) => ({
           id: s.id,
           number: s.number,
@@ -53,7 +55,8 @@ export default async function Page() {
           name: t.name,
           role: t.role,
         })),
-      }}
-    />
+        }}
+      />
+    </>
   );
 }

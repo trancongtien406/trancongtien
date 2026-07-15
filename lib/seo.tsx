@@ -6,6 +6,8 @@ type BuildMetadataInput = {
   description: string;
   path?: string;
   image?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   type?: "website" | "article";
 };
 
@@ -13,7 +15,9 @@ export function buildMetadata({
   title,
   description,
   path = "/",
-  image = siteConfig.personImage,
+  image = "/og-image.png",
+  imageWidth,
+  imageHeight,
   type = "website",
 }: BuildMetadataInput): Metadata {
   const url = `${siteConfig.url}${path}`;
@@ -22,6 +26,8 @@ export function buildMetadata({
       ? `${siteConfig.fullName} | ${siteConfig.tagline}`
       : `${title} | ${siteConfig.name}`;
   const imageUrl = new URL(image, siteConfig.url).toString();
+  const resolvedImageWidth = imageWidth ?? (image === "/og-image.png" ? 1200 : undefined);
+  const resolvedImageHeight = imageHeight ?? (image === "/og-image.png" ? 630 : undefined);
 
   return {
     applicationName: siteConfig.brand,
@@ -70,8 +76,8 @@ export function buildMetadata({
       images: [
         {
           url: imageUrl,
-          width: 1200,
-          height: 630,
+          width: resolvedImageWidth,
+          height: resolvedImageHeight,
           alt: `${siteConfig.fullName} - ${title}`,
         },
       ],
@@ -100,7 +106,9 @@ export function JsonLd({ data }: { data: Record<string, unknown> }) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(data).replace(/</g, "\\u003c"),
+      }}
     />
   );
 }
@@ -120,9 +128,18 @@ export function siteIdentityJsonLd() {
         "@id": personId,
         name: siteConfig.fullName,
         alternateName: [siteConfig.name, siteConfig.brand],
-        url: siteConfig.url,
-        image: personImage,
-        jobTitle: "Full-stack Developer",
+        url: `${siteConfig.url}/ve-toi`,
+        mainEntityOfPage: `${siteConfig.url}/ve-toi`,
+        image: {
+          "@type": "ImageObject",
+          url: personImage,
+          contentUrl: personImage,
+          width: 1024,
+          height: 1280,
+          caption: `${siteConfig.fullName} — ${siteConfig.tagline}`,
+        },
+        jobTitle: siteConfig.tagline,
+        birthDate: siteConfig.birthDate,
         email: siteConfig.email,
         telephone: siteConfig.phone,
         worksFor: { "@id": organizationId },
@@ -139,6 +156,19 @@ export function siteIdentityJsonLd() {
           "App Design",
           "AI Agent Development",
           "AI Automation",
+          "Next.js",
+          "Node.js",
+          "NestJS",
+          "Python",
+          "Java",
+          "Flutter",
+          "BLoC",
+          "PostgreSQL",
+          "MySQL",
+          "MongoDB",
+          "CRM",
+          "Booking Systems",
+          "E-commerce",
           "Cloud Infrastructure",
           "UI/UX Design",
         ],
@@ -172,6 +202,25 @@ export function siteIdentityJsonLd() {
         author: { "@id": personId },
       },
     ],
+  };
+}
+
+export function homePageJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${siteConfig.url}/#webpage`,
+    url: siteConfig.url,
+    name: `${siteConfig.fullName} | ${siteConfig.tagline}`,
+    description: siteConfig.description,
+    inLanguage: siteConfig.language,
+    isPartOf: { "@id": websiteId },
+    about: { "@id": personId },
+    mainEntity: { "@id": personId },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: new URL(siteConfig.personImage, siteConfig.url).toString(),
+    },
   };
 }
 

@@ -52,6 +52,8 @@ async function main() {
       seoTitle: "TRAN CONG TIEN | Full-stack Developer & AI Agent Builder",
       seoDescription:
         "Full-stack developer tại Đà Nẵng chuyên thiết kế website, app ứng dụng và hệ thống AI Agent thực tế.",
+      cvUrl:
+        "https://trancongtien.com/api/uploads/1784029250032-Tien-Tran-Cong.pdf",
     },
   });
 
@@ -906,58 +908,49 @@ async function main() {
     }
   }
 
+  await prisma.journeyItem.deleteMany();
+
   const journeys = [
     {
-      year: "2019",
-      title: "Bắt đầu với Web Development",
-      description: "Xây foundation HTML/CSS/JS và các dự án freelance nhỏ.",
+      year: "2021",
+      title: "Bắt đầu đại học và xây nền tảng công nghệ",
+      description:
+        "Bắt đầu hành trình đại học, làm quen với lập trình và xây dựng nền tảng cho con đường phát triển phần mềm.",
       sortOrder: 1,
     },
     {
-      year: "2020",
-      title: "Chuyên sâu Frontend & React",
-      description: "Làm việc với React ecosystem, UI system và tối ưu trải nghiệm.",
+      year: "2023",
+      title: "Bắt đầu làm website với Next.js",
+      description:
+        "Chính thức làm sản phẩm từ website, tập trung Next.js, React, TypeScript và trải nghiệm người dùng.",
       sortOrder: 2,
     },
     {
-      year: "2021",
-      title: "Full-stack & Mobile",
-      description: "Mở rộng Node.js, NestJS và Flutter cho sản phẩm end-to-end.",
+      year: "Tiếp theo",
+      title: "Mở rộng sang Backend và Database",
+      description:
+        "Phát triển API và hệ thống backend với Node.js, NestJS, Python, Java; làm việc với PostgreSQL, MySQL và MongoDB.",
       sortOrder: 3,
     },
     {
-      year: "2022",
-      title: "Full-stack Development",
-      description: "Kết hợp frontend, backend và tư duy sản phẩm trong dự án startup.",
+      year: "Mở rộng năng lực",
+      title: "Phát triển Mobile App với Flutter",
+      description:
+        "Mở rộng năng lực sang Flutter, Dart và BLoC để có thể xây dựng sản phẩm đa nền tảng từ đầu đến cuối.",
       sortOrder: 4,
     },
     {
-      year: "2023",
-      title: "Cloud, DevOps & Scale",
-      description: "Triển khai AWS, CI/CD và kiến trúc sẵn sàng mở rộng.",
+      year: "Hiện tại",
+      title: "Full-stack, Mobile và AI",
+      description:
+        "Ứng dụng Python vào AI và hướng tới vai trò solo developer, đồng hành cùng startup và cá nhân xây CRM, booking, e-commerce, landing page và sản phẩm theo yêu cầu.",
       sortOrder: 5,
-    },
-    {
-      year: "2024–Nay",
-      title: "Full-stack, App & AI Agent",
-      description: "Đồng hành startup xây dựng website, app ứng dụng, AI Agent và tăng trưởng.",
-      sortOrder: 6,
     },
   ];
   for (const j of journeys) {
-    const existing = await prisma.journeyItem.findFirst({
-      where: { year: j.year, title: j.title },
+    await prisma.journeyItem.create({
+      data: { ...j, status: ContentStatus.PUBLISHED },
     });
-    if (existing) {
-      await prisma.journeyItem.update({
-        where: { id: existing.id },
-        data: { ...j, status: ContentStatus.PUBLISHED },
-      });
-    } else {
-      await prisma.journeyItem.create({
-        data: { ...j, status: ContentStatus.PUBLISHED },
-      });
-    }
   }
 
   console.log("Seed OK. Admin:", email, "/", password);
