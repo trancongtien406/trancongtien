@@ -98,25 +98,33 @@ Authorization: Bearer <MCP_ACCESS_TOKEN>
 
 ## Scheduled task prompt
 
-Use this prompt for the daily 08:00 ChatGPT scheduled task:
+Use this prompt for the daily 08:00 ChatGPT scheduled task.
+
+Important: scheduled ChatGPT runs often fail when asked to finish 2–3 full posts + covers in one reply. Prefer **1 bài / lần chạy**. Update the ChatGPT scheduled task text to match:
 
 ```text
-Moi ngay luc 08:00 Asia/Ho_Chi_Minh, hay nghien cuu 2-3 chu de blog SEO cho trancongtien.com voi muc tieu tang do phu khi tim "Tran Cong Tien".
+Moi ngay luc 08:00 Asia/Ho_Chi_Minh, tao DUNG 1 ban nhap blog SEO cho trancongtien.com (muc tieu tang do phu khi tim "Tran Cong Tien").
 
-Quy trinh BAT BUOC:
-1. Goi list_categories truoc. Luu id/slug danh muc (tu-duy-san-pham, kien-truc-he-thong, frontend, ai-san-pham).
-2. Goi list_recent_posts de tranh trung lap chu de.
-3. Chon 2-3 chu de co y dinh tim kiem ro rang, lien quan toi Tran Cong Tien, lap trinh web, MERN, Next.js, SEO, portfolio ca nhan, san pham so, freelancer/developer. Gan dung 1 category_slug cho moi bai.
-4. Viet moi bai bang tieng Viet, giong tu nhien, chuyen sau, khong nhoi tu khoa. Moi bai co title, slug, excerpt, tags, read_time, category_slug (hoac category_id), va content HTML/TipTap-friendly.
-5. Tao cover image cho tung bai. Upload bang upload_cover (uu tien image_url neu ChatGPT cung cap URL anh; neu khong dung image_base64).
+Ban CO day du tool MCP va CO the tao anh bang tinh nang tao anh cua ChatGPT. Khong duoc dung som, khong bao "khong the tao anh", khong yeu cau chuyen sang Agent khac.
+
+Quy trinh (lam LAN LUOT, 1 bai duy nhat):
+1. Goi list_categories. Chon 1 category_slug phu hop (tu-duy-san-pham | kien-truc-he-thong | frontend | ai-san-pham).
+2. Goi list_recent_posts. Chon 1 chu de KHONG trung title/slug/y dinh tim kiem voi cac bai gan day. Chu de lien quan Tran Cong Tien / web app / MERN / Next.js / SEO / portfolio / AI Agent / freelancer.
+3. Viet 1 bai tieng Viet: title, slug, excerpt (~40-220 ky tu), tags (3-6), read_time, content HTML (H2/H3, ket luan thuc te). Co the chen internal link /ve-toi, /blog khi hop ly. Khong nhoi tu khoa.
+4. Tao 1 cover image bang tinh nang tao anh cua ChatGPT (anh editorial ngang, khong chu/logo/watermark, hop chu de).
+5. Lay URL anh vua tao, goi upload_cover voi:
+   - image_url = URL anh ChatGPT vua tao
+   - filename, alt tieng Viet
+   Khong can image_base64 neu da co image_url.
 6. Goi create_blog_draft voi:
-   - cover_url DUNG bang media.url / cover_url tra ve tu upload_cover (dang /api/uploads/...), KHONG dung URL OpenAI/DALL-E;
-   - category_id hoac category_slug BAT BUOC;
-   - status DRAFT, khong publish.
-7. Cuoi cung bao cao ngan gon: title, slug, category, cover_url, admin path /admin/posts/<id>.
+   - cover_url = dung gia tri cover_url (hoac media.url) tra ve tu upload_cover, dang /api/uploads/...
+   - category_slug da chon o buoc 1
+   - status DRAFT (khong publish)
+   Neu muon gon, co the bo qua buoc 5 va truyen image_url + category_slug truc tiep vao create_blog_draft.
+7. Bao cao ngan: title, slug, category_slug, cover_url (/api/uploads/...), /admin/posts/<id>.
 
-Rang buoc SEO:
-- Moi bai nen co cum tu "Tran Cong Tien" mot cach tu nhien trong title hoac doan mo dau khi phu hop.
-- Uu tien internal link den /ve-toi, /blog, va cac bai lien quan neu thay hop ly.
-- Khong sao chep noi dung nguon. Neu dung thong tin moi, tom tat va ghi nguon trong bai.
+Luu y:
+- Chi 1 bai moi lan chay. Thanh cong khi da goi create_blog_draft va nhan post.id.
+- cover_url tren post phai la /api/uploads/..., khong de nguyen URL OpenAI/DALL-E.
+- Neu 1 tool loi: sua input roi thu lai, khong dung toan bo quy trinh.
 ```

@@ -332,7 +332,7 @@ function createServer() {
     {
       title: "Upload cover image",
       description:
-        "Upload a generated cover image to trancongtien.com. Prefer image_url from ChatGPT image generation when available; otherwise image_base64. Returns cover_url — you MUST pass that exact value to create_blog_draft.cover_url (not the OpenAI CDN URL).",
+        "Upload a ChatGPT-generated cover to trancongtien.com. After you generate an image in ChatGPT, pass its HTTPS URL as image_url (preferred). image_base64 is optional fallback. Returns cover_url like /api/uploads/... — pass THAT to create_blog_draft.cover_url, not the temporary OpenAI CDN URL.",
       inputSchema: {
         filename: z.string().min(3),
         mime_type: z

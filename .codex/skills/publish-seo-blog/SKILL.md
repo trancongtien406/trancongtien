@@ -5,7 +5,7 @@ description: Research useful Vietnamese SEO topics for trancongtien.com, generat
 
 # Publish SEO Blog
 
-Create one to three original, evidence-based Vietnamese blog drafts per run. Never edit `prisma/seed.ts` or write directly to the database.
+Create one original, evidence-based Vietnamese blog draft per run (scheduled tasks should stay at one post to avoid reply limits). Never edit `prisma/seed.ts` or write directly to the database.
 
 ## Required tools and environment
 
