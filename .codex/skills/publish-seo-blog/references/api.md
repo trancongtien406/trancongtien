@@ -1,4 +1,14 @@
-# Production API contract
+# Blog automation contract
+
+Prefer MCP tools when available:
+
+- `list_recent_posts` checks existing posts and drafts.
+- `upload_cover` uploads a generated image and returns `media.url`.
+- `create_blog_draft` creates a draft post. Use the URL returned by `upload_cover` as `cover_url`.
+
+Use direct production API calls only when MCP tools are unavailable.
+
+## Production API fallback
 
 Origin: `https://trancongtien.com`
 

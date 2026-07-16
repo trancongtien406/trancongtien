@@ -1,4 +1,4 @@
 interface:
   display_name: "Publish SEO Blog"
-  short_description: "Create illustrated SEO blog drafts via production API"
-  default_prompt: "Use $publish-seo-blog to research, illustrate, and create today’s SEO blog draft."
+  short_description: "Create illustrated SEO blog drafts via MCP or API"
+  default_prompt: "Use $publish-seo-blog to research, illustrate, and create today’s SEO blog drafts."
