@@ -2,8 +2,8 @@
 
 This repo runs two separate apps from the same codebase:
 
-- Website app: Next.js, exposed at `https://trancongtien.com`, local port `3000`.
-- MCP app: ChatGPT automation server, exposed at `https://mcp.trancongtien.com`, local port `3100`.
+- Website app: Next.js, exposed at `https://trancongtien.com`, local port `3342`.
+- MCP app: ChatGPT automation server, exposed at `https://mcp.trancongtien.com`, local port `3343`.
 
 ChatGPT can research and draft the post, generate a cover image, then call the MCP server to upload the image and create a draft in `trancongtien.com`.
 
@@ -16,9 +16,9 @@ Set these on the VPS:
 ```bash
 SITE_ORIGIN=https://trancongtien.com
 CONTENT_AUTOMATION_TOKEN=replace-with-long-random-internal-token
-WEB_PORT=3000
+WEB_PORT=3342
 MCP_ACCESS_TOKEN=replace-with-different-long-random-external-token
-MCP_PORT=3100
+MCP_PORT=3343
 MCP_ALLOWED_IMAGE_HOSTS=
 ```
 
@@ -47,8 +47,8 @@ pm2 restart trancongtien-mcp
 Check it locally on the VPS:
 
 ```bash
-curl http://127.0.0.1:3000
-curl http://127.0.0.1:3100/health
+curl http://127.0.0.1:3342
+curl http://127.0.0.1:3343/health
 ```
 
 ## Nginx
@@ -60,7 +60,7 @@ server {
   server_name trancongtien.com www.trancongtien.com;
 
   location / {
-    proxy_pass http://127.0.0.1:3000;
+    proxy_pass http://127.0.0.1:3342;
     proxy_http_version 1.1;
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
@@ -73,7 +73,7 @@ server {
   server_name mcp.trancongtien.com;
 
   location / {
-    proxy_pass http://127.0.0.1:3100;
+    proxy_pass http://127.0.0.1:3343;
     proxy_http_version 1.1;
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;

@@ -7,7 +7,7 @@ module.exports = {
       cwd: __dirname,
       env: {
         NODE_ENV: "production",
-        PORT: process.env.WEB_PORT || process.env.PORT || "3000",
+        PORT: process.env.WEB_PORT || process.env.PORT || "3342",
       },
     },
     {
@@ -17,7 +17,7 @@ module.exports = {
       cwd: __dirname,
       env: {
         NODE_ENV: "production",
-        MCP_PORT: process.env.MCP_PORT || "3100",
+        MCP_PORT: process.env.MCP_PORT || "3343",
       },
     },
   ],
