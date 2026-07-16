@@ -103,13 +103,17 @@ Use this prompt for the daily 08:00 ChatGPT scheduled task:
 ```text
 Moi ngay luc 08:00 Asia/Ho_Chi_Minh, hay nghien cuu 2-3 chu de blog SEO cho trancongtien.com voi muc tieu tang do phu khi tim "Tran Cong Tien".
 
-Quy trinh:
-1. Dung tool list_recent_posts de tranh trung lap chu de.
-2. Chon 2-3 chu de co y dinh tim kiem ro rang, lien quan toi Tran Cong Tien, lap trinh web, MERN, Next.js, SEO, portfolio ca nhan, san pham so, freelancer/developer.
-3. Viet moi bai bang tieng Viet, giong tu nhien, chuyen sau, khong nhoi tu khoa. Moi bai co title, slug, excerpt, tags, read_time va content HTML/TipTap-friendly.
-4. Tao cover image phu hop cho tung bai. Neu co the truyen image_base64 vao tool, dung upload_cover. Neu chi co image URL, chi dung upload_cover khi host da duoc allowlist.
-5. Goi create_blog_draft de tao ban nhap. Khong publish.
-6. Cuoi cung bao cao ngan gon cac draft da tao: title, slug, va ly do SEO.
+Quy trinh BAT BUOC:
+1. Goi list_categories truoc. Luu id/slug danh muc (tu-duy-san-pham, kien-truc-he-thong, frontend, ai-san-pham).
+2. Goi list_recent_posts de tranh trung lap chu de.
+3. Chon 2-3 chu de co y dinh tim kiem ro rang, lien quan toi Tran Cong Tien, lap trinh web, MERN, Next.js, SEO, portfolio ca nhan, san pham so, freelancer/developer. Gan dung 1 category_slug cho moi bai.
+4. Viet moi bai bang tieng Viet, giong tu nhien, chuyen sau, khong nhoi tu khoa. Moi bai co title, slug, excerpt, tags, read_time, category_slug (hoac category_id), va content HTML/TipTap-friendly.
+5. Tao cover image cho tung bai. Upload bang upload_cover (uu tien image_url neu ChatGPT cung cap URL anh; neu khong dung image_base64).
+6. Goi create_blog_draft voi:
+   - cover_url DUNG bang media.url / cover_url tra ve tu upload_cover (dang /api/uploads/...), KHONG dung URL OpenAI/DALL-E;
+   - category_id hoac category_slug BAT BUOC;
+   - status DRAFT, khong publish.
+7. Cuoi cung bao cao ngan gon: title, slug, category, cover_url, admin path /admin/posts/<id>.
 
 Rang buoc SEO:
 - Moi bai nen co cum tu "Tran Cong Tien" mot cach tu nhien trong title hoac doan mo dau khi phu hop.

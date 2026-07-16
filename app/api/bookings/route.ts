@@ -64,15 +64,16 @@ export async function POST(req: Request) {
     },
   });
 
-  const adminBody = adminContactEmailText(data);
+  const href = `/admin/bookings?id=${booking.id}`;
+  const adminBody = `${adminContactEmailText(data)}\nChi tiết: ${href}`;
   const adminNotify = await notifyAdmin({
     title: data.scheduledAt
       ? `Đặt lịch tư vấn mới từ ${data.name}`
       : `Liên hệ mới từ ${data.name}`,
     body: adminBody,
     channel: "EMAIL",
-    meta: { bookingId: booking.id },
-    html: adminContactEmailHtml(data),
+    meta: { bookingId: booking.id, href },
+    html: adminContactEmailHtml({ ...data, adminHref: href }),
     deliver: false,
   });
 

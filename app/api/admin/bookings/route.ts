@@ -29,11 +29,12 @@ export async function POST(req: Request) {
     });
 
     if (status === "SCHEDULED") {
+      const href = `/admin/bookings?id=${id}`;
       await notifyAdmin({
         title: "Lịch tư vấn đã xác nhận",
-        body: `Booking ${id} → SCHEDULED${scheduledAt ? ` lúc ${scheduledAt}` : ""}`,
+        body: `Booking ${id} → SCHEDULED${scheduledAt ? ` lúc ${scheduledAt}` : ""}\nChi tiết: ${href}`,
         channel: "EMAIL",
-        meta: { bookingId: id },
+        meta: { bookingId: id, href },
       });
     }
 

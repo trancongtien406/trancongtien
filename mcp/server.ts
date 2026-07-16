@@ -11,11 +11,23 @@ const SITE_ORIGIN = (process.env.SITE_ORIGIN || "https://trancongtien.com").repl
 const CONTENT_AUTOMATION_TOKEN = process.env.CONTENT_AUTOMATION_TOKEN || "";
 const MCP_ACCESS_TOKEN = process.env.MCP_ACCESS_TOKEN || "";
 const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
+
+/** Hosts ChatGPT / OpenAI commonly use for generated images. */
+const DEFAULT_IMAGE_HOSTS = [
+  "oaidalleapiprodscus.blob.core.windows.net",
+  "files.oaiusercontent.com",
+  "cdn.openai.com",
+  "chatgpt.com",
+];
+
 const allowedImageHosts = new Set(
-  (process.env.MCP_ALLOWED_IMAGE_HOSTS || "")
-    .split(",")
-    .map((host) => host.trim().toLowerCase())
-    .filter(Boolean),
+  [
+    ...DEFAULT_IMAGE_HOSTS,
+    ...(process.env.MCP_ALLOWED_IMAGE_HOSTS || "")
+      .split(",")
+      .map((host) => host.trim().toLowerCase())
+      .filter(Boolean),
+  ].map((h) => h.toLowerCase()),
 );
 
 type RecentPost = {
@@ -26,7 +38,15 @@ type RecentPost = {
   status?: string;
   readTime?: string;
   updatedAt?: string;
-  category?: { name?: string } | null;
+  coverUrl?: string | null;
+  category?: { id?: string; name?: string; slug?: string } | null;
+};
+
+type CategoryRow = {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string | null;
 };
 
 function requireEnv() {
@@ -85,6 +105,53 @@ async function siteFetch(pathname: string, init?: RequestInit) {
   return data;
 }
 
+function sniffImageMime(bytes: Buffer): string | null {
+  if (bytes.length >= 3 && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff) {
+    return "image/jpeg";
+  }
+  if (
+    bytes.length >= 8 &&
+    bytes[0] === 0x89 &&
+    bytes[1] === 0x50 &&
+    bytes[2] === 0x4e &&
+    bytes[3] === 0x47
+  ) {
+    return "image/png";
+  }
+  if (
+    bytes.length >= 12 &&
+    bytes.toString("ascii", 0, 4) === "RIFF" &&
+    bytes.toString("ascii", 8, 12) === "WEBP"
+  ) {
+    return "image/webp";
+  }
+  if (bytes.length >= 12 && bytes.toString("ascii", 4, 8) === "ftyp") {
+    return "image/avif";
+  }
+  return null;
+}
+
+function extensionForMime(mime: string) {
+  switch (mime) {
+    case "image/jpeg":
+      return ".jpg";
+    case "image/png":
+      return ".png";
+    case "image/webp":
+      return ".webp";
+    case "image/avif":
+      return ".avif";
+    default:
+      return ".webp";
+  }
+}
+
+function ensureFilename(filename: string, mime: string) {
+  const base = filename.replace(/\.[a-z0-9]+$/i, "") || "cover";
+  const safe = base.replace(/[^a-zA-Z0-9._-]/g, "_").slice(0, 80);
+  return `${safe}${extensionForMime(mime)}`;
+}
+
 function decodeBase64Image(imageBase64: string) {
   const cleaned = imageBase64.replace(/^data:image\/[a-z0-9.+-]+;base64,/i, "");
   const bytes = Buffer.from(cleaned, "base64");
@@ -100,7 +167,7 @@ async function fetchAllowedImage(url: string) {
   }
   if (!allowedImageHosts.has(parsed.hostname.toLowerCase())) {
     throw new Error(
-      `Host ${parsed.hostname} is not in MCP_ALLOWED_IMAGE_HOSTS. Use image_base64 or add this host to the allowlist.`,
+      `Host ${parsed.hostname} is not allowed. Prefer image_base64, or add the host to MCP_ALLOWED_IMAGE_HOSTS.`,
     );
   }
 
@@ -108,54 +175,117 @@ async function fetchAllowedImage(url: string) {
   if (!res.ok) throw new Error(`Failed to download image: ${res.status}`);
 
   const type = res.headers.get("content-type") || "";
-  if (!type.startsWith("image/")) {
+  if (type && !type.startsWith("image/") && !type.includes("octet-stream")) {
     throw new Error(`image_url returned non-image content-type: ${type || "unknown"}`);
   }
 
   const bytes = Buffer.from(await res.arrayBuffer());
   if (bytes.length > MAX_IMAGE_BYTES) throw new Error("Image is larger than 10 MB");
-  return { bytes, contentType: type.split(";")[0] || "image/webp" };
+  const sniffed = sniffImageMime(bytes);
+  return {
+    bytes,
+    contentType: sniffed || (type.startsWith("image/") ? type.split(";")[0] : null) || "image/webp",
+  };
 }
 
 function ensureCoverUrl(url: string) {
-  if (url.startsWith("/api/uploads/")) return url;
-  if (url.startsWith(`${SITE_ORIGIN}/api/uploads/`)) return url.slice(SITE_ORIGIN.length);
-  throw new Error("cover_url must be a media URL returned by upload_cover");
+  const trimmed = url.trim();
+  if (trimmed.startsWith("/api/uploads/")) return trimmed;
+  if (trimmed.startsWith(`${SITE_ORIGIN}/api/uploads/`)) {
+    return trimmed.slice(SITE_ORIGIN.length);
+  }
+  // Common agent mistake: pass absolute site URL without noticing
+  try {
+    const parsed = new URL(trimmed);
+    if (parsed.pathname.startsWith("/api/uploads/")) {
+      return parsed.pathname;
+    }
+  } catch {
+    // ignore
+  }
+  throw new Error(
+    "cover_url must be media.url from upload_cover (e.g. /api/uploads/...). Do not pass OpenAI/DALL-E URLs as cover_url.",
+  );
 }
 
 async function uploadCover(input: {
   filename: string;
-  mime_type: string;
+  mime_type?: string;
   alt: string;
   image_base64?: string;
   image_url?: string;
 }) {
-  const hasBase64 = Boolean(input.image_base64);
-  const hasUrl = Boolean(input.image_url);
+  const hasBase64 = Boolean(input.image_base64?.trim());
+  const hasUrl = Boolean(input.image_url?.trim());
   if (hasBase64 === hasUrl) {
     throw new Error("Provide exactly one of image_base64 or image_url");
   }
 
   const image = hasBase64
-    ? { bytes: decodeBase64Image(input.image_base64 || ""), contentType: input.mime_type }
+    ? (() => {
+        const bytes = decodeBase64Image(input.image_base64 || "");
+        const sniffed = sniffImageMime(bytes);
+        const contentType =
+          sniffed ||
+          (input.mime_type && input.mime_type.startsWith("image/")
+            ? input.mime_type
+            : "image/webp");
+        return { bytes, contentType };
+      })()
     : await fetchAllowedImage(input.image_url || "");
 
-  const blob = new Blob([image.bytes], { type: image.contentType });
+  const filename = ensureFilename(input.filename, image.contentType);
+  const blob = new Blob([new Uint8Array(image.bytes)], { type: image.contentType });
   const form = new FormData();
-  form.set("file", blob, input.filename);
+  form.set("file", blob, filename);
   form.set("alt", input.alt);
 
-  return siteFetch("/api/admin/upload", {
+  const data = (await siteFetch("/api/admin/upload", {
     method: "POST",
     body: form,
-  });
+  })) as { media?: { id: string; url: string; alt: string; mimeType?: string } };
+
+  if (!data.media?.url?.startsWith("/api/uploads/")) {
+    throw new Error(`Upload succeeded but media.url is invalid: ${JSON.stringify(data)}`);
+  }
+
+  return {
+    ...data,
+    /** Convenience aliases so agents copy the right field into create_blog_draft */
+    cover_url: data.media.url,
+    cover_media_id: data.media.id,
+  };
 }
 
 function createServer() {
   const server = new McpServer({
     name: "trancongtien-blog-automation",
-    version: "1.0.0",
+    version: "1.1.0",
   });
+
+  server.registerTool(
+    "list_categories",
+    {
+      title: "List blog categories",
+      description:
+        "List available blog categories (id, name, slug). Always call this before create_blog_draft and pass category_id or category_slug.",
+      inputSchema: {},
+      annotations: {
+        readOnlyHint: true,
+        openWorldHint: true,
+      },
+    },
+    async () => {
+      const data = (await siteFetch("/api/admin/categories")) as {
+        categories?: CategoryRow[];
+      };
+      const categories = data.categories || [];
+      return {
+        content: [{ type: "text", text: JSON.stringify({ categories }, null, 2) }],
+        structuredContent: { categories },
+      };
+    },
+  );
 
   server.registerTool(
     "list_recent_posts",
@@ -180,7 +310,14 @@ function createServer() {
         status: post.status,
         readTime: post.readTime,
         updatedAt: post.updatedAt,
-        category: post.category?.name || null,
+        coverUrl: post.coverUrl || null,
+        category: post.category
+          ? {
+              id: post.category.id || null,
+              name: post.category.name || null,
+              slug: post.category.slug || null,
+            }
+          : null,
       }));
 
       return {
@@ -195,10 +332,13 @@ function createServer() {
     {
       title: "Upload cover image",
       description:
-        "Upload a generated cover image to trancongtien.com. Prefer image_base64. image_url only works for allowlisted hosts.",
+        "Upload a generated cover image to trancongtien.com. Prefer image_url from ChatGPT image generation when available; otherwise image_base64. Returns cover_url — you MUST pass that exact value to create_blog_draft.cover_url (not the OpenAI CDN URL).",
       inputSchema: {
         filename: z.string().min(3),
-        mime_type: z.enum(["image/webp", "image/png", "image/jpeg", "image/avif"]).default("image/webp"),
+        mime_type: z
+          .enum(["image/webp", "image/png", "image/jpeg", "image/avif"])
+          .optional()
+          .default("image/webp"),
         alt: z.string().min(3),
         image_base64: z.string().optional(),
         image_url: z.string().url().optional(),
@@ -211,9 +351,25 @@ function createServer() {
       },
     },
     async (input) => {
-      const data = (await uploadCover(input)) as { media?: { id: string; url: string; alt: string } };
+      const data = await uploadCover(input);
       return {
-        content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify(
+              {
+                ok: true,
+                cover_url: data.cover_url,
+                cover_media_id: data.cover_media_id,
+                media: data.media,
+                instruction:
+                  "Pass cover_url (or cover_media_id) into create_blog_draft. Do not use the original OpenAI image URL as cover_url.",
+              },
+              null,
+              2,
+            ),
+          },
+        ],
         structuredContent: data,
       };
     },
@@ -224,17 +380,25 @@ function createServer() {
     {
       title: "Create blog draft",
       description:
-        "Create a DRAFT blog post on trancongtien.com from researched SEO content. Publishing still requires admin review.",
+        "Create a DRAFT blog post. category_id or category_slug is REQUIRED (from list_categories). cover_url must be media.url from upload_cover, or pass cover_media_id. You may also pass image_base64/image_url here to upload and attach the cover in one step.",
       inputSchema: {
         title: z.string().min(10).max(120),
         slug: z.string().min(3).max(120).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
         excerpt: z.string().min(40).max(220),
         content: z.string().min(800),
-        cover_url: z.string().min(3),
+        cover_url: z.string().min(3).optional(),
+        cover_media_id: z.string().min(3).optional(),
         cover_alt: z.string().min(3),
         tags: z.array(z.string().min(1).max(40)).min(1).max(12),
         read_time: z.string().min(3).max(30).default("5 phút đọc"),
-        category_id: z.string().nullable().optional(),
+        category_id: z.string().min(1).optional(),
+        category_slug: z.string().min(1).optional(),
+        image_base64: z.string().optional(),
+        image_url: z.string().url().optional(),
+        image_filename: z.string().min(3).optional(),
+        image_mime_type: z
+          .enum(["image/webp", "image/png", "image/jpeg", "image/avif"])
+          .optional(),
       },
       annotations: {
         readOnlyHint: false,
@@ -244,6 +408,34 @@ function createServer() {
       },
     },
     async (input) => {
+      if (!input.category_id && !input.category_slug) {
+        throw new Error(
+          "category_id or category_slug is required. Call list_categories first and pick one (e.g. tu-duy-san-pham, kien-truc-he-thong, frontend, ai-san-pham).",
+        );
+      }
+
+      let coverUrl = input.cover_url ? ensureCoverUrl(input.cover_url) : null;
+      let coverMediaId = input.cover_media_id || null;
+
+      const wantsInlineUpload = Boolean(input.image_base64?.trim() || input.image_url?.trim());
+      if (wantsInlineUpload) {
+        const uploaded = await uploadCover({
+          filename: input.image_filename || `${input.slug}-cover.webp`,
+          mime_type: input.image_mime_type || "image/webp",
+          alt: input.cover_alt,
+          image_base64: input.image_base64,
+          image_url: input.image_url,
+        });
+        coverUrl = uploaded.cover_url || null;
+        coverMediaId = uploaded.cover_media_id || null;
+      }
+
+      if (!coverUrl && !coverMediaId) {
+        throw new Error(
+          "Provide cover_url from upload_cover, cover_media_id, or image_base64/image_url to upload inline.",
+        );
+      }
+
       const data = (await siteFetch("/api/admin/posts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -252,11 +444,13 @@ function createServer() {
           slug: input.slug,
           excerpt: input.excerpt,
           content: input.content,
-          coverUrl: ensureCoverUrl(input.cover_url),
+          coverUrl,
+          coverMediaId,
           coverAlt: input.cover_alt,
           tags: input.tags,
           readTime: input.read_time,
           categoryId: input.category_id || null,
+          categorySlug: input.category_slug || null,
           status: "DRAFT",
         }),
       })) as Record<string, unknown>;

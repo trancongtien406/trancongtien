@@ -2,9 +2,10 @@
 
 Prefer MCP tools when available:
 
+- `list_categories` returns category `id` / `slug` — **required** before creating a draft.
 - `list_recent_posts` checks existing posts and drafts.
-- `upload_cover` uploads a generated image and returns `media.url`.
-- `create_blog_draft` creates a draft post. Use the URL returned by `upload_cover` as `cover_url`.
+- `upload_cover` uploads a generated image and returns `cover_url` (`media.url`).
+- `create_blog_draft` creates a draft post. Pass `cover_url` from `upload_cover` (never an OpenAI CDN URL). Pass `category_id` or `category_slug`.
 
 Use direct production API calls only when MCP tools are unavailable.
 
@@ -18,6 +19,12 @@ All requests must include:
 Authorization: Bearer <CONTENT_AUTOMATION_TOKEN>
 ```
 
+## List categories
+
+`GET /api/admin/categories`
+
+Response includes `{ categories: [{ id, name, slug, description }] }`.
+
 ## Upload cover
 
 `POST /api/admin/upload` as `multipart/form-data`:
@@ -25,7 +32,7 @@ Authorization: Bearer <CONTENT_AUTOMATION_TOKEN>
 - `file`: generated image, maximum 10 MB
 - `alt`: accurate Vietnamese alternative text
 
-Use `media.url` from the JSON response as `coverUrl`.
+Use `media.url` or `cover_url` from the JSON response as `coverUrl`. Do **not** store OpenAI/DALL-E temporary URLs on the post.
 
 ## Create draft
 
@@ -42,12 +49,19 @@ Use `media.url` from the JSON response as `coverUrl`.
   "tags": ["..."],
   "status": "DRAFT",
   "readTime": "8 phút đọc",
-  "categoryId": null
+  "categorySlug": "tu-duy-san-pham"
 }
 ```
 
-Automation authentication always forces `DRAFT`, even if another status is sent.
+Automation authentication always forces `DRAFT`, and **requires** a valid category (`categoryId` or `categorySlug`) plus a cover from `/api/uploads/...`.
+
+Known category slugs:
+
+- `tu-duy-san-pham`
+- `kien-truc-he-thong`
+- `frontend`
+- `ai-san-pham`
 
 ## Verification
 
-A successful create returns HTTP 200 with `post`, `post.status` equal to `DRAFT`, and `source` equal to `automation`. Review at `/admin/posts/<post.id>`.
+A successful create returns HTTP 200 with `post`, `post.status` equal to `DRAFT`, `post.category`, and `adminHref` like `/admin/posts/<id>`.

@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Eye } from "lucide-react";
 import toast from "react-hot-toast";
 import {
@@ -28,12 +28,23 @@ export type BookingRow = {
 
 export function BookingsManager({ bookings }: { bookings: BookingRow[] }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("");
   const [selected, setSelected] = useState<BookingRow | null>(null);
   const [nextStatus, setNextStatus] = useState("CONTACTED");
   const [scheduledAt, setScheduledAt] = useState("");
   const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    const id = searchParams.get("id");
+    if (!id) return;
+    const match = bookings.find((b) => b.id === id);
+    if (!match) return;
+    setSelected(match);
+    setNextStatus(match.status);
+    setScheduledAt("");
+  }, [bookings, searchParams]);
 
   const filtered = useMemo(() => {
     return bookings.filter((b) => {
@@ -49,6 +60,18 @@ export function BookingsManager({ bookings }: { bookings: BookingRow[] }) {
     });
   }, [bookings, search, status]);
 
+  function openBooking(b: BookingRow) {
+    setSelected(b);
+    setNextStatus(b.status);
+    setScheduledAt("");
+    router.replace(`/admin/bookings?id=${b.id}`, { scroll: false });
+  }
+
+  function closeBooking() {
+    setSelected(null);
+    router.replace("/admin/bookings", { scroll: false });
+  }
+
   async function save() {
     if (!selected) return;
     setSaving(true);
@@ -60,7 +83,7 @@ export function BookingsManager({ bookings }: { bookings: BookingRow[] }) {
       const res = await fetch("/api/admin/bookings", { method: "POST", body: fd });
       if (!res.ok) throw new Error("Cập nhật liên hệ thất bại");
       toast.success("Đã cập nhật liên hệ");
-      setSelected(null);
+      closeBooking();
       router.refresh();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Cập nhật liên hệ thất bại");
@@ -122,11 +145,7 @@ export function BookingsManager({ bookings }: { bookings: BookingRow[] }) {
                   <td className="px-4 py-3 text-right">
                     <button
                       type="button"
-                      onClick={() => {
-                        setSelected(b);
-                        setNextStatus(b.status);
-                        setScheduledAt("");
-                      }}
+                      onClick={() => openBooking(b)}
                       className="inline-flex size-8 items-center justify-center rounded-lg border border-slate-200"
                     >
                       <Eye className="size-4" />
@@ -146,7 +165,7 @@ export function BookingsManager({ bookings }: { bookings: BookingRow[] }) {
 
       <AdminDialog
         open={!!selected}
-        onClose={() => setSelected(null)}
+        onClose={closeBooking}
         title={selected?.name || ""}
         description={selected?.email}
         size="lg"
@@ -154,7 +173,7 @@ export function BookingsManager({ bookings }: { bookings: BookingRow[] }) {
           <div className="flex flex-wrap items-center justify-end gap-2">
             <button
               type="button"
-              onClick={() => setSelected(null)}
+              onClick={closeBooking}
               className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold"
             >
               Đóng

@@ -89,6 +89,8 @@ export type ContactEmailData = {
   timeline?: string;
   message: string;
   scheduledAt?: string;
+  /** Relative admin path, e.g. /admin/bookings?id=... */
+  adminHref?: string;
 };
 
 export function adminContactEmailHtml(data: ContactEmailData) {
@@ -121,7 +123,14 @@ ${escapeHtml(data.message)}
       </p>
     </div>
     <p style="margin:24px 0 0;">
-      <a href="mailto:${escapeHtml(data.email)}" style="display:inline-block;background:#2563eb;color:#ffffff;text-decoration:none;font-size:14px;font-weight:600;padding:12px 20px;border-radius:10px;">
+      ${
+        data.adminHref
+          ? `<a href="${siteConfig.url.replace(/\/$/, "")}${escapeHtml(data.adminHref)}" style="display:inline-block;background:#2563eb;color:#ffffff;text-decoration:none;font-size:14px;font-weight:600;padding:12px 20px;border-radius:10px;margin-right:8px;">
+        Xem trong admin
+      </a>`
+          : ""
+      }
+      <a href="mailto:${escapeHtml(data.email)}" style="display:inline-block;background:#ffffff;color:#2563eb;text-decoration:none;font-size:14px;font-weight:600;padding:12px 20px;border-radius:10px;border:1px solid #bfdbfe;">
         Trả lời ${escapeHtml(data.name)}
       </a>
     </p>
