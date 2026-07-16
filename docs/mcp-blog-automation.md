@@ -100,31 +100,37 @@ Authorization: Bearer <MCP_ACCESS_TOKEN>
 
 Use this prompt for the daily 08:00 ChatGPT scheduled task.
 
-Important: scheduled ChatGPT runs often fail when asked to finish 2–3 full posts + covers in one reply. Prefer **1 bài / lần chạy**. Update the ChatGPT scheduled task text to match:
+Important: do **1 bài / lần**. Prefer **one** write tool call (`create_blog_draft` with `image_url`) to avoid ChatGPT MCP `Resource not found` on a separate `upload_cover`.
 
 ```text
-Moi ngay luc 08:00 Asia/Ho_Chi_Minh, tao DUNG 1 ban nhap blog SEO cho trancongtien.com (muc tieu tang do phu khi tim "Tran Cong Tien").
+Moi ngay luc 08:00 Asia/Ho_Chi_Minh, tao DUNG 1 ban nhap blog SEO cho trancongtien.com.
 
-Ban CO day du tool MCP va CO the tao anh bang tinh nang tao anh cua ChatGPT. Khong duoc dung som, khong bao "khong the tao anh", khong yeu cau chuyen sang Agent khac.
+Ban CO tool MCP. Khong dung som. Neu tool bao "Resource not found": goi lai list_categories (refresh), roi tiep tuc bang create_blog_draft — KHONG bat buoc upload_cover.
 
-Quy trinh (lam LAN LUOT, 1 bai duy nhat):
-1. Goi list_categories. Chon 1 category_slug phu hop (tu-duy-san-pham | kien-truc-he-thong | frontend | ai-san-pham).
-2. Goi list_recent_posts. Chon 1 chu de KHONG trung title/slug/y dinh tim kiem voi cac bai gan day. Chu de lien quan Tran Cong Tien / web app / MERN / Next.js / SEO / portfolio / AI Agent / freelancer.
-3. Viet 1 bai tieng Viet: title, slug, excerpt (~40-220 ky tu), tags (3-6), read_time, content HTML (H2/H3, ket luan thuc te). Co the chen internal link /ve-toi, /blog khi hop ly. Khong nhoi tu khoa.
-4. Tao 1 cover image bang tinh nang tao anh cua ChatGPT (anh editorial ngang, khong chu/logo/watermark, hop chu de).
-5. Lay URL anh vua tao, goi upload_cover voi:
+Quy trinh (1 bai):
+1. Goi list_categories. Chon 1 category_slug (tu-duy-san-pham | kien-truc-he-thong | frontend | ai-san-pham).
+2. Goi list_recent_posts. Chon 1 chu de khong trung.
+3. Viet 1 bai tieng Viet: title, slug, excerpt, tags (3-6), content HTML (>=800 ky tu), cover_alt.
+4. Tao 1 cover bang tinh nang tao anh ChatGPT. Lay URL HTTPS cua anh.
+5. Goi create_blog_draft MOT LAN voi:
+   - category_slug
    - image_url = URL anh ChatGPT vua tao
-   - filename, alt tieng Viet
-   Khong can image_base64 neu da co image_url.
-6. Goi create_blog_draft voi:
-   - cover_url = dung gia tri cover_url (hoac media.url) tra ve tu upload_cover, dang /api/uploads/...
-   - category_slug da chon o buoc 1
-   - status DRAFT (khong publish)
-   Neu muon gon, co the bo qua buoc 5 va truyen image_url + category_slug truc tiep vao create_blog_draft.
-7. Bao cao ngan: title, slug, category_slug, cover_url (/api/uploads/...), /admin/posts/<id>.
+   - title, slug, excerpt, content, cover_alt, tags
+   (Tool se tu upload anh + tao DRAFT. Khong can goi upload_cover.)
+6. Bao cao: title, slug, category_slug, post.id, /admin/posts/<id>.
 
-Luu y:
-- Chi 1 bai moi lan chay. Thanh cong khi da goi create_blog_draft va nhan post.id.
-- cover_url tren post phai la /api/uploads/..., khong de nguyen URL OpenAI/DALL-E.
-- Neu 1 tool loi: sua input roi thu lai, khong dung toan bo quy trinh.
+Neu create_blog_draft loi: sua input roi goi lai. Chi thanh cong khi co post.id.
 ```
+
+## Troubleshooting: `Resource not found: Blog_TranCongTien.upload_cover`
+
+This is a **ChatGPT connector bug**, not a failure of your VPS upload API. ChatGPT keeps a stale internal route for some MCP tools; the `tools/call` never reaches `mcp.trancongtien.com`.
+
+Fix on ChatGPT side:
+
+1. Open a **new chat** (or new scheduled-task run).
+2. In connector / Developer Mode settings: **refresh / reconnect** the MCP connector `Blog_TranCongTien`.
+3. Avoid a separate `upload_cover` hop — use `create_blog_draft` with `image_url` (prompt above).
+4. Confirm MCP is up: `curl https://mcp.trancongtien.com/health` should list the four tools.
+
+If `list_categories` / `list_recent_posts` work but write tools fail with Resource not found, reconnect the connector before retrying.

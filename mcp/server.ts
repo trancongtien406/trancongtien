@@ -260,7 +260,7 @@ async function uploadCover(input: {
 function createServer() {
   const server = new McpServer({
     name: "trancongtien-blog-automation",
-    version: "1.1.0",
+    version: "1.2.0",
   });
 
   server.registerTool(
@@ -332,16 +332,11 @@ function createServer() {
     {
       title: "Upload cover image",
       description:
-        "Upload a ChatGPT-generated cover to trancongtien.com. After you generate an image in ChatGPT, pass its HTTPS URL as image_url (preferred). image_base64 is optional fallback. Returns cover_url like /api/uploads/... — pass THAT to create_blog_draft.cover_url, not the temporary OpenAI CDN URL.",
+        "Upload a ChatGPT-generated cover. Pass image_url (HTTPS URL of the generated image). Returns cover_url like /api/uploads/.... Prefer skipping this tool and passing image_url directly to create_blog_draft instead.",
       inputSchema: {
-        filename: z.string().min(3),
-        mime_type: z
-          .enum(["image/webp", "image/png", "image/jpeg", "image/avif"])
-          .optional()
-          .default("image/webp"),
-        alt: z.string().min(3),
-        image_base64: z.string().optional(),
-        image_url: z.string().url().optional(),
+        filename: z.string().min(3).describe("e.g. cover-seo-nextjs.png"),
+        alt: z.string().min(3).describe("Vietnamese alt text"),
+        image_url: z.string().min(8).describe("HTTPS URL of the ChatGPT-generated image"),
       },
       annotations: {
         readOnlyHint: false,
@@ -351,7 +346,12 @@ function createServer() {
       },
     },
     async (input) => {
-      const data = await uploadCover(input);
+      const data = await uploadCover({
+        filename: input.filename,
+        alt: input.alt,
+        image_url: input.image_url,
+        mime_type: "image/png",
+      });
       return {
         content: [
           {
@@ -362,8 +362,6 @@ function createServer() {
                 cover_url: data.cover_url,
                 cover_media_id: data.cover_media_id,
                 media: data.media,
-                instruction:
-                  "Pass cover_url (or cover_media_id) into create_blog_draft. Do not use the original OpenAI image URL as cover_url.",
               },
               null,
               2,
@@ -380,25 +378,20 @@ function createServer() {
     {
       title: "Create blog draft",
       description:
-        "Create a DRAFT blog post. category_id or category_slug is REQUIRED (from list_categories). cover_url must be media.url from upload_cover, or pass cover_media_id. You may also pass image_base64/image_url here to upload and attach the cover in one step.",
+        "PREFERRED one-step draft creator. Pass category_slug + image_url (ChatGPT image HTTPS URL) + article fields. Server uploads the cover and creates a DRAFT. Do not require a separate upload_cover call.",
       inputSchema: {
         title: z.string().min(10).max(120),
-        slug: z.string().min(3).max(120).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+        slug: z.string().min(3).max(120),
         excerpt: z.string().min(40).max(220),
         content: z.string().min(800),
-        cover_url: z.string().min(3).optional(),
-        cover_media_id: z.string().min(3).optional(),
         cover_alt: z.string().min(3),
         tags: z.array(z.string().min(1).max(40)).min(1).max(12),
-        read_time: z.string().min(3).max(30).default("5 phút đọc"),
-        category_id: z.string().min(1).optional(),
-        category_slug: z.string().min(1).optional(),
-        image_base64: z.string().optional(),
-        image_url: z.string().url().optional(),
-        image_filename: z.string().min(3).optional(),
-        image_mime_type: z
-          .enum(["image/webp", "image/png", "image/jpeg", "image/avif"])
-          .optional(),
+        category_slug: z.string().min(1).describe("From list_categories, e.g. frontend"),
+        image_url: z
+          .string()
+          .min(8)
+          .describe("HTTPS URL of ChatGPT-generated cover image"),
+        read_time: z.string().min(3).max(30).optional(),
       },
       annotations: {
         readOnlyHint: false,
@@ -408,33 +401,12 @@ function createServer() {
       },
     },
     async (input) => {
-      if (!input.category_id && !input.category_slug) {
-        throw new Error(
-          "category_id or category_slug is required. Call list_categories first and pick one (e.g. tu-duy-san-pham, kien-truc-he-thong, frontend, ai-san-pham).",
-        );
-      }
-
-      let coverUrl = input.cover_url ? ensureCoverUrl(input.cover_url) : null;
-      let coverMediaId = input.cover_media_id || null;
-
-      const wantsInlineUpload = Boolean(input.image_base64?.trim() || input.image_url?.trim());
-      if (wantsInlineUpload) {
-        const uploaded = await uploadCover({
-          filename: input.image_filename || `${input.slug}-cover.webp`,
-          mime_type: input.image_mime_type || "image/webp",
-          alt: input.cover_alt,
-          image_base64: input.image_base64,
-          image_url: input.image_url,
-        });
-        coverUrl = uploaded.cover_url || null;
-        coverMediaId = uploaded.cover_media_id || null;
-      }
-
-      if (!coverUrl && !coverMediaId) {
-        throw new Error(
-          "Provide cover_url from upload_cover, cover_media_id, or image_base64/image_url to upload inline.",
-        );
-      }
+      const uploaded = await uploadCover({
+        filename: `${input.slug}-cover.png`,
+        mime_type: "image/png",
+        alt: input.cover_alt,
+        image_url: input.image_url,
+      });
 
       const data = (await siteFetch("/api/admin/posts", {
         method: "POST",
@@ -444,13 +416,12 @@ function createServer() {
           slug: input.slug,
           excerpt: input.excerpt,
           content: input.content,
-          coverUrl,
-          coverMediaId,
+          coverUrl: uploaded.cover_url,
+          coverMediaId: uploaded.cover_media_id,
           coverAlt: input.cover_alt,
           tags: input.tags,
-          readTime: input.read_time,
-          categoryId: input.category_id || null,
-          categorySlug: input.category_slug || null,
+          readTime: input.read_time || "5 phút đọc",
+          categorySlug: input.category_slug,
           status: "DRAFT",
         }),
       })) as Record<string, unknown>;
@@ -487,7 +458,11 @@ app.set("trust proxy", 1);
 app.use(express.json({ limit: "16mb" }));
 
 app.get("/health", (_req, res) => {
-  res.json({ ok: true, service: "trancongtien-blog-mcp" });
+  res.json({
+    ok: true,
+    service: "trancongtien-blog-mcp",
+    tools: ["list_categories", "list_recent_posts", "upload_cover", "create_blog_draft"],
+  });
 });
 
 app.post("/mcp", requireMcpAccess, handleMcp);
