@@ -29,9 +29,9 @@ Create one original, evidence-based Vietnamese blog draft per run (scheduled tas
    - contextual internal links to relevant pages on trancongtien.com;
    - a natural author/entity mention only where relevant, without keyword stuffing.
 6. Generate one wide, editorial cover image without text, logos, or watermarks. Match the article subject and the site's clean blue/coral visual language. Save the final image inside the workspace temporarily.
-7. Upload the cover with accurate Vietnamese alt text using `upload_cover` or the production upload endpoint. Copy the returned `cover_url` (`/api/uploads/...`) exactly — never pass an OpenAI/DALL-E CDN URL as `cover_url`.
+7. Upload the cover with accurate Vietnamese alt text. **Encode the image as `image_base64`** and pass it to `create_blog_draft` (or `upload_cover`). Do not rely on ChatGPT internal image URLs — they return 401 on the server.
 8. Create the post through `create_blog_draft` or the production posts endpoint with:
-   - `cover_url` from step 7 (or `cover_media_id`);
+   - `image_base64` (preferred) or a public `image_url`;
    - `category_id` or `category_slug` from step 1;
    - status `DRAFT` (the API also enforces `DRAFT` for automation tokens).
 9. Verify the response includes the post ID, slug, cover URL, category, and `DRAFT` status.

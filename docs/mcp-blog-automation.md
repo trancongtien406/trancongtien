@@ -100,37 +100,37 @@ Authorization: Bearer <MCP_ACCESS_TOKEN>
 
 Use this prompt for the daily 08:00 ChatGPT scheduled task.
 
-Important: do **1 bài / lần**. Prefer **one** write tool call (`create_blog_draft` with `image_url`) to avoid ChatGPT MCP `Resource not found` on a separate `upload_cover`.
+Important: do **1 bài / lần**. Cover must reach the server as **image_base64** (preferred). ChatGPT image URLs are often auth-only (401) or expire (404).
 
 ```text
 Moi ngay luc 08:00 Asia/Ho_Chi_Minh, tao DUNG 1 ban nhap blog SEO cho trancongtien.com.
 
-Ban CO tool MCP. Khong dung som. Neu tool bao "Resource not found": goi lai list_categories (refresh), roi tiep tuc bang create_blog_draft — KHONG bat buoc upload_cover.
+Ban CO tool MCP. Khong dung som.
 
 Quy trinh (1 bai):
 1. Goi list_categories. Chon 1 category_slug (tu-duy-san-pham | kien-truc-he-thong | frontend | ai-san-pham).
 2. Goi list_recent_posts. Chon 1 chu de khong trung.
 3. Viet 1 bai tieng Viet: title, slug, excerpt, tags (3-6), content HTML (>=800 ky tu), cover_alt.
-4. Tao 1 cover bang tinh nang tao anh ChatGPT. Lay URL HTTPS cua anh.
+4. Tao 1 cover bang tinh nang tao anh ChatGPT.
 5. Goi create_blog_draft MOT LAN voi:
    - category_slug
-   - image_url = URL anh ChatGPT vua tao
+   - image_base64 = encode anh cover vua tao (uu tien; co the dung data:image/png;base64,...)
    - title, slug, excerpt, content, cover_alt, tags
-   (Tool se tu upload anh + tao DRAFT. Khong can goi upload_cover.)
-6. Bao cao: title, slug, category_slug, post.id, /admin/posts/<id>.
+   KHONG dung URL noi bo ChatGPT lam image_url (thuong 401).
+   Chi dung image_url neu la HTTPS cong khai, khong can auth.
+6. Bao cao khi co post.id va /admin/posts/<id>.
 
-Neu create_blog_draft loi: sua input roi goi lai. Chi thanh cong khi co post.id.
+Chi thanh cong khi create_blog_draft tra ve post.id.
 ```
 
-## Troubleshooting: `Resource not found: Blog_TranCongTien.upload_cover`
+## Troubleshooting: cover image fails
 
-This is a **ChatGPT connector bug**, not a failure of your VPS upload API. ChatGPT keeps a stale internal route for some MCP tools; the `tools/call` never reaches `mcp.trancongtien.com`.
+| Symptom | Cause | Fix |
+|--------|--------|-----|
+| `401` on image_url | ChatGPT internal / signed URL | Use **image_base64** instead |
+| `404` on files.oaiusercontent.com | Expired temporary link | Regenerate image, pass **image_base64** |
+| `Host ... is not allowed` | URL host not allowlisted | Use **image_base64**, or add host to `MCP_ALLOWED_IMAGE_HOSTS` on VPS |
 
-Fix on ChatGPT side:
+After code deploy: `pm2 restart trancongtien-mcp`
 
-1. Open a **new chat** (or new scheduled-task run).
-2. In connector / Developer Mode settings: **refresh / reconnect** the MCP connector `Blog_TranCongTien`.
-3. Avoid a separate `upload_cover` hop — use `create_blog_draft` with `image_url` (prompt above).
-4. Confirm MCP is up: `curl https://mcp.trancongtien.com/health` should list the four tools.
-
-If `list_categories` / `list_recent_posts` work but write tools fail with Resource not found, reconnect the connector before retrying.
+Default allowlisted hosts now include `files.openai.com`, `files.oaiusercontent.com`, `trancongtien.com`. **image_base64** is still the reliable path for scheduled ChatGPT runs.

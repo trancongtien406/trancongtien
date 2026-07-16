@@ -16,8 +16,11 @@ const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
 const DEFAULT_IMAGE_HOSTS = [
   "oaidalleapiprodscus.blob.core.windows.net",
   "files.oaiusercontent.com",
+  "files.openai.com",
   "cdn.openai.com",
   "chatgpt.com",
+  "trancongtien.com",
+  "www.trancongtien.com",
 ];
 
 const allowedImageHosts = new Set(
@@ -260,7 +263,7 @@ async function uploadCover(input: {
 function createServer() {
   const server = new McpServer({
     name: "trancongtien-blog-automation",
-    version: "1.2.0",
+    version: "1.3.0",
   });
 
   server.registerTool(
@@ -332,11 +335,18 @@ function createServer() {
     {
       title: "Upload cover image",
       description:
-        "Upload a ChatGPT-generated cover. Pass image_url (HTTPS URL of the generated image). Returns cover_url like /api/uploads/.... Prefer skipping this tool and passing image_url directly to create_blog_draft instead.",
+        "Upload cover to trancongtien.com. PREFER image_base64 (raw bytes of the ChatGPT-generated image). Use image_url only when it is a public HTTPS URL the server can fetch.",
       inputSchema: {
-        filename: z.string().min(3).describe("e.g. cover-seo-nextjs.png"),
+        filename: z.string().min(3).describe("e.g. jtbd-cover.png"),
         alt: z.string().min(3).describe("Vietnamese alt text"),
-        image_url: z.string().min(8).describe("HTTPS URL of the ChatGPT-generated image"),
+        image_base64: z
+          .string()
+          .optional()
+          .describe("Base64 or data:image/...;base64,... of the generated cover (preferred)"),
+        image_url: z
+          .string()
+          .optional()
+          .describe("Public HTTPS image URL (fallback; ChatGPT internal URLs often fail)"),
       },
       annotations: {
         readOnlyHint: false,
@@ -349,6 +359,7 @@ function createServer() {
       const data = await uploadCover({
         filename: input.filename,
         alt: input.alt,
+        image_base64: input.image_base64,
         image_url: input.image_url,
         mime_type: "image/png",
       });
@@ -378,7 +389,7 @@ function createServer() {
     {
       title: "Create blog draft",
       description:
-        "PREFERRED one-step draft creator. Pass category_slug + image_url (ChatGPT image HTTPS URL) + article fields. Server uploads the cover and creates a DRAFT. Do not require a separate upload_cover call.",
+        "One-step draft creator. Pass category_slug + article fields + cover. PREFER image_base64 from the ChatGPT-generated image (ChatGPT image URLs are often auth-only and fail on the server). image_url is optional fallback.",
       inputSchema: {
         title: z.string().min(10).max(120),
         slug: z.string().min(3).max(120),
@@ -386,11 +397,15 @@ function createServer() {
         content: z.string().min(800),
         cover_alt: z.string().min(3),
         tags: z.array(z.string().min(1).max(40)).min(1).max(12),
-        category_slug: z.string().min(1).describe("From list_categories, e.g. frontend"),
+        category_slug: z.string().min(1).describe("From list_categories, e.g. tu-duy-san-pham"),
+        image_base64: z
+          .string()
+          .optional()
+          .describe("PREFERRED: base64 or data:image/...;base64,... of the cover you just generated"),
         image_url: z
           .string()
-          .min(8)
-          .describe("HTTPS URL of ChatGPT-generated cover image"),
+          .optional()
+          .describe("Optional fallback: public HTTPS cover URL (not ChatGPT internal links)"),
         read_time: z.string().min(3).max(30).optional(),
       },
       annotations: {
@@ -401,10 +416,22 @@ function createServer() {
       },
     },
     async (input) => {
+      const hasBase64 = Boolean(input.image_base64?.trim());
+      const hasUrl = Boolean(input.image_url?.trim());
+      if (!hasBase64 && !hasUrl) {
+        throw new Error(
+          "Provide image_base64 (preferred) or image_url. ChatGPT internal image URLs return 401 — encode the image as base64 instead.",
+        );
+      }
+      if (hasBase64 && hasUrl) {
+        throw new Error("Provide exactly one of image_base64 or image_url");
+      }
+
       const uploaded = await uploadCover({
         filename: `${input.slug}-cover.png`,
         mime_type: "image/png",
         alt: input.cover_alt,
+        image_base64: input.image_base64,
         image_url: input.image_url,
       });
 
