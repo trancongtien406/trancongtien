@@ -1,7 +1,13 @@
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/db";
-import { notifyAdmin, sendEmail } from "@/lib/notify";
+import {
+  adminContactEmailHtml,
+  adminContactEmailText,
+  customerConfirmationEmailHtml,
+  customerConfirmationEmailText,
+} from "@/lib/email-templates";
+import { deliverAdminNotify, notifyAdmin, sendEmail } from "@/lib/notify";
 
 const schema = z.object({
   name: z.string().min(2),
@@ -38,29 +44,34 @@ export async function POST(req: Request) {
     },
   });
 
-  await notifyAdmin({
+  const adminBody = adminContactEmailText(data);
+  const adminNotify = await notifyAdmin({
     title: data.scheduledAt
       ? `Đặt lịch tư vấn mới từ ${data.name}`
       : `Liên hệ mới từ ${data.name}`,
-    body: [
-      `Email: ${data.email}`,
-      `SĐT: ${data.phone || "—"}`,
-      `Loại: ${data.projectType || "—"}`,
-      `Ngân sách: ${data.budget || "—"}`,
-      `Timeline: ${data.timeline || "—"}`,
-      `Nội dung: ${data.message}`,
-      data.scheduledAt ? `Lịch hẹn: ${data.scheduledAt}` : "",
-    ]
-      .filter(Boolean)
-      .join("\n"),
+    body: adminBody,
     channel: "EMAIL",
     meta: { bookingId: booking.id },
+    html: adminContactEmailHtml(data),
+    deliver: false,
   });
 
-  await sendEmail({
-    to: data.email,
-    subject: "Đã nhận yêu cầu — Tran Cong Tien Studio",
-    text: `Xin chào ${data.name},\n\nTôi đã nhận được yêu cầu của bạn và sẽ phản hồi trong 24 giờ.\n\n— Trần Công Tiến`,
+  // Trả success ngay — email chạy nền sau khi response hoàn tất
+  after(async () => {
+    try {
+      await deliverAdminNotify(adminNotify);
+      await sendEmail({
+        to: data.email,
+        subject: "Đã nhận yêu cầu — Trần Công Tiến",
+        text: customerConfirmationEmailText(data.name),
+        html: customerConfirmationEmailHtml({
+          name: data.name,
+          message: data.message,
+        }),
+      });
+    } catch (err) {
+      console.error("[bookings] background email failed", err);
+    }
   });
 
   return NextResponse.json({ ok: true, id: booking.id });
