@@ -1,8 +1,9 @@
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { requireAdmin } from "@/lib/auth";
+import { requireAdmin, requireAdminOrAutomation } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import { notifyAdmin } from "@/lib/notify";
 
 export const dynamic = "force-dynamic";
 
@@ -19,9 +20,9 @@ const postSchema = z.object({
   categoryId: z.string().optional().nullable(),
 });
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
-    await requireAdmin();
+    await requireAdminOrAutomation(req);
     const posts = await prisma.post.findMany({
       orderBy: { updatedAt: "desc" },
       include: { author: true, category: true },
@@ -34,13 +35,14 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
-    const user = await requireAdmin();
+    const { user, mode } = await requireAdminOrAutomation(req);
     const body = await req.json();
     const parsed = postSchema.safeParse(body);
     if (!parsed.success) {
       return NextResponse.json({ error: "Invalid" }, { status: 400 });
     }
     const d = parsed.data;
+    const status = mode === "automation" ? "DRAFT" : d.status || "DRAFT";
     const post = await prisma.post.create({
       data: {
         title: d.title,
@@ -50,16 +52,27 @@ export async function POST(req: Request) {
         coverUrl: d.coverUrl,
         coverAlt: d.coverAlt,
         tags: JSON.stringify(d.tags || []),
-        status: d.status || "DRAFT",
+        status,
         readTime: d.readTime || "5 phút đọc",
         categoryId: d.categoryId || null,
         authorId: user.id,
-        publishedAt: d.status === "PUBLISHED" ? new Date() : null,
+        publishedAt: status === "PUBLISHED" ? new Date() : null,
       },
     });
     revalidatePath("/blog");
     revalidatePath(`/blog/${post.slug}`);
-    return NextResponse.json({ post });
+    if (mode === "automation") {
+      try {
+        await notifyAdmin({
+          title: "Codex đã tạo bản nháp blog",
+          body: `${post.title}\nDuyệt bài tại /admin/posts/${post.id}`,
+          meta: { postId: post.id, slug: post.slug, source: "codex-automation" },
+        });
+      } catch (error) {
+        console.error("Failed to notify admin about automated draft", error);
+      }
+    }
+    return NextResponse.json({ post, source: mode });
   } catch {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }

@@ -62,3 +62,28 @@ export async function requireAdmin() {
   }
   return user;
 }
+
+export type AdminAuthMode = "session" | "automation";
+
+function matchesSecret(value: string, expected: string) {
+  const a = Buffer.from(value, "utf8");
+  const b = Buffer.from(expected, "utf8");
+  return a.length === b.length && timingSafeEqual(a, b);
+}
+
+/** Allow either an interactive admin session or the server-only automation token. */
+export async function requireAdminOrAutomation(req: Request) {
+  const authorization = req.headers.get("authorization");
+  const expected = process.env.CONTENT_AUTOMATION_TOKEN;
+
+  if (expected && authorization?.startsWith("Bearer ")) {
+    const token = authorization.slice("Bearer ".length).trim();
+    if (token && matchesSecret(token, expected)) {
+      const user = await prisma.user.findFirst({ where: { role: "ADMIN" } });
+      if (!user) throw new Error("ADMIN_NOT_FOUND");
+      return { user, mode: "automation" as const };
+    }
+  }
+
+  return { user: await requireAdmin(), mode: "session" as const };
+}
