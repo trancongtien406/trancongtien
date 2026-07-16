@@ -23,6 +23,7 @@ import {
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { isValidEmail, isValidVnPhone } from "@/lib/validation";
 
 type FaqItem = { question: string; answer: string };
 
@@ -184,26 +185,54 @@ export function ContactPage({ faqs }: { faqs: FaqItem[] }) {
                 const form = e.currentTarget;
                 const fd = new FormData(form);
                 const payload = {
-                  name: String(fd.get("name") || ""),
-                  email: String(fd.get("email") || ""),
-                  phone: String(fd.get("phone") || ""),
+                  name: String(fd.get("name") || "").trim(),
+                  email: String(fd.get("email") || "").trim(),
+                  phone: String(fd.get("phone") || "").trim(),
                   projectType: String(fd.get("type") || ""),
                   budget: String(fd.get("budget") || ""),
                   timeline: String(fd.get("timeline") || ""),
-                  message: String(fd.get("description") || ""),
+                  message: String(fd.get("description") || "").trim(),
                 };
+
+                if (!isValidEmail(payload.email)) {
+                  setStatus("error");
+                  setError("Email không hợp lệ. Vui lòng kiểm tra lại.");
+                  return;
+                }
+                if (!isValidVnPhone(payload.phone)) {
+                  setStatus("error");
+                  setError(
+                    "Số điện thoại không hợp lệ. Ví dụ: 0382802406 hoặc +84382802406.",
+                  );
+                  return;
+                }
+                if (payload.message.length < 5) {
+                  setStatus("error");
+                  setError("Mô tả dự án cần ít nhất 5 ký tự.");
+                  return;
+                }
+
                 try {
                   const res = await fetch("/api/bookings", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload),
                   });
-                  if (!res.ok) throw new Error("fail");
+                  const result = (await res.json().catch(() => null)) as {
+                    error?: string;
+                  } | null;
+                  if (!res.ok) {
+                    throw new Error(result?.error || "fail");
+                  }
                   setStatus("ok");
                   form.reset();
-                } catch {
+                } catch (err) {
                   setStatus("error");
-                  setError("Gửi thất bại. Vui lòng thử lại hoặc gọi Zalo.");
+                  setError(
+                    err instanceof Error && err.message !== "fail"
+                      ? err.message
+                      : "Gửi thất bại. Vui lòng thử lại hoặc gọi Zalo.",
+                  );
                 }
               }}
             >
@@ -212,6 +241,8 @@ export function ContactPage({ faqs }: { faqs: FaqItem[] }) {
                 <input
                   required
                   name="name"
+                  minLength={2}
+                  autoComplete="name"
                   className="h-11 w-full rounded-xl border border-border px-3 outline-none focus:ring-2 focus:ring-brand/30"
                 />
               </label>
@@ -221,6 +252,8 @@ export function ContactPage({ faqs }: { faqs: FaqItem[] }) {
                   required
                   type="email"
                   name="email"
+                  autoComplete="email"
+                  inputMode="email"
                   className="h-11 w-full rounded-xl border border-border px-3 outline-none focus:ring-2 focus:ring-brand/30"
                 />
               </label>
@@ -229,7 +262,12 @@ export function ContactPage({ faqs }: { faqs: FaqItem[] }) {
                   Số điện thoại
                 </span>
                 <input
+                  required
                   name="phone"
+                  type="tel"
+                  autoComplete="tel"
+                  inputMode="tel"
+                  placeholder="0382 802 406"
                   className="h-11 w-full rounded-xl border border-border px-3 outline-none focus:ring-2 focus:ring-brand/30"
                 />
               </label>
