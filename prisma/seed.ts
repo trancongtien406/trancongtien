@@ -451,7 +451,7 @@ async function main() {
         result:
           "Luồng đăng sản phẩm, chat và checkout được gom vào một trải nghiệm mượt trên mobile.",
       }),
-      coverUrl: "/images/illustrations/projects-hero-devices.png",
+      coverUrl: "/images/illustrations/projects-hero-devices.webp",
       coverAlt:
         "Mockup marketplace thời trang Fashion Move trên mobile và dashboard web",
       features: JSON.stringify([
@@ -487,7 +487,7 @@ async function main() {
         result:
           "Admin theo dõi lịch theo ngày, giảm thao tác thủ công và dễ mở rộng chi nhánh.",
       }),
-      coverUrl: "/images/illustrations/services-devices.png",
+      coverUrl: "/images/illustrations/services-devices.webp",
       coverAlt:
         "Giao diện web app đặt lịch Smart Booking với calendar và dashboard doanh thu",
       features: JSON.stringify([
@@ -522,7 +522,7 @@ async function main() {
         result:
           "Quản lý có dashboard tổng quan, nhân viên có checklist lead cần xử lý.",
       }),
-      coverUrl: "/images/illustrations/blog-hero-desk.png",
+      coverUrl: "/images/illustrations/blog-hero-desk.webp",
       coverAlt:
         "Dashboard Sales CRM hiển thị pipeline lead KPI và lịch sử chăm sóc khách hàng",
       features: JSON.stringify([
@@ -552,7 +552,7 @@ async function main() {
         result:
           "Booth vận hành độc lập, ảnh được xử lý và in ngay tại điểm check-in.",
       }),
-      coverUrl: "/images/illustrations/about-outdoors.png",
+      coverUrl: "/images/illustrations/about-outdoors.webp",
       coverAlt:
         "Ứng dụng Photo Booth mobile chụp ảnh sự kiện và in Bluetooth tại booth",
       features: JSON.stringify([
@@ -582,7 +582,7 @@ async function main() {
         result:
           "Nhân sự có thể hỏi bằng ngôn ngữ tự nhiên và nhận câu trả lời gắn với tài liệu gốc.",
       }),
-      coverUrl: "/images/illustrations/process-roadmap.png",
+      coverUrl: "/images/illustrations/process-roadmap.webp",
       coverAlt:
         "Sơ đồ AI Search Engine tìm kiếm tài liệu nội bộ bằng vector search",
       features: JSON.stringify([

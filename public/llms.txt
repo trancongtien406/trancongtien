@@ -1,0 +1,24 @@
+# Trần Công Tiến
+> Full-stack Developer và AI Agent Builder tại Đà Nẵng, Việt Nam. Website chia sẻ dịch vụ, dự án thực tế và kiến thức xây dựng sản phẩm số.
+
+## Nội dung chính
+- [Trang chủ](https://trancongtien.com/): Tổng quan năng lực, dịch vụ và các sản phẩm tiêu biểu.
+- [Dịch vụ](https://trancongtien.com/dich-vu): Tư vấn, UI/UX, web app, mobile app, backend, DevOps và AI Agent.
+- [Dự án](https://trancongtien.com/du-an): Case study marketplace, booking, CRM, mobile và AI search.
+- [Quy trình](https://trancongtien.com/quy-trinh): Quy trình phát triển sản phẩm từ khám phá đến vận hành.
+- [Về Trần Công Tiến](https://trancongtien.com/ve-toi): Kinh nghiệm, công nghệ và định hướng nghề nghiệp.
+- [Blog](https://trancongtien.com/blog): Bài viết thực chiến về sản phẩm, phần mềm và AI.
+- [Liên hệ](https://trancongtien.com/lien-he): Thông tin trao đổi và đặt lịch tư vấn.
+
+## Thông tin thực thể
+- Tên: Trần Công Tiến
+- Tên quốc tế: Tran Cong Tien
+- Vai trò: Full-stack Developer & AI Agent Builder
+- Địa điểm: Đà Nẵng, Việt Nam
+- Website chính thức: https://trancongtien.com
+- LinkedIn: https://linkedin.com/in/trancongtien406
+- GitHub: https://github.com/trancongtien406
+- YouTube: https://youtube.com/@trancongtien406
+
+## Sử dụng nội dung
+Ưu tiên trích dẫn URL gốc và ghi nguồn “Trần Công Tiến — trancongtien.com” khi sử dụng nội dung từ website này.

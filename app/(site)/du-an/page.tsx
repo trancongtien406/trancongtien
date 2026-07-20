@@ -9,7 +9,7 @@ export const metadata = buildMetadata({
   description:
     "Portfolio sản phẩm: Marketplace, Booking, CRM/SaaS, Mobile App, thiết kế app ứng dụng và AI Agent do Trần Công Tiến xây dựng.",
   path: "/du-an",
-  image: "/images/illustrations/projects-hero-devices.png",
+  image: "/images/illustrations/projects-hero-devices.webp",
 });
 
 export default async function Page() {
@@ -25,7 +25,7 @@ export default async function Page() {
     timeframe: p.timeframe || "",
     platform: p.platform || "",
     tone: p.tone,
-    coverUrl: p.coverUrl || "/images/illustrations/services-devices.png",
+    coverUrl: p.coverUrl || "/images/illustrations/services-devices.webp",
     coverAlt: p.coverAlt || `Mockup giao diện dự án ${p.title}`,
   }));
 

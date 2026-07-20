@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props) {
     title: project.title,
     description: project.description,
     path: `/du-an/${project.slug}`,
-    image: project.coverUrl || "/images/illustrations/projects-hero-devices.png",
+    image: project.coverUrl || "/images/illustrations/projects-hero-devices.webp",
   });
 }
 
@@ -34,7 +34,7 @@ export default async function ProjectDetailPage({ params }: Props) {
   const features = parseJsonArray(project.features);
   const stack = parseJsonArray(project.stack);
   const cover =
-    project.coverUrl || "/images/illustrations/projects-hero-devices.png";
+    project.coverUrl || "/images/illustrations/projects-hero-devices.webp";
   const coverAlt = project.coverAlt || `Mockup chi tiết dự án ${project.title}`;
   const projectUrl = `${siteConfig.url}/du-an/${project.slug}`;
 
@@ -129,7 +129,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                 width={900}
                 height={700}
                 className="w-full object-cover"
-                priority
+                preload
               />
             </div>
           </div>

@@ -88,12 +88,12 @@ export function ServicesPage({
           <div className="relative">
             <div className="absolute -inset-4 rounded-3xl bg-brand/10 blur-2xl" />
             <Image
-              src="/images/illustrations/services-devices.png"
+              src="/images/illustrations/services-devices.webp"
               alt="Mockup laptop và smartphone hiển thị dashboard sản phẩm SaaS"
               width={900}
               height={700}
               className="relative w-full rounded-3xl object-cover shadow-xl"
-              priority
+              preload
             />
           </div>
         </Container>

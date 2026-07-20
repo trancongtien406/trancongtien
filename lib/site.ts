@@ -8,7 +8,7 @@ export const siteConfig = {
   url: "https://trancongtien.com",
   locale: "vi_VN",
   language: "vi",
-  personImage: "/images/avatars/tran-cong-tien-full-stack-ai-agent.png",
+  personImage: "/images/avatars/tran-cong-tien-full-stack-ai-agent.webp",
   birthDate: "2003-06-04",
   cvUrl:
     "https://trancongtien.com/api/uploads/1784029250032-Tien-Tran-Cong.pdf",

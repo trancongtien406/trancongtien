@@ -20,11 +20,18 @@ export function buildMetadata({
   imageHeight,
   type = "website",
 }: BuildMetadataInput): Metadata {
+  const shorten = (value: string, maxLength: number) => {
+    if (value.length <= maxLength) return value;
+    const shortened = value.slice(0, maxLength - 1).replace(/\s+\S*$/, "");
+    return `${shortened.replace(/[\s,;:–—-]+$/, "")}…`;
+  };
   const url = `${siteConfig.url}${path}`;
-  const fullTitle =
+  const rawTitle =
     path === "/"
-      ? `${siteConfig.fullName} | ${siteConfig.tagline}`
+      ? `${siteConfig.fullName} | Full-stack & AI Developer`
       : `${title} | ${siteConfig.name}`;
+  const fullTitle = shorten(rawTitle, 60);
+  const seoDescription = shorten(description, 160);
   const imageUrl = new URL(image, siteConfig.url).toString();
   const resolvedImageWidth = imageWidth ?? (image === "/og-image.png" ? 1200 : undefined);
   const resolvedImageHeight = imageHeight ?? (image === "/og-image.png" ? 630 : undefined);
@@ -36,7 +43,7 @@ export function buildMetadata({
     publisher: siteConfig.brand,
     category: "technology",
     title: fullTitle,
-    description,
+    description: seoDescription,
     keywords: [
       siteConfig.fullName,
       siteConfig.name,
@@ -68,7 +75,7 @@ export function buildMetadata({
     },
     openGraph: {
       title: fullTitle,
-      description,
+      description: seoDescription,
       url,
       siteName: siteConfig.brand,
       locale: siteConfig.locale,
@@ -85,7 +92,7 @@ export function buildMetadata({
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
-      description,
+      description: seoDescription,
       images: [imageUrl],
     },
     robots: {
@@ -174,12 +181,18 @@ export function siteIdentityJsonLd() {
         ],
       },
       {
-        "@type": "ProfessionalService",
+        "@type": ["Organization", "ProfessionalService"],
         "@id": organizationId,
         name: siteConfig.brand,
         alternateName: [siteConfig.fullName, siteConfig.name],
         description: siteConfig.description,
         url: siteConfig.url,
+        logo: {
+          "@type": "ImageObject",
+          url: `${siteConfig.url}/icon.png`,
+          width: 512,
+          height: 512,
+        },
         image: personImage,
         email: siteConfig.email,
         telephone: siteConfig.phone,

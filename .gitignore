@@ -54,3 +54,7 @@ package-lock.json
 # runtime uploads
 /uploads
 /public/uploads
+
+# Codex SEO runtime artifacts
+/seo-output/
+/.codex/skills/seo/.venv/

@@ -3,7 +3,6 @@ import { getPublishedFaqs } from "@/lib/content";
 import {
   breadcrumbJsonLd,
   buildMetadata,
-  faqJsonLd,
   JsonLd,
 } from "@/lib/seo";
 
@@ -26,11 +25,6 @@ export default async function Page() {
           { name: "Trang chủ", path: "/" },
           { name: "Liên hệ", path: "/lien-he" },
         ])}
-      />
-      <JsonLd
-        data={faqJsonLd(
-          faqs.map((f) => ({ question: f.question, answer: f.answer })),
-        )}
       />
       <ContactPage
         faqs={faqs.map((f) => ({

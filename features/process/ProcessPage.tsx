@@ -113,12 +113,12 @@ export function ProcessPage({ steps }: { steps: Step[] }) {
             <div className="space-y-4">
               <div className="relative">
                 <Image
-                  src="/images/illustrations/process-roadmap.png"
+                  src="/images/illustrations/process-roadmap.webp"
                   alt="Sơ đồ lộ trình 6 bước phát triển sản phẩm với các mốc quan trọng"
                   width={900}
                   height={700}
                   className="w-full rounded-3xl object-cover shadow-xl"
-                  priority
+                  preload
                 />
                 <div className="absolute bottom-4 left-4 right-4 rounded-2xl border border-border bg-white/95 p-4 shadow-lg backdrop-blur sm:left-auto sm:right-6 sm:w-64">
                   <p className="text-sm font-semibold text-ink">Mục tiêu cuối cùng</p>

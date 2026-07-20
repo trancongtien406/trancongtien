@@ -82,12 +82,12 @@ export function ProjectsPage({ projects }: { projects: ProjectListItem[] }) {
           </div>
           <div className="relative">
             <Image
-              src="/images/illustrations/projects-hero-devices.png"
+              src="/images/illustrations/projects-hero-devices.webp"
               alt="Tổng hợp mockup thiết bị của các sản phẩm đã xây dựng"
               width={900}
               height={600}
               className="w-full rounded-3xl object-cover shadow-xl"
-              priority
+              preload
             />
           </div>
         </Container>

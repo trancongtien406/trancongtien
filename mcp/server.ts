@@ -191,26 +191,6 @@ async function fetchAllowedImage(url: string) {
   };
 }
 
-function ensureCoverUrl(url: string) {
-  const trimmed = url.trim();
-  if (trimmed.startsWith("/api/uploads/")) return trimmed;
-  if (trimmed.startsWith(`${SITE_ORIGIN}/api/uploads/`)) {
-    return trimmed.slice(SITE_ORIGIN.length);
-  }
-  // Common agent mistake: pass absolute site URL without noticing
-  try {
-    const parsed = new URL(trimmed);
-    if (parsed.pathname.startsWith("/api/uploads/")) {
-      return parsed.pathname;
-    }
-  } catch {
-    // ignore
-  }
-  throw new Error(
-    "cover_url must be media.url from upload_cover (e.g. /api/uploads/...). Do not pass OpenAI/DALL-E URLs as cover_url.",
-  );
-}
-
 async function uploadCover(input: {
   filename: string;
   mime_type?: string;

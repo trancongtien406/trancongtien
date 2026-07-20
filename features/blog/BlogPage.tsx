@@ -110,12 +110,12 @@ export function BlogPage({ posts }: { posts: BlogListItem[] }) {
           </div>
           <div className="relative overflow-hidden rounded-3xl">
             <Image
-              src="/images/illustrations/blog-hero-desk.png"
+              src="/images/illustrations/blog-hero-desk.webp"
               alt="Không gian làm việc với laptop hiển thị dashboard phân tích dữ liệu"
               width={900}
               height={700}
               className="aspect-4/3 w-full object-cover"
-              priority
+              preload
             />
           </div>
         </Container>

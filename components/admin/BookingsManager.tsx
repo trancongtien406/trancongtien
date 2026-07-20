@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Eye } from "lucide-react";
 import toast from "react-hot-toast";
@@ -31,20 +31,15 @@ export function BookingsManager({ bookings }: { bookings: BookingRow[] }) {
   const searchParams = useSearchParams();
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("");
-  const [selected, setSelected] = useState<BookingRow | null>(null);
-  const [nextStatus, setNextStatus] = useState("CONTACTED");
+  const [selected, setSelected] = useState<BookingRow | null>(() => {
+    const id = searchParams.get("id");
+    return bookings.find((booking) => booking.id === id) ?? null;
+  });
+  const [nextStatus, setNextStatus] = useState(
+    selected?.status ?? "CONTACTED",
+  );
   const [scheduledAt, setScheduledAt] = useState("");
   const [saving, setSaving] = useState(false);
-
-  useEffect(() => {
-    const id = searchParams.get("id");
-    if (!id) return;
-    const match = bookings.find((b) => b.id === id);
-    if (!match) return;
-    setSelected(match);
-    setNextStatus(match.status);
-    setScheduledAt("");
-  }, [bookings, searchParams]);
 
   const filtered = useMemo(() => {
     return bookings.filter((b) => {

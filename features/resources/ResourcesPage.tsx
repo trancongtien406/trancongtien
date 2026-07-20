@@ -145,12 +145,12 @@ export function ResourcesPage({
             </div>
             <div className="relative">
               <Image
-                src="/images/illustrations/blog-hero-desk.png"
+                src="/images/illustrations/blog-hero-desk.webp"
                 alt="Laptop hiển thị dashboard cùng các thẻ tài nguyên nổi bật"
                 width={900}
                 height={700}
                 className="w-full rounded-3xl object-cover shadow-xl"
-                priority
+                preload
               />
               <div className="absolute inset-x-4 bottom-4 grid grid-cols-2 gap-2 sm:inset-x-auto sm:right-4 sm:top-4 sm:bottom-auto sm:w-48 sm:grid-cols-1">
                 {["PRD Template", "UI Kit", "Estimate Sheet", "Architecture Guide"].map(

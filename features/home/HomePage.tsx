@@ -91,7 +91,6 @@ export function HomePage({ data }: { data: HomeData }) {
                 width={720}
                 height={900}
                 loading="eager"
-                fetchPriority="high"
                 sizes="(max-width: 1023px) calc(100vw - 2rem), 50vw"
                 className="aspect-4/5 w-full object-cover object-top"
               />
@@ -113,6 +112,27 @@ export function HomePage({ data }: { data: HomeData }) {
               ))}
             </div>
           </div>
+        </Container>
+      </section>
+
+      <section className="border-y border-border bg-surface-muted py-12 sm:py-16">
+        <Container className="max-w-4xl">
+          <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">
+            Trần Công Tiến có thể giúp doanh nghiệp xây sản phẩm số như thế nào?
+          </h2>
+          <p className="mt-5 text-base leading-8 text-ink-muted sm:text-lg">
+            Trần Công Tiến là Full-stack Developer và AI Agent Builder tại Đà
+            Nẵng, đồng hành cùng startup, doanh nghiệp nhỏ và đội ngũ sản phẩm
+            để biến một nhu cầu kinh doanh thành website, web app, mobile app
+            hoặc hệ thống tự động hóa có thể vận hành thực tế. Mỗi dự án bắt
+            đầu bằng việc làm rõ người dùng, phạm vi và chỉ số thành công; sau
+            đó mới chuyển sang thiết kế UI/UX, kiến trúc dữ liệu, phát triển,
+            kiểm thử và triển khai. Thay vì chỉ bàn giao mã nguồn, quy trình
+            tập trung vào một sản phẩm dễ sử dụng, có khả năng mở rộng, đo
+            lường được và phù hợp ngân sách. Các năng lực chính gồm Next.js,
+            React, Node.js, NestJS, Python, Flutter, cơ sở dữ liệu SQL/NoSQL,
+            cloud và AI Agent kết nối tài liệu hoặc quy trình nội bộ.
+          </p>
         </Container>
       </section>
 
@@ -163,9 +183,10 @@ export function HomePage({ data }: { data: HomeData }) {
                   <Image
                     src={project.coverUrl}
                     alt={project.coverAlt}
-                    fill
+                    width={1200}
+                    height={800}
                     sizes="(max-width:768px) 100vw, 33vw"
-                    className="object-cover transition duration-500 hover:scale-105"
+                    className="h-full w-full object-cover transition duration-500 hover:scale-105"
                   />
                 </div>
                 <div className="p-5">

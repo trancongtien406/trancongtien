@@ -37,7 +37,7 @@ export default async function Page() {
           slug: p.slug,
           title: p.title,
           category: p.category?.name || "Blog",
-          image: p.coverUrl || "/images/illustrations/blog-hero-desk.png",
+          image: p.coverUrl || "/images/illustrations/blog-hero-desk.webp",
           date: (p.publishedAt || p.createdAt).toLocaleDateString("vi-VN"),
           readTime: p.readTime,
         }))}

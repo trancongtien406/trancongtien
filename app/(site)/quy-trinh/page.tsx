@@ -9,7 +9,7 @@ export const metadata = buildMetadata({
   description:
     "Quy trình 6 bước phát triển sản phẩm: khám phá, lập kế hoạch, thiết kế, phát triển, triển khai và tối ưu liên tục.",
   path: "/quy-trinh",
-  image: "/images/illustrations/process-roadmap.png",
+  image: "/images/illustrations/process-roadmap.webp",
 });
 
 export default async function Page() {

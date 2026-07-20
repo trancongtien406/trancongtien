@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props) {
     title: post.title,
     description: post.excerpt,
     path: `/blog/${post.slug}`,
-    image: post.coverUrl || "/images/illustrations/blog-hero-desk.png",
+    image: post.coverUrl || "/images/illustrations/blog-hero-desk.webp",
     imageWidth: post.coverUrl?.startsWith("/images/blog/") ? 1600 : undefined,
     imageHeight: post.coverUrl?.startsWith("/images/blog/") ? 900 : undefined,
     type: "article",
@@ -32,7 +32,7 @@ export default async function BlogPostPage({ params }: Props) {
   const post = await getPostBySlug(slug);
   if (!post) notFound();
 
-  const cover = post.coverUrl || "/images/illustrations/blog-hero-desk.png";
+  const cover = post.coverUrl || "/images/illustrations/blog-hero-desk.webp";
   const coverAlt = post.coverAlt || `Hình minh họa bài viết: ${post.title}`;
   const tags = parseJsonArray(post.tags);
   const date = (post.publishedAt || post.createdAt).toLocaleDateString("vi-VN");
@@ -94,7 +94,7 @@ export default async function BlogPostPage({ params }: Props) {
               alt={coverAlt}
               fill
               className="object-cover"
-              priority
+              preload
               sizes="768px"
             />
           </div>

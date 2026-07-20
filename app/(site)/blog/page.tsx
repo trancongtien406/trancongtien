@@ -9,7 +9,7 @@ export const metadata = buildMetadata({
   description:
     "Blog kiến thức thực chiến về full-stack development: kiến trúc hệ thống, Next.js, Clean Code, thiết kế app, AI Agent và tư duy sản phẩm.",
   path: "/blog",
-  image: "/images/illustrations/blog-hero-desk.png",
+  image: "/images/illustrations/blog-hero-desk.webp",
 });
 
 export default async function Page() {
@@ -22,7 +22,7 @@ export default async function Page() {
     readTime: p.readTime,
     tags: parseJsonArray(p.tags),
     category: p.category?.name || "Kiến thức",
-    image: p.coverUrl || "/images/illustrations/blog-hero-desk.png",
+    image: p.coverUrl || "/images/illustrations/blog-hero-desk.webp",
     imageAlt: p.coverAlt || `Ảnh minh họa bài viết ${p.title}`,
   }));
 

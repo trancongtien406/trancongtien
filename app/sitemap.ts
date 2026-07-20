@@ -22,42 +22,34 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = [
     {
       path: "",
-      priority: 1,
       images: [siteConfig.personImage, "/og-image.png"],
     },
     {
       path: "/dich-vu",
-      priority: 0.8,
-      images: ["/images/illustrations/services-devices.png"],
+      images: ["/images/illustrations/services-devices.webp"],
     },
     {
       path: "/du-an",
-      priority: 0.8,
-      images: ["/images/illustrations/projects-hero-devices.png"],
+      images: ["/images/illustrations/projects-hero-devices.webp"],
     },
     {
       path: "/quy-trinh",
-      priority: 0.8,
-      images: ["/images/illustrations/process-roadmap.png"],
+      images: ["/images/illustrations/process-roadmap.webp"],
     },
-    { path: "/ve-toi", priority: 0.9, images: [siteConfig.personImage] },
+    { path: "/ve-toi", images: [siteConfig.personImage] },
     {
       path: "/tai-nguyen",
-      priority: 0.8,
-      images: ["/images/illustrations/blog-hero-desk.png"],
+      images: ["/images/illustrations/blog-hero-desk.webp"],
     },
     {
       path: "/blog",
-      priority: 0.8,
-      images: ["/images/illustrations/blog-hero-desk.png"],
+      images: ["/images/illustrations/blog-hero-desk.webp"],
     },
-    { path: "/lien-he", priority: 0.8, images: [siteConfig.personImage] },
-    { path: "/chinh-sach-bao-mat", priority: 0.4, images: [] },
-    { path: "/dieu-khoan", priority: 0.4, images: [] },
+    { path: "/lien-he", images: [siteConfig.personImage] },
+    { path: "/chinh-sach-bao-mat", images: [] },
+    { path: "/dieu-khoan", images: [] },
   ].map((route) => ({
     url: `${siteConfig.url}${route.path}`,
-    changeFrequency: "weekly" as const,
-    priority: route.priority,
     images: route.images.map(absoluteImageUrl),
   }));
 
@@ -66,15 +58,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...posts.map((p) => ({
       url: `${siteConfig.url}/blog/${p.slug}`,
       lastModified: p.updatedAt,
-      changeFrequency: "weekly" as const,
-      priority: 0.7,
       images: p.coverUrl ? [absoluteImageUrl(p.coverUrl)] : [],
     })),
     ...projects.map((p) => ({
       url: `${siteConfig.url}/du-an/${p.slug}`,
       lastModified: p.updatedAt,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
       images: p.coverUrl ? [absoluteImageUrl(p.coverUrl)] : [],
     })),
   ];

@@ -147,7 +147,7 @@ export function AboutPage({
               width={640}
               height={800}
               className="aspect-4/5 w-full rounded-3xl object-cover object-top shadow-2xl"
-              priority
+              preload
             />
             <figcaption className="mt-3 text-center text-sm text-ink-muted">
               {siteConfig.fullName} — {siteConfig.tagline} tại Đà Nẵng
@@ -301,7 +301,7 @@ export function AboutPage({
             </div>
             <div className="mt-6 overflow-hidden rounded-3xl">
               <Image
-                src="/images/illustrations/about-outdoors.png"
+                src="/images/illustrations/about-outdoors.webp"
                 alt="Khung cảnh núi non lúc hoàng hôn — sở thích du lịch và khám phá"
                 width={800}
                 height={500}

@@ -42,7 +42,7 @@ export default async function Page() {
           category: p.category,
           title: p.title,
           description: p.description,
-          coverUrl: p.coverUrl || "/images/illustrations/services-devices.png",
+          coverUrl: p.coverUrl || "/images/illustrations/services-devices.webp",
           coverAlt: p.coverAlt || `Giao diện dự án ${p.title}`,
         })),
         process: process.map((s) => ({
