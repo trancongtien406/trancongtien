@@ -44,7 +44,6 @@ export function BlogPage({ posts }: { posts: BlogListItem[] }) {
     "Tất cả bài viết",
   );
   const [query, setQuery] = useState("");
-  const [page, setPage] = useState(1);
 
   const filtered = useMemo(() => {
     return posts.filter((post) => {
@@ -77,7 +76,6 @@ export function BlogPage({ posts }: { posts: BlogListItem[] }) {
                 value={query}
                 onChange={(e) => {
                   setQuery(e.target.value);
-                  setPage(1);
                 }}
                 type="search"
                 placeholder="Tìm kiếm bài viết..."
@@ -131,7 +129,6 @@ export function BlogPage({ posts }: { posts: BlogListItem[] }) {
                   type="button"
                   onClick={() => {
                     setFilter(cat);
-                    setPage(1);
                   }}
                   className={cn(
                     "rounded-full px-4 py-2 text-sm font-medium transition",
@@ -199,26 +196,11 @@ export function BlogPage({ posts }: { posts: BlogListItem[] }) {
               ))}
             </div>
 
-            <nav
-              className="mt-10 flex items-center justify-center gap-2"
-              aria-label="Phân trang blog"
-            >
-              {[1, 2, 3].map((n) => (
-                <button
-                  key={n}
-                  type="button"
-                  onClick={() => setPage(n)}
-                  className={cn(
-                    "flex size-9 items-center justify-center rounded-full text-sm font-semibold",
-                    page === n
-                      ? "bg-brand text-white"
-                      : "border border-border text-ink-muted hover:border-brand/40",
-                  )}
-                >
-                  {n}
-                </button>
-              ))}
-            </nav>
+            {filtered.length === 0 && (
+              <p className="mt-8 rounded-2xl border border-border bg-surface-soft p-6 text-center text-sm text-ink-muted">
+                Không tìm thấy bài viết phù hợp. Hãy thử từ khóa hoặc danh mục khác.
+              </p>
+            )}
           </div>
 
           <aside className="space-y-6">

@@ -16,6 +16,52 @@ export async function getPostBySlug(slug: string) {
   });
 }
 
+export async function getPublishedPostSlugs() {
+  return prisma.post.findMany({
+    where: { status: ContentStatus.PUBLISHED },
+    select: { slug: true },
+  });
+}
+
+export async function getRelatedPosts(
+  slug: string,
+  categoryId: string | null,
+) {
+  const sameCategory = await prisma.post.findMany({
+    where: {
+      status: ContentStatus.PUBLISHED,
+      slug: { not: slug },
+      ...(categoryId ? { categoryId } : {}),
+    },
+    orderBy: { publishedAt: "desc" },
+    take: 3,
+    select: {
+      slug: true,
+      title: true,
+      category: { select: { name: true } },
+    },
+  });
+
+  if (sameCategory.length >= 3 || !categoryId) return sameCategory;
+
+  const excludedSlugs = [slug, ...sameCategory.map((post) => post.slug)];
+  const fallback = await prisma.post.findMany({
+    where: {
+      status: ContentStatus.PUBLISHED,
+      slug: { notIn: excludedSlugs },
+    },
+    orderBy: { publishedAt: "desc" },
+    take: 3 - sameCategory.length,
+    select: {
+      slug: true,
+      title: true,
+      category: { select: { name: true } },
+    },
+  });
+
+  return [...sameCategory, ...fallback];
+}
+
 export async function getPublishedProjects() {
   return prisma.project.findMany({
     where: { status: ContentStatus.PUBLISHED },

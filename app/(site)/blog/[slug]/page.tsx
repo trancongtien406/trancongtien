@@ -1,16 +1,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronRight } from "lucide-react";
 import { Container } from "@/components/common/Container";
 import { CtaBanner } from "@/components/common/CtaBanner";
-import { getPostBySlug, parseJsonArray } from "@/lib/content";
+import {
+  getPostBySlug,
+  getPublishedPostSlugs,
+  getRelatedPosts,
+  parseJsonArray,
+} from "@/lib/content";
 import { breadcrumbJsonLd, buildMetadata, JsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 type Props = { params: Promise<{ slug: string }> };
+
+export async function generateStaticParams() {
+  return getPublishedPostSlugs();
+}
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
@@ -35,6 +44,7 @@ export default async function BlogPostPage({ params }: Props) {
   const cover = post.coverUrl || "/images/illustrations/blog-hero-desk.webp";
   const coverAlt = post.coverAlt || `Hình minh họa bài viết: ${post.title}`;
   const tags = parseJsonArray(post.tags);
+  const relatedPosts = await getRelatedPosts(post.slug, post.categoryId);
   const date = (post.publishedAt || post.createdAt).toLocaleDateString("vi-VN");
   const postUrl = `${siteConfig.url}/blog/${post.slug}`;
   const imageUrl = new URL(cover, siteConfig.url).toString();
@@ -73,6 +83,29 @@ export default async function BlogPostPage({ params }: Props) {
       />
       <article>
         <Container className="max-w-3xl py-12 sm:py-16">
+          <nav aria-label="Breadcrumb" className="mb-6">
+            <ol className="flex flex-wrap items-center gap-1.5 text-sm text-ink-subtle">
+              <li>
+                <Link href="/" className="hover:text-brand">
+                  Trang chủ
+                </Link>
+              </li>
+              <li aria-hidden="true">
+                <ChevronRight className="size-3.5" />
+              </li>
+              <li>
+                <Link href="/blog" className="hover:text-brand">
+                  Blog
+                </Link>
+              </li>
+              <li aria-hidden="true">
+                <ChevronRight className="size-3.5" />
+              </li>
+              <li className="truncate text-ink-muted" aria-current="page">
+                {post.title}
+              </li>
+            </ol>
+          </nav>
           <Link
             href="/blog"
             className="inline-flex items-center gap-1 text-sm font-semibold text-brand"
@@ -104,21 +137,6 @@ export default async function BlogPostPage({ params }: Props) {
               className="admin-prose space-y-5 [&_a]:font-semibold [&_a]:text-brand [&_blockquote]:border-l-4 [&_blockquote]:border-brand [&_blockquote]:bg-brand-soft/50 [&_blockquote]:px-5 [&_blockquote]:py-4 [&_blockquote]:italic [&_blockquote]:text-ink-muted [&_h2]:pt-4 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:leading-tight [&_h2]:text-ink [&_h3]:pt-2 [&_h3]:font-display [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-ink [&_img]:my-6 [&_img]:rounded-2xl [&_li]:pl-1 [&_ol]:list-decimal [&_ol]:space-y-2 [&_ol]:pl-6 [&_p]:text-ink-muted [&_strong]:font-semibold [&_strong]:text-ink [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-6"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
-            <h2 className="font-display text-2xl font-bold text-ink">
-              Câu hỏi thường gặp
-            </h2>
-            <p>
-              <strong>Khi nào nên áp dụng?</strong> Khi bạn đã có bài toán người
-              dùng rõ ràng và cần khung ra quyết định kỹ thuật có kiểm soát rủi
-              ro.
-            </p>
-            <p>
-              <strong>Bước tiếp theo?</strong>{" "}
-              <Link href="/lien-he" className="font-semibold text-brand">
-                Đặt lịch tư vấn
-              </Link>{" "}
-              để áp dụng vào dự án cụ thể.
-            </p>
           </div>
           <div className="mt-6 flex flex-wrap gap-2">
             {tags.map((tag) => (
@@ -129,6 +147,48 @@ export default async function BlogPostPage({ params }: Props) {
                 {tag}
               </span>
             ))}
+          </div>
+          <div className="mt-10 border-t border-border pt-8">
+            <h2 className="font-display text-2xl font-bold text-ink">
+              Bài viết liên quan
+            </h2>
+            <div className="mt-5 grid gap-4 sm:grid-cols-3">
+              {relatedPosts.map((related) => (
+                <article
+                  key={related.slug}
+                  className="flex flex-col rounded-2xl border border-border bg-surface p-4"
+                >
+                  <p className="text-xs font-semibold text-brand">
+                    {related.category?.name || "Kiến thức"}
+                  </p>
+                  <h3 className="mt-2 font-display font-bold leading-snug text-ink">
+                    <Link
+                      href={`/blog/${related.slug}`}
+                      className="hover:text-brand"
+                    >
+                      {related.title}
+                    </Link>
+                  </h3>
+                  <Link
+                    href={`/blog/${related.slug}`}
+                    className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-brand"
+                  >
+                    Đọc tiếp <ArrowRight className="size-3.5" />
+                  </Link>
+                </article>
+              ))}
+            </div>
+            <p className="mt-6 text-sm text-ink-muted">
+              Cần áp dụng vào một sản phẩm cụ thể?{" "}
+              <Link href="/dich-vu" className="font-semibold text-brand">
+                Xem dịch vụ phát triển sản phẩm
+              </Link>{" "}
+              hoặc{" "}
+              <Link href="/lien-he" className="font-semibold text-brand">
+                đặt lịch trao đổi
+              </Link>
+              .
+            </p>
           </div>
         </Container>
         <CtaBanner title="Muốn áp dụng những nguyên tắc này vào dự án của bạn?" />

@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/db";
 import { siteConfig } from "@/lib/site";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 const absoluteImageUrl = (path: string) =>
   new URL(path, siteConfig.url).toString();
@@ -12,6 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     prisma.post.findMany({
       where: { status: "PUBLISHED" },
       select: { slug: true, updatedAt: true, coverUrl: true },
+      orderBy: { updatedAt: "desc" },
     }),
     prisma.project.findMany({
       where: { status: "PUBLISHED" },
@@ -51,6 +52,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ].map((route) => ({
     url: `${siteConfig.url}${route.path}`,
     images: route.images.map(absoluteImageUrl),
+    ...(route.path === "/blog" && posts[0]?.updatedAt
+      ? { lastModified: posts[0].updatedAt }
+      : {}),
   }));
 
   return [

@@ -31,6 +31,12 @@ function absoluteAdminUrl(path: string) {
   return `${siteConfig.url.replace(/\/$/, "")}${path}`;
 }
 
+function revalidatePublicPost(slug: string) {
+  revalidatePath("/blog");
+  revalidatePath(`/blog/${slug}`);
+  revalidatePath("/sitemap.xml");
+}
+
 function escapeHtml(value: string) {
   return value
     .replaceAll("&", "&amp;")
@@ -203,8 +209,7 @@ export async function POST(req: Request) {
       },
       include: { category: true },
     });
-    revalidatePath("/blog");
-    revalidatePath(`/blog/${post.slug}`);
+    revalidatePublicPost(post.slug);
     if (mode === "automation") {
       const href = adminPostHref(post.id);
       try {
@@ -248,6 +253,13 @@ export async function PUT(req: Request) {
       return NextResponse.json({ error: "Invalid" }, { status: 400 });
     }
     const d = parsed.data;
+    const existingPost = await prisma.post.findUnique({
+      where: { id },
+      select: { slug: true, status: true, publishedAt: true },
+    });
+    if (!existingPost) {
+      return NextResponse.json({ error: "Bài viết không tồn tại" }, { status: 404 });
+    }
     const categoryId =
       "categoryId" in d || "categorySlug" in d
         ? await resolveCategoryId({
@@ -285,11 +297,17 @@ export async function PUT(req: Request) {
         ...("status" in d ? { status: d.status } : {}),
         ...("readTime" in d ? { readTime: d.readTime } : {}),
         ...(categoryId !== undefined ? { categoryId } : {}),
-        ...(d.status === "PUBLISHED" ? { publishedAt: new Date() } : {}),
+        ...(d.status === "PUBLISHED" &&
+        existingPost.status !== "PUBLISHED" &&
+        !existingPost.publishedAt
+          ? { publishedAt: new Date() }
+          : {}),
       },
     });
-    revalidatePath("/blog");
-    revalidatePath(`/blog/${post.slug}`);
+    revalidatePublicPost(post.slug);
+    if (existingPost.slug !== post.slug) {
+      revalidatePath(`/blog/${existingPost.slug}`);
+    }
     return NextResponse.json({ post });
   } catch (error) {
     return errorResponse(error);
@@ -303,7 +321,7 @@ export async function DELETE(req: Request) {
     const id = searchParams.get("id");
     if (!id) return NextResponse.json({ error: "Missing id" }, { status: 400 });
     const post = await prisma.post.delete({ where: { id } });
-    revalidatePath("/blog");
+    revalidatePublicPost(post.slug);
     return NextResponse.json({ ok: true, slug: post.slug });
   } catch (error) {
     return errorResponse(error);
