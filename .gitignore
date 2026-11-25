@@ -51,6 +51,9 @@ package-lock.json
 *.sqlite
 *.sqlite3
 
+# VPS credentials (never commit)
+connect.md
+
 # runtime uploads
 /uploads
 /public/uploads

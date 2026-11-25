@@ -1,0 +1,9 @@
+# QA — Nở Rừng (LP-17)
+
+Lệnh: `BASE=http://localhost:3100 node tests/showroom/hoa-tuoi/e2e.mjs` (Playwright + Chrome headless). Lần chạy cuối: **95 pass, 0 fail**. `tsc --noEmit` không lỗi ở file hoa-tuoi; ESLint 0 lỗi 0 cảnh báo.
+
+Đã kiểm: 0 lỗi console, 0 request ngoài origin; title/description/noindex; quét chữ cấm (demo, minh hoạ, giả định, mô phỏng, dữ liệu mẫu) ở văn bản/alt/aria/meta, bản tóm tắt Builder, credits và sau luồng Builder; font Prata + Work Sans nạp thật và glyph ă â ê ô ơ ư đ Ắ Ế Ể Ệ Ố Ợ Ử Ữ Ờ Ặ render (đo canvas so với fallback); không tràn ngang 320/390/768/1024/1440; hiệu ứng chạy thật (PetalMask nở, BlobMorph đổi path, BloomText, lá parallax, PetalRain có pixel và chuyển động, ScrollProgress, VelocityMarquee, ScrollScrubText, SVGPathDraw, gallery kéo + quán tính + Home + mũi tên + nút, CustomCursor, MagneticButton); reduced-motion (không canvas, chữ/mặt nạ/thẻ hiện đủ, blob tĩnh, lá không dịch); Builder (12 lời thiệp ≤80 ký tự, giới hạn 4 loại, lỗi ngân sách chữ/100k/9tr/rỗng có aria-invalid, cảnh báo thiếu ngân sách, tự gợi ý, giảm cành, lưu localStorage, đổi dịp từ danh sách dịp, chép tóm tắt); Tab tới skip link và CTA, nút ≥44px, input ≥16px, menu mobile + Escape trả focus; link thoát có industry/solution/utm_campaign=hoa-tuoi; credits 200 + 12 ảnh. Long task >200ms khi cuộn toàn trang: 0 ở 1440 và 0 ở 390.
+
+Ảnh chụp: `tests/showroom/hoa-tuoi/screenshots/` (d-hero-1440, d-full, m-hero-390, m-full, d-builder-state, m-builder-390). Đã tự xem hero desktop/mobile, từng section desktop, và builder mobile.
+
+Chưa kiểm / yếu: chỉ Chrome headless, chưa Safari/Firefox/thiết bị thật/trình đọc màn hình/Lighthouse/axe; tương phản tính tay; chưa `next build`; `clip-path: url(#id)` trên Safari chưa thử; ảnh mobile builder chụp lúc tiêu đề còn đang nở; bó hoa SVG vẽ tượng trưng, chưa duyệt thẩm mỹ với chủ; lỗi lặt vặt của dev server dùng chung (500 thoáng qua do agent khác) làm vài lần chạy phải lặp.

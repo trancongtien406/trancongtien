@@ -1,0 +1,172 @@
+{
+ "images": [
+  {
+   "file": "ban-dai-go",
+   "title": "Wooden office desks with chairs and laptops",
+   "author": "Pavel Danilyuk",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/7658310/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "b5ebc29700f4ac0947daa25f05c5ce1d9b41d5013f5da1265b823e7d9cf21313",
+   "alt": "Dãy bàn gỗ dài với ghế công thái học và laptop, ánh sáng từ cửa sổ",
+   "usage": "Hero, mảng lưới ảnh",
+   "width": 2000,
+   "height": 1335,
+   "ai": false
+  },
+  {
+   "file": "khong-gian-trang",
+   "title": "Bright open-plan office with plants and white desks",
+   "author": "Maksim Goncharenok",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/4412921/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "4ea5916149fa84b9a22ce502e209510b3b1ed7fd01370230e8010194f7dc8bca",
+   "alt": "Không gian làm việc mở, bàn trắng, cây xanh và nắng chiều",
+   "usage": "Khu làm việc mở",
+   "width": 2000,
+   "height": 2667,
+   "ai": false
+  },
+  {
+   "file": "khu-lam-viec-mo",
+   "title": "Modern office with sit-stand desks",
+   "author": "Mike van Schoonderwalt",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/5511099/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "f96b437c8dd818fa10bcc5ac5b4c242aeb919ab9c575a77bef7ea2fbdaaa5869",
+   "alt": "Sàn làm việc rộng với bàn nâng hạ và cửa sổ lớn",
+   "usage": "Bàn cố định",
+   "width": 2000,
+   "height": 1333,
+   "ai": false
+  },
+  {
+   "file": "phong-hop-kinh",
+   "title": "Glass-walled meeting room",
+   "author": "Pixabay",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/260689/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "1449bf8e8a9263387d0e6ec8f4d8a611d562bb9cac8b2849744cfdf1e52051bb",
+   "alt": "Phòng họp vách kính, bàn dài và màn hình treo tường",
+   "usage": "Phòng họp",
+   "width": 2000,
+   "height": 1335,
+   "ai": false
+  },
+  {
+   "file": "phong-hop-nang-chieu",
+   "title": "Meeting room in afternoon light",
+   "author": "Sonny Sixteen",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/29625510/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "f066c61f711e62d84f152283e081c12134773c4849ef2d82788a59429eaa2d00",
+   "alt": "Phòng họp lúc chiều muộn, nắng đổ dài trên sàn",
+   "usage": "Phòng riêng, nền",
+   "width": 2000,
+   "height": 1500,
+   "ai": false
+  },
+  {
+   "file": "ca-phe",
+   "title": "Cup of black coffee next to a laptop mouse",
+   "author": "Cihan KAHRAMAN",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/383496/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "e96f0886ba020ebeed933754312dc65a67fd856cca6811832d8fac8a788545e9",
+   "alt": "Tách cà phê đen cạnh chuột máy tính trên mặt bàn gỗ",
+   "usage": "Góc cà phê",
+   "width": 2000,
+   "height": 2667,
+   "ai": false
+  },
+  {
+   "file": "den-ban",
+   "title": "Wooden desk lamp with a potted plant",
+   "author": "Pușcaș Adryan",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/38986380/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "264184916a77aba2a3591da531dd356a3d128863697fc8c006850cf640d8b9e3",
+   "alt": "Đèn bàn gỗ phát sáng cạnh chậu cỏ nhỏ",
+   "usage": "Tiện ích",
+   "width": 2000,
+   "height": 2000,
+   "ai": false
+  },
+  {
+   "file": "cay-xanh-cua-so",
+   "title": "Office windowsill with potted plants",
+   "author": "Mikhail Nilov",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/8297853/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "a6889b55731908f455d3a509d2d1d31dcdf3cf57335c457045b541c26ff457ec",
+   "alt": "Hàng chậu cây bên cửa sổ lớn của văn phòng mở",
+   "usage": "Khu làm việc mở",
+   "width": 2000,
+   "height": 3000,
+   "ai": false
+  },
+  {
+   "file": "mat-dung-luoi",
+   "title": "Minimalist facade with grid pattern",
+   "author": "H&CO",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/25881421/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "9423125509c2b1e25d381e22b2691809242acb95c99d96487d99164cb7d319e8",
+   "alt": "Mặt đứng toà nhà với lưới ô vuông dày",
+   "usage": "Nền kiến trúc, chân trang",
+   "width": 2000,
+   "height": 3000,
+   "ai": false
+  },
+  {
+   "file": "cau-thang-be-tong",
+   "title": "Concrete spiral staircase from below",
+   "author": "Dante Muñoz",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/17488406/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "c5051c66361b4e0d55b5aace22d6167f1369b98a51dddbefcf46e19c17ef7d64",
+   "alt": "Cầu thang bê tông xoắn nhìn từ dưới lên",
+   "usage": "Quy trình",
+   "width": 2000,
+   "height": 3000,
+   "ai": false
+  },
+  {
+   "file": "ghe-cam",
+   "title": "Orange chairs around a conference table",
+   "author": "Jakub Zerdzicki",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/36149083/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "b7d735ec750ca61cdaa3a542cc9f6229cc0e5de80f2d9fda58202c7a46104ddf",
+   "alt": "Ghế cam quanh bàn họp gỗ sáng",
+   "usage": "Phòng họp, điểm nhấn cam",
+   "width": 2000,
+   "height": 1333,
+   "ai": false
+  }
+ ],
+ "fonts": [
+  {
+   "name": "Bai Jamjuree",
+   "author": "Cadson Demak",
+   "license": "SIL OFL 1.1",
+   "source": "https://fonts.google.com/specimen/Bai+Jamjuree"
+  },
+  {
+   "name": "Space Mono",
+   "author": "Colophon Foundry",
+   "license": "SIL OFL 1.1",
+   "source": "https://fonts.google.com/specimen/Space+Mono"
+  }
+ ]
+}

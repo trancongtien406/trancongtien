@@ -1,0 +1,114 @@
+đo mien-an desktop
+đo hien-man desktop
+đo rong-dam desktop
+đo rot-nhiet desktop
+đo ben-vi desktop
+đo mien-cuoi desktop
+đo nep-tho desktop
+đo khoi-nep desktop
+đo thang-mo desktop
+đo net-lech desktop
+đo mien-an mobile
+đo hien-man mobile
+đo rong-dam mobile
+đo rot-nhiet mobile
+đo ben-vi mobile
+đo mien-cuoi mobile
+đo nep-tho mobile
+đo khoi-nep mobile
+đo thang-mo mobile
+đo net-lech mobile
+ok   desktop mien-an ↔ hien-man  layout 1.00 dom 1.00 hero 0.74 pal 0.78 type 0.67 comp 0.86
+ok   desktop mien-an ↔ rong-dam  layout 0.60 dom 1.00 hero 0.46 pal 0.28 type 0.84 comp 0.68
+ok   desktop mien-an ↔ rot-nhiet  layout 0.80 dom 0.99 hero 0.36 pal 0.36 type 0.84 comp 0.72
+ok   desktop mien-an ↔ ben-vi  layout 0.60 dom 0.95 hero 0.39 pal 0.89 type 0.73 comp 0.72
+FAIL desktop mien-an ↔ mien-cuoi  layout 0.55 dom 0.96 hero 0.44 pal 0.10 type 0.82 comp 0.62  <palette
+FAIL desktop mien-an ↔ nep-tho  layout 0.80 dom 1.00 hero 0.50 pal 0.17 type 0.79 comp 0.70  <palette
+ok   desktop mien-an ↔ khoi-nep  layout 0.80 dom 0.99 hero 0.71 pal 0.37 type 0.79 comp 0.77
+FAIL desktop mien-an ↔ thang-mo  layout 0.80 dom 0.93 hero 0.35 pal 0.08 type 0.70 comp 0.63  <palette
+ok   desktop mien-an ↔ net-lech  layout 0.73 dom 1.00 hero 0.37 pal 0.41 type 0.86 comp 0.72
+ok   desktop hien-man ↔ rong-dam  layout 1.00 dom 1.00 hero 0.77 pal 0.80 type 0.85 comp 0.90
+ok   desktop hien-man ↔ rot-nhiet  layout 1.00 dom 1.00 hero 0.73 pal 0.54 type 0.85 comp 0.86
+ok   desktop hien-man ↔ ben-vi  layout 1.00 dom 1.00 hero 0.72 pal 0.21 type 0.74 comp 0.78
+ok   desktop hien-man ↔ mien-cuoi  layout 1.00 dom 0.99 hero 0.63 pal 0.83 type 0.83 comp 0.88
+ok   desktop hien-man ↔ nep-tho  layout 1.00 dom 1.00 hero 0.69 pal 0.82 type 0.81 comp 0.88
+ok   desktop hien-man ↔ khoi-nep  layout 1.00 dom 1.00 hero 0.36 pal 0.78 type 0.79 comp 0.82
+ok   desktop hien-man ↔ thang-mo  layout 1.00 dom 1.00 hero 0.74 pal 0.84 type 0.71 comp 0.88
+ok   desktop hien-man ↔ net-lech  layout 1.00 dom 0.99 hero 0.69 pal 0.44 type 0.84 comp 0.83
+ok   desktop rong-dam ↔ rot-nhiet  layout 0.78 dom 0.98 hero 0.52 pal 0.37 type 0.77 comp 0.72
+ok   desktop rong-dam ↔ ben-vi  layout 0.67 dom 1.00 hero 0.37 pal 0.90 type 0.77 comp 0.76
+ok   desktop rong-dam ↔ mien-cuoi  layout 0.45 dom 0.99 hero 0.35 pal 0.35 type 0.69 comp 0.60
+FAIL desktop rong-dam ↔ nep-tho  layout 0.80 dom 1.00 hero 0.52 pal 0.14 type 0.82 comp 0.71  <palette
+ok   desktop rong-dam ↔ khoi-nep  layout 0.70 dom 0.99 hero 0.71 pal 0.35 type 0.88 comp 0.76
+ok   desktop rong-dam ↔ thang-mo  layout 0.78 dom 0.98 hero 0.33 pal 0.34 type 0.81 comp 0.70
+ok   desktop rong-dam ↔ net-lech  layout 0.73 dom 0.99 hero 0.51 pal 0.42 type 0.81 comp 0.73
+ok   desktop rot-nhiet ↔ ben-vi  layout 0.89 dom 0.99 hero 0.44 pal 0.65 type 0.86 comp 0.80
+ok   desktop rot-nhiet ↔ mien-cuoi  layout 0.73 dom 0.98 hero 0.43 pal 0.43 type 0.84 comp 0.72
+ok   desktop rot-nhiet ↔ nep-tho  layout 0.70 dom 0.99 hero 0.39 pal 0.40 type 0.80 comp 0.70
+ok   desktop rot-nhiet ↔ khoi-nep  layout 0.80 dom 0.99 hero 0.68 pal 0.36 type 0.94 comp 0.79
+ok   desktop rot-nhiet ↔ thang-mo  layout 0.78 dom 0.96 hero 0.48 pal 0.42 type 0.82 comp 0.73
+FAIL desktop rot-nhiet ↔ net-lech  layout 0.82 dom 0.99 hero 0.24 pal 0.18 type 0.83 comp 0.68  <hero
+ok   desktop ben-vi ↔ mien-cuoi  layout 0.73 dom 0.97 hero 0.29 pal 0.95 type 0.67 comp 0.74
+ok   desktop ben-vi ↔ nep-tho  layout 0.80 dom 0.99 hero 0.39 pal 0.92 type 0.71 comp 0.78
+ok   desktop ben-vi ↔ khoi-nep  layout 0.80 dom 0.99 hero 0.64 pal 0.87 type 0.79 comp 0.83
+ok   desktop ben-vi ↔ thang-mo  layout 0.67 dom 0.96 hero 0.35 pal 0.95 type 0.70 comp 0.74
+ok   desktop ben-vi ↔ net-lech  layout 0.64 dom 1.00 hero 0.42 pal 0.54 type 0.81 comp 0.71
+ok   desktop mien-cuoi ↔ nep-tho  layout 0.73 dom 0.98 hero 0.38 pal 0.23 type 0.69 comp 0.65
+ok   desktop mien-cuoi ↔ khoi-nep  layout 0.64 dom 0.99 hero 0.54 pal 0.46 type 0.89 comp 0.73
+FAIL desktop mien-cuoi ↔ thang-mo  layout 0.82 dom 0.99 hero 0.37 pal 0.06 type 0.78 comp 0.67  <palette
+ok   desktop mien-cuoi ↔ net-lech  layout 0.55 dom 1.00 hero 0.37 pal 0.50 type 0.80 comp 0.67
+ok   desktop nep-tho ↔ khoi-nep  layout 0.90 dom 1.00 hero 0.68 pal 0.40 type 0.79 comp 0.79
+ok   desktop nep-tho ↔ thang-mo  layout 0.70 dom 0.99 hero 0.51 pal 0.22 type 0.66 comp 0.66
+ok   desktop nep-tho ↔ net-lech  layout 0.73 dom 1.00 hero 0.39 pal 0.45 type 0.78 comp 0.71
+ok   desktop khoi-nep ↔ thang-mo  layout 0.80 dom 1.00 hero 0.69 pal 0.43 type 0.79 comp 0.77
+ok   desktop khoi-nep ↔ net-lech  layout 0.73 dom 0.97 hero 0.62 pal 0.39 type 0.95 comp 0.76
+ok   desktop thang-mo ↔ net-lech  layout 0.64 dom 0.96 hero 0.47 pal 0.48 type 0.89 comp 0.72
+ok   NEGATIVE-CONTROL desktop mien-an vs bản sao đổi màu/chữ: layout 0.00 dom 0.05 hero 0.00 pal 0.21 type 0.60 → bị bắt là bản sao
+ok   mobile mien-an ↔ hien-man  layout 1.00 dom 1.00 hero 0.71 pal 0.56 type 0.67 comp 0.82
+FAIL mobile mien-an ↔ rong-dam  layout 0.60 dom 0.98 hero 0.56 pal 0.09 type 0.83 comp 0.66  <palette
+FAIL mobile mien-an ↔ rot-nhiet  layout 0.90 dom 1.00 hero 0.08 pal 0.14 type 0.81 comp 0.66  <hero,palette
+ok   mobile mien-an ↔ ben-vi  layout 0.80 dom 0.94 hero 0.58 pal 0.77 type 0.71 comp 0.78
+FAIL mobile mien-an ↔ mien-cuoi  layout 0.64 dom 0.98 hero 0.45 pal 0.18 type 0.81 comp 0.66  <palette
+FAIL mobile mien-an ↔ nep-tho  layout 0.82 dom 0.98 hero 0.47 pal 0.06 type 0.79 comp 0.68  <palette
+ok   mobile mien-an ↔ khoi-nep  layout 0.70 dom 1.00 hero 0.89 pal 0.30 type 0.78 comp 0.76
+FAIL mobile mien-an ↔ thang-mo  layout 0.80 dom 0.97 hero 0.69 pal 0.15 type 0.69 comp 0.71  <palette
+ok   mobile mien-an ↔ net-lech  layout 0.80 dom 1.00 hero 1.00 pal 0.59 type 0.83 comp 0.86
+ok   mobile hien-man ↔ rong-dam  layout 1.00 dom 1.00 hero 0.82 pal 0.60 type 0.82 comp 0.88
+ok   mobile hien-man ↔ rot-nhiet  layout 1.00 dom 1.00 hero 0.73 pal 0.50 type 0.83 comp 0.85
+ok   mobile hien-man ↔ ben-vi  layout 1.00 dom 0.99 hero 0.78 pal 0.50 type 0.70 comp 0.83
+ok   mobile hien-man ↔ mien-cuoi  layout 1.00 dom 1.00 hero 0.79 pal 0.62 type 0.79 comp 0.87
+ok   mobile hien-man ↔ nep-tho  layout 1.00 dom 1.00 hero 0.77 pal 0.56 type 0.78 comp 0.85
+ok   mobile hien-man ↔ khoi-nep  layout 1.00 dom 0.99 hero 0.58 pal 0.45 type 0.78 comp 0.80
+ok   mobile hien-man ↔ thang-mo  layout 1.00 dom 1.00 hero 0.88 pal 0.65 type 0.67 comp 0.86
+ok   mobile hien-man ↔ net-lech  layout 1.00 dom 1.00 hero 0.55 pal 0.33 type 0.85 comp 0.80
+FAIL mobile rong-dam ↔ rot-nhiet  layout 0.78 dom 1.00 hero 0.56 pal 0.17 type 0.79 comp 0.71  <palette
+ok   mobile rong-dam ↔ ben-vi  layout 0.78 dom 1.00 hero 0.49 pal 0.82 type 0.79 comp 0.79
+ok   mobile rong-dam ↔ mien-cuoi  layout 0.55 dom 0.98 hero 0.41 pal 0.19 type 0.69 comp 0.61
+FAIL mobile rong-dam ↔ nep-tho  layout 0.73 dom 0.99 hero 0.46 pal 0.09 type 0.80 comp 0.67  <palette
+ok   mobile rong-dam ↔ khoi-nep  layout 0.80 dom 1.00 hero 0.96 pal 0.35 type 0.85 comp 0.82
+FAIL mobile rong-dam ↔ thang-mo  layout 0.89 dom 1.00 hero 0.73 pal 0.17 type 0.81 comp 0.77  <palette
+ok   mobile rong-dam ↔ net-lech  layout 0.80 dom 0.97 hero 0.91 pal 0.63 type 0.80 comp 0.84
+ok   mobile rot-nhiet ↔ ben-vi  layout 0.88 dom 0.99 hero 0.60 pal 0.74 type 0.87 comp 0.84
+ok   mobile rot-nhiet ↔ mien-cuoi  layout 0.73 dom 1.00 hero 0.51 pal 0.28 type 0.86 comp 0.72
+FAIL mobile rot-nhiet ↔ nep-tho  layout 0.73 dom 1.00 hero 0.50 pal 0.17 type 0.85 comp 0.70  <palette
+ok   mobile rot-nhiet ↔ khoi-nep  layout 0.80 dom 1.00 hero 0.89 pal 0.27 type 0.93 comp 0.81
+ok   mobile rot-nhiet ↔ thang-mo  layout 0.78 dom 0.99 hero 0.70 pal 0.26 type 0.84 comp 0.75
+ok   mobile rot-nhiet ↔ net-lech  layout 0.80 dom 1.00 hero 1.00 pal 0.54 type 0.77 comp 0.84
+ok   mobile ben-vi ↔ mien-cuoi  layout 0.64 dom 0.98 hero 0.36 pal 0.89 type 0.66 comp 0.72
+ok   mobile ben-vi ↔ nep-tho  layout 0.82 dom 0.96 hero 0.32 pal 0.82 type 0.68 comp 0.75
+ok   mobile ben-vi ↔ khoi-nep  layout 0.80 dom 0.94 hero 1.00 pal 0.64 type 0.77 comp 0.84
+ok   mobile ben-vi ↔ thang-mo  layout 0.67 dom 0.98 hero 0.55 pal 0.89 type 0.69 comp 0.76
+ok   mobile ben-vi ↔ net-lech  layout 0.70 dom 0.98 hero 1.00 pal 0.28 type 0.78 comp 0.77
+FAIL mobile mien-cuoi ↔ nep-tho  layout 0.73 dom 0.98 hero 0.20 pal 0.17 type 0.67 comp 0.61  <palette
+ok   mobile mien-cuoi ↔ khoi-nep  layout 0.64 dom 0.98 hero 0.94 pal 0.47 type 0.82 comp 0.78
+FAIL mobile mien-cuoi ↔ thang-mo  layout 0.82 dom 0.99 hero 0.52 pal 0.08 type 0.78 comp 0.69  <palette
+ok   mobile mien-cuoi ↔ net-lech  layout 0.64 dom 0.99 hero 0.94 pal 0.70 type 0.78 comp 0.81
+ok   mobile nep-tho ↔ khoi-nep  layout 0.91 dom 1.00 hero 0.93 pal 0.31 type 0.77 comp 0.82
+FAIL mobile nep-tho ↔ thang-mo  layout 0.73 dom 0.99 hero 0.51 pal 0.15 type 0.66 comp 0.66  <palette
+ok   mobile nep-tho ↔ net-lech  layout 0.82 dom 0.98 hero 0.94 pal 0.61 type 0.77 comp 0.84
+ok   mobile khoi-nep ↔ thang-mo  layout 0.80 dom 0.99 hero 0.68 pal 0.44 type 0.77 comp 0.77
+ok   mobile khoi-nep ↔ net-lech  layout 0.60 dom 0.96 hero 0.47 pal 0.47 type 0.93 comp 0.72
+ok   mobile thang-mo ↔ net-lech  layout 0.70 dom 0.96 hero 0.78 pal 0.68 type 0.86 comp 0.81
+ok   NEGATIVE-CONTROL mobile mien-an vs bản sao đổi màu/chữ: layout 0.00 dom 0.10 hero 0.00 pal 0.24 type 0.60 → bị bắt là bản sao
+
+Differentiation Gate: 18 cặp/kiểm tra KHÔNG đạt (ngưỡng V1 đề xuất bởi ChatGPT, chưa kiểm chứng khoa học)

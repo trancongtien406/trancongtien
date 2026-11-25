@@ -1,0 +1,24 @@
+KHỐI NẾP — MATERIAL BOARD
+
+Tên bảng: Phòng khách Ắ Ự
+
+CHẤT GỖ
+Gỗ sồi sáng — #C3A47C
+
+BỀ MẶT ĐÁ
+Microcement — #AAA79E
+
+SỢI VẢI
+Vải olive — #797D65
+
+BẢNG MÀU
+#C3A47C
+#AAA79E
+#797D65
+#EDEAE2
+#262824
+
+GHI CHÚ
+Ưu tiên ánh sáng buổi sáng, đồ gỗ mộc.
+
+Ảnh vật liệu: Pexels (xem /demos/khoi-nep/credits).

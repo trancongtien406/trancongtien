@@ -1,0 +1,3 @@
+# QA (tests/showroom/lan-bien/e2e.mjs, chạy với BASE=http://localhost:3100)
+Kết quả lần chạy cuối: pass=60 fail=0. Gồm: không tràn ngang 320/390/768/1024/1440; 0 lỗi console; 0 request ngoài origin; 11 hiệu ứng có mặt (data-fx); SVG displacement gắn khi hover và gỡ khi nghỉ; độ sâu 0→30 đơn điệu, nền đổi màu; quét chữ cấm (visible/alt/aria/meta) sạch; glyph Việt (Ố Ế Ể Ệ Ợ Ử Ữ Ầ Ắ Ằ, ảnh chụp glyph-unbounded.png); finder: lỗi rỗng, 5 luật, bàn phím; khoá học; reduced-motion; menu mobile + Escape + trả focus; credits 13 ảnh; long task >200ms: 0 (1440), 0 (390).
+Chưa kiểm: Safari/Firefox, thiết bị thật, đọc màn hình thật, Lighthouse, kiểm tương phản bằng công cụ (chọn màu theo tính tay), ?ref giữ qua điều hướng (do proxy.ts).

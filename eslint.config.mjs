@@ -15,6 +15,15 @@ const eslintConfig = defineConfig([
     ".codex/**",
     "seo-output/**",
   ]),
+  // Khu demo (app/(demos)): các demo khôi phục trạng thái từ localStorage sau hydrate
+  // (đọc trong effect để tránh lệch SSR). Hai luật React Compiler dưới đây báo mẫu đó là lỗi.
+  {
+    files: ["app/(demos)/**/*.{ts,tsx}"],
+    rules: {
+      "react-hooks/set-state-in-effect": "off",
+      "react-hooks/preserve-manual-memoization": "off",
+    },
+  },
 ]);
 
 export default eslintConfig;

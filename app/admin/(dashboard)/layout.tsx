@@ -11,7 +11,7 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
   const user = await getSessionUser();
-  if (!user) redirect("/admin/login");
+  if (!user || user.role !== "ADMIN") redirect("/admin/login");
 
   const unread = await prisma.notification.count({ where: { read: false } });
 

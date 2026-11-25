@@ -1,0 +1,192 @@
+{
+ "images": [
+  {
+   "file": "ban-xoay-tay-nan",
+   "title": "Close-up of hands crafting pottery on wheel",
+   "author": "Umar Aliyu",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/close-up-of-hands-crafting-pottery-on-wheel-33878963/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "533a7b19de76e20bd767044d256d4f058e17955e7200ef03b2605e4963305d6c",
+   "alt": "Tay nặn khối đất trên bàn xoay, ánh sáng ấm",
+   "usage": "Workshop bàn xoay",
+   "width": 2000,
+   "height": 3000,
+   "ai": false
+  },
+  {
+   "file": "ban-xoay-mo",
+   "title": "Hands crafting pottery on a spinning wheel",
+   "author": "Henny Wiyanti",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/hands-crafting-pottery-on-a-spinning-wheel-37222842/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "6dd7193178ca874435dbb07629a00539ab68e4cce14c3d6bfb5f4c7d4417e372",
+   "alt": "Bàn xoay quay nhanh, tay đang vuốt lòng chiếc bát đất",
+   "usage": "Hero / chuyển cảnh",
+   "width": 2000,
+   "height": 3551,
+   "ai": false
+  },
+  {
+   "file": "binh-tren-ban-xoay",
+   "title": "Vase on potters wheel",
+   "author": "David Kwewum",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/vase-on-potters-wheel-20208720/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "e5c35e1e72f6e6e89e3e177ce0cb560e278d790acbfc1eba46e59b702d67b81d",
+   "alt": "Chiếc bình đất mộc vừa nặn xong trên bàn xoay",
+   "usage": "Bàn xoay nặn bình",
+   "width": 2000,
+   "height": 3000,
+   "ai": false
+  },
+  {
+   "file": "binh-dat-nung",
+   "title": "Collection of artisan clay pottery vases",
+   "author": "Sarah Farouk",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/collection-of-artisan-clay-pottery-vases-31160363/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "783ebfbb5082b15a0175181abf59c42a4572def6be294492b77d581dbb6b0617",
+   "alt": "Những chiếc bình đất nung màu terracotta xếp sát nhau",
+   "usage": "Hero",
+   "width": 2000,
+   "height": 2500,
+   "ai": false
+  },
+  {
+   "file": "binh-cao-be",
+   "title": "Handcrafted ceramic vases on display",
+   "author": "Novirina",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/handcrafted-ceramic-vases-on-display-29286721/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "fc09570674598edeaa1d5ee35ae50641893ba7a4a21e2cc958019f4c5337f9df",
+   "alt": "Những chiếc bình cao màu đất mộc chưa tráng men",
+   "usage": "Gallery",
+   "width": 2000,
+   "height": 3000,
+   "ai": false
+  },
+  {
+   "file": "bat-men-ngoc",
+   "title": "A group of blue and green ceramic bowls",
+   "author": "Mathias Reding",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/a-group-of-blue-and-green-ceramic-bowls-28271468/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "24c2f2160b9392ed81791bae80b3a96c2bbd57df38f3835a269462e20cc8f8a9",
+   "alt": "Những chiếc đĩa, bát men xanh ngọc loang",
+   "usage": "Men và sản phẩm",
+   "width": 2000,
+   "height": 1333,
+   "ai": false
+  },
+  {
+   "file": "chong-bat-nau",
+   "title": "Stacked clay bowls in Oaxaca workshop",
+   "author": "Miguel González",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/stacked-clay-bowls-in-oaxaca-workshop-33703946/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "c2548384a4820f29f55d1f5fe8b1c8ae1113a7883e5eb6ad63c533a739cdc5f2",
+   "alt": "Chồng bát đất nâu sẫm xếp trên kệ gỗ",
+   "usage": "Gallery",
+   "width": 2000,
+   "height": 1333,
+   "ai": false
+  },
+  {
+   "file": "pha-men-xanh",
+   "title": "A person mixing a paint",
+   "author": "Kampus Production",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/a-person-mixing-a-paint-6023611/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "c4240b3928ea90c72d70fbf5a2d7c12d654751df5fb5662e8beda4d1cd256cb4",
+   "alt": "Tay pha men xanh bên chiếc bát đất mộc",
+   "usage": "Workshop vẽ men",
+   "width": 2000,
+   "height": 1333,
+   "ai": false
+  },
+  {
+   "file": "men-mau-ban-xoay",
+   "title": "A person painting a ceramic bowls",
+   "author": "Betty Llensa",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/a-person-painting-a-ceramic-bowls-6800483/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "61d03c8e81679b3ff9273233360f9f0242a6ba0ff15452c1d7a8cc3ad39c2e04",
+   "alt": "Các hũ men nhiều màu cạnh bàn xoay vẽ men",
+   "usage": "Workshop vẽ men",
+   "width": 2000,
+   "height": 2667,
+   "ai": false
+  },
+  {
+   "file": "xuong-ke-lo",
+   "title": "Clay pots in the basement",
+   "author": "Ravi Lages",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/clay-pots-in-the-basement-9145517/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "fa5868e7a0a6cfec762f93805dc8b7f4af512aed8bc1294943e586f4de2afe10",
+   "alt": "Góc xưởng gốm với kệ gỗ, chum vại đất nung",
+   "usage": "Xưởng và lò nung",
+   "width": 2000,
+   "height": 1333,
+   "ai": false
+  },
+  {
+   "file": "dat-set-tho",
+   "title": "A tub of clay on a wooden stool",
+   "author": "Tima Miroshnichenko",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/a-tub-of-clay-on-a-wooden-stool-6714295/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "37fcb68f3d12214675046d6b05ee3eb05e0627537c1b089a8e8fb2038d37d42f",
+   "alt": "Thùng đất sét ướt chưa nặn",
+   "usage": "Chất liệu đất",
+   "width": 2000,
+   "height": 3000,
+   "ai": false
+  },
+  {
+   "file": "ke-coc-men",
+   "title": "Rustic pottery cups and bowls on wooden shelves",
+   "author": "Novirina",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/rustic-pottery-cups-and-bowls-on-wooden-shelves-29286722/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "6268eb86160d7b0ca16a39977520087adfa03cb190d047c2cc40743fbff616ba",
+   "alt": "Hàng cốc, tách gốm xếp trên giá gỗ cũ",
+   "usage": "Kệ sản phẩm",
+   "width": 2000,
+   "height": 3000,
+   "ai": false
+  }
+ ],
+ "fonts": [
+  {
+   "name": "Yeseva One",
+   "author": "Jovanny Lemonad",
+   "license": "OFL-1.1",
+   "source": "https://fonts.google.com/specimen/Yeseva+One"
+  },
+  {
+   "name": "Patrick Hand",
+   "author": "Patrick Wagesreiter",
+   "license": "OFL-1.1",
+   "source": "https://fonts.google.com/specimen/Patrick+Hand"
+  },
+  {
+   "name": "Nunito Sans",
+   "author": "Vernon Adams, Jacques Le Bailly, Manvel Shmavonyan, Alexei Vanyashin",
+   "license": "OFL-1.1",
+   "source": "https://fonts.google.com/specimen/Nunito+Sans"
+  }
+ ]
+}

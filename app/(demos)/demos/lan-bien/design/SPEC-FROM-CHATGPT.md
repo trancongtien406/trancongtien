@@ -1,0 +1,2 @@
+# Rút gọn đặc tả ChatGPT (bản khách, phản hồi bị cắt ở mục An toàn)
+Tên Tầng Xanh; slogan; palette 5 mốc độ sâu; Manrope/Inter/Space Grotesk (KHÔNG dùng: thay bằng Unbounded + Inter Tight để khác biệt); 13 section; Finder: luật xác định, thứ tự ưu tiên (freediving riêng, chưa chắc → xác nhận, mâu thuẫn → không kết luận); hiệu ứng: depth gradient, sticky rail, SVG displacement (scale 0/8/14, baseFrequency 0.012-0.02, 2 octave), bong bóng 36/14, caustics, parallax 3 lớp, coral pulse, hero 10 mốc/4s. Đã áp dụng phần dùng được; bỏ giả định sai về repo (public/fonts, useGSAP).

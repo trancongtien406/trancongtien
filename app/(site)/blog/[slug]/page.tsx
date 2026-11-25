@@ -6,20 +6,16 @@ import { Container } from "@/components/common/Container";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import {
   getPostBySlug,
-  getPublishedPostSlugs,
   getRelatedPosts,
   parseJsonArray,
 } from "@/lib/content";
 import { breadcrumbJsonLd, buildMetadata, JsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 type Props = { params: Promise<{ slug: string }> };
 
-export async function generateStaticParams() {
-  return getPublishedPostSlugs();
-}
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;

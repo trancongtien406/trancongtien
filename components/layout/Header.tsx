@@ -40,14 +40,11 @@ export function Header() {
         </Link>
 
         <nav
-          className="hidden items-center gap-1 xl:flex"
+              className="hidden items-center gap-1 lg:flex"
           aria-label="Điều hướng chính"
         >
           {navLinks.map((link) => {
-            const active =
-              link.href === "/"
-                ? pathname === "/"
-                : pathname.startsWith(link.href);
+            const active = pathname === link.href || pathname.startsWith(`${link.href}/`);
             return (
               <Link
                 key={link.href}
@@ -73,7 +70,7 @@ export function Header() {
             className="hidden sm:inline-flex"
             iconRight={<Calendar className="size-4" />}
           >
-            Đặt lịch tư vấn
+            Trao đổi dự án
           </Button>
           <button
             type="button"
@@ -85,7 +82,7 @@ export function Header() {
           </button>
           <button
             type="button"
-            className="inline-flex size-10 items-center justify-center rounded-xl border border-border text-ink xl:hidden"
+            className="inline-flex size-10 items-center justify-center rounded-xl border border-border text-ink lg:hidden"
             aria-label={open ? "Đóng menu" : "Mở menu"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
@@ -96,13 +93,11 @@ export function Header() {
       </Container>
 
       {open ? (
-        <div className="border-t border-border bg-surface xl:hidden">
+        <div className="border-t border-border bg-surface lg:hidden">
           <Container className="flex flex-col gap-1 py-4">
             {navLinks.map((link) => {
               const active =
-                link.href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(link.href);
+                pathname === link.href || pathname.startsWith(`${link.href}/`);
               return (
                 <Link
                   key={link.href}
@@ -124,7 +119,7 @@ export function Header() {
               className="mt-2 w-full"
               iconRight={<Calendar className="size-4" />}
             >
-              Đặt lịch tư vấn
+              Trao đổi dự án
             </Button>
             <button
               type="button"

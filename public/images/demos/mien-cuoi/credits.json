@@ -1,0 +1,249 @@
+{
+ "demo": "mien-cuoi",
+ "images": [
+  {
+   "file": "ghe-nha-khoa-hero",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 3000,
+   "title": "A dental chair in a clinic",
+   "author": "Cedric Fauntleroy",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/4269265/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "b9fe1391c3f594787dda86cc251c295c70db8a7abeac43aaf54def9d1e132e0e",
+   "alt": "Ghế nha khoa nhìn từ phía sau trong phòng khám sáng, cửa sổ lớn",
+   "usage": "Hero",
+   "ai": false
+  },
+  {
+   "file": "phong-tham-kham",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 3000,
+   "title": "Interior of a dentist office with chairs and equipment",
+   "author": "Tima Miroshnichenko",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/5355921/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "1b0f1c42a55e2992f4ce3904c2fcd2afe4f30bc88206abac1840f7ae9a5da718",
+   "alt": "Phòng thăm khám với hai ghế nha khoa xanh dương và thiết bị",
+   "usage": "Không gian, ảnh lớn",
+   "ai": false
+  },
+  {
+   "file": "ghe-xanh-trang",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 2996,
+   "title": "Blue and white dental chair",
+   "author": "Pavel Danilyuk",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/6809634/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "5e19447ccc6020a8d364e5cb2cdfd359f5885a9484c3dcfe19da6bf4b3f83efa",
+   "alt": "Ghế nha khoa xanh trắng trong phòng khám sáng",
+   "usage": "Không gian, ảnh nhỏ",
+   "ai": false
+  },
+  {
+   "file": "phong-kham-trong",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 2996,
+   "title": "Empty dentist office",
+   "author": "Pavel Danilyuk",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/6812461/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "5fa9cf0824274cd5919846eceae6097e525a58b232824805ad73ace151cfb73b",
+   "alt": "Phòng khám nha khoa trống, sạch và sáng",
+   "usage": "Giới thiệu (Về Miền Cười)",
+   "ai": false
+  },
+  {
+   "file": "thiet-bi-phong-kham",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1335,
+   "title": "Equipment at a dentist's office",
+   "author": "Pavel Danilyuk",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/6812463/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "1043e13fe6fa5bf816329636daec18db4b284cb901634e9be85d924e3cd4fe3f",
+   "alt": "Thiết bị và đèn chiếu trong phòng khám nha khoa sáng",
+   "usage": "Dịch vụ: khám định kỳ",
+   "ai": false
+  },
+  {
+   "file": "phong-kham-trang",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 2996,
+   "title": "Grayscale photo of a dental chair in dental clinic",
+   "author": "MM Dental",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/9062527/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "8952bdb3ca8471d419aa07b544f6705e8ebb64f7293e6cf0d70cc34edef840a7",
+   "alt": "Phòng khám nha khoa tông trắng xám với ghế và đèn",
+   "usage": "Không gian, ảnh nhỏ",
+   "ai": false
+  },
+  {
+   "file": "may-nha-khoa",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1333,
+   "title": "A dental engine in a clinic",
+   "author": "Engin Akyurt",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/4562895/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "b9a067103f30e31c5f43d4aeef5eac9b0ba8689088bc88102ca0d99853b7b8a1",
+   "alt": "Cận cảnh thiết bị nha khoa trong phòng khám sáng",
+   "usage": "Dịch vụ: đau, ê buốt",
+   "ai": false
+  },
+  {
+   "file": "khay-dung-cu-xanh",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1333,
+   "title": "Stainless steel medical tools",
+   "author": "Cedric Fauntleroy",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/4270969/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "379c9ca91c2b904f580a8c851d64f07c6ee68c7d580c06ace19a9f057503e70b",
+   "alt": "Dụng cụ inox xếp ngay ngắn trên khăn xanh nhạt",
+   "usage": "Dịch vụ: nhổ răng, chi tiết",
+   "ai": false
+  },
+  {
+   "file": "gia-dung-cu",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 3000,
+   "title": "Dental instruments in a row",
+   "author": "cottonbro studio",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/6528776/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "5260d9b619444e7c90b178b2cd52057595302fd5378dfe303ab573e37ca4a42a",
+   "alt": "Giá dụng cụ nha khoa inox xếp hàng, nền mờ",
+   "usage": "Dịch vụ: trám, phục hồi",
+   "ai": false
+  },
+  {
+   "file": "guong-nha-khoa",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1333,
+   "title": "Dental instruments on textured surface",
+   "author": "Busenur Demirkan",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/31786500/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "6223b3ac83d3ecbb696e19a95768730ad3759ce6aba318589be972c444727aac",
+   "alt": "Gương và dụng cụ nha khoa trên nền xám nhám",
+   "usage": "Dịch vụ: chỉnh nha",
+   "ai": false
+  },
+  {
+   "file": "nu-cuoi-can-canh",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1334,
+   "title": "A close-up shot of a person's teeth",
+   "author": "Towfiqu barbhuiya",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/12474261/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "e6c03a86fda1981689d249d508a337170552a5e451c50d1116fe083118db1e3d",
+   "alt": "Cận cảnh nụ cười tự nhiên, không nhận diện khuôn mặt",
+   "usage": "Dịch vụ: tẩy trắng",
+   "ai": false
+  },
+  {
+   "file": "nu-cuoi-hong",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1335,
+   "title": "Woman with red lipstick smiling",
+   "author": "Shiny Diamond",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/3762453/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "f21a2578836f9ba4566ede8f084123d6896049a39db665b739100f8ef4687767",
+   "alt": "Cận cảnh nụ cười với son hồng, không thấy mắt",
+   "usage": "Giới thiệu chi phí",
+   "ai": false
+  }
+ ],
+ "fonts": [
+  {
+   "name": "Plus Jakarta Sans",
+   "author": "Tokotype (The Plus Jakarta Sans Project Authors)",
+   "license": "SIL Open Font License 1.1",
+   "source": "https://github.com/tokotype/PlusJakartaSans",
+   "usage": "Heading"
+  },
+  {
+   "name": "Public Sans",
+   "author": "USWDS / GSA (The Public Sans Project Authors)",
+   "license": "SIL Open Font License 1.1",
+   "source": "https://github.com/uswds/public-sans",
+   "usage": "Body"
+  }
+ ]
+}

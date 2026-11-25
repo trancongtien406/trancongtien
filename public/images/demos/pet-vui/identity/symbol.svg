@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Bông Xù"><title>Bông Xù</title><circle cx="100" cy="100" r="94" fill="#ffc300" stroke="#14121a" stroke-width="8"/>
+<path d="M54 70C28 64 16 98 30 126C46 124 58 106 60 86Z" fill="#2f5bff" stroke="#14121a" stroke-width="7" stroke-linejoin="round"/>
+<path d="M126 64L148 30L168 80Z" fill="#ff3b30" stroke="#14121a" stroke-width="7" stroke-linejoin="round"/>
+<circle cx="100" cy="112" r="58" fill="#ffffff" stroke="#14121a" stroke-width="7"/>
+<circle cx="82" cy="106" r="7" fill="#14121a"/><circle cx="118" cy="106" r="7" fill="#14121a"/>
+<circle cx="84.5" cy="103.5" r="2.2" fill="#ffffff" />
+<path d="M91 123Q100 116 109 123Q100 135 91 123Z" fill="#14121a"/>
+<path d="M85 134Q100 150 115 134" fill="none" stroke="#14121a" stroke-width="5" stroke-linecap="round"/>
+<circle cx="70" cy="126" r="6" fill="#ff3b30" opacity="0.9"/><circle cx="130" cy="126" r="6" fill="#ff3b30" opacity="0.9"/>
+<circle cx="40" cy="52" r="11" fill="#ffffff" stroke="#14121a" stroke-width="5"/><circle cx="60" cy="34" r="6" fill="#ffffff" stroke="#14121a" stroke-width="4"/></svg>

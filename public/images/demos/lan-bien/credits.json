@@ -1,0 +1,187 @@
+{
+  "images": [
+    {
+      "file": "mat-nuoc",
+      "title": "Underwater Bubble Ring with Sunlight",
+      "author": "JUN HO LEE",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/33069284/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "2a28c9c6f484947ee6e7ee6cda974ddf470bf239ebb10fea876025e318bcf496",
+      "alt": "Vòng bong bóng khí nhìn từ dưới nước hướng lên mặt biển đầy nắng",
+      "usage": "Hero, tầng 0 m",
+      "width": 2000,
+      "height": 1500
+    },
+    {
+      "file": "nang-xuyen-nuoc",
+      "title": "Underwater Ocean Surface with Sunlight Reflections",
+      "author": "Michael Pointner",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/31843981/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "bcfadd9d3fa656b7b289d9d9bb6ab5821eac7478a12550fe29cbc74e3cd81fc6",
+      "alt": "Ánh nắng gợn sóng trên nền cát nông dưới mặt nước trong xanh",
+      "usage": "Chương 1 (0 m)",
+      "width": 2000,
+      "height": 1500
+    },
+    {
+      "file": "ran-nong",
+      "title": "Underwater Coral Reef Sea View",
+      "author": "Francesco Ungaro",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/3154149/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "169893c3f92a85f23379a298fe80e73e95f05bda1ee709fd61d41f52b79548f2",
+      "alt": "Rạn san hô nông nhìn từ dưới nước, nắng xuyên mặt nước",
+      "usage": "Chương 2 (5 m)",
+      "width": 2000,
+      "height": 1500
+    },
+    {
+      "file": "ran-san-ho",
+      "title": "Undersea View of Fish Swimming over a Coral Reef",
+      "author": "Francesco Ungaro",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/17668216/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "d745df21cf082997c116fdd5db96a904995dfa3e2bbb24861edacf7136a0565d",
+      "alt": "Cá vẹt bơi trên rạn san hô nhiều màu",
+      "usage": "Chương 3 (12 m)",
+      "width": 2000,
+      "height": 1500
+    },
+    {
+      "file": "tau-dam",
+      "title": "Picture of a Shipwreck Underwater",
+      "author": "沖縄ダイビングスクール ワールドダイビング",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/17875663/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "172a666bfac23ee33e0516658e96fae36850c37b7313abd3d2d3c92fa07d9f36",
+      "alt": "Xác tàu chìm phủ rêu trong làn nước xanh thẫm",
+      "usage": "Chương 4 (20 m)",
+      "width": 2000,
+      "height": 1335
+    },
+    {
+      "file": "vuc-sau",
+      "title": "Diver Exploring Coral Reef in South Sinai Depths",
+      "author": "Mido Makasardi",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/35206706/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "1d4fe7d1d01a00459ed9c5cb82f523308df8e2afefb0c67b96f29484aa52ed67",
+      "alt": "Bóng người lặn nhỏ bé trước vách rạn trong vùng nước xanh sâu",
+      "usage": "Chương 5 (30 m)",
+      "width": 2000,
+      "height": 3200
+    },
+    {
+      "file": "dan-ca",
+      "title": "School of Fish Swimming near the Corals",
+      "author": "wewe yang",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/4839208/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "5bd6539414ca1a806e73857c7a159e27fc81adf64cabcff42ef5fc4ad7903e7c",
+      "alt": "Đàn cá xanh bơi gần rạn san hô",
+      "usage": "Khoá học khám phá rạn",
+      "width": 2000,
+      "height": 1500
+    },
+    {
+      "file": "rua-bien",
+      "title": "Sea Turtle Swimming in Blue Sea",
+      "author": "Daniel Torobekov",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/10498909/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "b64eb4c432efef348e1dde8d04b1074e2f489d25b6909bee7eaee83803676a76",
+      "alt": "Rùa biển bơi trong làn nước xanh trên nền cát",
+      "usage": "Khoá học snorkeling",
+      "width": 2000,
+      "height": 2998
+    },
+    {
+      "file": "nguoi-lan",
+      "title": "Underwater Picture of Man Diving",
+      "author": "Domingo Dias",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/12678040/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "b62670b1c4e4585e353e1d45355572b5c8695e851d2ad17115f29b3800c3aaa6",
+      "alt": "Bóng người lặn thả mình giữa nước xanh gần rạn",
+      "usage": "Khoá học Open Water",
+      "width": 2000,
+      "height": 2667
+    },
+    {
+      "file": "binh-khi",
+      "title": "Scuba Diving Oxygen Tanks Overlooking Caribbean Waters",
+      "author": "Manuel Enrique Sankitts",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/35541059/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "a6fc8f96338dcbd36401cdc3e0c320098de86ce8803cc0a04913c35e00863759",
+      "alt": "Van bình khí lặn bên mặt biển xanh ngọc lấp lánh",
+      "usage": "An toàn và thiết bị (đã cắt phần trên, bỏ chữ trên thân bình)",
+      "width": 2000,
+      "height": 667
+    },
+    {
+      "file": "chan-nhai",
+      "title": "Snorkeling Equipment on Sand Beach",
+      "author": "Matias Mango",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/21630945/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "7a3b5d6cd66386ed5285eeec6a731fc11905aa27f3d688c1b1a14ee3d569f481",
+      "alt": "Chân nhái, kính và ống thở xanh ngọc đặt trên cát trắng",
+      "usage": "Chuẩn bị, khoá học snorkeling",
+      "width": 2000,
+      "height": 3000
+    },
+    {
+      "file": "tau-go",
+      "title": "Old Boats on a Sea",
+      "author": "Chunry",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/5392389/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "bda6c148f18722ec779745ee23e22445fcd0d99e5141ab3652990c732a5c6034",
+      "alt": "Những chiếc thuyền gỗ neo giữa mặt biển xanh",
+      "usage": "Hành trình",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "file": "bo-bien",
+      "title": "Aerial Photo of the Ocean",
+      "author": "Artem Zhukov",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/14925022/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "f217e8defbd3983b80a6ce46dd6cf32e0a7e4ab81df8f13c1b796416154ddef6",
+      "alt": "Mũi đất phủ cây nhìn từ trên cao, nước biển xanh thẫm",
+      "usage": "Kêu gọi cuối trang, bờ biển",
+      "width": 2000,
+      "height": 1500
+    }
+  ],
+  "fonts": [
+    {
+      "name": "Unbounded",
+      "author": "The Unbounded Project Authors",
+      "license": "SIL Open Font License 1.1",
+      "source": "https://fontsource.org/fonts/unbounded"
+    },
+    {
+      "name": "Inter Tight",
+      "author": "The Inter Project Authors",
+      "license": "SIL Open Font License 1.1",
+      "source": "https://fontsource.org/fonts/inter-tight"
+    }
+  ]
+}

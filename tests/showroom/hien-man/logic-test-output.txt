@@ -1,0 +1,30 @@
+✔ dates: cộng ngày qua tháng/năm, năm nhuận, không lệch múi giờ (0.93725ms)
+✔ mùa: thấp / thường / cao / lễ (0.133958ms)
+✔ cuối tuần = đêm thứ sáu và thứ bảy (0.07675ms)
+✔ giá đêm: nhân hệ số mùa và cuối tuần, làm tròn 10.000 (0.112458ms)
+✔ ngày kín: khối cứng, Tết, quá khứ, quá hạn (0.776958ms)
+✔ dữ liệu kín xác định (cùng đầu vào, cùng kết quả) và có cả ngày trống lẫn kín (1.008542ms)
+✔ bao trọn villa chỉ trống khi mọi phòng trống (1.007292ms)
+✔ giảm giá ở dài ngày theo bậc 3/5/7 đêm (0.071958ms)
+✔ số đêm tối thiểu: cuối tuần 2, lễ 3 (0.099375ms)
+✔ báo giá mùa thấp ngày thường 2 đêm: tổng khớp công thức (0.440417ms)
+✔ qua mùa: các đêm tính theo mùa của từng đêm, tổng = tổng các dòng (0.18175ms)
+✔ cuối tuần đắt hơn ngày thường cùng mùa (T6 > T4) (0.056917ms)
+✔ ở dài ngày: 7 đêm giảm 12%, khớp tay (0.325375ms)
+✔ phụ thu khách thêm: 3 khách ở phòng 2 khách gốc = 1 khách thêm × số đêm (0.121042ms)
+✔ lỗi: thiếu ngày, ngược ngày, quá khứ, quá xa, quá dài (0.090792ms)
+✔ lỗi: ngày kín được liệt kê, số khách vượt, số phòng sai (0.084875ms)
+✔ lỗi: tối thiểu đêm khi có cuối tuần / lễ (0.109916ms)
+✔ Tết 5–8/2/2027 kín hết mọi loại phòng, gợi ý đêm trống kế tiếp (0.131542ms)
+✔ bao trọn villa: số phòng cố định 1, phụ thu vệ sinh riêng, tối thiểu 2 đêm (0.239375ms)
+✔ chọn ngày: hai lần bấm tạo khoảng, bấm lần ba bắt đầu khoảng mới (0.183292ms)
+✔ chọn ngày: bấm ngày trước ngày nhận thì dời ngày nhận; ngày kín bị từ chối (0.117875ms)
+✔ chọn ngày: khoảng chứa đêm kín bị từ chối và nêu ngày kín đầu tiên; ngày kín làm ngày trả phòng hợp lệ (0.096083ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 88.034375

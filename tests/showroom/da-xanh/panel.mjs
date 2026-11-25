@@ -1,0 +1,15 @@
+import { chromium } from "/Users/mac/mern/works/hancitywebsite/node_modules/playwright/index.mjs";
+const [,, w="1440", h="900", out="panel.png"] = process.argv;
+const b = await chromium.launch({ executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", headless: true });
+const p = await (await b.newContext({ viewport: { width: +w, height: +h } })).newPage();
+await p.goto("http://localhost:3100/demos/da-xanh", { waitUntil: "networkidle" }); await p.waitForTimeout(2500);
+await p.evaluate(() => document.querySelector("#routine").scrollIntoView()); await p.waitForTimeout(1500);
+await p.getByLabel(/Da hỗn hợp/).check(); await p.getByLabel(/Da xỉn/).check(); await p.getByLabel(/Dầu nhờn/).check();
+await p.getByLabel(/Khoảng 10 phút/).check(); await p.getByLabel(/^Vừa phải\s*500/).check();
+await p.getByRole("button", { name: "Tạo routine của tôi" }).click(); await p.waitForTimeout(2000);
+const el = p.locator("#routine .builderOut, #routine [data-state]").first();
+await p.evaluate(() => document.querySelector("#routine [data-state]").scrollIntoView({block:"start"})); await p.waitForTimeout(800);
+await p.screenshot({ path: new URL("./screenshots/"+out, import.meta.url).pathname });
+await p.evaluate(() => window.scrollBy(0, 700)); await p.waitForTimeout(500);
+await p.screenshot({ path: new URL("./screenshots/2"+out, import.meta.url).pathname });
+await b.close();

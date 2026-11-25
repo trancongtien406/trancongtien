@@ -1,0 +1,872 @@
+ok   desktop bar-mai-thuong ↔ ben-vi  layout 0.75 dom 1.00 hero 0.25 pal 0.19 type 0.68 comp 0.63
+ok   desktop bar-mai-thuong ↔ can-ho-ven-bien  layout 0.83 dom 0.95 hero 0.30 pal 0.59 type 0.78 comp 0.73
+FAIL desktop bar-mai-thuong ↔ cowork-grid  layout 0.75 dom 0.93 hero 0.52 pal 0.11 type 0.68 comp 0.65  <palette
+ok   desktop bar-mai-thuong ↔ da-xanh  layout 0.67 dom 0.94 hero 0.72 pal 0.94 type 0.77 comp 0.80
+FAIL desktop bar-mai-thuong ↔ detail-xe  layout 0.58 dom 0.88 hero 0.75 pal 0.11 type 0.74 comp 0.64  <palette
+ok   desktop bar-mai-thuong ↔ glamping-nui  layout 0.92 dom 0.96 hero 0.74 pal 0.20 type 0.70 comp 0.75
+ok   desktop bar-mai-thuong ↔ gom-lo  layout 0.83 dom 0.96 hero 0.71 pal 0.91 type 0.77 comp 0.84
+ok   desktop bar-mai-thuong ↔ hien-man  layout 1.00 dom 1.00 hero 0.76 pal 0.34 type 0.82 comp 0.83
+ok   desktop bar-mai-thuong ↔ hoa-tuoi  layout 0.75 dom 0.99 hero 0.45 pal 0.40 type 0.80 comp 0.72
+ok   desktop bar-mai-thuong ↔ khoi-nep  layout 0.75 dom 1.00 hero 0.69 pal 0.88 type 0.89 comp 0.85
+FAIL desktop bar-mai-thuong ↔ kim-hoan  layout 0.92 dom 0.95 hero 0.36 pal 0.14 type 0.78 comp 0.69  <palette
+FAIL desktop bar-mai-thuong ↔ lan-bien  layout 0.83 dom 0.98 hero 0.75 pal 0.89 type 0.42 comp 0.78  <type
+ok   desktop bar-mai-thuong ↔ luot-song  layout 0.92 dom 0.98 hero 0.35 pal 0.80 type 0.75 comp 0.79
+ok   desktop bar-mai-thuong ↔ mien-an  layout 0.75 dom 1.00 hero 0.44 pal 0.90 type 0.81 comp 0.80
+ok   desktop bar-mai-thuong ↔ mien-cuoi  layout 0.75 dom 1.00 hero 0.36 pal 0.94 type 0.66 comp 0.76
+ok   desktop bar-mai-thuong ↔ nail-pop  layout 0.92 dom 0.97 hero 0.71 pal 0.86 type 0.82 comp 0.87
+ok   desktop bar-mai-thuong ↔ nep-tho  layout 0.75 dom 1.00 hero 0.44 pal 0.93 type 0.68 comp 0.78
+ok   desktop bar-mai-thuong ↔ net-lech  layout 0.75 dom 1.00 hero 0.45 pal 0.55 type 0.79 comp 0.74
+ok   desktop bar-mai-thuong ↔ ngoai-ngu-sao  layout 0.92 dom 0.96 hero 0.52 pal 0.93 type 0.72 comp 0.83
+ok   desktop bar-mai-thuong ↔ pet-vui  layout 0.67 dom 0.92 hero 0.43 pal 0.84 type 0.75 comp 0.73
+FAIL desktop bar-mai-thuong ↔ phong-thu  layout 0.83 dom 0.96 hero 0.48 pal 0.13 type 0.65 comp 0.67  <palette
+FAIL desktop bar-mai-thuong ↔ phuot-xe  layout 0.79 dom 0.97 hero 0.55 pal 0.12 type 0.83 comp 0.70  <palette
+ok   desktop bar-mai-thuong ↔ rong-dam  layout 0.67 dom 1.00 hero 0.42 pal 0.91 type 0.70 comp 0.75
+ok   desktop bar-mai-thuong ↔ rot-nhiet  layout 0.83 dom 0.99 hero 0.46 pal 0.65 type 0.83 comp 0.78
+ok   desktop bar-mai-thuong ↔ ruou-vang  layout 0.83 dom 0.90 hero 0.71 pal 0.52 type 0.79 comp 0.78
+FAIL desktop bar-mai-thuong ↔ sat-gym  layout 0.75 dom 0.99 hero 0.79 pal 0.13 type 0.86 comp 0.75  <palette
+ok   desktop bar-mai-thuong ↔ thang-mo  layout 0.67 dom 1.00 hero 0.35 pal 0.94 type 0.77 comp 0.76
+ok   desktop bar-mai-thuong ↔ tiem-banh  layout 0.75 dom 0.99 hero 0.73 pal 0.93 type 0.66 comp 0.81
+FAIL desktop bar-mai-thuong ↔ tra-thi  layout 0.92 dom 0.95 hero 0.40 pal 0.12 type 0.80 comp 0.70  <palette
+ok   desktop ben-vi ↔ can-ho-ven-bien  layout 0.89 dom 1.00 hero 0.27 pal 0.44 type 0.81 comp 0.73
+ok   desktop ben-vi ↔ cowork-grid  layout 0.67 dom 0.98 hero 0.46 pal 0.21 type 0.71 comp 0.65
+ok   desktop ben-vi ↔ da-xanh  layout 0.67 dom 0.99 hero 0.69 pal 0.97 type 0.80 comp 0.82
+ok   desktop ben-vi ↔ detail-xe  layout 0.60 dom 0.99 hero 0.71 pal 0.21 type 0.86 comp 0.71
+ok   desktop ben-vi ↔ glamping-nui  layout 0.75 dom 0.99 hero 0.71 pal 0.21 type 0.83 comp 0.74
+ok   desktop ben-vi ↔ gom-lo  layout 0.90 dom 1.00 hero 0.73 pal 0.93 type 0.67 comp 0.86
+ok   desktop ben-vi ↔ hien-man  layout 1.00 dom 0.99 hero 0.72 pal 0.21 type 0.74 comp 0.78
+ok   desktop ben-vi ↔ hoa-tuoi  layout 0.89 dom 0.99 hero 0.38 pal 0.45 type 0.73 comp 0.74
+ok   desktop ben-vi ↔ khoi-nep  layout 0.80 dom 0.98 hero 0.64 pal 0.88 type 0.79 comp 0.83
+ok   desktop ben-vi ↔ kim-hoan  layout 0.90 dom 0.98 hero 0.29 pal 0.22 type 0.71 comp 0.68
+ok   desktop ben-vi ↔ lan-bien  layout 0.70 dom 1.00 hero 0.71 pal 0.90 type 0.80 comp 0.83
+ok   desktop ben-vi ↔ luot-song  layout 1.00 dom 1.00 hero 0.42 pal 0.79 type 0.68 comp 0.81
+ok   desktop ben-vi ↔ mien-an  layout 0.60 dom 0.95 hero 0.39 pal 0.90 type 0.73 comp 0.72
+ok   desktop ben-vi ↔ mien-cuoi  layout 0.73 dom 0.97 hero 0.29 pal 0.96 type 0.67 comp 0.74
+ok   desktop ben-vi ↔ nail-pop  layout 0.78 dom 0.97 hero 0.68 pal 0.89 type 0.85 comp 0.84
+ok   desktop ben-vi ↔ nep-tho  layout 0.80 dom 0.99 hero 0.39 pal 0.93 type 0.71 comp 0.78
+ok   desktop ben-vi ↔ net-lech  layout 0.64 dom 0.99 hero 0.42 pal 0.55 type 0.81 comp 0.71
+ok   desktop ben-vi ↔ ngoai-ngu-sao  layout 0.91 dom 1.00 hero 0.48 pal 0.95 type 0.79 comp 0.84
+ok   desktop ben-vi ↔ pet-vui  layout 0.70 dom 1.00 hero 0.40 pal 0.86 type 0.69 comp 0.75
+FAIL desktop ben-vi ↔ phong-thu  layout 0.89 dom 0.99 hero 0.44 pal 0.10 type 0.79 comp 0.70  <palette
+ok   desktop ben-vi ↔ phuot-xe  layout 0.79 dom 0.99 hero 0.48 pal 0.21 type 0.86 comp 0.72
+ok   desktop ben-vi ↔ rong-dam  layout 0.67 dom 1.00 hero 0.37 pal 0.91 type 0.77 comp 0.76
+ok   desktop ben-vi ↔ rot-nhiet  layout 0.89 dom 0.99 hero 0.44 pal 0.65 type 0.86 comp 0.80
+ok   desktop ben-vi ↔ ruou-vang  layout 0.82 dom 0.99 hero 0.68 pal 0.52 type 0.72 comp 0.77
+ok   desktop ben-vi ↔ sat-gym  layout 0.75 dom 1.00 hero 0.77 pal 0.21 type 0.75 comp 0.73
+ok   desktop ben-vi ↔ thang-mo  layout 0.67 dom 0.95 hero 0.35 pal 0.96 type 0.70 comp 0.74
+ok   desktop ben-vi ↔ tiem-banh  layout 0.67 dom 1.00 hero 0.69 pal 0.94 type 0.79 comp 0.82
+ok   desktop ben-vi ↔ tra-thi  layout 0.90 dom 0.98 hero 0.33 pal 0.21 type 0.82 comp 0.71
+ok   desktop can-ho-ven-bien ↔ cowork-grid  layout 0.92 dom 1.00 hero 0.43 pal 0.63 type 0.75 comp 0.78
+ok   desktop can-ho-ven-bien ↔ da-xanh  layout 0.67 dom 0.98 hero 0.75 pal 0.96 type 0.67 comp 0.80
+ok   desktop can-ho-ven-bien ↔ detail-xe  layout 0.70 dom 0.95 hero 0.77 pal 0.62 type 0.81 comp 0.78
+ok   desktop can-ho-ven-bien ↔ glamping-nui  layout 0.89 dom 0.89 hero 0.77 pal 0.61 type 0.78 comp 0.81
+ok   desktop can-ho-ven-bien ↔ gom-lo  layout 0.70 dom 0.92 hero 0.70 pal 0.93 type 0.80 comp 0.81
+ok   desktop can-ho-ven-bien ↔ hien-man  layout 1.00 dom 1.00 hero 0.76 pal 0.37 type 0.80 comp 0.83
+ok   desktop can-ho-ven-bien ↔ hoa-tuoi  layout 0.78 dom 0.98 hero 0.39 pal 0.61 type 0.78 comp 0.74
+ok   desktop can-ho-ven-bien ↔ khoi-nep  layout 0.70 dom 1.00 hero 0.69 pal 0.90 type 0.89 comp 0.84
+ok   desktop can-ho-ven-bien ↔ kim-hoan  layout 0.80 dom 0.99 hero 0.30 pal 0.64 type 0.75 comp 0.73
+ok   desktop can-ho-ven-bien ↔ lan-bien  layout 0.80 dom 0.96 hero 0.77 pal 0.88 type 0.67 comp 0.82
+ok   desktop can-ho-ven-bien ↔ luot-song  layout 0.89 dom 0.93 hero 0.30 pal 0.80 type 0.79 comp 0.77
+ok   desktop can-ho-ven-bien ↔ mien-an  layout 0.90 dom 1.00 hero 0.44 pal 0.90 type 0.78 comp 0.83
+ok   desktop can-ho-ven-bien ↔ mien-cuoi  layout 0.91 dom 1.00 hero 0.39 pal 0.95 type 0.79 comp 0.83
+ok   desktop can-ho-ven-bien ↔ nail-pop  layout 0.78 dom 1.00 hero 0.66 pal 0.89 type 0.82 comp 0.84
+ok   desktop can-ho-ven-bien ↔ nep-tho  layout 0.90 dom 1.00 hero 0.39 pal 0.94 type 0.76 comp 0.82
+ok   desktop can-ho-ven-bien ↔ net-lech  layout 0.91 dom 1.00 hero 0.43 pal 0.62 type 0.88 comp 0.81
+ok   desktop can-ho-ven-bien ↔ ngoai-ngu-sao  layout 0.91 dom 1.00 hero 0.51 pal 0.95 type 0.83 comp 0.86
+ok   desktop can-ho-ven-bien ↔ pet-vui  layout 0.80 dom 1.00 hero 0.39 pal 0.85 type 0.78 comp 0.79
+ok   desktop can-ho-ven-bien ↔ phong-thu  layout 0.67 dom 1.00 hero 0.46 pal 0.50 type 0.78 comp 0.71
+ok   desktop can-ho-ven-bien ↔ phuot-xe  layout 0.86 dom 1.00 hero 0.53 pal 0.62 type 0.80 comp 0.79
+ok   desktop can-ho-ven-bien ↔ rong-dam  layout 0.89 dom 0.99 hero 0.47 pal 0.92 type 0.82 comp 0.84
+ok   desktop can-ho-ven-bien ↔ rot-nhiet  layout 0.89 dom 1.00 hero 0.45 pal 0.66 type 0.80 comp 0.79
+ok   desktop can-ho-ven-bien ↔ ruou-vang  layout 1.00 dom 0.97 hero 0.74 pal 0.63 type 0.76 comp 0.85
+ok   desktop can-ho-ven-bien ↔ sat-gym  layout 0.83 dom 0.84 hero 0.81 pal 0.63 type 0.87 comp 0.81
+ok   desktop can-ho-ven-bien ↔ thang-mo  layout 0.78 dom 1.00 hero 0.47 pal 0.96 type 0.77 comp 0.81
+ok   desktop can-ho-ven-bien ↔ tiem-banh  layout 0.89 dom 1.00 hero 0.75 pal 0.95 type 0.78 comp 0.88
+ok   desktop can-ho-ven-bien ↔ tra-thi  layout 0.60 dom 0.99 hero 0.36 pal 0.62 type 0.67 comp 0.68
+ok   desktop cowork-grid ↔ da-xanh  layout 0.67 dom 0.96 hero 0.77 pal 0.94 type 0.77 comp 0.82
+FAIL desktop cowork-grid ↔ detail-xe  layout 0.58 dom 0.98 hero 0.77 pal 0.02 type 0.71 comp 0.65  <palette
+ok   desktop cowork-grid ↔ glamping-nui  layout 0.67 dom 0.99 hero 0.77 pal 0.19 type 0.68 comp 0.69
+ok   desktop cowork-grid ↔ gom-lo  layout 0.75 dom 0.98 hero 0.75 pal 0.93 type 0.80 comp 0.84
+ok   desktop cowork-grid ↔ hien-man  layout 1.00 dom 1.00 hero 0.76 pal 0.36 type 0.80 comp 0.83
+ok   desktop cowork-grid ↔ hoa-tuoi  layout 0.83 dom 1.00 hero 0.52 pal 0.44 type 0.78 comp 0.75
+ok   desktop cowork-grid ↔ khoi-nep  layout 0.67 dom 1.00 hero 0.69 pal 0.86 type 0.89 comp 0.83
+FAIL desktop cowork-grid ↔ kim-hoan  layout 0.83 dom 0.99 hero 0.48 pal 0.07 type 0.75 comp 0.68  <palette
+ok   desktop cowork-grid ↔ lan-bien  layout 0.75 dom 1.00 hero 0.77 pal 0.93 type 0.77 comp 0.85
+ok   desktop cowork-grid ↔ luot-song  layout 1.00 dom 0.99 hero 0.50 pal 0.81 type 0.79 comp 0.85
+ok   desktop cowork-grid ↔ mien-an  layout 0.58 dom 0.99 hero 0.57 pal 0.87 type 0.78 comp 0.76
+ok   desktop cowork-grid ↔ mien-cuoi  layout 0.50 dom 1.00 hero 0.48 pal 0.93 type 0.69 comp 0.73
+ok   desktop cowork-grid ↔ nail-pop  layout 0.67 dom 1.00 hero 0.72 pal 0.87 type 0.82 comp 0.82
+ok   desktop cowork-grid ↔ nep-tho  layout 0.75 dom 1.00 hero 0.57 pal 0.91 type 0.66 comp 0.79
+ok   desktop cowork-grid ↔ net-lech  layout 0.58 dom 1.00 hero 0.51 pal 0.52 type 0.78 comp 0.71
+ok   desktop cowork-grid ↔ ngoai-ngu-sao  layout 0.83 dom 1.00 hero 0.60 pal 0.94 type 0.73 comp 0.83
+ok   desktop cowork-grid ↔ pet-vui  layout 0.67 dom 0.99 hero 0.47 pal 0.85 type 0.78 comp 0.77
+FAIL desktop cowork-grid ↔ phong-thu  layout 0.92 dom 0.97 hero 0.54 pal 0.16 type 0.68 comp 0.71  <palette
+FAIL desktop cowork-grid ↔ phuot-xe  layout 0.79 dom 0.99 hero 0.56 pal 0.03 type 0.80 comp 0.69  <palette
+ok   desktop cowork-grid ↔ rong-dam  layout 0.67 dom 0.99 hero 0.63 pal 0.89 type 0.72 comp 0.79
+ok   desktop cowork-grid ↔ rot-nhiet  layout 0.75 dom 0.97 hero 0.57 pal 0.62 type 0.80 comp 0.77
+ok   desktop cowork-grid ↔ ruou-vang  layout 0.75 dom 0.98 hero 0.76 pal 0.53 type 0.76 comp 0.78
+FAIL desktop cowork-grid ↔ sat-gym  layout 0.75 dom 1.00 hero 0.77 pal 0.09 type 0.87 comp 0.74  <palette
+ok   desktop cowork-grid ↔ thang-mo  layout 0.75 dom 0.98 hero 0.66 pal 0.93 type 0.77 comp 0.82
+ok   desktop cowork-grid ↔ tiem-banh  layout 0.67 dom 1.00 hero 0.77 pal 0.93 type 0.68 comp 0.81
+FAIL desktop cowork-grid ↔ tra-thi  layout 0.83 dom 0.99 hero 0.48 pal 0.03 type 0.77 comp 0.68  <palette
+FAIL desktop da-xanh ↔ detail-xe  layout 0.70 dom 0.90 hero 0.07 pal 0.93 type 0.83 comp 0.71  <hero
+FAIL desktop da-xanh ↔ glamping-nui  layout 0.89 dom 0.99 hero 0.05 pal 0.95 type 0.79 comp 0.77  <hero
+ok   desktop da-xanh ↔ gom-lo  layout 0.80 dom 0.97 hero 0.94 pal 0.95 type 0.78 comp 0.88
+FAIL desktop da-xanh ↔ hien-man  layout 1.00 dom 1.00 hero 0.08 pal 0.86 type 0.81 comp 0.79  <hero
+ok   desktop da-xanh ↔ hoa-tuoi  layout 0.78 dom 1.00 hero 0.72 pal 0.94 type 0.79 comp 0.85
+ok   desktop da-xanh ↔ khoi-nep  layout 0.60 dom 1.00 hero 0.33 pal 0.47 type 0.89 comp 0.70
+ok   desktop da-xanh ↔ kim-hoan  layout 0.80 dom 0.96 hero 0.66 pal 0.97 type 0.77 comp 0.84
+FAIL desktop da-xanh ↔ lan-bien  layout 0.80 dom 0.98 hero 0.08 pal 0.91 type 0.65 comp 0.72  <hero
+ok   desktop da-xanh ↔ luot-song  layout 1.00 dom 0.97 hero 0.82 pal 0.97 type 0.77 comp 0.91
+ok   desktop da-xanh ↔ mien-an  layout 0.80 dom 0.99 hero 0.73 pal 0.28 type 0.80 comp 0.76
+ok   desktop da-xanh ↔ mien-cuoi  layout 0.64 dom 1.00 hero 0.61 pal 0.27 type 0.78 comp 0.70
+ok   desktop da-xanh ↔ nail-pop  layout 0.89 dom 1.00 hero 0.92 pal 0.27 type 0.80 comp 0.81
+ok   desktop da-xanh ↔ nep-tho  layout 0.90 dom 1.00 hero 0.67 pal 0.28 type 0.76 comp 0.77
+ok   desktop da-xanh ↔ net-lech  layout 0.64 dom 1.00 hero 0.66 pal 0.50 type 0.89 comp 0.76
+ok   desktop da-xanh ↔ ngoai-ngu-sao  layout 0.91 dom 1.00 hero 0.70 pal 0.83 type 0.83 comp 0.87
+ok   desktop da-xanh ↔ pet-vui  layout 0.70 dom 0.96 hero 0.77 pal 0.75 type 0.77 comp 0.80
+ok   desktop da-xanh ↔ phong-thu  layout 0.78 dom 0.99 hero 0.50 pal 0.94 type 0.76 comp 0.81
+ok   desktop da-xanh ↔ phuot-xe  layout 0.86 dom 1.00 hero 0.34 pal 0.94 type 0.82 comp 0.81
+ok   desktop da-xanh ↔ rong-dam  layout 0.78 dom 1.00 hero 0.76 pal 0.37 type 0.81 comp 0.78
+ok   desktop da-xanh ↔ rot-nhiet  layout 0.89 dom 1.00 hero 0.72 pal 0.44 type 0.82 comp 0.81
+FAIL desktop da-xanh ↔ ruou-vang  layout 0.82 dom 0.89 hero 0.08 pal 0.96 type 0.78 comp 0.73  <hero
+FAIL desktop da-xanh ↔ sat-gym  layout 0.67 dom 0.99 hero 0.10 pal 0.96 type 0.86 comp 0.74  <hero
+ok   desktop da-xanh ↔ thang-mo  layout 0.67 dom 1.00 hero 0.71 pal 0.28 type 0.75 comp 0.71
+FAIL desktop da-xanh ↔ tiem-banh  layout 0.78 dom 0.99 hero 0.02 pal 0.74 type 0.76 comp 0.70  <hero
+ok   desktop da-xanh ↔ tra-thi  layout 0.80 dom 0.98 hero 0.64 pal 0.95 type 0.69 comp 0.82
+FAIL desktop detail-xe ↔ glamping-nui  layout 0.80 dom 0.98 hero 0.03 pal 0.20 type 0.72 comp 0.62  <hero
+ok   desktop detail-xe ↔ gom-lo  layout 0.90 dom 0.98 hero 0.91 pal 0.94 type 0.85 comp 0.92
+FAIL desktop detail-xe ↔ hien-man  layout 1.00 dom 1.00 hero 0.06 pal 0.35 type 0.85 comp 0.72  <hero
+ok   desktop detail-xe ↔ hoa-tuoi  layout 0.80 dom 0.99 hero 0.69 pal 0.45 type 0.82 comp 0.78
+ok   desktop detail-xe ↔ khoi-nep  layout 0.60 dom 1.00 hero 0.34 pal 0.86 type 0.94 comp 0.77
+FAIL desktop detail-xe ↔ kim-hoan  layout 0.90 dom 0.99 hero 0.67 pal 0.07 type 0.81 comp 0.74  <palette
+FAIL desktop detail-xe ↔ lan-bien  layout 0.90 dom 0.95 hero 0.03 pal 0.92 type 0.82 comp 0.76  <hero
+ok   desktop detail-xe ↔ luot-song  layout 1.00 dom 1.00 hero 0.84 pal 0.82 type 0.84 comp 0.92
+ok   desktop detail-xe ↔ mien-an  layout 0.70 dom 0.99 hero 0.71 pal 0.87 type 0.83 comp 0.82
+ok   desktop detail-xe ↔ mien-cuoi  layout 0.73 dom 0.99 hero 0.63 pal 0.93 type 0.75 comp 0.81
+ok   desktop detail-xe ↔ nail-pop  layout 0.80 dom 1.00 hero 0.93 pal 0.86 type 0.68 comp 0.86
+ok   desktop detail-xe ↔ nep-tho  layout 0.80 dom 1.00 hero 0.69 pal 0.90 type 0.81 comp 0.85
+ok   desktop detail-xe ↔ net-lech  layout 0.73 dom 1.00 hero 0.66 pal 0.52 type 0.72 comp 0.75
+ok   desktop detail-xe ↔ ngoai-ngu-sao  layout 0.82 dom 1.00 hero 0.67 pal 0.93 type 0.79 comp 0.85
+ok   desktop detail-xe ↔ pet-vui  layout 0.70 dom 1.00 hero 0.75 pal 0.84 type 0.84 comp 0.83
+FAIL desktop detail-xe ↔ phong-thu  layout 0.70 dom 1.00 hero 0.47 pal 0.16 type 0.74 comp 0.66  <palette
+FAIL desktop detail-xe ↔ phuot-xe  layout 0.71 dom 1.00 hero 0.36 pal 0.03 type 0.66 comp 0.61  <palette
+ok   desktop detail-xe ↔ rong-dam  layout 0.70 dom 1.00 hero 0.76 pal 0.89 type 0.77 comp 0.83
+ok   desktop detail-xe ↔ rot-nhiet  layout 0.80 dom 1.00 hero 0.70 pal 0.62 type 0.66 comp 0.78
+FAIL desktop detail-xe ↔ ruou-vang  layout 0.82 dom 0.92 hero 0.12 pal 0.53 type 0.81 comp 0.69  <hero
+FAIL desktop detail-xe ↔ sat-gym  layout 0.75 dom 0.99 hero 0.11 pal 0.09 type 0.92 comp 0.64  <hero,palette
+ok   desktop detail-xe ↔ thang-mo  layout 0.70 dom 1.00 hero 0.72 pal 0.93 type 0.83 comp 0.84
+FAIL desktop detail-xe ↔ tiem-banh  layout 0.70 dom 1.00 hero 0.06 pal 0.93 type 0.73 comp 0.71  <hero
+FAIL desktop detail-xe ↔ tra-thi  layout 0.90 dom 0.99 hero 0.61 pal 0.03 type 0.81 comp 0.73  <palette
+ok   desktop glamping-nui ↔ gom-lo  layout 0.90 dom 0.85 hero 0.92 pal 0.91 type 0.82 comp 0.88
+FAIL desktop glamping-nui ↔ hien-man  layout 1.00 dom 0.99 hero 0.07 pal 0.38 type 0.78 comp 0.71  <hero
+ok   desktop glamping-nui ↔ hoa-tuoi  layout 0.89 dom 0.86 hero 0.70 pal 0.29 type 0.75 comp 0.74
+ok   desktop glamping-nui ↔ khoi-nep  layout 0.80 dom 1.00 hero 0.33 pal 0.87 type 0.89 comp 0.80
+ok   desktop glamping-nui ↔ kim-hoan  layout 0.80 dom 0.99 hero 0.68 pal 0.21 type 0.78 comp 0.73
+FAIL desktop glamping-nui ↔ lan-bien  layout 0.70 dom 0.97 hero 0.04 pal 0.94 type 0.79 comp 0.71  <hero
+ok   desktop glamping-nui ↔ luot-song  layout 1.00 dom 0.92 hero 0.84 pal 0.76 type 0.81 comp 0.88
+ok   desktop glamping-nui ↔ mien-an  layout 0.70 dom 1.00 hero 0.71 pal 0.89 type 0.76 comp 0.82
+ok   desktop glamping-nui ↔ mien-cuoi  layout 0.82 dom 1.00 hero 0.63 pal 0.95 type 0.71 comp 0.83
+ok   desktop glamping-nui ↔ nail-pop  layout 0.78 dom 1.00 hero 0.94 pal 0.86 type 0.74 comp 0.86
+ok   desktop glamping-nui ↔ nep-tho  layout 0.90 dom 1.00 hero 0.69 pal 0.91 type 0.78 comp 0.87
+ok   desktop glamping-nui ↔ net-lech  layout 0.82 dom 1.00 hero 0.66 pal 0.54 type 0.76 comp 0.78
+ok   desktop glamping-nui ↔ ngoai-ngu-sao  layout 0.91 dom 0.98 hero 0.68 pal 0.94 type 0.75 comp 0.86
+ok   desktop glamping-nui ↔ pet-vui  layout 0.90 dom 0.97 hero 0.75 pal 0.82 type 0.80 comp 0.86
+ok   desktop glamping-nui ↔ phong-thu  layout 0.89 dom 1.00 hero 0.48 pal 0.18 type 0.70 comp 0.71
+ok   desktop glamping-nui ↔ phuot-xe  layout 0.86 dom 1.00 hero 0.35 pal 0.19 type 0.73 comp 0.69
+ok   desktop glamping-nui ↔ rong-dam  layout 0.78 dom 1.00 hero 0.76 pal 0.89 type 0.73 comp 0.84
+ok   desktop glamping-nui ↔ rot-nhiet  layout 0.89 dom 1.00 hero 0.70 pal 0.64 type 0.73 comp 0.82
+FAIL desktop glamping-nui ↔ ruou-vang  layout 0.73 dom 0.98 hero 0.11 pal 0.52 type 0.77 comp 0.67  <hero
+FAIL desktop glamping-nui ↔ sat-gym  layout 0.92 dom 0.85 hero 0.10 pal 0.20 type 0.87 comp 0.65  <hero
+ok   desktop glamping-nui ↔ thang-mo  layout 0.89 dom 1.00 hero 0.73 pal 0.94 type 0.79 comp 0.88
+FAIL desktop glamping-nui ↔ tiem-banh  layout 0.89 dom 1.00 hero 0.06 pal 0.92 type 0.70 comp 0.75  <hero
+ok   desktop glamping-nui ↔ tra-thi  layout 0.90 dom 1.00 hero 0.62 pal 0.20 type 0.76 comp 0.75
+ok   desktop gom-lo ↔ hien-man  layout 1.00 dom 1.00 hero 0.92 pal 0.90 type 0.73 comp 0.92
+ok   desktop gom-lo ↔ hoa-tuoi  layout 0.70 dom 0.84 hero 0.57 pal 0.86 type 0.72 comp 0.74
+ok   desktop gom-lo ↔ khoi-nep  layout 0.70 dom 1.00 hero 0.93 pal 0.90 type 0.79 comp 0.86
+ok   desktop gom-lo ↔ kim-hoan  layout 0.90 dom 0.99 hero 0.77 pal 0.94 type 0.70 comp 0.87
+ok   desktop gom-lo ↔ lan-bien  layout 0.90 dom 0.98 hero 0.91 pal 0.88 type 0.69 comp 0.88
+ok   desktop gom-lo ↔ luot-song  layout 0.90 dom 0.91 hero 0.58 pal 0.87 type 0.62 comp 0.79
+ok   desktop gom-lo ↔ mien-an  layout 0.80 dom 1.00 hero 0.65 pal 0.93 type 0.72 comp 0.83
+ok   desktop gom-lo ↔ mien-cuoi  layout 0.82 dom 1.00 hero 0.72 pal 0.93 type 0.76 comp 0.85
+ok   desktop gom-lo ↔ nail-pop  layout 0.80 dom 1.00 hero 0.69 pal 0.92 type 0.83 comp 0.86
+ok   desktop gom-lo ↔ nep-tho  layout 0.90 dom 1.00 hero 0.65 pal 0.93 type 0.79 comp 0.87
+ok   desktop gom-lo ↔ net-lech  layout 0.73 dom 1.00 hero 0.55 pal 0.93 type 0.90 comp 0.83
+ok   desktop gom-lo ↔ ngoai-ngu-sao  layout 0.91 dom 0.96 hero 0.77 pal 0.94 type 0.75 comp 0.87
+ok   desktop gom-lo ↔ pet-vui  layout 0.70 dom 0.96 hero 0.53 pal 0.91 type 0.67 comp 0.76
+ok   desktop gom-lo ↔ phong-thu  layout 0.70 dom 0.92 hero 0.63 pal 0.93 type 0.77 comp 0.79
+ok   desktop gom-lo ↔ phuot-xe  layout 0.93 dom 1.00 hero 0.79 pal 0.93 type 0.85 comp 0.91
+ok   desktop gom-lo ↔ rong-dam  layout 0.90 dom 1.00 hero 0.70 pal 0.89 type 0.78 comp 0.87
+ok   desktop gom-lo ↔ rot-nhiet  layout 0.80 dom 1.00 hero 0.51 pal 0.91 type 0.85 comp 0.83
+ok   desktop gom-lo ↔ ruou-vang  layout 0.91 dom 0.94 hero 0.93 pal 0.88 type 0.71 comp 0.87
+ok   desktop gom-lo ↔ sat-gym  layout 0.67 dom 0.90 hero 0.95 pal 0.95 type 0.70 comp 0.82
+ok   desktop gom-lo ↔ thang-mo  layout 0.80 dom 1.00 hero 0.67 pal 0.90 type 0.68 comp 0.82
+ok   desktop gom-lo ↔ tiem-banh  layout 0.90 dom 0.99 hero 0.94 pal 0.86 type 0.77 comp 0.90
+ok   desktop gom-lo ↔ tra-thi  layout 0.70 dom 0.95 hero 0.58 pal 0.94 type 0.71 comp 0.78
+ok   desktop hien-man ↔ hoa-tuoi  layout 1.00 dom 0.99 hero 0.71 pal 0.42 type 0.68 comp 0.80
+ok   desktop hien-man ↔ khoi-nep  layout 1.00 dom 1.00 hero 0.36 pal 0.79 type 0.79 comp 0.82
+ok   desktop hien-man ↔ kim-hoan  layout 1.00 dom 0.99 hero 0.66 pal 0.41 type 0.70 comp 0.80
+FAIL desktop hien-man ↔ lan-bien  layout 1.00 dom 1.00 hero 0.07 pal 0.84 type 0.71 comp 0.77  <hero
+ok   desktop hien-man ↔ luot-song  layout 1.00 dom 1.00 hero 0.84 pal 0.82 type 0.72 comp 0.89
+ok   desktop hien-man ↔ mien-an  layout 1.00 dom 1.00 hero 0.74 pal 0.79 type 0.67 comp 0.86
+ok   desktop hien-man ↔ mien-cuoi  layout 1.00 dom 0.99 hero 0.63 pal 0.84 type 0.83 comp 0.88
+ok   desktop hien-man ↔ nail-pop  layout 1.00 dom 1.00 hero 0.91 pal 0.78 type 0.86 comp 0.92
+ok   desktop hien-man ↔ nep-tho  layout 1.00 dom 0.99 hero 0.69 pal 0.82 type 0.81 comp 0.88
+ok   desktop hien-man ↔ net-lech  layout 1.00 dom 0.99 hero 0.69 pal 0.44 type 0.84 comp 0.83
+ok   desktop hien-man ↔ ngoai-ngu-sao  layout 0.91 dom 1.00 hero 0.70 pal 0.86 type 0.86 comp 0.88
+ok   desktop hien-man ↔ pet-vui  layout 1.00 dom 1.00 hero 0.75 pal 0.76 type 0.72 comp 0.87
+ok   desktop hien-man ↔ phong-thu  layout 1.00 dom 1.00 hero 0.50 pal 0.26 type 0.82 comp 0.77
+ok   desktop hien-man ↔ phuot-xe  layout 1.00 dom 1.00 hero 0.35 pal 0.37 type 0.85 comp 0.77
+ok   desktop hien-man ↔ rong-dam  layout 1.00 dom 1.00 hero 0.77 pal 0.81 type 0.85 comp 0.90
+ok   desktop hien-man ↔ rot-nhiet  layout 1.00 dom 0.99 hero 0.73 pal 0.55 type 0.85 comp 0.86
+FAIL desktop hien-man ↔ ruou-vang  layout 0.91 dom 1.00 hero 0.14 pal 0.53 type 0.69 comp 0.71  <hero
+FAIL desktop hien-man ↔ sat-gym  layout 1.00 dom 0.99 hero 0.11 pal 0.40 type 0.78 comp 0.72  <hero
+ok   desktop hien-man ↔ thang-mo  layout 1.00 dom 1.00 hero 0.74 pal 0.85 type 0.71 comp 0.88
+FAIL desktop hien-man ↔ tiem-banh  layout 1.00 dom 1.00 hero 0.08 pal 0.85 type 0.82 comp 0.79  <hero
+ok   desktop hien-man ↔ tra-thi  layout 1.00 dom 1.00 hero 0.65 pal 0.38 type 0.69 comp 0.79
+ok   desktop hoa-tuoi ↔ khoi-nep  layout 0.80 dom 1.00 hero 0.65 pal 0.84 type 0.79 comp 0.83
+ok   desktop hoa-tuoi ↔ kim-hoan  layout 0.90 dom 0.99 hero 0.48 pal 0.48 type 0.68 comp 0.75
+ok   desktop hoa-tuoi ↔ lan-bien  layout 0.90 dom 0.97 hero 0.69 pal 0.87 type 0.69 comp 0.84
+ok   desktop hoa-tuoi ↔ luot-song  layout 0.89 dom 0.98 hero 0.47 pal 0.76 type 0.71 comp 0.79
+ok   desktop hoa-tuoi ↔ mien-an  layout 0.90 dom 0.99 hero 0.33 pal 0.88 type 0.66 comp 0.78
+ok   desktop hoa-tuoi ↔ mien-cuoi  layout 0.73 dom 1.00 hero 0.45 pal 0.93 type 0.81 comp 0.80
+ok   desktop hoa-tuoi ↔ nail-pop  layout 0.78 dom 1.00 hero 0.66 pal 0.85 type 0.84 comp 0.84
+ok   desktop hoa-tuoi ↔ nep-tho  layout 0.90 dom 1.00 hero 0.42 pal 0.91 type 0.78 comp 0.82
+ok   desktop hoa-tuoi ↔ net-lech  layout 0.73 dom 0.98 hero 0.31 pal 0.53 type 0.86 comp 0.72
+ok   desktop hoa-tuoi ↔ ngoai-ngu-sao  layout 0.91 dom 1.00 hero 0.42 pal 0.95 type 0.85 comp 0.85
+FAIL desktop hoa-tuoi ↔ pet-vui  layout 0.70 dom 0.99 hero 0.19 pal 0.84 type 0.70 comp 0.71  <hero
+ok   desktop hoa-tuoi ↔ phong-thu  layout 0.67 dom 0.99 hero 0.33 pal 0.45 type 0.80 comp 0.69
+ok   desktop hoa-tuoi ↔ phuot-xe  layout 0.79 dom 1.00 hero 0.56 pal 0.45 type 0.83 comp 0.76
+ok   desktop hoa-tuoi ↔ rong-dam  layout 0.89 dom 1.00 hero 0.50 pal 0.88 type 0.83 comp 0.84
+ok   desktop hoa-tuoi ↔ rot-nhiet  layout 0.89 dom 1.00 hero 0.30 pal 0.62 type 0.83 comp 0.77
+ok   desktop hoa-tuoi ↔ ruou-vang  layout 0.82 dom 0.97 hero 0.70 pal 0.49 type 0.66 comp 0.76
+ok   desktop hoa-tuoi ↔ sat-gym  layout 0.75 dom 0.97 hero 0.79 pal 0.46 type 0.77 comp 0.77
+ok   desktop hoa-tuoi ↔ thang-mo  layout 0.89 dom 1.00 hero 0.44 pal 0.91 type 0.69 comp 0.81
+ok   desktop hoa-tuoi ↔ tiem-banh  layout 0.89 dom 1.00 hero 0.72 pal 0.90 type 0.80 comp 0.87
+FAIL desktop hoa-tuoi ↔ tra-thi  layout 0.80 dom 1.00 hero 0.21 pal 0.45 type 0.66 comp 0.67  <hero
+ok   desktop khoi-nep ↔ kim-hoan  layout 0.80 dom 1.00 hero 0.67 pal 0.90 type 0.79 comp 0.84
+ok   desktop khoi-nep ↔ lan-bien  layout 0.90 dom 1.00 hero 0.34 pal 0.93 type 0.89 comp 0.84
+ok   desktop khoi-nep ↔ luot-song  layout 1.00 dom 0.99 hero 0.79 pal 0.86 type 0.79 comp 0.90
+ok   desktop khoi-nep ↔ mien-an  layout 0.80 dom 0.99 hero 0.71 pal 0.36 type 0.79 comp 0.77
+ok   desktop khoi-nep ↔ mien-cuoi  layout 0.64 dom 1.00 hero 0.54 pal 0.46 type 0.89 comp 0.74
+ok   desktop khoi-nep ↔ nail-pop  layout 0.90 dom 0.97 hero 0.94 pal 0.38 type 0.94 comp 0.85
+ok   desktop khoi-nep ↔ nep-tho  layout 0.90 dom 1.00 hero 0.68 pal 0.40 type 0.79 comp 0.79
+ok   desktop khoi-nep ↔ net-lech  layout 0.73 dom 0.97 hero 0.62 pal 0.39 type 0.95 comp 0.76
+ok   desktop khoi-nep ↔ ngoai-ngu-sao  layout 0.73 dom 1.00 hero 0.65 pal 0.87 type 0.88 comp 0.83
+ok   desktop khoi-nep ↔ pet-vui  layout 0.80 dom 1.00 hero 0.72 pal 0.69 type 0.79 comp 0.82
+ok   desktop khoi-nep ↔ phong-thu  layout 0.80 dom 0.99 hero 0.56 pal 0.88 type 0.89 comp 0.84
+ok   desktop khoi-nep ↔ phuot-xe  layout 0.86 dom 1.00 hero 0.48 pal 0.86 type 0.94 comp 0.85
+ok   desktop khoi-nep ↔ rong-dam  layout 0.70 dom 0.99 hero 0.71 pal 0.35 type 0.88 comp 0.76
+ok   desktop khoi-nep ↔ rot-nhiet  layout 0.80 dom 0.99 hero 0.68 pal 0.36 type 0.94 comp 0.79
+ok   desktop khoi-nep ↔ ruou-vang  layout 0.82 dom 1.00 hero 0.28 pal 0.89 type 0.79 comp 0.78
+ok   desktop khoi-nep ↔ sat-gym  layout 0.58 dom 1.00 hero 0.34 pal 0.89 type 0.76 comp 0.73
+ok   desktop khoi-nep ↔ thang-mo  layout 0.80 dom 1.00 hero 0.69 pal 0.44 type 0.79 comp 0.78
+ok   desktop khoi-nep ↔ tiem-banh  layout 0.80 dom 1.00 hero 0.33 pal 0.67 type 0.89 comp 0.77
+ok   desktop khoi-nep ↔ tra-thi  layout 0.90 dom 1.00 hero 0.59 pal 0.87 type 0.89 comp 0.87
+ok   desktop kim-hoan ↔ lan-bien  layout 0.80 dom 0.97 hero 0.67 pal 0.96 type 0.66 comp 0.82
+ok   desktop kim-hoan ↔ luot-song  layout 1.00 dom 1.00 hero 0.48 pal 0.79 type 0.68 comp 0.82
+ok   desktop kim-hoan ↔ mien-an  layout 0.90 dom 0.99 hero 0.42 pal 0.92 type 0.69 comp 0.81
+ok   desktop kim-hoan ↔ mien-cuoi  layout 0.82 dom 1.00 hero 0.40 pal 0.97 type 0.79 comp 0.81
+ok   desktop kim-hoan ↔ nail-pop  layout 0.60 dom 0.96 hero 0.69 pal 0.88 type 0.82 comp 0.79
+ok   desktop kim-hoan ↔ nep-tho  layout 0.80 dom 1.00 hero 0.43 pal 0.95 type 0.75 comp 0.80
+ok   desktop kim-hoan ↔ net-lech  layout 0.91 dom 1.00 hero 0.43 pal 0.57 type 0.88 comp 0.80
+ok   desktop kim-hoan ↔ ngoai-ngu-sao  layout 0.82 dom 0.98 hero 0.46 pal 0.96 type 0.83 comp 0.83
+ok   desktop kim-hoan ↔ pet-vui  layout 0.90 dom 0.91 hero 0.51 pal 0.85 type 0.68 comp 0.79
+FAIL desktop kim-hoan ↔ phong-thu  layout 0.80 dom 0.89 hero 0.38 pal 0.18 type 0.78 comp 0.66  <palette
+FAIL desktop kim-hoan ↔ phuot-xe  layout 0.93 dom 0.87 hero 0.45 pal 0.06 type 0.80 comp 0.68  <palette
+ok   desktop kim-hoan ↔ rong-dam  layout 0.80 dom 1.00 hero 0.49 pal 0.92 type 0.82 comp 0.82
+ok   desktop kim-hoan ↔ rot-nhiet  layout 0.70 dom 1.00 hero 0.49 pal 0.67 type 0.80 comp 0.76
+ok   desktop kim-hoan ↔ ruou-vang  layout 0.82 dom 0.84 hero 0.63 pal 0.53 type 0.67 comp 0.72
+FAIL desktop kim-hoan ↔ sat-gym  layout 0.83 dom 0.99 hero 0.72 pal 0.09 type 0.77 comp 0.73  <palette
+ok   desktop kim-hoan ↔ thang-mo  layout 0.90 dom 0.98 hero 0.48 pal 0.96 type 0.67 comp 0.82
+ok   desktop kim-hoan ↔ tiem-banh  layout 0.80 dom 1.00 hero 0.65 pal 0.94 type 0.78 comp 0.84
+FAIL desktop kim-hoan ↔ tra-thi  layout 0.80 dom 0.84 hero 0.39 pal 0.04 type 0.67 comp 0.60  <palette
+ok   desktop lan-bien ↔ luot-song  layout 1.00 dom 1.00 hero 0.84 pal 0.94 type 0.67 comp 0.90
+ok   desktop lan-bien ↔ mien-an  layout 0.70 dom 1.00 hero 0.71 pal 0.93 type 0.70 comp 0.81
+ok   desktop lan-bien ↔ mien-cuoi  layout 0.82 dom 1.00 hero 0.63 pal 0.90 type 0.78 comp 0.84
+ok   desktop lan-bien ↔ nail-pop  layout 0.80 dom 1.00 hero 0.93 pal 0.92 type 0.80 comp 0.89
+ok   desktop lan-bien ↔ nep-tho  layout 0.90 dom 1.00 hero 0.69 pal 0.93 type 0.76 comp 0.87
+ok   desktop lan-bien ↔ net-lech  layout 0.82 dom 1.00 hero 0.64 pal 0.93 type 0.89 comp 0.87
+ok   desktop lan-bien ↔ ngoai-ngu-sao  layout 0.91 dom 1.00 hero 0.67 pal 0.90 type 0.83 comp 0.88
+ok   desktop lan-bien ↔ pet-vui  layout 0.80 dom 0.99 hero 0.75 pal 0.91 type 0.67 comp 0.83
+ok   desktop lan-bien ↔ phong-thu  layout 0.80 dom 1.00 hero 0.49 pal 0.89 type 0.77 comp 0.81
+ok   desktop lan-bien ↔ phuot-xe  layout 0.79 dom 0.94 hero 0.35 pal 0.93 type 0.82 comp 0.78
+ok   desktop lan-bien ↔ rong-dam  layout 0.70 dom 1.00 hero 0.76 pal 0.92 type 0.81 comp 0.84
+ok   desktop lan-bien ↔ rot-nhiet  layout 0.90 dom 1.00 hero 0.69 pal 0.92 type 0.81 comp 0.88
+FAIL desktop lan-bien ↔ ruou-vang  layout 0.91 dom 0.96 hero 0.13 pal 0.95 type 0.78 comp 0.78  <hero
+FAIL desktop lan-bien ↔ sat-gym  layout 0.83 dom 0.98 hero 0.12 pal 0.95 type 0.76 comp 0.76  <hero
+ok   desktop lan-bien ↔ thang-mo  layout 0.80 dom 1.00 hero 0.72 pal 0.93 type 0.75 comp 0.85
+FAIL desktop lan-bien ↔ tiem-banh  layout 0.80 dom 1.00 hero 0.07 pal 0.93 type 0.76 comp 0.75  <hero
+ok   desktop lan-bien ↔ tra-thi  layout 0.80 dom 0.98 hero 0.61 pal 0.94 type 0.68 comp 0.81
+ok   desktop luot-song ↔ mien-an  layout 1.00 dom 1.00 hero 0.52 pal 0.91 type 0.71 comp 0.85
+ok   desktop luot-song ↔ mien-cuoi  layout 1.00 dom 1.00 hero 0.54 pal 0.96 type 0.76 comp 0.87
+ok   desktop luot-song ↔ nail-pop  layout 0.89 dom 1.00 hero 0.69 pal 0.88 type 0.82 comp 0.87
+ok   desktop luot-song ↔ nep-tho  layout 1.00 dom 1.00 hero 0.53 pal 0.94 type 0.78 comp 0.87
+ok   desktop luot-song ↔ net-lech  layout 0.91 dom 1.00 hero 0.51 pal 0.81 type 0.89 comp 0.85
+ok   desktop luot-song ↔ ngoai-ngu-sao  layout 1.00 dom 1.00 hero 0.65 pal 0.95 type 0.76 comp 0.89
+ok   desktop luot-song ↔ pet-vui  layout 1.00 dom 0.96 hero 0.40 pal 0.85 type 0.65 comp 0.80
+ok   desktop luot-song ↔ phong-thu  layout 1.00 dom 0.96 hero 0.58 pal 0.80 type 0.76 comp 0.84
+ok   desktop luot-song ↔ phuot-xe  layout 0.93 dom 1.00 hero 0.63 pal 0.81 type 0.84 comp 0.86
+ok   desktop luot-song ↔ rong-dam  layout 1.00 dom 1.00 hero 0.50 pal 0.85 type 0.80 comp 0.86
+ok   desktop luot-song ↔ rot-nhiet  layout 1.00 dom 0.99 hero 0.46 pal 0.81 type 0.83 comp 0.85
+ok   desktop luot-song ↔ ruou-vang  layout 1.00 dom 0.98 hero 0.81 pal 0.77 type 0.70 comp 0.87
+ok   desktop luot-song ↔ sat-gym  layout 1.00 dom 0.93 hero 0.88 pal 0.81 type 0.71 comp 0.87
+ok   desktop luot-song ↔ thang-mo  layout 1.00 dom 0.98 hero 0.47 pal 0.93 type 0.67 comp 0.83
+ok   desktop luot-song ↔ tiem-banh  layout 1.00 dom 0.97 hero 0.82 pal 0.88 type 0.76 comp 0.90
+ok   desktop luot-song ↔ tra-thi  layout 0.90 dom 1.00 hero 0.49 pal 0.81 type 0.70 comp 0.81
+FAIL desktop mien-an ↔ mien-cuoi  layout 0.55 dom 0.96 hero 0.44 pal 0.10 type 0.82 comp 0.62  <palette
+FAIL desktop mien-an ↔ nail-pop  layout 0.80 dom 0.99 hero 0.63 pal 0.18 type 0.85 comp 0.74  <palette
+FAIL desktop mien-an ↔ nep-tho  layout 0.80 dom 1.00 hero 0.50 pal 0.18 type 0.79 comp 0.70  <palette
+ok   desktop mien-an ↔ net-lech  layout 0.73 dom 1.00 hero 0.37 pal 0.41 type 0.86 comp 0.72
+ok   desktop mien-an ↔ ngoai-ngu-sao  layout 0.91 dom 0.97 hero 0.36 pal 0.87 type 0.85 comp 0.82
+ok   desktop mien-an ↔ pet-vui  layout 0.90 dom 1.00 hero 0.29 pal 0.71 type 0.71 comp 0.76
+ok   desktop mien-an ↔ phong-thu  layout 0.80 dom 0.99 hero 0.37 pal 0.89 type 0.81 comp 0.79
+ok   desktop mien-an ↔ phuot-xe  layout 0.79 dom 1.00 hero 0.57 pal 0.88 type 0.83 comp 0.83
+ok   desktop mien-an ↔ rong-dam  layout 0.60 dom 1.00 hero 0.46 pal 0.29 type 0.84 comp 0.68
+ok   desktop mien-an ↔ rot-nhiet  layout 0.80 dom 1.00 hero 0.36 pal 0.37 type 0.84 comp 0.72
+ok   desktop mien-an ↔ ruou-vang  layout 0.91 dom 1.00 hero 0.71 pal 0.91 type 0.67 comp 0.85
+ok   desktop mien-an ↔ sat-gym  layout 0.83 dom 1.00 hero 0.79 pal 0.91 type 0.78 comp 0.87
+FAIL desktop mien-an ↔ thang-mo  layout 0.80 dom 0.94 hero 0.35 pal 0.08 type 0.70 comp 0.63  <palette
+ok   desktop mien-an ↔ tiem-banh  layout 0.70 dom 1.00 hero 0.73 pal 0.73 type 0.81 comp 0.81
+ok   desktop mien-an ↔ tra-thi  layout 0.90 dom 0.98 hero 0.26 pal 0.88 type 0.67 comp 0.77
+ok   desktop mien-cuoi ↔ nail-pop  layout 0.73 dom 1.00 hero 0.69 pal 0.24 type 0.83 comp 0.74
+ok   desktop mien-cuoi ↔ nep-tho  layout 0.73 dom 0.99 hero 0.38 pal 0.23 type 0.69 comp 0.65
+ok   desktop mien-cuoi ↔ net-lech  layout 0.55 dom 1.00 hero 0.37 pal 0.49 type 0.80 comp 0.67
+ok   desktop mien-cuoi ↔ ngoai-ngu-sao  layout 0.82 dom 1.00 hero 0.46 pal 0.86 type 0.71 comp 0.79
+ok   desktop mien-cuoi ↔ pet-vui  layout 0.64 dom 1.00 hero 0.49 pal 0.76 type 0.76 comp 0.75
+ok   desktop mien-cuoi ↔ phong-thu  layout 0.82 dom 1.00 hero 0.36 pal 0.94 type 0.67 comp 0.78
+ok   desktop mien-cuoi ↔ phuot-xe  layout 0.71 dom 1.00 hero 0.42 pal 0.94 type 0.84 comp 0.80
+ok   desktop mien-cuoi ↔ rong-dam  layout 0.45 dom 0.99 hero 0.35 pal 0.36 type 0.69 comp 0.60
+ok   desktop mien-cuoi ↔ rot-nhiet  layout 0.73 dom 0.98 hero 0.43 pal 0.44 type 0.84 comp 0.72
+ok   desktop mien-cuoi ↔ ruou-vang  layout 0.82 dom 1.00 hero 0.59 pal 0.96 type 0.80 comp 0.85
+ok   desktop mien-cuoi ↔ sat-gym  layout 0.67 dom 0.99 hero 0.68 pal 0.96 type 0.86 comp 0.83
+FAIL desktop mien-cuoi ↔ thang-mo  layout 0.82 dom 0.99 hero 0.37 pal 0.06 type 0.78 comp 0.67  <palette
+ok   desktop mien-cuoi ↔ tiem-banh  layout 0.73 dom 1.00 hero 0.61 pal 0.74 type 0.67 comp 0.77
+ok   desktop mien-cuoi ↔ tra-thi  layout 0.82 dom 0.99 hero 0.32 pal 0.95 type 0.81 comp 0.80
+ok   desktop nail-pop ↔ nep-tho  layout 0.70 dom 0.99 hero 0.73 pal 0.21 type 0.81 comp 0.73
+ok   desktop nail-pop ↔ net-lech  layout 0.82 dom 1.00 hero 0.72 pal 0.37 type 0.84 comp 0.78
+ok   desktop nail-pop ↔ ngoai-ngu-sao  layout 0.82 dom 0.95 hero 0.75 pal 0.81 type 0.77 comp 0.83
+ok   desktop nail-pop ↔ pet-vui  layout 0.80 dom 0.95 hero 0.61 pal 0.58 type 0.82 comp 0.78
+ok   desktop nail-pop ↔ phong-thu  layout 0.78 dom 0.95 hero 0.69 pal 0.87 type 0.71 comp 0.81
+ok   desktop nail-pop ↔ phuot-xe  layout 0.86 dom 0.99 hero 0.79 pal 0.85 type 0.67 comp 0.84
+ok   desktop nail-pop ↔ rong-dam  layout 0.78 dom 1.00 hero 0.76 pal 0.30 type 0.76 comp 0.75
+ok   desktop nail-pop ↔ rot-nhiet  layout 0.89 dom 1.00 hero 0.73 pal 0.36 type 0.67 comp 0.77
+ok   desktop nail-pop ↔ ruou-vang  layout 0.82 dom 0.99 hero 0.92 pal 0.89 type 0.83 comp 0.89
+ok   desktop nail-pop ↔ sat-gym  layout 0.83 dom 1.00 hero 0.91 pal 0.86 type 0.91 comp 0.91
+ok   desktop nail-pop ↔ thang-mo  layout 0.78 dom 0.99 hero 0.67 pal 0.23 type 0.80 comp 0.74
+ok   desktop nail-pop ↔ tiem-banh  layout 0.78 dom 1.00 hero 0.92 pal 0.70 type 0.71 comp 0.83
+ok   desktop nail-pop ↔ tra-thi  layout 0.70 dom 0.93 hero 0.64 pal 0.87 type 0.84 comp 0.80
+ok   desktop nep-tho ↔ net-lech  layout 0.73 dom 1.00 hero 0.39 pal 0.44 type 0.78 comp 0.71
+ok   desktop nep-tho ↔ ngoai-ngu-sao  layout 0.73 dom 1.00 hero 0.55 pal 0.87 type 0.83 comp 0.81
+ok   desktop nep-tho ↔ pet-vui  layout 0.90 dom 1.00 hero 0.49 pal 0.75 type 0.78 comp 0.81
+ok   desktop nep-tho ↔ phong-thu  layout 0.90 dom 1.00 hero 0.43 pal 0.92 type 0.78 comp 0.83
+ok   desktop nep-tho ↔ phuot-xe  layout 0.79 dom 1.00 hero 0.49 pal 0.91 type 0.81 comp 0.82
+FAIL desktop nep-tho ↔ rong-dam  layout 0.80 dom 0.99 hero 0.52 pal 0.14 type 0.82 comp 0.71  <palette
+ok   desktop nep-tho ↔ rot-nhiet  layout 0.70 dom 1.00 hero 0.39 pal 0.40 type 0.80 comp 0.70
+ok   desktop nep-tho ↔ ruou-vang  layout 0.91 dom 1.00 hero 0.65 pal 0.94 type 0.67 comp 0.85
+ok   desktop nep-tho ↔ sat-gym  layout 0.83 dom 1.00 hero 0.74 pal 0.94 type 0.87 comp 0.88
+ok   desktop nep-tho ↔ thang-mo  layout 0.70 dom 0.98 hero 0.51 pal 0.22 type 0.66 comp 0.66
+ok   desktop nep-tho ↔ tiem-banh  layout 0.70 dom 1.00 hero 0.67 pal 0.72 type 0.77 comp 0.79
+ok   desktop nep-tho ↔ tra-thi  layout 0.90 dom 1.00 hero 0.39 pal 0.92 type 0.77 comp 0.82
+ok   desktop net-lech ↔ ngoai-ngu-sao  layout 0.73 dom 1.00 hero 0.47 pal 0.83 type 0.82 comp 0.79
+ok   desktop net-lech ↔ pet-vui  layout 0.64 dom 1.00 hero 0.36 pal 0.63 type 0.89 comp 0.73
+ok   desktop net-lech ↔ phong-thu  layout 0.73 dom 0.97 hero 0.28 pal 0.54 type 0.79 comp 0.70
+ok   desktop net-lech ↔ phuot-xe  layout 0.86 dom 1.00 hero 0.47 pal 0.51 type 0.83 comp 0.77
+ok   desktop net-lech ↔ rong-dam  layout 0.73 dom 0.97 hero 0.51 pal 0.42 type 0.81 comp 0.72
+FAIL desktop net-lech ↔ rot-nhiet  layout 0.82 dom 0.98 hero 0.24 pal 0.18 type 0.83 comp 0.67  <hero,palette
+ok   desktop net-lech ↔ ruou-vang  layout 0.91 dom 1.00 hero 0.64 pal 0.56 type 0.87 comp 0.83
+ok   desktop net-lech ↔ sat-gym  layout 0.58 dom 1.00 hero 0.71 pal 0.54 type 0.93 comp 0.77
+ok   desktop net-lech ↔ thang-mo  layout 0.64 dom 0.96 hero 0.47 pal 0.48 type 0.89 comp 0.72
+ok   desktop net-lech ↔ tiem-banh  layout 0.73 dom 1.00 hero 0.66 pal 0.72 type 0.79 comp 0.80
+FAIL desktop net-lech ↔ tra-thi  layout 0.82 dom 1.00 hero 0.21 pal 0.53 type 0.87 comp 0.73  <hero
+ok   desktop ngoai-ngu-sao ↔ pet-vui  layout 0.91 dom 0.93 hero 0.45 pal 0.73 type 0.82 comp 0.80
+ok   desktop ngoai-ngu-sao ↔ phong-thu  layout 0.82 dom 0.97 hero 0.46 pal 0.93 type 0.72 comp 0.80
+ok   desktop ngoai-ngu-sao ↔ phuot-xe  layout 0.93 dom 1.00 hero 0.59 pal 0.92 type 0.78 comp 0.86
+ok   desktop ngoai-ngu-sao ↔ rong-dam  layout 0.82 dom 1.00 hero 0.57 pal 0.86 type 0.68 comp 0.80
+ok   desktop ngoai-ngu-sao ↔ rot-nhiet  layout 0.64 dom 1.00 hero 0.46 pal 0.87 type 0.78 comp 0.76
+ok   desktop ngoai-ngu-sao ↔ ruou-vang  layout 0.91 dom 1.00 hero 0.68 pal 0.95 type 0.59 comp 0.84
+ok   desktop ngoai-ngu-sao ↔ sat-gym  layout 0.83 dom 1.00 hero 0.77 pal 0.95 type 0.78 comp 0.87
+ok   desktop ngoai-ngu-sao ↔ thang-mo  layout 0.82 dom 1.00 hero 0.45 pal 0.87 type 0.83 comp 0.81
+FAIL desktop ngoai-ngu-sao ↔ tiem-banh  layout 0.82 dom 0.98 hero 0.70 pal 0.85 type 0.12 comp 0.71  <type
+ok   desktop ngoai-ngu-sao ↔ tra-thi  layout 0.91 dom 0.95 hero 0.32 pal 0.95 type 0.84 comp 0.82
+ok   desktop pet-vui ↔ phong-thu  layout 0.80 dom 0.90 hero 0.38 pal 0.82 type 0.75 comp 0.75
+ok   desktop pet-vui ↔ phuot-xe  layout 0.86 dom 0.98 hero 0.60 pal 0.82 type 0.83 comp 0.84
+ok   desktop pet-vui ↔ rong-dam  layout 0.70 dom 0.98 hero 0.52 pal 0.71 type 0.80 comp 0.76
+ok   desktop pet-vui ↔ rot-nhiet  layout 0.80 dom 1.00 hero 0.33 pal 0.66 type 0.83 comp 0.76
+ok   desktop pet-vui ↔ ruou-vang  layout 0.91 dom 0.95 hero 0.76 pal 0.86 type 0.69 comp 0.84
+ok   desktop pet-vui ↔ sat-gym  layout 0.58 dom 1.00 hero 0.81 pal 0.84 type 0.76 comp 0.80
+ok   desktop pet-vui ↔ thang-mo  layout 0.70 dom 1.00 hero 0.41 pal 0.76 type 0.67 comp 0.73
+ok   desktop pet-vui ↔ tiem-banh  layout 0.80 dom 1.00 hero 0.77 pal 0.74 type 0.76 comp 0.83
+FAIL desktop pet-vui ↔ tra-thi  layout 0.80 dom 0.96 hero 0.23 pal 0.86 type 0.70 comp 0.74  <hero
+FAIL desktop phong-thu ↔ phuot-xe  layout 0.86 dom 0.98 hero 0.37 pal 0.15 type 0.73 comp 0.68  <palette
+ok   desktop phong-thu ↔ rong-dam  layout 0.89 dom 1.00 hero 0.52 pal 0.90 type 0.70 comp 0.82
+ok   desktop phong-thu ↔ rot-nhiet  layout 0.78 dom 0.97 hero 0.37 pal 0.64 type 0.73 comp 0.73
+ok   desktop phong-thu ↔ ruou-vang  layout 0.91 dom 0.92 hero 0.45 pal 0.52 type 0.79 comp 0.76
+ok   desktop phong-thu ↔ sat-gym  layout 0.83 dom 0.99 hero 0.55 pal 0.18 type 0.86 comp 0.73
+ok   desktop phong-thu ↔ thang-mo  layout 0.89 dom 0.98 hero 0.47 pal 0.94 type 0.76 comp 0.83
+ok   desktop phong-thu ↔ tiem-banh  layout 0.78 dom 1.00 hero 0.49 pal 0.93 type 0.65 comp 0.78
+FAIL desktop phong-thu ↔ tra-thi  layout 0.80 dom 0.95 hero 0.23 pal 0.16 type 0.80 comp 0.65  <hero,palette
+ok   desktop phuot-xe ↔ rong-dam  layout 0.79 dom 1.00 hero 0.59 pal 0.89 type 0.77 comp 0.82
+ok   desktop phuot-xe ↔ rot-nhiet  layout 0.86 dom 1.00 hero 0.54 pal 0.63 type 0.65 comp 0.77
+ok   desktop phuot-xe ↔ ruou-vang  layout 0.86 dom 0.96 hero 0.35 pal 0.53 type 0.81 comp 0.75
+FAIL desktop phuot-xe ↔ sat-gym  layout 0.86 dom 0.99 hero 0.39 pal 0.07 type 0.92 comp 0.71  <palette
+ok   desktop phuot-xe ↔ thang-mo  layout 0.86 dom 1.00 hero 0.60 pal 0.93 type 0.82 comp 0.86
+ok   desktop phuot-xe ↔ tiem-banh  layout 0.79 dom 1.00 hero 0.33 pal 0.92 type 0.73 comp 0.78
+FAIL desktop phuot-xe ↔ tra-thi  layout 0.93 dom 0.95 hero 0.46 pal 0.04 type 0.82 comp 0.70  <palette
+ok   desktop rong-dam ↔ rot-nhiet  layout 0.78 dom 0.98 hero 0.52 pal 0.37 type 0.77 comp 0.72
+ok   desktop rong-dam ↔ ruou-vang  layout 0.82 dom 1.00 hero 0.74 pal 0.91 type 0.83 comp 0.87
+ok   desktop rong-dam ↔ sat-gym  layout 0.83 dom 1.00 hero 0.81 pal 0.92 type 0.84 comp 0.89
+ok   desktop rong-dam ↔ thang-mo  layout 0.78 dom 0.99 hero 0.33 pal 0.35 type 0.81 comp 0.70
+ok   desktop rong-dam ↔ tiem-banh  layout 0.78 dom 1.00 hero 0.76 pal 0.70 type 0.70 comp 0.80
+ok   desktop rong-dam ↔ tra-thi  layout 0.90 dom 1.00 hero 0.46 pal 0.90 type 0.83 comp 0.84
+ok   desktop rot-nhiet ↔ ruou-vang  layout 0.82 dom 1.00 hero 0.70 pal 0.66 type 0.82 comp 0.82
+ok   desktop rot-nhiet ↔ sat-gym  layout 0.92 dom 1.00 hero 0.77 pal 0.67 type 0.92 comp 0.88
+ok   desktop rot-nhiet ↔ thang-mo  layout 0.78 dom 0.96 hero 0.48 pal 0.42 type 0.82 comp 0.73
+ok   desktop rot-nhiet ↔ tiem-banh  layout 0.67 dom 0.99 hero 0.72 pal 0.71 type 0.72 comp 0.77
+ok   desktop rot-nhiet ↔ tra-thi  layout 0.90 dom 1.00 hero 0.27 pal 0.64 type 0.82 comp 0.77
+FAIL desktop ruou-vang ↔ sat-gym  layout 0.83 dom 0.98 hero 0.15 pal 0.53 type 0.77 comp 0.70  <hero
+ok   desktop ruou-vang ↔ thang-mo  layout 0.91 dom 1.00 hero 0.69 pal 0.91 type 0.68 comp 0.85
+FAIL desktop ruou-vang ↔ tiem-banh  layout 0.73 dom 1.00 hero 0.07 pal 0.91 type 0.54 comp 0.68  <hero
+ok   desktop ruou-vang ↔ tra-thi  layout 0.91 dom 0.81 hero 0.62 pal 0.53 type 0.76 comp 0.75
+ok   desktop sat-gym ↔ thang-mo  layout 0.67 dom 0.98 hero 0.79 pal 0.96 type 0.76 comp 0.83
+FAIL desktop sat-gym ↔ tiem-banh  layout 0.83 dom 0.99 hero 0.10 pal 0.94 type 0.86 comp 0.78  <hero
+FAIL desktop sat-gym ↔ tra-thi  layout 0.83 dom 1.00 hero 0.71 pal 0.09 type 0.77 comp 0.73  <palette
+ok   desktop thang-mo ↔ tiem-banh  layout 0.89 dom 1.00 hero 0.70 pal 0.70 type 0.76 comp 0.83
+ok   desktop thang-mo ↔ tra-thi  layout 0.90 dom 0.99 hero 0.38 pal 0.94 type 0.79 comp 0.82
+ok   desktop tiem-banh ↔ tra-thi  layout 0.80 dom 1.00 hero 0.64 pal 0.94 type 0.79 comp 0.84
+ok   NEGATIVE-CONTROL desktop bar-mai-thuong vs bản sao đổi màu/chữ: layout 0.08 dom 0.12 hero 0.01 pal 0.92 type 0.60 → bị bắt là bản sao
+FAIL mobile bar-mai-thuong ↔ ben-vi  layout 0.75 dom 0.99 hero 0.28 pal 0.14 type 0.66 comp 0.62  <palette
+ok   mobile bar-mai-thuong ↔ can-ho-ven-bien  layout 0.83 dom 0.97 hero 0.27 pal 0.33 type 0.72 comp 0.68
+FAIL mobile bar-mai-thuong ↔ cowork-grid  layout 0.75 dom 0.91 hero 0.34 pal 0.17 type 0.66 comp 0.62  <palette
+ok   mobile bar-mai-thuong ↔ da-xanh  layout 0.67 dom 0.94 hero 0.71 pal 0.88 type 0.76 comp 0.79
+FAIL mobile bar-mai-thuong ↔ detail-xe  layout 0.75 dom 0.89 hero 1.00 pal 0.17 type 0.71 comp 0.73  <palette
+FAIL mobile bar-mai-thuong ↔ glamping-nui  layout 0.92 dom 0.95 hero 0.69 pal 0.16 type 0.67 comp 0.73  <palette
+ok   mobile bar-mai-thuong ↔ gom-lo  layout 0.83 dom 1.00 hero 0.51 pal 0.88 type 0.80 comp 0.82
+ok   mobile bar-mai-thuong ↔ hien-man  layout 1.00 dom 1.00 hero 0.76 pal 0.48 type 0.79 comp 0.84
+ok   mobile bar-mai-thuong ↔ hoa-tuoi  layout 0.83 dom 0.99 hero 0.23 pal 0.49 type 0.78 comp 0.71
+ok   mobile bar-mai-thuong ↔ khoi-nep  layout 0.83 dom 1.00 hero 0.96 pal 0.70 type 0.87 comp 0.88
+ok   mobile bar-mai-thuong ↔ kim-hoan  layout 0.83 dom 0.98 hero 0.45 pal 0.20 type 0.78 comp 0.70
+FAIL mobile bar-mai-thuong ↔ lan-bien  layout 0.83 dom 0.99 hero 0.92 pal 0.82 type 0.42 comp 0.80  <type
+ok   mobile bar-mai-thuong ↔ luot-song  layout 0.92 dom 0.99 hero 0.48 pal 0.83 type 0.77 comp 0.82
+ok   mobile bar-mai-thuong ↔ mien-an  layout 0.75 dom 1.00 hero 0.65 pal 0.82 type 0.81 comp 0.82
+ok   mobile bar-mai-thuong ↔ mien-cuoi  layout 0.75 dom 1.00 hero 0.41 pal 0.88 type 0.65 comp 0.76
+ok   mobile bar-mai-thuong ↔ nail-pop  layout 0.92 dom 0.97 hero 0.48 pal 0.76 type 0.82 comp 0.82
+ok   mobile bar-mai-thuong ↔ nep-tho  layout 0.92 dom 1.00 hero 0.39 pal 0.82 type 0.67 comp 0.79
+ok   mobile bar-mai-thuong ↔ net-lech  layout 0.75 dom 1.00 hero 1.00 pal 0.30 type 0.78 comp 0.79
+ok   mobile bar-mai-thuong ↔ ngoai-ngu-sao  layout 0.92 dom 0.96 hero 0.69 pal 0.89 type 0.71 comp 0.85
+ok   mobile bar-mai-thuong ↔ pet-vui  layout 0.75 dom 0.92 hero 0.51 pal 0.84 type 0.77 comp 0.77
+ok   mobile bar-mai-thuong ↔ phong-thu  layout 0.92 dom 0.90 hero 0.95 pal 0.23 type 0.68 comp 0.77
+FAIL mobile bar-mai-thuong ↔ phuot-xe  layout 0.93 dom 0.97 hero 1.00 pal 0.17 type 0.83 comp 0.82  <palette
+ok   mobile bar-mai-thuong ↔ rong-dam  layout 0.75 dom 1.00 hero 0.57 pal 0.85 type 0.69 comp 0.79
+ok   mobile bar-mai-thuong ↔ rot-nhiet  layout 0.83 dom 0.99 hero 0.51 pal 0.72 type 0.86 comp 0.81
+ok   mobile bar-mai-thuong ↔ ruou-vang  layout 0.83 dom 0.91 hero 0.86 pal 0.55 type 0.77 comp 0.80
+FAIL mobile bar-mai-thuong ↔ sat-gym  layout 0.92 dom 1.00 hero 0.96 pal 0.18 type 0.83 comp 0.82  <palette
+ok   mobile bar-mai-thuong ↔ thang-mo  layout 0.67 dom 1.00 hero 0.50 pal 0.90 type 0.78 comp 0.78
+ok   mobile bar-mai-thuong ↔ tiem-banh  layout 0.83 dom 1.00 hero 0.90 pal 0.89 type 0.68 comp 0.86
+ok   mobile bar-mai-thuong ↔ tra-thi  layout 0.92 dom 0.97 hero 1.00 pal 0.18 type 0.77 comp 0.81
+ok   mobile ben-vi ↔ can-ho-ven-bien  layout 0.89 dom 1.00 hero 0.38 pal 0.33 type 0.78 comp 0.73
+FAIL mobile ben-vi ↔ cowork-grid  layout 0.80 dom 1.00 hero 0.39 pal 0.17 type 0.67 comp 0.66  <palette
+ok   mobile ben-vi ↔ da-xanh  layout 0.78 dom 0.99 hero 0.76 pal 0.91 type 0.77 comp 0.85
+FAIL mobile ben-vi ↔ detail-xe  layout 0.70 dom 1.00 hero 1.00 pal 0.17 type 0.80 comp 0.76  <palette
+FAIL mobile ben-vi ↔ glamping-nui  layout 0.75 dom 1.00 hero 0.74 pal 0.13 type 0.77 comp 0.72  <palette
+ok   mobile ben-vi ↔ gom-lo  layout 0.90 dom 1.00 hero 0.46 pal 0.87 type 0.70 comp 0.81
+ok   mobile ben-vi ↔ hien-man  layout 1.00 dom 0.99 hero 0.78 pal 0.51 type 0.70 comp 0.83
+ok   mobile ben-vi ↔ hoa-tuoi  layout 0.88 dom 0.99 hero 0.33 pal 0.50 type 0.69 comp 0.72
+ok   mobile ben-vi ↔ khoi-nep  layout 0.80 dom 0.94 hero 1.00 pal 0.66 type 0.77 comp 0.84
+FAIL mobile ben-vi ↔ kim-hoan  layout 0.90 dom 1.00 hero 0.32 pal 0.17 type 0.69 comp 0.68  <palette
+ok   mobile ben-vi ↔ lan-bien  layout 0.70 dom 0.99 hero 0.91 pal 0.87 type 0.76 comp 0.84
+ok   mobile ben-vi ↔ luot-song  layout 1.00 dom 0.98 hero 0.40 pal 0.75 type 0.66 comp 0.79
+ok   mobile ben-vi ↔ mien-an  layout 0.80 dom 0.96 hero 0.58 pal 0.78 type 0.71 comp 0.79
+ok   mobile ben-vi ↔ mien-cuoi  layout 0.64 dom 0.98 hero 0.36 pal 0.91 type 0.66 comp 0.72
+ok   mobile ben-vi ↔ nail-pop  layout 0.89 dom 0.98 hero 0.55 pal 0.77 type 0.83 comp 0.83
+ok   mobile ben-vi ↔ nep-tho  layout 0.82 dom 0.96 hero 0.32 pal 0.83 type 0.68 comp 0.75
+ok   mobile ben-vi ↔ net-lech  layout 0.70 dom 0.97 hero 1.00 pal 0.29 type 0.78 comp 0.77
+ok   mobile ben-vi ↔ ngoai-ngu-sao  layout 0.91 dom 0.98 hero 0.70 pal 0.91 type 0.81 comp 0.87
+ok   mobile ben-vi ↔ pet-vui  layout 0.67 dom 0.97 hero 0.42 pal 0.86 type 0.66 comp 0.73
+ok   mobile ben-vi ↔ phong-thu  layout 0.89 dom 0.98 hero 0.94 pal 0.26 type 0.78 comp 0.80
+FAIL mobile ben-vi ↔ phuot-xe  layout 0.86 dom 1.00 hero 1.00 pal 0.17 type 0.83 comp 0.81  <palette
+ok   mobile ben-vi ↔ rong-dam  layout 0.78 dom 1.00 hero 0.50 pal 0.85 type 0.79 comp 0.80
+ok   mobile ben-vi ↔ rot-nhiet  layout 0.88 dom 0.99 hero 0.47 pal 0.72 type 0.87 comp 0.81
+ok   mobile ben-vi ↔ ruou-vang  layout 0.82 dom 1.00 hero 0.93 pal 0.52 type 0.67 comp 0.81
+ok   mobile ben-vi ↔ sat-gym  layout 0.83 dom 0.99 hero 0.95 pal 0.18 type 0.73 comp 0.77
+ok   mobile ben-vi ↔ thang-mo  layout 0.67 dom 0.99 hero 0.55 pal 0.91 type 0.69 comp 0.77
+ok   mobile ben-vi ↔ tiem-banh  layout 0.78 dom 0.97 hero 0.87 pal 0.89 type 0.78 comp 0.86
+FAIL mobile ben-vi ↔ tra-thi  layout 0.90 dom 1.00 hero 1.00 pal 0.16 type 0.78 comp 0.81  <palette
+ok   mobile can-ho-ven-bien ↔ cowork-grid  layout 0.80 dom 1.00 hero 0.22 pal 0.39 type 0.76 comp 0.69
+ok   mobile can-ho-ven-bien ↔ da-xanh  layout 0.56 dom 1.00 hero 0.60 pal 0.90 type 0.66 comp 0.75
+ok   mobile can-ho-ven-bien ↔ detail-xe  layout 0.80 dom 0.95 hero 1.00 pal 0.39 type 0.83 comp 0.81
+ok   mobile can-ho-ven-bien ↔ glamping-nui  layout 0.89 dom 0.89 hero 0.61 pal 0.35 type 0.75 comp 0.74
+ok   mobile can-ho-ven-bien ↔ gom-lo  layout 0.70 dom 0.85 hero 0.47 pal 0.87 type 0.82 comp 0.75
+ok   mobile can-ho-ven-bien ↔ hien-man  layout 1.00 dom 1.00 hero 0.71 pal 0.31 type 0.77 comp 0.81
+FAIL mobile can-ho-ven-bien ↔ hoa-tuoi  layout 0.67 dom 0.96 hero 0.17 pal 0.49 type 0.76 comp 0.65  <hero
+ok   mobile can-ho-ven-bien ↔ khoi-nep  layout 0.80 dom 1.00 hero 0.91 pal 0.69 type 0.87 comp 0.86
+ok   mobile can-ho-ven-bien ↔ kim-hoan  layout 0.90 dom 0.99 hero 0.35 pal 0.40 type 0.76 comp 0.73
+ok   mobile can-ho-ven-bien ↔ lan-bien  layout 0.90 dom 0.97 hero 0.88 pal 0.83 type 0.69 comp 0.86
+ok   mobile can-ho-ven-bien ↔ luot-song  layout 0.89 dom 0.89 hero 0.39 pal 0.79 type 0.78 comp 0.77
+ok   mobile can-ho-ven-bien ↔ mien-an  layout 0.90 dom 1.00 hero 0.48 pal 0.81 type 0.79 comp 0.82
+ok   mobile can-ho-ven-bien ↔ mien-cuoi  layout 0.91 dom 1.00 hero 0.23 pal 0.90 type 0.77 comp 0.79
+ok   mobile can-ho-ven-bien ↔ nail-pop  layout 0.78 dom 1.00 hero 0.43 pal 0.77 type 0.80 comp 0.78
+ok   mobile can-ho-ven-bien ↔ nep-tho  layout 0.91 dom 1.00 hero 0.26 pal 0.83 type 0.75 comp 0.78
+ok   mobile can-ho-ven-bien ↔ net-lech  layout 0.90 dom 1.00 hero 1.00 pal 0.38 type 0.87 comp 0.85
+ok   mobile can-ho-ven-bien ↔ ngoai-ngu-sao  layout 0.91 dom 1.00 hero 0.54 pal 0.92 type 0.83 comp 0.85
+ok   mobile can-ho-ven-bien ↔ pet-vui  layout 0.67 dom 1.00 hero 0.40 pal 0.84 type 0.79 comp 0.76
+FAIL mobile can-ho-ven-bien ↔ phong-thu  layout 0.78 dom 0.99 hero 0.87 pal 0.15 type 0.80 comp 0.75  <palette
+ok   mobile can-ho-ven-bien ↔ phuot-xe  layout 0.79 dom 0.99 hero 1.00 pal 0.39 type 0.81 comp 0.82
+ok   mobile can-ho-ven-bien ↔ rong-dam  layout 0.89 dom 1.00 hero 0.47 pal 0.85 type 0.81 comp 0.83
+ok   mobile can-ho-ven-bien ↔ rot-nhiet  layout 0.89 dom 1.00 hero 0.40 pal 0.72 type 0.85 comp 0.80
+ok   mobile can-ho-ven-bien ↔ ruou-vang  layout 0.91 dom 0.97 hero 0.80 pal 0.55 type 0.75 comp 0.82
+ok   mobile can-ho-ven-bien ↔ sat-gym  layout 0.75 dom 0.85 hero 0.94 pal 0.39 type 0.84 comp 0.77
+ok   mobile can-ho-ven-bien ↔ thang-mo  layout 0.67 dom 1.00 hero 0.45 pal 0.91 type 0.76 comp 0.77
+ok   mobile can-ho-ven-bien ↔ tiem-banh  layout 0.89 dom 1.00 hero 0.84 pal 0.91 type 0.76 comp 0.89
+ok   mobile can-ho-ven-bien ↔ tra-thi  layout 0.80 dom 1.00 hero 1.00 pal 0.39 type 0.65 comp 0.79
+ok   mobile cowork-grid ↔ da-xanh  layout 0.70 dom 0.95 hero 0.61 pal 0.91 type 0.76 comp 0.79
+FAIL mobile cowork-grid ↔ detail-xe  layout 0.60 dom 1.00 hero 1.00 pal 0.04 type 0.72 comp 0.70  <palette
+FAIL mobile cowork-grid ↔ glamping-nui  layout 0.70 dom 0.98 hero 0.61 pal 0.14 type 0.65 comp 0.66  <palette
+ok   mobile cowork-grid ↔ gom-lo  layout 0.90 dom 1.00 hero 0.51 pal 0.91 type 0.81 comp 0.85
+ok   mobile cowork-grid ↔ hien-man  layout 1.00 dom 1.00 hero 0.73 pal 0.55 type 0.78 comp 0.84
+ok   mobile cowork-grid ↔ hoa-tuoi  layout 0.90 dom 1.00 hero 0.21 pal 0.49 type 0.77 comp 0.73
+ok   mobile cowork-grid ↔ khoi-nep  layout 0.50 dom 1.00 hero 0.90 pal 0.71 type 0.87 comp 0.79
+FAIL mobile cowork-grid ↔ kim-hoan  layout 0.90 dom 1.00 hero 0.41 pal 0.09 type 0.77 comp 0.70  <palette
+ok   mobile cowork-grid ↔ lan-bien  layout 0.80 dom 1.00 hero 0.88 pal 0.90 type 0.78 comp 0.87
+ok   mobile cowork-grid ↔ luot-song  layout 1.00 dom 0.98 hero 0.48 pal 0.81 type 0.78 comp 0.84
+ok   mobile cowork-grid ↔ mien-an  layout 0.60 dom 1.00 hero 0.55 pal 0.82 type 0.80 comp 0.76
+ok   mobile cowork-grid ↔ mien-cuoi  layout 0.55 dom 0.99 hero 0.26 pal 0.91 type 0.66 comp 0.69
+ok   mobile cowork-grid ↔ nail-pop  layout 0.80 dom 0.99 hero 0.50 pal 0.78 type 0.81 comp 0.80
+ok   mobile cowork-grid ↔ nep-tho  layout 0.73 dom 1.00 hero 0.36 pal 0.83 type 0.65 comp 0.74
+ok   mobile cowork-grid ↔ net-lech  layout 0.80 dom 0.99 hero 1.00 pal 0.29 type 0.77 comp 0.80
+ok   mobile cowork-grid ↔ ngoai-ngu-sao  layout 0.82 dom 1.00 hero 0.64 pal 0.91 type 0.72 comp 0.83
+ok   mobile cowork-grid ↔ pet-vui  layout 0.80 dom 0.96 hero 0.45 pal 0.85 type 0.78 comp 0.79
+ok   mobile cowork-grid ↔ phong-thu  layout 0.90 dom 0.97 hero 0.93 pal 0.29 type 0.69 comp 0.79
+FAIL mobile cowork-grid ↔ phuot-xe  layout 0.71 dom 1.00 hero 1.00 pal 0.05 type 0.82 comp 0.75  <palette
+ok   mobile cowork-grid ↔ rong-dam  layout 0.60 dom 1.00 hero 0.52 pal 0.85 type 0.70 comp 0.75
+ok   mobile cowork-grid ↔ rot-nhiet  layout 0.80 dom 1.00 hero 0.45 pal 0.72 type 0.85 comp 0.79
+ok   mobile cowork-grid ↔ ruou-vang  layout 0.82 dom 0.97 hero 0.80 pal 0.56 type 0.75 comp 0.80
+FAIL mobile cowork-grid ↔ sat-gym  layout 0.75 dom 1.00 hero 0.94 pal 0.18 type 0.84 comp 0.77  <palette
+ok   mobile cowork-grid ↔ thang-mo  layout 0.60 dom 1.00 hero 0.46 pal 0.90 type 0.77 comp 0.76
+ok   mobile cowork-grid ↔ tiem-banh  layout 0.80 dom 1.00 hero 0.84 pal 0.90 type 0.66 comp 0.84
+FAIL mobile cowork-grid ↔ tra-thi  layout 0.90 dom 0.99 hero 1.00 pal 0.05 type 0.76 comp 0.78  <palette
+ok   mobile da-xanh ↔ detail-xe  layout 0.70 dom 0.91 hero 0.52 pal 0.91 type 0.81 comp 0.78
+FAIL mobile da-xanh ↔ glamping-nui  layout 0.89 dom 0.99 hero 0.05 pal 0.90 type 0.76 comp 0.76  <hero
+ok   mobile da-xanh ↔ gom-lo  layout 0.70 dom 1.00 hero 0.89 pal 0.92 type 0.81 comp 0.86
+ok   mobile da-xanh ↔ hien-man  layout 1.00 dom 1.00 hero 0.20 pal 0.63 type 0.78 comp 0.77
+ok   mobile da-xanh ↔ hoa-tuoi  layout 0.78 dom 1.00 hero 0.61 pal 0.91 type 0.77 comp 0.83
+ok   mobile da-xanh ↔ khoi-nep  layout 0.70 dom 0.99 hero 0.52 pal 0.48 type 0.87 comp 0.74
+ok   mobile da-xanh ↔ kim-hoan  layout 0.90 dom 0.98 hero 0.76 pal 0.93 type 0.77 comp 0.88
+ok   mobile da-xanh ↔ lan-bien  layout 0.80 dom 1.00 hero 0.28 pal 0.89 type 0.68 comp 0.75
+ok   mobile da-xanh ↔ luot-song  layout 1.00 dom 0.94 hero 0.84 pal 0.93 type 0.77 comp 0.90
+ok   mobile da-xanh ↔ mien-an  layout 0.80 dom 0.99 hero 0.85 pal 0.23 type 0.80 comp 0.77
+ok   mobile da-xanh ↔ mien-cuoi  layout 0.82 dom 1.00 hero 0.67 pal 0.22 type 0.76 comp 0.74
+ok   mobile da-xanh ↔ nail-pop  layout 0.89 dom 1.00 hero 0.84 pal 0.35 type 0.81 comp 0.81
+ok   mobile da-xanh ↔ nep-tho  layout 0.91 dom 0.99 hero 0.72 pal 0.23 type 0.76 comp 0.77
+ok   mobile da-xanh ↔ net-lech  layout 0.80 dom 1.00 hero 0.49 pal 0.70 type 0.87 comp 0.80
+ok   mobile da-xanh ↔ ngoai-ngu-sao  layout 0.91 dom 1.00 hero 0.79 pal 0.80 type 0.82 comp 0.88
+ok   mobile da-xanh ↔ pet-vui  layout 0.78 dom 0.97 hero 0.83 pal 0.76 type 0.78 comp 0.83
+ok   mobile da-xanh ↔ phong-thu  layout 0.89 dom 0.95 hero 0.59 pal 0.90 type 0.79 comp 0.84
+ok   mobile da-xanh ↔ phuot-xe  layout 0.86 dom 1.00 hero 0.46 pal 0.89 type 0.82 comp 0.83
+ok   mobile da-xanh ↔ rong-dam  layout 0.78 dom 1.00 hero 0.78 pal 0.22 type 0.80 comp 0.75
+ok   mobile da-xanh ↔ rot-nhiet  layout 0.89 dom 1.00 hero 0.82 pal 0.34 type 0.86 comp 0.82
+ok   mobile da-xanh ↔ ruou-vang  layout 0.82 dom 0.94 hero 0.28 pal 0.92 type 0.76 comp 0.77
+ok   mobile da-xanh ↔ sat-gym  layout 0.83 dom 1.00 hero 0.34 pal 0.89 type 0.83 comp 0.80
+ok   mobile da-xanh ↔ thang-mo  layout 0.78 dom 1.00 hero 0.71 pal 0.23 type 0.77 comp 0.74
+ok   mobile da-xanh ↔ tiem-banh  layout 0.78 dom 0.98 hero 0.25 pal 0.81 type 0.77 comp 0.75
+ok   mobile da-xanh ↔ tra-thi  layout 0.70 dom 0.98 hero 0.52 pal 0.92 type 0.67 comp 0.77
+FAIL mobile detail-xe ↔ glamping-nui  layout 0.80 dom 1.00 hero 0.54 pal 0.16 type 0.72 comp 0.70  <palette
+ok   mobile detail-xe ↔ gom-lo  layout 0.90 dom 1.00 hero 1.00 pal 0.91 type 0.85 comp 0.93
+ok   mobile detail-xe ↔ hien-man  layout 1.00 dom 1.00 hero 0.56 pal 0.55 type 0.85 comp 0.83
+ok   mobile detail-xe ↔ hoa-tuoi  layout 0.80 dom 1.00 hero 1.00 pal 0.51 type 0.83 comp 0.85
+ok   mobile detail-xe ↔ khoi-nep  layout 0.60 dom 0.99 hero 0.49 pal 0.71 type 0.92 comp 0.76
+FAIL mobile detail-xe ↔ kim-hoan  layout 0.90 dom 1.00 hero 1.00 pal 0.10 type 0.84 comp 0.81  <palette
+ok   mobile detail-xe ↔ lan-bien  layout 0.80 dom 0.96 hero 0.44 pal 0.90 type 0.81 comp 0.80
+ok   mobile detail-xe ↔ luot-song  layout 1.00 dom 1.00 hero 1.00 pal 0.83 type 0.81 comp 0.94
+ok   mobile detail-xe ↔ mien-an  layout 0.80 dom 1.00 hero 1.00 pal 0.82 type 0.86 comp 0.90
+ok   mobile detail-xe ↔ mien-cuoi  layout 0.73 dom 1.00 hero 0.95 pal 0.91 type 0.71 comp 0.86
+ok   mobile detail-xe ↔ nail-pop  layout 0.90 dom 1.00 hero 1.00 pal 0.78 type 0.67 comp 0.88
+ok   mobile detail-xe ↔ nep-tho  layout 0.91 dom 1.00 hero 0.95 pal 0.83 type 0.82 comp 0.91
+FAIL mobile detail-xe ↔ net-lech  layout 0.70 dom 1.00 hero 0.16 pal 0.30 type 0.73 comp 0.63  <hero
+ok   mobile detail-xe ↔ ngoai-ngu-sao  layout 0.91 dom 1.00 hero 1.00 pal 0.91 type 0.76 comp 0.92
+ok   mobile detail-xe ↔ pet-vui  layout 0.90 dom 1.00 hero 1.00 pal 0.85 type 0.81 comp 0.92
+ok   mobile detail-xe ↔ phong-thu  layout 0.70 dom 0.99 hero 0.47 pal 0.29 type 0.73 comp 0.68
+FAIL mobile detail-xe ↔ phuot-xe  layout 0.79 dom 0.99 hero 0.16 pal 0.05 type 0.68 comp 0.60  <hero,palette
+ok   mobile detail-xe ↔ rong-dam  layout 0.80 dom 1.00 hero 0.92 pal 0.86 type 0.74 comp 0.86
+ok   mobile detail-xe ↔ rot-nhiet  layout 0.90 dom 1.00 hero 1.00 pal 0.73 type 0.72 comp 0.88
+ok   mobile detail-xe ↔ ruou-vang  layout 0.82 dom 0.96 hero 0.37 pal 0.56 type 0.82 comp 0.74
+FAIL mobile detail-xe ↔ sat-gym  layout 0.67 dom 1.00 hero 0.44 pal 0.18 type 0.88 comp 0.68  <palette
+ok   mobile detail-xe ↔ thang-mo  layout 0.80 dom 1.00 hero 0.84 pal 0.91 type 0.83 comp 0.88
+ok   mobile detail-xe ↔ tiem-banh  layout 0.80 dom 1.00 hero 0.44 pal 0.91 type 0.73 comp 0.79
+FAIL mobile detail-xe ↔ tra-thi  layout 0.90 dom 1.00 hero 0.08 pal 0.02 type 0.83 comp 0.65  <hero,palette
+ok   mobile glamping-nui ↔ gom-lo  layout 0.90 dom 0.81 hero 0.90 pal 0.89 type 0.81 comp 0.86
+FAIL mobile glamping-nui ↔ hien-man  layout 1.00 dom 0.99 hero 0.17 pal 0.53 type 0.78 comp 0.75  <hero
+ok   mobile glamping-nui ↔ hoa-tuoi  layout 1.00 dom 0.85 hero 0.58 pal 0.41 type 0.77 comp 0.76
+ok   mobile glamping-nui ↔ khoi-nep  layout 0.90 dom 1.00 hero 0.54 pal 0.66 type 0.87 comp 0.82
+FAIL mobile glamping-nui ↔ kim-hoan  layout 0.90 dom 1.00 hero 0.77 pal 0.17 type 0.77 comp 0.77  <palette
+ok   mobile glamping-nui ↔ lan-bien  layout 0.80 dom 0.95 hero 0.30 pal 0.90 type 0.78 comp 0.77
+ok   mobile glamping-nui ↔ luot-song  layout 1.00 dom 0.89 hero 0.85 pal 0.78 type 0.78 comp 0.87
+ok   mobile glamping-nui ↔ mien-an  layout 0.70 dom 1.00 hero 0.85 pal 0.78 type 0.80 comp 0.83
+ok   mobile glamping-nui ↔ mien-cuoi  layout 0.73 dom 1.00 hero 0.68 pal 0.90 type 0.66 comp 0.80
+ok   mobile glamping-nui ↔ nail-pop  layout 0.89 dom 0.99 hero 0.86 pal 0.75 type 0.70 comp 0.85
+ok   mobile glamping-nui ↔ nep-tho  layout 0.82 dom 1.00 hero 0.73 pal 0.81 type 0.75 comp 0.84
+ok   mobile glamping-nui ↔ net-lech  layout 0.90 dom 1.00 hero 0.51 pal 0.27 type 0.77 comp 0.74
+ok   mobile glamping-nui ↔ ngoai-ngu-sao  layout 0.91 dom 0.94 hero 0.79 pal 0.91 type 0.72 comp 0.86
+ok   mobile glamping-nui ↔ pet-vui  layout 0.89 dom 0.95 hero 0.83 pal 0.83 type 0.78 comp 0.86
+ok   mobile glamping-nui ↔ phong-thu  layout 0.89 dom 0.98 hero 0.59 pal 0.26 type 0.70 comp 0.73
+FAIL mobile glamping-nui ↔ phuot-xe  layout 0.86 dom 1.00 hero 0.48 pal 0.14 type 0.71 comp 0.70  <palette
+ok   mobile glamping-nui ↔ rong-dam  layout 0.78 dom 1.00 hero 0.79 pal 0.81 type 0.70 comp 0.82
+ok   mobile glamping-nui ↔ rot-nhiet  layout 0.88 dom 1.00 hero 0.82 pal 0.69 type 0.75 comp 0.84
+ok   mobile glamping-nui ↔ ruou-vang  layout 0.73 dom 0.98 hero 0.30 pal 0.54 type 0.70 comp 0.69
+FAIL mobile glamping-nui ↔ sat-gym  layout 0.83 dom 0.86 hero 0.36 pal 0.16 type 0.84 comp 0.66  <palette
+ok   mobile glamping-nui ↔ thang-mo  layout 0.89 dom 1.00 hero 0.72 pal 0.89 type 0.76 comp 0.86
+ok   mobile glamping-nui ↔ tiem-banh  layout 0.89 dom 1.00 hero 0.27 pal 0.88 type 0.66 comp 0.77
+FAIL mobile glamping-nui ↔ tra-thi  layout 0.90 dom 1.00 hero 0.54 pal 0.16 type 0.76 comp 0.73  <palette
+ok   mobile gom-lo ↔ hien-man  layout 1.00 dom 1.00 hero 0.90 pal 0.89 type 0.73 comp 0.91
+ok   mobile gom-lo ↔ hoa-tuoi  layout 0.80 dom 0.90 hero 0.47 pal 0.86 type 0.72 comp 0.76
+ok   mobile gom-lo ↔ khoi-nep  layout 0.90 dom 0.99 hero 0.96 pal 0.89 type 0.75 comp 0.90
+ok   mobile gom-lo ↔ kim-hoan  layout 0.90 dom 1.00 hero 0.35 pal 0.90 type 0.72 comp 0.80
+ok   mobile gom-lo ↔ lan-bien  layout 0.90 dom 1.00 hero 1.00 pal 0.85 type 0.69 comp 0.89
+ok   mobile gom-lo ↔ luot-song  layout 0.90 dom 0.88 hero 0.30 pal 0.85 type 0.64 comp 0.74
+ok   mobile gom-lo ↔ mien-an  layout 0.90 dom 1.00 hero 0.59 pal 0.88 type 0.74 comp 0.84
+ok   mobile gom-lo ↔ mien-cuoi  layout 0.91 dom 0.99 hero 0.45 pal 0.89 type 0.81 comp 0.83
+ok   mobile gom-lo ↔ nail-pop  layout 0.80 dom 1.00 hero 0.27 pal 0.89 type 0.87 comp 0.79
+ok   mobile gom-lo ↔ nep-tho  layout 0.82 dom 1.00 hero 0.40 pal 0.90 type 0.82 comp 0.81
+ok   mobile gom-lo ↔ net-lech  layout 0.90 dom 1.00 hero 1.00 pal 0.90 type 0.90 comp 0.94
+ok   mobile gom-lo ↔ ngoai-ngu-sao  layout 0.91 dom 0.98 hero 0.75 pal 0.91 type 0.72 comp 0.86
+ok   mobile gom-lo ↔ pet-vui  layout 0.80 dom 0.98 hero 0.47 pal 0.88 type 0.69 comp 0.78
+ok   mobile gom-lo ↔ phong-thu  layout 0.90 dom 0.98 hero 0.92 pal 0.89 type 0.78 comp 0.90
+ok   mobile gom-lo ↔ phuot-xe  layout 0.93 dom 1.00 hero 1.00 pal 0.90 type 0.87 comp 0.94
+ok   mobile gom-lo ↔ rong-dam  layout 0.90 dom 1.00 hero 0.52 pal 0.85 type 0.77 comp 0.83
+ok   mobile gom-lo ↔ rot-nhiet  layout 0.90 dom 1.00 hero 0.49 pal 0.89 type 0.89 comp 0.86
+ok   mobile gom-lo ↔ ruou-vang  layout 0.91 dom 1.00 hero 1.00 pal 0.86 type 0.71 comp 0.90
+ok   mobile gom-lo ↔ sat-gym  layout 0.67 dom 0.82 hero 1.00 pal 0.91 type 0.64 comp 0.79
+ok   mobile gom-lo ↔ thang-mo  layout 0.80 dom 1.00 hero 0.60 pal 0.87 type 0.72 comp 0.81
+ok   mobile gom-lo ↔ tiem-banh  layout 0.90 dom 1.00 hero 1.00 pal 0.82 type 0.82 comp 0.91
+ok   mobile gom-lo ↔ tra-thi  layout 0.70 dom 0.99 hero 1.00 pal 0.91 type 0.72 comp 0.86
+ok   mobile hien-man ↔ hoa-tuoi  layout 1.00 dom 1.00 hero 0.71 pal 0.53 type 0.67 comp 0.82
+ok   mobile hien-man ↔ khoi-nep  layout 1.00 dom 0.99 hero 0.58 pal 0.41 type 0.78 comp 0.79
+ok   mobile hien-man ↔ kim-hoan  layout 1.00 dom 1.00 hero 0.75 pal 0.58 type 0.66 comp 0.83
+ok   mobile hien-man ↔ lan-bien  layout 1.00 dom 0.99 hero 0.30 pal 0.82 type 0.70 comp 0.80
+ok   mobile hien-man ↔ luot-song  layout 1.00 dom 0.99 hero 0.84 pal 0.83 type 0.70 comp 0.89
+ok   mobile hien-man ↔ mien-an  layout 1.00 dom 1.00 hero 0.71 pal 0.52 type 0.67 comp 0.82
+ok   mobile hien-man ↔ mien-cuoi  layout 1.00 dom 1.00 hero 0.79 pal 0.61 type 0.79 comp 0.87
+ok   mobile hien-man ↔ nail-pop  layout 1.00 dom 1.00 hero 0.87 pal 0.48 type 0.83 comp 0.86
+ok   mobile hien-man ↔ nep-tho  layout 1.00 dom 0.99 hero 0.77 pal 0.53 type 0.78 comp 0.85
+ok   mobile hien-man ↔ net-lech  layout 1.00 dom 1.00 hero 0.55 pal 0.33 type 0.85 comp 0.80
+ok   mobile hien-man ↔ ngoai-ngu-sao  layout 0.91 dom 1.00 hero 0.79 pal 0.83 type 0.84 comp 0.89
+ok   mobile hien-man ↔ pet-vui  layout 1.00 dom 1.00 hero 0.84 pal 0.72 type 0.71 comp 0.87
+ok   mobile hien-man ↔ phong-thu  layout 1.00 dom 1.00 hero 0.53 pal 0.33 type 0.82 comp 0.79
+ok   mobile hien-man ↔ phuot-xe  layout 1.00 dom 1.00 hero 0.49 pal 0.53 type 0.82 comp 0.81
+ok   mobile hien-man ↔ rong-dam  layout 1.00 dom 1.00 hero 0.82 pal 0.56 type 0.82 comp 0.87
+ok   mobile hien-man ↔ rot-nhiet  layout 1.00 dom 1.00 hero 0.79 pal 0.42 type 0.83 comp 0.85
+ok   mobile hien-man ↔ ruou-vang  layout 1.00 dom 0.99 hero 0.39 pal 0.58 type 0.68 comp 0.77
+ok   mobile hien-man ↔ sat-gym  layout 1.00 dom 0.99 hero 0.29 pal 0.52 type 0.75 comp 0.76
+ok   mobile hien-man ↔ thang-mo  layout 1.00 dom 0.99 hero 0.88 pal 0.63 type 0.67 comp 0.86
+ok   mobile hien-man ↔ tiem-banh  layout 1.00 dom 0.99 hero 0.27 pal 0.80 type 0.77 comp 0.80
+ok   mobile hien-man ↔ tra-thi  layout 1.00 dom 1.00 hero 0.56 pal 0.56 type 0.67 comp 0.80
+ok   mobile hoa-tuoi ↔ khoi-nep  layout 0.90 dom 1.00 hero 0.89 pal 0.71 type 0.77 comp 0.87
+ok   mobile hoa-tuoi ↔ kim-hoan  layout 0.90 dom 1.00 hero 0.42 pal 0.53 type 0.65 comp 0.74
+ok   mobile hoa-tuoi ↔ lan-bien  layout 0.90 dom 0.99 hero 0.86 pal 0.88 type 0.69 comp 0.87
+ok   mobile hoa-tuoi ↔ luot-song  layout 1.00 dom 0.95 hero 0.44 pal 0.80 type 0.69 comp 0.80
+ok   mobile hoa-tuoi ↔ mien-an  layout 0.90 dom 1.00 hero 0.55 pal 0.80 type 0.69 comp 0.81
+ok   mobile hoa-tuoi ↔ mien-cuoi  layout 0.91 dom 1.00 hero 0.31 pal 0.89 type 0.78 comp 0.81
+ok   mobile hoa-tuoi ↔ nail-pop  layout 0.78 dom 1.00 hero 0.45 pal 0.76 type 0.81 comp 0.79
+ok   mobile hoa-tuoi ↔ nep-tho  layout 0.91 dom 1.00 hero 0.33 pal 0.82 type 0.76 comp 0.80
+ok   mobile hoa-tuoi ↔ net-lech  layout 0.80 dom 1.00 hero 0.98 pal 0.51 type 0.86 comp 0.85
+ok   mobile hoa-tuoi ↔ ngoai-ngu-sao  layout 0.91 dom 1.00 hero 0.61 pal 0.92 type 0.83 comp 0.87
+ok   mobile hoa-tuoi ↔ pet-vui  layout 0.67 dom 1.00 hero 0.44 pal 0.85 type 0.69 comp 0.75
+ok   mobile hoa-tuoi ↔ phong-thu  layout 0.78 dom 1.00 hero 0.92 pal 0.50 type 0.81 comp 0.82
+ok   mobile hoa-tuoi ↔ phuot-xe  layout 0.79 dom 1.00 hero 1.00 pal 0.51 type 0.80 comp 0.83
+ok   mobile hoa-tuoi ↔ rong-dam  layout 0.89 dom 1.00 hero 0.53 pal 0.82 type 0.81 comp 0.83
+ok   mobile hoa-tuoi ↔ rot-nhiet  layout 0.88 dom 1.00 hero 0.41 pal 0.71 type 0.84 comp 0.80
+ok   mobile hoa-tuoi ↔ ruou-vang  layout 1.00 dom 0.99 hero 0.79 pal 0.54 type 0.67 comp 0.83
+ok   mobile hoa-tuoi ↔ sat-gym  layout 0.75 dom 0.97 hero 0.93 pal 0.50 type 0.74 comp 0.79
+ok   mobile hoa-tuoi ↔ thang-mo  layout 0.78 dom 1.00 hero 0.44 pal 0.88 type 0.65 comp 0.77
+ok   mobile hoa-tuoi ↔ tiem-banh  layout 0.89 dom 1.00 hero 0.84 pal 0.81 type 0.75 comp 0.87
+ok   mobile hoa-tuoi ↔ tra-thi  layout 0.90 dom 1.00 hero 1.00 pal 0.51 type 0.66 comp 0.83
+ok   mobile khoi-nep ↔ kim-hoan  layout 0.80 dom 1.00 hero 0.92 pal 0.71 type 0.77 comp 0.85
+ok   mobile khoi-nep ↔ lan-bien  layout 0.90 dom 1.00 hero 0.42 pal 0.90 type 0.86 comp 0.84
+ok   mobile khoi-nep ↔ luot-song  layout 1.00 dom 0.99 hero 0.92 pal 0.79 type 0.76 comp 0.91
+ok   mobile khoi-nep ↔ mien-an  layout 0.70 dom 1.00 hero 0.89 pal 0.31 type 0.78 comp 0.76
+ok   mobile khoi-nep ↔ mien-cuoi  layout 0.64 dom 0.98 hero 0.94 pal 0.47 type 0.82 comp 0.78
+ok   mobile khoi-nep ↔ nail-pop  layout 0.90 dom 0.99 hero 0.96 pal 0.28 type 0.92 comp 0.84
+ok   mobile khoi-nep ↔ nep-tho  layout 0.91 dom 1.00 hero 0.93 pal 0.30 type 0.77 comp 0.82
+ok   mobile khoi-nep ↔ net-lech  layout 0.60 dom 0.97 hero 0.47 pal 0.48 type 0.93 comp 0.72
+ok   mobile khoi-nep ↔ ngoai-ngu-sao  layout 0.82 dom 1.00 hero 0.90 pal 0.83 type 0.84 comp 0.88
+ok   mobile khoi-nep ↔ pet-vui  layout 0.80 dom 1.00 hero 0.89 pal 0.71 type 0.76 comp 0.84
+ok   mobile khoi-nep ↔ phong-thu  layout 0.70 dom 1.00 hero 0.67 pal 0.70 type 0.86 comp 0.80
+ok   mobile khoi-nep ↔ phuot-xe  layout 0.86 dom 1.00 hero 0.51 pal 0.69 type 0.92 comp 0.83
+ok   mobile khoi-nep ↔ rong-dam  layout 0.80 dom 1.00 hero 0.96 pal 0.36 type 0.85 comp 0.82
+ok   mobile khoi-nep ↔ rot-nhiet  layout 0.80 dom 1.00 hero 0.89 pal 0.22 type 0.93 comp 0.80
+ok   mobile khoi-nep ↔ ruou-vang  layout 0.82 dom 0.99 hero 0.43 pal 0.70 type 0.77 comp 0.77
+ok   mobile khoi-nep ↔ sat-gym  layout 0.67 dom 1.00 hero 0.45 pal 0.66 type 0.73 comp 0.73
+ok   mobile khoi-nep ↔ thang-mo  layout 0.80 dom 1.00 hero 0.68 pal 0.44 type 0.77 comp 0.77
+ok   mobile khoi-nep ↔ tiem-banh  layout 0.80 dom 1.00 hero 0.43 pal 0.77 type 0.87 comp 0.80
+ok   mobile khoi-nep ↔ tra-thi  layout 0.90 dom 1.00 hero 0.49 pal 0.72 type 0.87 comp 0.83
+ok   mobile kim-hoan ↔ lan-bien  layout 0.90 dom 0.98 hero 0.88 pal 0.91 type 0.70 comp 0.88
+ok   mobile kim-hoan ↔ luot-song  layout 1.00 dom 1.00 hero 0.20 pal 0.76 type 0.69 comp 0.78
+ok   mobile kim-hoan ↔ mien-an  layout 0.90 dom 0.99 hero 0.43 pal 0.84 type 0.68 comp 0.80
+ok   mobile kim-hoan ↔ mien-cuoi  layout 0.82 dom 1.00 hero 0.32 pal 0.93 type 0.78 comp 0.79
+ok   mobile kim-hoan ↔ nail-pop  layout 0.90 dom 0.96 hero 0.41 pal 0.77 type 0.81 comp 0.80
+ok   mobile kim-hoan ↔ nep-tho  layout 0.91 dom 1.00 hero 0.29 pal 0.85 type 0.76 comp 0.80
+ok   mobile kim-hoan ↔ net-lech  layout 0.90 dom 0.99 hero 1.00 pal 0.30 type 0.86 comp 0.84
+ok   mobile kim-hoan ↔ ngoai-ngu-sao  layout 0.91 dom 0.99 hero 0.58 pal 0.91 type 0.83 comp 0.86
+ok   mobile kim-hoan ↔ pet-vui  layout 0.90 dom 0.95 hero 0.33 pal 0.82 type 0.70 comp 0.77
+ok   mobile kim-hoan ↔ phong-thu  layout 0.80 dom 0.93 hero 0.85 pal 0.29 type 0.81 comp 0.77
+FAIL mobile kim-hoan ↔ phuot-xe  layout 0.93 dom 0.85 hero 1.00 pal 0.08 type 0.80 comp 0.77  <palette
+ok   mobile kim-hoan ↔ rong-dam  layout 0.80 dom 1.00 hero 0.45 pal 0.85 type 0.81 comp 0.80
+ok   mobile kim-hoan ↔ rot-nhiet  layout 0.80 dom 1.00 hero 0.40 pal 0.75 type 0.84 comp 0.79
+ok   mobile kim-hoan ↔ ruou-vang  layout 0.91 dom 0.83 hero 0.94 pal 0.53 type 0.67 comp 0.79
+FAIL mobile kim-hoan ↔ sat-gym  layout 0.83 dom 0.99 hero 0.90 pal 0.16 type 0.74 comp 0.76  <palette
+ok   mobile kim-hoan ↔ thang-mo  layout 0.80 dom 1.00 hero 0.65 pal 0.90 type 0.65 comp 0.81
+ok   mobile kim-hoan ↔ tiem-banh  layout 0.80 dom 1.00 hero 0.84 pal 0.88 type 0.76 comp 0.86
+FAIL mobile kim-hoan ↔ tra-thi  layout 0.90 dom 0.76 hero 1.00 pal 0.09 type 0.66 comp 0.71  <palette
+ok   mobile lan-bien ↔ luot-song  layout 1.00 dom 1.00 hero 0.91 pal 0.91 type 0.65 comp 0.90
+ok   mobile lan-bien ↔ mien-an  layout 0.80 dom 1.00 hero 0.80 pal 0.91 type 0.72 comp 0.85
+ok   mobile lan-bien ↔ mien-cuoi  layout 0.64 dom 1.00 hero 0.89 pal 0.85 type 0.77 comp 0.83
+ok   mobile lan-bien ↔ nail-pop  layout 0.90 dom 1.00 hero 0.99 pal 0.90 type 0.84 comp 0.93
+ok   mobile lan-bien ↔ nep-tho  layout 0.91 dom 1.00 hero 0.91 pal 0.91 type 0.78 comp 0.91
+ok   mobile lan-bien ↔ net-lech  layout 0.90 dom 1.00 hero 0.38 pal 0.91 type 0.89 comp 0.84
+ok   mobile lan-bien ↔ ngoai-ngu-sao  layout 0.91 dom 1.00 hero 0.81 pal 0.90 type 0.80 comp 0.89
+ok   mobile lan-bien ↔ pet-vui  layout 0.90 dom 1.00 hero 0.85 pal 0.89 type 0.65 comp 0.87
+ok   mobile lan-bien ↔ phong-thu  layout 0.80 dom 1.00 hero 0.52 pal 0.84 type 0.77 comp 0.80
+ok   mobile lan-bien ↔ phuot-xe  layout 0.79 dom 0.97 hero 0.34 pal 0.90 type 0.84 comp 0.79
+ok   mobile lan-bien ↔ rong-dam  layout 0.80 dom 1.00 hero 0.94 pal 0.89 type 0.78 comp 0.88
+ok   mobile lan-bien ↔ rot-nhiet  layout 0.80 dom 1.00 hero 0.83 pal 0.90 type 0.87 comp 0.88
+ok   mobile lan-bien ↔ ruou-vang  layout 1.00 dom 0.98 hero 0.19 pal 0.91 type 0.78 comp 0.81
+FAIL mobile lan-bien ↔ sat-gym  layout 0.92 dom 0.98 hero 0.07 pal 0.91 type 0.72 comp 0.76  <hero
+ok   mobile lan-bien ↔ thang-mo  layout 0.80 dom 1.00 hero 0.75 pal 0.90 type 0.79 comp 0.86
+FAIL mobile lan-bien ↔ tiem-banh  layout 0.90 dom 1.00 hero 0.06 pal 0.90 type 0.79 comp 0.77  <hero
+ok   mobile lan-bien ↔ tra-thi  layout 0.80 dom 1.00 hero 0.44 pal 0.91 type 0.69 comp 0.79
+ok   mobile luot-song ↔ mien-an  layout 1.00 dom 1.00 hero 0.38 pal 0.85 type 0.72 comp 0.82
+ok   mobile luot-song ↔ mien-cuoi  layout 1.00 dom 1.00 hero 0.38 pal 0.93 type 0.77 comp 0.84
+ok   mobile luot-song ↔ nail-pop  layout 0.89 dom 1.00 hero 0.46 pal 0.81 type 0.83 comp 0.82
+ok   mobile luot-song ↔ nep-tho  layout 1.00 dom 1.00 hero 0.36 pal 0.85 type 0.78 comp 0.83
+ok   mobile luot-song ↔ net-lech  layout 1.00 dom 0.99 hero 1.00 pal 0.81 type 0.88 comp 0.95
+ok   mobile luot-song ↔ ngoai-ngu-sao  layout 1.00 dom 1.00 hero 0.57 pal 0.92 type 0.75 comp 0.87
+ok   mobile luot-song ↔ pet-vui  layout 1.00 dom 0.96 hero 0.22 pal 0.84 type 0.65 comp 0.77
+ok   mobile luot-song ↔ phong-thu  layout 1.00 dom 0.96 hero 0.82 pal 0.80 type 0.77 comp 0.89
+ok   mobile luot-song ↔ phuot-xe  layout 0.93 dom 1.00 hero 1.00 pal 0.82 type 0.84 comp 0.92
+ok   mobile luot-song ↔ rong-dam  layout 1.00 dom 1.00 hero 0.49 pal 0.85 type 0.78 comp 0.85
+ok   mobile luot-song ↔ rot-nhiet  layout 1.00 dom 1.00 hero 0.31 pal 0.82 type 0.87 comp 0.84
+ok   mobile luot-song ↔ ruou-vang  layout 1.00 dom 0.97 hero 0.96 pal 0.76 type 0.68 comp 0.89
+ok   mobile luot-song ↔ sat-gym  layout 1.00 dom 0.85 hero 0.92 pal 0.80 type 0.67 comp 0.85
+ok   mobile luot-song ↔ thang-mo  layout 1.00 dom 0.99 hero 0.62 pal 0.89 type 0.69 comp 0.86
+ok   mobile luot-song ↔ tiem-banh  layout 1.00 dom 0.97 hero 0.88 pal 0.86 type 0.79 comp 0.91
+ok   mobile luot-song ↔ tra-thi  layout 0.90 dom 0.99 hero 1.00 pal 0.82 type 0.69 comp 0.88
+FAIL mobile mien-an ↔ mien-cuoi  layout 0.64 dom 0.98 hero 0.45 pal 0.18 type 0.81 comp 0.66  <palette
+ok   mobile mien-an ↔ nail-pop  layout 0.90 dom 1.00 hero 0.65 pal 0.22 type 0.84 comp 0.77
+FAIL mobile mien-an ↔ nep-tho  layout 0.82 dom 0.98 hero 0.47 pal 0.07 type 0.79 comp 0.69  <palette
+ok   mobile mien-an ↔ net-lech  layout 0.80 dom 1.00 hero 1.00 pal 0.59 type 0.83 comp 0.86
+ok   mobile mien-an ↔ ngoai-ngu-sao  layout 0.82 dom 0.99 hero 0.45 pal 0.84 type 0.85 comp 0.81
+ok   mobile mien-an ↔ pet-vui  layout 0.70 dom 1.00 hero 0.24 pal 0.72 type 0.72 comp 0.71
+ok   mobile mien-an ↔ phong-thu  layout 0.90 dom 0.99 hero 0.67 pal 0.82 type 0.83 comp 0.86
+ok   mobile mien-an ↔ phuot-xe  layout 0.86 dom 1.00 hero 1.00 pal 0.81 type 0.84 comp 0.90
+FAIL mobile mien-an ↔ rong-dam  layout 0.60 dom 0.99 hero 0.56 pal 0.11 type 0.83 comp 0.66  <palette
+ok   mobile mien-an ↔ rot-nhiet  layout 0.90 dom 1.00 hero 0.19 pal 0.19 type 0.81 comp 0.69
+ok   mobile mien-an ↔ ruou-vang  layout 0.91 dom 1.00 hero 0.91 pal 0.84 type 0.70 comp 0.88
+ok   mobile mien-an ↔ sat-gym  layout 0.83 dom 1.00 hero 0.77 pal 0.79 type 0.76 comp 0.84
+FAIL mobile mien-an ↔ thang-mo  layout 0.80 dom 0.97 hero 0.69 pal 0.15 type 0.69 comp 0.71  <palette
+ok   mobile mien-an ↔ tiem-banh  layout 0.70 dom 1.00 hero 0.76 pal 0.78 type 0.79 comp 0.81
+ok   mobile mien-an ↔ tra-thi  layout 0.90 dom 0.99 hero 1.00 pal 0.83 type 0.69 comp 0.89
+ok   mobile mien-cuoi ↔ nail-pop  layout 0.91 dom 1.00 hero 0.47 pal 0.35 type 0.82 comp 0.76
+FAIL mobile mien-cuoi ↔ nep-tho  layout 0.73 dom 0.98 hero 0.20 pal 0.18 type 0.67 comp 0.61  <palette
+ok   mobile mien-cuoi ↔ net-lech  layout 0.64 dom 0.99 hero 0.94 pal 0.70 type 0.78 comp 0.81
+ok   mobile mien-cuoi ↔ ngoai-ngu-sao  layout 0.82 dom 1.00 hero 0.58 pal 0.83 type 0.72 comp 0.81
+ok   mobile mien-cuoi ↔ pet-vui  layout 0.82 dom 1.00 hero 0.36 pal 0.77 type 0.77 comp 0.77
+ok   mobile mien-cuoi ↔ phong-thu  layout 0.82 dom 1.00 hero 0.78 pal 0.91 type 0.69 comp 0.84
+ok   mobile mien-cuoi ↔ phuot-xe  layout 0.79 dom 1.00 hero 0.95 pal 0.89 type 0.83 comp 0.89
+ok   mobile mien-cuoi ↔ rong-dam  layout 0.55 dom 0.99 hero 0.40 pal 0.19 type 0.69 comp 0.61
+ok   mobile mien-cuoi ↔ rot-nhiet  layout 0.73 dom 1.00 hero 0.39 pal 0.33 type 0.86 comp 0.71
+ok   mobile mien-cuoi ↔ ruou-vang  layout 0.91 dom 1.00 hero 0.86 pal 0.92 type 0.76 comp 0.90
+ok   mobile mien-cuoi ↔ sat-gym  layout 0.92 dom 1.00 hero 0.94 pal 0.88 type 0.83 comp 0.92
+FAIL mobile mien-cuoi ↔ thang-mo  layout 0.82 dom 0.98 hero 0.52 pal 0.07 type 0.78 comp 0.69  <palette
+ok   mobile mien-cuoi ↔ tiem-banh  layout 0.82 dom 1.00 hero 0.85 pal 0.81 type 0.67 comp 0.84
+ok   mobile mien-cuoi ↔ tra-thi  layout 0.82 dom 0.99 hero 0.94 pal 0.92 type 0.77 comp 0.89
+ok   mobile nail-pop ↔ nep-tho  layout 0.82 dom 0.99 hero 0.49 pal 0.23 type 0.80 comp 0.72
+ok   mobile nail-pop ↔ net-lech  layout 0.90 dom 0.98 hero 1.00 pal 0.50 type 0.82 comp 0.86
+ok   mobile nail-pop ↔ ngoai-ngu-sao  layout 0.91 dom 0.96 hero 0.73 pal 0.78 type 0.77 comp 0.85
+ok   mobile nail-pop ↔ pet-vui  layout 0.89 dom 0.93 hero 0.56 pal 0.58 type 0.84 comp 0.79
+ok   mobile nail-pop ↔ phong-thu  layout 0.89 dom 0.95 hero 0.94 pal 0.76 type 0.75 comp 0.86
+ok   mobile nail-pop ↔ phuot-xe  layout 0.86 dom 0.96 hero 1.00 pal 0.74 type 0.66 comp 0.85
+ok   mobile nail-pop ↔ rong-dam  layout 0.89 dom 1.00 hero 0.55 pal 0.24 type 0.75 comp 0.74
+FAIL mobile nail-pop ↔ rot-nhiet  layout 0.89 dom 1.00 hero 0.59 pal 0.17 type 0.70 comp 0.72  <palette
+ok   mobile nail-pop ↔ ruou-vang  layout 0.91 dom 0.99 hero 0.95 pal 0.79 type 0.80 comp 0.90
+ok   mobile nail-pop ↔ sat-gym  layout 0.83 dom 0.99 hero 0.99 pal 0.66 type 0.89 comp 0.88
+ok   mobile nail-pop ↔ thang-mo  layout 0.78 dom 1.00 hero 0.64 pal 0.32 type 0.81 comp 0.75
+ok   mobile nail-pop ↔ tiem-banh  layout 0.89 dom 1.00 hero 1.00 pal 0.77 type 0.71 comp 0.88
+ok   mobile nail-pop ↔ tra-thi  layout 0.70 dom 0.99 hero 1.00 pal 0.78 type 0.80 comp 0.85
+ok   mobile nep-tho ↔ net-lech  layout 0.82 dom 0.97 hero 0.94 pal 0.61 type 0.77 comp 0.83
+ok   mobile nep-tho ↔ ngoai-ngu-sao  layout 0.73 dom 1.00 hero 0.62 pal 0.84 type 0.82 comp 0.81
+ok   mobile nep-tho ↔ pet-vui  layout 0.91 dom 0.99 hero 0.40 pal 0.72 type 0.79 comp 0.79
+ok   mobile nep-tho ↔ phong-thu  layout 0.91 dom 1.00 hero 0.82 pal 0.82 type 0.80 comp 0.88
+ok   mobile nep-tho ↔ phuot-xe  layout 0.93 dom 1.00 hero 0.95 pal 0.81 type 0.81 comp 0.91
+FAIL mobile nep-tho ↔ rong-dam  layout 0.73 dom 1.00 hero 0.47 pal 0.09 type 0.80 comp 0.67  <palette
+ok   mobile nep-tho ↔ rot-nhiet  layout 0.73 dom 1.00 hero 0.37 pal 0.21 type 0.85 comp 0.69
+ok   mobile nep-tho ↔ ruou-vang  layout 0.82 dom 1.00 hero 0.88 pal 0.84 type 0.65 comp 0.84
+ok   mobile nep-tho ↔ sat-gym  layout 0.83 dom 1.00 hero 0.96 pal 0.79 type 0.84 comp 0.89
+FAIL mobile nep-tho ↔ thang-mo  layout 0.73 dom 0.99 hero 0.51 pal 0.17 type 0.66 comp 0.66  <palette
+ok   mobile nep-tho ↔ tiem-banh  layout 0.91 dom 1.00 hero 0.88 pal 0.80 type 0.76 comp 0.88
+ok   mobile nep-tho ↔ tra-thi  layout 0.82 dom 1.00 hero 0.94 pal 0.83 type 0.76 comp 0.87
+ok   mobile net-lech ↔ ngoai-ngu-sao  layout 0.73 dom 1.00 hero 1.00 pal 0.80 type 0.81 comp 0.86
+ok   mobile net-lech ↔ pet-vui  layout 0.70 dom 0.99 hero 1.00 pal 0.67 type 0.89 comp 0.85
+ok   mobile net-lech ↔ phong-thu  layout 0.80 dom 0.98 hero 0.50 pal 0.29 type 0.79 comp 0.72
+ok   mobile net-lech ↔ phuot-xe  layout 0.86 dom 1.00 hero 0.23 pal 0.26 type 0.81 comp 0.69
+ok   mobile net-lech ↔ rong-dam  layout 0.80 dom 0.98 hero 0.90 pal 0.63 type 0.80 comp 0.84
+ok   mobile net-lech ↔ rot-nhiet  layout 0.80 dom 1.00 hero 1.00 pal 0.50 type 0.77 comp 0.83
+ok   mobile net-lech ↔ ruou-vang  layout 0.91 dom 0.99 hero 0.33 pal 0.54 type 0.87 comp 0.77
+ok   mobile net-lech ↔ sat-gym  layout 0.83 dom 1.00 hero 0.38 pal 0.22 type 0.92 comp 0.73
+ok   mobile net-lech ↔ thang-mo  layout 0.70 dom 0.95 hero 0.78 pal 0.68 type 0.86 comp 0.81
+ok   mobile net-lech ↔ tiem-banh  layout 0.80 dom 1.00 hero 0.38 pal 0.79 type 0.76 comp 0.77
+FAIL mobile net-lech ↔ tra-thi  layout 0.90 dom 1.00 hero 0.17 pal 0.30 type 0.86 comp 0.71  <hero
+ok   mobile ngoai-ngu-sao ↔ pet-vui  layout 0.91 dom 0.95 hero 0.39 pal 0.71 type 0.80 comp 0.79
+ok   mobile ngoai-ngu-sao ↔ phong-thu  layout 0.91 dom 0.98 hero 0.74 pal 0.91 type 0.69 comp 0.85
+ok   mobile ngoai-ngu-sao ↔ phuot-xe  layout 0.93 dom 0.99 hero 1.00 pal 0.88 type 0.78 comp 0.92
+ok   mobile ngoai-ngu-sao ↔ rong-dam  layout 0.91 dom 1.00 hero 0.67 pal 0.82 type 0.68 comp 0.83
+ok   mobile ngoai-ngu-sao ↔ rot-nhiet  layout 0.73 dom 1.00 hero 0.34 pal 0.84 type 0.80 comp 0.76
+ok   mobile ngoai-ngu-sao ↔ ruou-vang  layout 0.91 dom 1.00 hero 0.92 pal 0.91 type 0.57 comp 0.87
+ok   mobile ngoai-ngu-sao ↔ sat-gym  layout 0.83 dom 0.99 hero 0.84 pal 0.85 type 0.73 comp 0.86
+ok   mobile ngoai-ngu-sao ↔ thang-mo  layout 0.82 dom 1.00 hero 0.81 pal 0.83 type 0.83 comp 0.87
+FAIL mobile ngoai-ngu-sao ↔ tiem-banh  layout 0.82 dom 0.99 hero 0.76 pal 0.82 type 0.13 comp 0.71  <type
+ok   mobile ngoai-ngu-sao ↔ tra-thi  layout 0.91 dom 0.96 hero 1.00 pal 0.92 type 0.83 comp 0.92
+ok   mobile pet-vui ↔ phong-thu  layout 0.89 dom 0.93 hero 0.75 pal 0.81 type 0.77 comp 0.84
+ok   mobile pet-vui ↔ phuot-xe  layout 0.86 dom 0.99 hero 1.00 pal 0.81 type 0.84 comp 0.90
+ok   mobile pet-vui ↔ rong-dam  layout 0.78 dom 0.99 hero 0.50 pal 0.71 type 0.78 comp 0.77
+FAIL mobile pet-vui ↔ rot-nhiet  layout 0.89 dom 1.00 hero 0.15 pal 0.72 type 0.87 comp 0.77  <hero
+ok   mobile pet-vui ↔ ruou-vang  layout 1.00 dom 0.95 hero 0.94 pal 0.85 type 0.68 comp 0.89
+ok   mobile pet-vui ↔ sat-gym  layout 0.83 dom 0.97 hero 0.89 pal 0.75 type 0.72 comp 0.84
+ok   mobile pet-vui ↔ thang-mo  layout 0.67 dom 1.00 hero 0.58 pal 0.76 type 0.69 comp 0.75
+ok   mobile pet-vui ↔ tiem-banh  layout 0.89 dom 1.00 hero 0.82 pal 0.78 type 0.79 comp 0.87
+ok   mobile pet-vui ↔ tra-thi  layout 0.90 dom 0.98 hero 1.00 pal 0.86 type 0.69 comp 0.89
+ok   mobile phong-thu ↔ phuot-xe  layout 0.86 dom 0.97 hero 0.46 pal 0.28 type 0.76 comp 0.72
+ok   mobile phong-thu ↔ rong-dam  layout 0.89 dom 1.00 hero 0.81 pal 0.83 type 0.66 comp 0.85
+ok   mobile phong-thu ↔ rot-nhiet  layout 0.78 dom 1.00 hero 0.75 pal 0.72 type 0.78 comp 0.82
+ok   mobile phong-thu ↔ ruou-vang  layout 1.00 dom 0.93 hero 0.52 pal 0.54 type 0.80 comp 0.80
+ok   mobile phong-thu ↔ sat-gym  layout 0.75 dom 0.99 hero 0.48 pal 0.29 type 0.81 comp 0.71
+ok   mobile phong-thu ↔ thang-mo  layout 0.89 dom 1.00 hero 1.00 pal 0.89 type 0.81 comp 0.92
+ok   mobile phong-thu ↔ tiem-banh  layout 0.89 dom 0.99 hero 0.55 pal 0.89 type 0.70 comp 0.82
+ok   mobile phong-thu ↔ tra-thi  layout 0.80 dom 0.96 hero 0.50 pal 0.29 type 0.80 comp 0.72
+ok   mobile phuot-xe ↔ rong-dam  layout 0.79 dom 1.00 hero 0.92 pal 0.83 type 0.76 comp 0.86
+ok   mobile phuot-xe ↔ rot-nhiet  layout 0.79 dom 1.00 hero 1.00 pal 0.71 type 0.69 comp 0.84
+ok   mobile phuot-xe ↔ ruou-vang  layout 0.93 dom 0.95 hero 0.38 pal 0.55 type 0.81 comp 0.76
+FAIL mobile phuot-xe ↔ sat-gym  layout 0.86 dom 0.99 hero 0.34 pal 0.14 type 0.89 comp 0.71  <palette
+ok   mobile phuot-xe ↔ thang-mo  layout 0.86 dom 0.98 hero 0.84 pal 0.88 type 0.80 comp 0.88
+ok   mobile phuot-xe ↔ tiem-banh  layout 0.93 dom 1.00 hero 0.38 pal 0.88 type 0.70 comp 0.81
+FAIL mobile phuot-xe ↔ tra-thi  layout 0.93 dom 0.90 hero 0.20 pal 0.06 type 0.81 comp 0.65  <palette
+ok   mobile rong-dam ↔ rot-nhiet  layout 0.78 dom 1.00 hero 0.55 pal 0.22 type 0.79 comp 0.71
+ok   mobile rong-dam ↔ ruou-vang  layout 0.82 dom 1.00 hero 0.95 pal 0.85 type 0.80 comp 0.89
+ok   mobile rong-dam ↔ sat-gym  layout 0.83 dom 1.00 hero 0.96 pal 0.82 type 0.80 comp 0.89
+FAIL mobile rong-dam ↔ thang-mo  layout 0.89 dom 1.00 hero 0.74 pal 0.17 type 0.81 comp 0.77  <palette
+ok   mobile rong-dam ↔ tiem-banh  layout 0.78 dom 1.00 hero 0.91 pal 0.76 type 0.71 comp 0.84
+ok   mobile rong-dam ↔ tra-thi  layout 0.90 dom 1.00 hero 0.97 pal 0.86 type 0.81 comp 0.91
+ok   mobile rot-nhiet ↔ ruou-vang  layout 0.91 dom 1.00 hero 0.94 pal 0.74 type 0.85 comp 0.90
+ok   mobile rot-nhiet ↔ sat-gym  layout 0.92 dom 0.99 hero 0.84 pal 0.70 type 0.91 comp 0.89
+ok   mobile rot-nhiet ↔ thang-mo  layout 0.78 dom 0.99 hero 0.57 pal 0.31 type 0.84 comp 0.74
+ok   mobile rot-nhiet ↔ tiem-banh  layout 0.89 dom 1.00 hero 0.78 pal 0.79 type 0.75 comp 0.85
+ok   mobile rot-nhiet ↔ tra-thi  layout 0.80 dom 1.00 hero 1.00 pal 0.74 type 0.85 comp 0.88
+ok   mobile ruou-vang ↔ sat-gym  layout 0.67 dom 0.99 hero 0.26 pal 0.55 type 0.74 comp 0.68
+ok   mobile ruou-vang ↔ thang-mo  layout 0.91 dom 0.99 hero 0.65 pal 0.87 type 0.66 comp 0.83
+ok   mobile ruou-vang ↔ tiem-banh  layout 0.82 dom 0.99 hero 0.24 pal 0.80 type 0.51 comp 0.70
+ok   mobile ruou-vang ↔ tra-thi  layout 0.91 dom 0.77 hero 0.37 pal 0.55 type 0.76 comp 0.70
+ok   mobile sat-gym ↔ thang-mo  layout 0.83 dom 1.00 hero 0.80 pal 0.88 type 0.74 comp 0.86
+FAIL mobile sat-gym ↔ tiem-banh  layout 0.92 dom 1.00 hero 0.11 pal 0.87 type 0.84 comp 0.78  <hero
+ok   mobile sat-gym ↔ tra-thi  layout 0.83 dom 0.99 hero 0.44 pal 0.19 type 0.74 comp 0.69
+ok   mobile thang-mo ↔ tiem-banh  layout 0.89 dom 1.00 hero 0.74 pal 0.74 type 0.75 comp 0.84
+ok   mobile thang-mo ↔ tra-thi  layout 0.90 dom 0.99 hero 0.84 pal 0.91 type 0.76 comp 0.89
+ok   mobile tiem-banh ↔ tra-thi  layout 0.90 dom 1.00 hero 0.44 pal 0.91 type 0.75 comp 0.82
+FAIL NEGATIVE-CONTROL mobile bar-mai-thuong vs bản sao đổi màu/chữ: layout 0.00 dom 0.16 hero 0.00 pal 0.96 type 0.60 → KHÔNG bắt được (gate chưa đủ nhạy)

@@ -33,6 +33,8 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   const features = parseJsonArray(project.features);
   const stack = parseJsonArray(project.stack);
+  const challenges = parseJsonArray(project.challenges);
+  const results = parseJsonArray(project.results);
   const cover =
     project.coverUrl || "/images/illustrations/projects-hero-devices.webp";
   const coverAlt = project.coverAlt || `Mockup chi tiết dự án ${project.title}`;
@@ -99,7 +101,35 @@ export default async function ProjectDetailPage({ params }: Props) {
                   <dd className="font-semibold">{project.platform}</dd>
                 </div>
               </dl>
-              <h2 className="mt-8 font-display text-xl font-bold">Tính năng</h2>
+              {(project.overview || project.problem || project.solution) && (
+                <div className="mt-8 space-y-5">
+                  {project.overview ? (
+                    <div>
+                      <h2 className="font-display text-xl font-bold">Tổng quan</h2>
+                      <p className="mt-2 whitespace-pre-line text-sm leading-7 text-ink-muted">
+                        {project.overview}
+                      </p>
+                    </div>
+                  ) : null}
+                  {project.problem ? (
+                    <div>
+                      <h2 className="font-display text-xl font-bold">Vấn đề</h2>
+                      <p className="mt-2 text-sm leading-7 text-ink-muted">
+                        {project.problem}
+                      </p>
+                    </div>
+                  ) : null}
+                  {project.solution ? (
+                    <div>
+                      <h2 className="font-display text-xl font-bold">Giải pháp</h2>
+                      <p className="mt-2 text-sm leading-7 text-ink-muted">
+                        {project.solution}
+                      </p>
+                    </div>
+                  ) : null}
+                </div>
+              )}
+              <h2 className="mt-8 font-display text-xl font-bold">Tính năng chính</h2>
               <ul className="mt-3 space-y-2">
                 {features.map((f) => (
                   <li key={f} className="flex gap-2 text-sm text-ink-muted">
@@ -108,6 +138,36 @@ export default async function ProjectDetailPage({ params }: Props) {
                   </li>
                 ))}
               </ul>
+              {challenges.length > 0 ? (
+                <>
+                  <h2 className="mt-8 font-display text-xl font-bold">
+                    Thách thức kỹ thuật
+                  </h2>
+                  <ul className="mt-3 space-y-2">
+                    {challenges.map((item) => (
+                      <li key={item} className="flex gap-2 text-sm text-ink-muted">
+                        <span className="mt-1.5 size-1.5 rounded-full bg-brand" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : null}
+              {results.length > 0 ? (
+                <>
+                  <h2 className="mt-8 font-display text-xl font-bold">
+                    Kết quả
+                  </h2>
+                  <ul className="mt-3 space-y-2">
+                    {results.map((item) => (
+                      <li key={item} className="flex gap-2 text-sm text-ink-muted">
+                        <span className="mt-1.5 size-1.5 rounded-full bg-brand" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : null}
               <h2 className="mt-8 font-display text-xl font-bold">Công nghệ</h2>
               <div className="mt-3 flex flex-wrap gap-2">
                 {stack.map((t) => (

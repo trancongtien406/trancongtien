@@ -6,8 +6,13 @@ import { prisma } from "@/lib/db";
 const COOKIE = "tct_admin_session";
 
 function sign(payload: string) {
-  const secret = process.env.SESSION_SECRET || "dev-secret";
-  return createHmac("sha256", secret).update(payload).digest("hex");
+  const secret = process.env.SESSION_SECRET;
+  if (!secret && process.env.NODE_ENV === "production") {
+    throw new Error("SESSION_SECRET is required in production");
+  }
+  return createHmac("sha256", secret || "development-only-secret")
+    .update(payload)
+    .digest("hex");
 }
 
 export async function hashPassword(password: string) {

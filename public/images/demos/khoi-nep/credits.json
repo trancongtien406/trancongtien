@@ -1,0 +1,244 @@
+{
+ "fonts": [
+  {
+   "name": "IBM Plex Sans",
+   "license": "SIL OFL 1.1",
+   "source": "@fontsource/ibm-plex-sans 5.3.0"
+  },
+  {
+   "name": "IBM Plex Serif",
+   "license": "SIL OFL 1.1",
+   "source": "@fontsource/ibm-plex-serif 5.3.0"
+  }
+ ],
+ "images": [
+  {
+   "file": "hero-room",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1464,
+   "title": "Elegant Modern Living Room with Natural Light",
+   "author": "Beyza Kılıçdere",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/elegant-modern-living-room-with-natural-light-29012624/",
+   "retrievedAt": "2026-11-24",
+   "sha256": "3545e2451c3991433ddb0a91d186b334f6bba2a53c553402c39b321759ee5aab",
+   "alt": "Phòng khách sáng với rèm voan cao, ghế bọc vải sọc be và cây xanh nhỏ",
+   "usage": "Ảnh bìa hero",
+   "ai": false
+  },
+  {
+   "file": "kitchen",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1333,
+   "title": "An Interior of a Modern Kitchen",
+   "author": "Max Vakhtbovych",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/an-interior-of-a-modern-kitchen-7045351/",
+   "retrievedAt": "2026-11-24",
+   "sha256": "3df55f4b23c8f9e555a3e08c0e3fbac515237d9d734e849178646a44a73866f6",
+   "alt": "Bếp tủ gỗ, mặt đá xám và bếp từ",
+   "usage": "Bộ sưu tập không gian: bếp",
+   "ai": false
+  },
+  {
+   "file": "bedroom-detail",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 2902,
+   "title": "A White Bed with Linen Near the Chopped Wood with Ceramic Vase on Top",
+   "author": "PNW Production",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/a-white-bed-with-linen-near-the-chopped-wood-with-ceramic-vase-on-top-8251666/",
+   "retrievedAt": "2026-11-24",
+   "sha256": "9ef0d3233e62b69e1ad36c514aad3d9570d86713804ed802a90f207ce563b053",
+   "alt": "Giường vải lanh trắng, bình gốm trên mặt gỗ thô",
+   "usage": "Phòng ngủ chi tiết",
+   "ai": false
+  },
+  {
+   "file": "dining",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 3000,
+   "title": "Empty White Chairs Beside Table",
+   "author": "Tiana",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/empty-white-chairs-beside-table-2995012/",
+   "retrievedAt": "2026-11-24",
+   "sha256": "027f3dcd80a8f0a811bb963f62540d3c8e4046c9de4bdcc5f12328b37361e921",
+   "alt": "Bàn ăn tròn bằng gỗ, ghế trắng, nắng chiều",
+   "usage": "Phòng ăn",
+   "ai": false
+  },
+  {
+   "file": "stairs",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 3000,
+   "title": "Photograph of a Wooden Staircase",
+   "author": "Israel Piña",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/photograph-of-a-wooden-staircase-11888495/",
+   "retrievedAt": "2026-11-24",
+   "sha256": "a82bdb1b487384f3fcea3df73f8a7c1b5d5787e5073251dc84b990008628537d",
+   "alt": "Cầu thang gỗ lơ lửng dựa tường trắng",
+   "usage": "Chi tiết kiến trúc, nguyên tắc",
+   "ai": false
+  },
+  {
+   "file": "bath",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1334,
+   "title": "Stainless Steel Faucet on White Ceramic Sink",
+   "author": "Max Vakhtbovych",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/stainless-steel-faucet-on-white-ceramic-sink-7587378/",
+   "retrievedAt": "2026-11-24",
+   "sha256": "833dfe9802520b106a2a754d942e3b0c839d931e439be95d75a6a4bad83046d8",
+   "alt": "Chậu đá mài đặt trên mặt gỗ sồi, tường đá xám",
+   "usage": "Phòng tắm / vật liệu",
+   "ai": false
+  },
+  {
+   "file": "loft",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1335,
+   "title": "Empty spacious room in modern villa with windows overlooking lake",
+   "author": "Max Vakhtbovych",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/empty-spacious-room-in-modern-villa-with-windows-overlooking-lake-7031622/",
+   "retrievedAt": "2026-11-24",
+   "sha256": "4a2f0c2adc1db87898e2687e3b6dd4376dc7bd322fae8cce8fd323acf4c66f4b",
+   "alt": "Không gian mở với cột và trần bê tông",
+   "usage": "Văn phòng / bê tông",
+   "ai": false
+  },
+  {
+   "file": "mat-wood",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1500,
+   "title": "Detailed Oak Wood Texture with Natural Knots",
+   "author": "Chris Steele",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/detailed-oak-wood-texture-with-natural-knots-37225886/",
+   "retrievedAt": "2026-11-24",
+   "sha256": "f064832ee1eb8d150026155e06e81e5bfcd93505f24b746e3d2130db3b36e1e2",
+   "alt": "Vân gỗ sồi có mắt gỗ",
+   "usage": "Thư viện vật liệu: gỗ",
+   "ai": false
+  },
+  {
+   "file": "mat-stone",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1333,
+   "title": "Close Up of Marble Texture",
+   "author": "kaboompics",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/close-up-of-marble-texture-4709030/",
+   "retrievedAt": "2026-11-24",
+   "sha256": "6378f31f218757435a968f52e25a51f9a86b50670e23c1fa993fed620631d67c",
+   "alt": "Đá marble vân be và nâu",
+   "usage": "Thư viện vật liệu: đá",
+   "ai": false
+  },
+  {
+   "file": "mat-linen",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1334,
+   "title": "Close-up of a Linen Texture",
+   "author": "Monstera Production",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/close-up-of-a-linen-texture-7794365/",
+   "retrievedAt": "2026-11-24",
+   "sha256": "e41d5d8e5d2d5a08d0a6c61be01def20919838b35d7735d48b96e0299106789b",
+   "alt": "Vải lanh màu be",
+   "usage": "Thư viện vật liệu: vải",
+   "ai": false
+  },
+  {
+   "file": "mat-concrete",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 2667,
+   "title": "Rough Concrete Texture",
+   "author": "Ann Hannes",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/rough-concrete-texture-11299515/",
+   "retrievedAt": "2026-11-24",
+   "sha256": "946e5eafd9c92b01e2fdd64de93091dfe7aa8d0ec2bfc54a5602335078e6b085",
+   "alt": "Bê tông thô xám nhạt",
+   "usage": "Thư viện vật liệu: bê tông",
+   "ai": false
+  },
+  {
+   "file": "bedroom",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1334,
+   "title": "Minimalist Bedroom Design with Neutral Tones",
+   "author": "Margo Evardson",
+   "license": "Pexels License (miễn phí, dùng thương mại)",
+   "sourceUrl": "https://www.pexels.com/photo/minimalist-bedroom-design-with-neutral-tones-37625077/",
+   "retrievedAt": "2026-11-24",
+   "sha256": "9c8d21e26c2ddeec3ad8403b071f91b90b55a09fbb5ad8b077562ebb2116fc1e",
+   "alt": "Giường lanh trắng, bàn đầu giường gỗ ép và cành khô",
+   "usage": "Phòng ngủ",
+   "ai": false
+  }
+ ]
+}

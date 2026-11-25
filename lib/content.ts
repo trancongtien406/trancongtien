@@ -69,6 +69,17 @@ export async function getPublishedProjects() {
   });
 }
 
+export async function getProjectsBySolutionSlug(solutionSlug: string, take = 3) {
+  return prisma.project.findMany({
+    where: {
+      status: ContentStatus.PUBLISHED,
+      solutionSlug,
+    },
+    orderBy: { sortOrder: "asc" },
+    take,
+  });
+}
+
 export async function getProjectBySlug(slug: string) {
   return prisma.project.findFirst({
     where: { slug, status: ContentStatus.PUBLISHED },
@@ -80,6 +91,17 @@ export async function getPublishedServices() {
     where: { status: ContentStatus.PUBLISHED },
     orderBy: { sortOrder: "asc" },
   });
+}
+
+export async function getPublishedSolutions() {
+  return prisma.solution.findMany({
+    where: { status: ContentStatus.PUBLISHED },
+    orderBy: { sortOrder: "asc" },
+  });
+}
+
+export async function getSolutionBySlug(slug: string) {
+  return prisma.solution.findFirst({ where: { slug, status: ContentStatus.PUBLISHED } });
 }
 
 export async function getPublishedTestimonials() {

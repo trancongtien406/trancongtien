@@ -15,8 +15,17 @@ export const metadata = buildMetadata({
   path: "/lien-he",
 });
 
-export default async function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
   const faqs = await getPublishedFaqs();
+  const params = await searchParams;
+  const pick = (key: string) => {
+    const value = params[key];
+    return typeof value === "string" ? value : Array.isArray(value) ? value[0] || "" : "";
+  };
 
   return (
     <>
@@ -31,6 +40,9 @@ export default async function Page() {
           question: f.question,
           answer: f.answer,
         }))}
+        initialIndustry={pick("industry") || pick("solution")}
+        initialReferralCode={pick("ref")}
+        initialSolution={pick("solution")}
       />
     </>
   );

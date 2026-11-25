@@ -1,0 +1,174 @@
+{
+  "images": [
+    {
+      "file": "thap-hoang-hon",
+      "title": "High-rise building with balconies at twilight",
+      "author": "Oleg Prachuk",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/8422426/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "b93b67f6610974c97bed56146b0fc1524db3c5f1a6356241070f58e6254007f5",
+      "alt": "Toà tháp cong ánh đồng lúc hoàng hôn nhìn từ dưới lên",
+      "usage": "Hero",
+      "width": 2000,
+      "height": 2667
+    },
+    {
+      "file": "thap-cong",
+      "title": "Modern curved glass building at sunset",
+      "author": "Ben B.",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/33217714/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "ae16ea8928c371ac4a6b8c10f4131e729e07a2883fa362e82c1dc36fdf81b60e",
+      "alt": "Mặt tiền kính cong của toà tháp ánh nắng chiều",
+      "usage": "Chương Hoàn thiện, mặt tiền",
+      "width": 2000,
+      "height": 3009
+    },
+    {
+      "file": "thap-vang",
+      "title": "Modern skyscrapers at sunset with dramatic sky",
+      "author": "OMAR",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/39864256/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "327df1bff7d3a04ac05e2e7762b634dcb3a449e2b5c774cbba5ba89a27ac4dab",
+      "alt": "Toà tháp cao tầng nhuộm nắng vàng chiều",
+      "usage": "Chương Vị trí",
+      "width": 2000,
+      "height": 2667
+    },
+    {
+      "file": "bo-bien",
+      "title": "Aerial view of a coastal skyline at sunrise",
+      "author": "Parth Patel",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/37930290/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "a357bec739fa395140ae1a5b0c8b6020274c4bb003fc14a58ea4200f20b5f6d9",
+      "alt": "Đường bờ biển với dải đô thị cao tầng nhìn từ trên cao",
+      "usage": "Chương Vị trí, nền",
+      "width": 2000,
+      "height": 1500
+    },
+    {
+      "file": "bai-cat",
+      "title": "Aerial view of beach meeting the modern skyline",
+      "author": "Martin Škeřík",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/19823955/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "900ed947f927e44b026d1c26e1e9b2253d2e502e71a6a58ed23a8f16fd437a27",
+      "alt": "Bãi cát dài và sóng vỗ nhìn từ trên cao",
+      "usage": "Dải biển",
+      "width": 2000,
+      "height": 1500
+    },
+    {
+      "file": "ban-cong-bien",
+      "title": "Modern apartment balcony overlooking a serene ocean",
+      "author": "Tapas S",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/34271104/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "0ff77bb1dcf3c4c246356c5c6f37fea67f1f5364f790b831dd542c84b68f7a59",
+      "alt": "Ban công căn hộ nhìn ra mặt biển xanh",
+      "usage": "Chương Căn hộ",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "file": "ban-cong-ghe",
+      "title": "Scenic balcony with ocean view at sunset",
+      "author": "Наталья Маркина",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/9753953/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "105da5120330dd677e8ed2b50239861c213d82dc2d53df95f2dedbe084e1dd27",
+      "alt": "Ban công hoàng hôn với ghế treo nhìn ra biển",
+      "usage": "Chương Hoàn thiện",
+      "width": 2000,
+      "height": 2667
+    },
+    {
+      "file": "phong-khach",
+      "title": "Elegant living room with large window overlooking ocean",
+      "author": "lumverte",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/33198971/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "56ffca6dca504e6230a962d5ff8f9afbcc65c694f8d73753a8130456f10bf4c6",
+      "alt": "Phòng khách cửa kính lớn nhìn ra biển",
+      "usage": "Chương Căn hộ, nội thất",
+      "width": 2000,
+      "height": 2667
+    },
+    {
+      "file": "phong-ngoi",
+      "title": "Contemporary living room with stunning ocean view",
+      "author": "Rosie C",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/18946620/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "6084ac7d7b36e187640d9f22ef7bae1e1f3282c55cb8619972d83cbe742eade7",
+      "alt": "Phòng ngồi tối giản nhìn ra biển",
+      "usage": "Nội thất đầy đủ",
+      "width": 2000,
+      "height": 2667
+    },
+    {
+      "file": "ho-boi",
+      "title": "Infinity pool at dusk",
+      "author": "Nadin Sh",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/27555450/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "dae15743c6bb32f7133747a77194ffc285d5cdc13500b9b86f3f8067d011468d",
+      "alt": "Hồ bơi tràn bờ lúc chạng vạng",
+      "usage": "Chương Tiện ích",
+      "width": 2000,
+      "height": 2667
+    },
+    {
+      "file": "ho-boi-hoang-hon",
+      "title": "Sunset view over an infinity pool with palm trees",
+      "author": "Ümit Çetin",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/34782964/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "e99ba66c5fc446ba331c0b5941bdb6978eba1b2997a61754732840de367ebe43",
+      "alt": "Hồ bơi vô cực và mặt trời lặn",
+      "usage": "Tiện ích",
+      "width": 2000,
+      "height": 1328
+    },
+    {
+      "file": "thap-chieu-muon",
+      "title": "Contemporary skyscraper at dusk",
+      "author": "yanping ma",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/16276655/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "08e25de5a8fa48f7aa57f8d684e40e042cbea3e2a8545e46c02d94fe82e969ff",
+      "alt": "Toà nhà hiện đại trong ánh chiều muộn",
+      "usage": "Đoạn kết",
+      "width": 2000,
+      "height": 1500
+    }
+  ],
+  "fonts": [
+    {
+      "name": "Spectral",
+      "author": "Production Type",
+      "license": "SIL OFL 1.1",
+      "source": "https://fonts.google.com/specimen/Spectral"
+    },
+    {
+      "name": "Geologica",
+      "author": "Anna Zakharova, Ilya Ruderman",
+      "license": "SIL OFL 1.1",
+      "source": "https://fonts.google.com/specimen/Geologica"
+    }
+  ]
+}

@@ -38,14 +38,17 @@ function resolveHref(meta: Record<string, unknown>): string | null {
     return `/admin/posts/${meta.postId}`;
   }
   if (typeof meta.bookingId === "string" && meta.bookingId) {
-    return `/admin/bookings?id=${meta.bookingId}`;
+    return `/admin/leads`;
+  }
+  if (typeof meta.leadId === "string" && meta.leadId) {
+    return `/admin/leads?id=${meta.leadId}`;
   }
   return null;
 }
 
 function hrefLabel(href: string) {
   if (href.startsWith("/admin/posts/")) return "Xem chi tiết bài viết";
-  if (href.startsWith("/admin/bookings")) return "Xem chi tiết liên hệ";
+  if (href.startsWith("/admin/leads")) return "Xem lead";
   return "Mở trong admin";
 }
 

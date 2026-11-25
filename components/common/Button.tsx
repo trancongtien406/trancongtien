@@ -9,6 +9,7 @@ type ButtonProps = {
   className?: string;
   type?: "button" | "submit";
   onClick?: () => void;
+  disabled?: boolean;
   iconLeft?: React.ReactNode;
   iconRight?: React.ReactNode;
   external?: boolean;
@@ -38,13 +39,14 @@ export function Button({
   className,
   type = "button",
   onClick,
+  disabled,
   iconLeft,
   iconRight,
   external,
   download,
 }: ButtonProps) {
   const classes = cn(
-    "inline-flex items-center justify-center font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2",
+    "inline-flex items-center justify-center font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-60",
     variants[variant],
     sizes[size],
     className,
@@ -80,7 +82,7 @@ export function Button({
   }
 
   return (
-    <button type={type} onClick={onClick} className={classes}>
+    <button type={type} onClick={onClick} disabled={disabled} className={classes}>
       {content}
     </button>
   );

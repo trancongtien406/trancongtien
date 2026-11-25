@@ -9,7 +9,7 @@ const contentSecurityPolicy = [
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
   "style-src 'self' 'unsafe-inline'",
-  `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""}`,
+  `script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://ajax.cloudflare.com${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""}`,
   "connect-src 'self' https:",
   "media-src 'self' blob: https:",
   "worker-src 'self' blob:",
@@ -32,6 +32,8 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  output: "standalone",
+  allowedDevOrigins: ["127.0.0.1"],
   turbopack: {
     ignoreIssue: [
       {
@@ -42,6 +44,9 @@ const nextConfig: NextConfig = {
   },
   images: {
     formats: ["image/avif", "image/webp"],
+    remotePatterns: process.env.R2_PUBLIC_URL
+      ? [{ protocol: "https", hostname: new URL(process.env.R2_PUBLIC_URL).hostname }]
+      : [],
     localPatterns: [
       { pathname: "/images/**" },
       { pathname: "/uploads/**" },

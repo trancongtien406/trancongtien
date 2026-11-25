@@ -1,0 +1,202 @@
+{
+ "images": [
+  {
+   "file": "tent-night",
+   "title": "A Tent in the Forest at Night",
+   "author": "Alexandre Boucher",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/a-tent-in-the-forest-at-night-9043496/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "349ffd34c8ddf8b59b973333eeae9f69ac9fa9bf6f797784ded17c520cf7eba2",
+   "alt": "Lều sáng đèn trong rừng thông ban đêm",
+   "usage": "Lều Mộc / hero",
+   "width": 2000,
+   "height": 1333
+  },
+  {
+   "file": "bell-tent",
+   "title": "A Luxurious Tent on a Campsite in a Forest",
+   "author": "cottonbro studio",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/a-luxurious-tent-on-a-campsite-in-a-forest-5364965/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "c4ce5ad3fd3b38d5c7de452f75e37818984b8db49a6766a442b361c4230a7030",
+   "alt": "Lều chuông màu kem giữa rừng thông, treo cờ đèn nhỏ",
+   "usage": "Thẻ lều",
+   "width": 2000,
+   "height": 3000
+  },
+  {
+   "file": "fairy-tent",
+   "title": "Illuminated with Fairy Lights Big Tent for Glamping",
+   "author": "Matheus Bertelli",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/illuminated-with-fairy-lights-big-tent-for-glamping-7163675/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "661580a275e645cd2034c561678e9577c3323757a93845f156c993c0bcc2d610",
+   "alt": "Lều glamping trên sàn gỗ với dây đèn vàng ban đêm",
+   "usage": "Thẻ lều",
+   "width": 2000,
+   "height": 3000
+  },
+  {
+   "file": "hill-tents",
+   "title": "Illuminated Campsite at Dusk",
+   "author": "Quang Nguyen Vinh",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/illuminated-campsite-at-dusk-6877877/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "830c71100ec6844f98e3891c7797ec7919352565bbe91e447c783211dfb19d64",
+   "alt": "Dãy lều sáng đèn trên đồi thông lúc chạng vạng",
+   "usage": "Dải ảnh",
+   "width": 2000,
+   "height": 1333
+  },
+  {
+   "file": "sunset-bbq",
+   "title": "Photo of Chicken Meat being Cooked Over a Campfire",
+   "author": "Quang Nguyen Vinh",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/photo-of-chicken-meat-being-cooked-over-a-campfire-6877866/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "88e63cf28543a54cc898d9b597be3654b60e68c27a63943c7faf6f9336482b60",
+   "alt": "Xiên thịt nướng bên lửa trên đồi lúc hoàng hôn",
+   "usage": "Hành trình 16:30",
+   "width": 2000,
+   "height": 1333
+  },
+  {
+   "file": "campfire",
+   "title": "Photograph of a Campfire",
+   "author": "Katie Hackney",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/photograph-of-a-campfire-9659395/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "3711e7d28c014b9a927622532459ead4f422e2988635efe437083cc57dce2033",
+   "alt": "Ngọn lửa trại cháy giữa đêm tối",
+   "usage": "Mục lửa trại",
+   "width": 2000,
+   "height": 3000
+  },
+  {
+   "file": "campfire-glow",
+   "title": "Cozy Nighttime Campfire Under the Stars",
+   "author": "Dara",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/cozy-nighttime-campfire-under-the-stars-39318072/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "ef86d37749d5cdc17f596fe6fdbe9e1458ecb6735a4863894eb901a562df0440",
+   "alt": "Đống lửa trại sáng cam trong đêm",
+   "usage": "Dải ảnh",
+   "width": 2000,
+   "height": 2667
+  },
+  {
+   "file": "mist-pines",
+   "title": "Tall Trees on a Mountain",
+   "author": "Vietnam Photographer",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/tall-trees-on-a-mountain-10814497/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "d70dc666cbfc424c3e46beb81cec28fb79841bd421c5db2136e25885b21b894c",
+   "alt": "Sương phủ triền núi với hàng thông",
+   "usage": "Hành trình 06:00",
+   "width": 2000,
+   "height": 1333
+  },
+  {
+   "file": "pine-silhouette",
+   "title": "Green Trees on Mountain Range during Winter",
+   "author": "Diana",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/green-trees-on-mountain-range-during-winter-2004312/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "399d381547c72fb54aefcf8e8135ea661d54fc3c4b1d09ad29d939087a312303",
+   "alt": "Bóng cây thông trên sườn núi mờ sương",
+   "usage": "Hành trình 10:00",
+   "width": 2000,
+   "height": 1333
+  },
+  {
+   "file": "fog-peak",
+   "title": "Misty Forested Mountain Peaks Enveloped in Fog",
+   "author": "eberhard grossgasteiger",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/misty-forested-mountain-peaks-enveloped-in-fog-31612084/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "4b3defa382d4a2eeb3bb18692b41302249ed27892b008c4d18a952669ec73b29",
+   "alt": "Đỉnh núi phủ rừng trong sương",
+   "usage": "Dải ảnh",
+   "width": 2000,
+   "height": 3000
+  },
+  {
+   "file": "hammock",
+   "title": "Bare Trees With Green Hammock",
+   "author": "Dương Nhân",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/bare-trees-with-green-hammock-3413310/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "7762b5fc3632613b656cd604e2517af8dbd52e7826447971b527dd6abb253a5f",
+   "alt": "Võng giữa rừng thông trong nắng chiều",
+   "usage": "Hành trình 13:00",
+   "width": 2000,
+   "height": 1333
+  },
+  {
+   "file": "milky-way",
+   "title": "Starry Sky over a Mountain",
+   "author": "Maël BALLAND",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/starry-sky-over-a-mountain-13713048/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "516a69f681a3527fb4223df45447f4d732faadc2aa820e1e0ba48dab5f8e8764",
+   "alt": "Dải ngân hà trên núi, vài chiếc lều nhỏ phía dưới",
+   "usage": "Hành trình 21:00",
+   "width": 2000,
+   "height": 3000
+  },
+  {
+   "file": "camp-kitchen",
+   "title": "Man Prepares Skewers at Outdoor Camp",
+   "author": "apertur 2.8",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/man-prepares-skewers-at-outdoor-camp-32943056/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "ea08afeb1787452d89c71557df0495ccd5c2b89e0ffa6258e40ed11cd5658da4",
+   "alt": "Bếp ngoài trời giữa rừng, đang xiên thức ăn",
+   "usage": "Hành trình 08:00",
+   "width": 2000,
+   "height": 1333
+  },
+  {
+   "file": "grill",
+   "title": "Grilled Sausages on Black Charcoal Griller",
+   "author": "Daniel Torobekov",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/grilled-sausages-on-black-charcoal-griller-9532470/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "d03cd1bf463589a4c422205531f0cb0e0946fbf22c5c4ec7f0b7dd65569d7103",
+   "alt": "Xúc xích nướng trên vỉ than cạnh lều",
+   "usage": "Hành trình 19:00",
+   "width": 2000,
+   "height": 3119
+  }
+ ],
+ "fonts": [
+  {
+   "name": "Alegreya (variable)",
+   "author": "Juan Pablo del Peral / Huerta Tipográfica",
+   "license": "SIL OFL 1.1",
+   "source": "https://fonts.google.com/specimen/Alegreya",
+   "use": "Tiêu đề"
+  },
+  {
+   "name": "Mulish (variable)",
+   "author": "Vernon Adams, Jacques Le Bailly, Alexei Vanyashin",
+   "license": "SIL OFL 1.1",
+   "source": "https://fonts.google.com/specimen/Mulish",
+   "use": "Nội dung"
+  }
+ ]
+}

@@ -10,6 +10,7 @@ export const dynamic = "force-dynamic";
 const entityEnum = z.enum([
   "project",
   "service",
+  "solution",
   "resource",
   "testimonial",
   "processStep",
@@ -25,6 +26,7 @@ function revalidateAll() {
     "/",
     "/dich-vu",
     "/du-an",
+    "/solutions",
     "/quy-trinh",
     "/ve-toi",
     "/tai-nguyen",
@@ -32,6 +34,7 @@ function revalidateAll() {
     "/lien-he",
     "/admin/projects",
     "/admin/services",
+    "/admin/solutions",
     "/admin/testimonials",
     "/admin/media",
   ].forEach((p) => revalidatePath(p));
@@ -95,6 +98,26 @@ async function createEntity(entity: Entity, data: Record<string, unknown>) {
           items: asJsonArray(data.items),
           color: String(data.color || "bg-blue-50 text-blue-600"),
           status: (data.status as "DRAFT" | "PUBLISHED" | "ARCHIVED") || "PUBLISHED",
+          sortOrder: Number(data.sortOrder || 0),
+        },
+      });
+    }
+    case "solution": {
+      const title = String(data.title || "");
+      return prisma.solution.create({
+        data: {
+          title,
+          slug: String(data.slug || toSlug(title)),
+          industry: String(data.industry || ""),
+          excerpt: String(data.excerpt || ""),
+          heroTitle: String(data.heroTitle || title),
+          heroDescription: String(data.heroDescription || ""),
+          problems: asJsonArray(data.problems),
+          capabilities: asJsonArray(data.capabilities),
+          packageItems: asJsonArray(data.packageItems),
+          coverUrl: data.coverUrl ? String(data.coverUrl) : null,
+          coverAlt: data.coverAlt ? String(data.coverAlt) : null,
+          status: (data.status as "DRAFT" | "PUBLISHED" | "ARCHIVED") || "DRAFT",
           sortOrder: Number(data.sortOrder || 0),
         },
       });
@@ -233,6 +256,45 @@ async function updateEntity(
             : {}),
         },
       });
+    case "solution":
+      return prisma.solution.update({
+        where: { id },
+        data: {
+          ...(data.title !== undefined ? { title: String(data.title) } : {}),
+          ...(data.slug !== undefined ? { slug: String(data.slug) } : {}),
+          ...(data.industry !== undefined
+            ? { industry: String(data.industry) }
+            : {}),
+          ...(data.excerpt !== undefined ? { excerpt: String(data.excerpt) } : {}),
+          ...(data.heroTitle !== undefined
+            ? { heroTitle: String(data.heroTitle) }
+            : {}),
+          ...(data.heroDescription !== undefined
+            ? { heroDescription: String(data.heroDescription) }
+            : {}),
+          ...(data.problems !== undefined
+            ? { problems: asJsonArray(data.problems) }
+            : {}),
+          ...(data.capabilities !== undefined
+            ? { capabilities: asJsonArray(data.capabilities) }
+            : {}),
+          ...(data.packageItems !== undefined
+            ? { packageItems: asJsonArray(data.packageItems) }
+            : {}),
+          ...(data.coverUrl !== undefined
+            ? { coverUrl: data.coverUrl ? String(data.coverUrl) : null }
+            : {}),
+          ...(data.coverAlt !== undefined
+            ? { coverAlt: data.coverAlt ? String(data.coverAlt) : null }
+            : {}),
+          ...(data.status !== undefined
+            ? { status: data.status as "DRAFT" | "PUBLISHED" | "ARCHIVED" }
+            : {}),
+          ...(data.sortOrder !== undefined
+            ? { sortOrder: Number(data.sortOrder) }
+            : {}),
+        },
+      });
     case "resource":
       return prisma.resource.update({
         where: { id },
@@ -352,6 +414,8 @@ async function deleteEntity(entity: Entity, id: string) {
       return prisma.project.delete({ where: { id } });
     case "service":
       return prisma.service.delete({ where: { id } });
+    case "solution":
+      return prisma.solution.delete({ where: { id } });
     case "resource":
       return prisma.resource.delete({ where: { id } });
     case "testimonial":

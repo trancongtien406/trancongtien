@@ -1,0 +1,6 @@
+# QA — Kim Nguyệt (kết quả thật, 2026-11-25)
+- `BASE=http://localhost:3100 node tests/showroom/kim-hoan/e2e.mjs` (Chrome headless): **RESULT pass=95 fail=0**, không dòng RETRY ở lần chạy cuối (lần chạy trước có 1 lỗi console React "state update on a component that hasn't mounted yet" ở 1024px, không tái hiện ở 2 lần sau; chưa rõ nguyên nhân, nghi tải dev server).
+- `node tests/showroom/kim-hoan/pricing.test.mjs`: all assertions passed (mặc định nhẫn 18K + đá tổng hợp 4mm cỡ 12 = 12.670.000 – 14.620.000 đ, ~3,3 g).
+- `npx tsc --noEmit | grep kim-hoan`: không lỗi; `npx eslint "app/(demos)/demos/kim-hoan"`: sạch.
+- Đã kiểm: không tràn ngang 320/390/768/1024/1440; 0 request ngoài; intro ≤1,15s + click bỏ qua; no-JS tự gỡ intro; reduced-motion nội dung hiện đủ, nhẫn/shimmer đứng yên; quét chữ cấm mục 11 sạch; glyph Việt (Ệ Ế Ổ Ứ Ữ Ợ Ắ Ẳ) đo + xem ảnh; long task >200ms khi cuộn 1440 = 0; chạm >=44px trên mobile; menu mobile Escape trả focus; công cụ: đổi loại/chất liệu/đá, lỗi đơn giá (aria-invalid + trạng thái rỗng), preset từ thẻ, phím mũi tên, sao chép.
+- CHƯA kiểm: Safari/Firefox, thiết bị thật, trình đọc màn hình, Lighthouse/axe, long task ở 390 (chỉ đo 1440), `next build`, hiệu năng 40 lớp 3D trên máy yếu.

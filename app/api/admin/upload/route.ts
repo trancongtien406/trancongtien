@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
 import { requireAdminOrAutomation } from "@/lib/auth";
 import { prisma } from "@/lib/db";
-import { getUploadDir, getUploadUrl, safeUploadName } from "@/lib/uploads";
+import { storeUpload } from "@/lib/storage";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -83,16 +81,16 @@ export async function POST(req: Request) {
       originalName = `${originalName.replace(/\.[^.]+$/, "") || "cover"}${ext}`;
     }
 
-    const safeName = safeUploadName(originalName);
-    const dir = getUploadDir();
-    await mkdir(dir, { recursive: true });
-    await writeFile(path.join(dir, safeName), bytes);
-
-    const url = getUploadUrl(safeName);
+    const stored = await storeUpload({
+      bytes,
+      contentType: sniffed || mimeType,
+      extension: ext || ".bin",
+    });
     const media = await prisma.media.create({
       data: {
         filename: originalName,
-        url,
+        url: stored.url,
+        storageKey: stored.key,
         alt: alt || originalName,
         mimeType: sniffed || mimeType,
         size: bytes.length,

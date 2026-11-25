@@ -1,0 +1,249 @@
+{
+ "demo": "nep-tho",
+ "images": [
+  {
+   "file": "studio-reformer",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 3000,
+   "title": "Pilates Reformers in Bright Room",
+   "author": "Ahmet Kurt",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/25596894/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "f11935df4ef154aac464faf5f39fd4016334a6500b77da6bb7623f72d848c7f4",
+   "alt": "Phòng studio sáng với các máy reformer gỗ và khung tháp",
+   "usage": "Hero",
+   "ai": false
+  },
+  {
+   "file": "studio-nang-som",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 2667,
+   "title": "Sunlit Modern Pilates Studio with Equipment",
+   "author": "Olena Brumyrska",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/37573625/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "43382e1c841d609c118e2a178cc99a22c92a09e833e13306313ef695e19c403e",
+   "alt": "Sàn studio có nắng sớm, thảm xanh và bóng tập",
+   "usage": "Thời khoá biểu / giới thiệu",
+   "ai": false
+  },
+  {
+   "file": "rem-va-tham",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 3000,
+   "title": "Peaceful Yoga Studio Interior in Argentina",
+   "author": "Zulema Laborde",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/38470685/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "c7ef5e3ab45136e1f56c64a202bdf655d14b360bca83e2b781545d64e5d203e6",
+   "alt": "Phòng yoga rèm trắng, thảm và chăn gấp trên sàn gỗ",
+   "usage": "Lớp yoga",
+   "ai": false
+  },
+  {
+   "file": "tham-cuon-ke",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1333,
+   "title": "Still Life Photography of Rolled Yoga Mats",
+   "author": "Yan Krukau",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/8437013/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "3ee04f559741f7994cd867c9eb427c1f1fb6564ea6dceb03d86a42baf59e836d",
+   "alt": "Thảm cuộn và chăn trên kệ gỗ",
+   "usage": "Gói tập",
+   "ai": false
+  },
+  {
+   "file": "tay-cuon-tham",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1333,
+   "title": "A Person Holding a Yoga Mat with a Strap on the Floor",
+   "author": "Roman Odintsov",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/6193710/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "3dc6002122e4ab29fcac32cc46f9b78ba127555f6f247c0c69bbceba7a4fd4e5",
+   "alt": "Hai bàn tay cuộn tấm thảm tập có dây đeo",
+   "usage": "Class Finder",
+   "ai": false
+  },
+  {
+   "file": "ban-tay-tham",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 2500,
+   "title": "Close-up of Hand on Yoga Mat for Fitness",
+   "author": "Göksun Barış Gökalp",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/35225472/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "3738659d5f4f192ef095377d05c1d9178c85bc7069cf3d2720c3a9cc2156ed46",
+   "alt": "Cận bàn tay áp lên thảm tập xanh đen",
+   "usage": "Phương pháp",
+   "ai": false
+  },
+  {
+   "file": "ban-chan-tham",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1333,
+   "title": "Hands and Feet on a Yoga Mat",
+   "author": "Mikhail Nilov",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/7500434/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "45ee5ecaac85380a74814029c83caf088c39dbaab3f045c6e5d206e1e18b2f42",
+   "alt": "Cận bàn chân và bàn tay trên thảm xanh ngọc",
+   "usage": "Lớp nền tảng",
+   "ai": false
+  },
+  {
+   "file": "kiheng-chan",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1333,
+   "title": "A Person in Beige Leggings Tip-toeing on a Yoga Mat",
+   "author": "Yan Krukau",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/8436694/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "ef2710d66a98070917dc1b0bbaaf35982cfd4f3713256fb7b121ee6ee58d4f03",
+   "alt": "Bàn chân kiễng trên thảm trong studio sáng",
+   "usage": "Lớp thăng bằng",
+   "ai": false
+  },
+  {
+   "file": "dang-lung",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 3000,
+   "title": "Back View of a Woman Doing Yoga at Home",
+   "author": "Roman Odintsov",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/6193559/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "b967ae892871a42d4b326f073997d1a4b45bc20474bacf6c0d9700304bc2ca93",
+   "alt": "Dáng lưng xoay thân bên cửa sổ, không thấy mặt",
+   "usage": "Huấn luyện",
+   "ai": false
+  },
+  {
+   "file": "bong-dang-nuoc",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 3000,
+   "title": "Silhouette of Woman Performing Yoga by Water",
+   "author": "Andreas Suwardy",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/40037492/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "a16564d736bd990c1208e3a471a0ebd83408016bbc97a3025080aca31c391548",
+   "alt": "Bóng dáng tư thế yoga bên mặt nước buổi sớm",
+   "usage": "Câu chuyện thương hiệu",
+   "ai": false
+  },
+  {
+   "file": "vong-yoga",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 3000,
+   "title": "Person in Black Pants Standing on Brown Wooden Floor",
+   "author": "cottonbro studio",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/4324100/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "a0a6132add04abf840c8beec3959e77d0967b3b00bb20a3d73a52edb95200c05",
+   "alt": "Đôi chân trong võng yoga trên sàn gỗ",
+   "usage": "Lớp yoga bay",
+   "ai": false
+  },
+  {
+   "file": "guong-cay",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 2664,
+   "title": "Houseplant Beside a Mirror and Yoga Mat on Wooden Floor",
+   "author": "Liudmila Aksenenko",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/7011939/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "f0f17328db9accd83ded6a57026d40eef52f45668ffc946a7cd1c5f877e40021",
+   "alt": "Góc phòng có chậu cây, gương và thảm tập",
+   "usage": "Không gian",
+   "ai": false
+  }
+ ],
+ "fonts": [
+  {
+   "name": "Lexend",
+   "usage": "Heading",
+   "author": "Bonnie Shaver-Troup, Thomas Jockin, Santiago Orozco, Hector Gomez, Mohamad Mehdi / Lexend Project (qua Fontsource)",
+   "license": "SIL Open Font License 1.1",
+   "source": "https://fontsource.org/fonts/lexend"
+  },
+  {
+   "name": "Mulish",
+   "usage": "Body",
+   "author": "Vernon Adams, Cyreal (qua Fontsource)",
+   "license": "SIL Open Font License 1.1",
+   "source": "https://fontsource.org/fonts/mulish"
+  }
+ ]
+}

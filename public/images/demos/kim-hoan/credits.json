@@ -1,0 +1,176 @@
+{
+  "images": [
+    {
+      "file": "nhan-solitaire-{600,1200,2000}.webp",
+      "title": "Golden Ring with Gem",
+      "author": "The Glorious Studio",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/golden-ring-with-gem-18451698/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "8aca392ce809edd019316531ff43817b98f5f65e10d133ec311147ff8416cf0d",
+      "alt": "Nhẫn vàng gắn một viên đá lớn trên nền đen",
+      "usage": "hero, công cụ cấu hình (nhẫn)",
+      "width": 2000,
+      "height": 2492
+    },
+    {
+      "file": "nhan-hoa-van-{600,1200,2000}.webp",
+      "title": "Gold Ring with Diamonds",
+      "author": "Jacob Yavin",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/gold-ring-with-diamonds-6438667/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "63547caf269821f461d9703bd788e8164817907ad87ebe6375ae46826abe70e3",
+      "alt": "Nhẫn vàng chạm hoa văn đính đá nhỏ trên nền đen",
+      "usage": "bộ sưu tập",
+      "width": 2000,
+      "height": 1348
+    },
+    {
+      "file": "mat-day-{600,1200,2000}.webp",
+      "title": "Necklace with Golden, Handmade Dragon Tail",
+      "author": "Coppertist Wu",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/necklace-with-golden-handmade-dragon-tail-15967465/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "8427441496138e278d58983299884f4a3e9542525bf4971570fb75ea071887fd",
+      "alt": "Mặt dây vàng chế tác thủ công trên dây chuyền, nền đen",
+      "usage": "bộ sưu tập, công cụ cấu hình (mặt dây)",
+      "width": 2000,
+      "height": 3000
+    },
+    {
+      "file": "bong-tai-{600,1200,2000}.webp",
+      "title": "Precious Earrings on Silver Plate",
+      "author": "Coppertist Wu",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/precious-earrings-on-silver-plate-15785490/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "e4766455ae3e0016a302bf8b28d31c5521032dd50ed9c31c757e75a9438f9b65",
+      "alt": "Đôi bông tai vòng vàng đặt trên đĩa xám",
+      "usage": "bộ sưu tập, công cụ cấu hình (bông tai)",
+      "width": 2000,
+      "height": 3000
+    },
+    {
+      "file": "lac-tay-{600,1200,2000}.webp",
+      "title": "Gold Bracelet on Gray Surface",
+      "author": "Duygu Kamar",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/gold-bracelet-on-gray-surface-12124638/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "5cfcf7d354ca1c95e93226b4f0c17be1724d8741f037f527d32dfcc416f4667d",
+      "alt": "Lắc tay vàng dạng xích trên nền xám sẫm",
+      "usage": "bộ sưu tập, công cụ cấu hình (lắc)",
+      "width": 2000,
+      "height": 3000
+    },
+    {
+      "file": "cap-nhan-{600,1200,2000}.webp",
+      "title": "Close-up of Gold Rings on Black Surface",
+      "author": "Hanna Auramenka",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/close-up-of-gold-rings-on-black-surface-8467177/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "bd43448887bb79255c014be42d2e87c844f7d7e8f47430e1b9484a7e5b282b5c",
+      "alt": "Ba chiếc nhẫn vàng ánh lửa trên nền đen",
+      "usage": "dải ảnh, quy trình",
+      "width": 1662,
+      "height": 2493
+    },
+    {
+      "file": "vien-da-{600,1200,2000}.webp",
+      "title": "Close up of a Diamond",
+      "author": "The Glorious Studio",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/close-up-of-a-diamond-19895204/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "19ae6d6671622e75203f58d40ff6cf746fae745c0e73612eb8360d52cd71e0e4",
+      "alt": "Viên đá giác cắt trên vải đen",
+      "usage": "phần đá, nền công cụ",
+      "width": 2000,
+      "height": 2500
+    },
+    {
+      "file": "kinh-lup-{600,1200,2000}.webp",
+      "title": "Person Holding a Jewelry Loupe",
+      "author": "Tima Miroshnichenko",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/person-holdinga-jewelry-loupe-6263110/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "9d87596f64d8b334233543dbc48214311107c33c84258170959e75bdf5b5bbbd",
+      "alt": "Hai bàn tay cầm kính lúp xem trang sức",
+      "usage": "quy trình chế tác",
+      "width": 2000,
+      "height": 3000
+    },
+    {
+      "file": "ban-tho-{600,1200,2000}.webp",
+      "title": "Close-up of Person Making a Pendant",
+      "author": "Coppertist Wu",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/close-up-of-person-making-a-pendant-15955333/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "66bb2ff697087bf6b515aea7611939b2ce46866897afbb3317a80bb2169a24ba",
+      "alt": "Bàn thợ kim hoàn hàn mặt dây bằng đèn khò",
+      "usage": "quy trình chế tác",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "file": "hop-nhan-{600,1200,2000}.webp",
+      "title": "Gold Ring with Diamond in a Box",
+      "author": "Sina Rezakhani",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/gold-ring-with-diamond-in-a-box-19525059/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "1fdcfb3a3ddf7be0f8655f8cf44cfe00463027ec1d4d9298b1199b92c9bb62a9",
+      "alt": "Nhẫn vàng đính đá trong hộp đen",
+      "usage": "bảo hành, hộp quà",
+      "width": 2000,
+      "height": 3000
+    },
+    {
+      "file": "ban-tay-{600,1200,2000}.webp",
+      "title": "Precious Jewellery on Hand",
+      "author": "Jacob Halter",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/precious-jewellery-on-hand-16031574/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "568984cf5d236efb29576ec5dc30cd6b5ec18f9f09c7d4a34550b380c4c3df76",
+      "alt": "Bàn tay xoè đỡ vài chiếc nhẫn vàng trên nền tối",
+      "usage": "chăm sóc sau mua",
+      "width": 2000,
+      "height": 3000
+    },
+    {
+      "file": "nhan-ran-{600,1200,2000}.webp",
+      "title": "Golden Ring Against Black Background",
+      "author": "Coppertist Wu",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/golden-ring-against-black-background-15727983/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "d1de47c28cc082c76808cce8e04d4fc0c034a81f1a7c4771e38f70688d268416",
+      "alt": "Nhẫn vàng hoạ tiết vảy trên nền đen",
+      "usage": "vòng xoay, liên hệ",
+      "width": 2000,
+      "height": 2999
+    }
+  ],
+  "fonts": [
+    {
+      "name": "Libre Bodoni",
+      "author": "Impallari Type",
+      "license": "SIL Open Font License 1.1",
+      "source": "https://fonts.google.com/specimen/Libre+Bodoni",
+      "usage": "Tiêu đề (400, 500, nghiêng 400)"
+    },
+    {
+      "name": "Montserrat",
+      "author": "Julieta Ulanovsky và cộng sự",
+      "license": "SIL Open Font License 1.1",
+      "source": "https://fonts.google.com/specimen/Montserrat",
+      "usage": "Nội dung (300, 400, 500)"
+    }
+  ]
+}

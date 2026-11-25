@@ -2,9 +2,9 @@ export const siteConfig = {
   name: "Tran Cong Tien",
   fullName: "Trần Công Tiến",
   brand: "TRAN CONG TIEN",
-  tagline: "Full-stack Developer & AI Agent Builder",
+  tagline: "Xưởng kỹ thuật sản phẩm số",
   description:
-    "Full-stack developer tại Đà Nẵng chuyên thiết kế và phát triển website, ứng dụng web/mobile, hệ thống AI Agent và giải pháp số thực tế cho startup, doanh nghiệp.",
+    "Xây website, ứng dụng di động, phần mềm vận hành và giải pháp AI thực tế cho startup cùng doanh nghiệp tại Việt Nam.",
   url: "https://trancongtien.com",
   locale: "vi_VN",
   language: "vi",
@@ -34,14 +34,12 @@ export const siteConfig = {
 } as const;
 
 export const navLinks = [
-  { href: "/", label: "Trang chủ" },
   { href: "/dich-vu", label: "Dịch vụ" },
+  { href: "/solutions", label: "Giải pháp" },
   { href: "/du-an", label: "Dự án" },
   { href: "/quy-trinh", label: "Quy trình" },
   { href: "/ve-toi", label: "Về tôi" },
-  { href: "/tai-nguyen", label: "Tài nguyên" },
   { href: "/blog", label: "Blog" },
-  { href: "/lien-he", label: "Liên hệ" },
 ] as const;
 
 export const aboutJourney = [
@@ -86,17 +84,17 @@ export const footerLinks = {
     { href: "/dich-vu#toi-uu", label: "Tối ưu & Phát triển" },
   ],
   projects: [
-    { href: "/du-an?cat=marketplace", label: "Marketplace" },
-    { href: "/du-an?cat=booking", label: "Booking System" },
+    { href: "/du-an?cat=marketplace", label: "Sàn giao dịch" },
+    { href: "/du-an?cat=booking", label: "Hệ thống đặt lịch" },
     { href: "/du-an?cat=crm", label: "CRM / SaaS" },
-    { href: "/du-an?cat=mobile", label: "Mobile App" },
-    { href: "/du-an?cat=ai", label: "AI Agent & Automation" },
+    { href: "/du-an?cat=mobile", label: "Ứng dụng di động" },
+    { href: "/du-an?cat=ai", label: "AI Agent & tự động hoá" },
   ],
   resources: [
     { href: "/blog", label: "Blog" },
-    { href: "/tai-nguyen", label: "Templates" },
-    { href: "/tai-nguyen#guides", label: "Hướng dẫn" },
-    { href: "/tai-nguyen#ui-kit", label: "UI Kit" },
+    { href: "/tai-nguyen", label: "Mẫu tài nguyên" },
+    { href: "/solutions", label: "Giải pháp theo ngành" },
+    { href: "/doi-tac", label: "Cổng đối tác" },
     { href: "/tai-nguyen#checklist", label: "Checklist" },
   ],
   about: [

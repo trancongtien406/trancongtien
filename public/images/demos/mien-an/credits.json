@@ -1,0 +1,317 @@
+{
+  "brand": "Miên An Wellness",
+  "images": [
+    {
+      "file": "ma-hero",
+      "variants": [
+        "ma-hero-2000.webp",
+        "ma-hero-1200.webp",
+        "ma-hero-600.webp"
+      ],
+      "width": 2000,
+      "height": 2667,
+      "title": "Interior Design of a Massage Room",
+      "author": "Tugce Erten Barrett",
+      "authorUrl": "https://www.pexels.com/@tugce-erten-barrett-211955335/",
+      "license": "Pexels License (dùng thương mại được, không cần ghi nguồn)",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "sourceUrl": "https://www.pexels.com/photo/11774389/",
+      "retrievedAt": "2026-11-24",
+      "sha256": "e1c1c33fdf28b7ef1665661afe333e98785039451d6db35494b02e9bc490ead7",
+      "alt": "Phòng trị liệu vòm cung trát vữa màu kem, giường massage tròn và ánh sáng ấm viền vòm",
+      "usage": "Ảnh hero (vòm)",
+      "type": "stock",
+      "modifications": [
+        "Cắt/đổi cỡ",
+        "Giảm bão hoà nhẹ",
+        "Nén webp"
+      ]
+    },
+    {
+      "file": "ma-an-nhien",
+      "variants": [
+        "ma-an-nhien-2000.webp",
+        "ma-an-nhien-1200.webp",
+        "ma-an-nhien-600.webp"
+      ],
+      "width": 2000,
+      "height": 1333,
+      "title": "Masseurs Applying Oil on Their Hand",
+      "author": "Gustavo Fring",
+      "authorUrl": "https://www.pexels.com/@gustavo-fring/",
+      "license": "Pexels License (dùng thương mại được, không cần ghi nguồn)",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "sourceUrl": "https://www.pexels.com/photo/5888070/",
+      "retrievedAt": "2026-11-24",
+      "sha256": "941f79274db0f3aaee84874df743fa152ab507f0c2253cd994c126126d302db5",
+      "alt": "Đôi tay xoa dầu massage trước khi chạm vào lưng khách trên khăn trắng",
+      "usage": "Thẻ liệu trình An Nhiên",
+      "type": "stock",
+      "modifications": [
+        "Cắt/đổi cỡ",
+        "Giảm bão hoà nhẹ",
+        "Nén webp"
+      ]
+    },
+    {
+      "file": "ma-moc-nhiet",
+      "variants": [
+        "ma-moc-nhiet-2000.webp",
+        "ma-moc-nhiet-1200.webp",
+        "ma-moc-nhiet-600.webp"
+      ],
+      "width": 2000,
+      "height": 1334,
+      "title": "Stacking Stones Beside Star Anise",
+      "author": "Anna Tarazevich",
+      "authorUrl": "https://www.pexels.com/@anntarazevich/",
+      "license": "Pexels License (dùng thương mại được, không cần ghi nguồn)",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "sourceUrl": "https://www.pexels.com/photo/6560301/",
+      "retrievedAt": "2026-11-24",
+      "sha256": "f8e7173b4bb65132483b0fdde859f8daa2808bb1ea7f67dc0c3c7874afeb5582",
+      "alt": "Cột đá bazan đen xếp chồng và vài hoa hồi khô trên nền khăn trắng",
+      "usage": "Thẻ liệu trình Mộc Nhiệt",
+      "type": "stock",
+      "modifications": [
+        "Cắt/đổi cỡ",
+        "Giảm bão hoà nhẹ",
+        "Nén webp"
+      ]
+    },
+    {
+      "file": "ma-thanh-moc",
+      "variants": [
+        "ma-thanh-moc-2000.webp",
+        "ma-thanh-moc-1200.webp",
+        "ma-thanh-moc-600.webp"
+      ],
+      "width": 2000,
+      "height": 3000,
+      "title": "Flowers Petals on Plate with Burning Wax Candles",
+      "author": "Cup of Couple",
+      "authorUrl": "https://www.pexels.com/@cup-of-couple/",
+      "license": "Pexels License (dùng thương mại được, không cần ghi nguồn)",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "sourceUrl": "https://www.pexels.com/photo/7303331/",
+      "retrievedAt": "2026-11-24",
+      "sha256": "33b4f64a8bbdc548e229d29c676a4ecfe3efb92ee19cc13922d813506f857a88",
+      "alt": "Đĩa gỗ với cánh hoa hồng nhạt và nến nổi trên nền vải linen kem",
+      "usage": "Thẻ liệu trình Thanh Mộc",
+      "type": "stock",
+      "modifications": [
+        "Cắt/đổi cỡ",
+        "Giảm bão hoà nhẹ",
+        "Nén webp"
+      ]
+    },
+    {
+      "file": "ma-tinh-tam",
+      "variants": [
+        "ma-tinh-tam-2000.webp",
+        "ma-tinh-tam-1200.webp",
+        "ma-tinh-tam-600.webp"
+      ],
+      "width": 2000,
+      "height": 3000,
+      "title": "Close Up of a Person Putting Oil on Her Hands",
+      "author": "Dasha",
+      "authorUrl": "https://www.pexels.com/@dashamak/",
+      "license": "Pexels License (dùng thương mại được, không cần ghi nguồn)",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "sourceUrl": "https://www.pexels.com/photo/10894305/",
+      "retrievedAt": "2026-11-24",
+      "sha256": "7b8b062b00c0b9eeaf8311302864bb16181ce57aa92a049995c1f9edc17f4f3b",
+      "alt": "Đôi tay thoa dầu ấm phía trên lưng, ánh sáng hổ phách dịu",
+      "usage": "Thẻ liệu trình Tĩnh Tâm",
+      "type": "stock",
+      "modifications": [
+        "Cắt/đổi cỡ",
+        "Giảm bão hoà nhẹ",
+        "Nén webp"
+      ]
+    },
+    {
+      "file": "ma-duong-nguyen",
+      "variants": [
+        "ma-duong-nguyen-2000.webp",
+        "ma-duong-nguyen-1200.webp",
+        "ma-duong-nguyen-600.webp"
+      ],
+      "width": 2000,
+      "height": 3000,
+      "title": "Serene Spa Interior with Massage Table and Candle",
+      "author": "Marine Fougère",
+      "authorUrl": "https://www.pexels.com/@marine-fougere-2159237528/",
+      "license": "Pexels License (dùng thương mại được, không cần ghi nguồn)",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "sourceUrl": "https://www.pexels.com/photo/35884502/",
+      "retrievedAt": "2026-11-24",
+      "sha256": "f455e3634846c1fbc6cf0d44eb6fa8a7f2a71f574becce51fb7ba5353cbe4fb6",
+      "alt": "Giường massage phủ khăn trắng cuộn, nến và lọ tinh dầu trên kệ gỗ tối",
+      "usage": "Thẻ liệu trình Dưỡng Nguyên",
+      "type": "stock",
+      "modifications": [
+        "Cắt/đổi cỡ",
+        "Giảm bão hoà nhẹ",
+        "Nén webp"
+      ]
+    },
+    {
+      "file": "ma-nhe-buoc",
+      "variants": [
+        "ma-nhe-buoc-2000.webp",
+        "ma-nhe-buoc-1200.webp",
+        "ma-nhe-buoc-600.webp"
+      ],
+      "width": 2000,
+      "height": 1500,
+      "title": "Feet under Water Surface",
+      "author": "Prafull Kawate",
+      "authorUrl": "https://www.pexels.com/@prafull-kawate-696986121/",
+      "license": "Pexels License (dùng thương mại được, không cần ghi nguồn)",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "sourceUrl": "https://www.pexels.com/photo/18069171/",
+      "retrievedAt": "2026-11-24",
+      "sha256": "714898565cc1fba22807ade206115b5cc2738f0b914ba33ee8f4411900c756de",
+      "alt": "Đôi bàn chân trong làn nước ấm xanh rêu, mặt nước gợn nhẹ",
+      "usage": "Thẻ liệu trình Nhẹ Bước",
+      "type": "stock",
+      "modifications": [
+        "Cắt/đổi cỡ",
+        "Giảm bão hoà nhẹ",
+        "Nén webp"
+      ]
+    },
+    {
+      "file": "ma-story",
+      "variants": [
+        "ma-story-2000.webp",
+        "ma-story-1200.webp",
+        "ma-story-600.webp"
+      ],
+      "width": 2000,
+      "height": 1333,
+      "title": "Wheat Stalks Near White Container",
+      "author": "Andrzej Gdula",
+      "authorUrl": "https://www.pexels.com/@andrzej-gdula-177638374/",
+      "license": "Pexels License (dùng thương mại được, không cần ghi nguồn)",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "sourceUrl": "https://www.pexels.com/photo/11741344/",
+      "retrievedAt": "2026-11-24",
+      "sha256": "33813dd338a3e26ae13ccb40d87a0eb20100bfa43267fa0bc3944406c02f3f7e",
+      "alt": "Nến trắng trong hũ thuỷ tinh, bó lúa khô và khăn be cuộn",
+      "usage": "Ảnh chính Câu chuyện",
+      "type": "stock",
+      "modifications": [
+        "Cắt/đổi cỡ",
+        "Giảm bão hoà nhẹ",
+        "Nén webp"
+      ]
+    },
+    {
+      "file": "ma-detail",
+      "variants": [
+        "ma-detail-2000.webp",
+        "ma-detail-1200.webp",
+        "ma-detail-600.webp"
+      ],
+      "width": 2000,
+      "height": 3000,
+      "title": "Candles on Brown Wooden Tray",
+      "author": "Andrzej Gdula",
+      "authorUrl": "https://www.pexels.com/@andrzej-gdula-177638374/",
+      "license": "Pexels License (dùng thương mại được, không cần ghi nguồn)",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "sourceUrl": "https://www.pexels.com/photo/11137699/",
+      "retrievedAt": "2026-11-24",
+      "sha256": "4a1c316269a9fb0ac273b4538f6b789e675d1422ca7efbe23ffa631c614833be",
+      "alt": "Nến be, nến hộp đen và cánh hoa khô trên khay gỗ",
+      "usage": "Ảnh nhỏ Câu chuyện",
+      "type": "stock",
+      "modifications": [
+        "Cắt/đổi cỡ",
+        "Giảm bão hoà nhẹ",
+        "Nén webp"
+      ]
+    },
+    {
+      "file": "ma-sanctuary",
+      "variants": [
+        "ma-sanctuary-2000.webp",
+        "ma-sanctuary-1200.webp",
+        "ma-sanctuary-600.webp"
+      ],
+      "width": 2000,
+      "height": 1334,
+      "title": "A Massage Table Near the Window Blinds",
+      "author": "Anna Tarazevich",
+      "authorUrl": "https://www.pexels.com/@anntarazevich/",
+      "license": "Pexels License (dùng thương mại được, không cần ghi nguồn)",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "sourceUrl": "https://www.pexels.com/photo/6560308/",
+      "retrievedAt": "2026-11-24",
+      "sha256": "2a13e0fad2731b1b0b482c975072f94dfae776547fe012d76fead2c136ebf5c4",
+      "alt": "Giường massage cạnh cửa sổ rèm gỗ, nắng ấm xiên vào phòng",
+      "usage": "Gallery Không gian (lớn)",
+      "type": "stock",
+      "modifications": [
+        "Cắt/đổi cỡ",
+        "Giảm bão hoà nhẹ",
+        "Nén webp"
+      ]
+    },
+    {
+      "file": "ma-materials",
+      "variants": [
+        "ma-materials-2000.webp",
+        "ma-materials-1200.webp",
+        "ma-materials-600.webp"
+      ],
+      "width": 2000,
+      "height": 3000,
+      "title": "Pink Flower on Stacked Stones",
+      "author": "Darina Belonogova",
+      "authorUrl": "https://www.pexels.com/@darina-belonogova/",
+      "license": "Pexels License (dùng thương mại được, không cần ghi nguồn)",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "sourceUrl": "https://www.pexels.com/photo/8789646/",
+      "retrievedAt": "2026-11-24",
+      "sha256": "8c91863cf0a277a14cd1941b0804e97c45c03310e56f9343be527b866903cf0b",
+      "alt": "Hoa hồng nhạt đặt trên hai viên đá cuội xếp chồng dưới nắng sớm",
+      "usage": "Gallery Không gian (nhỏ 1)",
+      "type": "stock",
+      "modifications": [
+        "Cắt/đổi cỡ",
+        "Giảm bão hoà nhẹ",
+        "Nén webp"
+      ]
+    },
+    {
+      "file": "ma-resting",
+      "variants": [
+        "ma-resting-2000.webp",
+        "ma-resting-1200.webp",
+        "ma-resting-600.webp"
+      ],
+      "width": 2000,
+      "height": 3000,
+      "title": "Cup of Tea on White Saucer",
+      "author": "Nataliya Vaitkevich",
+      "authorUrl": "https://www.pexels.com/@n-voitkevich/",
+      "license": "Pexels License (dùng thương mại được, không cần ghi nguồn)",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "sourceUrl": "https://www.pexels.com/photo/10060708/",
+      "retrievedAt": "2026-11-24",
+      "sha256": "bd6f3eff44a0091bc7bc767860488d1f1b32264940d3bbab44f9568e07ecbb8c",
+      "alt": "Tách trà nóng trên đĩa sứ giữa nếp khăn trải giường trắng kem",
+      "usage": "Gallery Không gian (nhỏ 2)",
+      "type": "stock",
+      "modifications": [
+        "Cắt/đổi cỡ",
+        "Giảm bão hoà nhẹ",
+        "Nén webp"
+      ]
+    }
+  ]
+}

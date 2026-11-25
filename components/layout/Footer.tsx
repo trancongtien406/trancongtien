@@ -54,8 +54,8 @@ export function Footer() {
           <div className="lg:col-span-4">
             <Logo variant="dark" />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-400">
-              Full-stack Developer & AI Agent Builder — đồng hành cùng
-              startup và doanh nghiệp xây dựng sản phẩm số bền vững.
+              Xưởng kỹ thuật sản phẩm số — đồng hành cùng startup và doanh nghiệp
+              Việt Nam xây sản phẩm bền vững.
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
               {socialIcons.map(({ href, label, Icon }) => (

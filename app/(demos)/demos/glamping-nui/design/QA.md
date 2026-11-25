@@ -1,0 +1,14 @@
+# QA — Rừng Thức (kiểm thử THẬT)
+
+Lệnh: `BASE=http://localhost:3100 node tests/showroom/glamping-nui/e2e.mjs` (Playwright + Chrome headless, dev server chung). Kiểu: `npx tsc --noEmit -p . | grep glamping-nui` = 0 lỗi.
+
+Lần chạy đầy đủ cuối cùng của mã ứng dụng: **105 PASS, 1 FAIL**. FAIL duy nhất là lỗi của bộ kiểm thử: regex chữ cấm `mock` khớp chữ "Hammock" trong tên ảnh stock ở trang credits ("Bare Trees With Green Hammock"). Đã sửa regex thành `\bmock` và thay phép kiểm JSON-LD có tính tautology bằng kiểm thật; mã ứng dụng không đổi sau lần chạy đó. Lần chạy lại toàn bộ sau sửa test: **106 PASS, 0 FAIL** (máy tải nặng nên mất khoảng 1 giờ).
+
+Đã kiểm (PASS): HTTP 200, 0 lỗi console ở 320/390/768/1024/1440, 0 request ngoài origin, không tràn ngang ở cả 5 độ rộng, title/noindex/lang/1 h1/og-image/favicon, link credits + dòng ký tên, không chữ cấm (mục 11) ở trạng thái đầu, sau khi dùng planner (lỗi, rỗng), ở reduced-motion và ở credits; liên hệ chỉ dạng `.example` và `0236 000 0000`; glyph tiếng Việt (Ă Â Ê Ô Ơ Ư Đ + Ắ…Ự) có trong Alegreya và Mulish (đo bằng canvas + document.fonts.load) và ảnh chụp chữ đậm cỡ lớn `screenshots/glyphs.png` đã tự xem: dấu chồng không bị cắt.
+Hiệu ứng: hero choreography (data-fx-ready=1, mốc lửa data-lit), tàn lửa canvas có pixel được vẽ, lửa SVG chạy CSS animation, đếm ngược HH:MM:SS chạy mỗi giây và có giờ hoàng hôn tính theo ngày, nền trang tối dần theo cuộn và sao từ ẩn tới đầy, pinned journey (ghim top=0; 06:00 không sao/trăng có mặt trời; giữa ngày; 21:00 sao đầy + trăng + hết mặt trời; màu trời và track đổi theo tiến độ; bấm mốc 16:30; Tab vào thẻ cuối kéo tiến độ theo), 13 loại hiệu ứng data-fx trên trang.
+Fallback: 390px không ghim, 7 thẻ xếp dọc, menu mobile mở/Esc đóng trả focus; reduced-motion: tắt pin, hero static, lửa/sương đứng yên, nền cố định, thẻ hiện đủ.
+Planner: giá mặc định 890.000 ₫; 2 đêm Lều Rừng 3 người BBQ+sao = 3.570.000 ₫; thêm trekking + xe = 5.070.000 ₫; không trùng giờ, mỗi hoạt động một lần; cảnh báo vượt sức chứa và ghép thêm lều (1.780.000 ₫); lỗi cạnh ô (rỗng, 0, 9) kèm aria-invalid/aria-describedby; trạng thái rỗng; ArrowRight đổi lều, ArrowUp tăng người, Enter không gửi; nút chọn nhanh ở mục Lều/Hoạt động đồng bộ planner; 2 nút thoát tới `buildConsultHref("glamping-nui")` có industry/solution/utm (registry đã có mục); mở với `?ref=` không lỗi, trang không tự ghi cookie `tct_ref`; sao chép tóm tắt có phản hồi.
+Ảnh: 14 ảnh không lặp, không hỏng, đều có alt; credits liệt kê 14 ảnh.
+Hiệu năng thô khi cuộn toàn trang: 1440px 0 long task >200ms, 390px 0 long task >200ms.
+
+Chưa kiểm / yếu: chưa chạy Lighthouse; chưa kiểm trên thiết bị thật (chỉ giả lập mobile của Chrome); pinned scroll chưa thử trên Safari/Firefox; tương phản kiểm bằng tính tay các cặp chính, chưa quét tự động toàn trang; hạt tàn lửa/FPS chưa đo FPS; thanh DemoNotice chung cố định đáy che 60px cuối viewport (đã tránh ở thanh mốc hành trình).

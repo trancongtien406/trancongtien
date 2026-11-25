@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import {
   ArrowRight,
   Calendar,
@@ -21,6 +22,7 @@ import {
   SectionHeading,
 } from "@/components/common/Container";
 import { CtaBanner } from "@/components/common/CtaBanner";
+import { trackClientEvent } from "@/lib/analytics/client";
 import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { isValidEmail, isValidVnPhone } from "@/lib/validation";
@@ -90,12 +92,40 @@ const budgets = [
 
 const timelines = ["ASAP", "1–2 tháng", "3–6 tháng", "Linh hoạt"];
 
-export function ContactPage({ faqs }: { faqs: FaqItem[] }) {
+export function ContactPage({
+  faqs,
+  initialIndustry = "",
+  initialReferralCode = "",
+  initialSolution = "",
+}: {
+  faqs: FaqItem[];
+  initialIndustry?: string;
+  initialReferralCode?: string;
+  initialSolution?: string;
+}) {
   const [openFaq, setOpenFaq] = useState(0);
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">(
     "idle",
   );
   const [error, setError] = useState("");
+  const [industry, setIndustry] = useState(initialIndustry);
+  const [referralCode, setReferralCode] = useState(
+    initialReferralCode.toUpperCase(),
+  );
+  const [trackedStart, setTrackedStart] = useState(false);
+
+  useEffect(() => {
+    trackClientEvent("consultation_cta_clicked", {
+      industry: initialIndustry || null,
+      solution: initialSolution || null,
+    });
+  }, [initialIndustry, initialSolution]);
+
+  function onFormFocus() {
+    if (trackedStart) return;
+    setTrackedStart(true);
+    trackClientEvent("consultation_started");
+  }
 
   return (
     <>
@@ -178,20 +208,30 @@ export function ContactPage({ faqs }: { faqs: FaqItem[] }) {
             </h2>
             <form
               className="mt-6 grid gap-4 sm:grid-cols-2"
+              onFocus={onFormFocus}
               onSubmit={async (e) => {
                 e.preventDefault();
                 setStatus("loading");
                 setError("");
                 const form = e.currentTarget;
                 const fd = new FormData(form);
+                const params = new URLSearchParams(window.location.search);
                 const payload = {
                   name: String(fd.get("name") || "").trim(),
+                  company: String(fd.get("company") || "").trim(),
                   email: String(fd.get("email") || "").trim(),
                   phone: String(fd.get("phone") || "").trim(),
+                  industry: String(fd.get("industry") || ""),
                   projectType: String(fd.get("type") || ""),
                   budget: String(fd.get("budget") || ""),
                   timeline: String(fd.get("timeline") || ""),
                   message: String(fd.get("description") || "").trim(),
+                  referralCode: String(fd.get("referralCode") || params.get("ref") || ""),
+                  landingPath: `${window.location.pathname}${window.location.search}`,
+                  utmSource: params.get("utm_source") || "",
+                  utmMedium: params.get("utm_medium") || "",
+                  utmCampaign: params.get("utm_campaign") || "",
+                  consent: fd.get("consent") === "on",
                 };
 
                 if (!isValidEmail(payload.email)) {
@@ -224,8 +264,14 @@ export function ContactPage({ faqs }: { faqs: FaqItem[] }) {
                   if (!res.ok) {
                     throw new Error(result?.error || "fail");
                   }
+                  trackClientEvent("consultation_submitted", {
+                    industry: payload.industry || null,
+                    projectType: payload.projectType || null,
+                  });
                   setStatus("ok");
                   form.reset();
+                  setIndustry("");
+                  setReferralCode("");
                 } catch (err) {
                   setStatus("error");
                   setError(
@@ -243,6 +289,14 @@ export function ContactPage({ faqs }: { faqs: FaqItem[] }) {
                   name="name"
                   minLength={2}
                   autoComplete="name"
+                  className="h-11 w-full rounded-xl border border-border px-3 outline-none focus:ring-2 focus:ring-brand/30"
+                />
+              </label>
+              <label className="block text-sm">
+                <span className="mb-1.5 block font-medium text-ink">Công ty</span>
+                <input
+                  name="company"
+                  autoComplete="organization"
                   className="h-11 w-full rounded-xl border border-border px-3 outline-none focus:ring-2 focus:ring-brand/30"
                 />
               </label>
@@ -268,6 +322,16 @@ export function ContactPage({ faqs }: { faqs: FaqItem[] }) {
                   autoComplete="tel"
                   inputMode="tel"
                   placeholder="0382 802 406"
+                  className="h-11 w-full rounded-xl border border-border px-3 outline-none focus:ring-2 focus:ring-brand/30"
+                />
+              </label>
+              <label className="block text-sm">
+                <span className="mb-1.5 block font-medium text-ink">Lĩnh vực</span>
+                <input
+                  name="industry"
+                  value={industry}
+                  onChange={(event) => setIndustry(event.target.value)}
+                  placeholder="Spa, bất động sản, xây dựng..."
                   className="h-11 w-full rounded-xl border border-border px-3 outline-none focus:ring-2 focus:ring-brand/30"
                 />
               </label>
@@ -318,6 +382,29 @@ export function ContactPage({ faqs }: { faqs: FaqItem[] }) {
                   className="w-full rounded-xl border border-border px-3 py-2 outline-none focus:ring-2 focus:ring-brand/30"
                   placeholder="Mô tả ngắn về ý tưởng, vấn đề cần giải quyết và kỳ vọng..."
                 />
+              </label>
+              <label className="block text-sm sm:col-span-2">
+                <span className="mb-1.5 block font-medium text-ink">
+                  Mã giới thiệu (nếu có)
+                </span>
+                <input
+                  name="referralCode"
+                  value={referralCode}
+                  onChange={(event) =>
+                    setReferralCode(event.target.value.toUpperCase())
+                  }
+                  autoCapitalize="characters"
+                  className="h-11 w-full rounded-xl border border-border px-3 uppercase outline-none focus:ring-2 focus:ring-brand/30"
+                />
+              </label>
+              <label className="flex items-start gap-2 text-sm text-ink-muted sm:col-span-2">
+                <input required name="consent" type="checkbox" className="mt-1 size-4" />
+                <span>
+                  Tôi đồng ý để thông tin được sử dụng nhằm liên hệ và tư vấn theo{" "}
+                  <Link href="/chinh-sach-bao-mat" className="font-medium text-brand hover:underline">
+                    chính sách bảo mật
+                  </Link>.
+                </span>
               </label>
               <div className="sm:col-span-2">
                 <Button

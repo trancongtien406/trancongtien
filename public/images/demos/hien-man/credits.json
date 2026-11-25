@@ -1,0 +1,174 @@
+{
+  "images": [
+    {
+      "file": "hero-ho-boi",
+      "title": "Pexels 12715491",
+      "author": "Keegan Checks",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/12715491/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "cfbbf798c7a1b8086c5514b77285e198989ceb2b21edabd538f5ee63cbfaa17b",
+      "alt": "Biệt thự trắng và hồ bơi dài nhìn ra biển",
+      "usage": "Hero, ánh sáng ban mai",
+      "width": 2400,
+      "height": 1601
+    },
+    {
+      "file": "phong-khach-mo",
+      "title": "Pexels 12715501",
+      "author": "Keegan Checks",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/12715501/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "9ee2589bb3162903171aa72e0c63a139d711199af39fc9185d59457c98602570",
+      "alt": "Phòng khách mở ra biển, gỗ và vải lanh",
+      "usage": "Kiến trúc mở",
+      "width": 2400,
+      "height": 1601
+    },
+    {
+      "file": "phong-ngu-cua-so-bien",
+      "title": "Pexels 6752175",
+      "author": "Rachel Claire",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/6752175/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "f31cd26798d9c2e9ca9f40c0d5d0d48e21343c3f7d9f987795ea49542ee1c717",
+      "alt": "Phòng ngủ có dải cửa sổ nhìn ra biển",
+      "usage": "Loại phòng Biển Gỗ",
+      "width": 2400,
+      "height": 1600
+    },
+    {
+      "file": "phong-ngu-cua-kinh",
+      "title": "Pexels 8495974",
+      "author": "Kai-Chieh Chan",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/8495974/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "1944f92c305542e36560422609e76fb6ade5f78b46c862c37fcd2f9df6b321e0",
+      "alt": "Phòng ngủ sáng với cửa kính trượt mở ra biển",
+      "usage": "Loại phòng Hiên Sáng",
+      "width": 2400,
+      "height": 1600
+    },
+    {
+      "file": "hoang-hon-hien-go",
+      "title": "Pexels 14265799",
+      "author": "iulianna",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/14265799/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "60108fa99a473cd771e7803bef3f6c3d796ef56ef46947103ab590a79d25deea",
+      "alt": "Hiên gỗ nhìn hoàng hôn trên bãi biển",
+      "usage": "Hoàng hôn",
+      "width": 2400,
+      "height": 3200
+    },
+    {
+      "file": "binh-minh-bien",
+      "title": "Pexels 36123467",
+      "author": "nhavantuonglai",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/36123467/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "ba000214343ca1845eb3cdbc0924a283f47602e335398a71b50a1c2f302456a7",
+      "alt": "Bình minh trên mặt biển Đà Nẵng",
+      "usage": "Biển",
+      "width": 2400,
+      "height": 1600
+    },
+    {
+      "file": "thuyen-thung",
+      "title": "Pexels 35210988",
+      "author": "nhavantuonglai",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/35210988/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "bd36d49afea3133358930853b97674980d7aee4052fed3689bb3cc4f7a716216",
+      "alt": "Thuyền thúng lúc bình minh",
+      "usage": "Trải nghiệm bình minh",
+      "width": 2400,
+      "height": 3600
+    },
+    {
+      "file": "toan-canh-hang-cay",
+      "title": "Pexels 12389384",
+      "author": "Quang Nguyen Vinh",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/12389384/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "b854dc0bb1e4c033c90eec65283b5d30e8a97dd06749ced62b241560fa0f8401",
+      "alt": "Toàn cảnh khu nghỉ ven biển nhìn từ trên cao",
+      "usage": "Vị trí",
+      "width": 2400,
+      "height": 1489
+    },
+    {
+      "file": "hien-dai-vong",
+      "title": "Pexels 6779229",
+      "author": "Milada Vigerova",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/6779229/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "663b969e924b92a5362dae1a2e187abf4e3e313309ffcac226fe2a24609f0f93",
+      "alt": "Hiên có mái gỗ, võng và bàn ăn ngoài trời",
+      "usage": "Bữa sáng trên hiên",
+      "width": 2400,
+      "height": 1600
+    },
+    {
+      "file": "ho-boi-hoang-hon",
+      "title": "Pexels 13914283",
+      "author": "Thibault Om",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/13914283/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "ed92ff690a69718aa1580385f3a9b9ca506ae6439f8d40ad066b9501bb125b3a",
+      "alt": "Hồ bơi và sàn gỗ lúc hoàng hôn",
+      "usage": "Hồ bơi",
+      "width": 2400,
+      "height": 1601
+    },
+    {
+      "file": "kien-truc-kinh-go",
+      "title": "Pexels 35361412",
+      "author": "Alef Morais",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/35361412/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "2c7fa9c44e442f52e24a12b627fdcf326a39388507dda58d7b9cc18049de40c4",
+      "alt": "Mặt tiền kính và gỗ nhìn ra bãi cỏ",
+      "usage": "Kiến trúc",
+      "width": 2400,
+      "height": 1350
+    },
+    {
+      "file": "cua-so-ban-mai",
+      "title": "Pexels 33723583",
+      "author": "Mikkel Kvist",
+      "license": "Pexels License (dùng thương mại, không cần ghi nguồn)",
+      "sourceUrl": "https://www.pexels.com/photo/33723583/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "7ee184602035895b1dd1cbf8eff80485bcf42e8e294c959a0f2bbdda73c13c09",
+      "alt": "Nắng ban mai xuyên cửa sổ, tán cọ phía xa",
+      "usage": "Chi tiết ánh sáng",
+      "width": 2400,
+      "height": 3600
+    }
+  ],
+  "fonts": [
+    {
+      "name": "Lora (variable)",
+      "author": "Cyreal (The Lora Project Authors)",
+      "license": "SIL Open Font License 1.1",
+      "source": "https://fonts.google.com/specimen/Lora"
+    },
+    {
+      "name": "Manrope (variable)",
+      "author": "Mikhail Sharanda",
+      "license": "SIL Open Font License 1.1",
+      "source": "https://fonts.google.com/specimen/Manrope"
+    }
+  ]
+}

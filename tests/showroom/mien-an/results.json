@@ -1,0 +1,583 @@
+{
+  "base": "http://localhost:3100",
+  "pass": 115,
+  "fail": 0,
+  "at": "2026-11-25T04:53:57.196Z",
+  "results": [
+    {
+      "name": "home trả 200",
+      "ok": true,
+      "extra": "200"
+    },
+    {
+      "name": "title riêng tiếng Việt",
+      "ok": true,
+      "extra": "Miên An Wellness — Spa & wellness"
+    },
+    {
+      "name": "description riêng",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "robots noindex,follow",
+      "ok": true,
+      "extra": "noindex, follow"
+    },
+    {
+      "name": "html lang=vi",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "đúng 1 h1",
+      "ok": true,
+      "extra": "1"
+    },
+    {
+      "name": "favicon theo route (svg + png + apple)",
+      "ok": true,
+      "extra": "/favicon.ico?favicon.1wrglxxjuzv8p.ico,/images/demos/mien-an/identity/favicon.svg,/images/demos/mien-an/identity/favicon-32.png,/images/demos/mien-an/identity/apple-touch-icon.png"
+    },
+    {
+      "name": "og:image riêng",
+      "ok": true,
+      "extra": "https://trancongtien.com/images/demos/mien-an/identity/og-image.webp"
+    },
+    {
+      "name": "JSON-LD chỉ WebPage (không Review/LocalBusiness)",
+      "ok": true,
+      "extra": "WebPage"
+    },
+    {
+      "name": "skip link + main + ribbon thương hiệu",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "identity/favicon.svg tải được",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "identity/favicon-32.png tải được",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "identity/apple-touch-icon.png tải được",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "identity/og-image.webp tải được",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "identity/logo-primary.svg tải được",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "identity/logo-horizontal.svg tải được",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "identity/symbol.svg tải được",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "identity/logo-mono.svg tải được",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "identity/logo-reversed.svg tải được",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "logo SVG không script/href ngoài/font ngoài",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "mọi ảnh tải thành công",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "mọi ảnh có thuộc tính alt",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "không còn nhãn cấm: trang chủ (toàn bộ văn bản, alt, aria-label, meta, JSON-LD)",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "0 lỗi console",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "không request ra ngoài origin",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "không request ghi (POST...) khi chỉ xem trang",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "có link thoát /lien-he",
+      "ok": true,
+      "extra": "3"
+    },
+    {
+      "name": "link thoát đúng industry/solution/utm",
+      "ok": true,
+      "extra": "/lien-he?industry=Spa&solution=spa&utm_source=showroom&utm_campaign=mien-an"
+    },
+    {
+      "name": "demo không tự ghi/đọc cookie tct_ref và không nhét ref vào link",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "6 kiểu font (Cormorant 400/500/italic, Be Vietnam 400/500/600) có face khớp chữ Việt",
+      "ok": true,
+      "extra": "{\"MA Cormorant 400 normal\":3,\"MA Cormorant 500 normal\":3,\"MA Cormorant 400 italic\":3,\"MA Be Vietnam 400 normal\":3,\"MA Be Vietnam 500 normal\":3,\"MA Be Vietnam 600 normal\":3,\"serifDiff\":35.838623046875,\"sansDiff\":107.9586181640625,\"loadedCount\":18,\"h1\":\"\\\"MA Cormorant\\\", \\\"Cormorant Garamond\\\", \\\"Times New Roman\\\", serif\",\"body\":\"\\\"MA Be Vietnam\\\", \\\"Be Vietnam Pro\\\", system-ui, -apple-system, \\\"Segoe UI\\\", sans-serif\",\"viLoaded\":6}"
+    },
+    {
+      "name": "glyph Việt render bằng font thật (không fallback): Cormorant",
+      "ok": true,
+      "extra": "35.838623046875"
+    },
+    {
+      "name": "glyph Việt render bằng font thật (không fallback): Be Vietnam",
+      "ok": true,
+      "extra": "107.9586181640625"
+    },
+    {
+      "name": "subset vietnamese đã load thật",
+      "ok": true,
+      "extra": "6"
+    },
+    {
+      "name": "h1 dùng Cormorant, body dùng Be Vietnam",
+      "ok": true,
+      "extra": "\"MA Cormorant\", \"Cormorant Garamond\", \"Times New Roman\", serif / \"MA Be Vietnam\", \"Be Vietnam Pro\", system-ui, -apple-system, \"Segoe UI\", sans-serif"
+    },
+    {
+      "name": "không tràn ngang ở 320px",
+      "ok": true,
+      "extra": "{\"sw\":320,\"cw\":320,\"bsw\":320}"
+    },
+    {
+      "name": "touch target >= 44px ở 320px (trừ liên kết nằm trong câu)",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "không tràn ngang ở 390px",
+      "ok": true,
+      "extra": "{\"sw\":390,\"cw\":390,\"bsw\":390}"
+    },
+    {
+      "name": "touch target >= 44px ở 390px (trừ liên kết nằm trong câu)",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "không tràn ngang ở 768px",
+      "ok": true,
+      "extra": "{\"sw\":768,\"cw\":768,\"bsw\":768}"
+    },
+    {
+      "name": "touch target >= 44px ở 768px (trừ liên kết nằm trong câu)",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "không tràn ngang ở 1024px",
+      "ok": true,
+      "extra": "{\"sw\":1024,\"cw\":1024,\"bsw\":1024}"
+    },
+    {
+      "name": "touch target >= 44px ở 1024px (trừ liên kết nằm trong câu)",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "không tràn ngang ở 1440px",
+      "ok": true,
+      "extra": "{\"sw\":1440,\"cw\":1440,\"bsw\":1440}"
+    },
+    {
+      "name": "touch target >= 44px ở 1440px (trừ liên kết nằm trong câu)",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "reduced-motion: mọi khối hiện đủ ngay (opacity 1)",
+      "ok": true,
+      "extra": "0"
+    },
+    {
+      "name": "reduced-motion: GSAP không chạy",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "không JS: h1, 6 thẻ liệu trình, FAQ vẫn render từ server",
+      "ok": true,
+      "extra": "{\"h1\":\"Chậm lại, để trở về với mình.\",\"op\":\"1\",\"cards\":6,\"faq\":8}"
+    },
+    {
+      "name": "Finder bước 1: lỗi thiếu mong muốn hiện cạnh ô (role=alert)",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "Finder bước 1: aria-invalid trên radio",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "Finder bước 2: lỗi thiếu thời gian",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "Finder: sang bước mới thì focus chuyển vào tiêu đề bước",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "RF-01 relax/60/any → An Nhiên đứng đầu",
+      "ok": true,
+      "extra": "GỢI Ý CHÍNH\nAn Nhiên\n\nMassage thư giãn toàn thân · 60 phút ·"
+    },
+    {
+      "name": "Finder hiển thị tối đa 1 chính + 2 phụ",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "RF-02 face/60/nhẹ → Thanh Mộc",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "RF-03 head/45/vừa → Tĩnh Tâm",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "RF-04 feet/45 → Nhẹ Bước",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "RF-05 full/120 → Dưỡng Nguyên",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "RF-06 full/45 → rỗng",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "trạng thái rỗng có 3 hướng đi (điều chỉnh / xem tất cả / bắt đầu lại)",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "RF-07 body/90 → Mộc Nhiệt",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "RF-08 body/90/tránh đá ấm → rỗng (không tự nới lỏng)",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "RF-09 body/120/tránh đá ấm → Dưỡng Nguyên",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "RF-10 face/45 → rỗng",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "RF-14 chọn từ Finder điền sẵn nghi thức + áp lực + hương liệu",
+      "ok": true,
+      "extra": "{\"ritual\":\"R01\",\"pressure\":\"medium\",\"scent\":\"unscented\"}"
+    },
+    {
+      "name": "không còn nhãn cấm: Ritual Finder sau khi có gợi ý",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "0 lỗi console trong luồng Finder",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "lỗi khi gửi trống: nghi thức, ngày, xác nhận (cạnh từng ô)",
+      "ok": true,
+      "extra": "Hãy chọn nghi thức bạn muốn trải nghiệm. | Hãy chọn một ngày để xem các khung giờ. | Hãy xác nhận bạn đã hiểu ghi chú về bản tóm tắt."
+    },
+    {
+      "name": "aria-invalid + aria-describedby trên ô lỗi",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "focus chuyển tới ô lỗi đầu tiên",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "không còn nhãn cấm: trạng thái lỗi biểu mẫu lịch hẹn",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "AP-06 ngày kín lịch (offset 3) hiện thông báo kín",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "ngày kín được đánh dấu 'Kín' ở ô chọn ngày",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "ngày trống có khung giờ khả dụng",
+      "ok": true,
+      "extra": "17"
+    },
+    {
+      "name": "AP-09/10 offset 1: slot 09:00/09:30/10:00 bị loại do phòng bận; không có slot kết thúc sau 20:00",
+      "ok": true,
+      "extra": "630,660,690,720,750,780,810,840,870,900,930,960,990,1020,1050,1080,1110"
+    },
+    {
+      "name": "slot cách nhau 30 phút",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "AP-14 đổi nghi thức reset giờ đã chọn",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "Dưỡng Nguyên chỉ ROOM-02: 'Phòng An' bị vô hiệu khi chọn riêng",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "AP-16 chưa xác nhận → không tạo preview",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "AP-17 tạo preview thành công",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "mã tóm tắt dạng MA-XXXXXXXX",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "hiển thị giá 490.000 ₫ và 60 phút, đúng giờ đã chọn",
+      "ok": true,
+      "extra": "MA-9610A978\n\nKhoảng thời gian dành riêng cho bạn.\n\nTóm tắt lịch hẹn đã sẵn sàng trên thiết bị của bạn. Chưa có yêu cầu nào được gửi đến spa; để tiếp tục, hãy dùng nút liên hệ bên dưới.\n\nNghi thức\nAn Nhiên · Massage thư giãn toàn thân\nNgày\nT5, 26/11/2026\nGiờ\n10:30 – 11:30 (60 phút)\nPhòng\nPhòng Miên ·"
+    },
+    {
+      "name": "success không dùng 'Đặt lịch thành công' / 'sẽ liên hệ'",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "CTA chính của preview → buildConsultHref('mien-an')",
+      "ok": true,
+      "extra": "/lien-he?industry=Spa&solution=spa&utm_source=showroom&utm_campaign=mien-an"
+    },
+    {
+      "name": "CTA tư vấn focus được bằng bàn phím",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "không còn nhãn cấm: trạng thái tóm tắt lịch hẹn thành công",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "AP-18 Chỉnh sửa giữ nguyên draft",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "AP-19 Tạo mới reset draft",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "AP-21 không có request ghi dữ liệu nào, không localStorage cá nhân",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "0 lỗi console trong luồng đặt lịch",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "demo không ghi cookie tct_ref khi mở với ?ref= (chỉ proxy được phép)",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "dialog liệu trình mở, có tên, giá, trình tự, lưu ý",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "không còn nhãn cấm: dialog liệu trình",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "Escape đóng dialog",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "đóng dialog trả focus về nút gọi",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "'Chọn nghi thức này' đóng dialog và điền sẵn Appointment",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "Mộc Nhiệt chỉ áp lực vừa: radio 'nhẹ' bị vô hiệu",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "lightbox: mũi tên phải đổi ảnh + caption",
+      "ok": true,
+      "extra": "01 — Một không gian riêng tư -> 02 — Chạm vào sự giản dị"
+    },
+    {
+      "name": "lightbox: mũi tên trái quay lại",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "lightbox: Escape đóng và trả focus",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "FAQ: mục đầu mở mặc định",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "FAQ: chỉ mở một mục tại một thời điểm",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "FAQ: Enter mở mục",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "FAQ: Space mở mục",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "Tab đi qua skip link và tới CTA 'Tìm nghi thức của bạn'",
+      "ok": true,
+      "extra": "Bỏ qua điều hướng | Về portfolio |  | Trang chủ | Liệu trình | Câu chuyện | Không gian | Hỏi đáp | Đặt lịch trải nghiệm | Tìm nghi thức của bạn ↗ | Khám phá liệu trình | Xem nghi thức ↗ | Xem nghi thức ↗ | Xem nghi thức ↗"
+    },
+    {
+      "name": "focus-visible rõ (outline >= 2px)",
+      "ok": true,
+      "extra": "solid 2px"
+    },
+    {
+      "name": "menu mobile mở (dialog modal)",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "không còn nhãn cấm: menu mobile đang mở (390px)",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "Escape đóng menu và trả focus về nút Menu",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "chọn mục menu: đóng menu và cuộn tới #rituals",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "credits trả 200",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "credits: noindex, 12 ảnh với tác giả/nguồn/giấy phép, có font",
+      "ok": true,
+      "extra": "{\"robots\":\"noindex, follow\",\"cards\":12,\"title\":\"Ảnh & ghi công — Miên An Wellness\",\"links\":36,\"fonts\":true,\"broken\":0}"
+    },
+    {
+      "name": "credits: ảnh tải đủ, 0 lỗi console",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "credits.json đủ trường (file,title,author,license,sourceUrl,retrievedAt,sha256,alt,usage)",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "không còn nhãn cấm: trang credits (không có chữ Demo/minh hoạ)",
+      "ok": true,
+      "extra": ""
+    },
+    {
+      "name": "credits giữ lời công khai trung thực (do Trần Công Tiến thiết kế, ảnh stock có ghi công)",
+      "ok": true,
+      "extra": "n tự vẽ (SVG). Thương hiệu, nội dung và hình ảnh trên trang này do Trần Công Tiến thiết kế để giới thiệu phong cách thiết kế website; ảnh là ảnh stock có ghi công bên dưới. Thiết kế bởi Trần Công Tiến · website thương hiệu sáng tác Muốn website như thế này? Ẩn"
+    }
+  ]
+}

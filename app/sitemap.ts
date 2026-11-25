@@ -2,13 +2,13 @@ import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/db";
 import { siteConfig } from "@/lib/site";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 const absoluteImageUrl = (path: string) =>
   new URL(path, siteConfig.url).toString();
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [posts, projects] = await Promise.all([
+  const [posts, projects, solutions] = await Promise.all([
     prisma.post.findMany({
       where: { status: "PUBLISHED" },
       select: { slug: true, updatedAt: true, coverUrl: true },
@@ -18,6 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       where: { status: "PUBLISHED" },
       select: { slug: true, updatedAt: true, coverUrl: true },
     }),
+    prisma.solution.findMany({ where: { status: "PUBLISHED" }, select: { slug: true, updatedAt: true, coverUrl: true } }),
   ]);
 
   const staticRoutes = [
@@ -33,6 +34,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       path: "/du-an",
       images: ["/images/illustrations/projects-hero-devices.webp"],
     },
+    { path: "/solutions", images: [] },
+    { path: "/doi-tac", images: [] },
     {
       path: "/quy-trinh",
       images: ["/images/illustrations/process-roadmap.webp"],
@@ -68,6 +71,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${siteConfig.url}/du-an/${p.slug}`,
       lastModified: p.updatedAt,
       images: p.coverUrl ? [absoluteImageUrl(p.coverUrl)] : [],
+    })),
+    ...solutions.map((solution) => ({
+      url: `${siteConfig.url}/solutions/${solution.slug}`,
+      lastModified: solution.updatedAt,
+      images: solution.coverUrl ? [absoluteImageUrl(solution.coverUrl)] : [],
     })),
   ];
 }

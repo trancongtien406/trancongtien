@@ -1,14 +1,14 @@
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
+import { PrismaPg } from "@prisma/adapter-pg";
 import bcrypt from "bcryptjs";
 import "dotenv/config";
 import {
   ContentStatus,
   PrismaClient,
 } from "../lib/generated/prisma/client";
+import { buildSeedProjects } from "./seed-projects-data";
 
-const adapter = new PrismaBetterSqlite3({
-  url: process.env.DATABASE_URL ?? "file:./prisma/dev.db",
-});
+if (!process.env.DATABASE_URL) throw new Error("DATABASE_URL is required");
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
@@ -436,169 +436,8 @@ async function main() {
     });
   }
 
-  const projects = [
-    {
-      slug: "fashion-move",
-      title: "Fashion Move",
-      category: "Marketplace",
-      description:
-        "Marketplace thời trang đa nền tảng cho seller đăng sản phẩm, chat realtime và quản lý đơn hàng.",
-      content: caseStudyHtml({
-        problem:
-          "Seller cần một kênh bán hàng mobile-first, buyer cần trải nghiệm tìm kiếm và trao đổi nhanh.",
-        solution:
-          "Xây app Flutter, API NestJS, dashboard seller và realtime chat bằng Socket.io.",
-        result:
-          "Luồng đăng sản phẩm, chat và checkout được gom vào một trải nghiệm mượt trên mobile.",
-      }),
-      coverUrl: "/images/illustrations/projects-hero-devices.webp",
-      coverAlt:
-        "Mockup marketplace thời trang Fashion Move trên mobile và dashboard web",
-      features: JSON.stringify([
-        "Seller dashboard",
-        "Realtime chat",
-        "Payment gateway",
-        "Recommendation",
-      ]),
-      stack: JSON.stringify([
-        "Flutter",
-        "NestJS",
-        "PostgreSQL",
-        "AWS S3",
-        "Socket.io",
-      ]),
-      role: "Full-stack Developer",
-      timeframe: "03/2024 – 08/2024",
-      platform: "iOS, Android, Web",
-      tone: "bg-violet-50",
-      sortOrder: 1,
-    },
-    {
-      slug: "smart-booking",
-      title: "Smart Booking System",
-      category: "Booking",
-      description:
-        "Web app đặt lịch cho spa/clinic với quản lý nhân sự, nhắc lịch tự động và dashboard doanh thu.",
-      content: caseStudyHtml({
-        problem:
-          "Dịch vụ có nhiều nhân sự, nhiều khung giờ và tỷ lệ khách quên lịch cao.",
-        solution:
-          "Xây booking flow, calendar multi-staff, email/SMS reminder và thanh toán online.",
-        result:
-          "Admin theo dõi lịch theo ngày, giảm thao tác thủ công và dễ mở rộng chi nhánh.",
-      }),
-      coverUrl: "/images/illustrations/services-devices.webp",
-      coverAlt:
-        "Giao diện web app đặt lịch Smart Booking với calendar và dashboard doanh thu",
-      features: JSON.stringify([
-        "Calendar multi-staff",
-        "SMS/Email reminders",
-        "Stripe",
-        "Analytics",
-      ]),
-      stack: JSON.stringify([
-        "Next.js",
-        "TypeScript",
-        "PostgreSQL",
-        "Stripe",
-        "Redis",
-      ]),
-      role: "Full Stack Developer",
-      timeframe: "11/2023 – 02/2024",
-      platform: "Web",
-      tone: "bg-orange-50",
-      sortOrder: 2,
-    },
-    {
-      slug: "sales-crm",
-      title: "Sales CRM Dashboard",
-      category: "CRM / SaaS",
-      description:
-        "Dashboard CRM cho đội sales quản lý lead, pipeline, KPI và lịch sử chăm sóc khách hàng.",
-      content: caseStudyHtml({
-        problem:
-          "Sales team cần nhìn rõ trạng thái lead và ưu tiên follow-up mỗi ngày.",
-        solution: "Xây Kanban pipeline, KPI chart, RBAC và activity timeline.",
-        result:
-          "Quản lý có dashboard tổng quan, nhân viên có checklist lead cần xử lý.",
-      }),
-      coverUrl: "/images/illustrations/blog-hero-desk.webp",
-      coverAlt:
-        "Dashboard Sales CRM hiển thị pipeline lead KPI và lịch sử chăm sóc khách hàng",
-      features: JSON.stringify([
-        "Kanban pipeline",
-        "KPI charts",
-        "RBAC",
-        "Activity timeline",
-      ]),
-      stack: JSON.stringify(["React", "Node.js", "MongoDB", "Chart.js", "AWS"]),
-      role: "Full Stack Developer",
-      timeframe: "06/2023 – 10/2023",
-      platform: "Web",
-      tone: "bg-slate-900",
-      sortOrder: 3,
-    },
-    {
-      slug: "photo-booth",
-      title: "Photo Booth App",
-      category: "Mobile App",
-      description:
-        "Ứng dụng mobile chụp ảnh sự kiện, áp filter, lưu offline và in Bluetooth ngay tại booth.",
-      content: caseStudyHtml({
-        problem:
-          "Sự kiện cần app chạy ổn định dù mạng yếu và in ảnh nhanh cho khách.",
-        solution:
-          "Xây app Flutter offline-first, lưu local, quản lý event pack và kết nối Bluetooth printer.",
-        result:
-          "Booth vận hành độc lập, ảnh được xử lý và in ngay tại điểm check-in.",
-      }),
-      coverUrl: "/images/illustrations/about-outdoors.webp",
-      coverAlt:
-        "Ứng dụng Photo Booth mobile chụp ảnh sự kiện và in Bluetooth tại booth",
-      features: JSON.stringify([
-        "Camera filters",
-        "Bluetooth printing",
-        "Offline mode",
-        "Event packs",
-      ]),
-      stack: JSON.stringify(["Flutter", "Dart", "Bluetooth", "Hive", "Provider"]),
-      role: "Mobile Developer",
-      timeframe: "01/2023 – 04/2023",
-      platform: "Android, iOS",
-      tone: "bg-rose-50",
-      sortOrder: 4,
-    },
-    {
-      slug: "ai-search",
-      title: "AI Search Engine",
-      category: "AI Agent",
-      description:
-        "AI Agent tìm kiếm tài liệu nội bộ bằng vector search, trả lời theo nguồn và hỗ trợ đội vận hành.",
-      content: caseStudyHtml({
-        problem:
-          "Tài liệu nội bộ rải rác khiến nhân sự mất thời gian tìm quy trình và câu trả lời.",
-        solution:
-          "Xây ingestion pipeline, embedding, vector search và API trả lời có trích nguồn.",
-        result:
-          "Nhân sự có thể hỏi bằng ngôn ngữ tự nhiên và nhận câu trả lời gắn với tài liệu gốc.",
-      }),
-      coverUrl: "/images/illustrations/process-roadmap.webp",
-      coverAlt:
-        "Sơ đồ AI Search Engine tìm kiếm tài liệu nội bộ bằng vector search",
-      features: JSON.stringify([
-        "Semantic search",
-        "Ingestion pipeline",
-        "OpenAI embeddings",
-        "Docker deploy",
-      ]),
-      stack: JSON.stringify(["Python", "FastAPI", "Qdrant", "OpenAI", "Docker"]),
-      role: "AI Engineer",
-      timeframe: "09/2024 – 12/2024",
-      platform: "Web",
-      tone: "bg-cyan-50",
-      sortOrder: 5,
-    },
-  ];
+  const projects = buildSeedProjects(caseStudyHtml);
+  const projectSlugs = projects.map((p) => p.slug);
 
   for (const project of projects) {
     await prisma.project.upsert({
@@ -607,6 +446,15 @@ async function main() {
       create: { ...project, status: ContentStatus.PUBLISHED },
     });
   }
+
+  // Ẩn dự án seed cũ không còn trong bộ chọn lại.
+  await prisma.project.updateMany({
+    where: {
+      slug: { notIn: projectSlugs },
+      status: ContentStatus.PUBLISHED,
+    },
+    data: { status: ContentStatus.DRAFT },
+  });
 
   const services = [
     {
@@ -953,7 +801,431 @@ async function main() {
     });
   }
 
+  const solutions = [
+    {
+      slug: "spa",
+      title: "Giải pháp số cho Spa & Beauty",
+      industry: "Spa & Beauty",
+      excerpt:
+        "Gom đặt lịch, hồ sơ khách, membership và ca nhân viên vào một hệ thống — giảm sót lịch, tăng tái sử dụng dịch vụ.",
+      heroTitle: "Giảm lịch hẹn thủ công, giữ dữ liệu khách hàng ở một nơi",
+      heroDescription:
+        "Website đặt lịch và bảng điều khiển được thiết kế quanh quy trình thật của spa: đặt lịch → phục vụ → chăm sóc lại → gia hạn membership.",
+      problems: [
+        "Đặt lịch phân tán trên Messenger, Zalo và sổ tay",
+        "Khó xem lịch trống theo kỹ thuật viên / phòng",
+        "Không có lịch sử dịch vụ và sở thích khách tập trung",
+        "Nhắc lịch và remarketing làm thủ công",
+        "Báo cáo doanh thu theo dịch vụ / nhân viên thiếu tin cậy",
+      ],
+      capabilities: [
+        "Website giới thiệu dịch vụ & gói",
+        "Đặt lịch online theo ca",
+        "CRM khách hàng & lịch sử dịch vụ",
+        "Membership / thẻ liệu trình",
+        "Xếp ca nhân viên",
+        "Nhắc lịch tự động",
+        "Bảng doanh thu & công suất",
+      ],
+      packageItems: ["Website thương hiệu", "Module đặt lịch", "Admin vận hành", "CRM khách"],
+    },
+    {
+      slug: "real-estate",
+      title: "Giải pháp số cho bất động sản",
+      industry: "Bất động sản",
+      excerpt:
+        "Nguồn hàng, lead quảng cáo và follow-up sales nằm trên một pipeline — biết khách đang quan tâm căn nào và cần gọi lại khi nào.",
+      heroTitle: "Biến nguồn hàng và lead thành quy trình bán có thể theo dõi",
+      heroDescription:
+        "Landing dự án, kho hàng và CRM giúp đội sales không bỏ sót lead từ ads, fanpage hay môi giới.",
+      problems: [
+        "Nguồn hàng nằm rải rác trên Excel và chat",
+        "Lead từ quảng cáo dễ thất thoát",
+        "Sales không có lịch sử chăm sóc chung",
+        "Báo cáo pipeline làm tay cuối tuần",
+        "Tài liệu dự án / pháp lý khó chia sẻ có kiểm soát",
+      ],
+      capabilities: [
+        "Landing page dự án",
+        "Kho hàng / inventory",
+        "Thu & định tuyến lead",
+        "CRM bán hàng",
+        "Nhắc follow-up",
+        "Thư viện tài liệu",
+        "Bảng pipeline & KPI",
+      ],
+      packageItems: ["Website / landing dự án", "Kho hàng", "CRM lead", "Dashboard sales"],
+    },
+    {
+      slug: "construction",
+      title: "Giải pháp số cho xây dựng",
+      industry: "Xây dựng",
+      excerpt:
+        "Theo dõi mốc dự án, tài liệu, báo cáo hiện trường và rủi ro chậm tiến độ trong một không gian làm việc chung.",
+      heroTitle: "Theo dõi tiến độ mà không ghép dữ liệu từ nhiều nhóm chat",
+      heroDescription:
+        "Văn phòng và hiện trường nhìn cùng nguồn sự thật: mốc, sự cố, tài liệu phiên bản và báo cáo ngày.",
+      problems: [
+        "Tiến độ cập nhật qua nhiều nhóm Zalo",
+        "Tài liệu / bản vẽ khó kiểm soát phiên bản",
+        "Báo cáo hiện trường làm tay",
+        "Khó nhìn sớm rủi ro chậm tiến độ",
+        "Phân quyền giữa chủ đầu tư – thầu – giám sát còn lỏng",
+      ],
+      capabilities: [
+        "Không gian dự án theo vai trò",
+        "Theo dõi mốc & tiến độ",
+        "Quản lý tài liệu",
+        "Báo cáo hiện trường",
+        "Theo dõi sự cố",
+        "Phân quyền",
+        "Bảng quản lý điều hành",
+      ],
+      packageItems: ["Website doanh nghiệp", "Cổng dự án", "Bảng tiến độ", "Module tài liệu"],
+    },
+    {
+      slug: "clinic",
+      title: "Giải pháp số cho phòng khám & thẩm mỹ",
+      industry: "Y tế & Thẩm mỹ",
+      excerpt:
+        "Đặt lịch khám, hồ sơ khách/bệnh án nhẹ, nhắc tái khám và quản lý liệu trình trong một hệ thống gọn cho phòng khám tư.",
+      heroTitle: "Giảm hàng chờ thủ công, giữ liệu trình và tái khám có kiểm soát",
+      heroDescription:
+        "Phù hợp phòng khám da liễu, nha khoa, thẩm mỹ viện cần đặt lịch theo bác sĩ/kỹ thuật viên và theo dõi liệu trình.",
+      problems: [
+        "Đặt lịch trùng / sót ca bác sĩ",
+        "Hồ sơ khách nằm rời trên giấy và Zalo",
+        "Khó nhắc tái khám đúng liệu trình",
+        "Doanh thu theo dịch vụ không rõ",
+        "Không có kênh đặt lịch ngoài giờ hành chính",
+      ],
+      capabilities: [
+        "Website đặt lịch theo bác sĩ",
+        "Hồ sơ khách / liệu trình",
+        "Nhắc tái khám",
+        "Quản lý gói dịch vụ",
+        "Phân quyền lễ tân – bác sĩ",
+        "Báo cáo doanh thu",
+        "Tích hợp Zalo OA (tuỳ chọn)",
+      ],
+      packageItems: ["Website phòng khám", "Đặt lịch", "Hồ sơ liệu trình", "Admin vận hành"],
+    },
+    {
+      slug: "fnb",
+      title: "Giải pháp số cho F&B / nhà hàng",
+      industry: "F&B",
+      excerpt:
+        "Menu online, đặt bàn / order, quản lý chi nhánh và chương trình khách hàng thân thiết trên một nền tảng.",
+      heroTitle: "Đặt bàn và vận hành chi nhánh gọn hơn, dữ liệu khách không bị mất",
+      heroDescription:
+        "Dành cho chuỗi nhỏ và nhà hàng muốn số hoá menu, đặt chỗ và chăm sóc khách quay lại.",
+      problems: [
+        "Đặt bàn qua điện thoại dễ trùng",
+        "Menu thay đổi khó đồng bộ đa kênh",
+        "Không có dữ liệu khách quay lại",
+        "Báo cáo theo chi nhánh làm tay",
+        "Chương trình ưu đãi khó kiểm soát",
+      ],
+      capabilities: [
+        "Website / menu digital",
+        "Đặt bàn online",
+        "Quản lý chi nhánh",
+        "Khách hàng thân thiết",
+        "Ưu đãi & voucher",
+        "Bảng doanh thu",
+        "Tích hợp giao vận (tuỳ chọn)",
+      ],
+      packageItems: ["Website nhà hàng", "Đặt bàn", "Loyalty cơ bản", "Admin đa chi nhánh"],
+    },
+    {
+      slug: "education",
+      title: "Giải pháp số cho trung tâm đào tạo",
+      industry: "Giáo dục",
+      excerpt:
+        "Tuyển sinh, lớp học, điểm danh, học phí và portal học viên — thay cho Excel và nhóm chat rời.",
+      heroTitle: "Quản lý tuyển sinh và lớp học trên một hệ thống",
+      heroDescription:
+        "Phù hợp trung tâm ngoại ngữ, kỹ năng, luyện thi cần theo dõi lead đăng ký đến học phí và chuyên cần.",
+      problems: [
+        "Lead tư vấn khoá học dễ thất thoát",
+        "Xếp lớp / lịch học cập nhật thủ công",
+        "Theo dõi học phí còn lệch số",
+        "Phụ huynh / học viên khó xem lịch",
+        "Báo cáo tuyển sinh không realtime",
+      ],
+      capabilities: [
+        "Landing khoá học",
+        "CRM tuyển sinh",
+        "Quản lý lớp & lịch",
+        "Điểm danh",
+        "Theo dõi học phí",
+        "Portal học viên",
+        "Báo cáo tuyển sinh",
+      ],
+      packageItems: ["Website trung tâm", "CRM tuyển sinh", "Quản lý lớp", "Portal học viên"],
+    },
+    {
+      slug: "ecommerce",
+      title: "Giải pháp số cho bán lẻ / thương mại điện tử",
+      industry: "Thương mại điện tử",
+      excerpt:
+        "Website bán hàng, quản lý đơn, kho nhẹ và chăm sóc khách sau mua — phù hợp SME chưa cần nền tảng quá nặng.",
+      heroTitle: "Bán hàng online có kiểm soát đơn và tồn kho",
+      heroDescription:
+        "Xây storefront và admin vận hành gọn: danh mục, đơn hàng, trạng thái giao, và lịch sử khách.",
+      problems: [
+        "Bán trên nhiều kênh nhưng số liệu lệch",
+        "Đơn hàng xử lý thủ công dễ sót",
+        "Tồn kho không đồng bộ",
+        "Chăm sóc sau bán thiếu quy trình",
+        "Khó mở rộng khi đơn tăng",
+      ],
+      capabilities: [
+        "Storefront / catalogue",
+        "Giỏ hàng & thanh toán",
+        "Quản lý đơn",
+        "Kho hàng nhẹ",
+        "CRM sau bán",
+        "Mã giảm giá",
+        "Bảng doanh thu",
+      ],
+      packageItems: ["Website bán hàng", "Admin đơn & kho", "CRM cơ bản", "Tích hợp thanh toán"],
+    },
+    {
+      slug: "logistics",
+      title: "Giải pháp số cho logistics & giao nhận",
+      industry: "Logistics",
+      excerpt:
+        "Tạo vận đơn, theo dõi trạng thái giao, đối soát và cổng khách hàng — giảm Excel và gọi điện xác nhận.",
+      heroTitle: "Theo dõi vận đơn và đối soát rõ ràng hơn cho đội giao nhận",
+      heroDescription:
+        "Phù hợp đơn vị giao hàng nội thành / liên tỉnh muốn cổng tạo đơn và cập nhật trạng thái realtime.",
+      problems: [
+        "Tạo vận đơn thủ công dễ sai",
+        "Khách không tự tra cứu được trạng thái",
+        "Đối soát COD chậm",
+        "Điều phối tài xế còn dựa vào chat",
+        "Báo cáo hiệu suất tuyến thiếu dữ liệu",
+      ],
+      capabilities: [
+        "Cổng tạo vận đơn",
+        "Theo dõi trạng thái",
+        "Phân công tài xế",
+        "Đối soát COD",
+        "Thông báo khách",
+        "Bảng hiệu suất",
+        "API đối tác (tuỳ chọn)",
+      ],
+      packageItems: ["Cổng khách hàng", "Module vận đơn", "Đối soát", "Dashboard điều phối"],
+    },
+    {
+      slug: "hospitality",
+      title: "Giải pháp số cho khách sạn & homestay",
+      industry: "Lưu trú",
+      excerpt:
+        "Đặt phòng, quản lý tồn phòng, giá theo mùa và chăm sóc khách trước/sau check-in trên một hệ thống gọn.",
+      heroTitle: "Đặt phòng và tồn phòng rõ ràng — bớt phụ thuộc OTA thuần tuý",
+      heroDescription:
+        "Giúp homestay, boutique hotel có kênh trực tiếp + admin vận hành lịch phòng và giá.",
+      problems: [
+        "Phụ thuộc OTA, tỉ lệ hoa hồng cao",
+        "Tồn phòng cập nhật lệch kênh",
+        "Đặt phòng trực tiếp vẫn qua chat",
+        "Giá theo mùa / cuối tuần khó quản",
+        "Thiếu dữ liệu khách quay lại",
+      ],
+      capabilities: [
+        "Website đặt phòng",
+        "Quản lý tồn phòng",
+        "Giá theo mùa",
+        "Xác nhận & thanh toán cọc",
+        "CRM khách lưu trú",
+        "Báo cáo công suất",
+        "Đồng bộ kênh (tuỳ chọn)",
+      ],
+      packageItems: ["Website đặt phòng", "Admin phòng & giá", "CRM khách", "Báo cáo công suất"],
+    },
+    {
+      slug: "fitness",
+      title: "Giải pháp số cho phòng gym & yoga",
+      industry: "Thể thao & Sức khoẻ",
+      excerpt:
+        "Gói membership, check-in, lịch PT/lớp và gia hạn tự động — giảm sót thu phí và tăng giữ chân hội viên.",
+      heroTitle: "Membership và lịch lớp trên một hệ thống vận hành",
+      heroDescription:
+        "Phù hợp phòng gym, yoga, pilates cần quản lý gói, điểm danh và lịch huấn luyện viên.",
+      problems: [
+        "Thu phí membership theo dõi trên Excel",
+        "Check-in hội viên thủ công",
+        "Lịch PT / lớp dễ trùng",
+        "Nhắc gia hạn làm tay",
+        "Không đo được tỷ lệ giữ chân",
+      ],
+      capabilities: [
+        "Website gói tập",
+        "Membership & gia hạn",
+        "Check-in hội viên",
+        "Lịch lớp / PT",
+        "Nhắc gia hạn",
+        "CRM hội viên",
+        "Bảng doanh thu gói",
+      ],
+      packageItems: ["Website CLB", "Membership", "Check-in & lịch lớp", "Admin vận hành"],
+    },
+    {
+      slug: "agency",
+      title: "Giải pháp số cho agency & studio dịch vụ",
+      industry: "Agency & Studio",
+      excerpt:
+        "Pipeline dự án, báo giá, theo dõi milestone và cổng khách xem tiến độ — giảm email vòng và file rời.",
+      heroTitle: "Quản lý dự án dịch vụ và trải nghiệm khách chuyên nghiệp hơn",
+      heroDescription:
+        "Dành cho agency marketing, studio thiết kế, team outsource cần CRM deal + workspace dự án.",
+      problems: [
+        "Deal và dự án nằm rời trên nhiều tool",
+        "Khách hỏi tiến độ phải trả lời thủ công",
+        "Báo giá / phiên bản hợp đồng khó theo dõi",
+        "Workload team không nhìn chung",
+        "Thiếu dữ liệu để tối ưu bán lại",
+      ],
+      capabilities: [
+        "CRM pipeline",
+        "Báo giá & phiên bản",
+        "Workspace dự án",
+        "Cổng khách xem tiến độ",
+        "Phân công task",
+        "Thư viện tài sản",
+        "Báo cáo doanh thu dự án",
+      ],
+      packageItems: ["Website agency", "CRM deal", "Cổng dự án", "Cổng khách"],
+    },
+    {
+      slug: "sme-ops",
+      title: "Giải pháp số cho vận hành SME",
+      industry: "Doanh nghiệp vừa & nhỏ",
+      excerpt:
+        "Nội bộ hoá quy trình: phê duyệt, hồ sơ nhân sự nhẹ, công việc và báo cáo điều hành — thay quy trình chat.",
+      heroTitle: "Đưa quy trình nội bộ lên hệ thống thay vì nhóm chat",
+      heroDescription:
+        "Phù hợp SME 10–100 người cần công cụ gọn: yêu cầu nội bộ, phê duyệt, theo dõi việc và dashboard quản lý.",
+      problems: [
+        "Phê duyệt chi phí / nghỉ phép qua chat",
+        "Công việc không có nguồn theo dõi chung",
+        "Hồ sơ nhân sự / tài liệu nội bộ rời",
+        "Quản lý thiếu số liệu realtime",
+        "Onboarding nhân sự mới chậm",
+      ],
+      capabilities: [
+        "Portal nội bộ",
+        "Quy trình phê duyệt",
+        "Quản lý công việc",
+        "Thư viện tài liệu",
+        "Hồ sơ nhân sự nhẹ",
+        "Thông báo nội bộ",
+        "Dashboard điều hành",
+      ],
+      packageItems: ["Portal nội bộ", "Module phê duyệt", "Công việc & báo cáo", "Thư viện tài liệu"],
+    },
+  ];
+  for (const [sortOrder, solution] of solutions.entries()) {
+    await prisma.solution.upsert({
+      where: { slug: solution.slug },
+      update: {
+        ...solution,
+        problems: JSON.stringify(solution.problems),
+        capabilities: JSON.stringify(solution.capabilities),
+        packageItems: JSON.stringify(solution.packageItems),
+        sortOrder,
+        status: ContentStatus.PUBLISHED,
+      },
+      create: {
+        ...solution,
+        problems: JSON.stringify(solution.problems),
+        capabilities: JSON.stringify(solution.capabilities),
+        packageItems: JSON.stringify(solution.packageItems),
+        sortOrder,
+        status: ContentStatus.PUBLISHED,
+      },
+    });
+  }
+
+  const partners = [
+    {
+      code: "CTV001",
+      name: "Nguyễn Minh Anh",
+      company: "CTV Đà Nẵng",
+      email: "ctv001@trancongtien.com",
+      phone: "0901000001",
+      type: "REFERRAL" as const,
+      commissionRate: 10,
+    },
+    {
+      code: "CTV002",
+      name: "Trần Hoàng Long",
+      company: "Sales Partner miền Trung",
+      email: "ctv002@trancongtien.com",
+      phone: "0901000002",
+      type: "SALES" as const,
+      commissionRate: 12,
+    },
+    {
+      code: "AGY001",
+      name: "Lê Thu Hà",
+      company: "Agency Digital Partner",
+      email: "agy001@trancongtien.com",
+      phone: "0901000003",
+      type: "AGENCY" as const,
+      commissionRate: 15,
+    },
+    {
+      code: "CTV003",
+      name: "Phạm Quốc Bảo",
+      company: "CTV TP.HCM",
+      email: "ctv003@trancongtien.com",
+      phone: "0901000004",
+      type: "REFERRAL" as const,
+      commissionRate: 10,
+    },
+    {
+      code: "CTV004",
+      name: "Võ Thanh Tâm",
+      company: "CTV Hà Nội",
+      email: "ctv004@trancongtien.com",
+      phone: "0901000005",
+      type: "SALES" as const,
+      commissionRate: 11,
+    },
+  ];
+  for (const partner of partners) {
+    await prisma.partner.upsert({
+      where: { code: partner.code },
+      update: {
+        name: partner.name,
+        company: partner.company,
+        email: partner.email,
+        phone: partner.phone,
+        type: partner.type,
+        status: "APPROVED",
+        commissionRate: partner.commissionRate,
+        ownershipDays: 30,
+        approvedAt: new Date(),
+      },
+      create: {
+        ...partner,
+        status: "APPROVED",
+        ownershipDays: 30,
+        approvedAt: new Date(),
+      },
+    });
+  }
+
   console.log("Seed OK. Admin:", email, "/", password);
+  console.log(`Solutions: ${solutions.length}`);
+  console.log("Pilot partners: CTV001, CTV002, CTV003, CTV004, AGY001");
+
+  const { seedEstimator } = await import("./seed-estimator");
+  await seedEstimator(prisma);
+  console.log("Estimator catalog seeded (products, features, questions, pricing).");
 }
 
 main()

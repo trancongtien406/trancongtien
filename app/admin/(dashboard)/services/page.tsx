@@ -10,7 +10,7 @@ export default async function AdminServicesPage() {
     <EntityCrudManager
       entity="service"
       title="Dịch vụ"
-      subtitle="CRUD dịch vụ trên SQLite"
+      subtitle="CRUD dịch vụ trên website"
       searchKeys={["title", "slug", "description"]}
       columns={[
         { key: "number", label: "#" },

@@ -1,0 +1,247 @@
+{
+ "demo": "rot-nhiet",
+ "images": [
+  {
+   "file": "hat-rang-can-canh",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1333,
+   "title": "Roasted coffee beans are displayed up close",
+   "author": "Indra Projects",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/H80RH1Hhvu8",
+   "retrievedAt": "2026-11-24",
+   "sha256": "a7df1bb72e8c39f95ab327fa09c16376553052bb032343a7c14526f070e49777",
+   "alt": "Cận cảnh hạt cà phê rang nâu đậm, vân nứt rõ nét",
+   "usage": "Hero / mục hạt cà phê",
+   "ai": false
+  },
+  {
+   "file": "hat-rang-vang",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1333,
+   "title": "A pile of coffee beans is shown in this image",
+   "author": "Bernd Dittrich",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/U2AgTbVPwlE",
+   "retrievedAt": "2026-11-24",
+   "sha256": "b72ef4a2c2c9ce07d05df8907d92fd12712861efa392311326f913160c16b2af",
+   "alt": "Đống hạt cà phê rang ánh cam ấm",
+   "usage": "Dải ảnh chạy / nền section rang",
+   "ai": false
+  },
+  {
+   "file": "hat-rang-toi",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1335,
+   "title": "A pile of coffee beans sitting on top of a table",
+   "author": "Bernd Dittrich",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/Nbu4vHEUNF8",
+   "retrievedAt": "2026-11-24",
+   "sha256": "c67ec9e612aa70508669c9fa89668d214e5ff6414c6ee0b4561bf093afcbe075",
+   "alt": "Hạt cà phê rang đậm màu, nền tối",
+   "usage": "Section hạt đậm",
+   "ai": false
+  },
+  {
+   "file": "sua-ca-phe-da",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 3008,
+   "title": "Selective focus photography of milk pouring on shot glass",
+   "author": "Jorik Blom",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/HP4VFH70LMc",
+   "retrievedAt": "2026-11-24",
+   "sha256": "203aeb424783d3e15257c3e516bc30426536179d6dd7aad91309adf804900728",
+   "alt": "Ly cao cà phê đá, sữa xoáy loang trong ly",
+   "usage": "Menu lạnh / tương tác",
+   "ai": false
+  },
+  {
+   "file": "espresso-chiet-xuat",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 2999,
+   "title": "Espresso pouring from portafilter",
+   "author": "Nathan Dumlao",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/So7cyDtlmls",
+   "retrievedAt": "2026-11-24",
+   "sha256": "536b0a791121097d235fb7f8b56381a20be8f6dc1df39c1b23af680c7aff2bde",
+   "alt": "Dòng espresso chảy từ tay cầm pha vào ly",
+   "usage": "Hero phụ / quy trình",
+   "ai": false
+  },
+  {
+   "file": "may-xay-bot",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 3000,
+   "title": "A coffee grinder with ground coffee in it",
+   "author": "Phil Hearing",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/aBWerKhNnpw",
+   "retrievedAt": "2026-11-24",
+   "sha256": "669961702aa60bd8fe237c7d1cb8b81f71ec497d5692a39b04cf5b103cfefa60",
+   "alt": "Bột cà phê xay trong tay cầm pha ở máy xay",
+   "usage": "Quy trình: xay",
+   "ai": false
+  },
+  {
+   "file": "ca-phe-sua-da",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 3006,
+   "title": "A glass of iced coffee sitting on a counter",
+   "author": "pariwat pannium",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/y2Dfk2Kt89o",
+   "retrievedAt": "2026-11-24",
+   "sha256": "3e9e54d437bcf652305d7a6e903c2d74813acc0926b32386f0bebac8df7f9240",
+   "alt": "Ly cà phê sữa đá trên quầy bar tối",
+   "usage": "Menu lạnh",
+   "ai": false
+  },
+  {
+   "file": "pour-over-tay",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1333,
+   "title": "Person holding gray stainless steel kettle",
+   "author": "Jakub Kapusnak",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/Rt2t11IUizs",
+   "retrievedAt": "2026-11-24",
+   "sha256": "e717d90f4dfc639cb4e789080ce0049c867bb45ec42ad3f8f9f36d03eb6e6d90",
+   "alt": "Bàn tay rót nước từ ấm cổ ngỗng vào phễu pour-over",
+   "usage": "Quy trình: rót / hero",
+   "ai": false
+  },
+  {
+   "file": "pour-over-tu-tren",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1333,
+   "title": "Water pouring on brown mug",
+   "author": "Patrick Fore",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/YWHK_pePhVw",
+   "retrievedAt": "2026-11-24",
+   "sha256": "b767f429bf9401c431cc98daee7f81ced97d2036a82e6963a482548d0d1fc72d",
+   "alt": "Nhìn từ trên xuống phễu lọc đang được rót nước",
+   "usage": "Quy trình: ủ",
+   "ai": false
+  },
+  {
+   "file": "latte-art-tay",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 3556,
+   "title": "Hands hold a cup of latte with art",
+   "author": "hosein fayton",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/fNWtFetQseU",
+   "retrievedAt": "2026-11-24",
+   "sha256": "32c16cab73a8611c715b628a693bcbda1ec2d385f8f5dd073d1bfed6fd2044b8",
+   "alt": "Hai bàn tay cầm ly latte có hoa văn bọt sữa",
+   "usage": "Quầy bar / menu nóng",
+   "ai": false
+  },
+  {
+   "file": "khay-hat-rang",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1333,
+   "title": "Person holding stainless steel tray with brown and black beads",
+   "author": "Andrew Neel",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/66NjVBij7P8",
+   "retrievedAt": "2026-11-24",
+   "sha256": "16a94b4ffd1581751fb5d33173bc2a9d799687b668ec9bc94a87ddaa2ce38146",
+   "alt": "Tay cầm khay inox đầy hạt cà phê vừa rang",
+   "usage": "Quy trình: rang",
+   "ai": false
+  },
+  {
+   "file": "ly-giay-tay",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 3000,
+   "title": "Hands holding a cup of latte art coffee",
+   "author": "Kaylee Stoll",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/v7wKHCDtiVo",
+   "retrievedAt": "2026-11-24",
+   "sha256": "30b9142ca1edc442f4d2ab8e7231a56e221165b5cf2db73464de51cd0419d2bc",
+   "alt": "Hai tay ôm ly giấy cà phê nóng",
+   "usage": "Khay / mang đi",
+   "ai": false
+  }
+ ],
+ "fonts": [
+  {
+   "name": "Anybody",
+   "author": "The Anybody Project Authors (Etcetera Type Co.)",
+   "license": "SIL OFL 1.1",
+   "source": "https://github.com/Etcetera-Type-Co/Anybody"
+  },
+  {
+   "name": "Space Grotesk",
+   "author": "Florian Karsten",
+   "license": "SIL OFL 1.1",
+   "source": "https://github.com/floriankarsten/space-grotesk"
+  }
+ ]
+}

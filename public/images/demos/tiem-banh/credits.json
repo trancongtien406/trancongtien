@@ -1,0 +1,174 @@
+{
+  "images": [
+    {
+      "file": "banh-hong-macaron",
+      "title": "Pink cake with macarons",
+      "author": "DRAKE NICOLLS",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/10891154/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "6c40041a1bca3712c25a4d259bee254c8281e994745eeb24f10f253182c5c300",
+      "alt": "Bánh kem hồng phủ macaron và kem bông",
+      "usage": "Ảnh hero, bánh sinh nhật",
+      "width": 2000,
+      "height": 3000
+    },
+    {
+      "file": "kem-bong-pastel",
+      "title": "Pastel cake with meringue swirls",
+      "author": "Towfiqu barbhuiya",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/11264390/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "6a25986c35c7adc3e94e83c2a4e99b732aa8399fb2c40a9300606d22113d58e0",
+      "alt": "Bánh kem hồng với kem bông màu mint và tím",
+      "usage": "Thẻ thực đơn, bánh kem",
+      "width": 2000,
+      "height": 2997
+    },
+    {
+      "file": "macaron-mint-hong",
+      "title": "Pastel macarons on wooden surface",
+      "author": "Valeria Boltneva",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/8625947/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "62d40a3603274d40dee1a82e6a5ff62c689934223f0b5b71a1b0b5086f0dabc8",
+      "alt": "Macaron màu mint và hồng trên mặt gỗ",
+      "usage": "Macaron, cuộn kể chuyện",
+      "width": 2000,
+      "height": 3000
+    },
+    {
+      "file": "macaron-chong",
+      "title": "Stacked macarons on pink fabric",
+      "author": "Beyzanur K.",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/29922134/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "e52b12534dd93f8132fdbbe7ecae7f5c4d57311f7bd25f433e02ef57e4db8f99",
+      "alt": "Tháp macaron nhiều màu trên nền vải hồng",
+      "usage": "Dải ảnh, nhãn dán",
+      "width": 2000,
+      "height": 3000
+    },
+    {
+      "file": "macaron-hop",
+      "title": "Macarons in a cardboard box",
+      "author": "Emmanuel Zua",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/8714791/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "84b61d9607d69c987a25b490b0912572e88fe39a18f974b2a83273627e095f76",
+      "alt": "Hộp giấy bốn chiếc macaron hồng và xanh",
+      "usage": "Hộp quà",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "file": "donut-hong",
+      "title": "Pink glazed donut with sprinkles",
+      "author": "Jakub Zerdzicki",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/23203365/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "fe013edb1d95a8cfb5b8493bfc4ba9976c01ebddfadfb50dd6c05a85e5d69ffe",
+      "alt": "Bánh donut phủ đường hồng và cốm trắng",
+      "usage": "Món nổi bật",
+      "width": 2000,
+      "height": 1334
+    },
+    {
+      "file": "donut-com-mau",
+      "title": "Pink frosted doughnuts with sprinkles",
+      "author": "Maria Charizani",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/6020733/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "fa287b8a24bf706da28d4e99427383b2cfebb69d9a36b2ceb4fe1f5e4c45340e",
+      "alt": "Donut phủ cốm nhiều màu trên nền hồng",
+      "usage": "Dải ảnh",
+      "width": 2000,
+      "height": 2998
+    },
+    {
+      "file": "croissant-bo",
+      "title": "Close-up of golden croissants",
+      "author": "Dimitri",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/17581159/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "b581206504768daddea553bb3dc03ba1b3bb58c65e0865ed33593ded94c55b61",
+      "alt": "Croissant bơ vàng ruộm trên đĩa sứ",
+      "usage": "Món nổi bật",
+      "width": 2000,
+      "height": 3000
+    },
+    {
+      "file": "bot-mi-bay",
+      "title": "Hands kneading dough with flour",
+      "author": "ricardo rojas",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/5403020/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "bdd7fcd900397a3ea52dd14aa7d2f5695f31f39b007c57744a7cf238f7fc1ddf",
+      "alt": "Tay nhào bột, bột mịn bay trong ánh sáng",
+      "usage": "Câu chuyện, làm bánh mỗi sáng",
+      "width": 2000,
+      "height": 1335
+    },
+    {
+      "file": "tay-nhao-bot",
+      "title": "Hand kneading dough in a bowl",
+      "author": "Anna Tarazevich",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/7287693/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "a973e7c620b9a3deb53657b3d3b714f1e9e4f291c4b2af084f26510aed0eb719",
+      "alt": "Bàn tay nhào khối bột trong tô sứ",
+      "usage": "Quy trình",
+      "width": 2000,
+      "height": 3000
+    },
+    {
+      "file": "lo-nuong",
+      "title": "Warm artisan bread baking in oven",
+      "author": "Chris F",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/10481790/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "b1a1bdd4f6144af8d6e79260518afabfd1623db3d9d9c57b3c5a36289eb7f600",
+      "alt": "Những ổ bánh chín vàng trong lò nướng",
+      "usage": "Lò nướng, câu chuyện",
+      "width": 2000,
+      "height": 1326
+    },
+    {
+      "file": "ca-phe-hoa",
+      "title": "Coffee, cake and pink hydrangea",
+      "author": "Lara",
+      "license": "Pexels License (dùng thương mại, không cần ghi công)",
+      "sourceUrl": "https://www.pexels.com/photo/28930725/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "ec97876b85bc4040e6617d6634c9af1d8bf4ca3c6e9a123d035c49124e828608",
+      "alt": "Ly cà phê cạnh bình hoa cẩm tú cầu hồng",
+      "usage": "Góc cà phê",
+      "width": 2000,
+      "height": 2667
+    }
+  ],
+  "fonts": [
+    {
+      "name": "Baloo 2",
+      "author": "Ek Type",
+      "license": "SIL OFL 1.1",
+      "source": "https://fonts.google.com/specimen/Baloo+2"
+    },
+    {
+      "name": "Nunito",
+      "author": "Vernon Adams, Jacques Le Bailly, Manvel Shmavonyan",
+      "license": "SIL OFL 1.1",
+      "source": "https://fonts.google.com/specimen/Nunito"
+    }
+  ]
+}

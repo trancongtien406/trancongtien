@@ -76,25 +76,27 @@ export async function sendEmail(opts: {
   text: string;
   html?: string;
 }) {
-  const host = process.env.SMTP_HOST;
-  if (!host) {
+  const { resolveSmtpSettings } = await import("@/lib/config");
+  const smtp = await resolveSmtpSettings();
+  if (!smtp) {
     console.info(`[EMAIL→${opts.to}] ${opts.subject}\n${opts.text}`);
     return { ok: true, mode: "console" as const };
   }
 
   const nodemailer = await import("nodemailer");
+  // Không cache transporter — Settings có thể đổi runtime
   const transport = nodemailer.createTransport({
-    host,
-    port: Number(process.env.SMTP_PORT || 587),
-    secure: false,
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
+    host: smtp.host,
+    port: smtp.port,
+    secure: smtp.secure,
+    connectionTimeout: 10_000,
+    greetingTimeout: 10_000,
+    socketTimeout: 20_000,
+    auth: smtp.user ? { user: smtp.user, pass: smtp.pass } : undefined,
   });
 
   await transport.sendMail({
-    from: process.env.SMTP_FROM || process.env.SMTP_USER,
+    from: smtp.from || smtp.user,
     to: opts.to,
     subject: opts.subject,
     text: opts.text,

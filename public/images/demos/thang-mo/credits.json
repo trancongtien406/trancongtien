@@ -1,0 +1,230 @@
+{
+ "demo": "thang-mo",
+ "images": [
+  {
+   "file": "vay-cua-so",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 3000,
+   "title": "Wedding Dress Hanging in a Room",
+   "author": "Alessandra Araújo",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/20148775/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "5583fa947df66b92688f89ef3873ef006ff69d1bb7ae07db089c8cb1f9ac88f5",
+   "alt": "Váy cưới ren và voan treo trước rèm cửa sáng, không có người",
+   "usage": "Hero, album Cổ điển (trang cuối), album Tối giản, moodboard Tối giản",
+   "ai": false
+  },
+  {
+   "file": "nhan-thiep",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1333,
+   "title": "Elegant Gold Wedding Rings on Invitation",
+   "author": "Bruno Mattos",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/30232952/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "fde3fea8e18e47a2f67702b2e9d89bc552e89b7ed7ca4e33fd514eb744f25978",
+   "alt": "Hai chiếc nhẫn vàng đặt trên tấm thiệp giấy kem in hoạ tiết nhành lá",
+   "usage": "Ảnh phụ hero, trang trong album Biển/Cổ điển/Tối giản",
+   "ai": false
+  },
+  {
+   "file": "hoang-hon-bong-dang",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1125,
+   "title": "Silhouettes of Bride and Groom Hugging at Sunset",
+   "author": "Lucksborn Sangma",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/5026140/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "cf9a07537d06be9e9b58b5951a24800a211c3c6c922917adb7ddca775abb62d4",
+   "alt": "Bóng dáng hai người ôm nhau trên nền trời hoàng hôn màu cam, không thấy mặt",
+   "usage": "Bìa album Biển, moodboard Biển",
+   "ai": false
+  },
+  {
+   "file": "hoa-cuoi",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1333,
+   "title": "Close-Up Photo of a Wedding Bouquet",
+   "author": "Daniel Ponomarev",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/4802272/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "98393b245f36e48a010578d8f98ae87f4de760926dd11cba1773d335920d377a",
+   "alt": "Cận cảnh bó hoa cưới hồng phấn và trắng nhạt, lá xanh",
+   "usage": "Photo essay, trang trong album, moodboard Vườn",
+   "ai": false
+  },
+  {
+   "file": "chi-tiet-vay-lung",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1333,
+   "title": "Close-up of the Back of a Wedding Dress on the Bride",
+   "author": "Hanna Auramenka",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/8553202/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "19d39f370213e33944fdd9d0ce1496511788dd3b33b43f962516d3f9e72ff6ed",
+   "alt": "Chi tiết lưng váy cưới ren và hàng khuy nhỏ, chỉ thấy cánh tay và voan",
+   "usage": "Photo essay, album Tối giản",
+   "ai": false
+  },
+  {
+   "file": "co-dau-quay-lung",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 3000,
+   "title": "Back View of a Bride Holding a Bouquet of Flowers",
+   "author": "GODMODE INTRUST",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/9469632/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "82cf0ff4e6bd1742777a465f5679b1eb709efe8ab7d128e73430f66cd3feec44",
+   "alt": "Nhìn từ phía sau, váy cưới trắng dài và bó hoa trên con phố lát gạch, không thấy mặt",
+   "usage": "Lời đề tựa, album Biển/Vườn",
+   "ai": false
+  },
+  {
+   "file": "cong-vom-bien",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1334,
+   "title": "Garden Gate by Sea",
+   "author": "Mohan Nannapaneni",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/13891755/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "b526e42370015e118ada0ae538bf65db4e9daf0348cc928fdb685d870216d603",
+   "alt": "Cổng vòm phủ hoa trắng và lá xanh nhìn ra biển xanh dưới trời trong",
+   "usage": "Trang cuối, album Biển/Vườn, moodboard Biển",
+   "ai": false
+  },
+  {
+   "file": "loi-di-vuon",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1333,
+   "title": "Elegant outdoor wedding ceremony setup with floral arch",
+   "author": "Qodak. stx",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/35629338/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "3922ed6adc6faaaf91ad515d7dfb70b727a456182ddd5ba2c097ddc47289f606",
+   "alt": "Lối đi trải thảm cỏ giữa hai hàng ghế gỗ và hoa trắng, cổng vòm phía xa trong vườn",
+   "usage": "Bìa album Vườn, moodboard Vườn",
+   "ai": false
+  },
+  {
+   "file": "ban-tiec",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1335,
+   "title": "Elegant Wedding Reception Table Setting",
+   "author": "Jonathan Borba",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/29040997/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "00f69ac691a24c6192ca7a24a05f7f5711e17a3a02a228cf383c35513b26d420",
+   "alt": "Bàn tiệc tròn trải khăn trắng, khăn ăn xanh đậm, ly thuỷ tinh và hoa nhỏ, không có khách",
+   "usage": "Bìa album Tối giản, album Cổ điển, moodboard Tối giản",
+   "ai": false
+  },
+  {
+   "file": "thiep-guong",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 2690,
+   "title": "Wedding Invitations with Rings and Vintage Mirror",
+   "author": "Eugenia Remark",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/18748938/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "3753596ffba20c5b5d375e8d1693a37ca890f21425185ed0508713749041859b",
+   "alt": "Bộ thiệp giấy mỹ thuật, hai chiếc nhẫn và gương nhỏ cổ trên lớp voan xám xanh",
+   "usage": "Photo essay, album Vườn/Cổ điển, moodboard Cổ điển",
+   "ai": false
+  },
+  {
+   "file": "album-cu",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 3000,
+   "title": "Album with Vintage Pictures",
+   "author": "Radwan Menzer",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/17790673/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "890c79b84a4a5c75a744b233018538a1a448ca0ac9b55caf954baccd4dbd95ed",
+   "alt": "Cuốn album ảnh cũ mở trên mặt bàn gỗ, tấm rèm vải phía sau",
+   "usage": "Bìa album Cổ điển, moodboard Cổ điển",
+   "ai": false
+  }
+ ],
+ "fonts": [
+  {
+   "name": "Playfair Display (biến thiên, thường + nghiêng)",
+   "usage": "Heading, caption",
+   "author": "Claus Eggers Sørensen",
+   "license": "SIL Open Font License 1.1",
+   "source": "https://fonts.google.com/specimen/Playfair+Display"
+  },
+  {
+   "name": "Josefin Sans (biến thiên)",
+   "usage": "Nội dung",
+   "author": "Santiago Orozco",
+   "license": "SIL Open Font License 1.1",
+   "source": "https://fonts.google.com/specimen/Josefin+Sans"
+  }
+ ]
+}

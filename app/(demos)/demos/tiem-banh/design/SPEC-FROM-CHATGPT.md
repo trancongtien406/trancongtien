@@ -1,0 +1,2 @@
+# SPEC-FROM-CHATGPT — KHÔNG LẤY ĐƯỢC
+Đã mở tab ChatGPT riêng và dán prompt (đề xuất 3 tên + đặc tả hiệu ứng chi tiết), nhưng tab ở trạng thái khách (chưa đăng nhập), nút gửi chỉ bấm được sau khi tắt banner, rồi renderer của tab treo (javascript_tool/get_page_text/read_page đều timeout 30-45s, Browser pane đang ẩn). Đã đóng tab. Vì vậy tên thương hiệu "Mây Kẹo", bảng màu, đặc tả hiệu ứng và giá do mình (agent) tự quyết; chưa có phản biện của ChatGPT.

@@ -1,0 +1,17 @@
+import { createRequire } from "node:module";
+const require = createRequire("/Users/mac/mern/works/hancitywebsite/package.json");
+const { chromium } = require("playwright");
+const BASE = process.env.BASE || "http://localhost:3100";
+const b = await chromium.launch({ executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", headless: true });
+const mode = process.argv[2] || "d";
+const vp = mode === "m" ? { width: 390, height: 844 } : { width: 1440, height: 900 };
+const ctx = await b.newContext({ viewport: vp, deviceScaleFactor: 1, ...(mode === "m" ? { hasTouch: true, isMobile: true } : {}) });
+const p = await ctx.newPage(); const errs = [];
+p.on("console", (m) => { if (m.type() === "error") errs.push(m.text()); }); p.on("pageerror", (e) => errs.push(String(e)));
+await p.goto(BASE + "/demos/phong-thu", { waitUntil: "networkidle" }); await p.waitForTimeout(2800);
+await p.screenshot({ path: `screenshots/${mode}-hero.png` });
+await p.evaluate(async () => { const H = document.documentElement.scrollHeight; for (let y = 0; y < H; y += 300) { scrollTo(0, y); await new Promise((r) => setTimeout(r, 160)); } await Promise.all([...document.images].map((i) => (i.complete ? 1 : new Promise((r) => { i.onload = i.onerror = r; })))); scrollTo(0, 0); });
+await p.waitForTimeout(600);
+await p.screenshot({ path: `screenshots/${mode}-full.png`, fullPage: true });
+console.log("errors:", errs.slice(0, 5));
+await b.close();

@@ -5,16 +5,17 @@ import { usePathname } from "next/navigation";
 import {
   Bell,
   Briefcase,
-  CalendarDays,
+  Calculator,
   ChevronLeft,
   FileText,
   FolderKanban,
+  ContactRound,
+  UsersRound,
   ImageIcon,
   LayoutDashboard,
   LogOut,
   Mail,
   Menu,
-  MessageSquareQuote,
   PanelLeftClose,
   PanelLeftOpen,
   Settings,
@@ -25,22 +26,31 @@ import {
   AdminSidebarProvider,
   useAdminSidebar,
 } from "@/components/admin/AdminSidebarContext";
+import { enumLabel } from "@/lib/enums";
 import { cn } from "@/lib/utils";
 
 const nav = [
-  { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
-  { href: "/admin/posts", label: "Blog", icon: FileText },
+  { href: "/admin", label: "Tổng quan", icon: LayoutDashboard, exact: true },
+  { href: "/admin/leads", label: "Lead", icon: ContactRound },
+  { href: "/admin/estimator", label: "Estimator", icon: Calculator },
+  { href: "/admin/partners", label: "Đối tác", icon: UsersRound },
+  { href: "/admin/solutions", label: "Giải pháp", icon: Briefcase },
   { href: "/admin/projects", label: "Dự án", icon: FolderKanban },
   { href: "/admin/services", label: "Dịch vụ", icon: Briefcase },
-  { href: "/admin/process", label: "Quy trình", icon: CalendarDays },
-  { href: "/admin/resources", label: "Tài nguyên", icon: ImageIcon },
-  { href: "/admin/about-content", label: "Về tôi (data)", icon: MessageSquareQuote },
-  { href: "/admin/testimonials", label: "Testimonials", icon: MessageSquareQuote },
-  { href: "/admin/faqs", label: "FAQ", icon: FileText },
-  { href: "/admin/bookings", label: "Đặt lịch", icon: CalendarDays },
+  { href: "/admin/posts", label: "Blog / Tài nguyên", icon: FileText },
+  { href: "/admin/thuong-mai", label: "Thanh toán & hoa hồng", icon: Mail },
   { href: "/admin/media", label: "Media", icon: ImageIcon },
   { href: "/admin/notifications", label: "Thông báo", icon: Bell },
   { href: "/admin/settings", label: "Cài đặt", icon: Settings },
+];
+
+const secondaryNav = [
+  { href: "/admin/resources", label: "Tài nguyên tải" },
+  { href: "/admin/sales-resources", label: "Tài nguyên bán hàng" },
+  { href: "/admin/process", label: "Quy trình" },
+  { href: "/admin/about-content", label: "Nội dung Về tôi" },
+  { href: "/admin/testimonials", label: "Nhận xét" },
+  { href: "/admin/faqs", label: "FAQ" },
 ];
 
 type UserInfo = {
@@ -134,6 +144,31 @@ function SidebarNav({
               </Link>
             );
           })}
+          {!collapsed ? (
+            <div className="mt-4 border-t border-white/10 pt-3">
+              <p className="px-3 pb-2 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                CMS phụ
+              </p>
+              {secondaryNav.map((item) => {
+                const active = pathname.startsWith(item.href);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className={cn(
+                      "block rounded-xl px-3 py-2 text-xs font-medium transition",
+                      active
+                        ? "bg-white/10 text-white"
+                        : "text-slate-400 hover:bg-white/5 hover:text-white",
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </div>
+          ) : null}
         </nav>
 
         <div className="shrink-0 border-t border-white/10 p-3">
@@ -219,10 +254,10 @@ function ChromeInner({
               ) : null}
             </Link>
             <Link
-              href="/admin/bookings"
+              href="/admin/leads"
               className="hidden items-center gap-1 rounded-xl bg-brand px-3 py-2 text-sm font-semibold text-white sm:inline-flex"
             >
-              <Mail className="size-4" /> Liên hệ
+              <Mail className="size-4" /> Leads
             </Link>
             <div className="hidden items-center gap-2 rounded-xl border border-slate-200 px-2 py-1.5 md:flex">
               <div className="flex size-8 items-center justify-center rounded-full bg-brand text-xs font-bold text-white">
@@ -326,9 +361,39 @@ export function StatusBadge({
     ARCHIVED: "bg-slate-100 text-slate-600",
     NEW: "bg-sky-50 text-sky-700",
     CONTACTED: "bg-violet-50 text-violet-700",
-    SCHEDULED: "bg-brand-soft text-brand",
-    DONE: "bg-emerald-50 text-emerald-700",
+    QUALIFIED: "bg-indigo-50 text-indigo-700",
+    MEETING: "bg-brand-soft text-brand",
+    PROPOSAL: "bg-cyan-50 text-cyan-700",
+    NEGOTIATION: "bg-orange-50 text-orange-700",
+    WON: "bg-emerald-50 text-emerald-700",
+    LOST: "bg-rose-50 text-rose-700",
+    APPLIED: "bg-amber-50 text-amber-700",
+    APPROVED: "bg-emerald-50 text-emerald-700",
+    SUSPENDED: "bg-rose-50 text-rose-700",
+    REJECTED: "bg-slate-100 text-slate-600",
+    PENDING: "bg-amber-50 text-amber-700",
+    RECEIVED: "bg-emerald-50 text-emerald-700",
+    EARNED: "bg-sky-50 text-sky-700",
+    PAID: "bg-emerald-50 text-emerald-700",
+    SENT: "bg-sky-50 text-sky-700",
+    ACCEPTED: "bg-emerald-50 text-emerald-700",
+    REFUNDED: "bg-rose-50 text-rose-700",
     CANCELLED: "bg-rose-50 text-rose-700",
+    LOW: "bg-slate-100 text-slate-600",
+    NORMAL: "bg-sky-50 text-sky-700",
+    HIGH: "bg-orange-50 text-orange-700",
+    URGENT: "bg-rose-50 text-rose-700",
+    HOT: "bg-rose-50 text-rose-700",
+    WARM: "bg-amber-50 text-amber-700",
+    COLD: "bg-slate-100 text-slate-600",
+    IN_PROGRESS: "bg-sky-50 text-sky-700",
+    CALCULATED: "bg-indigo-50 text-indigo-700",
+    OPTIMIZED: "bg-violet-50 text-violet-700",
+    CONTACT_CAPTURED: "bg-emerald-50 text-emerald-700",
+    ABANDONED: "bg-slate-100 text-slate-600",
+    REFERRAL: "bg-violet-50 text-violet-700",
+    SALES: "bg-brand-soft text-brand",
+    AGENCY: "bg-indigo-50 text-indigo-700",
   };
   return (
     <span
@@ -337,7 +402,7 @@ export function StatusBadge({
         map[status] || "bg-slate-100 text-slate-600",
       )}
     >
-      {status}
+      {enumLabel(status)}
     </span>
   );
 }

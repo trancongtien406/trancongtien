@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 88" width="72" height="88" role="img" aria-label="Hiên Mặn Villa"><title>Hiên Mặn Villa</title>
+<path d="M8 33 L36 14 L64 33" fill="none" stroke="#FAF8F4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M16 33 V60 M56 33 V60" fill="none" stroke="#FAF8F4" stroke-width="3" stroke-linecap="round"/>
+<circle cx="36" cy="44" r="8" fill="#C98B5A"/>
+<path d="M8 67 Q22 59 36 67 T64 67" fill="none" stroke="#FAF8F4" stroke-width="3" stroke-linecap="round"/>
+<path d="M8 76 Q22 68 36 76 T64 76" fill="none" stroke="#FAF8F4" stroke-width="3" stroke-linecap="round"/>
+</svg>

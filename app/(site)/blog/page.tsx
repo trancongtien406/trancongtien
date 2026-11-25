@@ -3,7 +3,7 @@ import { getPublishedPosts, parseJsonArray } from "@/lib/content";
 import { breadcrumbJsonLd, buildMetadata, JsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 export const metadata = buildMetadata({
   title: "Blog",

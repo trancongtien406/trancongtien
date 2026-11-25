@@ -31,7 +31,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex h-11 items-center rounded-xl bg-brand px-6 text-sm font-semibold text-white hover:bg-brand-dark disabled:opacity-60"
+      className="inline-flex h-11 items-center rounded-xl bg-brand px-5 text-sm font-semibold text-white shadow-sm hover:bg-brand-dark disabled:opacity-60"
     >
       {pending ? "Đang lưu..." : "Lưu cài đặt"}
     </button>
@@ -51,10 +51,12 @@ export function SettingsForm({ action, children }: Props) {
   }, [state]);
 
   return (
-    <form action={formAction} className="mx-auto max-w-3xl space-y-4">
+    <form action={formAction} className="space-y-4 pb-24">
       {children}
-      <div className="flex justify-end">
-        <SubmitButton />
+      <div className="sticky bottom-4 z-10 flex justify-end">
+        <div className="rounded-2xl border border-slate-200 bg-white/95 p-2 shadow-lg backdrop-blur">
+          <SubmitButton />
+        </div>
       </div>
     </form>
   );

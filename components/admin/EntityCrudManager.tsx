@@ -263,9 +263,9 @@ export function EntityCrudManager({
                   value: status,
                   onChange: setStatus,
                   options: [
-                    { value: "PUBLISHED", label: "Published" },
-                    { value: "DRAFT", label: "Draft" },
-                    { value: "ARCHIVED", label: "Archived" },
+                    { value: "PUBLISHED", label: "Đã xuất bản" },
+                    { value: "DRAFT", label: "Nháp" },
+                    { value: "ARCHIVED", label: "Lưu trữ" },
                   ],
                 },
               ]

@@ -1,0 +1,200 @@
+{
+  "images": [
+    {
+      "file": "shiba-tam-voi",
+      "title": "Cún Shiba cười thè lưỡi dưới vòi sen",
+      "author": "Makiko Fujimoto",
+      "license": "Pexels License (dùng thương mại, không cần ghi công bắt buộc)",
+      "sourceUrl": "https://www.pexels.com/photo/close-up-photo-of-a-dog-13062569/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "dcdf70c4a93ea976b765053c6f949da398be9854d621fd2f4724567ff8223d6a",
+      "alt": "Chú chó Shiba đang tắm dưới vòi nước, thè lưỡi cười",
+      "usage": "Hero, ảnh lớn đầu trang",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "file": "poodle-bot-xa-phong",
+      "title": "Hai chú poodle trong bọt xà phòng",
+      "author": "Pet foto",
+      "license": "Pexels License (dùng thương mại, không cần ghi công bắt buộc)",
+      "sourceUrl": "https://www.pexels.com/photo/gray-poodles-in-bath-17802173/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "079bd7d88002c1772d350342c6c44349b83d8bca332abb00d2c17dd3fd036e87",
+      "alt": "Hai chú poodle xám giữa đám bọt xà phòng trắng",
+      "usage": "Gói Tắm Bọt Thơm",
+      "width": 2000,
+      "height": 2800
+    },
+    {
+      "file": "cun-tam-uot",
+      "title": "Cún poodle nhỏ ướt trong bồn tắm",
+      "author": "Benjamin Lehman",
+      "license": "Pexels License (dùng thương mại, không cần ghi công bắt buộc)",
+      "sourceUrl": "https://www.pexels.com/photo/cream-toy-poodle-puppy-in-bathtub-1436139/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "27ba816588982faa6f67adde340236fe4b9588e9382b4b3d058cb52aa225d788",
+      "alt": "Chú cún poodle nhỏ ướt sũng đứng trong bồn tắm",
+      "usage": "Bước 3, tắm bọt",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "file": "yorkshire-bon-tam",
+      "title": "Yorkshire Terrier bên bồn tắm",
+      "author": "Adrian Frentescu",
+      "license": "Pexels License (dùng thương mại, không cần ghi công bắt buộc)",
+      "sourceUrl": "https://www.pexels.com/photo/yorkshire-terrier-in-bath-6222967/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "3d5674666b4a3a08099343cc74e29739c9f219d06a9b5a37d28772466b9e5b00",
+      "alt": "Chú Yorkshire Terrier tựa chân lên thành bồn tắm trắng",
+      "usage": "Gói Tắm & Tỉa Gọn",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "file": "collie-bon-tam",
+      "title": "Chó collie trong bồn tắm cổ điển",
+      "author": "Elina Volkova",
+      "license": "Pexels License (dùng thương mại, không cần ghi công bắt buộc)",
+      "sourceUrl": "https://www.pexels.com/photo/a-furry-dog-in-a-bathtub-8343328/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "8b595aff6fa1144ea1c143ebfd78ce86ac947c3464d39d9d1ccc485d0d17be69",
+      "alt": "Chú chó collie đứng trong bồn tắm trắng kiểu cổ điển",
+      "usage": "Gói Spa Bông Xù",
+      "width": 2000,
+      "height": 3000
+    },
+    {
+      "file": "meo-xam-chai",
+      "title": "Mèo xám được chải lông",
+      "author": "Nadin Sh",
+      "license": "Pexels License (dùng thương mại, không cần ghi công bắt buộc)",
+      "sourceUrl": "https://www.pexels.com/photo/gray-cat-brushed-by-owner-20329050/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "d6e04db82918943bdae552f966949053f9e22422eef78ba668164d2c83c556fd",
+      "alt": "Chú mèo vằn xám đang được chải lông",
+      "usage": "Phần giới thiệu",
+      "width": 2000,
+      "height": 2669
+    },
+    {
+      "file": "meo-trang-long",
+      "title": "Mèo lông trắng được chải",
+      "author": "Gustavo Fring",
+      "license": "Pexels License (dùng thương mại, không cần ghi công bắt buộc)",
+      "sourceUrl": "https://www.pexels.com/photo/a-person-grooming-a-white-cat-6816855/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "94c242d534ac10e8a8d081ed9612d331db7c66f2db5fe7a0b7cf6142248e9b9a",
+      "alt": "Chú mèo lông trắng dài đang được chải lông",
+      "usage": "Gói Chải Suôn Gỡ Rối",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "file": "meo-cam-luoc",
+      "title": "Mèo cam với lược massage",
+      "author": "Cottonbro Studio",
+      "license": "Pexels License (dùng thương mại, không cần ghi công bắt buộc)",
+      "sourceUrl": "https://www.pexels.com/photo/orange-tabby-cat-on-chair-6865166/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "7d15ea44c7927986095190dd660a5c80fd67d77cb1b3bb0fece70b0f771008b1",
+      "alt": "Chú mèo cam ngồi thư giãn khi được chải lông bằng lược tròn",
+      "usage": "Bước 2, chải và gỡ rối",
+      "width": 2000,
+      "height": 3000
+    },
+    {
+      "file": "meo-song-gam",
+      "title": "Mèo lông dài trên sofa",
+      "author": "RDNE Stock project",
+      "license": "Pexels License (dùng thương mại, không cần ghi công bắt buộc)",
+      "sourceUrl": "https://www.pexels.com/photo/gray-cat-sitting-on-the-couch-7516106/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "2cac366f0f7c792a2d411433dc848fa2335198da4eea81c79526869ef1c27c66",
+      "alt": "Chú mèo lông dài nằm trên sofa được chải nhẹ",
+      "usage": "Thư viện",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "file": "corgi-chai-long",
+      "title": "Corgi được chải lông",
+      "author": "Ron Lach",
+      "license": "Pexels License (dùng thương mại, không cần ghi công bắt buộc)",
+      "sourceUrl": "https://www.pexels.com/photo/a-man-brushing-his-dog-9986354/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "35104638077bff756497751885eb30ecc167df0dfe932a461769c476465f428e",
+      "alt": "Chú corgi đang được chải lông, thè lưỡi thư giãn",
+      "usage": "Bước 1, đón và làm quen",
+      "width": 2000,
+      "height": 3000
+    },
+    {
+      "file": "cho-long-trang",
+      "title": "Chó lông trắng được chải",
+      "author": "Yaroslav Shuraev",
+      "license": "Pexels License (dùng thương mại, không cần ghi công bắt buộc)",
+      "sourceUrl": "https://www.pexels.com/photo/a-person-brushing-a-dog-8498861/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "8d6fc43b7790662e9ad51986a68791810ef6d1143a76b5ac152809ecfdf838bd",
+      "alt": "Chú chó lông trắng xù được chải lông trên sàn gỗ",
+      "usage": "Bước 4, sấy và chải suôn",
+      "width": 2000,
+      "height": 3000
+    },
+    {
+      "file": "yorkie-khan-xanh",
+      "title": "Cún Yorkshire quấn khăn xanh",
+      "author": "Tima Miroshnichenko",
+      "license": "Pexels License (dùng thương mại, không cần ghi công bắt buộc)",
+      "sourceUrl": "https://www.pexels.com/photo/a-wet-dog-covered-with-towel-6131158/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "50bf0bc78e5c1bddfdbcf5dd1307c092b79dbc99f915ced5fc48c76eb735189c",
+      "alt": "Chú Yorkshire ướt được quấn trong chiếc khăn xanh nhạt",
+      "usage": "Thư viện",
+      "width": 2000,
+      "height": 3000
+    },
+    {
+      "file": "lhasa-khan-trum",
+      "title": "Chó Lhasa Apso trùm khăn trắng",
+      "author": "Kevin Yang",
+      "license": "Pexels License (dùng thương mại, không cần ghi công bắt buộc)",
+      "sourceUrl": "https://www.pexels.com/photo/white-little-dog-with-white-towel-on-head-16544122/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "d75a9434107f51766a681a7414ad1933cde1b735e0045f0600f1267966d59c53",
+      "alt": "Chú chó Lhasa Apso trùm khăn trắng sau khi tắm",
+      "usage": "Bước 5, khoe boss",
+      "width": 2000,
+      "height": 2667
+    },
+    {
+      "file": "khan-luoc-sua-tam",
+      "title": "Khăn, lược cao su và chai sữa tắm",
+      "author": "Mathew Coulton",
+      "license": "Pexels License (dùng thương mại, không cần ghi công bắt buộc)",
+      "sourceUrl": "https://www.pexels.com/photo/white-short-coated-dog-on-a-wooden-floor-with-towel-and-bath-essentials-4432261/",
+      "retrievedAt": "2026-11-25",
+      "sha256": "23a39efbfc8afedc9782c69722c727835aa1e037285a010f347c599e5916fb2f",
+      "alt": "Khăn hoạ tiết lá, lược cao su xanh và chai sữa tắm trắng trên sàn gỗ cạnh chân chú chó",
+      "usage": "Thư viện",
+      "width": 2000,
+      "height": 1333
+    }
+  ],
+  "fonts": [
+    {
+      "name": "Coiny",
+      "author": "Digital Type Foundry (Google Fonts)",
+      "license": "SIL OFL 1.1",
+      "source": "https://fonts.google.com/specimen/Coiny"
+    },
+    {
+      "name": "Quicksand (variable)",
+      "author": "Andrew Paglinawan (Google Fonts)",
+      "license": "SIL OFL 1.1",
+      "source": "https://fonts.google.com/specimen/Quicksand"
+    }
+  ]
+}

@@ -89,7 +89,7 @@ export type ContactEmailData = {
   timeline?: string;
   message: string;
   scheduledAt?: string;
-  /** Relative admin path, e.g. /admin/bookings?id=... */
+  /** Đường dẫn admin, ví dụ /admin/leads?id=... */
   adminHref?: string;
 };
 
@@ -100,7 +100,7 @@ export function adminContactEmailHtml(data: ContactEmailData) {
     detailRow("Số điện thoại", data.phone || "—"),
     detailRow("Loại dự án", data.projectType || "—"),
     detailRow("Ngân sách", data.budget || "—"),
-    detailRow("Timeline", data.timeline || "—"),
+    detailRow("Thời gian", data.timeline || "—"),
   ];
 
   if (data.scheduledAt) {

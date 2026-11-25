@@ -1,0 +1,273 @@
+{
+ "site": "rong-dam",
+ "images": [
+  {
+   "file": "ba-na-hoang-hon",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1125,
+   "title": "The Golden Bridge held by giant stone hands above a valley in Da Nang",
+   "author": "Vivu Vietnam",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/golden-bridge-in-da-nang-QsQMtWfqGOM",
+   "retrievedAt": "2026-11-25",
+   "sha256": "a59529d6f0f5b2cf725f4fd9f2154df14c84fb43d3ac356ba95126fb8fe83c89",
+   "alt": "Cầu Vàng ở Bà Nà lúc bình minh nhìn từ trên cao",
+   "altEn": "Golden Bridge at Ba Na Hills at sunrise from above",
+   "usage": "Hero collage",
+   "ai": false,
+   "note": "sha256 là của file gốc tải về; ảnh đã nén webp, xô sơn có nhãn ở hoi-an-song-den được làm mờ; den-long-hoi-an được cắt bỏ cạnh phải (có đèn pha in logo)."
+  },
+  {
+   "file": "ba-na-bien-may",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1333,
+   "title": "The Golden Bridge held by giant stone hands above a sea of clouds in Da Nang, Vietnam",
+   "author": "Vivu Vietnam",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/golden-bridge-in-da-nang-ySzFDwSroks",
+   "retrievedAt": "2026-11-25",
+   "sha256": "cb64d5ef9c13766562b8a4ab1407ce76a537881c132a4d0558cef73bbdc968f8",
+   "alt": "Cầu Vàng nổi trên biển mây, vài du khách nhỏ trên cầu",
+   "altEn": "Golden Bridge above a sea of clouds, a few tiny visitors on the bridge",
+   "usage": "Thẻ tour RD-01, mục Bà Nà",
+   "ai": false,
+   "note": "sha256 là của file gốc tải về; ảnh đã nén webp, xô sơn có nhãn ở hoi-an-song-den được làm mờ; den-long-hoi-an được cắt bỏ cạnh phải (có đèn pha in logo)."
+  },
+  {
+   "file": "ba-na-suong",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 3000,
+   "title": "A very tall bridge with some big rocks on it",
+   "author": "Filipe Freitas",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/a-very-tall-bridge-with-some-big-rocks-on-it-mAwZMjYvZmM",
+   "retrievedAt": "2026-11-25",
+   "sha256": "9d72af90e59efc5cbfb42329488ad6e2d60dd084e5d77056d05afef8d3d5945f",
+   "alt": "Bàn tay đá và lan can vàng của Cầu Vàng trong sương",
+   "altEn": "Stone hands and golden railing of the Golden Bridge in mist",
+   "usage": "Nhật ký (mây)",
+   "ai": false,
+   "note": "sha256 là của file gốc tải về; ảnh đã nén webp, xô sơn có nhãn ở hoi-an-song-den được làm mờ; den-long-hoi-an được cắt bỏ cạnh phải (có đèn pha in logo)."
+  },
+  {
+   "file": "hoi-an-song-den",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 2500,
+   "title": "A group of boats are parked on the side of a river",
+   "author": "Filipe Freitas",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/a-group-of-boats-are-parked-on-the-side-of-a-river-XDBRl4bL_5w",
+   "retrievedAt": "2026-11-25",
+   "sha256": "40684cc5c1498d76b41a6672bd01697f42286b5c511f3adfae0d71c798a5e874",
+   "alt": "Thuyền gắn đèn lồng bên bờ sông Hội An lúc chiều muộn",
+   "altEn": "Lantern-decorated boats along the Hoi An riverbank at dusk",
+   "usage": "Hero collage",
+   "ai": false,
+   "note": "sha256 là của file gốc tải về; ảnh đã nén webp, xô sơn có nhãn ở hoi-an-song-den được làm mờ; den-long-hoi-an được cắt bỏ cạnh phải (có đèn pha in logo)."
+  },
+  {
+   "file": "den-long-hoi-an",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 1690,
+   "height": 3000,
+   "title": "A tree with a bunch of colorful paper lanterns hanging from its branches",
+   "author": "Khoi Tran",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/a-tree-with-a-bunch-of-colorful-paper-lanterns-hanging-from-its-branches-NPIJb6T4tO4",
+   "retrievedAt": "2026-11-25",
+   "sha256": "77b7ddc2d6f0b177c28f39abee7ce6726af9785d0440991aaa625a5695479987",
+   "alt": "Đèn lồng lụa đỏ vàng xanh treo trên cây trước tường vàng",
+   "altEn": "Red, yellow and blue silk lanterns hanging in a tree before a yellow wall",
+   "usage": "Hero collage, tour RD-06, nhật ký",
+   "ai": false,
+   "note": "cắt bỏ cạnh phải (đèn pha in logo); sha256 là của file gốc"
+  },
+  {
+   "file": "da-nang-bo-bien",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1124,
+   "title": "Aerial view of a beach and a city",
+   "author": "Thach Tran",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/an-aerial-view-of-a-beach-and-a-city-w_0Dk0_JN3A",
+   "retrievedAt": "2026-11-25",
+   "sha256": "56a18201d2189755c908887b15f47386143ed78385a039a236d17fd95287b946",
+   "alt": "Bờ biển Đà Nẵng nhìn từ trên cao, sóng trắng và dãy toà nhà ven biển",
+   "altEn": "Aerial view of the Da Nang coastline with white surf and seafront towers",
+   "usage": "Nhật ký (biển)",
+   "ai": false,
+   "note": "sha256 là của file gốc tải về; ảnh đã nén webp, xô sơn có nhãn ở hoi-an-song-den được làm mờ; den-long-hoi-an được cắt bỏ cạnh phải (có đèn pha in logo)."
+  },
+  {
+   "file": "son-tra-phat",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 3556,
+   "title": "A large white buddha statue against a bright sky",
+   "author": "Nick",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/a-large-white-buddha-statue-against-a-bright-sky-bcr9eVWJ16E",
+   "retrievedAt": "2026-11-25",
+   "sha256": "1a85a545441f90b61691ce8b063a2425d899a995593b6e9b709f6219dea8e026",
+   "alt": "Gương mặt tượng Phật trắng trong sương sớm (khu vực Sơn Trà, theo nhãn tìm kiếm Linh Ứng)",
+   "altEn": "Face of a white Buddha statue in morning haze (Son Tra area, per the Linh Ung search tag)",
+   "usage": "Thẻ tour RD-04",
+   "ai": false,
+   "note": "sha256 là của file gốc tải về; ảnh đã nén webp, xô sơn có nhãn ở hoi-an-song-den được làm mờ; den-long-hoi-an được cắt bỏ cạnh phải (có đèn pha in logo)."
+  },
+  {
+   "file": "da-nang-cau-rong",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1500,
+   "title": "Dragon bridge over river, city skyline, and palm trees",
+   "author": "Cong Long Vu",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/6Oy-fhKD7Y4",
+   "retrievedAt": "2026-11-25",
+   "sha256": "01997088fa49f30683267794769bfa40a0019a81d0eac05dfc3e35e7e8634d21",
+   "alt": "Cầu Rồng vàng bắc qua sông Hàn lúc sớm, hàng cọ ven sông",
+   "altEn": "The golden Dragon Bridge over the Han River at dawn with riverside palms",
+   "usage": "Thẻ tour RD-06",
+   "ai": false,
+   "note": "sha256 là của file gốc tải về; ảnh đã nén webp, xô sơn có nhãn ở hoi-an-song-den được làm mờ; den-long-hoi-an được cắt bỏ cạnh phải (có đèn pha in logo)."
+  },
+  {
+   "file": "hoi-an-cau-chua",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1500,
+   "title": "A canal flows between yellow buildings with a historic bridge",
+   "author": "Anton Pavlov",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/kFqQyfP9aqk",
+   "retrievedAt": "2026-11-25",
+   "sha256": "f9c5bc0116126b9987d735704822c030ec7f43122c397d88d85eef4762e109a9",
+   "alt": "Chùa Cầu bắc qua con kênh giữa những dãy nhà tường vàng ở Hội An",
+   "altEn": "The covered bridge over a canal between yellow-walled houses in Hoi An",
+   "usage": "Thẻ tour RD-02",
+   "ai": false,
+   "note": "sha256 là của file gốc tải về; ảnh đã nén webp, xô sơn có nhãn ở hoi-an-song-den được làm mờ; den-long-hoi-an được cắt bỏ cạnh phải (có đèn pha in logo)."
+  },
+  {
+   "file": "my-son-thap",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 3552,
+   "title": "Ancient temple ruins in lush landscape",
+   "author": "zsuzsa zsuzsa",
+   "license": "Pexels License",
+   "sourceUrl": "https://www.pexels.com/photo/ancient-temple-ruins-in-lush-landscape-31484538/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "79197b2dbf73c10c7667eea4cf02c42ca8085a011ec36751e05a9d17fdd1dfd1",
+   "alt": "Tháp gạch Chăm Pa cổ rêu phong (nguồn gán nhãn khu Mỹ Sơn)",
+   "altEn": "Moss-covered ancient Cham brick tower (source tags it as My Son)",
+   "usage": "Thẻ tour RD-03",
+   "ai": false,
+   "note": "sha256 là của file gốc tải về; ảnh đã nén webp, xô sơn có nhãn ở hoi-an-song-den được làm mờ; den-long-hoi-an được cắt bỏ cạnh phải (có đèn pha in logo)."
+  },
+  {
+   "file": "hue-dai-noi",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 1333,
+   "title": "Ancient vietnamese building with traditional architecture",
+   "author": "Daniele Franchi",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/ancient-vietnamese-building-with-traditional-architecture-iZc-sVjP4uE",
+   "retrievedAt": "2026-11-25",
+   "sha256": "55d81b94c0366e099406ad4b4eba6cf4b7ec6b90e62b34af7941a7dd79fa2322",
+   "alt": "Sân gạch và điện mái ngói âm dương tường vàng kiểu cung đình Huế",
+   "altEn": "Brick courtyard and a yellow-walled tiled hall in Hue imperial style",
+   "usage": "Thẻ tour RD-05",
+   "ai": false,
+   "note": "sha256 là của file gốc tải về; ảnh đã nén webp, xô sơn có nhãn ở hoi-an-song-den được làm mờ; den-long-hoi-an được cắt bỏ cạnh phải (có đèn pha in logo)."
+  },
+  {
+   "file": "cao-lau",
+   "sizes": [
+    2000,
+    1200,
+    600
+   ],
+   "width": 2000,
+   "height": 2667,
+   "title": "Two bowls of noodles topped with sliced pork and crispy fried wonton skins",
+   "author": "Vincent Yap",
+   "license": "Unsplash License",
+   "sourceUrl": "https://unsplash.com/photos/noodle-bowls-with-pork-and-wontons-SDQW_NzfyAI",
+   "retrievedAt": "2026-11-25",
+   "sha256": "61d2bda46c2ae41ad8a31f76f33bac2320cb62bff72a8d203dec11cd30313ac3",
+   "alt": "Hai tô mì kiểu cao lầu với thịt xíu và bánh phồng giòn",
+   "altEn": "Two bowls of cao lau-style noodles with roast pork and crisp crackers",
+   "usage": "Nhật ký (ẩm thực)",
+   "ai": false,
+   "note": "sha256 là của file gốc tải về; ảnh đã nén webp, xô sơn có nhãn ở hoi-an-song-den được làm mờ; den-long-hoi-an được cắt bỏ cạnh phải (có đèn pha in logo)."
+  }
+ ],
+ "fonts": [
+  {
+   "name": "Bricolage Grotesque (variable, wght 200-800)",
+   "author": "Mathieu Triay (Ateliers Bricolage)",
+   "license": "SIL Open Font License 1.1",
+   "source": "https://fonts.google.com/specimen/Bricolage+Grotesque",
+   "use": "Heading, wordmark"
+  },
+  {
+   "name": "Lexend (variable, wght 100-900)",
+   "author": "Bonnie Shaver-Troup, Thomas Jockin, Santiago Orozco, Hector Gomez, Superunion",
+   "license": "SIL Open Font License 1.1",
+   "source": "https://fonts.google.com/specimen/Lexend",
+   "use": "Nội dung (thay DM Sans vì DM Sans không có glyph tiếng Việt)"
+  }
+ ]
+}

@@ -1,0 +1,174 @@
+{
+ "images": [
+  {
+   "file": "mau-don-hong",
+   "title": "Mẫu đơn hồng đậm",
+   "author": "Kindel Media",
+   "license": "Pexels License (dùng thương mại, không cần xin phép)",
+   "sourceUrl": "https://www.pexels.com/photo/pink-flowers-in-close-up-photography-8093478/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "2214b49b257703cb5ab3f10cd062b2373392b54f9170a9213cc58d981485c5d1",
+   "alt": "Mẫu đơn hồng sen nở rộ, cánh có giọt sương, nền tối",
+   "usage": "hero và nền khu hoa theo mùa",
+   "width": 2000,
+   "height": 1500
+  },
+  {
+   "file": "mao-luong-can",
+   "title": "Mao lương cam cận cảnh",
+   "author": "Olena Bohovyk",
+   "license": "Pexels License (dùng thương mại, không cần xin phép)",
+   "sourceUrl": "https://www.pexels.com/photo/red-flower-petals-25686159/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "e04143896169dc1a259241037ce1d2a9bb1e268ceb77c2a9a21e6029d979795c",
+   "alt": "Bông mao lương màu cam đỏ nhiều lớp cánh trên nền tối",
+   "usage": "thư viện kéo ngang",
+   "width": 2000,
+   "height": 3000
+  },
+  {
+   "file": "mao-luong-cho",
+   "title": "Mao lương cam ở chợ hoa",
+   "author": "Jayce Q",
+   "license": "Pexels License (dùng thương mại, không cần xin phép)",
+   "sourceUrl": "https://www.pexels.com/photo/vibrant-ranunculus-flower-bouquets-for-sale-34771099/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "4ff886238e821aa79ea4133a55afae9a697203fb01bca5f629a920d242f3c2f6",
+   "alt": "Những bó mao lương cam đỏ bày ở chợ hoa",
+   "usage": "thư viện kéo ngang, chuyện chợ hoa",
+   "width": 2000,
+   "height": 3556
+  },
+  {
+   "file": "hong-giay-kraft",
+   "title": "Hoa hồng hồng gói giấy kraft",
+   "author": "Engin Akyurt",
+   "license": "Pexels License (dùng thương mại, không cần xin phép)",
+   "sourceUrl": "https://www.pexels.com/photo/vibrant-pink-roses-in-paper-wraps-for-sale-30104622/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "45f2e8d2e875cdc3ce116900c6d14c83fa7e6655c76020e2d3cea5492d52d5aa",
+   "alt": "Nhìn từ trên xuống những bó hoa hồng sen gói giấy kraft",
+   "usage": "thư viện kéo ngang, mục giấy gói",
+   "width": 2000,
+   "height": 1500
+  },
+  {
+   "file": "tay-cam-hoa",
+   "title": "Tay cắm bó hoa hồng và hoa đồng nội",
+   "author": "alleksana",
+   "license": "Pexels License (dùng thương mại, không cần xin phép)",
+   "sourceUrl": "https://www.pexels.com/photo/hands-arranging-flower-bouquet-4238353/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "19469508e20ce35709608b51eba66fcf7e50989da3fd5c0449c65c610a5d65c8",
+   "alt": "Đôi tay cắm bó hoa hồng cam và hoa đồng nội trên bàn gỗ",
+   "usage": "khu tay nghề, thư viện",
+   "width": 2000,
+   "height": 1333
+  },
+  {
+   "file": "tay-be-canh",
+   "title": "Tay cắm hoa hồng và lá xanh",
+   "author": "ROMAN ODINTSOV",
+   "license": "Pexels License (dùng thương mại, không cần xin phép)",
+   "sourceUrl": "https://www.pexels.com/photo/florist-making-flowers-bouquet-5927281/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "33ed8af220eec08ca7ddbb9a85a8aba82a90ac6a79be90850898dc0660b1e767",
+   "alt": "Tay đang cắm bó hoa hồng phấn với lá xanh lớn trên bàn gỗ",
+   "usage": "khu quy trình",
+   "width": 2000,
+   "height": 1333
+  },
+  {
+   "file": "goi-giay-do",
+   "title": "Gói bó hoa bằng giấy đỏ",
+   "author": "Pavel Danilyuk",
+   "license": "Pexels License (dùng thương mại, không cần xin phép)",
+   "sourceUrl": "https://www.pexels.com/photo/two-people-making-a-flower-bouquet-6764318/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "5f382c8884b50d57debd28e8760b05df17d0f31f454904f77cb4acb457676585",
+   "alt": "Hai đôi tay gói bó hoa đỏ trên tờ giấy gói màu đỏ cam",
+   "usage": "mục gói hoa, thư viện",
+   "width": 2000,
+   "height": 1335
+  },
+  {
+   "file": "keo-day-kraft",
+   "title": "Kéo cắt cành và dây gai trên giấy kraft",
+   "author": "cottonbro studio",
+   "license": "Pexels License (dùng thương mại, không cần xin phép)",
+   "sourceUrl": "https://www.pexels.com/photo/flowers-and-floral-cutters-on-brown-wrapping-paper-4466245/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "169423d074069f99e671473f913ef6d829d18fe47c5929e8ca40f6948087efe6",
+   "alt": "Kéo cắt cành đỏ, dây gai và vài bông cúc trắng trên giấy kraft",
+   "usage": "khu dụng cụ",
+   "width": 2000,
+   "height": 1333
+  },
+  {
+   "file": "la-monstera",
+   "title": "Lá monstera xanh thẫm",
+   "author": "José Luis Photographer",
+   "license": "Pexels License (dùng thương mại, không cần xin phép)",
+   "sourceUrl": "https://www.pexels.com/photo/green-leaves-in-close-up-photography-7051519/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "3b62358835c5c78d6fa15e5eb88f4ee9f4de7cb31772934a492677ad8c996b5b",
+   "alt": "Những chiếc lá monstera xanh thẫm trong bóng tối",
+   "usage": "nền khu lá, tách lớp parallax",
+   "width": 2000,
+   "height": 1333
+  },
+  {
+   "file": "binh-thuy-tinh",
+   "title": "Mao lương trong bình thuỷ tinh",
+   "author": "Jill Burrow",
+   "license": "Pexels License (dùng thương mại, không cần xin phép)",
+   "sourceUrl": "https://www.pexels.com/photo/orange-ranunculus-asiaticus-placed-in-glass-vase-on-table-7678005/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "2cc5b593c1ab1500c36bac81e09ff8f184db3873587669b0d3cddb53de93387f",
+   "alt": "Mao lương cam trong những chiếc bình thuỷ tinh cạnh rèm trắng",
+   "usage": "thư viện kéo ngang, mục bình",
+   "width": 2000,
+   "height": 2666
+  },
+  {
+   "file": "mau-don-phan",
+   "title": "Mẫu đơn hồng phấn",
+   "author": "Eugene Golovesov",
+   "license": "Pexels License (dùng thương mại, không cần xin phép)",
+   "sourceUrl": "https://www.pexels.com/photo/pink-flower-in-close-up-photography-9376941/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "89ba68cd22944cb5f58abc96c89cfd2097f92bab531cd820135abc2fa56e434e",
+   "alt": "Hai bông mẫu đơn hồng phấn giữa lá xanh",
+   "usage": "khu hoa theo mùa",
+   "width": 2000,
+   "height": 2667
+  },
+  {
+   "file": "bo-san-cho",
+   "title": "Bó hoa sẵn ở quầy chợ",
+   "author": "Khadija Qasanova",
+   "license": "Pexels License (dùng thương mại, không cần xin phép)",
+   "sourceUrl": "https://www.pexels.com/photo/ready-made-flower-bouquets-on-the-stall-20295105/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "81b820635118da2b510c29c288e8bbfbb2e5033e7dcb69bf76d775c5341669dd",
+   "alt": "Các bó hoa cúc, hồng gói giấy ở quầy chợ hoa",
+   "usage": "thư viện kéo ngang",
+   "width": 2000,
+   "height": 2663
+  }
+ ],
+ "fonts": [
+  {
+   "name": "Prata",
+   "author": "Cyreal",
+   "license": "SIL OFL 1.1",
+   "source": "https://fonts.google.com/specimen/Prata"
+  },
+  {
+   "name": "Work Sans",
+   "author": "Wei Huang",
+   "license": "SIL OFL 1.1",
+   "source": "https://fonts.google.com/specimen/Work+Sans"
+  }
+ ]
+}

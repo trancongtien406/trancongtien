@@ -3,8 +3,9 @@ import { Footer } from "@/components/layout/Footer";
 import { FloatingActions } from "@/components/floating/FloatingActions";
 import { prisma } from "@/lib/db";
 import { siteConfig } from "@/lib/site";
+import { Suspense } from "react";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 export default async function SiteLayout({
   children,
@@ -19,7 +20,9 @@ export default async function SiteLayout({
       <Header />
       <main className="flex-1">{children}</main>
       <Footer />
-      <FloatingActions zaloUrl={zaloUrl} />
+      <Suspense fallback={null}>
+        <FloatingActions zaloUrl={zaloUrl} />
+      </Suspense>
     </>
   );
 }

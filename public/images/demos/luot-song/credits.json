@@ -1,0 +1,180 @@
+{
+ "images": [
+  {
+   "file": "song-hoang-hon",
+   "title": "Sóng vỡ dưới bầu trời vàng cam lúc hoàng hôn",
+   "author": "Rosario Incandela",
+   "license": "Pexels License (dùng thương mại, không cần ghi công)",
+   "sourceUrl": "https://www.pexels.com/photo/vibrant-ocean-wave-at-sunset-36960981/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "49a76cd045b41079d4b1cff5de04815608f40d8007e2df88ded9c8305e7115f5",
+   "alt": "Sóng vỡ dưới bầu trời vàng cam lúc hoàng hôn",
+   "usage": "Hero, mặt trời trên sóng",
+   "width": 2000,
+   "height": 1333
+  },
+  {
+   "file": "chai-van",
+   "title": "Người chèo ván nhìn từ trên cao trên nước xanh ngọc, bọt sóng trắng",
+   "author": "Los Muertos Crew",
+   "license": "Pexels License (dùng thương mại, không cần ghi công)",
+   "sourceUrl": "https://www.pexels.com/photo/drone-shot-of-a-man-on-surfboard-8908040/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "db6b0757fc03b9729481d818658d06dd05aa4c9e9e7389c41e5b0719626e6a9b",
+   "alt": "Người chèo ván nhìn từ trên cao trên nước xanh ngọc, bọt sóng trắng",
+   "usage": "Khoá học, bài chèo ván",
+   "width": 2000,
+   "height": 1334
+  },
+  {
+   "file": "ong-song",
+   "title": "Bên trong ống sóng xanh ngọc nhìn ra bãi cát",
+   "author": "Tommy Pierucki",
+   "license": "Pexels License (dùng thương mại, không cần ghi công)",
+   "sourceUrl": "https://www.pexels.com/photo/captivating-wave-barrel-on-hawaiian-shore-29275767/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "a21918c4089d5d8597674478fdb3393f488425e4fcd3ccdee583e81b698cb094",
+   "alt": "Bên trong ống sóng xanh ngọc nhìn ra bãi cát",
+   "usage": "Điều kiện sóng, mùa sóng",
+   "width": 2000,
+   "height": 1333
+  },
+  {
+   "file": "day-buoc",
+   "title": "Tay buộc dây leash vào cổ chân trên cát, ván lướt phía sau",
+   "author": "Jonathan Borba",
+   "license": "Pexels License (dùng thương mại, không cần ghi công)",
+   "sourceUrl": "https://www.pexels.com/photo/man-tying-velcro-strap-around-his-ankle-19613238/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "e2a04e0c6bfe5f4beb2aca5158449b11c8bfa7720ecc617769d9cb30fc95f31e",
+   "alt": "Tay buộc dây leash vào cổ chân trên cát, ván lướt phía sau",
+   "usage": "Quy trình, bước an toàn",
+   "width": 2000,
+   "height": 1333
+  },
+  {
+   "file": "boi-sap",
+   "title": "Bàn tay xoa sáp lên mặt ván lướt",
+   "author": "Jonathan Borba",
+   "license": "Pexels License (dùng thương mại, không cần ghi công)",
+   "sourceUrl": "https://www.pexels.com/photo/close-up-of-woman-waxing-a-surfboard-19596866/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "fd108396bcdcc8ee3b51fa11869c0e8823f8e7793e65d70ba2eb68e24670d487",
+   "alt": "Bàn tay xoa sáp lên mặt ván lướt",
+   "usage": "Checklist mang gì",
+   "width": 2000,
+   "height": 1333
+  },
+  {
+   "file": "van-vang",
+   "title": "Những tấm ván lướt vàng dựng cạnh nhau trên cát",
+   "author": "Nastia Ligrain",
+   "license": "Pexels License (dùng thương mại, không cần ghi công)",
+   "sourceUrl": "https://www.pexels.com/photo/yellow-surfboards-on-sand-14475871/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "789a859f2d9a76cf320ca5b88d1f45a0b4ec3ed369189d6600f949153640363a",
+   "alt": "Những tấm ván lướt vàng dựng cạnh nhau trên cát",
+   "usage": "Khoá học, thiết bị",
+   "width": 2000,
+   "height": 3000
+  },
+  {
+   "file": "nhom-tren-cat",
+   "title": "Nhóm học viên nhỏ đứng trên bãi cát nhìn ra sóng, chụp từ xa",
+   "author": "Magda Ehlers",
+   "license": "Pexels License (dùng thương mại, không cần ghi công)",
+   "sourceUrl": "https://www.pexels.com/photo/group-surf-lesson-on-a-sunny-beach-38942922/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "95716436603ce62e98cd9230b82103413fde6c6d8b1786420d4931589de0b26e",
+   "alt": "Nhóm học viên nhỏ đứng trên bãi cát nhìn ra sóng, chụp từ xa",
+   "usage": "Buổi học, nhóm nhỏ",
+   "width": 2000,
+   "height": 1334
+  },
+  {
+   "file": "luot-chieu-do",
+   "title": "Bóng người lướt trên mặt sóng cam cuối chiều",
+   "author": "Dane Amacher",
+   "license": "Pexels License (dùng thương mại, không cần ghi công)",
+   "sourceUrl": "https://www.pexels.com/photo/surfer-on-wave-at-sunset-21706251/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "d66ad300d550332545cfd3e361d449dbca686c00b1cfe8cc1ccf34eddc428ea9",
+   "alt": "Bóng người lướt trên mặt sóng cam cuối chiều",
+   "usage": "Tuyên ngôn",
+   "width": 2000,
+   "height": 1125
+  },
+  {
+   "file": "bong-chieu",
+   "title": "Bóng người ôm ván trên mặt biển vàng sẫm lúc xế chiều",
+   "author": "Ilham Zovanka",
+   "license": "Pexels License (dùng thương mại, không cần ghi công)",
+   "sourceUrl": "https://www.pexels.com/photo/surfer-at-sunset-on-bali-beach-39093857/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "12460e21d173558fc226454af7424d5fea179f6b250334e1a45e1579460ece43",
+   "alt": "Bóng người ôm ván trên mặt biển vàng sẫm lúc xế chiều",
+   "usage": "Khung giờ chiều muộn",
+   "width": 2000,
+   "height": 1333
+  },
+  {
+   "file": "bot-song-vang",
+   "title": "Bọt sóng ánh vàng đổ vào bờ cát",
+   "author": "wal_ 172619",
+   "license": "Pexels License (dùng thương mại, không cần ghi công)",
+   "sourceUrl": "https://www.pexels.com/photo/golden-sunset-waves-crashing-on-the-shore-36420013/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "80d99c60aac880fa8029804feaa1450fb633bb96bca92efbca49d0fb368deb6c",
+   "alt": "Bọt sóng ánh vàng đổ vào bờ cát",
+   "usage": "Nền section CTA",
+   "width": 2000,
+   "height": 1291
+  },
+  {
+   "file": "ra-bien",
+   "title": "Hai người cầm ván chạy xuống sóng, chụp từ xa",
+   "author": "Jess Loiterton",
+   "license": "Pexels License (dùng thương mại, không cần ghi công)",
+   "sourceUrl": "https://www.pexels.com/photo/2-men-surfing-on-sea-waves-4603243/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "b0e2b99b426b391e7b075a4267a2a2aaaeaeae3c169570039bad80e62a9af097",
+   "alt": "Hai người cầm ván chạy xuống sóng, chụp từ xa",
+   "usage": "Sáng sớm, lời mời ra biển",
+   "width": 2000,
+   "height": 2500
+  },
+  {
+   "file": "hai-bong-ven-bo",
+   "title": "Hai bóng người cầm ván đứng ven bờ dưới trời đỏ cam",
+   "author": "rachid bendhiba",
+   "license": "Pexels License (dùng thương mại, không cần ghi công)",
+   "sourceUrl": "https://www.pexels.com/photo/surfers-at-sunset-on-a-vibrant-beach-38774273/",
+   "retrievedAt": "2026-11-25",
+   "sha256": "bcc0ffd7136298a21090e4b2dd51c3343c8b5d0b5643b554bcb6f6005593fd86",
+   "alt": "Hai bóng người cầm ván đứng ven bờ dưới trời đỏ cam",
+   "usage": "Chân trang",
+   "width": 2000,
+   "height": 3000
+  }
+ ],
+ "fonts": [
+  {
+   "name": "Paytone One",
+   "author": "Indian Type Foundry",
+   "license": "SIL OFL 1.1",
+   "source": "https://fonts.google.com/specimen/Paytone+One"
+  },
+  {
+   "name": "Pacifico",
+   "author": "Vernon Adams, Jacques Le Bailly, Botjo Nikoltchev, Ben Weiner",
+   "license": "SIL OFL 1.1",
+   "source": "https://fonts.google.com/specimen/Pacifico"
+  },
+  {
+   "name": "Readex Pro",
+   "author": "Thomas Jockin, Nadine Chahine, Bonnie Wang",
+   "license": "SIL OFL 1.1",
+   "source": "https://fonts.google.com/specimen/Readex+Pro"
+  }
+ ]
+}

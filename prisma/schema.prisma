@@ -4,7 +4,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
 }
 
 enum ContentStatus {
@@ -31,6 +31,138 @@ enum BookingStatus {
   CANCELLED
 }
 
+enum PartnerType {
+  REFERRAL
+  SALES
+  AGENCY
+}
+
+enum PartnerStatus {
+  APPLIED
+  APPROVED
+  SUSPENDED
+  REJECTED
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  MEETING
+  PROPOSAL
+  NEGOTIATION
+  WON
+  LOST
+}
+
+enum LeadPriority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+enum LeadSource {
+  WEBSITE
+  PARTNER
+  REFERRAL
+  ORGANIC
+  SOCIAL
+  OUTBOUND
+  EXISTING_CUSTOMER
+  ESTIMATOR
+  OTHER
+}
+
+enum EstimatorQuestionType {
+  TEXT
+  TEXTAREA
+  SINGLE_SELECT
+  MULTI_SELECT
+  NUMBER
+  RANGE
+  SLIDER
+  BOOLEAN
+  FEATURE_SELECTOR
+  TIMELINE
+  BUDGET
+  AI_FREE_TEXT
+}
+
+enum FeatureComplexity {
+  VERY_LOW
+  LOW
+  MEDIUM
+  HIGH
+  VERY_HIGH
+}
+
+enum FeaturePriority {
+  MUST_HAVE
+  SHOULD_HAVE
+  NICE_TO_HAVE
+  GROWTH
+  SCALE
+}
+
+enum FeatureDependencyType {
+  REQUIRES
+  RECOMMENDS
+  CONFLICTS_WITH
+  UPGRADES
+  ENABLES
+}
+
+enum EstimateSessionStatus {
+  IN_PROGRESS
+  CALCULATED
+  OPTIMIZED
+  CONTACT_CAPTURED
+  ABANDONED
+}
+
+enum LeadScoreBand {
+  HOT
+  WARM
+  COLD
+}
+
+enum LeadActivityType {
+  CREATED
+  STATUS_CHANGED
+  NOTE
+  CONTACT
+  MEETING
+  FOLLOW_UP
+  OWNERSHIP
+  PROPOSAL
+  PAYMENT
+  COMMISSION
+  SYSTEM
+}
+
+enum CommercialStatus {
+  DRAFT
+  SENT
+  ACCEPTED
+  REJECTED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  RECEIVED
+  REFUNDED
+  CANCELLED
+}
+
+enum CommissionStatus {
+  PENDING
+  EARNED
+  PAID
+  CANCELLED
+}
+
 enum NotificationChannel {
   EMAIL
   SMS
@@ -38,25 +170,26 @@ enum NotificationChannel {
 }
 
 model User {
-  id           String   @id @default(cuid())
-  name         String
-  email        String   @unique
-  passwordHash String
-  role         String   @default("ADMIN")
-  avatarUrl    String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  posts        Post[]
-  media        Media[]
-  notifications Notification[]
+  id             String         @id @default(cuid())
+  name           String
+  email          String         @unique
+  passwordHash   String
+  role           String         @default("ADMIN")
+  avatarUrl      String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  posts          Post[]
+  media          Media[]
+  notifications  Notification[]
+  leadActivities LeadActivity[]
 }
 
 model Category {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   name        String
-  slug        String   @unique
+  slug        String    @unique
   description String?
-  createdAt   DateTime @default(now())
+  createdAt   DateTime  @default(now())
   posts       Post[]
   projects    Project[]
 }
@@ -102,6 +235,38 @@ model Project {
   updatedAt   DateTime      @updatedAt
   categoryId  String?
   categoryRef Category?     @relation(fields: [categoryId], references: [id])
+  concept     Boolean       @default(false)
+  clientName  String?
+  overview    String        @default("")
+  problem     String        @default("")
+  solution    String        @default("")
+  challenges  String        @default("[]")
+  results     String        @default("[]")
+  /// Gắn dự án với solution landing (slug) để hiện case study liên quan.
+  solutionSlug String?
+
+  @@index([solutionSlug, status, sortOrder])
+}
+
+model Solution {
+  id              String        @id @default(cuid())
+  slug            String        @unique
+  title           String
+  industry        String
+  excerpt         String
+  heroTitle       String
+  heroDescription String
+  problems        String        @default("[]")
+  capabilities    String        @default("[]")
+  packageItems    String        @default("[]")
+  coverUrl        String?
+  coverAlt        String?
+  status          ContentStatus @default(DRAFT)
+  sortOrder       Int           @default(0)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([status, sortOrder])
 }
 
 model Service {
@@ -180,26 +345,49 @@ model Media {
   alt          String   @default("")
   mimeType     String
   size         Int      @default(0)
+  storageKey   String?  @unique
   uploadedById String?
   uploadedBy   User?    @relation(fields: [uploadedById], references: [id])
   createdAt    DateTime @default(now())
 }
 
 model SiteSetting {
-  id           String @id @default("default")
-  siteName     String @default("TRAN CONG TIEN")
-  tagline      String @default("Full-stack Developer & AI Agent Builder")
-  email        String @default("trancongtien406@gmail.com")
-  phone        String @default("+84 382 802 406")
-  location     String @default("Đà Nẵng, Việt Nam")
-  zaloUrl      String @default("https://zalo.me/0382802406")
-  notifyEmail  String @default("trancongtien406@gmail.com")
-  notifyPhone  String @default("+84382802406")
-  seoTitle     String?
+  id             String  @id @default("default")
+  siteName       String  @default("TRAN CONG TIEN")
+  tagline        String  @default("Full-stack Developer & AI Agent Builder")
+  email          String  @default("trancongtien406@gmail.com")
+  phone          String  @default("+84 382 802 406")
+  location       String  @default("Đà Nẵng, Việt Nam")
+  zaloUrl        String  @default("https://zalo.me/0382802406")
+  notifyEmail    String  @default("trancongtien406@gmail.com")
+  notifyPhone    String  @default("+84382802406")
+  seoTitle       String?
   seoDescription String?
-  logoUrl      String?
-  faviconUrl   String?
-  cvUrl        String?
+  logoUrl        String?
+  faviconUrl     String?
+  cvUrl          String?
+
+  // Tích hợp — ưu tiên Settings, fallback env
+  payosClientId     String?
+  payosApiKey       String?
+  payosChecksumKey  String?
+  smtpHost          String?
+  smtpPort          String?  @default("587")
+  smtpSecure        Boolean  @default(false)
+  smtpUser          String?
+  smtpPass          String?
+  smtpFrom          String?
+  r2AccountId       String?
+  r2AccessKeyId     String?
+  r2SecretAccessKey String?
+  r2Bucket          String?
+  r2PublicUrl       String?
+  posthogKey        String?
+  posthogHost       String?
+  llmProvider       String?  @default("openai")
+  llmApiKey         String?
+  llmModel          String?  @default("gpt-4o-mini")
+  llmBaseUrl        String?
 }
 
 model Notification {
@@ -254,4 +442,444 @@ model JourneyItem {
   sortOrder   Int           @default(0)
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
+}
+
+model Partner {
+  id             String        @id @default(cuid())
+  code           String        @unique
+  name           String
+  company        String?
+  email          String        @unique
+  phone          String?
+  type           PartnerType   @default(REFERRAL)
+  status         PartnerStatus @default(APPLIED)
+  commissionRate Decimal       @default(0) @db.Decimal(5, 2)
+  ownershipDays  Int           @default(30)
+  notes          String?
+  approvedAt     DateTime?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  leads          Lead[]
+  commissions    Commission[]
+
+  @@index([status, type])
+}
+
+model Lead {
+  id                 String         @id @default(cuid())
+  leadNumber         String         @unique
+  name               String
+  company            String?
+  email              String
+  phone              String?
+  industry           String?
+  projectType        String?
+  description        String
+  estimatedBudget    String?
+  expectedTimeline   String?
+  source             LeadSource     @default(WEBSITE)
+  sourceDetail       String?
+  landingPath        String?
+  utmSource          String?
+  utmMedium          String?
+  utmCampaign        String?
+  referralCode       String?
+  status             LeadStatus     @default(NEW)
+  priority           LeadPriority   @default(NORMAL)
+  estimatedValue     Decimal?       @db.Decimal(15, 2)
+  leadScore          Int?
+  scoreBand          LeadScoreBand?
+  lastContactAt      DateTime?
+  nextFollowUpAt     DateTime?
+  meetingAt          DateTime?
+  lostReason         String?
+  partnerId          String?
+  partner            Partner?       @relation(fields: [partnerId], references: [id], onDelete: SetNull)
+  ownershipExpiresAt DateTime?
+  estimateSessionId  String?        @unique
+  estimateSession    EstimateSession? @relation(fields: [estimateSessionId], references: [id], onDelete: SetNull)
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+  activities         LeadActivity[]
+  proposals          Proposal[]
+  payments           Payment[]
+
+  @@index([status, createdAt])
+  @@index([partnerId, status])
+  @@index([email])
+  @@index([phone])
+  @@index([nextFollowUpAt])
+  @@index([scoreBand])
+}
+
+model LeadActivity {
+  id        String           @id @default(cuid())
+  leadId    String
+  lead      Lead             @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  actorId   String?
+  actor     User?            @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  type      LeadActivityType @default(NOTE)
+  title     String
+  body      String?
+  meta      String           @default("{}")
+  createdAt DateTime         @default(now())
+
+  @@index([leadId, createdAt])
+}
+
+model Proposal {
+  id              String           @id @default(cuid())
+  leadId          String
+  lead            Lead             @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  title           String
+  version         Int              @default(1)
+  status          CommercialStatus @default(DRAFT)
+  currency        String           @default("VND")
+  amount          Decimal          @db.Decimal(15, 2)
+  /// Structured proposal document (executive summary, scope, schedule, …).
+  content         String           @default("{}")
+  executiveSummary String          @default("")
+  currentProblem  String           @default("")
+  proposedSolution String          @default("")
+  scope           String           @default("")
+  deliverables    String           @default("[]")
+  timeline        String           @default("")
+  technology      String           @default("")
+  responsibilities String          @default("")
+  paymentSchedule String           @default("")
+  maintenance     String           @default("")
+  outOfScope      String           @default("")
+  sentAt          DateTime?
+  acceptedAt      DateTime?
+  validUntil      DateTime?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  @@index([leadId, createdAt])
+}
+
+model SalesResource {
+  id          String        @id @default(cuid())
+  title       String
+  slug        String        @unique
+  category    String        @default("POLICY")
+  description String        @default("")
+  body        String        @default("")
+  fileUrl     String?
+  partnerVisible Boolean    @default(false)
+  status      ContentStatus @default(DRAFT)
+  sortOrder   Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([status, sortOrder])
+  @@index([partnerVisible, status])
+}
+
+model Payment {
+  id               String        @id @default(cuid())
+  leadId           String
+  lead             Lead          @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  status           PaymentStatus @default(PENDING)
+  currency         String        @default("VND")
+  amount           Decimal       @db.Decimal(15, 2)
+  reference        String?
+  note             String?
+  dueAt            DateTime?
+  receivedAt       DateTime?
+  provider         String?
+  providerOrderCode BigInt?      @unique
+  providerLinkId   String?
+  checkoutUrl      String?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  commissions      Commission[]
+
+  @@index([leadId, status])
+  @@index([receivedAt])
+  @@index([providerLinkId])
+}
+
+model Commission {
+  id        String           @id @default(cuid())
+  partnerId String
+  partner   Partner          @relation(fields: [partnerId], references: [id], onDelete: Restrict)
+  paymentId String
+  payment   Payment          @relation(fields: [paymentId], references: [id], onDelete: Restrict)
+  rate      Decimal          @db.Decimal(5, 2)
+  amount    Decimal          @db.Decimal(15, 2)
+  status    CommissionStatus @default(PENDING)
+  earnedAt  DateTime?
+  paidAt    DateTime?
+  note      String?
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  @@unique([partnerId, paymentId])
+  @@index([partnerId, status])
+}
+
+// ─── AI Project Estimator ───────────────────────────────────────────
+
+model EstimatorProduct {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  name        String
+  description String   @default("")
+  icon        String?
+  baseUnits   Int      @default(20)
+  active      Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  templates   ProductTemplate[]
+  features    EstimatorFeature[]
+  questions   EstimatorQuestion[]
+  sessions    EstimateSession[]
+}
+
+model ProductTemplate {
+  id              String   @id @default(cuid())
+  productId       String
+  product         EstimatorProduct @relation(fields: [productId], references: [id], onDelete: Cascade)
+  key             String
+  name            String
+  description     String   @default("")
+  /// Core feature keys that must never be removed by optimizer
+  coreFeatureKeys String   @default("[]")
+  /// Recommended question keys for this template
+  questionKeys    String   @default("[]")
+  businessModels  String   @default("[]")
+  active          Boolean  @default(true)
+  sortOrder       Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@unique([productId, key])
+  @@index([active, sortOrder])
+}
+
+model EstimatorFeature {
+  id              String            @id @default(cuid())
+  productId       String
+  product         EstimatorProduct  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  key             String
+  name            String
+  description     String            @default("")
+  category        String            @default("General")
+  complexity      FeatureComplexity @default(MEDIUM)
+  baseUnits       Int               @default(3)
+  priority        FeaturePriority   @default(SHOULD_HAVE)
+  technicalRisk   FeatureComplexity @default(LOW)
+  optional        Boolean           @default(true)
+  active          Boolean           @default(true)
+  sortOrder       Int               @default(0)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  dependenciesFrom FeatureDependency[] @relation("DepFrom")
+  dependenciesTo   FeatureDependency[] @relation("DepTo")
+
+  @@unique([productId, key])
+  @@index([productId, category, sortOrder])
+}
+
+model FeatureDependency {
+  id           String                @id @default(cuid())
+  fromFeatureId String
+  fromFeature  EstimatorFeature      @relation("DepFrom", fields: [fromFeatureId], references: [id], onDelete: Cascade)
+  toFeatureId  String
+  toFeature    EstimatorFeature      @relation("DepTo", fields: [toFeatureId], references: [id], onDelete: Cascade)
+  type         FeatureDependencyType @default(REQUIRES)
+  message      String?
+
+  @@unique([fromFeatureId, toFeatureId, type])
+}
+
+model EstimatorQuestion {
+  id          String                @id @default(cuid())
+  productId   String?
+  product     EstimatorProduct?     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  key         String                @unique
+  type        EstimatorQuestionType
+  section     String                @default("general")
+  title       String
+  description String                @default("")
+  required    Boolean               @default(true)
+  sortOrder   Int                   @default(0)
+  active      Boolean               @default(true)
+  /// Default options JSON for select/range types
+  config      String                @default("{}")
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+  options     QuestionOption[]
+  rules       QuestionRule[]
+
+  @@index([productId, section, sortOrder])
+}
+
+model QuestionOption {
+  id         String            @id @default(cuid())
+  questionId String
+  question   EstimatorQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  value      String
+  label      String
+  sortOrder  Int               @default(0)
+  meta       String            @default("{}")
+
+  @@unique([questionId, value])
+}
+
+model QuestionRule {
+  id         String            @id @default(cuid())
+  questionId String
+  question   EstimatorQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  /// JSON: { conditions: [...], actions: [{ type, target }] }
+  definition String
+  active     Boolean           @default(true)
+  sortOrder  Int               @default(0)
+}
+
+model PricingVersion {
+  id                    String   @id @default(cuid())
+  key                   String   @unique
+  name                  String
+  active                Boolean  @default(false)
+  unitValueVnd          Int      @default(1000000)
+  minimumProjectVnd     Int      @default(15000000)
+  riskBufferLow         Float    @default(0.05)
+  riskBufferMedium      Float    @default(0.10)
+  riskBufferHigh        Float    @default(0.20)
+  rushCoefficient       Float    @default(1.25)
+  rangePadding          Float    @default(0.12)
+  /// JSON map businessModel → coefficient
+  businessModelCoeffs   String   @default("{}")
+  /// JSON map scaleBand → coefficient
+  scaleCoeffs           String   @default("{}")
+  notes                 String   @default("")
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  sessions              EstimateSession[]
+}
+
+model IntegrationCatalogItem {
+  id                   String            @id @default(cuid())
+  key                  String            @unique
+  name                 String
+  category             String
+  description          String            @default("")
+  complexity           FeatureComplexity @default(MEDIUM)
+  setupCostUnits       Int               @default(2)
+  recurringNote        String?
+  requiresVerification Boolean           @default(false)
+  requiresMerchant     Boolean           @default(false)
+  active               Boolean           @default(true)
+  sortOrder            Int               @default(0)
+}
+
+model ArchitectureTemplate {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  name        String
+  description String   @default("")
+  /// JSON stack layers / nodes
+  stack       String   @default("[]")
+  /// JSON conditions when this template applies
+  conditions  String   @default("{}")
+  active      Boolean  @default(true)
+  sortOrder   Int      @default(0)
+}
+
+model RecommendationRule {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  name        String
+  description String   @default("")
+  /// JSON conditions + recommendation payload
+  definition  String   @default("{}")
+  active      Boolean  @default(true)
+  sortOrder   Int      @default(0)
+}
+
+model EstimateSession {
+  id               String                @id @default(cuid())
+  publicId         String                @unique
+  shareCode        String                @unique
+  tokenHash        String
+  status           EstimateSessionStatus @default(IN_PROGRESS)
+  productId        String?
+  product          EstimatorProduct?     @relation(fields: [productId], references: [id], onDelete: SetNull)
+  templateKey      String?
+  pricingVersionId String?
+  pricingVersion   PricingVersion?       @relation(fields: [pricingVersionId], references: [id], onDelete: SetNull)
+  /// Answers map questionKey → value
+  answers          String                @default("{}")
+  /// Selected feature keys
+  selectedFeatures String                @default("[]")
+  customRequirements String              @default("")
+  sectionProgress  String                @default("{}")
+  referralCode     String?
+  landingPath      String?
+  utmSource        String?
+  utmMedium        String?
+  utmCampaign      String?
+  contactName      String?
+  contactCompany   String?
+  contactEmail     String?
+  contactPhone     String?
+  contactZalo      String?
+  currentVersion   Int                   @default(0)
+  leadScore        Int?
+  scoreBand        LeadScoreBand?
+  technicalReviewRequired Boolean        @default(false)
+  aiSummary        String?
+  createdAt        DateTime              @default(now())
+  updatedAt        DateTime              @updatedAt
+  versions         EstimateVersion[]
+  aiExtractions    AiExtraction[]
+  lead             Lead?
+
+  @@index([status, updatedAt])
+  @@index([referralCode])
+}
+
+model EstimateVersion {
+  id              String   @id @default(cuid())
+  sessionId       String
+  session         EstimateSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  version         Int
+  label           String   @default("")
+  selectedFeatures String  @default("[]")
+  answersSnapshot String   @default("{}")
+  internalAmount  Decimal  @db.Decimal(15, 2)
+  minAmount       Decimal  @db.Decimal(15, 2)
+  maxAmount       Decimal  @db.Decimal(15, 2)
+  currency        String   @default("VND")
+  timelineWeeksMin Int     @default(4)
+  timelineWeeksMax Int     @default(8)
+  roadmap         String   @default("[]")
+  architecture    String   @default("{}")
+  recommendations String   @default("[]")
+  optimized       Boolean  @default(false)
+  deferredFeatures String  @default("[]")
+  riskLevel       String   @default("LOW")
+  breakdown       String   @default("{}")
+  createdAt       DateTime @default(now())
+
+  @@unique([sessionId, version])
+  @@index([sessionId, createdAt])
+}
+
+model AiExtraction {
+  id           String   @id @default(cuid())
+  sessionId    String
+  session      EstimateSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  task         String
+  promptVersion String  @default("v1")
+  inputText    String
+  outputJson   String   @default("{}")
+  confidence   Float?
+  model        String?
+  createdAt    DateTime @default(now())
+
+  @@index([sessionId, createdAt])
 }
