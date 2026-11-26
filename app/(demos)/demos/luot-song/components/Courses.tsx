@@ -1,4 +1,4 @@
-import { ClipReveal, DraggableGallery } from "@/features/showroom/effects";
+import { DraggableGallery } from "@/features/showroom/effects";
 import { COURSES } from "../data/content";
 import { vnd } from "../lib/planner";
 import { Divider } from "./Art";
@@ -12,15 +12,15 @@ export function Courses() {
       <div className={styles.wrap}>
         <div className={styles.courseHead}>
           <div>
-            <p className={styles.kicker} data-rs="reveal">Khoá học</p>
-            <h2 id="kh-title" className={styles.h2} data-rs="reveal">Chọn con sóng <span className={styles.script}>của bạn</span></h2>
-            <p className={styles.lede} data-rs="reveal">Từ chưa biết gì đến tự tin trên ván. Khoá nhập môn, khoá làm chủ kỹ thuật và lớp riêng, lớp gia đình, lớp cho các bạn nhỏ. Kéo ngang để xem hết.</p>
+            <p className={styles.kicker} data-rs="reveal">Khoá học tại Ráng Sóng</p>
+            <h2 id="kh-title" className={styles.h2} data-rs="reveal">Sáu cách <span className={styles.script}>bắt đầu với biển</span></h2>
+            <p className={styles.lede} data-rs="reveal">Buổi trải nghiệm một buổi, khoá 3, 5 và 10 buổi, lớp riêng cho trẻ em từ 6 tuổi và dịch vụ thuê ván cho người đã lướt. Kéo ngang để xem hết sáu thẻ.</p>
           </div>
-          <ClipReveal variant="circle" origin="50% 50%" className={styles.courseBoards} innerScale={1.1}>
+          <div className={styles.courseBoards}>
             <div className={styles.courseBoardsFrame}>
               <Photo file="van-vang" alt="Những tấm ván lướt vàng dựng cạnh nhau trên cát" sizes="(max-width: 900px) 60vw, 22vw" w={1200} pos="50% 40%" />
             </div>
-          </ClipReveal>
+          </div>
         </div>
       </div>
       <div className={styles.galleryWrap}>
@@ -38,15 +38,15 @@ export function Courses() {
                 {c.points.map((p) => <li key={p}>{p}</li>)}
               </ul>
               <div className={styles.cardFoot}>
-                <p className={styles.cardPrice}><small>Giá tham khảo</small><b>{vnd(c.price)}</b><small>mỗi người</small></p>
-                <a className={`${styles.btn} ${styles.btnCard} ${styles.btnSm}`} href="#lap-ke-hoach" aria-label={`Lên kế hoạch cho khoá ${c.name}`}>Lên kế hoạch</a>
+                <p className={styles.cardPrice}><small>{c.from ? "Giá từ" : "Giá tham khảo"}</small><b>{vnd(c.price)}</b><small>{c.per}</small></p>
+                <a className={`${styles.btn} ${styles.btnCard} ${styles.btnSm}`} href="#chon-khoa" aria-label={`Chọn khoá phù hợp, đang xem ${c.name}`}>Chọn khoá</a>
               </div>
             </article>
           ))}
         </DraggableGallery>
       </div>
       <div className={styles.wrap}>
-        <p className={styles.fine}>Giá là giá tham khảo theo từng người. Phần bao gồm ván, đồ bảo hộ, ảnh, bảo hiểm và di chuyển được xác nhận khi trao đổi lịch.</p>
+        <p className={styles.fine}>Giá là giá tham khảo theo từng người, đã gồm huấn luyện viên, ván, dây leash và áo lycra mượn trong buổi. Xem chi tiết ở phần giá và đồ cần mang.</p>
       </div>
     </section>
   );

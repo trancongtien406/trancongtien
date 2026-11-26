@@ -63,8 +63,8 @@ console.log('[1] Tải trang, console, request ngoài origin, metadata');
   ok(await page.locator('link[rel=icon][href*="nep-tho/identity/favicon"]').count() > 0, 'favicon theo route');
   ok(await page.locator('meta[property="og:image"][content*="nep-tho/identity/og-image"]').count() > 0, 'og-image');
   ok(await page.locator('h1').count() === 1, 'đúng 1 h1');
-  ok(await page.locator('#lop-tap li[data-nt-reveal]').count() === 6, '6 lớp tập');
-  ok(await page.locator('#faq details').count() === 8, '8 câu FAQ');
+  ok(await page.locator('#lop-tap [data-nt-class]').count() === 6, '6 lớp tập');
+  ok(await page.locator('#faq details').count() === 10, '10 câu FAQ');
   ok(await page.locator('[data-nt-root] ul[class*=guides] > li').count() === 3, '3 huấn luyện viên');
   ok(await page.locator('[class*=plans] > li').count() === 3, '3 gói tập');
   ok(await count(page) === 33, 'NT-T01 lịch có 33 buổi', String(await count(page)));
@@ -174,10 +174,10 @@ console.log('[5] Weekly Timetable');
   ok(rb === 8, 'NT-T03 Reformer + Nhập môn = 8', String(rb));
   await tt(page).getByRole('button', { name: 'Đặt lại bộ lọc' }).first().click();
   ok(await count(page) === 33, 'đặt lại bộ lọc về 33');
-  await chip(page, 'Huấn luyện viên', 'An').click();
+  await chip(page, 'Dẫn lớp', 'Reformer').click();
   ok(await count(page) === 13, 'NT-T04 HLV An = 13', String(await count(page)));
   await chip(page, 'Loại lớp', 'Yoga').click();
-  ok(await count(page) === 0 && await page.locator('[data-nt=empty]').isVisible(), 'NT-T05 Yoga + An = trạng thái rỗng');
+  ok(await count(page) === 0 && await page.locator('[data-nt=empty]').isVisible(), 'NT-T05 Yoga + HLV Reformer = trạng thái rỗng');
   await clean(page, 'timetable trạng thái rỗng');
   await page.locator('[data-nt=empty]').getByRole('button', { name: 'Đặt lại bộ lọc' }).click();
   ok(await count(page) === 33, 'từ trạng thái rỗng đặt lại được');
@@ -231,9 +231,9 @@ console.log('[5] Weekly Timetable');
   ok(await count(page) === 7 + 0 || (await count(page)) > 0 && await page.locator('[data-nt=count]').innerText().then((t) => /Yoga Chậm/.test(t)), 'CTA lớp lọc đúng lớp', await page.locator('[data-nt=count]').innerText());
   const names = await page.locator('[data-nt-tile]').evaluateAll((e) => [...new Set(e.map((x) => x.querySelector('[class*=tileName]').textContent))]);
   ok(names.length === 1 && names[0] === 'Yoga Chậm', 'chỉ còn Yoga Chậm', names.join());
-  await page.locator('[data-nt-root]').getByRole('link', { name: 'Xem lớp của Mây' }).click(); await page.waitForTimeout(400);
+  await page.locator('[data-nt-root]').getByRole('link', { name: 'Xem lớp của HLV Yoga' }).click(); await page.waitForTimeout(400);
   const metas = await page.locator('[data-nt-tile] [class*=tileMeta]').evaluateAll((e) => [...new Set(e.map((x) => x.textContent.split('HLV ')[1]))]);
-  ok(metas.length === 1 && metas[0] === 'Mây', 'CTA HLV lọc đúng người dẫn lớp', metas.join());
+  ok(metas.length === 1 && metas[0] === 'Yoga', 'CTA HLV lọc đúng người dẫn lớp', metas.join());
   ok(await page.locator('[role=status]').first().count() > 0, 'có live region thông báo số buổi');
   await ctx.close();
 }
@@ -362,6 +362,83 @@ console.log('[7] Bàn phím, link thoát, ref');
   ok(await page.locator('#nt-nav').isVisible() && await page.getByRole('button', { name: 'Đóng menu' }).getAttribute('aria-expanded') === 'true', 'mobile: menu mở bằng nút burger');
   await page.locator('#nt-nav').getByRole('link', { name: 'Gói tập' }).click(); await page.waitForTimeout(300);
   ok(!(await page.locator('#nt-nav').isVisible()), 'mobile: chọn link đóng menu');
+  await ctx.close();
+}
+
+
+// ---------- 9 Rework: nội dung studio thật + hiệu ứng riêng
+console.log('[9] Nội dung studio thật + hiệu ứng chữ ký');
+{
+  const { ctx, page } = await newPage();
+  await load(page);
+  const h1 = await page.locator('h1').innerText();
+  ok(/Pilates/i.test(h1) && /nhịp/.test(h1), 'H1 nêu loại hình', h1);
+  const hero = await page.locator('section#top').innerText();
+  ok(/Sơn Trà, Đà Nẵng/i.test(hero), 'hero có khu vực cấp quận');
+  ok(/Đăng ký tập thử/.test(hero) && /180\.000/.test(hero) && /06:30/.test(hero) && /250\.000/.test(hero), 'hero có CTA đúng ngành + 3 sự thật (giá, giờ, tập thử)');
+  ok(await page.locator('[data-nt=facts] li').count() === 3, 'hero 3 sự thật');
+  ok(await page.locator('#tap-thu').count() === 1 && await page.locator('#quy-dinh').count() === 1 && await page.locator('#nhip-tho').count() === 1, 'có section tập thử, quy định, nhịp xe trượt');
+  const body = await page.evaluate(() => document.body.innerText);
+  ok(/6 máy Reformer/.test(body) && /trước 6 giờ/.test(body) && /tối đa 6 người/i.test(body), 'có thiết bị, chính sách đổi huỷ, sĩ số');
+  ok(!/\b(An|Mây|Lam)\b/.test(await page.locator('[class*=guides]').innerText()), 'huấn luyện viên theo vai trò, không tên riêng');
+  ok(await page.locator('[data-fx=StackingCards] [data-fx-card]').count() === 6, 'StackingCards: 6 thẻ lớp');
+  ok(await page.locator('[role=progressbar]').count() >= 1, 'ScrollProgress có role=progressbar');
+  ok(await page.locator('svg[data-fx=SVGPathDraw]').count() === 1, 'SVGPathDraw đường sóng các bước');
+  await clean(page, 'trang chủ sau rework');
+
+  // thanh giờ lọc lịch
+  await tt(page).scrollIntoViewIfNeeded(); await page.waitForTimeout(800);
+  const rng = page.locator('[data-nt=from]');
+  await rng.focus();
+  for (let i = 0; i < 4; i++) await page.keyboard.press('ArrowRight');
+  ok((await page.locator('[data-nt=from-label]').innerText()) === '18:00', 'thanh giờ: mốc 18:00', await page.locator('[data-nt=from-label]').innerText());
+  const times = await page.locator('[data-nt-tile] [class*=tileTime]').evaluateAll((e) => [...new Set(e.map((x) => x.firstChild.textContent))]);
+  ok(times.length > 0 && times.every((t) => t >= '18:00'), 'thanh giờ lọc: chỉ còn buổi từ 18:00', times.join());
+  ok(await count(page) === 14, 'thanh giờ: 18:00 trở đi = 14 buổi', String(await count(page)));
+  await chip(page, 'Loại lớp', 'Yoga').click();
+  ok(await count(page) < 14 && await count(page) > 0, 'thanh giờ kết hợp bộ lọc loại lớp (AND)', String(await count(page)));
+  await tt(page).getByRole('button', { name: 'Đặt lại bộ lọc' }).first().click();
+  ok(await count(page) === 33 && (await page.locator('[data-nt=from-label]').innerText()) === 'Cả ngày', 'đặt lại cả thanh giờ');
+  // sơ đồ chỗ
+  await page.locator('[data-nt-tile][data-status=limited]').first().click();
+  ok(await page.locator('dialog[open] [data-nt=seatmap] li').count() >= 6, 'dialog có sơ đồ chỗ');
+  ok(await page.locator('dialog[open] [data-nt=seatmap] li[data-taken="0"]').count() >= 1, 'sơ đồ chỗ có chỗ trống');
+  await page.keyboard.press('Escape');
+
+  // đồng hồ nhịp thở
+  await page.locator('[data-nt=breath]').scrollIntoViewIfNeeded(); await page.waitForTimeout(500);
+  const b = page.locator('[data-nt=breath]');
+  ok(await b.getAttribute('data-phase') === 'idle', 'nhịp thở: chưa chạy khi chưa bấm');
+  await b.locator('[data-nt=breath-start]').click(); await page.waitForTimeout(1200);
+  ok(await b.getAttribute('data-phase') === 'in' && /Hít vào/.test(await b.innerText()), 'nhịp xe trượt: pha hít vào');
+  const sc1 = await page.locator('[data-nt=breath] svg > g:last-of-type').evaluate((e) => e.getAttribute('transform'));
+  await page.waitForTimeout(3200);
+  ok(['hold', 'out'].includes(await b.getAttribute('data-phase')), 'nhịp thở: chuyển pha giữ/thở ra');
+  const sc2 = await page.locator('[data-nt=breath] svg > g:last-of-type').evaluate((e) => e.getAttribute('transform'));
+  ok(sc1 !== sc2, 'nhịp xe trượt: xe chạy theo pha');
+  await b.locator('[data-nt=breath-stop]').click();
+  ok(await b.getAttribute('data-running') === '0', 'nhịp thở: Dừng được');
+  await ctx.close();
+}
+{
+  // reduced-motion: đồng hồ vẫn đổi chữ, không scale
+  const { ctx, page } = await newPage({ reducedMotion: 'reduce' });
+  await load(page);
+  const b = page.locator('[data-nt=breath]'); await b.scrollIntoViewIfNeeded();
+  await b.locator('[data-nt=breath-start]').click(); await page.waitForTimeout(900);
+  ok(/Hít vào/.test(await b.innerText()), 'reduced: nhịp xe trượt vẫn hiển thị pha bằng chữ');
+  ok(await page.locator('[data-nt=breath] svg > g:last-of-type').evaluate((e) => e.getAttribute('transform') === 'translate(0 0)'), 'reduced: xe đứng yên');
+  await b.locator('[data-nt=breath-stop]').click();
+  await ctx.close();
+}
+for (const [w, h] of [[1440, 900], [390, 844]]) {
+  // hiệu năng thô: long task khi cuộn toàn trang
+  const { ctx, page } = await newPage({ viewport: { width: w, height: h }, ...(w < 500 ? { isMobile: true, hasTouch: true } : {}) });
+  await page.addInitScript(() => { window.__lt = []; try { new PerformanceObserver((l) => l.getEntries().forEach((e) => window.__lt.push(e.duration))).observe({ type: 'longtask', buffered: true }); } catch {} });
+  await load(page); await slowScroll(page);
+  const lt = await page.evaluate(() => window.__lt.filter((d) => d > 200).length);
+  console.log(`  INFO long task >200ms @${w}: ${lt}`);
+  ok(lt <= 2, `long task >200ms khi cuộn @${w} (ghi số)`, String(lt));
   await ctx.close();
 }
 

@@ -34,7 +34,7 @@ async function answerAll(p, lang, mode) {
     let pick = ANS[lang][i];
     if (mode === "wrong" || (mode === "mid" && tier > 3)) pick = (pick + 1) % 4;
     await p.evaluate((id) => document.getElementById(id).click(), `${PREFIX[lang]}${i + 1}-${pick}`);
-    await p.evaluate(() => document.querySelector('form button[type="submit"]').click());
+    await p.evaluate(() => document.querySelector('[data-tool=level-test] form button[type="submit"]').click());
     await p.waitForTimeout(60);
   }
 }
@@ -62,7 +62,8 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   await p.evaluate(() => { window.__lt = 0; new PerformanceObserver((l) => l.getEntries().forEach((e) => { if (e.duration > 200) window.__lt++; })).observe({ entryTypes: ["longtask"] }); });
   const fx = await p.evaluate(() => [...new Set([...document.querySelectorAll("[data-fx]")].map((e) => e.dataset.fx))]);
   console.log("fx:", fx.join(","));
-  for (const n of ["KineticGreeting", "FlipCards", "ChatBubbles", "ScrollScrubText", "VelocityMarquee", "SVGPathDraw", "MagneticButton", "TiltCard", "ClipReveal", "ParallaxLayer", "ShineSweep", "Counter"]) ok(fx.includes(n), `effect present: ${n}`);
+  for (const n of ["FlipCards", "ChatBubbles", "ScrollScrubText", "SVGPathDraw", "TiltCard", "SlotText", "ProgramFilter", "RoadmapCards", "OpeningCalendar", "PlanCompare", "Counter"]) ok(fx.includes(n), `effect present: ${n}`);
+  for (const n of ["VelocityMarquee", "MagneticButton", "ClipReveal", "ParallaxLayer", "ScrollProgress", "SplitReveal"]) ok(!fx.includes(n), `mass effect removed: ${n}`);
 
   // font Việt thật
   const g = await p.evaluate(async () => {
@@ -93,26 +94,27 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   });
   ok(cjk >= 2, `Japanese/Korean subset fonts loaded (${cjk})`);
 
-  // Kinetic
-  const act = () => p.evaluate(() => [...document.querySelectorAll('[class*=kWord]')].filter((e) => e.dataset.on === "1").map((e) => e.lang).join(","));
-  const seen = new Set();
-  for (let i = 0; i < 16; i++) { seen.add(await act()); await p.waitForTimeout(500); }
-  ok(["vi", "en", "ja", "ko"].every((l) => [...seen].some((s) => s.includes(l))), `kinetic cycles all 4 languages (${[...seen].join("|")})`);
-  await p.click('button[class*=kPause]');
-  ok(await p.getAttribute('button[class*=kPause]', "aria-pressed") === "true", "kinetic pause button aria-pressed");
-  await p.mouse.move(5, 500);
-  const before = await act(); await p.waitForTimeout(3500);
-  ok((await act()) === before, "kinetic stays on same word while paused");
-  ok(await p.evaluate(() => document.querySelector('[data-fx=KineticGreeting]').getAttribute("aria-live")) === "off", "kinetic aria-live=off");
-  await p.click('button[class*=kPause]');
-  await p.click('button[class*=kDot] >> nth=2');
-  await p.waitForTimeout(900);
-  ok((await act()).includes("ja"), "kinetic dot jumps to Japanese");
-  await p.screenshot({ path: `${SHOT}kinetic-ja.png`, clip: { x: 0, y: 100, width: 800, height: 520 } });
-
-  // Marquee control
-  await p.evaluate(() => document.querySelector('[data-fx=VelocityMarquee]').scrollIntoView({ block: "center" }));
-  ok(await p.evaluate(() => !!document.querySelector('[data-fx=VelocityMarquee] button')), "marquee has pause control");
+  // Hero: trung tâm cụ thể
+  const h1 = await p.innerText("h1");
+  ok(/Trung tâm ngoại ngữ/i.test(h1) && /Mở Lời/.test(h1), `h1 names the center: ${h1.replace(/\n/g, " | ")}`);
+  const heroTxt = await p.innerText("section[aria-labelledby=hero-title]");
+  ok(/Hải Châu/.test(heroTxt) && /IELTS/.test(heroTxt) && /JLPT/.test(heroTxt) && /TOPIK|tiếng Hàn/i.test(heroTxt), "hero says what/where/for whom");
+  ok(/Tối đa 12/.test(heroTxt) && /Tại trung tâm/.test(heroTxt) && /2\.400\.000/.test(heroTxt), "hero has 3 concrete facts (class size, format, price from)");
+  const heroCta = p.locator('section[aria-labelledby=hero-title] a:has-text("Đăng ký học thử miễn phí")');
+  ok((await heroCta.count()) === 1, "hero CTA: Đăng ký học thử miễn phí");
+  const hcHref = await p.locator('section[aria-labelledby=hero-title] a:has-text("Nhận tư vấn lộ trình")').getAttribute("href");
+  ok(/^\/lien-he/.test(hcHref || ""), `hero consult CTA -> ${hcHref}`);
+  const slotWords = await p.locator("h1 [data-fx=SlotText] [data-fx-item]").evaluateAll((e) => e.map((x) => x.textContent));
+  ok(slotWords.length === 4, `hero slot has 4 topics (${slotWords.join("|")})`);
+  const slotAct = () => p.evaluate(() => [...document.querySelectorAll("h1 [data-fx=SlotText] [data-fx-item]")].find((e) => getComputedStyle(e).opacity === "1")?.textContent);
+  const seenSlot = new Set(); for (let i = 0; i < 9; i++) { seenSlot.add(await slotAct()); await p.waitForTimeout(700); }
+  ok(seenSlot.size >= 2, `hero topic slot cycles (${[...seenSlot].join(" | ")})`);
+  const secs = await p.evaluate(() => [...document.querySelectorAll("main > section")].map((e) => e.id).filter(Boolean));
+  for (const id of ["gioi-thieu", "chuong-trinh", "lo-trinh", "doi-ngu", "khai-giang", "hoc-phi", "co-so", "quy-trinh", "kiem-tra", "hoi-dap", "dang-ky"]) ok(secs.includes(id), `section present: #${id}`);
+  const secTxt = await p.innerText("main");
+  ok(/Tiếng Anh thiếu nhi/.test(secTxt) && /THCS/.test(secTxt) && /người đi làm/i.test(secTxt) && /N5/.test(secTxt) && /TOPIK/.test(secTxt) && /IELTS/.test(secTxt), "programs cover kids/teens/working adults, IELTS, JLPT, TOPIK");
+  ok(/hoàn 100% học phí/.test(secTxt) && /giảm 5%/.test(secTxt) && /Học thử 1 buổi miễn phí/.test(secTxt), "tuition page has offers + refund policy");
+  ok(!/(tỉ lệ đỗ|tỷ lệ đỗ|đạt band|band \d(\.\d)? trở lên|cam kết đầu ra|học viên đạt)/i.test(secTxt), "no claimed scores/pass rates");
 
   // Flip cards
   await p.evaluate(() => document.querySelector("#the-tu").scrollIntoView());
@@ -175,15 +177,99 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   await ctx.close();
 }
 
+// 2b. Chương trình, lộ trình, lịch khai giảng, học phí, đăng ký
+{
+  const { ctx, p } = await open(1440, 900);
+  await p.evaluate(() => document.querySelector("#chuong-trinh").scrollIntoView());
+  await p.waitForTimeout(500);
+  const cards = () => p.locator("#chuong-trinh [data-pid]").count();
+  ok((await cards()) === 11, `11 programs listed (${await cards()})`);
+  await p.click('#chuong-trinh [aria-label="Lọc theo ngôn ngữ"] button:has-text("IELTS")'); await p.waitForTimeout(700);
+  ok((await cards()) === 2, "filter IELTS -> 2 programs");
+  await p.click('#chuong-trinh [aria-label="Lọc theo đối tượng"] button:has-text("Thiếu nhi")'); await p.waitForTimeout(500);
+  ok((await cards()) === 0 && (await p.locator('#chuong-trinh button:has-text("Xoá bộ lọc")').count()) === 1, "IELTS + Thiếu nhi -> empty state with reset");
+  await p.click('#chuong-trinh button:has-text("Xoá bộ lọc")'); await p.waitForTimeout(700);
+  ok((await cards()) === 11, "reset shows all programs");
+  await p.click('#chuong-trinh [aria-label="Lọc theo đối tượng"] button:has-text("Thiếu nhi")'); await p.waitForTimeout(700);
+  ok((await cards()) === 1 && /Tiếng Anh thiếu nhi/.test(await p.innerText("#chuong-trinh [data-pid]")), "audience Thiếu nhi -> 1 program");
+  const ptxt = await p.innerText("#chuong-trinh [data-pid]");
+  ok(/Tối đa 10/.test(ptxt) && /60 phút/.test(ptxt) && /Giáo trình/.test(ptxt) && /₫/.test(ptxt), "program card lists size, duration, material, price");
+  await p.screenshot({ path: `${SHOT}programs.png` });
+  await p.click('#chuong-trinh [aria-label="Lọc theo đối tượng"] button:has-text("Mọi đối tượng")');
+  await p.click('#chuong-trinh [aria-label="Lọc theo ngôn ngữ"] button:has-text("Tiếng Nhật")'); await p.waitForTimeout(600);
+  ok((await cards()) === 3, "filter JLPT -> N5, N4, N3");
+
+  // Lộ trình
+  await p.evaluate(() => document.querySelector("#lo-trinh").scrollIntoView());
+  await p.waitForTimeout(900);
+  ok((await p.locator("#lo-trinh [data-fx=RoadmapCards] ol > li").count()) === 5, "roadmap: 5 steps for English");
+  const total0 = await p.innerText("#lo-trinh [aria-label='Phần còn lại của lộ trình']");
+  await p.click('#lo-trinh button:has-text("Bắt đầu từ chặng này") >> nth=1'); await p.waitForTimeout(1200);
+  const total1 = await p.innerText("#lo-trinh [aria-label='Phần còn lại của lộ trình']");
+  ok(total0 !== total1 && /Cấp 3/.test(total1), "roadmap: choosing a start step recalculates remaining courses/cost");
+  await p.click('#lo-trinh [aria-label="Chọn lộ trình"] button:has-text("Tiếng Nhật")'); await p.waitForTimeout(900);
+  ok((await p.locator("#lo-trinh [data-fx=RoadmapCards] ol > li").count()) === 3, "roadmap: switching to Japanese -> 3 steps");
+  ok(/N3/.test(await p.innerText("#lo-trinh")), "roadmap: JLPT steps shown");
+  await p.screenshot({ path: `${SHOT}roadmap.png` });
+  // chương trình -> lộ trình
+  await p.evaluate(() => document.querySelector("#chuong-trinh").scrollIntoView());
+  await p.click('#chuong-trinh [aria-label="Lọc theo ngôn ngữ"] button:has-text("Tiếng Hàn")'); await p.waitForTimeout(500);
+  await p.locator('#chuong-trinh a:has-text("Xem lộ trình")').first().click(); await p.waitForTimeout(500);
+  ok(await p.locator('#lo-trinh [aria-label="Chọn lộ trình"] button[aria-pressed="true"]').innerText() === "Tiếng Hàn TOPIK", "program 'Xem lộ trình' selects matching roadmap");
+
+  // Lịch khai giảng
+  await p.evaluate(() => document.querySelector("#khai-giang").scrollIntoView());
+  await p.waitForTimeout(700);
+  const dates = await p.locator("#khai-giang [data-fx=OpeningCalendar] ol > li button").evaluateAll((els) => els.map((e) => e.textContent));
+  ok(dates.length === 14, `opening calendar lists 14 classes (${dates.length})`);
+  ok(/^5Th12/.test(dates[0]) || /^05Th12/.test(dates[0]) || /5Th12/.test(dates[0]), `calendar sorted by start date (first: ${dates[0].slice(0, 40)})`);
+  await p.locator("#khai-giang [data-fx=OpeningCalendar] ol > li button").nth(5).click(); await p.waitForTimeout(900);
+  const det = await p.innerText('[data-tool=schedule] [class*=detail]');
+  ok(/Khai giảng/.test(det) && /Sĩ số tối đa/.test(det), "selecting an opening shows start date + class size");
+  const seatN = await p.locator("[data-fx=SeatMap] circle").count();
+  ok(seatN >= 8 && seatN <= 12, `seat map draws ${seatN} seats`);
+  await p.screenshot({ path: `${SHOT}schedule-open.png` });
+
+  // Học phí
+  await p.evaluate(() => document.querySelector("#hoc-phi").scrollIntoView());
+  await p.waitForTimeout(900);
+  ok((await p.locator("#hoc-phi [data-pack]").count()) === 3, "pricing compares 3 packs");
+  const priceOf = (i) => p.evaluate((i) => +document.querySelectorAll("#hoc-phi [data-pack]")[i].querySelector("[data-fx=Counter] span[style], [data-fx=Counter] span:last-child").textContent.replace(/\D/g, ""), i);
+  const g0 = await priceOf(0), g1 = await priceOf(1), g2 = await priceOf(2);
+  ok(g0 === 2400000 && g1 > g0 && g2 > g1, `plans price ascending: ${g0} < ${g1} < ${g2}`);
+  await p.selectOption("#plan-prog", "ielts-i"); await p.waitForTimeout(1300);
+  ok((await priceOf(0)) === 4800000, "choose IELTS Intensive -> group price 4.800.000");
+  await p.click('#hoc-phi [role=radio]:has-text("Nhóm 3 người")'); await p.waitForTimeout(1300);
+  ok((await priceOf(0)) === 4416000, `group discount 8% applied (${await priceOf(0)})`);
+  ok(/hoàn 100%/.test(await p.innerText("#hoc-phi")), "refund policy visible");
+  await p.screenshot({ path: `${SHOT}pricing.png` });
+
+  // Đăng ký
+  await p.evaluate(() => document.querySelector("#dang-ky").scrollIntoView());
+  await p.click('#dang-ky button[type=submit]'); await p.waitForTimeout(200);
+  ok((await p.locator("#dang-ky [role=alert]").count()) === 4, "register: 4 field errors when empty");
+  ok((await p.locator('#dang-ky [aria-invalid="true"]').count()) >= 4, "register: aria-invalid on options");
+  await p.evaluate(() => ["rg-who-kid", "rg-int-en", "rg-when-toi", "rg-mode-tai"].forEach((id) => document.getElementById(id).click()));
+  await p.click('#dang-ky button[type=submit]'); await p.waitForTimeout(300);
+  const regTxt = await p.innerText("#dang-ky [aria-live=polite]");
+  ok(/tóm tắt đăng ký/i.test(regTxt) && /Tiếng Anh giao tiếp/.test(regTxt), "register: summary produced");
+  const regHref = await p.getAttribute('#dang-ky a:has-text("Gửi cho tư vấn viên")', "href");
+  ok(/^\/lien-he/.test(regHref), `register: final CTA -> ${regHref}`);
+  ok((await p.evaluate(() => [...document.querySelectorAll("[data-fx]")].some((e) => e.dataset.fx === "ShineSweep"))), "effect present: ShineSweep");
+  ok(!(await p.locator("#dang-ky input[type=text],#dang-ky input[type=tel],#dang-ky input[type=email]").count()), "register: collects no name/phone/email");
+  await p.screenshot({ path: `${SHOT}register.png` });
+  await ctx.close();
+}
+
 // 3. Level test + lịch + tóm tắt + link tư vấn
 {
   const { ctx, p } = await open(1440, 900);
-  await p.evaluate(() => document.querySelector("#cong-cu").scrollIntoView());
+  await p.evaluate(() => document.querySelector("#kiem-tra").scrollIntoView());
   await p.waitForTimeout(400);
   // lỗi: bấm Câu tiếp khi chưa chọn
-  await p.evaluate(() => document.querySelector('form button[type="submit"]').click());
+  await p.evaluate(() => document.querySelector('[data-tool=level-test] form button[type="submit"]').click());
   ok(await p.locator("#lt-err").count() === 1, "error shown when no answer selected");
-  ok(await p.getAttribute("fieldset", "aria-describedby") === "lt-err", "error linked via aria-describedby");
+  ok(await p.getAttribute("[data-tool=level-test] fieldset", "aria-describedby") === "lt-err", "error linked via aria-describedby");
   ok((await p.innerText('[data-tool=level-test] [class*=quizTop]')).includes("Câu 1/10"), "still on Q1 after error");
   await p.evaluate(() => document.getElementById("en1-1").click()); await p.focus("#en1-1"); await p.keyboard.press("Enter"); await p.waitForTimeout(100);
   ok((await p.innerText('[data-tool=level-test] [class*=quizTop]')).includes("Câu 2/10"), "Enter on radio submits and advances");
@@ -269,11 +355,12 @@ for (const w of [320, 390, 768, 1024, 1440]) {
 // 5. reduced motion
 {
   const { ctx, p } = await open(1440, 900, { reducedMotion: "reduce" });
-  ok(await p.locator('button[class*=kPause]').count() === 0, "reduced: kinetic pause hidden (static)");
-  const a = await p.evaluate(() => [...document.querySelectorAll('[class*=kWord]')].filter((e) => e.dataset.on === "1").map((e) => e.lang).join(","));
-  await p.waitForTimeout(3500);
-  const a2 = await p.evaluate(() => [...document.querySelectorAll('[class*=kWord]')].filter((e) => e.dataset.on === "1").map((e) => e.lang).join(","));
-  ok(a === a2 && a === "vi", `reduced: kinetic static on first word (${a})`);
+  ok(await p.locator("h1 [data-fx=SlotText]").getAttribute("data-fx-ready") === "static", "reduced: hero slot static");
+  const sl0 = await p.evaluate(() => [...document.querySelectorAll("h1 [data-fx=SlotText] [data-fx-item]")].map((e) => getComputedStyle(e).opacity).join());
+  await p.waitForTimeout(3200);
+  const sl1 = await p.evaluate(() => [...document.querySelectorAll("h1 [data-fx=SlotText] [data-fx-item]")].map((e) => getComputedStyle(e).opacity).join());
+  ok(sl0 === sl1 && sl0.startsWith("1,"), `reduced: hero topic stays on first word (${sl0})`);
+  ok(await p.locator("#chuong-trinh [data-pid]").count() === 11, "reduced: all programs visible");
   await p.evaluate(() => document.querySelector("#hoi-thoai").scrollIntoView());
   await p.waitForTimeout(300);
   ok(await p.locator('#hoi-thoai [role=log] button').count() === 6, "reduced: dialogue shows all 6 bubbles at once");
@@ -297,7 +384,7 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   note(`tct_ref cookie ${ck ? "set" : "not set"} (proxy chỉ đặt khi mã ref thuộc đối tác đã duyệt trong DB; trang demo không đọc/ghi cookie này)`);
   ok(await p.evaluate(() => document.querySelector('a[href^="/lien-he"]') !== null && !document.cookie.includes("tct_ref=x")), "page opened with ?ref= works and consult links stay first-party (/lien-he)");
   let reached = false;
-  for (let i = 0; i < 12 && !reached; i++) { await p.keyboard.press("Tab"); reached = await p.evaluate(() => /Kiểm tra cấp độ/.test(document.activeElement?.textContent || "") && document.activeElement.tagName === "A"); }
+  for (let i = 0; i < 12 && !reached; i++) { await p.keyboard.press("Tab"); reached = await p.evaluate(() => /Đăng ký học thử/.test(document.activeElement?.textContent || "") && document.activeElement.tagName === "A"); }
   ok(reached, "Tab reaches primary CTA");
   ok(await p.evaluate(() => { const s = getComputedStyle(document.activeElement); return s.outlineStyle !== "none" && parseFloat(s.outlineWidth) >= 2; }), "focus ring visible on CTA");
   ok(await p.evaluate(() => [...document.querySelectorAll("a[href^='#']")].some((a) => a.className.includes("skip"))), "skip link present");

@@ -4,9 +4,9 @@ import { fontVars } from "./fonts";
 const base = "/images/demos/rot-nhiet/identity";
 
 export const metadata: Metadata = {
-  title: "Rót Nhiệt Coffee · Cà phê rang theo gu của bạn",
+  title: "Rót Nhiệt Coffee · Quán cà phê rang xay ở Sơn Trà, Đà Nẵng",
   description:
-    "Cà phê rang: menu có bộ lọc và khay tạm tính, Coffee Selector 3 câu hỏi gợi ý hạt và cách pha hợp gu.",
+    "Quán cà phê rang xay ở Quận Sơn Trà, Đà Nẵng: menu, hạt rang 250g mang về, bán buôn từ 5 kg, giờ mở cửa 06:30–21:30.",
   icons: {
     icon: [
       { url: `${base}/favicon.svg`, type: "image/svg+xml" },
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Rót Nhiệt Coffee",
-    description: "Cà phê rang theo gu của bạn.",
+    description: "Quán cà phê rang xay ở Quận Sơn Trà, Đà Nẵng.",
     images: [{ url: `${base}/og-image.webp`, width: 1200, height: 630, alt: "Rót Nhiệt Coffee, cà phê rang" }],
     locale: "vi_VN",
     type: "website",

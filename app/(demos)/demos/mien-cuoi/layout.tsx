@@ -4,9 +4,9 @@ import { fontVars } from "./fonts";
 const base = "/images/demos/mien-cuoi/identity";
 
 export const metadata: Metadata = {
-  title: "Miền Cười · Chăm sóc răng miệng rõ ràng, an tâm",
+  title: "Miền Cười · Phòng khám nha khoa tại Hải Châu, Đà Nẵng",
   description:
-    "Care Navigator định hướng nhu cầu chăm sóc (không chẩn đoán) và công cụ tóm tắt lịch hẹn thăm khám. Giá chỉ để tham khảo.",
+    "Phòng khám nha khoa tại Quận Hải Châu, Đà Nẵng: khám và lấy cao răng, trám, nhổ răng, niềng, tẩy trắng, tư vấn implant. Quy trình khám, chi phí tham khảo và đặt lịch.",
   icons: {
     icon: [
       { url: `${base}/favicon.svg`, type: "image/svg+xml" },
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     apple: `${base}/apple-touch-icon.png`,
   },
   openGraph: {
-    title: "Miền Cười · Nha khoa",
+    title: "Miền Cười · Phòng khám nha khoa",
     description: "Hiểu răng mình. An tâm chăm sóc.",
     images: [{ url: `${base}/og-image.webp`, width: 1200, height: 630, alt: "Miền Cười, nha khoa" }],
     locale: "vi_VN",

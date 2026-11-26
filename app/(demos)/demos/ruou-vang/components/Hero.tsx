@@ -1,4 +1,4 @@
-import { CanvasParticles, MagneticButton, SplitWords } from "@/features/showroom/effects";
+import { CanvasParticles, SplitWords } from "@/features/showroom/effects";
 import s from "../brand.module.css";
 import { IMGS } from "../data/images";
 import { Candle } from "./Candle";
@@ -18,22 +18,20 @@ export function Hero() {
       <div className={`${s.wrap} ${s.heroGrid}`}>
         <div className={s.heroText}>
           <p className={`${s.eyebrow} ${s.rise}`} style={{ "--d": "1.25s" } as React.CSSProperties}>
-            <span className={s.eyebrowLine} aria-hidden="true" /> Wine bar · Đà Nẵng
+            <span className={s.eyebrowLine} aria-hidden="true" /> Wine bar · Quận Ngũ Hành Sơn, Đà Nẵng
           </p>
           <SplitWords as="h1" className={s.h1} trigger="load" delay={1.3} stagger={0.07}>
             Chậm lại một ly vang.
           </SplitWords>
           <p className={`${s.lead} ${s.rise}`} style={{ "--d": "1.75s" } as React.CSSProperties}>
-            Một căn phòng nhỏ ánh nến, bàn gỗ sẫm và danh sách vang ngắn, chia theo phong cách thay vì tên gọi khó nhớ. Bạn nói món và dịp, Mộc Vang gợi ý ly hợp.
-          </p>
+            Wine bar nhỏ cho nhóm bạn, cặp đôi và buổi họp mặt hai đến mười hai người: vang theo ly và theo chai chia theo phong cách nho, đồ nhắm charcuterie, set thử rượu ba ly.</p>
           <div className={`${s.heroCtas} ${s.rise}`} style={{ "--d": "1.95s" } as React.CSSProperties}>
-            <MagneticButton>
-              <a className={`${s.btn} ${s.btnGold}`} href="#dat-ban">Đặt bàn tối nay</a>
-            </MagneticButton>
-            <a className={`${s.btn} ${s.btnGhost}`} href="#chon-vang">Tìm ly hợp vị</a>
+            <a className={`${s.btn} ${s.btnGold}`} href="#dat-ban">Đặt bàn</a>
+            <a className={`${s.btn} ${s.btnGhost}`} href="#thuc-don">Xem danh sách vang</a>
           </div>
           <ul className={`${s.facts} ${s.rise}`} style={{ "--d": "2.1s" } as React.CSSProperties}>
-            <li>14 ly và chai theo phong cách</li>
+            <li>Ly từ 150.000₫, 14 ly và chai</li>
+            <li>Mở 17:00 – 23:00, happy hour 17:00 – 19:00</li>
             <li>Dành cho khách từ 18 tuổi</li>
           </ul>
         </div>

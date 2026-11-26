@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { MagneticButton, NumberTicker, TextScramble } from "@/features/showroom/effects";
+import { NumberTicker, TextScramble } from "@/features/showroom/effects";
 import { buildConsultHref } from "@/features/showroom/consultation";
 import s from "../brand.module.css";
 import { SeatMap, seatAria } from "./SeatMap";
@@ -302,9 +302,7 @@ export function SeatPicker() {
           </div>
           <div className={s.sumActions}>
             <p className={s.sumNote}>Bản tóm tắt chỉ tạo trên trình duyệt của bạn. Gửi cho đội tư vấn qua biểu mẫu để hẹn ghé xem.</p>
-            <MagneticButton strength={0.25} max={8}>
-              <a className={`${s.btn} ${s.btnOrange}`} href={consult}>Đặt lịch tham quan với lựa chọn này</a>
-            </MagneticButton>
+            <a className={`${s.btn} ${s.btnOrange}`} href={consult}>Đặt lịch tham quan với lựa chọn này</a>
             <button type="button" className={`${s.btn} ${s.btnLine}`} onClick={copy}>Sao chép tóm tắt</button>
             <p ref={statusRef} className={s.copied} role="status">{copied}</p>
           </div>

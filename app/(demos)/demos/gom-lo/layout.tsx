@@ -6,7 +6,7 @@ const base = "/images/demos/gom-lo/identity";
 export const metadata: Metadata = {
   title: "Đất Mơ · Xưởng gốm và workshop làm gốm ở Đà Nẵng",
   description:
-    "Xưởng gốm thủ công ở Đà Nẵng: nặn tay, bàn xoay, vẽ men. Chọn buổi làm gốm, nặn thử chiếc bình của riêng bạn và xem tóm tắt chi phí tham khảo.",
+    "Xưởng gốm thủ công ở Quận Ngũ Hành Sơn, Đà Nẵng: bán cốc, bát, bình làm tay và mở workshop nặn tay, bàn xoay, vẽ men từ 250.000 ₫ mỗi người. Mở Thứ Ba đến Chủ Nhật, 09:00 đến 20:00.",
   icons: {
     icon: [
       { url: `${base}/favicon.svg`, type: "image/svg+xml" },

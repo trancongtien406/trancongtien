@@ -5,9 +5,10 @@ import styles from "../brand.module.css";
 
 const NAV = [
   { href: "#services", label: "Dịch vụ" },
-  { href: "#care-navigator", label: "Định hướng chăm sóc" },
-  { href: "#about", label: "Về Miền Cười" },
+  { href: "#process", label: "Quy trình" },
   { href: "#pricing", label: "Chi phí" },
+  { href: "#about", label: "Về phòng khám" },
+  { href: "#faq", label: "Hỏi đáp" },
 ];
 
 export function Header() {
@@ -22,7 +23,7 @@ export function Header() {
         <nav className={styles.nav} aria-label="Điều hướng chính" data-open={open ? "1" : "0"} id="mc-nav">
           <ul>
             {NAV.map((n) => (<li key={n.href}><a href={n.href} onClick={() => setOpen(false)}>{n.label}</a></li>))}
-            <li className={styles.navCtaItem}><a className={`${styles.btn} ${styles.btnPrimary}`} href="#appointment" onClick={() => setOpen(false)}>Xem trước lịch hẹn</a></li>
+            <li className={styles.navCtaItem}><a className={`${styles.btn} ${styles.btnPrimary}`} href="#appointment" onClick={() => setOpen(false)}>Đặt lịch khám</a></li>
           </ul>
         </nav>
         <button type="button" className={styles.menuBtn} aria-expanded={open} aria-controls="mc-nav" onClick={() => setOpen((v) => !v)}>

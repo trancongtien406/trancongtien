@@ -4,6 +4,6 @@ export const meta = {
   brand: "Nếp Thở",
   industry: "Pilates",
   solutionSlug: "fitness",
-  tagline: "Studio pilates & yoga",
+  tagline: "Studio pilates & yoga lớp nhỏ tại Sơn Trà, Đà Nẵng",
   look: "Lifestyle viên thuốc, thời khoá biểu là trung tâm",
 } as const;

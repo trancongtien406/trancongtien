@@ -1,4 +1,5 @@
-import { CanvasParticles, CursorSpotlight, MagneticButton, SplitWords } from "@/features/showroom/effects";
+import { CanvasParticles, CursorSpotlight } from "@/features/showroom/effects";
+import { AREA, FACTS } from "../data/content";
 import { Halo } from "./Halo";
 import { Photo } from "./Photo";
 import styles from "../brand.module.css";
@@ -9,23 +10,23 @@ export function Hero() {
       <CanvasParticles mode="bubbles" count={20} color="rgba(122,104,230,0.55)" speed={0.6} className={styles.heroBubbles} />
       <div className={`${styles.wrap} ${styles.heroGrid}`}>
         <div className={styles.heroCopy} data-dx="copy">
-          <p className={styles.eyebrow} data-dx="eyebrow"><i aria-hidden="true" />Skincare studio · Đà Nẵng</p>
+          <p className={styles.eyebrow} data-dx="eyebrow"><i aria-hidden="true" />Studio chăm sóc da cơ bản · {AREA}</p>
           <h1 id="hero-title" className={styles.heroTitle}>
-            <SplitWords as="span" className={styles.heroLine} trigger="load" delay={0.55} duration={1} stagger={0.09}>Chăm da dịu dàng,</SplitWords>
-            <SplitWords as="span" className={`${styles.heroLine} ${styles.heroAccent}`} trigger="load" delay={0.95} duration={1} stagger={0.09}>hiểu làn da hơn.</SplitWords>
+            <span className={styles.heroLine} data-dx="line">Chăm da dịu dàng,</span>
+            <span className={`${styles.heroLine} ${styles.heroAccent}`} data-dx="line">hiểu làn da hơn.</span>
           </h1>
           <p className={styles.heroLead} data-dx="lead">
-            NÉA là studio chăm sóc da cơ bản. Chúng mình lắng nghe trước, chọn vài bước vừa đủ và nói rõ từng bước trước khi làm, không thủ thuật xâm lấn và không hứa những điều kỳ diệu.
+            NÉA là studio làm sạch, cấp ẩm, phục hồi và chăm sóc vùng mắt, cổ cho người đi làm muốn chăm da đều tay, không thủ thuật xâm lấn. Mỗi buổi có phòng riêng, bắt đầu bằng soi da và trò chuyện, nói rõ từng bước trước khi làm.
           </p>
           <div className={styles.heroCtas}>
-            <span data-dx="cta"><MagneticButton><a className={`${styles.btn} ${styles.btnInk}`} href="#routine">Thử Skin Routine Builder</a></MagneticButton></span>
+            <span data-dx="cta"><a className={`${styles.btn} ${styles.btnInk}`} href="#dat-lich">Đặt lịch chăm da</a></span>
             <span data-dx="cta"><a className={`${styles.btn} ${styles.btnGlass}`} href="#lieu-trinh">Xem các liệu trình</a></span>
           </div>
-          <ul className={styles.heroFacts} data-dx="facts">
-            <li>Không thủ thuật xâm lấn</li>
-            <li>Giá tham khảo rõ ràng</li>
-            <li>Biết khi nào nên hỏi bác sĩ da liễu</li>
-          </ul>
+          <dl className={styles.heroFactsGrid} data-dx="facts">
+            {FACTS.map((f) => (
+              <div key={f.k}><dt>{f.k}</dt><dd><b>{f.v}</b><span>{f.d}</span></dd></div>
+            ))}
+          </dl>
         </div>
 
         <div className={styles.stage} data-dx="stage">
@@ -47,27 +48,28 @@ export function Hero() {
             <div className={styles.floatA} data-dx="card">
               <CursorSpotlight className={`${styles.glass} ${styles.miniCard}`} radius={180} color="rgba(255,255,255,0.7)">
                 <span className={styles.miniIcon} aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 2.5C9.6 7 5.5 10.2 5.5 14.4a6.5 6.5 0 0 0 13 0C18.5 10.2 14.4 7 12 2.5z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" /></svg></span>
-                <span className={styles.miniText}><b>Làm sạch dịu &amp; cấp ẩm</b><small>60&nbsp;phút · giá tham khảo từ 380.000&nbsp;đ</small></span>
+                <span className={styles.miniText}><b>Làm sạch dịu và cấp ẩm</b><small>60&nbsp;phút · giá tham khảo từ 380.000&nbsp;đ</small></span>
               </CursorSpotlight>
             </div>
           </div>
           <div className={`${styles.stageLayer} ${styles.sc2}`} data-depth="1.45">
             <div className={styles.floatB} data-dx="card">
               <CursorSpotlight className={`${styles.glass} ${styles.routineCard}`} radius={200} color="rgba(255,255,255,0.7)">
-                <b>Routine vừa đủ</b>
-                <span><em>Sáng</em>Làm sạch, dưỡng ẩm, chống nắng</span>
-                <span><em>Tối</em>Làm sạch, tinh chất, dưỡng ẩm</span>
+                <b>Một buổi tại studio</b>
+                <span><em>1</em>Soi da, trò chuyện</span>
+                <span><em>2</em>Làm sạch, liệu trình</span>
+                <span><em>3</em>Dặn dò, ghi lại</span>
               </CursorSpotlight>
             </div>
           </div>
           <div className={`${styles.stageLayer} ${styles.sc3}`} data-depth="1.8">
             <div className={styles.floatC} data-dx="card">
-              <span className={`${styles.glass} ${styles.pill}`}><i aria-hidden="true" />Nhẹ nhàng, từng bước</span>
+              <span className={`${styles.glass} ${styles.pill}`}><i aria-hidden="true" />Phòng riêng, hẹn trước</span>
             </div>
           </div>
         </div>
       </div>
-      <a className={styles.scrollHint} href="#triet-ly" data-dx="hint" aria-label="Cuộn xuống nội dung tiếp theo"><span aria-hidden="true" /></a>
+      <a className={styles.scrollHint} href="#ve-studio" data-dx="hint" aria-label="Cuộn xuống nội dung tiếp theo"><span aria-hidden="true" /></a>
     </section>
   );
 }

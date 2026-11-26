@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { ScrollProgress } from "@/features/showroom/effects";
 import { NAV } from "../data/content";
 import styles from "../brand.module.css";
 
@@ -40,6 +41,7 @@ export function Header() {
 
   return (
     <header className={styles.header} data-solid={solid || open} data-open={open}>
+      <ScrollProgress variant="bar" className={styles.progress} />
       <div className={styles.headerRow}>
         <a className={styles.logoLink} href="#top" aria-label="Hiên Mặn Villa, về đầu trang">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -50,7 +52,7 @@ export function Header() {
         <nav className={styles.nav} aria-label="Điều hướng chính">
           {NAV.map((n) => <a key={n.href} href={n.href}>{n.label}</a>)}
         </nav>
-        <a className={styles.headCta} href="#lich-gia">Xem lịch & giá</a>
+        <a className={styles.headCta} href="#lich-gia">Đặt phòng</a>
         <button ref={btn} type="button" className={styles.menuBtn} aria-expanded={open} aria-controls="hm-menu" onClick={() => setOpen((o) => !o)}>
           <span className={styles.srOnly}>{open ? "Đóng menu" : "Mở menu"}</span>
           <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
@@ -60,7 +62,7 @@ export function Header() {
       </div>
       <div id="hm-menu" ref={panel} className={styles.menuPanel} hidden={!open}>
         {NAV.map((n) => <a key={n.href} href={n.href} onClick={() => setOpen(false)}>{n.label}</a>)}
-        <a href="#lich-gia" className={styles.menuCta} onClick={() => setOpen(false)}>Xem lịch & giá</a>
+        <a href="#lich-gia" className={styles.menuCta} onClick={() => setOpen(false)}>Đặt phòng</a>
         <p>Hiên Mặn Villa · Sơn Trà, Đà Nẵng</p>
       </div>
     </header>

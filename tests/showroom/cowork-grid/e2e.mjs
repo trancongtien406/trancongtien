@@ -264,7 +264,6 @@ for (const w of [320, 390, 768, 1024, 1440]) {
       cells: cells.every((o) => o === "0"), // ô che ảnh không che
       tf: getComputedStyle(line).transform, op: getComputedStyle(line).opacity,
       scramble: q("[data-fx=TextScramble]")?.getAttribute("data-fx-ready"),
-      mq: q("[data-fx=VelocityMarquee]")?.getAttribute("data-fx-ready"),
       cnt: q("[data-fx=Counter]")?.getAttribute("data-fx-ready"),
       js: document.querySelector("[data-cg-root]").hasAttribute("data-cg-js"),
     };
@@ -272,11 +271,10 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   ok(st.cells, "reduced: các ô che ảnh hero không che");
   ok(st.op === "1" && (st.tf === "none" || st.tf === "matrix(1, 0, 0, 1, 0, 0)"), `reduced: tiêu đề hiện đủ (${st.op}/${st.tf})`);
   ok(st.scramble === "static", `reduced: scramble ở trạng thái cuối (${st.scramble})`);
-  ok(st.mq === "static", `reduced: marquee tĩnh (${st.mq})`);
   ok(st.cnt === "static", `reduced: counter trạng thái cuối (${st.cnt})`);
   ok(!st.js, "reduced: Motion không bật data-cg-js (không ẩn gì)");
   const txt = await page.locator("main").innerText();
-  ok(/Bốn khu, bốn toạ độ/.test(txt) && /Giá tham khảo/.test(txt) && /Câu hỏi thường gặp/.test(txt), "reduced: nội dung vẫn hiện đủ");
+  ok(/Bốn khu, bốn toạ độ/.test(txt) && /Hotdesk|Hot desk/i.test(txt) && /Dùng thử một ngày/i.test(txt) && /Câu hỏi thường gặp/.test(txt), "reduced: nội dung vẫn hiện đủ");
   const hid = await page.evaluate(() => [...document.querySelectorAll("[data-cg-cell],[data-cg-rise]")].filter((e) => getComputedStyle(e).opacity !== "1").length);
   ok(hid === 0, `reduced: không phần tử nào bị ẩn chờ reveal (${hid})`);
   ok(errs.length === 0, "reduced: 0 lỗi console");
@@ -287,11 +285,15 @@ for (const w of [320, 390, 768, 1024, 1440]) {
 {
   const { ctx, page } = await open();
   const r = await page.evaluate(() => {
-    const names = ["TextScramble", "SplitReveal", "ScrollScrubText", "ClipReveal", "Counter", "VelocityMarquee", "SVGPathDraw", "MagneticButton", "ScrollProgress"];
+    const names = ["TextScramble", "SplitReveal", "Counter", "ScrollProgress"];
     const o = {};
     names.forEach((n) => { const e = document.querySelector(`[data-fx=${n}]`); o[n] = e ? e.getAttribute("data-fx-ready") : "missing"; });
     o.crosshair = !!document.querySelector("[class*=xh]");
     o.heroCellsOpen = [...document.querySelectorAll("[data-hcell]")].every((e) => Number(getComputedStyle(e).opacity) < 0.05);
+    o.massGone = ["ScrollScrubText", "ClipReveal", "VelocityMarquee", "SVGPathDraw", "MagneticButton"].every((n) => !document.querySelector(`[data-fx=${n}]`)) ? "1" : "missing";
+    o.tiles = document.querySelectorAll("[data-cg-tiles]").length >= 4 ? "1" : "missing";
+    o.openBadge = document.querySelector("[class*=openBadge]")?.textContent.match(/mở cửa|đóng cửa/i) ? "1" : "missing";
+    o.calendar = document.querySelectorAll("[class*=calCell][data-ev]").length >= 4 ? "1" : "missing";
     o.needle = !!document.querySelector("[class*=wdNeedle]");
     o.clock = /\d\d:\d\d:\d\d/.test(document.querySelector("header").innerText);
     return o;

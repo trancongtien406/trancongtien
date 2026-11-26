@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { MagneticButton, ParallaxLayer, SlotText, VelocityMarquee } from "@/features/showroom/effects";
+import { BlobMorph, MagneticButton, SlotText } from "@/features/showroom/effects";
 import s from "../brand.module.css";
 import { BounceWords } from "./BounceWords";
 import { DragSticker } from "./DragSticker";
@@ -7,7 +7,7 @@ import { Drip } from "./Drip";
 import { SprinkleRain } from "./Sprinkles";
 import { Treat } from "./Treat";
 
-const SLOT = ["Croissant bơ", "Macaron mint", "Kem Dâu Mây", "Donut hồng cốm", "Cupcake kẹo bông"];
+const SLOT = ["Croissant bơ", "Macaron mint", "Kem Dâu Mây", "Tiramisu ly", "Brioche bơ đường"];
 
 const Star = () => (
   <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.8-6.3 3.8 1.7-7L2 9.2l7.1-.6z" fill="currentColor" /></svg>
@@ -19,17 +19,17 @@ export function Hero() {
       <SprinkleRain className={s.heroCanvas} />
       <div className={`${s.wrap} ${s.heroGrid}`}>
         <div className={s.heroCopy}>
-          <p className={s.pillTag}><span className={s.dotLive} aria-hidden="true" />Tiệm bánh ngọt làm tay · Đà Nẵng</p>
+          <p className={s.pillTag}><span className={s.dotLive} aria-hidden="true" />Tiệm bánh ngọt · Quận Hải Châu, Đà Nẵng</p>
           <BounceWords
             className={`${s.display} ${s.heroTitle}`}
-            lines={[["Bánh", "ngọt"], ["làm", "tay,"], ["vui", "từng", "miếng."]]}
+            lines={[["Bánh", "kem", "sinh", "nhật"], ["và", "bánh", "ngọt"], ["làm", "tay", "mỗi", "sáng."]]}
           />
           <p className={s.heroLead}>
-            Bột nhào bằng tay, kem đánh trong ngày, màu kẹo cho một chiếc bánh khiến bữa tiệc nhỏ cũng thành ngày hội. Chọn món có sẵn hoặc tự dựng chiếc bánh của bạn.
+            Tủ bánh có bánh kem, bánh lạnh, bánh mì, croissant, cookie và macaron, nướng mỗi sáng. Đặt bánh sinh nhật từ 14cm đến 2 tầng cho nhà có trẻ nhỏ, bạn bè và đồng nghiệp, báo trước 2 ngày.
           </p>
           <div className={s.heroCtas}>
             <MagneticButton>
-              <a className={`${s.btn} ${s.btnBig} ${s.btnChoco}`} href="#dung-banh" data-confetti="1">Dựng chiếc bánh của bạn</a>
+              <a className={`${s.btn} ${s.btnBig} ${s.btnChoco}`} href="#bang-gia" data-confetti="1">Đặt bánh sinh nhật</a>
             </MagneticButton>
             <a className={`${s.btn} ${s.btnBig} ${s.btnWhite}`} href="#tu-banh">Xem tủ bánh</a>
           </div>
@@ -40,10 +40,9 @@ export function Hero() {
         </div>
 
         <div className={s.heroArt}>
+          <BlobMorph className={s.heroBlob} count={3} seed={7} duration={6} aria-hidden="true" />
           <div className={s.photoBlob}>
-            <ParallaxLayer distance={40} className={s.parallaxFill}>
-              <Image src="/images/demos/tiem-banh/banh-hong-macaron-1200.webp" alt="Bánh kem hồng phủ macaron và kem bông trên nền hoa nổi" fill priority sizes="(max-width: 860px) 86vw, 520px" style={{ objectFit: "cover", objectPosition: "50% 38%" }} />
-            </ParallaxLayer>
+            <Image src="/images/demos/tiem-banh/banh-hong-macaron-1200.webp" alt="Bánh kem hồng phủ macaron và kem bông trên nền hoa nổi" fill priority sizes="(max-width: 860px) 86vw, 520px" style={{ objectFit: "cover", objectPosition: "50% 38%" }} />
           </div>
 
           <div className={s.badge} aria-hidden="true">
@@ -83,13 +82,11 @@ export function Hero() {
       </div>
 
       <div className={s.heroDrip}><Drip color="var(--mk-peach)" className={s.dripSvg} /></div>
-      <div className={s.strip} aria-label="Một vài món trong tủ bánh">
-        <VelocityMarquee mode="velocity" speed={60} boost={1.2} reverseOnScrollUp gap="2.2rem" controls pauseLabel="Dừng chạy chữ" playLabel="Chạy chữ" buttonClassName={s.marqueeBtn}>
-          {["Kem Dâu Mây", "Macaron 6 vị", "Croissant bơ", "Donut hồng cốm", "Cupcake kẹo bông", "Tart dâu kem sữa", "Su kem vani"].map((t) => (
-            <span key={t} className={s.stripItem}><Star />{t}</span>
-          ))}
-        </VelocityMarquee>
-      </div>
+      <ul className={s.strip} aria-label="Ba điều cần biết về tiệm">
+        <li><Star /><b>Bán 7:00 – 21:00</b><span>Hằng ngày, kể cả lễ</span></li>
+        <li><Star /><b>Bánh kem từ 320.000₫</b><span>14cm, 4 đến 6 người</span></li>
+        <li><Star /><b>Đặt bánh trước 2 ngày</b><span>Nhận tại tiệm hoặc giao nội thành</span></li>
+      </ul>
     </section>
   );
 }

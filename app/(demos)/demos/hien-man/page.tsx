@@ -1,7 +1,12 @@
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { Story } from "./components/Story";
-import { Scenes } from "./components/Scenes";
+import { TimeOfDay } from "./components/TimeOfDay";
+import { RoomTable } from "./components/RoomTable";
+import { VillaWalk } from "./components/VillaWalk";
+import { Dining } from "./components/Dining";
+import { Location } from "./components/Location";
+import { Curtain } from "./components/Curtain";
 import { Rooms } from "./components/Rooms";
 import { Amenities } from "./components/Amenities";
 import { Experiences } from "./components/Experiences";
@@ -19,16 +24,21 @@ export default function HienManPage() {
       <main id="main">
         <Hero />
         <Story />
-        <Scenes />
         <Rooms />
-        <Amenities />
-        <Experiences />
+        <RoomTable />
         <Planner />
+        <TimeOfDay />
+        <Amenities />
+        <VillaWalk />
+        <Dining />
+        <Experiences />
+        <Location />
         <Faq />
         <Closing />
       </main>
       <Footer />
       <Motion />
+      <Curtain />
     </StayProvider>
   );
 }

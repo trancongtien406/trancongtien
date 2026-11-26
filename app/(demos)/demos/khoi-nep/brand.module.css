@@ -148,7 +148,7 @@
 .sp { display: inline-block; width: 0.26em; }
 .coverFoot { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; padding: 20px var(--kn-m) 28px; display: grid; gap: 20px; color: var(--kn-white); }
 .h1 { font-weight: 500; font-size: clamp(40px, 8.6vw, 88px); line-height: 1.06; letter-spacing: -0.035em; text-wrap: balance; max-width: 14ch; }
-@media (min-width: 1024px) { .h1 { font-size: clamp(56px, 5.6vw, 88px); max-width: 16ch; } }
+@media (min-width: 1024px) { .h1 { font-size: clamp(48px, 4.4vw, 68px); max-width: 15ch; } }
 .coverSide p { font-size: 16px; line-height: 1.55; max-width: 44ch; color: #f2efe7; }
 .ctaRow { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
 @media (min-width: 1024px) {
@@ -420,3 +420,80 @@ textarea.input { font-family: var(--kn-serif); font-weight: 400; resize: vertica
 }
 
 @media (min-width: 768px) { .mast { top: clamp(12px, 2.2vw, 32px); } }
+
+/* ===== Rework 2026-11-25: công ty nội thất thật + hiệu ứng riêng ===== */
+.heroFacts { display: grid; gap: 8px; margin-top: 18px; }
+.heroFacts li { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; padding-top: 8px; border-top: 1px solid rgba(250, 249, 246, 0.35); font-family: var(--kn-sans); }
+.heroFacts b { font-weight: 600; font-size: 15px; }
+.heroFacts span { font-size: 13px; color: #d8d4c8; }
+@media (min-width: 1024px) { .heroFacts { grid-template-columns: repeat(3, auto); gap: 24px; justify-content: start; } .heroFacts li { display: grid; gap: 2px; } }
+
+/* cuộn ngang theo loại công trình */
+.spPin { background: var(--kn-paper); }
+.spTrack { gap: 0; padding-inline: var(--kn-m); }
+.spPanel { display: grid; grid-template-columns: 1fr; gap: 20px; width: min(86vw, 520px); padding: 0 24px 24px 0; margin-right: 24px; border-right: 1px solid var(--kn-ink); }
+.spFig { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--kn-stone); margin: 0; }
+.spBody { display: grid; gap: 10px; align-content: start; }
+.spTitle { font-family: var(--kn-sans); font-weight: 500; font-size: clamp(32px, 3vw, 44px); line-height: 1.05; letter-spacing: -0.035em; }
+.spDesc { font-size: 16px; color: var(--kn-olive); max-width: 52ch; }
+.spScope { display: flex; flex-wrap: wrap; gap: 6px; }
+.spScope li { font-family: var(--kn-sans); font-size: 12px; font-weight: 500; letter-spacing: .02em; padding: 5px 10px; border: 1px solid var(--kn-ink); }
+.spFacts { display: grid; gap: 4px; }
+.spFacts div { display: grid; grid-template-columns: 90px 1fr; gap: 10px; font-size: 14px; padding-block: 6px; border-top: 1px solid var(--kn-line); }
+.spFacts dt { font-family: var(--kn-sans); font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--kn-olive); }
+.spFacts dd { margin: 0; }
+@media (min-width: 1000px) {
+  .spPanel { grid-template-columns: 1fr 1fr; width: min(78vw, 1040px); gap: 32px; padding-right: 40px; margin-right: 40px; align-items: center; }
+  .spFig { aspect-ratio: 4 / 5; }
+}
+@media (max-width: 999px) { .spTrack { gap: 0; } .spPin [data-fx-viewport] { padding-bottom: 12px; } }
+
+/* process 5 bước */
+.stepOut { font-family: var(--kn-sans); font-size: 13px !important; color: var(--kn-ink) !important; margin-top: 8px !important; padding-top: 8px; border-top: 1px dashed var(--kn-line); }
+.stepOut span { color: var(--kn-terra); font-weight: 600; }
+@media (min-width: 1024px) { .steps { grid-template-columns: repeat(5, 1fr); } .bigNum { font-size: 72px; } .steps li { padding-inline: 18px; } }
+
+/* mặt bằng → phối cảnh */
+.fpSection { background: var(--kn-white); }
+.fpBox { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border: 1px solid var(--kn-ink); background: var(--kn-stone); cursor: ew-resize; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+@media (min-width: 768px) { .fpBox { aspect-ratio: 16 / 9; } }
+.fpPhoto, .fpPlan { position: absolute; inset: 0; }
+.fpPlan svg { width: 100%; height: 100%; display: block; }
+.fpHandle { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--kn-terra); transform: translateX(-1px); pointer-events: none; }
+.fpHandle span { position: absolute; top: 50%; left: 50%; width: 48px; height: 48px; margin: -24px 0 0 -24px; border-radius: 50%; background: var(--kn-terra); color: var(--kn-white); display: grid; place-items: center; font-size: 20px; }
+.fpTagL, .fpTagR { position: absolute; bottom: 12px; font-family: var(--kn-sans); font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; background: rgba(250, 249, 246, .92); padding: 5px 9px; pointer-events: none; }
+.fpTagL { left: 12px; } .fpTagR { right: 12px; }
+.fpRange { display: grid; gap: 4px; margin-top: 14px; font-family: var(--kn-sans); font-size: 13px; color: var(--kn-olive); }
+.fpRange input { width: 100%; min-height: 44px; accent-color: var(--kn-terra); }
+
+/* báo giá & bảo hành */
+.quote { background: var(--kn-paper); }
+.quoteGrid { display: grid; gap: 40px; }
+.quoteList { border-top: 1px solid var(--kn-ink); }
+.quoteList li { display: grid; grid-template-columns: 44px 1fr; gap: 12px; padding-block: 18px; border-bottom: 1px solid var(--kn-line); }
+.quoteList p, .warrantyList p { font-size: 15px; color: var(--kn-olive); margin-top: 4px; }
+.warrantyList { display: grid; gap: 0; border-top: 1px solid var(--kn-ink); align-content: start; }
+.warrantyList li { padding-block: 18px; border-bottom: 1px solid var(--kn-line); }
+@media (min-width: 1024px) { .quoteGrid { grid-template-columns: 7fr 5fr; gap: 64px; } }
+
+/* bảng vật liệu kéo-thả */
+.dropWrap { display: grid; gap: 28px; margin-bottom: 56px; }
+.dropRoom { position: relative; aspect-ratio: 4 / 3; border: 1px solid var(--kn-ink); overflow: hidden; background: var(--kn-stone); }
+.dropZone { position: absolute; border: 0; padding: 0; cursor: pointer; display: flex; align-items: flex-end; text-align: left; transition: outline-color .2s; outline: 3px solid transparent; outline-offset: -3px; }
+.dropZone[data-over="1"] { outline-color: var(--kn-terra); }
+.zone_wall { left: 0; right: 0; top: 0; height: 66%; }
+.zone_floor { left: 0; right: 0; bottom: 0; height: 34%; border-top: 1px solid rgba(24, 24, 20, .35); }
+.zone_cabinet { left: 8%; width: 34%; top: 14%; height: 58%; border: 1px solid rgba(24, 24, 20, .5); box-shadow: 0 14px 30px -18px rgba(24, 24, 20, .6); z-index: 1; }
+.dropTag { display: grid; gap: 0; margin: 8px; padding: 6px 10px; background: rgba(250, 249, 246, .92); font-family: var(--kn-sans); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.dropTag b { font-size: 13px; letter-spacing: 0; text-transform: none; font-weight: 500; }
+.dropSide { display: grid; gap: 14px; align-content: start; }
+.dropChips { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.dropChip { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 52px; padding: 6px 10px; background: var(--kn-white); border: 1px solid var(--kn-ink); cursor: grab; text-align: left; touch-action: none; font-family: var(--kn-sans); font-size: 14px; font-weight: 500; }
+.dropChip[aria-pressed="true"] { background: var(--kn-ink); color: var(--kn-paper); }
+.dropChip i { width: 28px; height: 28px; flex: none; border: 1px solid rgba(24, 24, 20, .4); }
+.dropChip small { display: block; font-size: 10px; font-weight: 500; letter-spacing: .08em; opacity: .7; }
+.dropSummary { border-top: 1px solid var(--kn-ink); }
+.dropSummary li { display: flex; justify-content: space-between; gap: 12px; padding-block: 8px; border-bottom: 1px solid var(--kn-line); font-size: 15px; }
+.dropSummary span { color: var(--kn-olive); }
+.dropGhost { position: fixed; left: 0; top: 0; z-index: 90; display: none; pointer-events: none; padding: 6px 12px; font-family: var(--kn-sans); font-size: 13px; font-weight: 600; border: 1px solid var(--kn-ink); box-shadow: 0 10px 24px -10px rgba(0, 0, 0, .5); }
+@media (min-width: 1024px) { .dropWrap { grid-template-columns: 7fr 5fr; gap: 48px; align-items: start; } }

@@ -1,7 +1,7 @@
 /**
  * Ước tính buổi thu. Thuần hàm, không gọi mạng. Giá là giá tham khảo; báo giá chính thức theo yêu cầu thực tế.
  */
-export type KindId = "vocal" | "band" | "podcast" | "voice" | "mix";
+export type KindId = "vocal" | "band" | "podcast" | "voice" | "mix" | "beat";
 export type Kind = {
   id: KindId; ch: string; label: string; short: string;
   rateEng: number; rateSelf: number | null;
@@ -14,6 +14,7 @@ export const KINDS: readonly Kind[] = [
   { id: "podcast", ch: "CH 03", label: "Podcast", short: "Podcast", rateEng: 380000, rateSelf: 250000, setup: 0.5, perTrack: 0.5, trackLabel: "Số micro", peopleLabel: "Số người tham gia", usesPeople: true },
   { id: "voice", ch: "CH 04", label: "Voice-over", short: "Voice", rateEng: 450000, rateSelf: 280000, setup: 0.25, perTrack: 0.35, trackLabel: "Số đoạn đọc (bản đọc riêng)", peopleLabel: "Số giọng đọc", usesPeople: true },
   { id: "mix", ch: "CH 05", label: "Mix & Master", short: "Mix", rateEng: 300000, rateSelf: null, setup: 0.25, perTrack: 0.6, trackLabel: "Số track cần mix", peopleLabel: "", usesPeople: false },
+  { id: "beat", ch: "CH 06", label: "Sản xuất beat", short: "Beat", rateEng: 400000, rateSelf: null, setup: 0.5, perTrack: 0.7, trackLabel: "Số lớp nhạc (trống, bass, hợp âm, giai điệu...)", peopleLabel: "", usesPeople: false },
 ] as const;
 
 export const LIMITS = { hours: [1, 12], tracks: [1, 32], people: [1, 8], minBill: 2, discountFrom: 6, discountPct: 10 } as const;
@@ -51,7 +52,7 @@ export function estimate(i: Input): Result {
   const p = price(k, engineer, hours, people);
   const pn = price(k, engineer, need, people);
   const notes: string[] = [];
-  if (forced) notes.push(i.kind === "mix" ? "Mix & Master luôn do engineer của phòng thực hiện." : "Thu band cần engineer vận hành, nên mục tự thu không áp dụng.");
+  if (forced) notes.push(i.kind === "mix" ? "Mix & Master luôn do engineer của phòng thực hiện." : i.kind === "beat" ? "Sản xuất beat luôn có producer của phòng cùng làm." : "Thu band cần engineer vận hành, nên mục tự thu không áp dụng.");
   if (hours < LIMITS.minBill) notes.push(`Buổi tối thiểu tính ${LIMITS.minBill} giờ.`);
   if (p.discount) notes.push(`Từ ${LIMITS.discountFrom} giờ liên tục được giảm ${LIMITS.discountPct}%.`);
   if (!engineer) notes.push("Tự thu: phòng chuẩn bị chuỗi tín hiệu và hướng dẫn 15 phút đầu; bạn tự vận hành.");
@@ -80,6 +81,9 @@ export function checklist(i: Input, r: Result): string[] {
       break;
     case "voice":
       out.push("Kịch bản đã chốt, tách theo đoạn và đánh số; ghi chú giọng đọc (tốc độ, cảm xúc).", "Bản video hoặc file hình ảnh nếu cần đọc khớp thời lượng.", "Nhắc cách đọc các tên riêng, số liệu, từ nước ngoài.", "Uống nước ấm, đọc thử một đoạn trước khi vào phòng.");
+      break;
+    case "beat":
+      out.push("Một đến ba bài tham chiếu về nhịp, màu âm và không khí bạn muốn.", "BPM và tone dự kiến nếu đã có; nếu chưa, producer sẽ đề xuất theo giọng bạn.", "Lời hoặc giai điệu ngân nga (ghi âm điện thoại cũng được) để beat bám theo.", "Cho biết beat dùng để thu hát, để đăng nền tảng hay làm nhạc nền video.");
       break;
     case "mix":
       out.push("Xuất từng track thành WAV 24-bit, cùng điểm bắt đầu 0:00, không gắn limiter lên tổng.", "Đặt tên track rõ ràng (Vocal lead, Bè 1, Kick...) và ghi tempo.", "Một bản mix thô hoặc bài tham chiếu cho hướng âm thanh mong muốn.", "Ghi chú những chỗ cần xử lý (lỗi thu, chỗ tuning, chỗ muốn nhấn).");

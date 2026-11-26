@@ -1,14 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MagneticButton } from "@/features/showroom/effects";
 import s from "../brand.module.css";
 
 const NAV = [
   { href: "#thuc-don", label: "Thực đơn" },
-  { href: "#chon-vang", label: "Chọn vang" },
-  { href: "#mon-nham", label: "Món nhắm" },
-  { href: "#cau-chuyen", label: "Câu chuyện" },
+  { href: "#thu-ruou", label: "Set thử rượu" },
+  { href: "#gio-mo-cua", label: "Giờ mở cửa" },
+  { href: "#su-kien", label: "Sự kiện" },
 ];
 
 export function LogoMark({ className }: { className?: string }) {
@@ -55,9 +54,7 @@ export function Header() {
           ))}
         </nav>
         <div className={s.headerCta}>
-          <MagneticButton>
-            <a className={`${s.btn} ${s.btnGold} ${s.btnSm}`} href="#dat-ban">Đặt bàn</a>
-          </MagneticButton>
+          <a className={`${s.btn} ${s.btnGold} ${s.btnSm}`} href="#dat-ban">Đặt bàn</a>
           <button ref={btn} type="button" className={s.burger} aria-expanded={open} aria-controls="rv-menu" aria-label={open ? "Đóng menu" : "Mở menu"} onClick={() => setOpen((v) => !v)}>
             <span aria-hidden="true" className={s.burgerBars} data-open={open || undefined} />
           </button>

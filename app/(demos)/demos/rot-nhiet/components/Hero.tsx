@@ -1,4 +1,6 @@
+import { MagneticButton } from "@/features/showroom/effects";
 import styles from "../brand.module.css";
+import { SPECS } from "../data/shop";
 import { Photo } from "./Photo";
 
 const split = (t: string) => t.split("").map((c, i) => <span key={i} className={`${styles.ch} rn-ch`} aria-hidden="true">{c}</span>);
@@ -7,23 +9,29 @@ export function Hero() {
   return (
     <section className={styles.hero} aria-labelledby="rn-hero-h" id="top">
       <div className={`${styles.wrap} ${styles.metaRow} ${styles.heroIn}`} data-rn="meta">
-        <span className={styles.label}>COFFEE CULTURE / VOL.01</span>
-        <span className={styles.label}>RANG &amp; PHA — VN</span>
-        <span className={styles.label}>Nhiệt từ hạt tới ly</span>
+        <span className={styles.label}>QUÁN CÀ PHÊ RANG XAY</span>
+        <span className={styles.label}>QUẬN SƠN TRÀ — ĐÀ NẴNG</span>
+        <span className={styles.label}>UỐNG TẠI QUÁN · MUA HẠT MANG VỀ</span>
       </div>
       <div className={`${styles.wrap} ${styles.heroGrid}`}>
         <div className={styles.heroText}>
           <h1 id="rn-hero-h" className={`${styles.display} ${styles.heroTitle}`} translate="no">
-            <span className={styles.srOnly}>Rót Nhiệt. Đánh thức vị giác.</span>
+            <span className={styles.srOnly}>Rót Nhiệt, quán cà phê rang xay ở Quận Sơn Trà, Đà Nẵng.</span>
             <span className={styles.heroLine} aria-hidden="true">{split("RÓT")}</span>
             <span className={styles.heroLine} aria-hidden="true">{split("NHIỆT.")}</span>
           </h1>
-          <p className={`${styles.display} ${styles.sub} ${styles.heroIn}`} data-rn="sub">Đánh thức vị giác.</p>
-          <p className={`${styles.heroDesc} ${styles.heroIn}`} data-rn="desc">Cà phê rang có cá tính. Pha theo gu. Thưởng thức theo cách của bạn.</p>
+          <p className={`${styles.display} ${styles.sub} ${styles.heroIn}`} data-rn="sub">Quán cà phê rang xay.</p>
+          <p className={`${styles.heroDesc} ${styles.heroIn}`} data-rn="desc">Uống tại quán ở Quận Sơn Trà, mua hạt rang 250g mang về, hoặc đăng ký giá sỉ cho quán nhỏ và văn phòng. Rang theo mẻ, xay theo cách pha của bạn.</p>
           <div className={`${styles.ctaRow} ${styles.heroIn}`} data-rn="cta">
-            <a className={`${styles.btn} ${styles.btnPrimary}`} href="#menu">Khám phá menu</a>
-            <a className={`${styles.btn} ${styles.btnSecondary}`} href="#tim-gu">Tìm gu cà phê của bạn</a>
+            <MagneticButton><a className={`${styles.btn} ${styles.btnPrimary}`} href="#menu">Xem menu</a></MagneticButton>
+            <a className={`${styles.btn} ${styles.btnSecondary}`} href="#hat-ca-phe">Mua hạt mang về</a>
+            <a className={`${styles.btn} ${styles.btnSecondary}`} href="#ban-buon">Đăng ký bán buôn</a>
           </div>
+          <dl className={`${styles.specRow} ${styles.heroIn}`} data-rn="specs">
+            {SPECS.map((x) => (
+              <div key={x.k} className={styles.spec1}><dt>{x.k}</dt><dd>{x.v}</dd><dd className={styles.spec1s}>{x.s}</dd></div>
+            ))}
+          </dl>
         </div>
         <figure className={`${styles.heroFrameCol} ${styles.heroIn}`} data-rn="frame">
           <div className={styles.posterFrame}>
@@ -36,7 +44,7 @@ export function Hero() {
             <div className={styles.posterPhoto}>
               <Photo name="espresso-chiet-xuat" alt="Dòng espresso chảy từ tay cầm pha vào ly, cận cảnh" sizes="(max-width: 900px) 90vw, 40vw" priority position="45% 45%" size={1200} />
             </div>
-            <figcaption className={`${styles.posterCap} ${styles.label}`}><span>FIG.01 — THE DAILY HEAT</span><span>01 / 12</span></figcaption>
+            <figcaption className={`${styles.posterCap} ${styles.label}`}><span>Espresso đầu ngày tại quầy bar</span><span>Sơn Trà</span></figcaption>
           </div>
         </figure>
       </div>

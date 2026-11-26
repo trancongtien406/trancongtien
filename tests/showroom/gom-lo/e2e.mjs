@@ -69,7 +69,15 @@ ok(fx.pot >= 7, `Bàn xoay SVG (PotWheel) x${fx.pot}`);
 ok(fx.engrave >= 9, `Chữ khắc vào đất x${fx.engrave}`);
 ok(fx.scrub === "1", "ScrollScrubText chạy");
 ok(fx.gal === "1" && fx.dist >= 8 && fx.distReady, `DraggableGallery + ImageHoverDistort x${fx.dist}`);
-ok(fx.grain && fx.cursor && fx.marq && fx.clip && fx.draw && fx.mag && fx.par >= 2, "Grain/Cursor/Marquee/ClipReveal/PathDraw/Magnetic/Parallax có mặt");
+ok(fx.grain && fx.cursor && fx.clip && !fx.marq && !fx.draw && !fx.mag && fx.par === 0, "Grain/Cursor/ClipReveal có mặt; đã bỏ Marquee/PathDraw/Magnetic/Parallax (chỉ giữ SST + CR)");
+ok(!(await page.evaluate(() => !!document.querySelector('[data-fx="ScrollProgress"]'))), "đã bỏ ScrollProgress");
+const hero = await page.locator("section#top").innerText();
+ok(/Ngũ Hành Sơn, Đà Nẵng/.test(hero) && /250\.000/.test(hero) && /8 người/.test(hero) && /09:00 đến 20:00/.test(hero) && /Đặt chỗ workshop/.test(hero), "hero: loại hình, quận, giá từ, sĩ số, giờ mở, CTA đặt chỗ");
+for (const id of ["ke-gom", "buoi-lam-gom", "tu-dat-den-men", "dat-theo-yeu-cau", "nan-binh", "cau-chuyen", "cham-soc", "gio-mo-cua", "hoi-dap"]) ok((await page.locator("#" + id).count()) === 1, "có section #" + id);
+ok((await page.locator("#hoi-dap details").count()) >= 8, "FAQ ≥8 câu");
+ok((await page.locator("#dat-theo-yeu-cau li").count()) === 3 && (await page.locator("#cham-soc li").count()) === 6, "đặt theo yêu cầu 3 nhóm, chăm sóc 6 mục");
+ok(/Thứ Hai\s*Nghỉ/.test(await page.locator("#gio-mo-cua").innerText()), "giờ mở cửa: nghỉ Thứ Hai");
+ok((await page.locator("#tu-dat-den-men [data-step]").count()) === 5, "quy trình 5 bước: đất, nặn, phơi, nung mộc, men");
 ok(fx.fire === "1", "Vết nung (Fire) chạy");
 // bình quay: path thân thay đổi theo thời gian
 const d1 = await page.locator('svg[data-fx="PotWheel"] [data-body]').first().getAttribute("d");
@@ -142,7 +150,12 @@ ok(f1b === f1.t, "cuộn ngược về đúng trạng thái giữa");
 console.log("== kệ gốm");
 await page.evaluate(() => document.getElementById("ke-gom").scrollIntoView());
 await page.waitForTimeout(800);
-ok((await page.locator("#ke-gom article").count()) === 10, "10 món trên kệ");
+ok((await page.locator("#ke-gom article").count()) === 12, "12 món trên kệ");
+await page.getByRole("button", { name: /Bình và lọ/ }).click(); await page.waitForTimeout(500);
+ok((await page.locator("#ke-gom article:visible").count()) === 5 && (await page.getByRole("button", { name: /Bình và lọ/ }).getAttribute("aria-pressed")) === "true", "lọc nhóm Bình và lọ: 5 món");
+await page.getByRole("button", { name: /Bộ quà và bộ trà/ }).click(); await page.waitForTimeout(500);
+ok((await page.locator("#ke-gom article:visible").count()) === 2 && /Hộp Quà Đôi/.test(await page.locator("#ke-gom").innerText()), "lọc nhóm Bộ quà: 2 món");
+await page.getByRole("button", { name: /Tất cả/ }).click(); await page.waitForTimeout(500);
 const shelfTxt = await page.locator("#ke-gom").innerText();
 ok(/\d{2,3}\.\d{3}\s?₫/.test(shelfTxt), "giá VND định dạng vi-VN");
 ok(/Giá tham khảo/.test(shelfTxt), "ghi 'Giá tham khảo'");
@@ -219,6 +232,13 @@ const cta = await page.locator(`${WS} a`, { hasText: "Gửi tóm tắt cho xư�
 ok(cta.startsWith("/lien-he"), "nút cuối dẫn tới /lien-he: " + cta);
 if (!/industry=/.test(cta)) console.log("  WARN: href chưa có industry/solution/utm_campaign (registry chưa có gom-lo, xem design/REQUESTS.md)");
 else ok(/solution=fnb/.test(cta) && /utm_campaign=gom-lo/.test(cta), "href đủ solution + utm_campaign");
+// lịch lớp: chọn một ô điền sẵn buổi + khung giờ
+ok((await page.locator(`${WS} [class*=ttCell]`).count()) === 14, "lịch lớp tuần: 14 buổi, nghỉ Thứ Hai");
+await page.locator(`${WS} [class*=ttCell]`, { hasText: "Vẽ men" }).first().click(); await page.waitForTimeout(300);
+const sum0 = await page.locator(`${WS} aside`).innerText();
+ok(/Phủ Men/.test(sum0) && /Khung giờ\s*Buổi sáng/.test(sum0), "chọn ô lịch: điền sẵn Phủ Men + Buổi sáng");
+ok((await page.locator(`${WS} [class*=ttOn]`).count()) === 1, "ô lịch đã chọn được đánh dấu");
+ok(/Đã gồm/.test(await page.locator(WS).innerText()) && /Cọc 50%/.test(await page.locator(WS).innerText()), "workshop: ghi đã gồm gì + chính sách cọc");
 ok(!(await ctx.cookies()).some((c) => c.name === "tct_ref"), "trang không tự ghi cookie tct_ref");
 
 /* ---------- 6. Pot Designer ---------- */
@@ -246,7 +266,7 @@ await page.getByRole("button", { name: "Nặn lại từ đầu" }).click();
 ok((await page.locator(`${PD} [class*=pdCode] b`).innerText()) === "DM-BAU-62-50-NG-VV-K", "nặn lại từ đầu về mặc định");
 await page.getByRole("button", { name: "Chép mã" }).click(); await page.waitForTimeout(300);
 ok(/Đã chép|ghi lại mã/.test(await page.locator(`${PD} [role=status]`).innerText()), "chép mã có phản hồi");
-ok((await page.locator(`${PD} a`, { hasText: "Hỏi xưởng về bình này" }).getAttribute("href")).startsWith("/lien-he"), "nút hỏi xưởng -> /lien-he");
+ok((await page.locator(`${PD} a`, { hasText: "Gửi phác thảo cho xưởng" }).getAttribute("href")).startsWith("/lien-he"), "nút hỏi xưởng -> /lien-he");
 
 /* ---------- 7. nội dung, FAQ, bàn phím ---------- */
 await page.locator("#hoi-dap summary").first().click();
@@ -260,7 +280,7 @@ await page.keyboard.press("Tab");
 ok(await page.evaluate(() => document.activeElement?.className.includes("skip")), "Tab đầu tiên tới skip link");
 for (let i = 0; i < 14; i++) await page.keyboard.press("Tab");
 ok(await page.evaluate(() => !!document.activeElement && document.activeElement !== document.body), "Tab di chuyển được focus");
-ok(await page.evaluate(() => { const a = [...document.querySelectorAll("a")].find((x) => /Đặt một buổi hẹn với đất/.test(x.textContent)); a.focus(); const cs = getComputedStyle(a); return cs.outlineStyle !== "none" && parseFloat(cs.outlineWidth) >= 2; }), "focus-visible rõ ở CTA");
+ok(await page.evaluate(() => { const a = [...document.querySelectorAll("a")].find((x) => /Đặt chỗ workshop/.test(x.textContent)); a.focus(); const cs = getComputedStyle(a); return cs.outlineStyle !== "none" && parseFloat(cs.outlineWidth) >= 2; }), "focus-visible rõ ở CTA");
 ok(ext.length === 0, "0 request ngoài origin " + ext.slice(0, 2).join(" "));
 ok(errs.length === 0, "0 lỗi console " + errs.slice(0, 2).join(" | "));
 
@@ -302,7 +322,7 @@ ok(await page.locator("#gl-menu").isVisible(), "menu mobile mở");
 await page.keyboard.press("Escape");
 ok(!(await page.locator("#gl-menu").count()), "Escape đóng menu");
 ok(await page.evaluate(() => document.activeElement?.textContent?.includes("Mục lục")), "trả focus về nút menu");
-await btn.click(); await page.locator("#gl-menu a", { hasText: "Kệ gốm" }).click(); await page.waitForTimeout(600);
+await btn.click(); await page.locator("#gl-menu a", { hasText: "Gốm bán" }).click(); await page.waitForTimeout(600);
 ok(!(await page.locator("#gl-menu").count()), "chọn mục đóng menu");
 ok(await page.evaluate(() => getComputedStyle(document.querySelector('[data-fx="ImageHoverDistort"]')).filter === "none"), "mobile: không filter méo ảnh");
 const small = await page.evaluate(() => [...document.querySelectorAll("a,button,summary,label")].filter((e) => { const r = e.getBoundingClientRect(); const cs = getComputedStyle(e); if (!r.width || cs.visibility === "hidden" || cs.display === "none") return false; if (e.closest("nav")) return false; if (e.matches("label") && !e.querySelector("input")) return false; return r.height < 40; }).map((e) => (e.textContent || e.tagName).trim().slice(0, 24) + ":" + Math.round(e.getBoundingClientRect().height)).slice(0, 8));

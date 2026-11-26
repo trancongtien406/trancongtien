@@ -107,9 +107,9 @@ export function Configurator({ consultHref }: { consultHref: string }) {
       <div className={styles.wrap}>
         <Glare className={styles.toolPanel} strength="strong">
           <header className={styles.toolHead}>
-            <p className={styles.label}>Thiết kế riêng</p>
-            <h2 id="tool-title" className={styles.h2}>Thiết kế trang sức của bạn.</h2>
-            <p className={styles.headText}>Chọn loại, chất liệu, đá và kích cỡ. Khoảng giá tham khảo được tính ra từng khoản để bạn thấy tiền nằm ở đâu.</p>
+            <p className={styles.label}>Ước tính giá</p>
+            <h2 id="tool-title" className={styles.h2}>Ước tính giá món trang sức.</h2>
+            <p className={styles.headText}>Chọn nhóm, chất liệu, đá và cỡ. Khoảng giá tham khảo được tính ra từng khoản: vàng, công, đá, để bạn thấy tiền nằm ở đâu trước khi đến tiệm.</p>
           </header>
 
           <div className={styles.toolGrid}>
@@ -162,7 +162,7 @@ export function Configurator({ consultHref }: { consultHref: string }) {
                 )}
                 <div className={styles.resultActions}>
                   <ShineSweep trigger="hover" color="rgba(255,244,200,0.7)" className={styles.btnWrap}>
-                    <a className={styles.btnGold} href={consultHref} data-cursor="" data-testid="consult">Nhận tư vấn với cấu hình này</a>
+                    <a className={styles.btnGold} href={consultHref} data-cursor="" data-testid="consult">Đặt làm với cấu hình này</a>
                   </ShineSweep>
                   <button type="button" className={styles.btnLine} onClick={copy} disabled={!q.ok}>Sao chép tóm tắt</button>
                 </div>

@@ -80,8 +80,30 @@ const fx = await p.evaluate(() => {
     vignette: !!q("[class*=vignette]"), spotEl: !!q("[data-rv=spot]"),
   };
 });
-ok(fx.split.length >= 6 && fx.split.every((v) => v === "1"), `SplitWords khởi chạy (${fx.split.length} gốc, ready=${[...new Set(fx.split)]})`);
-ok(fx.grain.length === 1 && fx.canvas.length >= 1 && fx.clip.length >= 1 && fx.gal.length === 1 && fx.scrub.length === 1 && fx.marq.length === 1 && fx.par.length === 1 && fx.mag.length >= 2, `thư viện: Grain/Canvas/ClipReveal/Gallery/ScrubText/Marquee/Parallax/Magnetic có mặt (${JSON.stringify({ g: fx.grain, c: fx.canvas, cl: fx.clip, ga: fx.gal, sc: fx.scrub, m: fx.marq, pa: fx.par, mag: fx.mag.length })})`);
+ok(fx.split.length === 1 && fx.split.every((v) => v === "1"), `SplitWords chỉ ở hero (${fx.split.length} gốc, ready=${[...new Set(fx.split)]})`);
+ok(fx.grain.length === 1 && fx.canvas.length >= 1 && fx.gal.length === 1 && fx.par.length === 1 && fx.spot.length >= 1, `thư viện giữ: Grain/Canvas/Gallery/Parallax/CursorSpotlight (${JSON.stringify({ g: fx.grain, c: fx.canvas, ga: fx.gal, pa: fx.par, sp: fx.spot })})`);
+ok(fx.clip.length === 0 && fx.scrub.length === 0 && fx.marq.length === 0 && fx.mag.length === 0, "đã bỏ ClipReveal/ScrollScrubText/VelocityMarquee/MagneticButton");
+{
+  const info = await p.evaluate(() => ({ top: document.querySelector("#top").innerText.replace(/\s+/g, " "), ids: ["thuc-don", "thu-ruou", "mon-nham", "gio-mo-cua", "su-kien", "mang-ve", "can-ham", "chon-vang", "dat-ban", "quy-dinh", "hoi-dap", "bon-loi", "rot"].filter((i) => !document.getElementById(i)), body: document.body.innerText }));
+  ok(/Wine bar/.test(info.top) && /Ngũ Hành Sơn/.test(info.top) && /Đặt bàn/.test(info.top) && /150\.000/.test(info.top) && /17:00 – 23:00/.test(info.top) && /18 tuổi/.test(info.top), `hero: loại hình, quận, CTA, 3 sự thật (${info.top.slice(0, 110)})`);
+  ok(info.ids.length === 0, `đủ section thật của wine bar (thiếu: ${info.ids.join(",")})`);
+  ok(/Set thử rượu/.test(info.body) && /Happy hour/.test(info.body) && /charcuterie/i.test(info.body) && /mang về/i.test(info.body) && /Bàn nhóm/.test(info.body) && /phí mở chai/.test(info.body), "nội dung: flight, happy hour, charcuterie, mang về, bàn nhóm, mang rượu riêng");
+}
+// ================= chữ ký mới: khay thử rượu + nến giờ mở cửa
+{
+  await p.evaluate(() => document.getElementById("thu-ruou").scrollIntoView({ block: "start" })); await p.waitForTimeout(1500);
+  const li = () => p.locator('[data-testid="flight-list"] li').count();
+  ok((await li()) === 3, "flight: set đầu có 3 ly");
+  const liq = await p.evaluate(() => [...document.querySelectorAll("[class*=flightLiquid]")].map((e) => getComputedStyle(e).animationName));
+  ok(liq.length === 3 && liq.every((n) => /rvFill/.test(n)), "flight: ly được rót bằng animation rvFill");
+  await p.locator('[data-testid="flight"] [role=radio]').nth(2).click(); await p.waitForTimeout(500);
+  ok((await li()) === 4 && (await p.locator('[data-testid="flight"] [role=radio][aria-checked=true]').count()) === 1, "flight: chọn set 4 ly đổi khay");
+  ok(/Bordeaux/.test(await p.locator('[data-testid="flight-list"]').innerText()), "flight: danh sách ly theo kiểu nho, không nhãn hiệu");
+  await p.evaluate(() => document.getElementById("gio-mo-cua").scrollIntoView({ block: "start" })); await p.waitForTimeout(800);
+  const cc = await p.evaluate(() => { const f = document.querySelector("[class*=candleClock]"); return { lit: f.getAttribute("data-lit"), rows: document.querySelectorAll('[data-testid=hours] tbody tr').length, today: document.querySelectorAll('[data-testid=hours] tr[data-today="1"]').length, h: document.querySelector("[class*=ccBody]").getAttribute("height") }; });
+  ok(cc.rows === 7 && cc.today === 1 && (cc.lit === "0" || cc.lit === "1"), `giờ mở cửa: 7 ngày, hôm nay tô sáng, nến ${cc.lit === "1" ? "đang thắp" : "chưa thắp"} (${JSON.stringify(cc)})`);
+  ok(/17:00 – 19:00/.test(await p.locator('[data-testid="happy"]').innerText()), "happy hour 17:00 – 19:00");
+}
 ok(fx.flame && fx.flame2 && fx.halo && fx.candles >= 3, `nến SVG nhấp nháy: 2 lớp lửa + quầng (${fx.candles} ngọn)`);
 ok(fx.lampCone && fx.frame, "hero: đèn rọi + khung tranh");
 ok(fx.vignette && fx.spotEl, "vignette cố định + lớp ánh nến theo con trỏ");
@@ -136,7 +158,7 @@ ok(fx.pour === "1" && fx.stream, "đường rượu rót (SVG pour line) đã k�
   ok((await n.locator("h1").innerText()).includes("Chậm lại"), "no-JS: h1 có chữ");
   ok(await n.locator("h1").isVisible(), "no-JS: h1 hiện");
   ok((await n.locator("[data-rv=curtain]").count()) === 0, "no-JS: không rèm chặn");
-  ok((await n.locator("a", { hasText: "Đặt bàn tối nay" }).isVisible()), "no-JS: nút CTA hiện");
+  ok((await n.locator("[class*=heroCtas] a", { hasText: /^Đặt bàn$/ }).isVisible()), "no-JS: nút CTA hiện");
   ok(((await n.locator("[class*=stream]").first().evaluate((e) => getComputedStyle(e).strokeDashoffset))) !== "1px", "no-JS: đường rượu hiện đủ");
   await n.context().close();
 }
@@ -291,7 +313,7 @@ ok(spotSt.on === "1" && /520/.test(spotSt.x), `spotlight theo con trỏ (x=${spo
   await p.evaluate(() => window.scrollTo(0, 0)); await p.waitForTimeout(300);
   let hit = false;
   await p.evaluate(() => { document.activeElement?.blur(); const s = document.querySelector("a[href=\"#main\"]"); s.focus(); s.blur(); document.getElementById("main").setAttribute("tabindex", "-1"); document.getElementById("main").focus(); });
-  for (let i = 0; i < 14; i++) { await p.keyboard.press("Tab"); const t = await p.evaluate(() => document.activeElement?.textContent?.trim()); if (t && /Đặt bàn tối nay/i.test(t)) { hit = true; break; } }
+  for (let i = 0; i < 14; i++) { await p.keyboard.press("Tab"); const t = await p.evaluate(() => document.activeElement?.textContent?.trim()); if (t && /^Đặt bàn$/i.test(t)) { hit = true; break; } }
   ok(hit, "Tab tới được CTA hero");
   const outline = await p.evaluate(() => getComputedStyle(document.activeElement).outlineStyle);
   ok(outline !== "none", "focus-visible rõ");

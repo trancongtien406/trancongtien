@@ -1,8 +1,10 @@
-import { ClipReveal, CursorSpotlight, MagneticButton, SVGPathDraw, ScrollScrubText, SplitWords, VelocityMarquee } from "@/features/showroom/effects";
+import { ClipReveal, CursorSpotlight } from "@/features/showroom/effects";
 import { buildConsultHref } from "@/features/showroom/consultation";
 import { siteConfig } from "@/lib/site";
-import { ACTIVES, FAQ, FLOW, FOOTER, MANIFESTO, MARQUEE, NAV } from "../data/content";
+import { ACTIVES, AREA, BEFORE_AFTER, FAQ, FLOW, FOOTER, MANIFESTO, NAV, POLICIES, STUDIO_FACTS, STUDIO_POINTS } from "../data/content";
+import { FlowThread } from "./FlowThread";
 import { Halo } from "./Halo";
+import { HoursToday } from "./Today";
 import { Photo } from "./Photo";
 import styles from "../brand.module.css";
 
@@ -10,16 +12,17 @@ const ID = "/images/demos/da-xanh/identity";
 
 export function Manifesto() {
   return (
-    <section id="triet-ly" className={styles.manifesto} aria-labelledby="triet-ly-title">
+    <section id="ve-studio" className={styles.manifesto} aria-labelledby="triet-ly-title">
       <div className={`${styles.wrap} ${styles.manifestoGrid}`}>
         <div data-bf="">
           <CursorSpotlight className={`${styles.glass} ${styles.manifestoCard}`} radius={320} color="rgba(255,255,255,0.65)">
-            <p className={styles.kicker} id="triet-ly-title">Triết lý của NÉA</p>
-            <ScrollScrubText as="p" className={styles.manifestoText} dim={0.22} start="top 80%" end="bottom 55%">{MANIFESTO}</ScrollScrubText>
+            <p className={styles.kicker} id="triet-ly-title">Về studio</p>
+            <p className={styles.manifestoText}>{MANIFESTO}</p>
             <ul className={styles.principles}>
-              <li><b>Lắng nghe trước</b><span>Mỗi buổi bắt đầu từ điều bạn đang cảm thấy, không phải từ một gói có sẵn.</span></li>
-              <li><b>Vừa đủ thì dừng</b><span>Ít bước hơn nhưng đúng chỗ. Chúng mình sẵn lòng bớt đi một sản phẩm.</span></li>
-              <li><b>Nói rõ từng bước</b><span>Dùng gì, bao lâu, cảm giác thế nào, bạn đều biết trước.</span></li>
+              {STUDIO_POINTS.map((p) => <li key={p.b}><b>{p.b}</b><span>{p.s}</span></li>)}
+            </ul>
+            <ul className={styles.studioFacts}>
+              {STUDIO_FACTS.map((f) => <li key={f}>{f}</li>)}
             </ul>
           </CursorSpotlight>
         </div>
@@ -37,34 +40,17 @@ export function Manifesto() {
   );
 }
 
-export function Band() {
-  return (
-    <div className={styles.band} aria-label="Những nhóm chăm sóc chính của NÉA">
-      <VelocityMarquee mode="velocity" speed={46} boost={1.4} reverseOnScrollUp pauseOnHover controls gap="2.6rem" className={styles.bandMarquee} buttonClassName={styles.bandBtn} pauseLabel="Dừng dải chữ" playLabel="Chạy dải chữ" label="Dải chữ chạy ngang">
-        {MARQUEE.map((m) => (
-          <span key={m} className={styles.bandItem}>{m}<i aria-hidden="true" /></span>
-        ))}
-      </VelocityMarquee>
-    </div>
-  );
-}
-
 export function Flow() {
   return (
     <section id="quy-trinh" className={styles.section} aria-labelledby="flow-title">
       <div className={styles.wrap}>
         <header className={styles.sectionHead}>
           <p className={styles.kicker} data-bf="">Một buổi tại studio</p>
-          <h2 id="flow-title" className={styles.h2}><SplitWords as="span">Bốn bước, đi chậm và nói rõ.</SplitWords></h2>
-          <p className={styles.lede} data-bf="" data-bf-delay="0.1">Bạn luôn biết bước kế tiếp là gì, và có thể dừng hoặc đổi ý bất cứ lúc nào.</p>
+          <h2 id="flow-title" className={styles.h2} data-bf="">Soi da, làm sạch, liệu trình, dặn dò.</h2>
+          <p className={styles.lede} data-bf="" data-bf-delay="0.1">Năm bước với thời gian dự kiến. Bạn luôn biết bước kế tiếp là gì, và có thể dừng hoặc đổi ý bất cứ lúc nào.</p>
         </header>
         <ol className={styles.flow}>
-          <SVGPathDraw className={styles.flowSvg} viewBox="0 0 80 1000" preserveAspectRatio="none" mode="scroll" start="top 70%" end="bottom 60%" aria-hidden="true" focusable="false">
-            <path d="M40 0C58 40 58 90 40 125C22 170 22 330 40 375C58 420 58 580 40 625C22 670 22 830 40 875C58 920 58 970 40 1000" stroke="url(#dx-flow)" strokeWidth="2" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
-            <defs>
-              <linearGradient id="dx-flow" x1="0" y1="0" x2="0" y2="1000" gradientUnits="userSpaceOnUse"><stop stopColor="#8f78ff" /><stop offset="1" stopColor="#3fb6d1" /></linearGradient>
-            </defs>
-          </SVGPathDraw>
+          <FlowThread />
           {FLOW.map((s, i) => (
             <li key={s.n} className={styles.flowItem} data-side={i % 2 === 0 ? "l" : "r"}>
               <span className={styles.flowNode} aria-hidden="true">{s.n}</span>
@@ -87,13 +73,69 @@ export function Flow() {
   );
 }
 
+export function BeforeAfter() {
+  return (
+    <section id="luu-y" className={styles.section} aria-labelledby="ba-title">
+      <div className={styles.wrap}>
+        <header className={styles.sectionHead}>
+          <p className={styles.kicker} data-bf="">Lưu ý</p>
+          <h2 id="ba-title" className={styles.h2} data-bf="">Trước và sau mỗi liệu trình.</h2>
+          <p className={styles.lede} data-bf="" data-bf-delay="0.1">Vài việc nhỏ để buổi chăm sóc dễ chịu hơn và da được giữ ổn định sau đó.</p>
+        </header>
+        <div className={styles.baGrid}>
+          {([BEFORE_AFTER.before, BEFORE_AFTER.after] as const).map((c, n) => (
+            <div key={c.t} data-bf="" data-bf-delay={n ? "0.1" : undefined}>
+              <CursorSpotlight className={`${styles.glass} ${styles.baCard}`} radius={280} color="rgba(255,255,255,0.65)">
+                <h3><span aria-hidden="true">{n === 0 ? "Trước" : "Sau"}</span>{c.t}</h3>
+                <ul>{c.list.map((x) => <li key={x}>{x}</li>)}</ul>
+              </CursorSpotlight>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function Booking() {
+  const href = buildConsultHref("da-xanh");
+  return (
+    <section id="dat-lich" className={styles.section} aria-labelledby="book-title">
+      <div className={styles.wrap}>
+        <header className={styles.sectionHead}>
+          <p className={styles.kicker} data-bf="">Giờ mở cửa và đặt lịch</p>
+          <h2 id="book-title" className={styles.h2} data-bf="">Hẹn trước, một khách một phòng.</h2>
+          <p className={styles.lede} data-bf="" data-bf-delay="0.1">Studio ở {AREA}. Bạn để lại nhu cầu và khung giờ mong muốn, studio xác nhận lại với bạn trước buổi hẹn.</p>
+        </header>
+        <div className={styles.bookGrid}>
+          <div data-bf="">
+            <CursorSpotlight className={`${styles.glass} ${styles.hoursCard}`} radius={260} color="rgba(255,255,255,0.65)">
+              <h3>Giờ mở cửa</h3>
+              <HoursToday />
+              <p className={styles.hoursNote}>Buổi cuối bắt đầu trước giờ đóng cửa ít nhất 90 phút.</p>
+              <a className={`${styles.btn} ${styles.btnInk}`} href={href}>Đặt lịch chăm da</a>
+            </CursorSpotlight>
+          </div>
+          <ul className={styles.policyList}>
+            {POLICIES.map((p, i) => (
+              <li key={p.t} data-bf="" data-bf-delay={String(i * 0.06)}>
+                <div className={`${styles.glass} ${styles.policy}`}><h3>{p.t}</h3><p>{p.d}</p></div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function Actives() {
   return (
     <section id="hoat-chat" className={styles.section} aria-labelledby="actives-title">
       <div className={`${styles.wrap} ${styles.activesGrid}`}>
         <div className={styles.activesIntro}>
           <p className={styles.kicker} data-bf="">Nhóm hoạt chất thường gặp</p>
-          <h2 id="actives-title" className={styles.h2}><SplitWords as="span">Hiểu nhãn trước khi thêm bước.</SplitWords></h2>
+          <h2 id="actives-title" className={styles.h2} data-bf="">Hiểu nhãn trước khi thêm bước.</h2>
           <p className={styles.lede} data-bf="" data-bf-delay="0.1">Đây là cách chúng mình giải thích theo nhóm chung, không theo thương hiệu. Mức độ phù hợp còn tuỳ từng làn da, nên khi chưa chắc hãy hỏi bác sĩ da liễu.</p>
           <div className={styles.leafMedia}>
             <ClipReveal variant="inset" from="bottom" duration={1.3} innerScale={1.2} className={styles.leafFrame}>
@@ -127,7 +169,7 @@ export function Faq() {
       <div className={`${styles.wrap} ${styles.faqGrid}`}>
         <header className={styles.faqHead}>
           <p className={styles.kicker} data-bf="">Hỏi đáp</p>
-          <h2 id="faq-title" className={styles.h2}><SplitWords as="span">Những điều thường được hỏi.</SplitWords></h2>
+          <h2 id="faq-title" className={styles.h2} data-bf="">Những điều thường được hỏi.</h2>
         </header>
         <div className={styles.faqList}>
           {FAQ.map((f, i) => (
@@ -156,11 +198,11 @@ export function FinalCta() {
               </svg>
             </Halo>
             <div className={styles.finalCopy}>
-              <h2 id="final-title" className={styles.h2}>Bắt đầu từ một cuộc trò chuyện.</h2>
-              <p className={styles.lede}>Cho chúng mình biết làn da bạn đang thế nào và bạn muốn dành bao nhiêu thời gian. Chúng mình sẽ trao đổi để chọn một buổi phù hợp, hoặc nói thẳng nếu bạn nên gặp bác sĩ trước.</p>
+              <h2 id="final-title" className={styles.h2}>Đặt một buổi chăm da vừa đủ.</h2>
+              <p className={styles.lede}>Cho chúng mình biết làn da bạn đang thế nào, liệu trình bạn quan tâm và khung giờ mong muốn. Studio sẽ xác nhận lịch, hoặc nói thẳng nếu bạn nên gặp bác sĩ trước.</p>
               <div className={styles.finalCtas}>
-                <MagneticButton><a className={`${styles.btn} ${styles.btnInk}`} href={href}>Trao đổi cùng NÉA</a></MagneticButton>
-                <a className={`${styles.btn} ${styles.btnGlass}`} href="#routine">Quay lại Routine Builder</a>
+                <a className={`${styles.btn} ${styles.btnInk}`} href={href}>Đặt lịch cùng NÉA</a>
+                <a className={`${styles.btn} ${styles.btnGlass}`} href="#routine">Thử Skin Routine Builder</a>
               </div>
             </div>
           </CursorSpotlight>
@@ -178,13 +220,14 @@ export function Footer() {
           <div className={styles.footerBrand}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={`${ID}/logo-horizontal.svg`} alt="NÉA Skin Studio" width={150} height={51} loading="lazy" />
-            <p>Chăm da dịu dàng, hiểu làn da hơn.</p>
+            <p>Studio chăm sóc da cơ bản tại Quận Thanh Khê, Đà Nẵng.</p>
           </div>
           <nav aria-label="Liên kết chân trang" className={styles.footerNav}>
             {NAV.map((n) => <a key={n.href} href={n.href}>{n.label}</a>)}
           </nav>
           <address className={styles.footerContact}>
             <span>{FOOTER.area}</span>
+            <span>9:00 – 20:00, nghỉ Chủ nhật</span>
             <a href={`mailto:${FOOTER.mail}`}>{FOOTER.mail}</a>
             <span>{FOOTER.phone}</span>
           </address>

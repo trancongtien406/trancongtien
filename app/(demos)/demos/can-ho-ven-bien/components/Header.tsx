@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MagneticButton } from "@/features/showroom/effects";
 import { NAV } from "../data/content";
 import styles from "../brand.module.css";
 
@@ -47,9 +46,7 @@ export function Header() {
           {NAV.map((n) => <a key={n.href} href={n.href} data-cursor="Đi tới">{n.label}</a>)}
         </nav>
         <div className={styles.headerCta}>
-          <MagneticButton>
-            <a className={`${styles.btn} ${styles.btnCopper} ${styles.btnSm}`} href="#mat-bang">Xem mặt bằng</a>
-          </MagneticButton>
+          <a className={`${styles.btn} ${styles.btnCopper} ${styles.btnSm}`} href="#tham-quan">Đặt lịch nhà mẫu</a>
         </div>
         <button ref={btn} type="button" className={styles.menuBtn} aria-expanded={open} aria-controls="cv-menu" aria-label={open ? "Đóng menu" : "Mở menu"} onClick={() => setOpen((v) => !v)}>
           <span aria-hidden="true" className={styles.menuIcon}><i /><i /></span>
@@ -61,7 +58,7 @@ export function Header() {
             <li key={n.href} style={{ ["--i" as string]: i }}><a href={n.href} onClick={close}>{n.label}</a></li>
           ))}
         </ul>
-        <a className={`${styles.btn} ${styles.btnCopper}`} href="#mat-bang" onClick={close}>Xem mặt bằng</a>
+        <a className={`${styles.btn} ${styles.btnCopper}`} href="#tham-quan" onClick={close}>Đặt lịch xem nhà mẫu</a>
       </div>
     </header>
   );

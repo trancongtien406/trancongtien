@@ -91,7 +91,7 @@ const shot = async (page, name, full = false, target = null) => {
     jsonldBad: [...document.querySelectorAll('script[type="application/ld+json"]')].filter((s) => /Miên An/.test(s.textContent)).some((s) => /Review|AggregateRating|LocalBusiness|Offer|DaySpa|address|telephone|openingHours/.test(s.textContent)),
     skip: !!document.querySelector('a[href="#main"]'),
     main: !!document.querySelector("main#main"),
-    ribbon: document.body.innerText.includes("Spa & wellness"),
+    ribbon: document.body.innerText.includes("Spa & massage"),
   }));
   ok("title riêng tiếng Việt", /Miên An/.test(meta.title), meta.title);
   ok("description riêng", /Miên An/.test(meta.desc || ""));
@@ -184,7 +184,7 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   const nj = await newPage({ javaScriptEnabled: false });
   await nj.page.goto(URL_HOME, { waitUntil: "load" });
   const vis = await nj.page.evaluate(() => ({ h1: document.querySelector("h1")?.innerText.replace(/\s+/g, " "), op: getComputedStyle(document.querySelector("h1")).opacity, cards: document.querySelectorAll("#rituals li").length, faq: document.querySelectorAll("#faq h3").length }));
-  ok("không JS: h1, 6 thẻ liệu trình, FAQ vẫn render từ server", /Chậm lại, để trở về với mình/.test(vis.h1) && vis.op === "1" && vis.cards === 6 && vis.faq === 8, JSON.stringify(vis));
+  ok("không JS: h1, 6 thẻ liệu trình, FAQ vẫn render từ server", /Một buổi massage, để cơ thể được nghỉ/.test(vis.h1) && vis.op === "1" && vis.cards === 6 && vis.faq === 8, JSON.stringify(vis));
   await nj.ctx.close();
 }
 
@@ -194,7 +194,7 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   await load(page);
   const finder = page.locator("#ritual-finder");
   await finder.scrollIntoViewIfNeeded();
-  await finder.getByRole("button", { name: "Bắt đầu tìm nghi thức" }).click();
+  await finder.getByRole("button", { name: "Bắt đầu tìm liệu trình" }).click();
   await finder.getByRole("button", { name: "Tiếp tục" }).click();
   ok("Finder bước 1: lỗi thiếu mong muốn hiện cạnh ô (role=alert)", await finder.getByRole("alert").filter({ hasText: "Hãy chọn một mong muốn" }).count() === 1);
   ok("Finder bước 1: aria-invalid trên radio", (await finder.locator('input[name="goal"][aria-invalid="true"]').count()) > 0);
@@ -214,7 +214,7 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   // helper chạy nhanh các ca
   async function run(goalRe, dur, { pressure, noStone, unscented } = {}) {
     await finder.getByRole("button", { name: "Bắt đầu lại" }).first().click();
-    await finder.getByRole("button", { name: "Bắt đầu tìm nghi thức" }).click();
+    await finder.getByRole("button", { name: "Bắt đầu tìm liệu trình" }).click();
     await finder.getByLabel(goalRe).check();
     await finder.getByRole("button", { name: "Tiếp tục" }).click();
     await finder.getByLabel(`Tối đa ${dur} phút`).check();
@@ -233,12 +233,12 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   ok("RF-03 head/45/vừa → Tĩnh Tâm", /Tĩnh Tâm/.test(r.mainTxt));
   r = await run(/Chăm sóc bàn chân/, 45);
   ok("RF-04 feet/45 → Nhẹ Bước", /Nhẹ Bước/.test(r.mainTxt));
-  r = await run(/Trải nghiệm chăm sóc toàn diện/, 120);
+  r = await run(/Cả cơ thể và da mặt/, 120);
   ok("RF-05 full/120 → Dưỡng Nguyên", /Dưỡng Nguyên/.test(r.mainTxt));
-  r = await run(/Trải nghiệm chăm sóc toàn diện/, 45);
+  r = await run(/Cả cơ thể và da mặt/, 45);
   ok("RF-06 full/45 → rỗng", r.empty);
   const emptyTxt = await finder.getByTestId("finder-empty").innerText();
-  ok("trạng thái rỗng có 3 hướng đi (điều chỉnh / xem tất cả / bắt đầu lại)", /Chưa tìm thấy nghi thức phù hợp/.test(emptyTxt) && (await finder.getByRole("button", { name: "Xem tất cả liệu trình" }).count()) === 1 && (await finder.getByRole("button", { name: "Bắt đầu lại" }).count()) >= 1);
+  ok("trạng thái rỗng có 3 hướng đi (điều chỉnh / xem tất cả / bắt đầu lại)", /Chưa tìm thấy liệu trình phù hợp/.test(emptyTxt) && (await finder.getByRole("button", { name: "Xem tất cả liệu trình" }).count()) === 1 && (await finder.getByRole("button", { name: "Bắt đầu lại" }).count()) >= 1);
   await shot(page, "state-finder-empty-1440.png", false, "#ritual-finder");
   r = await run(/Chăm sóc cơ thể với hơi ấm/, 90);
   ok("RF-07 body/90 → Mộc Nhiệt", /Mộc Nhiệt/.test(r.mainTxt));
@@ -250,10 +250,10 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   ok("RF-10 face/45 → rỗng", r.empty);
   // chọn kết quả → Appointment
   r = await run(/Thư giãn toàn thân/, 60, { pressure: "Vừa", unscented: true });
-  await finder.getByRole("button", { name: "Chọn nghi thức này" }).first().click();
+  await finder.getByRole("button", { name: "Chọn liệu trình này" }).first().click();
   await page.waitForTimeout(500);
   const sel = await page.evaluate(() => ({ ritual: document.querySelector('input[name="ritual"]:checked')?.value, pressure: document.querySelector('input[name="pressure"]:checked')?.value, scent: document.querySelector('input[name="scent"]:checked')?.value }));
-  ok("RF-14 chọn từ Finder điền sẵn nghi thức + áp lực + hương liệu", sel.ritual === "R01" && sel.pressure === "medium" && sel.scent === "unscented", JSON.stringify(sel));
+  ok("RF-14 chọn từ Finder điền sẵn liệu trình + áp lực + hương liệu", sel.ritual === "R01" && sel.pressure === "medium" && sel.scent === "unscented", JSON.stringify(sel));
   await noBanned(page, "Ritual Finder sau khi có gợi ý");
   ok("0 lỗi console trong luồng Finder", errors.length === 0, errors.join("|"));
   await ctx.close();
@@ -267,7 +267,7 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   await ap.scrollIntoViewIfNeeded();
   await ap.getByRole("button", { name: "Tạo bản xem trước lịch hẹn" }).click();
   const al = await ap.getByRole("alert").allInnerTexts();
-  ok("lỗi khi gửi trống: nghi thức, ngày, xác nhận (cạnh từng ô)", al.some((t) => /chọn nghi thức/.test(t)) && al.some((t) => /chọn một ngày/.test(t)) && al.some((t) => /xác nhận/.test(t)), al.join(" | "));
+  ok("lỗi khi gửi trống: liệu trình, ngày, xác nhận (cạnh từng ô)", al.some((t) => /chọn liệu trình/.test(t)) && al.some((t) => /chọn một ngày/.test(t)) && al.some((t) => /xác nhận/.test(t)), al.join(" | "));
   ok("aria-invalid + aria-describedby trên ô lỗi", (await ap.locator('input[aria-invalid="true"]').count()) > 0 && (await ap.locator("fieldset[aria-describedby]").count()) >= 2);
   ok("focus chuyển tới ô lỗi đầu tiên", await page.evaluate(() => document.activeElement?.getAttribute("name") === "ritual"));
   await noBanned(page, "trạng thái lỗi biểu mẫu lịch hẹn");
@@ -286,11 +286,11 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   const times = await ap.locator('input[name="time"]').evaluateAll((els) => els.map((e) => +e.value));
   ok("AP-09/10 offset 1: slot 09:00/09:30/10:00 bị loại do phòng bận; không có slot kết thúc sau 20:00", !times.some((t) => t < 10 * 60) && Math.max(...times) + 60 + 15 <= 20 * 60, times.join(","));
   ok("slot cách nhau 30 phút", times.every((t) => t % 30 === 0));
-  // đổi nghi thức → xoá giờ đã chọn
+  // đổi liệu trình → xoá giờ đã chọn
   await ap.locator('input[name="time"]').first().check({ force: true });
   const firstTime = await ap.locator('input[name="time"]:checked').count();
   await ap.getByLabel(/Dưỡng Nguyên/).check();
-  ok("AP-14 đổi nghi thức reset giờ đã chọn", firstTime === 1 && (await ap.locator('input[name="time"]:checked').count()) === 0);
+  ok("AP-14 đổi liệu trình reset giờ đã chọn", firstTime === 1 && (await ap.locator('input[name="time"]:checked').count()) === 0);
   ok("Dưỡng Nguyên chỉ ROOM-02: 'Phòng An' bị vô hiệu khi chọn riêng", await ap.locator('input[name="resource"][value="ROOM-01"]').isDisabled());
   await ap.getByLabel(/An Nhiên/).check();
   // chọn lại ngày + giờ
@@ -332,7 +332,7 @@ for (const w of [320, 390, 768, 1024, 1440]) {
 {
   const { ctx, page } = await newPage();
   await load(page);
-  const btn = page.getByRole("button", { name: "Xem nghi thức Mộc Nhiệt" });
+  const btn = page.getByRole("button", { name: "Xem liệu trình Mộc Nhiệt" });
   await btn.scrollIntoViewIfNeeded();
   await btn.click();
   const dlg = page.locator("dialog[open]");
@@ -342,11 +342,11 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   await page.keyboard.press("Escape");
   await page.waitForTimeout(200);
   ok("Escape đóng dialog", (await page.locator("dialog[open]").count()) === 0);
-  ok("đóng dialog trả focus về nút gọi", await page.evaluate(() => document.activeElement?.getAttribute("aria-label") === "Xem nghi thức Mộc Nhiệt"));
+  ok("đóng dialog trả focus về nút gọi", await page.evaluate(() => document.activeElement?.getAttribute("aria-label") === "Xem liệu trình Mộc Nhiệt"));
   await btn.click();
-  await page.getByRole("button", { name: "Chọn nghi thức này" }).click();
+  await page.getByRole("button", { name: "Chọn liệu trình này" }).click();
   await page.waitForFunction(() => document.querySelector("#appointment").getBoundingClientRect().top < 300, null, { timeout: 8000 }).catch(() => {});
-  ok("'Chọn nghi thức này' đóng dialog và điền sẵn Appointment", (await page.locator("dialog[open]").count()) === 0 && (await page.locator('input[name="ritual"]:checked').getAttribute("value")) === "R02");
+  ok("'Chọn liệu trình này' đóng dialog và điền sẵn Appointment", (await page.locator("dialog[open]").count()) === 0 && (await page.locator('input[name="ritual"]:checked').getAttribute("value")) === "R02");
   ok("Mộc Nhiệt chỉ áp lực vừa: radio 'nhẹ' bị vô hiệu", await page.locator('input[name="pressure"][value="light"]').isDisabled());
   // lightbox
   const san = page.locator("#sanctuary");
@@ -375,8 +375,8 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   await page.goto(URL_HOME, { waitUntil: "load" });
   await page.waitForFunction(() => document.querySelectorAll('input[name="date"]').length > 0);
   const seq = [];
-  for (let i = 0; i < 14; i++) { await page.keyboard.press("Tab"); seq.push(await page.evaluate(() => (document.activeElement?.textContent || "").trim().slice(0, 30))); }
-  ok("Tab đi qua skip link và tới CTA 'Tìm nghi thức của bạn'", seq.some((s) => /Bỏ qua/.test(s)) && seq.some((s) => /Tìm nghi thức của bạn/.test(s)), seq.join(" | "));
+  for (let i = 0; i < 20; i++) { await page.keyboard.press("Tab"); seq.push(await page.evaluate(() => (document.activeElement?.textContent || "").trim().slice(0, 30))); }
+  ok("Tab đi qua skip link và tới CTA Đặt lịch", seq.some((s) => /Bỏ qua/.test(s)) && seq.some((s) => /^Đặt lịch/.test(s)), seq.join(" | "));
   const fv = await page.evaluate(() => { const el = document.activeElement; const cs = getComputedStyle(el); return cs.outlineStyle + " " + cs.outlineWidth; });
   ok("focus-visible rõ (outline >= 2px)", /solid 2px|auto/.test(fv), fv);
   await ctx.close();

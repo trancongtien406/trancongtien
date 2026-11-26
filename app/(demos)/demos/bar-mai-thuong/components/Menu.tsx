@@ -1,39 +1,33 @@
 "use client";
 
 import { useState } from "react";
-import { CursorSpotlight, SplitWords } from "@/features/showroom/effects";
+import { CursorSpotlight } from "@/features/showroom/effects";
 import s from "../brand.module.css";
-import { DRINKS, FLAVORS, vnd, type Drink } from "../data/menu";
+import { DRINKS, FLAVORS, GROUPS, vnd, type GroupId } from "../data/menu";
 
-const TABS = [
-  { id: "all", label: "Tất cả" },
-  { id: "alc", label: "Có cồn" },
-  { id: "zero", label: "Không cồn" },
-  { id: "bite", label: "Món nhắm" },
-] as const;
-type Tab = (typeof TABS)[number]["id"];
-
-const filt = (t: Tab, d: Drink) => t === "all" || (t === "alc" && d.kind === "cocktail") || (t === "zero" && d.kind === "mocktail") || (t === "bite" && d.kind === "bite");
+type Tab = GroupId;
 
 export function Menu() {
-  const [tab, setTab] = useState<Tab>("all");
-  const list = DRINKS.filter((d) => filt(tab, d));
+  const [tab, setTab] = useState<Tab>("signature");
+  const list = DRINKS.filter((d) => d.group === tab);
+  const note = GROUPS.find((g) => g.id === tab)?.note;
   return (
     <section className={s.menu} id="thuc-don" aria-label="Thực đơn">
       <div className={s.wrap}>
         <header className={s.secHead}>
-          <p className={s.kicker}>Phòng pha chế</p>
-          <SplitWords as="h2" className={s.h2} trigger="view">Mỗi ly một sắc thái</SplitWords>
-          <p className={s.mutedP}>Từ những ly tươi sáng, dễ làm quen đến các kết hợp đậm và nhiều lớp. Giá ghi là giá tham khảo.</p>
+          <p className={s.kicker}>Thực đơn</p>
+          <h2 className={s.h2} data-tm="lit">Thực đơn cocktail, mocktail và món nhắm</h2>
+          <p className={s.mutedP}>Bốn nhóm: ly signature của quầy, cocktail cổ điển, đồ uống không cồn và món nhắm. Thanh bốn vạch bên phải mỗi ly là độ ngọt, chua, đắng, khói.</p>
         </header>
         <div className={s.tabs} role="group" aria-label="Lọc thực đơn">
-          {TABS.map((t) => (
+          {GROUPS.map((t) => (
             <button key={t.id} type="button" className={s.tab} aria-pressed={tab === t.id} onClick={() => setTab(t.id)}>
               {t.label}
-              <span className={s.tabCount}>{DRINKS.filter((d) => filt(t.id, d)).length}</span>
+              <span className={s.tabCount}>{DRINKS.filter((d) => d.group === t.id).length}</span>
             </button>
           ))}
         </div>
+        <p className={s.groupNote} aria-live="polite">{note}</p>
         <CursorSpotlight className={s.menuBox} radius={340} color="rgba(255,60,172,0.13)">
           <ul className={s.menuList} aria-live="polite">
             {list.map((d, i) => (
@@ -60,7 +54,7 @@ export function Menu() {
             ))}
           </ul>
         </CursorSpotlight>
-        <p className={s.menuNote}>Giá tham khảo, có thể thay đổi theo mùa nguyên liệu. Dành cho khách từ 18 tuổi.</p>
+        <p className={s.menuNote}>Giá tham khảo, đã gồm VAT, có thể đổi theo mùa nguyên liệu. Đồ uống có cồn dành cho khách từ 18 tuổi. Happy hour 17:00–19:00 từ thứ Hai đến thứ Sáu: cocktail cổ điển đồng giá 110.000₫.</p>
       </div>
     </section>
   );

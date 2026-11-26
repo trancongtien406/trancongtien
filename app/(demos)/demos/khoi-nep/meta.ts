@@ -4,6 +4,6 @@ export const meta = {
   brand: "Khối Nếp",
   industry: "Nội thất",
   solutionSlug: "construction",
-  tagline: "Studio thiết kế không gian & nội thất",
+  tagline: "Thiết kế & thi công nội thất tại Đà Nẵng",
   look: "Tạp chí kiến trúc: chữ trên ảnh, đường kẻ, lưới",
 } as const;

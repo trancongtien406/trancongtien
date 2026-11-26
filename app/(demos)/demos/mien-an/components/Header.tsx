@@ -55,7 +55,7 @@ export function Header() {
           ))}
         </nav>
         <a href="#appointment" className={`${styles.btn} ${styles.btnPrimary} ${styles.headerCta}`}>
-          Đặt lịch trải nghiệm
+          Đặt lịch
         </a>
         <button ref={btn} type="button" className={styles.menuBtn} aria-haspopup="dialog" aria-expanded={open} onClick={() => setOpen(true)}>
           Menu <span className={styles.menuBars} aria-hidden="true" />
@@ -89,7 +89,7 @@ export function Header() {
           </nav>
           <div className={styles.menuCta}>
             <a href="#appointment" className={`${styles.btn} ${styles.btnPrimary}`} onClick={close}>
-              Đặt lịch trải nghiệm
+              Đặt lịch
             </a>
           </div>
         </div>

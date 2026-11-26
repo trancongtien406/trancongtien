@@ -86,19 +86,19 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   await page.locator("label", { hasText: "Socola đậm" }).first().click();
   const sum = await page.locator("[aria-label='Bản xem trước và tóm tắt']").innerText();
   ok(/Vị socola đậm/i.test(sum), "đổi vị cập nhật tóm tắt");
-  const svgLabel = await page.locator("svg[role=img]").first().getAttribute("aria-label");
+  const svgLabel = await page.locator("#dung-banh svg[role=img]").first().getAttribute("aria-label");
   ok(/socola đậm/i.test(svgLabel || ""), "bản xem trước SVG cập nhật nhãn");
   // đổi size 2 tầng
   await page.locator("label", { hasText: "2 tầng" }).first().click();
   const t1 = await page.locator("strong", { hasText: /₫/ }).first().innerText();
   ok(t1 !== total0, `giá đổi theo size (${total0} -> ${t1})`);
   // chữ viết
-  const input = page.getByLabel(/Lời chúc/);
+  const input = page.getByLabel(/Lời chúc \(tối đa/);
   await input.fill("Chúc mừng Mai 30 tuổi ắệ");
-  ok(await page.locator("svg[role=img] text").first().textContent() === "Chúc mừng Mai 30 tuổi ắệ", "chữ viết hiện lên bánh (có dấu)");
+  ok(await page.locator("#dung-banh svg[role=img] text").first().textContent() === "Chúc mừng Mai 30 tuổi ắệ", "chữ viết hiện lên bánh (có dấu)");
   ok((await input.getAttribute("maxlength")) === "24", "giới hạn 24 ký tự");
   await input.fill("");
-  ok((await page.locator("svg[role=img] text").count()) === 0, "xoá chữ thì bản vẽ không còn dòng chữ");
+  ok((await page.locator("#dung-banh svg[role=img] text").count()) === 0, "xoá chữ thì bản vẽ không còn dòng chữ");
   // trạng thái lỗi: số người rỗng / vượt
   const serv = page.getByLabel("Bánh cho bao nhiêu người?");
   await serv.fill("");
@@ -122,7 +122,7 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   // trang trí toggle
   await page.locator("label", { hasText: "Macaron" }).last().click();
   // CTA
-  const href = await page.getByRole("link", { name: "Gửi yêu cầu tư vấn" }).first().getAttribute("href");
+  const href = await page.getByRole("link", { name: "Gửi yêu cầu đặt bánh" }).first().getAttribute("href");
   ok(/^\/lien-he/.test(href || ""), `CTA tới form tư vấn: ${href}`);
   console.log("INFO href đầy đủ:", href, "(industry/solution/utm chỉ có khi registry có tiem-banh)");
   await page.locator("#dung-banh").screenshot({ path: path.join(shots, "builder-1440.png") });
@@ -136,10 +136,15 @@ for (const w of [320, 390, 768, 1024, 1440]) {
 // 4) menu lọc + tilt + sticker kéo/xoay + bàn phím + Tab tới CTA
 {
   const { ctx, page } = await open();
-  await page.getByRole("button", { name: "Macaron", exact: true }).click();
-  ok(await page.locator("#tu-banh article").count() === 1, "lọc Macaron còn 1 món");
-  await page.getByRole("button", { name: "Tất cả" }).click();
-  ok(await page.locator("#tu-banh article").count() === 16, "tất cả 16 món");
+  ok(await page.locator("#tu-banh article").count() === 6, "mặc định nhóm Bánh kem = 6 món");
+  let tot = 6;
+  for (const [name, c] of [["Bánh lạnh", 6], ["Bánh mì & croissant", 5], ["Cookie & macaron", 4]]) {
+    await page.locator("#tu-banh button[aria-pressed]").filter({ hasText: name }).click();
+    ok(await page.locator("#tu-banh article").count() === c, `nhóm ${name} = ${c} món`);
+    tot += c;
+  }
+  ok(tot === 21, "tổng 21 món chia 4 nhóm");
+  await page.locator("#tu-banh button[aria-pressed]").filter({ hasText: "Bánh kem" }).click();
   // tilt
   const card = page.locator("#tu-banh [data-fx=TiltCard]").first();
   await card.scrollIntoViewIfNeeded();
@@ -180,16 +185,78 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   ok(rotated, "kéo tay nắm xoay đổi góc");
   // hero effects tồn tại
   const fx = await page.evaluate(() => [...document.querySelectorAll("[data-fx]")].map((e) => e.getAttribute("data-fx")));
-  const need = ["SprinkleRain", "ConfettiBurst", "BounceWords", "Drip", "TiltCard", "MagneticButton", "ParallaxLayer", "SlotText", "VelocityMarquee", "StackingCards", "ScrollScrubText", "ClipReveal"];
+  const need = ["SprinkleRain", "ConfettiBurst", "BounceWords", "Drip", "TiltCard", "MagneticButton", "SlotText", "StackingCards", "BlobMorph", "ScrollProgress"];
   for (const n of need) ok(fx.includes(n), `hiệu ứng có mặt: ${n}`);
+  for (const n of ["VelocityMarquee", "ParallaxLayer", "ScrollScrubText", "ClipReveal", "SplitReveal"]) ok(!fx.includes(n), `đã bỏ hiệu ứng đại trà: ${n}`);
+  for (const sel of ["oven-timer", "tu-kinh", "bang-gia", "thiep-chu"]) ok(await page.evaluate((x) => !!document.querySelector(`[data-fx-own=${x}], #${x}`), sel), `section/hiệu ứng riêng: ${sel}`);
   await ctx.close();
+}
+
+
+// 4a) nội dung ngành + hiệu ứng riêng gắn nghiệp vụ
+{
+  const { ctx, page } = await open();
+  const heroTxt = await page.locator("#dau-trang").innerText();
+  ok(/Quận Hải Châu/i.test(heroTxt) && /7:00/.test(heroTxt) && /320\.000/.test(heroTxt) && /trước 2 ngày/i.test(heroTxt) && /bánh kem/i.test(heroTxt), "hero: loại hình tiệm bánh, Quận Hải Châu, giờ bán, giá từ, báo trước 2 ngày");
+  ok(await page.getByRole("link", { name: "Đặt bánh sinh nhật" }).first().isVisible() && await page.getByRole("link", { name: "Xem tủ bánh" }).isVisible(), "hero: CTA Đặt bánh sinh nhật + Xem tủ bánh");
+  for (const id of ["tu-banh", "tu-kinh", "gio-ra-lo", "bang-gia", "dung-banh", "thiep-chu", "mua-dip", "dat-banh", "giao-nhan", "mot-ngay", "hoi-dap"]) ok((await page.locator("#" + id).count()) === 1, `section #${id}`);
+  ok((await page.locator("#hoi-dap details").count()) >= 7, "FAQ >= 7 câu (đặt trước, dị ứng, bảo quản, giao, cọc)");
+  // tủ kính xoay
+  await page.locator("#tu-kinh").scrollIntoViewIfNeeded();
+  const nm = () => page.locator("#tu-kinh h3").innerText();
+  const n0 = await nm();
+  await page.getByRole("button", { name: "Món sau" }).click(); await page.waitForTimeout(300);
+  const n1 = await nm();
+  const box = await page.locator("#tu-kinh [role=group]").first().boundingBox();
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2); await page.mouse.down(); await page.mouse.move(box.x + box.width / 2 - 260, box.y + box.height / 2, { steps: 10 }); await page.mouse.up(); await page.waitForTimeout(900);
+  const n2 = await nm();
+  ok(n0 !== n1 && n1 !== n2, `tủ kính xoay: nút Sau + kéo đổi món (${n0} -> ${n1} -> ${n2})`);
+  await page.locator("#tu-kinh [role=group]").first().focus(); await page.keyboard.press("ArrowLeft"); await page.waitForTimeout(300);
+  ok((await nm()) === n1 || (await nm()) !== n2, "tủ kính: phím mũi tên đổi món");
+  // lò nướng đếm giờ
+  await page.locator("#gio-ra-lo").scrollIntoViewIfNeeded();
+  const c1 = await page.locator("#gio-ra-lo [role=timer]").getAttribute("aria-label"); await page.waitForTimeout(2200);
+  const c2 = await page.locator("#gio-ra-lo [role=timer]").getAttribute("aria-label");
+  ok(/^Còn \d\d:\d\d:\d\d tới mẻ /.test(c2) && c1 !== c2, `lò nướng đếm ngược chạy (${c1} -> ${c2})`);
+  ok((await page.locator("#gio-ra-lo li").count()) === 5, "5 mẻ nướng trong ngày");
+  // cắt bánh: đổi size đổi số lát; cuộn đổi tiến độ
+  await page.locator("#bang-gia").scrollIntoViewIfNeeded();
+  for (const [lab, n] of [["14cm", 6], ["22cm", 16], ["2 tầng", 24], ["18cm", 10]]) {
+    await page.locator("#bang-gia").getByRole("radio", { name: new RegExp("^" + lab) }).click();
+    ok((await page.locator("#bang-gia svg g[class*=slice]").count()) === n, `cắt bánh ${lab}: ${n} lát`);
+  }
+  const pv = (y) => page.evaluate((yy) => { const e = document.querySelector("#bang-gia [class*=sliceGrid]"); window.scrollTo(0, e.getBoundingClientRect().top + scrollY - innerHeight * 0.7 + yy); return new Promise((r) => setTimeout(() => r(parseFloat(e.style.getPropertyValue("--p") || "1")), 900)); }, y);
+  const pa = await pv(0), pb = await pv(700);
+  ok(pa < pb && pb > 0.3, `cắt bánh theo cuộn: tiến độ ${pa.toFixed(2)} -> ${pb.toFixed(2)}`);
+  // nến thổi
+  await page.locator("#thiep-chu").scrollIntoViewIfNeeded();
+  const flames = () => page.locator("#thiep-chu path[class*=flame]").count();
+  const f0 = await flames();
+  await page.getByRole("button", { name: "Thêm một nến" }).click();
+  ok((await flames()) === f0 + 1, `thêm nến: ${f0} -> ${f0 + 1}`);
+  await page.getByRole("button", { name: "Thổi nến" }).click(); await page.waitForTimeout(1800);
+  ok((await flames()) === 0 && /Tắt hết/.test(await page.locator("#thiep-chu").innerText()), "thổi nến: tắt hết, hiện lời ước");
+  await page.getByRole("button", { name: "Thắp lại nến" }).click();
+  ok((await flames()) === f0 + 1, "thắp lại nến");
+  await page.getByLabel("Lời chúc trên thiệp").fill("Chúc mừng ắệ 30");
+  ok(/Chúc mừng ắệ 30/.test(await page.locator("#thiep-chu svg[role=img]").innerHTML()), "lời chúc hiện lên bánh (có dấu)");
+  await ctx.close();
+  // giả lập giờ: 03:00 sáng VN (20:00 UTC) -> mẻ đầu 06:30 sau 3.5h; 08:30 VN -> mẻ tiếp 10:00
+  for (const [utc, re, label] of [[Date.UTC(2026, 10, 24, 20, 0, 0), /^Còn 03:[23]\d:\d\d tới mẻ Croissant bơ/, "03:00 -> 06:30"], [Date.UTC(2026, 10, 25, 1, 30, 0), /^Còn 01:[23]\d:\d\d tới mẻ Cookie/, "08:30 -> 10:00"]]) {
+    const c = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+    await c.addInitScript((T) => { const R = Date; const off = T - R.now(); globalThis.Date = class extends R { constructor(...a) { if (a.length) super(...a); else super(R.now() + off); } static now() { return R.now() + off; } }; }, utc);
+    const q = await c.newPage(); await q.goto(URL, { waitUntil: "networkidle" }); await q.waitForTimeout(1500);
+    const lab = await q.locator("#gio-ra-lo [role=timer]").getAttribute("aria-label");
+    ok(re.test(lab), `lò nướng giả lập giờ ${label}: ${lab}`);
+    await c.close();
+  }
 }
 
 // 4b) Tab tới CTA (ngữ cảnh mới)
 {
   const { ctx, page } = await open();
   let reached = false;
-  for (let i = 0; i < 20; i++) { await page.keyboard.press("Tab"); const t = await page.evaluate(() => document.activeElement?.textContent || ""); if (/Dựng chiếc bánh/.test(t)) { reached = true; break; } }
+  for (let i = 0; i < 20; i++) { await page.keyboard.press("Tab"); const t = await page.evaluate(() => document.activeElement?.textContent || ""); if (/Đặt bánh sinh nhật/.test(t)) { reached = true; break; } }
   ok(reached, "Tab tới CTA chính ở hero");
   const fo = await page.evaluate(() => getComputedStyle(document.activeElement).outlineStyle);
   ok(fo !== "none", "CTA có viền focus rõ");
@@ -221,7 +288,7 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   ok(vis.op === "1" && (vis.tf === "none" || vis.tf === "matrix(1, 0, 0, 1, 0, 0)"), `reduced: chữ hero hiện đủ, không dịch (${vis.op}/${vis.tf})`);
   ok(vis.drip === "none", "reduced: kem chảy không animation");
   const txt = await page.locator("main").innerText();
-  ok(/Mười sáu món/.test(txt) && /Sinh nhật ai sắp tới/.test(txt), "reduced: nội dung vẫn hiện đủ");
+  ok(/Hai mươi mốt món/.test(txt) && /Sinh nhật ai sắp tới/.test(txt), "reduced: nội dung vẫn hiện đủ");
   ok(errs.length === 0, "reduced: 0 lỗi console");
   await page.screenshot({ path: path.join(shots, "reduced-1440.png"), fullPage: true });
   await ctx.close();
@@ -233,14 +300,14 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   const page = await ctx.newPage();
   await page.goto(URL, { waitUntil: "load" });
   const t = await page.locator("main").innerText();
-  ok(/Bánh\s+ngọt/.test(t) && /Tủ bánh hôm nay/i.test(t) && /Điều mọi người hay hỏi/.test(t), "no-JS: nội dung hero, tủ bánh, hỏi đáp có trong HTML");
+  ok(/Bánh\s+ngọt/.test(t) && /Tủ bánh theo nhóm/i.test(t) && /Điều mọi người hay hỏi/.test(t), "no-JS: nội dung hero, tủ bánh, hỏi đáp có trong HTML");
   await ctx.close();
 }
 
 // 8) ?ref giữ nguyên, trang credits, long task
 {
   const { ctx, page } = await open({}, 1440, 900, "?ref=abc");
-  const href = await page.getByRole("link", { name: "Gửi yêu cầu tư vấn" }).first().getAttribute("href");
+  const href = await page.getByRole("link", { name: "Gửi yêu cầu đặt bánh" }).first().getAttribute("href");
   ok(!!href && href.startsWith("/lien-he"), "link thoát cùng origin (cookie tct_ref đi theo, không đọc/ghi ở demo)");
   await ctx.close();
   const c2 = await browser.newContext({ viewport: { width: 1440, height: 900 } });

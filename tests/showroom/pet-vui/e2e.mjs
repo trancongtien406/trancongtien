@@ -82,36 +82,36 @@ for (const w of [320, 390, 768, 1024, 1440]) {
 // 3) công cụ chọn gói
 {
   const { ctx, page } = await open({ permissions: ["clipboard-read", "clipboard-write"] });
-  await page.locator("#chon-goi").scrollIntoViewIfNeeded();
+  await page.locator("#uoc-tinh").scrollIntoViewIfNeeded();
   const plan = page.locator("aside[aria-label='Kế hoạch chăm sóc']");
   ok(/Chưa đủ thông tin/.test(await plan.innerText()) && /loài/.test(await plan.innerText()), "trạng thái rỗng: báo còn thiếu loài, cân nặng, độ dài lông");
   ok(await page.locator("fieldset", { hasText: "Cân nặng" }).first().evaluate((e) => e.disabled), "cân nặng khoá khi chưa chọn loài");
-  await page.locator("label", { hasText: "Chó" }).first().click();
-  await page.locator("label", { hasText: "7 – 15 kg" }).click();
+  await page.locator("#uoc-tinh label", { hasText: "Chó" }).first().click();
+  await page.locator("#uoc-tinh label", { hasText: "7 – 15 kg" }).click();
   ok(/cân nặng|độ dài lông/.test(await plan.innerText()) && !/độ dài lông.*cân nặng/.test(await plan.innerText()), "thiếu độ dài lông thì vẫn rỗng");
-  await page.locator("label", { hasText: "Lông vừa" }).click();
+  await page.locator("#uoc-tinh label", { hasText: "Lông vừa" }).click();
   const t1 = await plan.innerText();
   ok(/Tắm Bọt Thơm/.test(t1) && /₫/.test(t1) && /phút|giờ/.test(t1), "đủ 3 mục: hiện gói, giá, thời gian");
   const price1 = (t1.match(/([\d.]+)\s*₫/) || [])[1];
   // đổi sang tỉa gọn -> giá tăng
-  await page.locator("label", { hasText: "Tắm và tỉa gọn" }).click();
+  await page.locator("#uoc-tinh label", { hasText: "Tắm và tỉa gọn" }).click();
   const t2 = await plan.innerText();
   const price2 = (t2.match(/([\d.]+)\s*₫/) || [])[1];
   ok(/Tắm & Tỉa Gọn/.test(t2) && +price2.replace(/\./g, "") > +price1.replace(/\./g, ""), `đổi mục tiêu: gói + giá tăng (${price1} -> ${price2})`);
   ok(/Tỉa gọn mặt/.test(t2), "chó tỉa gọn có bước tỉa mặt");
   // tình trạng rối + mùi + rụng
   const nBefore = await plan.locator("ol li").count();
-  await page.locator("label", { hasText: "Lông rối, vón cục" }).click();
-  await page.locator("label", { hasText: "Hơi có mùi" }).click();
-  await page.locator("label", { hasText: "Rụng nhiều lông" }).click();
+  await page.locator("#uoc-tinh label", { hasText: "Lông rối, vón cục" }).click();
+  await page.locator("#uoc-tinh label", { hasText: "Hơi có mùi" }).click();
+  await page.locator("#uoc-tinh label", { hasText: "Rụng nhiều lông" }).click();
   const nAfter = await plan.locator("ol li").count();
   ok(nAfter === nBefore + 3, `3 tình trạng thêm 3 bước (${nBefore} -> ${nAfter})`);
   // mèo: đổi loài reset cân nặng nếu id không còn
-  await page.locator("label", { hasText: "Mèo" }).first().click();
+  await page.locator("#uoc-tinh label", { hasText: "Mèo" }).first().click();
   ok(/Chưa đủ thông tin/.test(await plan.innerText()), "đổi sang mèo: cân nặng reset, quay về trạng thái rỗng");
-  ok((await page.locator("label", { hasText: /^\s*Trên 5 kg/ }).count()) === 1, "mèo có mức Trên 5 kg riêng");
-  await page.locator("label", { hasText: "Dưới 3 kg" }).first().click();
-  await page.locator("label", { hasText: "Lông dài" }).click();
+  ok((await page.locator("#uoc-tinh label", { hasText: /^\s*Trên 5 kg/ }).count()) === 1, "mèo có mức Trên 5 kg riêng");
+  await page.locator("#uoc-tinh label", { hasText: "Dưới 3 kg" }).first().click();
+  await page.locator("#uoc-tinh label", { hasText: "Lông dài" }).click();
   const t3 = await plan.innerText();
   ok(/Sấy nhẹ, dừng nghỉ/.test(t3) && /Mèo được nghỉ/.test(t3), "mèo có bước sấy nhẹ và ghi chú riêng cho mèo");
   // cảnh báo thú y luôn có; bật cờ da
@@ -124,16 +124,16 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   await page.waitForTimeout(300);
   const clip = await page.evaluate(() => navigator.clipboard.readText().catch(() => "ERR"));
   ok(/Tóm tắt chăm sóc tại Bông Xù/.test(clip) && /Giá tham khảo/.test(clip) && /bác sĩ thú y/.test(clip), "sao chép tóm tắt (có giá tham khảo + lưu ý thú y)");
-  ok(/Đã sao chép/.test(await page.locator("[role=status]").innerText()), "thông báo sao chép (aria-live)");
+  ok(/Đã sao chép/.test(await page.locator("#uoc-tinh [role=status]").innerText()), "thông báo sao chép (aria-live)");
   // CTA
-  const href = await plan.getByRole("link", { name: "Gửi yêu cầu tư vấn" }).getAttribute("href");
+  const href = await plan.getByRole("link", { name: "Gửi yêu cầu đặt lịch" }).getAttribute("href");
   ok(/^\/lien-he/.test(href || ""), `CTA tới form tư vấn: ${href}`);
   console.log("INFO href:", href);
   ok(!/<form[^>]*action/i.test(await page.content()), "không có form gửi dữ liệu");
-  await page.locator("#chon-goi").screenshot({ path: path.join(shots, "planner-1440.png") });
+  await page.locator("#uoc-tinh").screenshot({ path: path.join(shots, "planner-1440.png") });
   // persist
   await page.reload({ waitUntil: "networkidle" }); await page.waitForTimeout(700);
-  ok(await page.locator("input[type=radio]:checked").count() >= 3, "lựa chọn được khôi phục sau tải lại");
+  ok(await page.locator("#uoc-tinh input[type=radio]:checked").count() >= 3, "lựa chọn được khôi phục sau tải lại");
   await page.getByRole("button", { name: "Làm lại từ đầu" }).click();
   ok(/Chưa đủ thông tin/.test(await page.locator("aside[aria-label='Kế hoạch chăm sóc']").innerText()), "Làm lại từ đầu xoá lựa chọn");
   await ctx.close();
@@ -170,8 +170,8 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   const tail = await btn.locator("svg").evaluate((e) => ({ op: getComputedStyle(e).opacity, an: getComputedStyle(e).animationName }));
   ok(+tail.op === 1 && /wag/.test(tail.an), `hover nút: đuôi hiện và vẫy (${tail.op}/${tail.an})`);
   // bọt xà phòng
-  await page.locator("#goi").scrollIntoViewIfNeeded(); await page.waitForTimeout(900);
-  const card = page.locator("#goi [data-fx=BubbleCanvas]").first();
+  await page.locator("#dich-vu").scrollIntoViewIfNeeded(); await page.waitForTimeout(900);
+  const card = page.locator("#dich-vu [data-fx=BubbleCanvas]").first();
   await card.scrollIntoViewIfNeeded();
   const cb = await card.boundingBox();
   await page.mouse.move(cb.x + cb.width / 2, cb.y + cb.height / 2, { steps: 4 });
@@ -185,13 +185,64 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   await page.evaluate(() => window.scrollTo(0, 0));
   await scrollThrough(page, 900);
   const fx = await page.evaluate(() => [...new Set([...document.querySelectorAll("[data-fx]")].map((e) => e.getAttribute("data-fx")))]);
-  for (const n of ["BounceWords", "BubbleCanvas", "CircleWipe", "VelocityMarquee", "ClipReveal", "StackingCards", "ScrollScrubText", "SlotText", "MagneticButton", "ScrollProgress"]) ok(fx.includes(n), `hiệu ứng có mặt: ${n}`);
+  for (const n of ["BounceWords", "BubbleCanvas", "CircleWipe", "WordSwap", "PawWalk", "OpenNow", "BlobMorph", "MagneticButton"]) ok(fx.includes(n), `hiệu ứng có mặt: ${n}`);
+  for (const n of ["VelocityMarquee", "ClipReveal", "StackingCards", "ScrollScrubText", "ScrollProgress", "SlotText"]) ok(!fx.includes(n), `đã bỏ hiệu ứng đại trà: ${n}`);
   // CircleWipe đã loang hết
-  const cp = await page.locator("#goi").evaluate((e) => getComputedStyle(e).clipPath);
+  const cp = await page.locator("#dich-vu").evaluate((e) => getComputedStyle(e).clipPath);
   ok(cp === "none", `CircleWipe: khối gói loang hết sau khi cuộn qua (clip-path ${cp})`);
-  // marquee chạy (transform đổi theo thời gian)
-  const m1 = await page.locator("[data-fx=VelocityMarquee]").first().evaluate((e) => e.innerHTML.length);
-  ok(m1 > 100, "marquee có nội dung");
+  // chân thú đóng dấu theo quy trình
+  const stamped = await page.locator("[data-fx=PawWalk] [data-stamp='1']").count();
+  ok(stamped >= 4, `PawWalk: ${stamped}/5 bước đã đóng dấu sau khi cuộn qua`);
+  // đổi từ kiểu đóng dấu ở hero
+  const w1 = await page.locator("[data-fx=WordSwap] [aria-hidden]").first().textContent();
+  await page.waitForTimeout(2700);
+  const w2 = await page.locator("[data-fx=WordSwap] [aria-hidden]").first().textContent();
+  ok(w1 !== w2, `WordSwap đổi từ (${w1} -> ${w2})`);
+  await ctx.close();
+}
+
+// 4b) nội dung tiệm: hero, bảng giá, phụ phí, quy trình, quy định, lịch hẹn
+{
+  const { ctx, page } = await open();
+  const h = await page.locator("#dau-trang").innerText();
+  ok(/Tiệm tắm & cắt tỉa lông chó mèo/.test(h) && /Quận Sơn Trà, Đà Nẵng/.test(h), "hero nêu loại hình + quận");
+  ok(/150\.000/.test(h) && /8:00 – 19:00/.test(h) && /Từ 3 tháng/.test(h), "hero có 3 sự thật: giá từ, giờ mở cửa, tuổi nhận");
+  ok(/Đặt lịch cho bé/.test(h) && /Xem bảng giá/.test(h), "hero: CTA đặt lịch và xem bảng giá");
+  const sv = await page.locator("#dich-vu h3").allInnerTexts();
+  ok(sv.length === 5 && /Tắm Bọt/.test(sv[0]) && /Cắt Tỉa/.test(sv[1]) && /Móng & Lau Tai/.test(sv[2]) && /Spa/.test(sv[3]) && /Gỡ Rối/.test(sv[4]), `5 dịch vụ: ${sv.join(" | ")}`);
+  const main = await page.locator("main").innerText();
+  for (const k of ["Tiếp nhận và kiểm tra", "Sấy khô", "Hoàn thiện", "sổ tiêm", "Đưa đón", "Chính sách đặt và huỷ", "Giờ mở cửa", "Phụ phí có thể phát sinh"]) ok(main.includes(k), `có mục: ${k}`);
+  ok(!/bác sĩ (thú y )?[A-ZĐ][a-zà-ỹ]+ [A-ZĐ]/.test(main), "không bịa tên bác sĩ thú y");
+  // bảng giá: đổi loài/lông đổi số
+  const pb = page.locator("#bang-gia");
+  await pb.scrollIntoViewIfNeeded();
+  const cell = () => pb.locator("tbody tr").first().locator("td").first().locator("b").innerText();
+  const a = await cell();
+  ok(/150\.000/.test(a), `chó dưới 3 kg lông ngắn tắm thơm: ${a}`);
+  await pb.locator("label", { hasText: "Lông dài" }).click();
+  const b = await cell();
+  ok(/200\.000|210\.000|202\.000/.test(b.replace(/\s/g, " ")) || b !== a, `lông dài đổi giá (${a} -> ${b})`);
+  await pb.locator("label", { hasText: "Mèo" }).first().click();
+  ok((await pb.locator("tbody tr").count()) === 3, "mèo có 3 mức cân nặng");
+  await pb.locator("label", { hasText: "Lông ngắn" }).click();
+  ok(/180\.000/.test(await cell()), "mèo dưới 3 kg lông ngắn: 180.000");
+  ok(/khoảng/.test(await pb.locator("tbody td small").first().innerText()), "bảng giá có thời gian dự kiến");
+  // lịch hẹn: chủ nhật khoá 16:30
+  const bk = page.locator("#dat-lich");
+  await bk.scrollIntoViewIfNeeded();
+  ok(/Chọn ngày và giờ/.test(await bk.innerText()), "lịch hẹn: trạng thái chưa chọn");
+  await bk.locator("label", { hasText: "Thứ Bảy" }).click();
+  await bk.locator("label", { hasText: "16:30" }).click();
+  ok(/Thứ Bảy, 16:30/.test(await bk.locator("[role=status]").last().innerText()), "chọn Thứ Bảy 16:30: có tóm tắt");
+  await bk.locator("label", { hasText: "Chủ nhật" }).click();
+  ok(await bk.locator("input[name=pv-slot-time]").nth(5).isDisabled(), "Chủ nhật: khung 16:30 bị khoá");
+  ok(/Chọn ngày và giờ/.test(await bk.locator("[role=status]").last().innerText()), "đổi sang khung bị khoá thì bỏ chọn giờ");
+  const bh = await bk.getByRole("link", { name: "Gửi yêu cầu đặt lịch" }).getAttribute("href");
+  ok(/^\/lien-he/.test(bh || ""), `đặt lịch dẫn tới form tư vấn: ${bh}`);
+  ok(/nghỉ|Nghỉ/.test(await bk.locator("table").innerText()), "giờ mở cửa: Thứ Hai nghỉ");
+  // đèn đang mở: giờ VN giả lập qua computeOpen (kiểm bằng dữ liệu trang)
+  const st = await page.locator("[data-fx=OpenNow]").first().getAttribute("data-state");
+  ok(["open", "last", "closed"].includes(st), `OpenNow có trạng thái theo giờ Đà Nẵng: ${st}`);
   await ctx.close();
 }
 
@@ -199,7 +250,7 @@ for (const w of [320, 390, 768, 1024, 1440]) {
 {
   const { ctx, page } = await open();
   let reached = false;
-  for (let i = 0; i < 25; i++) { await page.keyboard.press("Tab"); const t = await page.evaluate(() => document.activeElement?.textContent || ""); if (/Chọn gói cho bé/.test(t) && await page.evaluate(() => !!document.activeElement.closest("section"))) { reached = true; break; } }
+  for (let i = 0; i < 25; i++) { await page.keyboard.press("Tab"); const t = await page.evaluate(() => document.activeElement?.textContent || ""); if (/Đặt lịch cho bé/.test(t) && await page.evaluate(() => !!document.activeElement.closest("section"))) { reached = true; break; } }
   ok(reached, "Tab tới CTA chính ở hero");
   ok((await page.evaluate(() => getComputedStyle(document.activeElement).outlineStyle)) !== "none", "CTA có viền focus rõ");
   await ctx.close();
@@ -221,17 +272,17 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   const v = await page.evaluate(() => {
     const w = document.querySelector("h1 [data-w]"); const cs = getComputedStyle(w);
     const paw = document.querySelector("[data-pv-root]").getAttribute("data-paw");
-    return { op: cs.opacity, tf: cs.transform, paw, disc: getComputedStyle(document.querySelector("[class*=heroDisc]")).animationName, cp: getComputedStyle(document.querySelector("#goi")).clipPath };
+    return { op: cs.opacity, tf: cs.transform, paw, disc: getComputedStyle(document.querySelector("[class*=heroDisc]")).animationName, cp: getComputedStyle(document.querySelector("#dich-vu")).clipPath };
   });
   ok(v.op === "1" && (v.tf === "none" || /matrix\(1, 0, 0, 1, 0, 0\)/.test(v.tf)), `reduced: chữ hero hiện đủ, không dịch (${v.op}/${v.tf})`);
   ok(v.paw === null, "reduced: tắt con trỏ chân thú");
   ok(v.disc === "none", "reduced: hero không animation");
   ok(v.cp === "none", "reduced: khối gói hiện đủ (không clip)");
-  await page.locator("#goi").scrollIntoViewIfNeeded();
-  const stat = await page.locator("#goi [data-fx=BubbleCanvas] [class*=bubblesStatic]").first().evaluate((e) => getComputedStyle(e).display);
+  await page.locator("#dich-vu").scrollIntoViewIfNeeded();
+  const stat = await page.locator("#dich-vu [data-fx=BubbleCanvas] [class*=bubblesStatic]").first().evaluate((e) => getComputedStyle(e).display);
   ok(stat === "block", "reduced: bọt tĩnh thay canvas");
   const txt = await page.locator("main").innerText();
-  ok(/Bốn kiểu chiều chuộng/.test(txt) && /Điều mọi người hay hỏi/.test(txt), "reduced: nội dung vẫn hiện đủ");
+  ok(/Năm dịch vụ/.test(txt) && /Điều mọi người hay hỏi/.test(txt), "reduced: nội dung vẫn hiện đủ");
   ok(errs.length === 0, "reduced: 0 lỗi console");
   await ctx.close();
 }
@@ -242,8 +293,8 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   const page = await ctx.newPage();
   await page.goto(URL_, { waitUntil: "load" });
   const t = await page.locator("main").innerText();
-  ok(/Tắm xinh/.test(t) && /Bốn kiểu chiều chuộng/.test(t) && /Điều mọi người hay hỏi/.test(t), "no-JS: nội dung hero, gói, hỏi đáp có trong HTML");
-  const cp = await page.locator("#goi").evaluate((e) => getComputedStyle(e).clipPath);
+  ok(/Tắm xinh/.test(t) && /Năm dịch vụ/.test(t) && /Bảng giá tham khảo/.test(t) && /Điều mọi người hay hỏi/.test(t), "no-JS: nội dung hero, gói, hỏi đáp có trong HTML");
+  const cp = await page.locator("#dich-vu").evaluate((e) => getComputedStyle(e).clipPath);
   ok(cp === "none", "no-JS: khối gói không bị clip");
   await ctx.close();
 }
@@ -251,9 +302,9 @@ for (const w of [320, 390, 768, 1024, 1440]) {
 // 8) ?ref, credits, hiệu năng
 {
   const { ctx, page } = await open({}, 1440, 900, "?ref=abc");
-  await page.locator("#chon-goi").scrollIntoViewIfNeeded();
-  for (const [a, b] of [["label", "Chó"], ["label", "3 – 7 kg"], ["label", "Lông ngắn"]]) await page.locator(a, { hasText: b }).first().click();
-  const href = await page.getByRole("link", { name: "Gửi yêu cầu tư vấn" }).first().getAttribute("href");
+  await page.locator("#uoc-tinh").scrollIntoViewIfNeeded();
+  for (const [a, b] of [["#uoc-tinh label", "Chó"], ["#uoc-tinh label", "3 – 7 kg"], ["#uoc-tinh label", "Lông ngắn"]]) await page.locator(a, { hasText: b }).first().click();
+  const href = await page.getByRole("link", { name: "Gửi yêu cầu đặt lịch" }).first().getAttribute("href");
   ok(!!href && href.startsWith("/lien-he"), "link thoát cùng origin (cookie tct_ref đi theo, demo không đọc/ghi)");
   ok(/^\/lien-he(\?|$)/.test(href), `href: ${href}`);
   await ctx.close();

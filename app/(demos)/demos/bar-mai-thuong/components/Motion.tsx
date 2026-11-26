@@ -9,7 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
  *  - Spotlight: vệt sáng hồng/cyan đi theo con trỏ trên nền tối (chỉ pointer fine, tắt khi reduced).
  *  - Moment cuộn 1: ly rót đầy theo tiến độ cuộn (mực ly, dòng rót, lát cam, bước 01-03).
  *  - Moment cuộn 2: skyline trượt chậm hơn nội dung hero + đèn quét lệch pha theo cuộn.
- *  - Reveal nhẹ cho thẻ/dòng khi vào khung (một lần).
+ *  - "Bật đèn": tiêu đề/thẻ nhấp nháy neon rồi sáng ổn định khi vào khung (một lần).
  * Reduced-motion: không đăng ký gì, nội dung hiện đủ, ly đầy sẵn.
  */
 export function Motion() {
@@ -19,10 +19,15 @@ export function Motion() {
     const q = (sel: string) => Array.from(document.querySelectorAll<HTMLElement>(sel));
 
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      // reveal
-      q('[data-tm="rv"]').forEach((el, i) => {
-        gsap.from(el, { y: 28, opacity: 0, duration: 0.7, delay: (i % 3) * 0.06, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 90%", once: true } });
-      });
+      // bật đèn: phần tử chờ được "thắp" (nhấp nháy neon) khi vào khung, một lần
+      const lit = q('[data-tm="lit"]');
+      lit.forEach((el) => el.setAttribute("data-arm", "1"));
+      const io = new IntersectionObserver((es) => es.forEach((e) => {
+        if (e.isIntersecting) { e.target.setAttribute("data-lit", "1"); io.unobserve(e.target); }
+      }), { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+      lit.forEach((el) => io.observe(el));
+      const safety = window.setTimeout(() => lit.forEach((el) => el.setAttribute("data-lit", "1")), 9000);
+      const undo = () => { io.disconnect(); window.clearTimeout(safety); lit.forEach((el) => { el.removeAttribute("data-arm"); el.removeAttribute("data-lit"); }); };
 
       // moment 1: ly rót
       const pour = document.querySelector<HTMLElement>('[data-tm="pour"]');
@@ -55,6 +60,7 @@ export function Motion() {
         gsap.to(sky, { yPercent: 14, ease: "none", scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true } });
         gsap.to(hero.querySelectorAll('[class*="beam"]'), { opacity: 0.25, ease: "none", scrollTrigger: { trigger: hero, start: "20% top", end: "bottom top", scrub: true } });
       }
+      return undo;
     });
 
     // spotlight theo con trỏ

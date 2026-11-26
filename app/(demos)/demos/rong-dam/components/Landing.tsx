@@ -3,12 +3,16 @@ import { siteConfig } from "@/lib/site";
 import { COPY } from "../data/copy";
 import type { Lang } from "../data/tours";
 import styles from "../brand.module.css";
+import { Booking } from "./Booking";
+import { Combo } from "./Combo";
+import { DepartureBoard } from "./DepartureBoard";
 import { Explorer } from "./Explorer";
 import { Header } from "./Header";
 import { HtmlLang } from "./HtmlLang";
 import { Hero } from "./Hero";
 import { Motion } from "./Motion";
 import { Closing, Faq, Footer, Journal, Rhythm, Why } from "./Sections";
+import { Team } from "./Team";
 import { Tours } from "./Tours";
 import { TripFinder } from "./TripFinder";
 import { TripProvider } from "./TripProvider";
@@ -25,11 +29,15 @@ export function Landing({ lang }: { lang: Lang }) {
       <main id="main">
         <Hero lang={lang} />
         <Rhythm lang={lang} />
-        <TripFinder />
+        <DepartureBoard lang={lang} />
         <Tours />
+        <TripFinder />
         <Explorer consultHref={consultHref} />
+        <Combo lang={lang} />
+        <Team lang={lang} />
         <Journal lang={lang} />
         <Why lang={lang} />
+        <Booking consultHref={consultHref} />
         <Faq lang={lang} />
         <Closing lang={lang} consultHref={consultHref} />
       </main>

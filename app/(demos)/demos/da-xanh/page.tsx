@@ -6,7 +6,7 @@ import { Reveals } from "./components/Reveals";
 import { SerumDrop } from "./components/SerumDrop";
 import { Treatments } from "./components/Treatments";
 import { Builder } from "./components/Builder";
-import { Actives, Band, Faq, FinalCta, Flow, Footer, Manifesto } from "./components/Sections";
+import { Actives, BeforeAfter, Booking, Faq, FinalCta, Flow, Footer, Manifesto } from "./components/Sections";
 import styles from "./brand.module.css";
 
 export default function DaXanhPage() {
@@ -19,11 +19,12 @@ export default function DaXanhPage() {
       <main id="main" className={styles.main}>
         <Hero />
         <Manifesto />
-        <Band />
         <Treatments />
         <Flow />
+        <BeforeAfter />
         <Actives />
         <Builder />
+        <Booking />
         <Faq />
         <FinalCta />
       </main>

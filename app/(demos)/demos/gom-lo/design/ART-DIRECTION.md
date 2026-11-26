@@ -1,18 +1,19 @@
-# ART-DIRECTION: Đất Mơ
+# ART-DIRECTION: Đất Mơ (cập nhật 2026-11-25, xem REWORK.md)
 
-Ý tưởng: trang là một buổi ở bàn xoay. Bình SVG quay, bạn "nặn" nó bằng thanh trượt/kéo chuột, đi qua lửa khi cuộn, rồi chọn buổi làm gốm.
+Ý tưởng: website của một xưởng gốm thủ công ở Quận Ngũ Hành Sơn, Đà Nẵng. Bình SVG quay trên bàn xoay là điểm nhấn; phần còn lại là thông tin xưởng thật: gốm bán có giá, workshop có lịch, đặt riêng, chăm sóc, chính sách, giờ mở cửa.
 
-| Section | Desktop | Mobile | Hiệu ứng |
-|---|---|---|---|
-| Hero | Nền terracotta vân đất. Trái: nhãn viết tay, H1 khắc vào đất, mô tả, CTA từ tính, 3 ý nhanh. Phải: bàn xoay + bình quay trong đĩa tròn có chữ chạy vòng (quay theo cuộn), thanh "độ phình", ảnh bình nung khung vòm xoay nghiêng. Mép dưới răng cưa sang nâu | Chữ, CTA rồi tới bàn xoay (bình lộ ngay dưới nếp gấp), 3 ý nhanh xuống cuối | Bình "nặn" từ cục đất (u 0->1, back.out 1.7s); H1 khắc từng từ; ring textPath xoay 220deg theo cuộn; bình phình thêm theo cuộn; kéo ngang trên bình đổi độ phình |
-| Dải chữ | "Nặn · Xoay · Phủ men · Nung · Chờ nguội" cỡ lớn, dấu vân tay xen giữa | Giống, nút Dừng chữ chạy | VelocityMarquee tăng tốc theo cuộn |
-| Câu chuyện | Ảnh bàn xoay khung vòm (mở như vòng tròn) trái, chữ phải | Xếp dọc | ClipReveal circle; ScrollScrubText sáng dần |
-| Từ đất đến men | Cột trái dính: tiêu đề, nhiệt kế, số °C, tên giai đoạn, đường cong nhiệt vẽ theo cuộn. Cột phải 4 bước | Một cột, không dính | Nền 3 lớp đất sống -> lửa -> men ngọc đổi theo cuộn; nhiệt độ 25 -> 1.240 °C; điểm lăn trên đường cong |
-| Kệ gốm | Nền đất chín, 10 thẻ vòm, kéo ngang | Vuốt ngang native | DraggableGallery (quán tính, phím, nút), ImageHoverDistort trên 5 thẻ ảnh, 5 thẻ là bình SVG tự quay, con trỏ "Kéo" |
-| Buổi làm gốm | 3 thẻ buổi (ảnh méo hover) + số người + khung giờ + nung; tờ tóm tắt giấy kraft dính phải, mép răng cưa | Tờ tóm tắt đặt dưới form | Công cụ Workshop Booking Preview |
-| Nặn bình | Đĩa vòm có bình quay lớn + mã; trái-phải: bảng điều khiển hình dáng/độ phình/cổ/men/cách phủ/hoạ tiết | Xếp dọc | Pot Designer: dáng nội suy khi đổi, hoạ tiết chấm/sóng quay theo bình |
-| Xưởng | Ảnh kệ lò parallax toàn bề ngang, 4 góc xưởng | Xếp dọc | ParallaxLayer |
-| Hỏi đáp | Nền terracotta, 6 mục details | Xếp dọc | không |
-| Kết | Chữ khổng lồ khắc, ảnh men nghiêng, vân tay lớn mờ | Xếp dọc | MagneticButton |
+| Section | Nội dung | Hiệu ứng |
+|---|---|---|
+| Hero | Nhãn viết tay (loại hình + quận), H1 khắc vào đất, mô tả đối tượng, CTA "Đặt chỗ workshop", 3 sự thật (từ 250.000 ₫/người, tối đa 8 người, 09:00 đến 20:00), bàn xoay + bình nặn được, ảnh vòm | Bình nặn từ cục đất, chữ khắc, ring chữ xoay theo cuộn, đất nén rồi nở |
+| 3 đường vào | Mua gốm, Học làm gốm, Đặt theo yêu cầu (có giá từ) | Đất nén rồi nở; hover viền ngọc |
+| Gốm bán tại xưởng | 12 món, 4 nhóm lọc (cốc, bát, bình, bộ quà) kèm giá từ, kệ kéo ngang | DraggableGallery, ImageHoverDistort, bình SVG tự quay |
+| Workshop | Lịch lớp tuần (14 buổi), 3 buổi (thời lượng, giá, đã gồm, phù hợp), số người, khung giờ, nung, tờ tóm tắt, chính sách cọc/dời/huỷ/lấy món | Ô lịch bấm điền sẵn; ô chọn nén xuống |
+| Từ đất đến men | 5 bước đất, nặn, phơi, nung mộc, men; ghi thời gian lấy món tuỳ lò | Vết nung theo cuộn: nền đất sống, lửa, men; nhiệt kế; đường cong |
+| Đặt theo yêu cầu | Quà tặng, gốm làm riêng, doanh nghiệp (mô tả chung, báo giá theo đơn) | Hover men xanh ngọc chảy từ trên xuống |
+| Phác bình | Pot Designer: gửi mã phác thảo cho xưởng | Bình nội suy dáng |
+| Về xưởng | Ảnh bàn xoay khung vòm + đoạn giới thiệu | ClipReveal circle, ScrollScrubText |
+| Chăm sóc và sử dụng | 6 mục: rửa, sốc nhiệt, lò vi sóng, đựng đồ ăn, cất giữ, vết nứt | Đất nén rồi nở |
+| Xưởng và giờ mở cửa | Giờ mở, nghỉ Thứ Hai, 4 góc xưởng, khu vực | Chữ khắc |
+| FAQ, kết | 9 câu; CTA gửi yêu cầu | Chữ khắc |
 
-Hiệu ứng riêng (không từ thư viện): Pot (bàn xoay SVG nội suy path), Engrave (chữ khắc bằng clip-path từng từ), Fire (vết nung: 3 lớp nền, nhiệt kế, đường cong), ring textPath xoay theo cuộn, Fingerprint (vân tay vẽ tay). Từ thư viện: DraggableGallery, ImageHoverDistort, GrainOverlay, ParallaxLayer, ScrollScrubText, VelocityMarquee, ClipReveal, CustomCursor, MagneticButton, SVGPathDraw, ScrollProgress. Mobile: tắt méo ảnh, parallax, từ tính, con trỏ (thư viện tự tắt). reduced-motion: bình tĩnh nhưng vẫn đổi hình theo thanh, chữ hiện đủ, nền không đổi theo cuộn.
+Ngôn ngữ chuyển động: đất nén rồi nở (back.out) + men chảy; không fade-up chung, không marquee, không từ tính, không parallax, không thanh tiến độ. Hiệu ứng đại trà giữ: ClipReveal, ScrollScrubText. Mobile: tắt méo ảnh; reduced-motion: chữ khắc hiện đủ, bình đứng yên, vết nung tĩnh.

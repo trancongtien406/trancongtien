@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MagneticButton } from "@/features/showroom/effects";
 import { buildConsultHref } from "@/features/showroom/consultation";
 import s from "../brand.module.css";
 import { NAV } from "../data/content";
@@ -51,9 +50,7 @@ export function Header() {
         </nav>
         <LiveClock className={s.headClock} />
         <div className={s.headerCta}>
-          <MagneticButton strength={0.3} max={8}>
-            <a className={`${s.btn} ${s.btnOrange} ${s.btnSm}`} href={consult}>Đặt lịch tham quan</a>
-          </MagneticButton>
+          <a className={`${s.btn} ${s.btnOrange} ${s.btnSm}`} href={consult}>Đặt lịch tham quan</a>
         </div>
         <button ref={btn} type="button" className={s.menuBtn} aria-expanded={open} aria-controls="cg-menu" onClick={() => setOpen((o) => !o)}>
           <span className={s.menuIcon} aria-hidden="true" />

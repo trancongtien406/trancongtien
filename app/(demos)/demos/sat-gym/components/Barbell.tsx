@@ -101,7 +101,7 @@ export function Barbell() {
     <section ref={ref} className={styles.load} id="tai" aria-labelledby="tai-title" data-fx="BarbellLift">
       <div className={styles.loadStage}>
         <div className={styles.loadCopy}>
-          <p className={styles.label} data-sg="stencil"><span>04</span> Tăng tải</p>
+          <p className={styles.label} data-sg="stencil"><span>06</span> Tăng tải</p>
           <h2 id="tai-title" className={styles.loadTitle}>Thêm một đĩa. Rồi mới thêm đĩa nữa.</h2>
           <ol className={styles.loadSteps}>
             {LOAD_STEPS.map((s, i) => (

@@ -9,7 +9,8 @@ const useIso = typeof window === "undefined" ? useEffect : useLayoutEffect;
  * Chuyển động toàn trang (chỉ transform/opacity):
  * (1) --vx-v: vận tốc cuộn 0..1 đặt lên gốc trang, nuôi SpeedLines và vệt chữ "tốc độ" (làm dịu khi dừng),
  * (2) [data-vx="rise"]: khối lướt lên theo lô khi vào khung, hơi nghiêng như vào cua,
- * (3) [data-vx="slash"]: tiêu đề section cắt chéo từ trái vào.
+ * (3) [data-vx="slash"]: tiêu đề section cắt chéo từ trái vào,
+ * (4) [data-vx="cut"]: ảnh mở ra bằng nhát cắt chéo từ trái sang.
  * Reduced-motion: không làm gì, nội dung hiện đủ. Trạng thái ẩn chỉ đặt bằng JS (no-JS vẫn đọc được).
  */
 export function Motion() {
@@ -28,6 +29,9 @@ export function Motion() {
       const slash = gsap.utils.toArray<HTMLElement>('[data-vx="slash"]');
       slash.forEach((el) => {
         gsap.fromTo(el, { x: -70, skewX: -18, opacity: 0 }, { x: 0, skewX: 0, opacity: 1, duration: 0.8, ease: "power4.out", clearProps: "transform", scrollTrigger: { trigger: el, start: "top 90%", once: true } });
+      });
+      gsap.utils.toArray<HTMLElement>('[data-vx="cut"]').forEach((el) => {
+        gsap.fromTo(el, { clipPath: "polygon(0 0, 0 0, -14% 100%, 0 100%)" }, { clipPath: "polygon(0 0, 114% 0, 100% 100%, -14% 100%)", duration: 0.95, ease: "power4.inOut", clearProps: "clipPath", scrollTrigger: { trigger: el, start: "top 88%", once: true } });
       });
       let timer = 0;
       if (root) {

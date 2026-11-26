@@ -9,7 +9,7 @@ const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
  * Chuyển động chung.
  * 1) Biến CSS theo cuộn trên gốc trang: --rs-sy (px), --rs-hp (tiến độ hero 0..1), --rs-amp (biên độ sóng, tăng khi cuộn nhanh và khi rời hero).
  *    Sóng, mặt trời, tem quay đọc các biến này bằng CSS (chỉ transform), không có JS per-element mỗi khung.
- * 2) Hero choreography ~3.2s: mặt trời nhô lên, mặt vòm ảnh mở ra, nhãn, mô tả, nút, tem.
+ * 2) Hero choreography ~3.2s: mặt trời nhô lên, mặt vòm ảnh mở ra, từng từ tiêu đề được sóng đẩy vào bờ (trượt ngang + nghiêng), nhãn, mô tả, nút, tem.
  * 3) Reveal theo lô cho khối `data-rs="reveal"`.
  * Reduced-motion: không chạy gì, mọi nội dung hiện đủ; biến CSS đặt ở giá trị tĩnh.
  */
@@ -59,6 +59,8 @@ export function Motion() {
       if (sun.length) tl.fromTo(sun, { yPercent: 38, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 1.6, ease: "power2.out" }, 0.1);
       const arch = q('[data-rs="arch"]');
       if (arch.length) tl.fromTo(arch, { clipPath: "inset(40% 0% 0% 0% round 999px 999px 40px 40px)", opacity: 0 }, { clipPath: "inset(0% 0% 0% 0% round 999px 999px 40px 40px)", opacity: 1, duration: 1.3, ease: "power3.inOut", clearProps: "clipPath" }, 0.35);
+      const words = q('[data-rs="hero-word"]');
+      if (words.length) tl.fromTo(words, { xPercent: -60, skewX: -18, opacity: 0 }, { xPercent: 0, skewX: 0, opacity: 1, duration: 1.1, stagger: 0.13, ease: "power4.out", clearProps: "transform" }, 0.7);
       tl.from(q('[data-rs="eyebrow"]'), { y: 16, opacity: 0, duration: 0.7 }, 0.5)
         .from(q('[data-rs="hero-lead"]'), { y: 18, opacity: 0, duration: 0.8 }, 1.6)
         .from(q('[data-rs="hero-cta"]'), { y: 18, opacity: 0, duration: 0.7, stagger: 0.12 }, 1.95)

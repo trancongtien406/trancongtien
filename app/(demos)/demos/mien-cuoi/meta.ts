@@ -4,6 +4,6 @@ export const meta = {
   brand: "Miền Cười",
   industry: "Nha khoa",
   solutionSlug: "clinic",
-  tagline: "Phòng khám nha khoa",
-  look: "Swiss clinical: lưới sạch, xanh bạc hà, thông tin rõ",
+  tagline: "Phòng khám nha khoa tại Hải Châu",
+  look: "Swiss clinical: lưới sạch, xanh bạc hà, sơ đồ hàm răng, timeline quy trình",
 } as const;

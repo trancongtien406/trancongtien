@@ -4,6 +4,6 @@ export const meta = {
   brand: "Tầng Xanh",
   industry: "Lặn biển",
   solutionSlug: "hospitality",
-  tagline: "Lặn biển & thể thao nước",
+  tagline: "Trung tâm lặn biển & thể thao nước ở Sơn Trà, Đà Nẵng",
   look: "Dưới nước: nền chuyển màu theo độ sâu, đồng hồ 0 đến 30 m, bong bóng và sóng méo ảnh",
 } as const;

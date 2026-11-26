@@ -13,3 +13,9 @@ Chưa kiểm / hạn chế:
 - Không kiểm bằng trình đọc màn hình thật, không đo Lighthouse, không kiểm Safari/Firefox, không chạy trên thiết bị cảm ứng thật (chỉ viewport 390).
 - Mobile: sơ đồ SVG rộng tối thiểu 620px nên cuộn ngang trong khung bản vẽ.
 - Có thể thấy nháy ngắn lúc hydrate ở hero (nội dung SSR hiện rồi mới ẩn để chạy hiệu ứng).
+
+## Chạy lại sau REWORK 2026-11-25
+- `BASE=http://localhost:3100 node tests/showroom/cowork-grid/e2e.mjs` -> **86 pass, 0 fail** (long task >200ms: 0 ở 1440 và 390). Đã đổi e2e: bỏ kiểm marquee/ScrollScrub/ClipReveal/SVGPathDraw/MagneticButton, thêm kiểm vắng hiệu ứng đại trà, ô che ảnh, trạng thái mở cửa, lịch cộng đồng, nội dung reduced-motion mới.
+- `node scripts/showroom-effects-matrix.mjs cowork-grid`: đại trà 7 -> 2 (SplitWords, ScrollProgress); chữ ký thư viện 3.
+- Chụp lại tests/showroom/cowork-grid/screenshots (s-hero/s-full 1440 và 390), đã xem cả 390. og-image tạo lại, đã xem, không chữ demo/minh hoạ.
+- Chưa kiểm: lịch cộng đồng bằng trình đọc màn hình thật; các test vitest picker không đổi nên không chạy lại.

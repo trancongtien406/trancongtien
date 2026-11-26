@@ -18,11 +18,9 @@ export function Motion() {
       const els = Array.from(document.querySelectorAll<HTMLElement>('[data-tt="fade"]'));
       const hero = els.filter((e) => e.closest("#top"));
       const rest = els.filter((e) => !e.closest("#top"));
-      gsap.set(els, { opacity: 0, y: 18 });
-      gsap.to(hero, { opacity: 1, y: 0, duration: 1.1, stagger: 0.12, delay: 1.05, ease: "power3.out", clearProps: "transform" });
-      rest.forEach((el) => gsap.to(el, { opacity: 1, y: 0, duration: 1, ease: "power3.out", clearProps: "transform", scrollTrigger: { trigger: el, start: "top 90%", once: true } }));
-      const img = document.querySelector<HTMLElement>("[data-hero-img]");
-      if (img) gsap.to(img, { yPercent: 7, ease: "none", scrollTrigger: { trigger: "#top", start: "top top", end: "bottom top", scrub: 0.6 } });
+      gsap.set(els, { opacity: 0, filter: "blur(8px)" });
+      gsap.to(hero, { opacity: 1, filter: "blur(0px)", duration: 1.4, stagger: 0.14, delay: 1.05, ease: "power2.out", clearProps: "filter" });
+      rest.forEach((el) => gsap.to(el, { opacity: 1, filter: "blur(0px)", duration: 1.3, ease: "power2.out", clearProps: "filter", scrollTrigger: { trigger: el, start: "top 90%", once: true } }));
     });
     return () => mm.revert();
   }, []);

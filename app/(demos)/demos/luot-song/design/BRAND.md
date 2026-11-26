@@ -3,12 +3,12 @@
 Trạng thái: `NEEDS_OWNER_REVIEW`.
 
 ## Tên
-- Chọn: **Ráng Sóng Surf Club** ("ráng" = ánh ráng chiều; "sóng" = ngành). Slogan: *Chạm sóng, bắt nắng.* Chữ ký chân trang: "Made with salt, sun & soul".
+- Chọn: **Ráng Sóng Surf Club** ("ráng" = ánh ráng chiều; "sóng" = ngành). Slogan thương hiệu: *Chạm sóng, bắt nắng* (chỉ còn trên tem quay). Chữ ký chân trang: "Made with salt, sun & soul". Đề tài (2026-11-25): trường dạy lướt sóng ở bãi biển quận Sơn Trà; hero và meta nêu loại hình, khu vực, giá từ, giờ, sĩ số (xem REWORK.md). Tên và nhận diện không đổi.
 - ChatGPT (chế độ khách) đề xuất 3 tên: Ráng Sóng (chọn), Sóng Mơ, Bờ Rì Rào. Lý do chọn: có chất Việt, dễ đọc dấu, dễ làm logo/tem.
 - Tra sơ bộ: WebSearch `"Ráng Sóng" surf Đà Nẵng` không thấy kết quả trùng tên (chỉ ra các trường lướt sóng khác ở Đà Nẵng như Go Surfing Da Nang, Surf Shack Da Nang, Danang Pansurf). CHƯA tra được: Google Maps, Facebook, Zalo, WIPO, Cục Sở hữu trí tuệ, tên miền. Máy không xác nhận được tên có thể đăng ký nhãn hiệu.
 
 ## Logo (tự vẽ, SVG, chữ đã chuyển thành path từ Paytone One)
-`public/images/demos/luot-song/identity/`: `logo-primary.svg`, `logo-horizontal.svg`, `logo-horizontal-reversed.svg`, `logo-reversed.svg`, `logo-mono.svg`, `symbol.svg`, `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`, `og-image.webp` (1200x630).
+`public/images/demos/luot-song/identity/`: `logo-primary.svg`, `logo-horizontal.svg`, `logo-horizontal-reversed.svg`, `logo-reversed.svg`, `logo-mono.svg`, `symbol.svg`, `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`, `og-image.webp` (1200x630, vẽ lại 2026-11-25: logo, tên, "Trường dạy lướt sóng · Quận Sơn Trà, Đà Nẵng", giá từ, sĩ số; không có chữ demo/minh hoạ).
 Symbol 200x200: tròn nền vàng sa mạc, viền nâu 8; mặt trời cam r40 tại (100,86); ba dải sóng teal / teal đậm / nâu cắt bởi clip tròn r91. Bản mono dùng mask cắt dải sóng; bản đảo màu nền nâu.
 
 ## Palette

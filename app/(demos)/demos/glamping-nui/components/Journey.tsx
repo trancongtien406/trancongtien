@@ -152,9 +152,9 @@ export function Journey() {
         <div className={styles.jViewport} data-viewport="" role="region" aria-label="Hành trình trong một ngày và một đêm">
           <div className={styles.jTrack} data-track="">
             <div className={styles.jBoard}>
-              <p className={styles.eyebrow}>Từ nắng sớm tới ánh sao</p>
+              <p className={styles.eyebrow}>Một ngày-đêm tại khu</p>
               <h2 id="journey-title" className={styles.h2}>Một ngày. Một đêm. Nhiều điều đáng nhớ.</h2>
-              <p className={styles.jIntro}>Theo bước ánh sáng qua từng khoảnh khắc của một chuyến đi giữa núi rừng.</p>
+              <p className={styles.jIntro}>Từ bình minh tới khuya: giờ ăn, hoạt động và nghỉ của một ngày ở khu glamping.</p>
               <p className={styles.jNote}>Các khung giờ là gợi ý, có thể thay đổi theo mùa, thời tiết và chương trình thực tế.</p>
             </div>
             <ol className={styles.jScenes}>

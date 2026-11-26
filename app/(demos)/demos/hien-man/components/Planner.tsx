@@ -9,15 +9,15 @@ export function Planner() {
   return (
     <section className={styles.planner} id="lich-gia" aria-labelledby="plan-h">
       <div className={styles.plannerHead}>
-        <p className={styles.eyebrow}>06 / Lịch & giá</p>
-        <h2 id="plan-h" className={styles.h2}>Tìm khoảng nghỉ của bạn.</h2>
-        <p className={styles.lead}>Chọn ngày nhận và trả phòng trên lịch, công cụ bên cạnh tính ngay chi phí từng đêm. Những ngày này vẫn còn chỗ cho bạn, những ngày kín được đánh dấu rõ.</p>
+        <p className={styles.eyebrow}>Lịch phòng và chi phí</p>
+        <h2 id="plan-h" className={styles.h2}>Xem ngày còn phòng và tính chi phí.</h2>
+        <p className={styles.lead}>Chọn loại phòng, ngày nhận và trả phòng trên lịch; công cụ bên cạnh tính chi phí từng đêm. Ngày còn ít phòng và ngày kín được đánh dấu rõ.</p>
       </div>
       <div className={styles.plannerGrid}>
         <div className={styles.plannerLeft}>
           <div className={styles.plannerCal}><Calendar /></div>
       <div className={styles.seasons}>
-            <h3 className={styles.h3}>Giá theo mùa (giá tham khảo)</h3>
+            <h3 className={styles.h3}>Mùa và dịp lễ, Tết</h3>
             <div className={styles.seasonGrid}>
               <table className={styles.seasonTable}>
                 <caption className={styles.srOnly}>Hệ số giá theo mùa</caption>

@@ -3,12 +3,12 @@ import { buildConsultHref } from "@/features/showroom/consultation";
 import styles from "./brand.module.css";
 import { Header } from "./components/Header";
 import { Motion } from "./components/Motion";
-import { AppointmentSection, About, Closing, Environment, FaqSection, Footer, Hero, NavigatorSection, Pricing, Principles, Services, Team } from "./components/Sections";
+import { About, AppointmentSection, Closing, Environment, FaqSection, Footer, Hero, NavigatorSection, PolicySection, Prepare, Pricing, ProcessSection, Services, Team } from "./components/Sections";
 
 export const metadata: Metadata = {
-  title: "Miền Cười · Chăm sóc răng miệng rõ ràng, an tâm",
+  title: "Miền Cười · Phòng khám nha khoa tại Hải Châu, Đà Nẵng",
   description:
-    "Care Navigator định hướng nhu cầu chăm sóc (không chẩn đoán) và công cụ tóm tắt lịch hẹn thăm khám. Giá chỉ để tham khảo.",
+    "Phòng khám nha khoa tại Quận Hải Châu, Đà Nẵng: khám và lấy cao răng, trám, nhổ răng, niềng, tẩy trắng, tư vấn implant. Quy trình khám, chi phí tham khảo và đặt lịch.",
   alternates: { canonical: "/demos/mien-cuoi" },
 };
 
@@ -16,18 +16,20 @@ export default function Page() {
   const consult = buildConsultHref("mien-cuoi");
   return (
     <div className={styles.brand} data-mc-root>
-      <a className={styles.skip} href="#care-navigator">Bỏ qua, tới Care Navigator</a>
+      <a className={styles.skip} href="#main">Bỏ qua tới nội dung</a>
       <Header />
-      <main>
+      <main id="main">
         <Hero />
-        <Principles />
-        <NavigatorSection />
         <Services />
+        <ProcessSection />
+        <Prepare />
+        <Pricing />
+        <NavigatorSection />
+        <AppointmentSection consultHref={consult} />
         <About />
         <Team />
-        <Pricing />
-        <AppointmentSection consultHref={consult} />
         <Environment />
+        <PolicySection />
         <FaqSection />
         <Closing consultHref={consult} />
       </main>

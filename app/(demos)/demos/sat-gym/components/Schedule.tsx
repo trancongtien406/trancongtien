@@ -39,7 +39,7 @@ export function Schedule() {
     <section className={styles.sched} id="lich-lop" aria-labelledby="lich-title">
       <div className={styles.wrap}>
         <header className={styles.secHead}>
-          <p className={styles.label} data-sg="stencil"><span>06</span> Lịch lớp tuần</p>
+          <p className={styles.label} data-sg="stencil"><span>03</span> Lịch lớp tuần</p>
           <h2 id="lich-title" className={styles.h2Big}>
             <OutlineSolid />
           </h2>

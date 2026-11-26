@@ -8,3 +8,5 @@ Trạng thái: NEEDS_OWNER_REVIEW
 - Font: Raleway (heading, 200/300/400/500) + Commissioner (body), OFL, biến thiên wght, subset vietnamese/latin/latin-ext, nhúng cục bộ.
 - Tra tên (WebSearch, 2026-11-25): "NÉA Skin Studio Đà Nẵng" và "Nea Skin spa Đà Nẵng" không thấy cơ sở trùng; có tên gần giống "Neva Face & Body" (wanderlog) và "Neau" (Singapore). CHƯA tra được: Google Maps, Facebook, Zalo, WIPO, Cục SHTT, tên miền. Cần chủ duyệt trước khi dùng thật.
 - Liên hệ trên trang: xinchao@neaskin.example, 0236 000 0000, "Đà Nẵng" (không địa chỉ/giờ thật).
+
+- Rework 2026-11-25: studio đặt ở Quận Thanh Khê, giờ 9:00 – 20:00 (T7 đến 18:00, nghỉ Chủ nhật); trang có giờ mở cửa và quận (cấp quận), vẫn không địa chỉ đường.

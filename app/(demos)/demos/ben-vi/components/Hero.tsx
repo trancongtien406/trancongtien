@@ -1,3 +1,4 @@
+import { SplitWords } from "@/features/showroom/effects";
 import s from "../brand.module.css";
 import { Photo } from "./Photo";
 
@@ -6,22 +7,22 @@ export function Hero() {
     <section className={`${s.hero} ${s.grain} ${s.noPrint}`} aria-labelledby="hero-h">
       <div className={`${s.wrap} ${s.heroGrid}`}>
         <div>
-          <span className={s.eyebrow} data-bv="fade">Nhà hàng hải sản · ven biển Đà Nẵng</span>
+          <span className={s.eyebrow} data-bv="fade">Nhà hàng hải sản · Quận Sơn Trà, Đà Nẵng</span>
           <h1 id="hero-h" className={`${s.display} ${s.heroH1}`}>
-            <span className={s.ln}><span data-bv="hl">Vị biển,</span></span>
-            <span className={s.ln}><span data-bv="hl" className={s.italic}>trọn cuộc vui.</span></span>
+            <SplitWords as="span" trigger="load" className={s.ln}>Hải sản tươi sống,</SplitWords>
+            <SplitWords as="span" trigger="load" delay={0.25} className={`${s.ln} ${s.italic}`}>chọn theo cân, nấu theo ý bạn.</SplitWords>
           </h1>
           <p className={s.heroSub} data-bv="fade">
-            Tôm cua mực về bến lúc sáng, lên bếp lửa lúc chiều. Chọn món theo số người, ngân sách và khẩu vị, rồi giữ một bàn nhìn ra biển.
+            Nhà hàng ven biển cho gia đình và nhóm bạn: chọn tôm, cua, mực, cá, hàu ngay ở quầy, chọn cách chế biến, ngồi sảnh nhìn ra biển hoặc phòng riêng 6 đến 12 khách.
           </p>
           <div className={s.heroCtas} data-bv="fade">
-            <a className={`${s.btn} ${s.btnGold}`} href="#dat-ban">Xem trước đặt bàn</a>
-            <a className={`${s.btn} ${s.btnLine}`} href="#ghep-thuc-don">Ghép thực đơn cho nhóm bạn</a>
+            <a className={`${s.btn} ${s.btnGold}`} href="#dat-ban">Đặt bàn</a>
+            <a className={`${s.btn} ${s.btnLine}`} href="#thuc-don">Xem thực đơn</a>
           </div>
           <dl className={s.heroMeta} data-bv="fade">
-            <div><dt className={s.srOnly}>Số món</dt><dd><b>18</b>món trên thực đơn</dd></div>
-            <div><dt className={s.srOnly}>Bếp</dt><dd><b>Than</b>nướng bằng bếp lửa</dd></div>
-            <div><dt className={s.srOnly}>Chỗ ngồi</dt><dd><b>4</b>khu vực chỗ ngồi</dd></div>
+            <div><dt className={s.srOnly}>Giờ phục vụ</dt><dd><b>10:00 – 22:00</b>phục vụ trưa và tối, mỗi ngày</dd></div>
+            <div><dt className={s.srOnly}>Giá hải sản</dt><dd><b>Từ 160.000₫/kg</b>tính theo cân, đổi theo ngày</dd></div>
+            <div><dt className={s.srOnly}>Phòng riêng</dt><dd><b>6 – 12 khách</b>bàn tròn xoay, đặt trước</dd></div>
           </dl>
         </div>
         <div className={s.plateStage} data-bv="stage">

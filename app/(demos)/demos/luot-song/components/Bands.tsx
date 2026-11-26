@@ -13,12 +13,12 @@ function Items({ list }: { list: string[] }) {
   );
 }
 
-/** Hai băng chữ retro cắt chéo nhau; chạy theo vận tốc cuộn, dừng khi rê chuột/focus, có nút Dừng. */
+/** Hai băng chữ cắt chéo nhau, chạy theo vận tốc cuộn; nội dung là danh mục dịch vụ của trường. Dừng khi rê chuột/focus, có nút Dừng. */
 export function Bands() {
   return (
-    <section className={styles.bands} aria-label="Khẩu hiệu">
+    <section className={styles.bands} aria-label="Dịch vụ của trường">
       <div className={`${styles.ribbon} ${styles.ribbonA}`}>
-        <VelocityMarquee speed={60} boost={1.1} direction={1} gap="2rem" controls buttonClassName={styles.bandBtn} label="Băng chữ: chạm sóng, bắt nắng" pauseLabel="Dừng chạy chữ" playLabel="Chạy chữ">
+        <VelocityMarquee speed={60} boost={1.1} direction={1} gap="2rem" controls buttonClassName={styles.bandBtn} label="Băng chữ: các dịch vụ của trường" pauseLabel="Dừng chạy chữ" playLabel="Chạy chữ">
           <Items list={MARQUEE_A} />
         </VelocityMarquee>
       </div>

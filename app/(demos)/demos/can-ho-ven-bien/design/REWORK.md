@@ -1,0 +1,14 @@
+# REWORK — Vọng Triều (2026-11-25)
+(a) Đề tài trước: trang điện ảnh "biển mở ra trước khi bạn kịp mở cửa", công cụ (mặt bằng, dự toán) là trọng tâm; thiếu tổng quan dự án, loại căn kèm diện tích và giá, tiện ích theo tầng, đặt lịch nhà mẫu. Hero là khẩu hiệu. Sau: website giới thiệu MỘT DỰ ÁN căn hộ ven biển (một tháp 36 tầng ở dải bờ phía Đông Đà Nẵng, căn 1PN/2PN/3PN). Giữ tên Vọng Triều và nhận diện navy-đồng. Không tên chủ đầu tư, không số quy hoạch, không giấy tờ pháp lý, không ngày bàn giao.
+(b) Section thật của ngành: Hero (loại hình, khu vực, đối tượng, CTA Đặt lịch xem nhà mẫu, 3 sự thật: từ 48 m², giá tham khảo từ 2,98 tỷ, 36 tầng) · Tổng quan dự án (bảng thông tin chung) · Vị trí và kết nối (ra biển, thành phố, sân bay ở mức khu vực) · Tiện ích nội khu (chương + mặt cắt tháp theo tầng) · Loại căn (diện tích, ban công, số phòng, giá tham khảo) · Hoàn thiện và bàn giao · Khung nhìn · Mặt tiền theo giờ · Mặt bằng (Floor Plan Explorer, chỉ một section) · Chính sách thanh toán tham khảo và cách tính vay ("không phải tư vấn tài chính") · Hỏi đáp (8) · Đặt lịch tham quan nhà mẫu · Footer.
+(c) Nội dung đổi: data/content.ts (NAV, OVERVIEW, AMENITY_LEVELS, VISIT_*, CHAPTERS, FAQ); Hero.tsx viết lại; Overview thay Manifesto; Units.tsx, Tower.tsx, Visit.tsx, FloorRuler.tsx mới; Planner giữ công cụ, đổi tiêu đề thanh toán; layout/meta cập nhật. Giá là giá tham khảo; số liệu diện tích tính từ mặt bằng thật của công cụ (48, 71, 101 m²). Liên hệ `.example`, 0236 000 0000.
+(d) Hiệu ứng (ma trận thư viện): trước đại trà 7 (SplitWords, ClipReveal, ParallaxLayer, ScrollScrubText, MagneticButton, SVGPathDraw, ScrollProgress) VƯỢT, chữ ký thư viện 6 | sau đại trà 2/2 (ParallaxLayer, ScrollScrubText), chữ ký thư viện 6 (StickyChapters, Counter, CustomCursor, ShineSweep, DraggableGallery, NumberTicker). Bỏ: SplitWords, ClipReveal, MagneticButton, SVGPathDraw, ScrollProgress.
+Chữ ký riêng (≥3 code riêng của landing):
+- Cảnh mặt tiền theo giờ (components/SunScene.tsx): tháp 36 tầng, mặt trời/mặt trăng theo cung, nội suy màu theo giờ.
+- Mặt bằng morph (components/FloorPlan.tsx): phòng là rect được gsap nội suy khi đổi 1PN/2PN/3PN.
+- La bàn hướng nhìn theo tầng (components/View.tsx): góc nhìn ra biển mở/xoay theo tầng và hướng.
+- Mặt cắt tháp (components/Tower.tsx): dải đồng trượt tới nhóm tầng được chọn trên mặt cắt 36 tầng, mô tả tiện ích đổi theo.
+- Thước tầng (components/FloorRuler.tsx): cạnh phải trang, đọc tới đâu "lên tầng" tới đó, T01 → T36 theo cuộn.
+- Hero "đèn cửa sổ" (Hero.tsx Lights + Motion.tsx): từng từ tiêu đề bật sáng ngẫu nhiên như cửa sổ lúc chạng vạng; ảnh tháp mở từ dưới lên như các tầng (clip-path riêng).
+- Đường kích thước hero vẽ bằng CSS (stroke-dashoffset), thay SVGPathDraw.
+Ngôn ngữ chuyển động chính: ÁNH SÁNG và TẦNG (bật sáng từng ô, mở từ dưới lên, trượt theo tầng, vẽ nét kỹ thuật) thay vì fade-up. Khác luot-song (sóng, trượt), lan-bien, tang-xanh.

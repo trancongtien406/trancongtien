@@ -1,7 +1,7 @@
 # BRAND — Tần Số Studio (LP-25, /demos/phong-thu)
 Trạng thái: NEEDS_OWNER_REVIEW
 
-- Tên: Tần Số Studio (ChatGPT đề xuất 3: Tần Số, Âm Phố, Mộc Âm; chọn Tần Số vì ngắn, hợp họa tiết sóng/phổ). Slogan: "Chạm đúng tần số, tạo chất riêng." Ngành: phòng thu âm Đà Nẵng. solutionSlug: agency.
+- Tên: Tần Số Studio (ChatGPT đề xuất 3: Tần Số, Âm Phố, Mộc Âm; chọn Tần Số vì ngắn, hợp họa tiết sóng/phổ). Slogan: "Chạm đúng tần số, tạo chất riêng." Ngành: phòng thu âm ở Quận Hải Châu, Đà Nẵng (thu giọng, band, podcast, voice-over, sản xuất beat, mix & master). Rework 2026-11-25: đề tài giữ nguyên tên, bổ sung nội dung thật của ngành. solutionSlug: agency.
 - Logo: vòng tròn cam + 7 thanh sóng đối xứng (viewBox 0 0 100 100) + wordmark "TẦN SỐ" / "STUDIO". Chữ đã chuyển thành path (Archivo wdth 125 wght 800, dựng bằng fontkit) nên không phụ thuộc font ngoài. Tệp: public/images/demos/phong-thu/identity/ (logo-primary, logo-horizontal, symbol, logo-mono, logo-reversed, favicon.svg, favicon-32.png, apple-touch-icon.png, og-image.webp).
 - Palette: nền #1a0b2e (chủ đạo), nền sâu #120620, panel #241040/#2e1650, cam #ff8a1f (tín hiệu, CTA), cam nhạt #ffb15c, trắng ngà #f6f0e4 (chữ), tím nhạt #bba9d8 (chữ phụ). Cặp AA: ngà/tím nền ~15:1, cam/tím nền ~7:1, tím nền trên cam (nút) ~7:1.
 - Font: Archivo biến thiên (trục wdth 125, wght 800) cho tiêu đề; Epilogue cho nội dung; JetBrains Mono cho nhãn kỹ thuật. Tất cả OFL, woff2 trong fonts/, subset vietnamese đặt trước latin.

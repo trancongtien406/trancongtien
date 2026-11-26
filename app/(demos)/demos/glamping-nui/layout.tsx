@@ -5,9 +5,9 @@ import styles from "./brand.module.css";
 const ID = "/images/demos/glamping-nui/identity";
 
 export const metadata: Metadata = {
-  title: "Rừng Thức · Glamping và camping núi gần Đà Nẵng",
+  title: "Rừng Thức · Khu glamping chân núi Bà Nà, Đà Nẵng",
   description:
-    "Ngủ lều giữa rừng thông, ngồi bên lửa trại, thức dậy cùng sương núi. Xem hành trình một ngày-đêm, chọn lều, và ước tính chi phí chuyến đi bằng công cụ lên kế hoạch. Giá tham khảo.",
+    "Khu glamping ở chân núi Bà Nà, Hòa Vang, Đà Nẵng: 3 loại lều cho 2 đến 4 người từ 890.000₫ một đêm, BBQ bên lửa trại, trekking nhẹ, lịch trình 2 ngày 1 đêm. Giá tham khảo.",
   robots: { index: false, follow: true },
   icons: {
     icon: [
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Rừng Thức · Đêm chạm rừng, ngày chạm mây",
-    description: "Glamping giữa núi rừng gần Đà Nẵng: lều ấm, bữa tối bên lửa, bầu trời đầy sao.",
+    description: "Khu glamping chân núi Bà Nà, Đà Nẵng: lều từ 890.000₫ một đêm, BBQ, trekking, ngắm sao.",
     type: "website",
     locale: "vi_VN",
     images: [{ url: `${ID}/og-image.webp`, width: 1200, height: 630, alt: "Rừng Thức, đêm chạm rừng, ngày chạm mây" }],

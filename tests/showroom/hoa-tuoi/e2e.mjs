@@ -119,17 +119,12 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   await page.mouse.wheel(0, 500); await page.waitForTimeout(1400);
   const after = await page.evaluate(() => getComputedStyle(document.querySelector("#dau-trang [data-leaf]")).transform);
   ok(before !== after, "parallax lá nhiều tầng dịch theo cuộn");
-  const prog = await page.evaluate(() => document.querySelector("[data-fx=ScrollProgress]")?.getAttribute("aria-valuenow") ?? document.querySelector("[role=progressbar]")?.getAttribute("aria-valuenow"));
-  ok(prog !== null && Number(prog) > 0, `ScrollProgress cập nhật (${prog})`);
-  // 3d marquee velocity
-  const mq1 = await page.evaluate(() => getComputedStyle(document.querySelector("[data-fx=VelocityMarquee] [data-fx-track]")).transform);
-  await page.waitForTimeout(700);
-  const mq2 = await page.evaluate(() => getComputedStyle(document.querySelector("[data-fx=VelocityMarquee] [data-fx-track]")).transform);
-  ok(mq1 !== mq2, "VelocityMarquee chạy");
-  // 3e ScrollScrubText
-  await page.evaluate(() => document.querySelector("[data-fx=ScrollScrubText]").scrollIntoView({ block: "center" })); await page.waitForTimeout(1200);
-  const sc = await page.evaluate(() => [...document.querySelectorAll("[data-fx=ScrollScrubText] [data-fx-w]")].map((e) => +getComputedStyle(e).opacity));
-  ok(sc.length > 10 && sc.some((v) => v > 0.9) && sc.some((v) => v < 0.9), "ScrollScrubText sáng dần theo cuộn");
+  ok((await page.locator("[data-fx=ScrollProgress],[data-fx=VelocityMarquee],[data-fx=ScrollScrubText],[data-fx=MagneticButton]").count()) === 0, "đã bỏ ScrollProgress, VelocityMarquee, ScrollScrubText, MagneticButton (hạn mức đại trà)");
+  // data-rise mọc từ đáy lên
+  for (const y of [0.2, 0.45, 0.7]) { await page.evaluate((f) => { const e = document.querySelector("#cuoi-su-kien"); scrollTo(0, e.offsetTop + e.offsetHeight * f - 300); }, y); await page.waitForTimeout(500); }
+  await page.waitForTimeout(1800);
+  const rs = await page.evaluate(() => [...document.querySelectorAll("#cuoi-su-kien [data-rise]")].map((e) => +getComputedStyle(e).opacity));
+  ok(rs.length >= 8 && rs.every((v) => v > 0.99), `thẻ [data-rise] đã mọc lên hết (${rs.length} thẻ)`);
   // 3f Mask reveal ở ảnh section tay nghề + gallery
   await page.evaluate(() => document.querySelector("#tay-nghe [data-fx=PetalMask]").scrollIntoView({ block: "center" })); await page.waitForTimeout(3000);
   const mk = await page.evaluate(() => document.querySelector("#tay-nghe [data-fx=PetalMask] [data-pm-path]").getAttribute("transform"));
@@ -141,8 +136,9 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   ok(sd >= 0 && sd < 1, `SVGPathDraw (thân hoa) vẽ theo cuộn: dashoffset ${sd}`);
 
   // 3h Draggable gallery: kéo chuột, phím, nút
-  await page.evaluate(() => document.querySelector("#vuon").scrollIntoView({ block: "center" })); await page.waitForTimeout(900);
+  await page.evaluate(() => document.querySelector("#vuon").scrollIntoView({ block: "center" })); await page.waitForTimeout(1800);
   const vp = page.locator("#vuon [data-fx-viewport]");
+  await vp.scrollIntoViewIfNeeded(); await page.waitForTimeout(400);
   const box = await vp.boundingBox();
   const sl0 = await vp.evaluate((e) => e.scrollLeft);
   await page.mouse.move(box.x + box.width * 0.7, box.y + box.height * 0.4);
@@ -168,7 +164,6 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   ok(await page.locator("#vuon [data-fx-prev]").isEnabled(), "nút Xem hoa trước bật sau khi cuộn");
   // 3i custom cursor + magnetic
   ok((await page.locator("[data-fx=CustomCursor]").count()) > 0, "CustomCursor có mặt trên pointer mịn");
-  ok((await page.locator("[data-fx=MagneticButton]").count()) >= 3, "MagneticButton gắn ở CTA chính");
   await ctx.close();
 }
 
@@ -192,7 +187,7 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   ok(st.leafT, "reduced-motion: lá không parallax");
   ok(st.blobStatic === "static", "reduced-motion: blob đứng yên (static)");
   const txt = await page.evaluate(() => document.querySelector("main").innerText);
-  ok(/Hoa cho những điều đang nở/.test(txt) && /Bó hoa của riêng bạn/.test(txt), "reduced-motion: tiêu đề đọc được");
+  ok(/Bó, lẵng và hoa hộp theo dịp/.test(txt) && /Dựng thử bó của riêng bạn/.test(txt), "reduced-motion: tiêu đề đọc được");
   await ctx.close();
 }
 
@@ -201,6 +196,7 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   const { ctx, page, errs } = await open({ permissions: ["clipboard-read", "clipboard-write"] }, 1440, 900, "", 1000);
   await page.evaluate(() => localStorage.clear());
   await page.reload({ waitUntil: "networkidle" });
+  const B = page.locator("#bo-hoa");
   await page.evaluate(() => document.querySelector("#bo-hoa").scrollIntoView());
   await page.waitForTimeout(900);
   const num = (s) => Number(((s || "").match(/\d{1,3}(?:\.\d{3})+|\d+/) || ["0"])[0].replace(/\./g, ""));
@@ -213,7 +209,7 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   // đổi dịp -> lời thiệp đổi, <=80 ký tự
   const msgs = new Set();
   for (const [label] of [["Sinh nhật"], ["Khai trương"], ["Cưới"], ["Xin lỗi"]]) {
-    await page.locator("label", { hasText: new RegExp("^" + label) }).first().click();
+    await B.locator("label", { hasText: new RegExp("^" + label) }).first().click();
     await page.waitForTimeout(150);
     for (let i = 0; i < 3; i++) {
       const t = (await page.locator('[data-testid="card-text"]').innerText()).trim();
@@ -223,25 +219,25 @@ for (const w of [320, 390, 768, 1024, 1440]) {
     }
   }
   ok(msgs.size === 12, `12 lời thiệp khác nhau (${msgs.size})`);
-  await page.locator("label", { hasText: /^Sinh nhật/ }).first().click();
+  await B.locator("label", { hasText: /^Sinh nhật/ }).first().click();
   // tông màu & kích cỡ đổi bó
   const svg1 = await page.locator('[data-testid="bouquet-preview"]').innerHTML();
-  await page.locator("label", { hasText: /Hồng sen/ }).click(); await page.waitForTimeout(200);
+  await B.locator("label", { hasText: /Hồng sen/ }).click(); await page.waitForTimeout(200);
   const svg2 = await page.locator('[data-testid="bouquet-preview"]').innerHTML();
   ok(svg1 !== svg2, "đổi tông màu làm bó hoa đổi");
-  await page.locator("label", { hasText: /^Lớn/ }).click(); await page.waitForTimeout(900);
+  await B.locator("label", { hasText: /^Lớn/ }).click(); await page.waitForTimeout(900);
   const tL = await total();
   ok(tL > t0 || (await page.locator('[data-testid="note-trim"]').count()) > 0, `cỡ lớn: giá ${tL} (> ${t0}) hoặc bị giảm cành`);
   ok(tL <= 500000 || (await page.locator('[data-testid="note-low"]').count()) > 0, "tổng không vượt ngân sách trừ khi báo thiếu");
   // chọn loại hoa, tối đa 4
-  for (const f of ["Hoa hồng", "Mao lương", "Mẫu đơn", "Tulip"]) await page.locator("label", { hasText: new RegExp("^" + f) }).click();
-  const fifth = page.locator("label", { hasText: /^Cẩm chướng/ }).locator("input");
+  for (const f of ["Hoa hồng", "Mao lương", "Mẫu đơn", "Tulip"]) await B.locator("label", { hasText: new RegExp("^" + f) }).click();
+  const fifth = B.locator("label", { hasText: /^Cẩm chướng/ }).locator("input");
   ok(await fifth.isDisabled(), "chọn tối đa 4 loại: loại thứ 5 bị khoá");
   ok((await page.locator("text=Đã chọn đủ 4 loại").count()) === 1, "có gợi ý khi đủ 4 loại");
   const lines = await page.locator("[class*=bLines] li").count();
   ok(lines === 4 + 2, `danh sách hoa: 4 loại + lá + giấy gói (${lines})`);
   // ngân sách thấp -> thiếu
-  await page.locator("label", { hasText: /^Khác/ }).click();
+  await B.locator("label", { hasText: /^Khác/ }).click();
   const cb = page.locator('input[type="text"][inputmode="numeric"]');
   await cb.fill("abc"); await page.waitForTimeout(100);
   ok((await cb.getAttribute("aria-invalid")) === "true" && (await page.locator("[role=alert]", { hasText: "Chỉ nhập số" }).count()) === 1, "ngân sách chữ -> lỗi cạnh ô + aria-invalid");
@@ -258,9 +254,9 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   const tc = await total();
   ok(tc <= 650000 || (await page.locator('[data-testid="note-low"]').count()) > 0, `650k: tổng ${tc} nằm trong ngân sách (hoặc báo thiếu)`);
   // preset 300k và tự gợi ý
-  await page.locator("label", { hasText: /^300k/ }).click();
-  for (const f of ["Hoa hồng", "Mao lương", "Mẫu đơn", "Tulip"]) await page.locator("label", { hasText: new RegExp("^" + f) }).click();
-  await page.locator("label", { hasText: /^Vừa/ }).click(); await page.waitForTimeout(900);
+  await B.locator("label", { hasText: /^300k/ }).click();
+  for (const f of ["Hoa hồng", "Mao lương", "Mẫu đơn", "Tulip"]) await B.locator("label", { hasText: new RegExp("^" + f) }).click();
+  await B.locator("label", { hasText: /^Vừa/ }).click(); await page.waitForTimeout(900);
   const t300 = await total();
   ok(t300 <= 300000 || (await page.locator('[data-testid="note-low"]').count()) > 0, `300k, không chọn hoa (tự gợi ý): tổng ${t300}`);
   ok((await page.locator("text=Bạn chưa chọn loại hoa").count()) === 1, "không chọn hoa -> Nở Rừng gợi ý");
@@ -268,12 +264,12 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("nr-builder-v1") || "null"));
   ok(saved && saved.budget === 300000 && saved.size === "vua", "lưu trạng thái vào localStorage");
   await page.reload({ waitUntil: "networkidle" }); await page.waitForTimeout(900);
-  ok((await page.locator("label", { hasText: /^300k/ }).locator("input").isChecked()), "khôi phục ngân sách sau tải lại");
+  ok((await B.locator("label", { hasText: /^300k/ }).locator("input").isChecked()), "khôi phục ngân sách sau tải lại");
   // đổi dịp từ danh sách dịp
   await page.evaluate(() => document.querySelector("#dip").scrollIntoView());
   await page.waitForTimeout(500);
   await page.locator('[data-pick-occasion="cuoi"]').click(); await page.waitForTimeout(600);
-  ok(await page.locator("label", { hasText: /^Cưới/ }).locator("input").isChecked(), "bấm 'Dựng bó cho dịp cưới' -> Builder chọn dịp Cưới");
+  ok(await B.locator("label", { hasText: /^Cưới/ }).locator("input").isChecked(), "bấm 'Dựng bó cho dịp cưới' -> Builder chọn dịp Cưới");
   // chép tóm tắt
   await page.evaluate(() => document.querySelector("#bo-hoa").scrollIntoView()); await page.waitForTimeout(300);
   await page.getByRole("button", { name: "Chép bản tóm tắt" }).click(); await page.waitForTimeout(300);
@@ -296,6 +292,71 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   await ctx.close();
 }
 
+// ============ 5b) Khối nghiệp vụ tiệm hoa: bảng giá, báo trước, định kỳ, thiệp, mùa, chăm hoa
+{
+  const { ctx, page, errs } = await open({}, 1440, 900, "", 1500);
+  const txt0 = await page.evaluate(() => document.querySelector("main").innerText);
+  for (const w of ["Bảng giá", "Hoa theo dịp", "Hoa cưới, sự kiện, khai trương", "Hoa định kỳ cho quán và văn phòng", "Thiệp và chữ", "Thời gian báo trước và giao nhận", "Bảo quản hoa tại nhà", "Quận Thanh Khê"]) ok(txt0.includes(w) || txt0.toUpperCase().includes(w.toUpperCase()), `có mục/nội dung: ${w}`);
+  ok(/Bó từ 200\.000/.test(txt0) && /7:00 đến 21:00/.test(txt0), "hero có 3 sự thật: giá từ, giờ mở cửa, báo trước");
+  ok(!/"@type":"(Review|AggregateRating|LocalBusiness|Offer|Product)"/.test((await page.locator("script[type='application/ld+json']").allTextContents()).join("")), "không JSON-LD Review/Rating/LocalBusiness/Offer");
+  ok(!/(giao|nhận)[^.]{0,40}\d+\s*(phút|giờ)\s*(là|sau|nội)/i.test(txt0) && !/giao hoa trong\s*\d/i.test(txt0), "không hứa giờ giao cụ thể");
+  // bảng giá
+  await page.evaluate(() => document.querySelector("#bang-gia").scrollIntoView()); await page.waitForTimeout(600);
+  ok((await page.locator('#bang-gia [data-testid="tier"]').count()) === 3, "bảng giá Bó: 3 cỡ");
+  await page.getByRole("tab", { name: "Lẵng hoa" }).click(); await page.waitForTimeout(1200);
+  const pb = await page.locator("#bang-gia").innerText();
+  ok(/500\.000/.test(pb) && /1\.300\.000/.test(pb), "tab Lẵng hoa: giá 500.000 ... 1.300.000");
+  await page.getByRole("tab", { name: "Hoa hộp" }).focus(); await page.keyboard.press("ArrowLeft"); await page.waitForTimeout(300);
+  ok((await page.getByRole("tab", { name: "Lẵng hoa" }).getAttribute("aria-selected")) === "true", "tab bảng giá điều khiển bằng phím mũi tên");
+  // báo trước
+  await page.evaluate(() => document.querySelector("#bao-truoc").scrollIntoView()); await page.waitForTimeout(500);
+  await page.locator("#bao-truoc label", { hasText: /^Hoa cưới/ }).click(); await page.waitForTimeout(1100);
+  ok(/7 ngày/.test(await page.locator('[data-testid="lead-text"]').innerText()), "thước báo trước: hoa cưới -> 7 ngày");
+  const left = await page.evaluate(() => parseFloat(document.querySelector("#bao-truoc [class*=bud]").style.left));
+  ok(left > 80, `nụ hoa trượt tới cuối thước (${Math.round(left)}%)`);
+  await page.locator("#bao-truoc label", { hasText: /^Bó theo mẫu/ }).click(); await page.waitForTimeout(1100);
+  ok(/3 giờ/.test(await page.locator('[data-testid="lead-text"]').innerText()), "bó theo mẫu -> ít nhất 3 giờ");
+  // định kỳ
+  await page.evaluate(() => document.querySelector("#dinh-ky").scrollIntoView()); await page.waitForTimeout(500);
+  ok((await page.locator('[data-testid="cal-on"]').count()) === 4, "định kỳ mặc định: 4 lần nhận trong lịch");
+  const rhTotal = async () => Number(((await page.locator('[data-testid="rh-total"]').innerText()).match(/[\d.]+/) || ["0"])[0].replace(/\./g, ""));
+  await page.waitForTimeout(900);
+  ok((await rhTotal()) === 1800000, `4 lần x 450.000 = ${await rhTotal()}`);
+  await page.locator("#dinh-ky label", { hasText: /^Hai tuần/ }).click(); await page.waitForTimeout(1000);
+  ok((await page.locator('[data-testid="cal-on"]').count()) === 2 && (await rhTotal()) === 900000, "hai tuần một lần: 2 ngày, 900.000");
+  await page.locator("#dinh-ky label", { hasText: /^Mỗi 4 tuần/ }).click();
+  await page.locator("#dinh-ky label", { hasText: /^Bình lớn/ }).click(); await page.waitForTimeout(1000);
+  ok((await page.locator('[data-testid="cal-on"]').count()) === 1 && (await rhTotal()) === 700000, "mỗi 4 tuần + bình lớn: 1 ngày, 700.000");
+  // thiệp
+  await page.evaluate(() => document.querySelector("#thiep").scrollIntoView()); await page.waitForTimeout(500);
+  const card = async () => (await page.locator('[data-testid="writer-card"] p').getAttribute("aria-label")) || "";
+  const c1 = await card();
+  await page.locator('[data-testid="writer-next"]').click(); await page.waitForTimeout(1800);
+  const c2 = await card();
+  ok(c1 && c2 && c1 !== c2, `thiệp đổi lời: "${c2}"`);
+  await page.locator('[data-testid="writer-own"]').fill("Chúc mẹ luôn khoẻ"); await page.waitForTimeout(2200);
+  ok((await card()) === "Chúc mẹ luôn khoẻ", "thiệp hiện câu tự viết");
+  const wv = await page.evaluate(() => [...document.querySelectorAll('[data-testid="writer-card"] [data-w]')].map((e) => getComputedStyle(e).clipPath));
+  ok(wv.length === 4 && wv.every((v) => !/inset\(0(px)? 100%/.test(v)), "chữ thiệp đã hiện đủ sau khi viết");
+  await page.locator('[data-testid="writer-own"]').fill("");
+  // mùa
+  await page.evaluate(() => document.querySelector("#mua-hoa").scrollIntoView()); await page.waitForTimeout(500);
+  await page.locator('[data-testid="season-range"]').fill("7"); await page.waitForTimeout(600);
+  ok((await page.locator('[data-testid="season-month"]').innerText()) === "Tháng 7", "trượt tới Tháng 7");
+  ok((await page.locator('[data-testid="season-item"][data-open="1"]').count()) === Number(await page.locator('[data-testid="season-count"]').innerText()), "số loại nở khớp số đếm");
+  ok(await page.locator('[data-testid="season-item"][data-open="1"]', { hasText: "Hướng dương" }).count() === 1 && await page.locator('[data-testid="season-item"][data-open="0"]', { hasText: "Tulip" }).count() === 1, "tháng 7: hướng dương nở, tulip còn nụ");
+  await page.locator('[data-testid="season-range"]').fill("1"); await page.waitForTimeout(500);
+  ok(await page.locator('[data-testid="season-item"][data-open="1"]', { hasText: "Tulip" }).count() === 1, "tháng 1: tulip nở");
+  // chăm hoa
+  await page.evaluate(() => document.querySelector("#bao-quan").scrollIntoView()); await page.waitForTimeout(500);
+  await page.getByRole("button", { name: /Ngày 3/ }).click(); await page.waitForTimeout(500);
+  ok(/Thay nước/.test(await page.locator('[data-testid="care-title"]').innerText()), "chăm hoa ngày 3: Thay nước");
+  ok(errs.length === 0, `khối nghiệp vụ: 0 lỗi console (${errs.slice(0, 2).join("|")})`);
+  const all = await page.evaluate(() => document.querySelector("main").innerText);
+  ok(!all.match(BAD), "không chữ cấm sau khi dùng các khối nghiệp vụ");
+  await ctx.close();
+}
+
 // ============ 6) bàn phím, menu mobile, IME, ?ref, credits
 {
   const { ctx, page } = await open({}, 1440, 900, "?ref=abc", 1000);
@@ -307,8 +368,8 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   const skip = await page.evaluate(() => document.activeElement?.textContent);
   ok(/Bỏ qua/.test(skip || ""), "Tab đầu tiên là skip link");
   let reached = false;
-  for (let i = 0; i < 40 && !reached; i++) { await page.keyboard.press("Tab"); reached = await page.evaluate(() => /Tự tay dựng bó hoa/.test(document.activeElement?.textContent || "")); }
-  ok(reached, "Tab tới CTA chính");
+  for (let i = 0; i < 40 && !reached; i++) { await page.keyboard.press("Tab"); reached = await page.evaluate(() => /^Đặt hoa$/.test((document.activeElement?.textContent || "").trim())); }
+  ok(reached, "Tab tới CTA Đặt hoa");
   const outline = await page.evaluate(() => getComputedStyle(document.activeElement).outlineStyle);
   ok(outline !== "none", "CTA có focus-visible rõ");
   // chiều cao nút

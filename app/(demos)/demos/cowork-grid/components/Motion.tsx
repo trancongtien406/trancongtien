@@ -37,6 +37,10 @@ export function Motion() {
           },
         }));
       });
+      // (1b) [data-cg-tiles]: ảnh được che bằng lưới 4x3 ô, các ô tan theo đường chéo khi vào khung (CSS transition, trễ theo --d)
+      gsap.utils.toArray<HTMLElement>("[data-cg-tiles]").forEach((el) => {
+        triggers.push(ScrollTrigger.create({ trigger: el, start: "top 88%", once: true, onEnter: () => el.setAttribute("data-in", "1") }));
+      });
       const rise = gsap.utils.toArray<HTMLElement>("[data-cg-rise]");
       gsap.set(rise, { opacity: 0, y: 28 });
       ScrollTrigger.batch(rise, {

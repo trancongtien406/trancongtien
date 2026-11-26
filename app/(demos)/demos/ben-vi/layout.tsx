@@ -4,9 +4,9 @@ import { fontVars } from "./fonts";
 const base = "/images/demos/ben-vi/identity";
 
 export const metadata: Metadata = {
-  title: "Bến Vị · Nhà hàng hải sản ven biển Đà Nẵng",
+  title: "Bến Vị · Nhà hàng hải sản ven biển Sơn Trà, Đà Nẵng",
   description:
-    "Nhà hàng hải sản ven biển: ghép thực đơn theo số người, ngân sách, khẩu vị và chuẩn bị yêu cầu đặt bàn.",
+    "Nhà hàng hải sản ven biển Quận Sơn Trà, Đà Nẵng: hải sản tươi sống chọn theo cân, thực đơn lẩu và món ăn kèm, set theo số người, phòng riêng 6 đến 12 khách, đặt bàn và tiệc đoàn.",
   icons: {
     icon: [
       { url: `${base}/favicon.svg`, type: "image/svg+xml" },

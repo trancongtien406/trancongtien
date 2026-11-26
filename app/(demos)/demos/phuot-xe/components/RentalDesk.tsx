@@ -63,8 +63,8 @@ export function RentalDesk({ divider }: { divider: ReactNode }) {
         <div className={s.wrap}>
           <div className={s.secHead}>
             <p className={s.kicker}>01 · Đội xe</p>
-            <h2 id={`${uid}-fleet`} className={s.h2} data-vx="slash">Tám chiếc xe, chọn theo cung đường.</h2>
-            <p className={s.lead}>Thông số, giá ngày và giá tuần nằm ngay trên thẻ. Bấm &quot;Chọn xe này&quot; để chuyển sang phiếu giá bên dưới.</p>
+            <h2 id={`${uid}-fleet`} className={s.h2} data-vx="slash">Tám mẫu xe, giá ngày và giá tuần.</h2>
+            <p className={s.lead}>Thông số, giá ngày và giá tuần nằm ngay trên thẻ. Giá tham khảo, đã gồm mũ bảo hiểm cho người lái. Bấm &quot;Chọn xe này&quot; để chuyển sang phiếu giá bên dưới.</p>
           </div>
 
           <div className={s.chips} role="group" aria-label="Lọc theo loại xe">
@@ -119,7 +119,7 @@ export function RentalDesk({ divider }: { divider: ReactNode }) {
       <section id="tinh-gia" ref={calcRef} className={s.calc} aria-labelledby={`${uid}-calc`}>
         <div className={s.wrap}>
           <div className={s.secHead}>
-            <p className={s.kicker}>02 · Tính giá thuê</p>
+            <p className={s.kicker}>02 · Ước tính giá</p>
             <h2 id={`${uid}-calc`} className={s.h2} data-vx="slash">Phiếu giá, từng dòng một.</h2>
             <p className={s.lead}>Chọn số ngày, cách nhận xe, phụ kiện và bảo hiểm. Công cụ chỉ tính trên trình duyệt của bạn; chưa có xe nào được giữ cho đến khi bạn gửi tư vấn.</p>
           </div>
@@ -247,7 +247,7 @@ export function RentalDesk({ divider }: { divider: ReactNode }) {
                   {quote.capped && <p className={s.rcHint}>Ngày lẻ đã giới hạn bằng giá một tuần: thuê tròn 7 ngày vẫn cùng giá.</p>}
                   <div className={s.rcActions}>
                     <MagneticButton strength={0.28} max={10} className={s.full}>
-                      <a className={`${s.btn} ${s.btnYellow} ${s.btnFull}`} href={consult}>Tư vấn thuê xe với phiếu giá này</a>
+                      <a className={`${s.btn} ${s.btnYellow} ${s.btnFull}`} href={consult}>Đặt xe với phiếu giá này</a>
                     </MagneticButton>
                     <button type="button" className={`${s.btn} ${s.btnLine} ${s.btnFull}`} onClick={copy}>Sao chép bản tóm tắt</button>
                     <p className={s.rcCopy} role="status" aria-live="polite">{copied === "ok" ? "Đã sao chép. Dán vào ô ghi chú ở form tư vấn." : copied === "fail" ? "Chưa sao chép được, hãy chọn và sao chép bản tóm tắt bên dưới." : ""}</p>

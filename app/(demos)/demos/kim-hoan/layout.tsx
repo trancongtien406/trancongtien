@@ -5,9 +5,9 @@ import styles from "./brand.module.css";
 const ID = "/images/demos/kim-hoan/identity";
 
 export const metadata: Metadata = {
-  title: "Kim Nguyệt · Trang sức vàng chế tác ở Đà Nẵng",
+  title: "Kim Nguyệt · Tiệm kim hoàn, nhẫn cưới và trang sức vàng ở Đà Nẵng",
   description:
-    "Kim Nguyệt chế tác nhẫn, mặt dây, bông tai và lắc tay bằng vàng 10K, 14K, 18K, vàng trắng và bạc ở Đà Nẵng. Chọn chất liệu, đá, kích cỡ và xem khoảng giá tham khảo tính minh bạch ngay trên trang.",
+    "Kim Nguyệt là tiệm kim hoàn ở Quận Hải Châu, Đà Nẵng: nhẫn cưới, nhẫn đính hôn, dây chuyền, bông tai, lắc và vòng bằng vàng 10K, 14K, 18K, 24K. Giá tính minh bạch từng khoản, nhận đặt làm, khắc chữ, sửa chữa và thu đổi.",
   robots: { index: false, follow: true },
   icons: {
     icon: [
@@ -17,11 +17,11 @@ export const metadata: Metadata = {
     apple: `${ID}/apple-touch-icon.png`,
   },
   openGraph: {
-    title: "Kim Nguyệt · Vẻ đẹp lưu dấu thời gian",
-    description: "Trang sức vàng chế tác ở Đà Nẵng: chọn chất liệu, đá và kích cỡ, xem khoảng giá tham khảo từng khoản.",
+    title: "Kim Nguyệt · Tiệm kim hoàn ở Đà Nẵng",
+    description: "Nhẫn cưới và trang sức vàng chế tác theo yêu cầu, giá viết ra từng khoản: vàng, công, đá.",
     type: "website",
     locale: "vi_VN",
-    images: [{ url: `${ID}/og-image.webp`, width: 1200, height: 630, alt: "Kim Nguyệt, trang sức vàng chế tác ở Đà Nẵng" }],
+    images: [{ url: `${ID}/og-image.webp`, width: 1200, height: 630, alt: "Kim Nguyệt, tiệm kim hoàn ở Đà Nẵng" }],
   },
   twitter: { card: "summary_large_image", images: [`${ID}/og-image.webp`] },
   alternates: { canonical: "/demos/kim-hoan" },

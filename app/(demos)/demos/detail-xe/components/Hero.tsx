@@ -2,8 +2,9 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { Counter, CursorSpotlight, ShineSweep, SplitWords, gsap, prefersReducedMotion, useFxLayout } from "@/features/showroom/effects";
+import { Counter, CursorSpotlight, ShineSweep, gsap, prefersReducedMotion, useFxLayout } from "@/features/showroom/effects";
 import s from "../brand.module.css";
+import { FACTS } from "../data/content";
 
 const P = "/images/demos/detail-xe";
 
@@ -25,6 +26,7 @@ export function Hero({ consultHref }: { consultHref: string }) {
     const tl = gsap.timeline({ delay: 0.1, defaults: { ease: "power3.out" } });
     tl.from(q('[data-h="photo"]'), { clipPath: "inset(100% 0 0 0)", duration: 1.1, ease: "power3.inOut" }, 0.2)
       .from(q('[data-h="img"]'), { scale: 1.12, filter: `blur(${small ? 10 : 20}px)`, duration: 1.9, ease: "power2.out", clearProps: "filter,transform" }, 0.2)
+      .from(q('[data-h="line"]'), { clipPath: "inset(0 100% 0 0)", duration: 1.0, stagger: 0.16, ease: "power2.inOut", clearProps: "clipPath" }, 0.95)
       .from(q('[data-h="fade"]'), { y: 22, opacity: 0, duration: 0.8, stagger: 0.12, clearProps: "transform,opacity" }, 1.3)
       .from(q('[data-h="spec"]'), { y: 30, opacity: 0, duration: 0.9, clearProps: "transform,opacity" }, 1.7)
       .fromTo(q('[data-h="streak"]'), { xPercent: -160, opacity: 0 }, { keyframes: { xPercent: [-160, 200, 560], opacity: [0, 0.9, 0], easeEach: "none" }, duration: 1.5, ease: "power1.inOut" }, 2.1);
@@ -45,27 +47,30 @@ export function Hero({ consultHref }: { consultHref: string }) {
       </div>
 
       <div className={`${s.wrap} ${s.heroInner}`}>
-        <p className={s.heroSub} data-h="fade"><span className={s.hairRed} aria-hidden="true" />&nbsp; Auto detailing · Đà Nẵng</p>
+        <p className={s.heroSub} data-h="fade"><span className={s.hairRed} aria-hidden="true" />&nbsp; Chăm sóc xe hơi · Quận Ngũ Hành Sơn, Đà Nẵng</p>
         <h1 id="hero-title" className={`${s.h1} ${s.heroTitle}`}>
-          <SplitWords as="span" trigger="load" delay={1.0} duration={0.95} stagger={0.07} className={s.chrome}>Vẻ đẹp nằm ở từng chi tiết.</SplitWords>
+          {["Rửa chi tiết,", "đánh bóng,", "phủ ceramic."].map((l) => <span key={l} className={s.chrome} data-h="line" style={{ display: "block" }}>{l}</span>)}
         </h1>
         <p className={`${s.lead} ${s.heroLead}`} data-h="fade">
-          Từ làm sạch chuyên sâu, hiệu chỉnh sơn đến bảo vệ ceramic. Mỗi quy trình được chọn dựa trên tình trạng thực tế của chiếc xe, không làm thừa một bước nào.
+          Cửa hàng chăm sóc xe hơi cho chủ xe cá nhân: sedan, SUV, bán tải và xe điện. Kiểm tra sơn dưới đèn, báo giá và các bước trước khi làm, nhận xe theo lịch hẹn.
         </p>
         <div className={s.ctaRow} data-h="fade">
           <ShineSweep trigger="loop" every={5} duration={1.1} color="rgba(255,255,255,0.75)" className={s.shineBtn}>
-            <a className={`${s.btn} ${s.btnSolid}`} href="#chon-goi">Chọn gói cho xe của bạn <Arrow /></a>
+            <a className={`${s.btn} ${s.btnSolid}`} href={consultHref}>Đặt lịch kiểm tra xe <Arrow /></a>
           </ShineSweep>
-          <a className={s.btn} href={consultHref}>Đặt lịch kiểm tra xe</a>
+          <a className={s.btn} href="#gia">Xem giá theo dòng xe</a>
         </div>
       </div>
 
       <div className={s.specBar} data-h="spec">
         <dl className={`${s.wrap} ${s.specGrid}`}>
-          <div className={s.specCell}><dt>Gói chăm sóc</dt><dd><Counter value={5} trigger="load" duration={1.4} /></dd></div>
-          <div className={s.specCell}><dt>Bước tối đa</dt><dd><Counter value={24} trigger="load" duration={1.8} /><small>&nbsp;bước</small></dd></div>
-          <div className={s.specCell}><dt>Thời gian</dt><dd><Counter value={90} trigger="load" duration={1.6} /><small>&nbsp;phút đến 2 ngày</small></dd></div>
-          <div className={s.specCell}><dt>Giá từ</dt><dd><Counter value={350000} trigger="load" duration={1.8} /><small>&nbsp;₫</small></dd></div>
+          {FACTS.map((f) => (
+            <div key={f.k} className={s.specCell}>
+              <dt>{f.k}</dt>
+              <dd>{typeof f.value === "number" ? <><Counter value={f.value} trigger="load" duration={1.8} /><small>{f.suffix}</small></> : f.text}</dd>
+              <p className={s.specNote}>{f.note}</p>
+            </div>
+          ))}
         </dl>
       </div>
     </section>

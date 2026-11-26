@@ -12,3 +12,6 @@ Luxury đen và vàng, chậm: nhiều khoảng đen, ảnh sản phẩm lớn, 
 9. Chất liệu / tuổi vàng (Counter %), Chăm sóc (2 ảnh lệch), Hỏi đáp (details), Liên hệ (nền ảnh bên phải, lấp lánh).
 ## Hiệu ứng
 Thư viện: SplitWords, ScrollScrubText, VelocityMarquee, Counter, NumberTicker, SVGPathDraw (đường kẻ vàng), ParallaxLayer, GrainOverlay, ShineSweep, ScrollProgress, CustomCursor. Riêng: GoldGlare, GoldShimmer, GemSparkle (canvas), Ring3D (CSS 3D), mở hộp (Intro), ProductReveal (clip+parallax), đường kẻ vàng chế tác, hero choreography.
+
+## Cập nhật 2026-11-25 (xem REWORK.md)
+Section hiện tại: Intro hộp trang sức · Hero (tiệm kim hoàn, 3 sự thật) · Dải thông tin · Về tiệm · Danh mục 5 nhóm · Nhẫn xoay 3D · Tuổi vàng 10K–24K · Cách tính giá (3 bảng + cân tiểu ly) · Ước tính giá (Configurator) · Dịch vụ (khắc chữ, thước nới size) · Quy trình đặt làm 5 bước · Bảo quản, bảo hành, chính sách · Giờ mở cửa (bảng đèn) · Hỏi đáp · Đặt làm. Thư viện còn dùng: SVGPathDraw, ScrollProgress (đại trà 2/2), Counter, NumberTicker, ShineSweep, GrainOverlay, CustomCursor. Đã bỏ SplitWords, ScrollScrubText, VelocityMarquee, ParallaxLayer. Ngôn ngữ chuyển động: dải ánh kim quét tiêu đề, ảnh mở tủ kính từ giữa, sáng dần như bật đèn tủ kính.

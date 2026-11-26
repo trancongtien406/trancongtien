@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Photo } from "./Photo";
 import { EV, emit, scrollToId } from "./events";
+import { MaterialDrop } from "./MaterialDrop";
 import { MATERIALS } from "../data/materials";
 import s from "../brand.module.css";
 
@@ -13,15 +14,13 @@ export function Materials() {
       <div className={s.wrap}>
         <i className={s.rule} data-rule />
         <div className={s.secHead}>
-          <p className={s.label}>05 / Thư viện vật liệu</p>
+          <p className={s.label}>08 / Thư viện vật liệu</p>
           <h2 id="materials-title" className={s.h2}>
-            Vật liệu định hình cảm xúc.
+            Chọn vật liệu cho từng bề mặt.
           </h2>
-          <p className={s.secLead}>
-            Không gian được cảm nhận qua những bề mặt chúng ta chạm vào mỗi ngày. Từ sắc gỗ ấm đến vân đá tự nhiên và độ
-            mềm của vải, mỗi chất liệu mang một ngôn ngữ riêng.
-          </p>
+          <p className={s.secLead}>Sáu mẫu gỗ, đá và vải thường dùng. Kéo từng mẫu vào tường, tủ hoặc sàn để xem phối màu, rồi mang bộ đã chọn sang bảng vật liệu; mẫu thật được đưa tới bạn xem trước khi chốt.</p>
         </div>
+        <MaterialDrop />
         <ul className={s.swatches}>
           {MATERIALS.map((m) => (
             <li key={m.id} className={s.swatch}>

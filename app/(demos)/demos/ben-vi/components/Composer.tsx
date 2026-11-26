@@ -62,9 +62,9 @@ export function Composer() {
     <section id="ghep-thuc-don" className={`${s.section} ${s.composer}`} aria-labelledby="cmp-h">
       <div className={s.wrap}>
         <div className={`${s.secHead} ${s.noPrint}`} data-bv="reveal">
-          <span className={s.eyebrow}>Ghép thực đơn</span>
-          <h2 id="cmp-h" className={`${s.display} ${s.h2}`}>Nói số người, <span className={s.italic}>bếp gợi ý món</span></h2>
-          <p className={s.lead}>Chọn số khách, ngân sách và khẩu vị. Thực đơn gợi ý hiện ngay bên phải, bạn có thể bớt hoặc thêm món, rồi in hoặc lưu lại.</p>
+          <span className={s.eyebrow}>Gợi ý theo ngân sách</span>
+          <h2 id="cmp-h" className={`${s.display} ${s.h2}`}>Ngân sách bao nhiêu, <span className={s.italic}>bếp gợi ý bữa ăn</span></h2>
+          <p className={s.lead}>Chọn số khách, ngân sách và khẩu vị, bếp gợi ý một bữa cân đối món chính, rau, khai vị. Bạn có thể bớt hoặc thêm món, rồi in hoặc lưu lại để mang theo khi đến nhà hàng.</p>
         </div>
         <div className={s.cmpGrid}>
           <div className={`${s.panel} ${s.noPrint}`} data-bv="reveal">
@@ -75,7 +75,7 @@ export function Composer() {
                 <output aria-live="polite" data-testid="guests">{guests} khách</output>
                 <button type="button" aria-label="Tăng một khách" disabled={guests >= 12} onClick={() => change(setGuests)(Math.min(12, guests + 1))}>+</button>
               </div>
-              <p className={s.hint}>Gợi ý khoảng {auto.mainsWanted} món chính cho {guests} khách. Tối đa 12 khách, nhóm lớn hơn xin đặt phòng riêng.</p>
+              <p className={s.hint}>Gợi ý khoảng {auto.mainsWanted} món chính cho {guests} khách. Tối đa 12 khách; nhóm lớn hơn xin liên hệ trước.</p>
             </div>
             <div className={s.fld}>
               <label className="lab" htmlFor={`${uid}-b`} style={{ display: "block", fontSize: 13, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--bv-gold)", marginBottom: 12 }}>Ngân sách cho cả bàn</label>

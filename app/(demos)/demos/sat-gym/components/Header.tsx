@@ -45,7 +45,7 @@ export function Header() {
         <nav className={styles.nav} aria-label="Điều hướng chính">
           {NAV.map((n) => <a key={n.href} href={n.href} data-cursor="Tới">{n.label}</a>)}
         </nav>
-        <a className={`${styles.btn} ${styles.btnAcid} ${styles.btnSm} ${styles.headerCta}`} href="#chon-bai" data-shake data-cursor="Tập">Chọn bài tập</a>
+        <a className={`${styles.btn} ${styles.btnAcid} ${styles.btnSm} ${styles.headerCta}`} href="#tap-thu" data-shake data-cursor="Tập">Tập thử</a>
         <button
           ref={btn} type="button" className={styles.menuBtn} aria-expanded={open} aria-controls="sg-menu"
           aria-label={open ? "Đóng menu" : "Mở menu"} onClick={() => setOpen((v) => !v)}
@@ -59,7 +59,7 @@ export function Header() {
             <a key={n.href} href={n.href} onClick={close}><small>{String(i + 1).padStart(2, "0")}</small>{n.label}</a>
           ))}
         </nav>
-        <a className={`${styles.btn} ${styles.btnAcid} ${styles.btnLg}`} href="#chon-bai" onClick={close} data-shake>Chọn bài tập hôm nay</a>
+        <a className={`${styles.btn} ${styles.btnAcid} ${styles.btnLg}`} href="#tap-thu" onClick={close} data-shake>Đăng ký tập thử</a>
       </div>
     </header>
   );

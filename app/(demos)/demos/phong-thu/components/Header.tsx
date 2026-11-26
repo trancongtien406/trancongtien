@@ -10,6 +10,7 @@ const NAV = [
   { href: "#phong-thu", label: "Phòng thu" },
   { href: "#bang-gia", label: "Bảng giá" },
   { href: "#uoc-tinh", label: "Ước tính" },
+  { href: "#dat-lich", label: "Đặt lịch" },
 ];
 
 export function Mark({ className }: { className?: string }) {

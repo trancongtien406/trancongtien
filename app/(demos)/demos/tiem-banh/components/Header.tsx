@@ -5,9 +5,9 @@ import s from "../brand.module.css";
 
 const NAV = [
   ["#tu-banh", "Tủ bánh"],
-  ["#dung-banh", "Dựng bánh"],
-  ["#mot-ngay", "Một ngày ở tiệm"],
-  ["#dat-banh", "Cách đặt bánh"],
+  ["#bang-gia", "Bảng giá"],
+  ["#mua-dip", "Theo mùa"],
+  ["#giao-nhan", "Giao nhận"],
   ["#hoi-dap", "Hỏi đáp"],
 ] as const;
 
@@ -36,7 +36,7 @@ export function Header() {
         <nav className={s.nav} aria-label="Điều hướng chính">
           {NAV.map(([h, l]) => <a key={h} href={h}>{l}</a>)}
         </nav>
-        <a className={`${s.btn} ${s.btnPink} ${s.headerCta}`} href="#dung-banh">Dựng bánh</a>
+        <a className={`${s.btn} ${s.btnPink} ${s.headerCta}`} href="#bang-gia">Đặt bánh</a>
         <button ref={btn} type="button" className={s.menuBtn} aria-expanded={open} aria-controls="mk-menu" onClick={() => setOpen((v) => !v)}>
           <span className={s.menuIcon} aria-hidden="true" data-open={open ? "1" : "0"}><i /><i /><i /></span>
           <span className={s.srOnly}>{open ? "Đóng menu" : "Mở menu"}</span>

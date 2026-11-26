@@ -1,0 +1,15 @@
+# REWORK — NÉA Skin Studio (2026-11-25)
+(a) Đề tài trước: "skincare studio" xoay quanh Skin Routine Builder, hero chỉ khẩu hiệu, liệu trình 6 mục có cả "tư vấn" lẫn thiếu vùng mắt/cổ, không có giờ mở cửa, chính sách đặt/huỷ, lưu ý trước/sau liệu trình. Sau: website một studio chăm sóc da cơ bản ở Quận Thanh Khê, Đà Nẵng; Builder chỉ là một section ("Routine tại nhà"). Không chẩn đoán/điều trị/thuốc, không cam kết kết quả, không ảnh trước–sau (e2e quét).
+(b) Section thật của ngành: Hero (loại hình, quận, đối tượng, CTA Đặt lịch chăm da / Xem các liệu trình, 3 sự thật: liệu trình từ 350.000 ₫ 45–90 phút, 9:00 – 20:00 (T7 đến 18:00, nghỉ CN), phòng riêng hẹn trước) · Về studio · Liệu trình (7 mục: làm sạch dịu, làm sạch chuyên sâu, cấp ẩm nhiều lớp, dịu da sau nắng, vùng mắt và cổ, massage mặt cổ vai, tư vấn thói quen; thời lượng, giá, ai phù hợp, lưu ý; lọc theo cảm giác da) · Một buổi tại studio (đón → soi da → làm sạch → liệu trình → dặn dò, có phút) · Trước và sau liệu trình · Thành phần thường gặp · Skin Routine Builder (công cụ) · Giờ mở cửa + chính sách (đặt lịch, giữ chỗ/cọc 30% từ 500.000 ₫, dời huỷ 12 giờ, đến trễ) · Hỏi đáp (9) · CTA · Footer.
+(c) Đổi nội dung: data/content.ts (FACTS, STUDIO_*, FEELS, TREATMENTS 7 mục có group/feels, FLOW 5 bước, BEFORE_AFTER, HOURS, POLICIES, FAQ 9); component mới BeforeAfter, Booking, FlowThread, HoursToday; Hero, Treatments, Sections, Header viết lại; bỏ Band (dải chữ). Ảnh: 10 ảnh, mỗi ảnh một lần (pipet-xanh chuyển sang liệu trình vùng mắt/cổ; Builder dùng giọt SVG). meta.ts, layout metadata, footer cập nhật.
+(d) Hiệu ứng (ma trận thư viện): trước = 10 thư viện, đại trà 6 (SplitWords, ClipReveal, ScrollScrubText, VelocityMarquee, MagneticButton, SVGPathDraw), chữ ký thư viện 4 (TiltCard, CursorSpotlight, ShineSweep, CanvasParticles). Sau = 3 thư viện, đại trà 1/2 (ClipReveal), chữ ký thư viện 2 (CursorSpotlight, CanvasParticles). Bỏ: SplitWords, ScrollScrubText, VelocityMarquee, MagneticButton, SVGPathDraw, TiltCard, ShineSweep; bỏ blur-fade.
+Chữ ký riêng (code của landing):
+- MeshBackground (components/Mesh.tsx): gradient mesh lilac/xanh nước trôi chậm, trôi theo tiến độ cuộn.
+- SerumDrop (components/SerumDrop.tsx): giọt serum rơi theo cuộn, giãn theo vận tốc, nở gợn ở cuối trang.
+- Halo (components/Halo.tsx): vòng sáng xoay quanh ảnh sản phẩm.
+- FlowThread (components/FlowThread.tsx): sợi serum chảy xuống nối 5 bước buổi chăm sóc, giọt nhỏ chạy đầu vệt (thay SVGPathDraw).
+- Lướt kính (components/Reveals.tsx + Motion.tsx, CSS data-bfs): mỗi khối lộ ra bằng tấm kính mờ lướt trái sang phải (clip-path), thay cho blur-fade; hero dùng cùng ngôn ngữ.
+- Liệu trình đổi tint + ảnh cross-fade và bộ lọc cảm giác da (components/Treatments.tsx): chọn "Da dầu, bí" thì tự chọn liệu trình hợp, các mục hợp được viền sáng.
+- HoursToday (components/Today.tsx): dòng "hôm nay" theo giờ Đà Nẵng được tô bằng vệt kính trượt.
+- Depth parallax 5 lớp theo con trỏ và cuộn ở hero (components/Motion.tsx).
+Ngôn ngữ chuyển động chính: LƯỚT KÍNH (tấm kính mờ trượt ngang để lộ nội dung) và SỢI/GIỌT SERUM; không blur-to-sharp (khác Tịch Trà), không fade-up.

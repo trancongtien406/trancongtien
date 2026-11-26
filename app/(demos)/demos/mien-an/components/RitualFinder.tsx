@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { CursorSpotlight } from "@/features/showroom/effects";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { DURATIONS, GOALS, RITUALS } from "../data/rituals";
 import type { Pressure, RitualFinderAnswers, RitualGoal } from "../data/types";
@@ -33,8 +34,8 @@ export function RitualFinder() {
   }, [step]);
 
   const next = () => {
-    if (step === 1 && !a.goal) return setErr("Hãy chọn một mong muốn để Miên An có thể gợi ý nghi thức phù hợp.");
-    if (step === 2 && !a.maxDuration) return setErr("Hãy chọn khoảng thời gian bạn có thể dành cho nghi thức.");
+    if (step === 1 && !a.goal) return setErr("Hãy chọn một mong muốn để Miên An có thể gợi ý liệu trình phù hợp.");
+    if (step === 2 && !a.maxDuration) return setErr("Hãy chọn khoảng thời gian bạn có thể dành cho liệu trình.");
     setErr(null);
     setStep((s) => (s + 1) as Step);
   };
@@ -58,30 +59,31 @@ export function RitualFinder() {
   };
 
   const titles: Record<number, string> = {
-    0: "Tìm nghi thức của bạn",
+    0: "Tìm liệu trình của bạn",
     1: "Hôm nay, bạn muốn dành thời gian cho điều gì?",
     2: "Bạn có thể dành bao lâu cho mình?",
     3: "Bạn thích được chăm sóc theo cách nào?",
-    4: results.length ? "Gợi ý dành cho bạn" : "Chưa có nghi thức phù hợp",
+    4: results.length ? "Gợi ý dành cho bạn" : "Chưa có liệu trình phù hợp",
   };
 
   return (
     <section id="ritual-finder" className={`${styles.section} ${styles.dark} ${styles.onDark} ${styles.finder}`} aria-labelledby="finder-title">
       <Symbol className={styles.finderArch} />
       <div className={styles.container}>
+        <CursorSpotlight radius={380} color="rgba(198,181,158,0.16)">
         <div className={styles.finderGrid}>
           <div className={styles.finderIntro} data-reveal>
-            <p className={styles.eyebrow}>Find your ritual</p>
+            <p className={styles.eyebrow}>Chọn liệu trình theo nhu cầu</p>
             <h2 id="finder-title" className={styles.h2}>
-              Cơ thể bạn đang <em>cần điều gì?</em>
+              Chưa biết chọn gì? <em>Trả lời ba câu.</em>
             </h2>
-            <p className={styles.lead}>Không cần biết trước tên liệu trình. Hãy chia sẻ một vài mong muốn, Miên An sẽ gợi ý một nghi thức phù hợp với khoảng thời gian và sở thích của bạn.</p>
+            <p className={styles.lead}>Cho biết bạn muốn giãn vùng nào, có bao nhiêu phút và thích áp lực thế nào. Công cụ lọc ra liệu trình hợp với thời gian và sở thích của bạn, rồi chuyển sang phần đặt lịch.</p>
             <p className={styles.finderNote}>Công cụ gợi ý chạy ngay trên trình duyệt của bạn, không thay thế tư vấn sức khoẻ hoặc chuyên môn.</p>
           </div>
           <div className={styles.finderPanelWrap} data-reveal>
             <div className={styles.panel}>
               <div className={styles.panelTop}>
-                <span>Ritual Finder</span>
+                <span>Gợi ý liệu trình</span>
                 {step >= 1 && step <= 3 ? (
                   <span className={styles.progress} aria-hidden="true">
                     {[1, 2, 3].map((n) => (
@@ -110,7 +112,7 @@ export function RitualFinder() {
                     </ul>
                     <div className={styles.panelActions}>
                       <button type="button" className={`${styles.btn} ${styles.btnPrimary}`} onClick={() => setStep(1)}>
-                        Bắt đầu tìm nghi thức
+                        Bắt đầu tìm liệu trình
                       </button>
                     </div>
                   </>
@@ -211,7 +213,7 @@ export function RitualFinder() {
                             <p className={styles.resMeta}>{r.subtitle} · {r.durationMinutes}&nbsp;phút · {formatVnd(r.priceVnd)}</p>
                             <p>{r.description}</p>
                             <div className={styles.resRow}>
-                              <button type="button" className={`${styles.btn} ${styles.btnPrimary}`} onClick={() => pick(r.id)}>Chọn nghi thức này</button>
+                              <button type="button" className={`${styles.btn} ${styles.btnPrimary}`} onClick={() => pick(r.id)}>Chọn liệu trình này</button>
                               <button type="button" className={`${styles.btn} ${styles.btnSecondary}`} onClick={() => openDetail(r.id)}>Xem chi tiết</button>
                             </div>
                             {chosen === r.id && <p className={styles.chosenNote} role="status">Đã chuyển sang phần xem trước lịch hẹn.</p>}
@@ -227,7 +229,7 @@ export function RitualFinder() {
                                 <h4>{r.name}</h4>
                                 <p className={styles.resMeta}>{r.durationMinutes}&nbsp;phút · {formatVnd(r.priceVnd)}</p>
                               </div>
-                              <button type="button" className={`${styles.btn} ${styles.btnSecondary}`} style={{ minHeight: 46 }} onClick={() => pick(r.id)}>Chọn nghi thức này</button>
+                              <button type="button" className={`${styles.btn} ${styles.btnSecondary}`} style={{ minHeight: 46 }} onClick={() => pick(r.id)}>Chọn liệu trình này</button>
                             </div>
                           ))}
                         </div>
@@ -243,7 +245,7 @@ export function RitualFinder() {
                 {step === 4 && results.length === 0 && (
                   <>
                     <div className={styles.empty} role="status" data-testid="finder-empty">
-                      <p>Chưa tìm thấy nghi thức phù hợp với tất cả lựa chọn của bạn. Hãy thử dành thêm thời gian hoặc điều chỉnh sở thích chăm sóc.</p>
+                      <p>Chưa tìm thấy liệu trình phù hợp với tất cả lựa chọn của bạn. Hãy thử dành thêm thời gian hoặc điều chỉnh sở thích chăm sóc.</p>
                       <div className={styles.resRow}>
                         <button type="button" className={`${styles.btn} ${styles.btnPrimary}`} onClick={() => setStep(3)}>Điều chỉnh lựa chọn</button>
                         <button type="button" className={`${styles.btn} ${styles.btnSecondary}`} onClick={() => scroll("rituals")}>Xem tất cả liệu trình</button>
@@ -258,6 +260,7 @@ export function RitualFinder() {
             </div>
           </div>
         </div>
+        </CursorSpotlight>
       </div>
     </section>
   );

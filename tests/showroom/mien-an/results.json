@@ -2,7 +2,7 @@
   "base": "http://localhost:3100",
   "pass": 115,
   "fail": 0,
-  "at": "2026-11-25T04:53:57.196Z",
+  "at": "2026-11-25T13:38:48.236Z",
   "results": [
     {
       "name": "home trả 200",
@@ -12,7 +12,7 @@
     {
       "name": "title riêng tiếng Việt",
       "ok": true,
-      "extra": "Miên An Wellness — Spa & wellness"
+      "extra": "Miên An Wellness — Spa massage & chăm sóc da tại Hải Châu, Đà Nẵng"
     },
     {
       "name": "description riêng",
@@ -237,7 +237,7 @@
     {
       "name": "không JS: h1, 6 thẻ liệu trình, FAQ vẫn render từ server",
       "ok": true,
-      "extra": "{\"h1\":\"Chậm lại, để trở về với mình.\",\"op\":\"1\",\"cards\":6,\"faq\":8}"
+      "extra": "{\"h1\":\"Một buổi massage, để cơ thể được nghỉ.\",\"op\":\"1\",\"cards\":6,\"faq\":8}"
     },
     {
       "name": "Finder bước 1: lỗi thiếu mong muốn hiện cạnh ô (role=alert)",
@@ -320,7 +320,7 @@
       "extra": ""
     },
     {
-      "name": "RF-14 chọn từ Finder điền sẵn nghi thức + áp lực + hương liệu",
+      "name": "RF-14 chọn từ Finder điền sẵn liệu trình + áp lực + hương liệu",
       "ok": true,
       "extra": "{\"ritual\":\"R01\",\"pressure\":\"medium\",\"scent\":\"unscented\"}"
     },
@@ -335,9 +335,9 @@
       "extra": ""
     },
     {
-      "name": "lỗi khi gửi trống: nghi thức, ngày, xác nhận (cạnh từng ô)",
+      "name": "lỗi khi gửi trống: liệu trình, ngày, xác nhận (cạnh từng ô)",
       "ok": true,
-      "extra": "Hãy chọn nghi thức bạn muốn trải nghiệm. | Hãy chọn một ngày để xem các khung giờ. | Hãy xác nhận bạn đã hiểu ghi chú về bản tóm tắt."
+      "extra": "Hãy chọn liệu trình bạn muốn đặt. | Hãy chọn một ngày để xem các khung giờ. | Hãy xác nhận bạn đã hiểu ghi chú về bản tóm tắt."
     },
     {
       "name": "aria-invalid + aria-describedby trên ô lỗi",
@@ -380,7 +380,7 @@
       "extra": ""
     },
     {
-      "name": "AP-14 đổi nghi thức reset giờ đã chọn",
+      "name": "AP-14 đổi liệu trình reset giờ đã chọn",
       "ok": true,
       "extra": ""
     },
@@ -407,7 +407,7 @@
     {
       "name": "hiển thị giá 490.000 ₫ và 60 phút, đúng giờ đã chọn",
       "ok": true,
-      "extra": "MA-9610A978\n\nKhoảng thời gian dành riêng cho bạn.\n\nTóm tắt lịch hẹn đã sẵn sàng trên thiết bị của bạn. Chưa có yêu cầu nào được gửi đến spa; để tiếp tục, hãy dùng nút liên hệ bên dưới.\n\nNghi thức\nAn Nhiên · Massage thư giãn toàn thân\nNgày\nT5, 26/11/2026\nGiờ\n10:30 – 11:30 (60 phút)\nPhòng\nPhòng Miên ·"
+      "extra": "MA-E3E2EADB\n\nKhoảng thời gian dành riêng cho bạn.\n\nTóm tắt lịch hẹn đã sẵn sàng trên thiết bị của bạn. Chưa có yêu cầu nào được gửi đến spa; để tiếp tục, hãy dùng nút liên hệ bên dưới.\n\nLiệu trình\nAn Nhiên · Massage thư giãn toàn thân\nNgày\nT5, 26/11/2026\nGiờ\n10:30 – 11:30 (60 phút)\nPhòng\nPhòng Miên "
     },
     {
       "name": "success không dùng 'Đặt lịch thành công' / 'sẽ liên hệ'",
@@ -475,7 +475,7 @@
       "extra": ""
     },
     {
-      "name": "'Chọn nghi thức này' đóng dialog và điền sẵn Appointment",
+      "name": "'Chọn liệu trình này' đóng dialog và điền sẵn Appointment",
       "ok": true,
       "extra": ""
     },
@@ -487,7 +487,7 @@
     {
       "name": "lightbox: mũi tên phải đổi ảnh + caption",
       "ok": true,
-      "extra": "01 — Một không gian riêng tư -> 02 — Chạm vào sự giản dị"
+      "extra": "01 — Phòng trị liệu có cửa sổ rèm gỗ -> 02 — Đá cuội và hoa tươi ở khu đón khách"
     },
     {
       "name": "lightbox: mũi tên trái quay lại",
@@ -520,9 +520,9 @@
       "extra": ""
     },
     {
-      "name": "Tab đi qua skip link và tới CTA 'Tìm nghi thức của bạn'",
+      "name": "Tab đi qua skip link và tới CTA Đặt lịch",
       "ok": true,
-      "extra": "Bỏ qua điều hướng | Về portfolio |  | Trang chủ | Liệu trình | Câu chuyện | Không gian | Hỏi đáp | Đặt lịch trải nghiệm | Tìm nghi thức của bạn ↗ | Khám phá liệu trình | Xem nghi thức ↗ | Xem nghi thức ↗ | Xem nghi thức ↗"
+      "extra": "Bỏ qua điều hướng | Về portfolio |  | Liệu trình | Combo | Một buổi tại spa | Không gian | Giờ & chính sách | Hỏi đáp | Đặt lịch | Đặt lịch ↗ | Xem bảng giá liệu trình | Xem liệu trình ↗ | Xem liệu trình ↗ | Xem liệu trình ↗ | Xem liệu trình ↗ | Xem liệu trình ↗ | Xem liệu trình ↗ | Liệu trìnhGồmThời lượngGiáĐặt  | Đặt lịch"
     },
     {
       "name": "focus-visible rõ (outline >= 2px)",

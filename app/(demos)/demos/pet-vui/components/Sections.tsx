@@ -1,45 +1,46 @@
 import Image from "next/image";
 import { siteConfig } from "@/lib/site";
 import { buildConsultHref } from "@/features/showroom/consultation";
-import { ClipReveal, ScrollScrubText, StackingCards, VelocityMarquee } from "@/features/showroom/effects";
 import { BounceWords } from "./BounceWords";
 import { BubbleHost } from "./BubbleHost";
 import { CircleWipe } from "./Motion";
 import { DragStickers, type StickerSpec } from "./DragStickers";
+import { OpenNow } from "./OpenNow";
+import { PawWalk } from "./PawWalk";
 import { WagButton } from "./WagButton";
-import { FAQ, MARQUEE, STEPS } from "../data/content";
-import { PACKS, fmtVnd } from "../data/care";
+import { ABOUT_POINTS, FAQ, INFO_STRIP, INTAKE, PICKUP, POLICIES, STEPS } from "../data/content";
+import { SERVICES, SURCHARGES, fmtVnd } from "../data/care";
 import s from "../brand.module.css";
 
 const img = (f: string, w = 1200) => `/images/demos/pet-vui/${f}-${w}.webp`;
+const Paw = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 40 40" aria-hidden="true" className={className}><circle cx="20" cy="26" r="9" fill="currentColor" /><circle cx="8" cy="16" r="4.5" fill="currentColor" /><circle cx="16" cy="8" r="4.5" fill="currentColor" /><circle cx="26" cy="8" r="4.5" fill="currentColor" /><circle cx="33" cy="17" r="4.5" fill="currentColor" /></svg>
+);
 
 export function Strip() {
   return (
-    <div className={s.strip} aria-label="Các dịch vụ chăm sóc">
-      <VelocityMarquee mode="velocity" speed={70} boost={0.6} pauseOnHover gap="2.2rem" label="Dịch vụ của Bông Xù" className={s.stripInner}>
-        {MARQUEE.map((m, i) => (
-          <span key={i} className={s.stripItem}>{m}<svg viewBox="0 0 40 40" aria-hidden="true" className={s.stripPaw}><circle cx="20" cy="26" r="9" fill="currentColor" /><circle cx="8" cy="16" r="4.5" fill="currentColor" /><circle cx="16" cy="8" r="4.5" fill="currentColor" /><circle cx="26" cy="8" r="4.5" fill="currentColor" /><circle cx="33" cy="17" r="4.5" fill="currentColor" /></svg></span>
-        ))}
-      </VelocityMarquee>
+    <div className={s.strip} aria-label="Thông tin nhanh về tiệm">
+      <ul className={`${s.wrap} ${s.stripList}`}>
+        {INFO_STRIP.map((m) => <li key={m} className={s.stripItem}><Paw className={s.stripPaw} />{m}</li>)}
+        <li className={s.stripOpen}><OpenNow /></li>
+      </ul>
     </div>
   );
 }
 
 export function About() {
   return (
-    <section className={s.about} aria-labelledby="about-h">
+    <section id="ve-tiem" className={s.about} aria-labelledby="about-h">
       <div className={`${s.wrap} ${s.aboutGrid}`}>
-        <ClipReveal variant="circle" from="center" innerScale={1.25} className={s.aboutDisc}>
+        <div className={s.aboutDisc}>
           <Image src={img("meo-xam-chai")} alt="Chú mèo xám được chải lông" fill sizes="(max-width: 900px) 80vw, 520px" loading="lazy" style={{ objectFit: "cover", objectPosition: "40% 50%" }} />
-        </ClipReveal>
+        </div>
         <div>
-          <p className={s.chipInk}>Một tiệm cho cả hai</p>
-          <BounceWords as="h2" className={`${s.display} ${s.h2}`} text="Chó mèo đều được *chiều* ở đây" />
-          <p className={s.lead} id="about-h">Bông Xù là chỗ để bé sạch thơm và vui vẻ: nước ấm vừa phải, sữa tắm dịu nhẹ, chải gỡ rối chậm rãi, nghỉ giữa chừng khi bé mệt. Chúng mình chỉ làm phần chăm sóc lông và vệ sinh, còn chuyện sức khoẻ xin nhường bác sĩ thú y.</p>
+          <p className={s.chipInk}>Về Bông Xù</p>
+          <BounceWords as="h2" className={`${s.display} ${s.h2}`} text="Tiệm tắm và cắt tỉa cho *cả chó lẫn mèo*" />
+          <p className={s.lead} id="about-h">Bông Xù là tiệm grooming nhỏ ở Quận Sơn Trà, làm phần chăm sóc lông và vệ sinh: chải, tắm, sấy, tỉa gọn, cắt móng, lau tai, spa. Tiệm không có dịch vụ thú y; bé có vấn đề sức khoẻ xin hỏi bác sĩ thú y trước khi đặt lịch.</p>
           <ul className={s.ticks}>
-            <li><b>Chậm mà chắc.</b> Bé căng thẳng thì dừng, không ép.</li>
-            <li><b>Rõ ràng.</b> Biết trước các bước, thời gian và giá tham khảo.</li>
-            <li><b>Chó và mèo tách khu.</b> Mèo có góc yên tĩnh riêng.</li>
+            {ABOUT_POINTS.map((p) => <li key={p.t}><b>{p.t}.</b> {p.d}</li>)}
           </ul>
         </div>
       </div>
@@ -47,17 +48,17 @@ export function About() {
   );
 }
 
-export function Packs() {
+export function Services() {
   return (
-    <CircleWipe id="goi" className={s.packs} aria-labelledby="packs-h">
+    <CircleWipe id="dich-vu" className={s.packs} aria-labelledby="packs-h">
       <div className={s.wrap}>
         <header className={s.sectionHead}>
-          <p className={s.chipWhite}>Các gói chăm sóc</p>
-          <BounceWords as="h2" className={`${s.display} ${s.h2} ${s.onBlue}`} text="Bốn kiểu chiều chuộng, *một mục đích:* bé thoải mái" />
-          <p className={`${s.lead} ${s.onBlue}`} id="packs-h">Rê chuột (hoặc chạm) vào thẻ để thổi bong bóng. Giá là giá tham khảo theo cân nặng và độ dài lông, báo chính xác sau khi xem bé.</p>
+          <p className={s.chipWhite}>Dịch vụ</p>
+          <BounceWords as="h2" className={`${s.display} ${s.h2} ${s.onBlue}`} text="Năm dịch vụ, *chọn đúng* điều bé cần" />
+          <p className={`${s.lead} ${s.onBlue}`} id="packs-h">Rê chuột (hoặc chạm) vào thẻ để thổi bong bóng. Giá là giá khởi điểm cho bé nhỏ, lông ngắn; bảng giá bên dưới tính theo cân nặng và độ dài lông.</p>
         </header>
         <ul className={s.packGrid}>
-          {PACKS.map((p) => (
+          {SERVICES.map((p) => (
             <li key={p.id}>
               <BubbleHost className={`${s.pack} ${s["pack_" + p.color]}`}>
                 <div className={s.packPhoto}>
@@ -65,9 +66,10 @@ export function Packs() {
                 </div>
                 {"addon" in p && p.addon ? <span className={s.packTag}>Thêm vào bất kỳ gói</span> : null}
                 <h3 className={`${s.display} ${s.packName}`}>{p.name}</h3>
+                <p className={s.packTime}>Thời gian: {p.time}</p>
                 <p>{p.blurb}</p>
                 <ul className={s.packList}>{p.items.map((it) => <li key={it}>{it}</li>)}</ul>
-                <p className={s.packPrice}><span>{"addon" in p && p.addon ? "Thêm từ" : "Từ"}</span> <b>{fmtVnd(p.from)}</b></p>
+                <p className={s.packPrice}><span>Từ</span> <b>{fmtVnd(p.from)}</b></p>
               </BubbleHost>
             </li>
           ))}
@@ -77,71 +79,90 @@ export function Packs() {
   );
 }
 
+export function Surcharges() {
+  return (
+    <section className={s.surcharge} aria-labelledby="sur-h">
+      <div className={s.wrap}>
+        <h2 id="sur-h" className={`${s.display} ${s.h3}`}>Phụ phí có thể phát sinh</h2>
+        <ul className={s.surList}>
+          {SURCHARGES.map((x) => (
+            <li key={x.t}><div><b>{x.t}</b><span>{x.d}</span></div><em>{x.p}</em></li>
+          ))}
+        </ul>
+        <p className={s.priceNote}>Tiệm báo phụ phí (nếu có) sau khi xem lông và trước khi bắt đầu, bạn đồng ý rồi mới làm.</p>
+      </div>
+    </section>
+  );
+}
+
 export function Process() {
   return (
     <section id="quy-trinh" className={s.process} aria-labelledby="proc-h">
       <div className={s.wrap}>
         <header className={s.sectionHead}>
           <p className={s.chipInk}>Một buổi ở Bông Xù</p>
-          <BounceWords as="h2" className={`${s.display} ${s.h2}`} text="Từ lúc vào cửa đến lúc *vẫy đuôi* ra về" />
-          <p className={s.lead} id="proc-h">Năm chặng, chặng nào cũng có thể dừng lại nếu bé chưa sẵn sàng.</p>
+          <BounceWords as="h2" className={`${s.display} ${s.h2}`} text="Tiếp nhận, tắm, sấy, *hoàn thiện*" />
+          <p className={s.lead} id="proc-h">Năm chặng với thời gian dự kiến, chặng nào cũng có thể dừng lại nếu bé chưa sẵn sàng.</p>
         </header>
-        <StackingCards top="6.5rem" offset={14} scaleStep={0.035} className={s.stack} cardClassName={s.stackCard}>
+        <PawWalk>
           {STEPS.map((st) => (
-            <article key={st.n} className={`${s.stepCard} ${s["sc_" + st.color]}`}>
-              <div className={s.stepText}>
-                <span className={s.stepBig} aria-hidden="true">{st.n}</span>
-                <h3 className={`${s.display} ${s.h3}`}>{st.t}</h3>
-                <p>{st.d}</p>
-              </div>
-              <div className={s.stepPhoto}>
-                <Image src={img(st.photo, 600)} alt={st.alt} fill sizes="(max-width: 700px) 90vw, 360px" loading="lazy" style={{ objectFit: "cover", objectPosition: st.pos }} />
-              </div>
-            </article>
+            <li key={st.n} data-step="" className={s.walkItem}>
+              <span className={s.walkPaw} aria-hidden="true"><Paw /></span>
+              <article className={`${s.stepCard} ${s["sc_" + st.color]}`}>
+                <div className={s.stepText}>
+                  <span className={s.stepBig} aria-hidden="true">{st.n}</span>
+                  <h3 className={`${s.display} ${s.h3}`}>{st.t}</h3>
+                  <p className={s.stepMins}>Khoảng {st.mins}</p>
+                  <p>{st.d}</p>
+                </div>
+                <div className={s.stepPhoto}>
+                  <Image src={img(st.photo, 600)} alt={st.alt} fill sizes="(max-width: 700px) 90vw, 300px" loading="lazy" style={{ objectFit: "cover", objectPosition: st.pos }} />
+                </div>
+              </article>
+            </li>
           ))}
-        </StackingCards>
+        </PawWalk>
       </div>
     </section>
   );
 }
 
-const GALLERY = [
-  { f: "yorkie-khan-xanh", alt: "Chú Yorkshire ướt được quấn trong chiếc khăn xanh nhạt", cap: "Quấn khăn là xong", size: "lg" },
-  { f: "khan-luoc-sua-tam", alt: "Khăn hoạ tiết lá, lược cao su xanh và chai sữa tắm trắng trên sàn gỗ cạnh chân chú chó", cap: "Khăn, lược, sẵn sàng", size: "md" },
-  { f: "meo-song-gam", alt: "Chú mèo lông dài nằm trên sofa được chải nhẹ", cap: "Mèo cũng mê chải lông", size: "lg" },
-] as const;
-
-export function Gallery() {
+export function Intake() {
   return (
-    <section className={s.gallery} aria-labelledby="gal-h">
+    <section id="tiep-nhan" className={s.intake} aria-labelledby="intake-h">
       <div className={s.wrap}>
         <header className={s.sectionHead}>
-          <p className={s.chipInk}>Chuyện tắm táp</p>
-          <BounceWords as="h2" className={`${s.display} ${s.h2}`} text="Những góc nhỏ *sạch bong*" />
-          <span id="gal-h" className={s.srOnly}>Ảnh chó mèo khi chăm sóc</span>
+          <p className={s.chipInk}>Tiếp nhận, đưa đón và quy định</p>
+          <BounceWords as="h2" className={`${s.display} ${s.h2}`} text="Điều cần biết *trước khi* đến" />
+          <p className={s.lead} id="intake-h">Để bé an toàn và để các bé trong tiệm không lây bệnh cho nhau, tiệm có vài quy định rõ ràng.</p>
         </header>
-        <ul className={s.discs}>
-          {GALLERY.map((g, i) => (
-            <li key={g.f} className={`${s.discItem} ${s["d_" + g.size]}`} data-i={i}>
-              <ClipReveal variant="circle" from="center" innerScale={1.2} className={s.disc}>
-                <Image src={img(g.f, 600)} alt={g.alt} fill sizes="(max-width: 700px) 70vw, 320px" loading="lazy" style={{ objectFit: "cover", objectPosition: "50% 40%" }} />
-              </ClipReveal>
-              <span className={s.discCap}>{g.cap}</span>
+        <ul className={s.intakeGrid}>
+          {INTAKE.map((x) => (
+            <li key={x.t} className={s.intakeCard}>
+              <span className={s.packTag}>{x.tag}</span>
+              <h3 className={`${s.display} ${s.h3}`}>{x.t}</h3>
+              <p>{x.d}</p>
             </li>
           ))}
         </ul>
-      </div>
-    </section>
-  );
-}
-
-export function Manifesto() {
-  return (
-    <section className={s.manifesto} aria-label="Điều Bông Xù tin">
-      <div className={s.wrapNarrow}>
-        <ScrollScrubText as="p" className={`${s.display} ${s.mani}`} dim={0.22}>
-          Một chú chó vẫy đuôi, một chú mèo kêu rừ rừ. Chúng mình tin chăm sóc lông là chuyện của sự dịu dàng: chậm lại, nghe bé, và chỉ làm điều bé chịu được.
-        </ScrollScrubText>
+        <div className={s.intakeSplit}>
+          <div className={s.pickup}>
+            <div className={s.pickupPhoto}>
+              <Image src={img("meo-song-gam", 600)} alt="Chú mèo lông dài nằm trên sofa được chải nhẹ" fill sizes="(max-width: 700px) 60vw, 240px" loading="lazy" style={{ objectFit: "cover", objectPosition: "50% 40%" }} />
+            </div>
+            <div>
+              <h3 className={`${s.display} ${s.h3}`}>{PICKUP.t}</h3>
+              <p>{PICKUP.d}</p>
+              <ul className={s.packList}>{PICKUP.list.map((l) => <li key={l}>{l}</li>)}</ul>
+            </div>
+          </div>
+          <div className={s.policies}>
+            <h3 className={`${s.display} ${s.h3}`}>Chính sách đặt và huỷ</h3>
+            <dl>
+              {POLICIES.map((p) => <div key={p.t}><dt>{p.t}</dt><dd>{p.d}</dd></div>)}
+            </dl>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -182,11 +203,11 @@ export function Closing() {
     <section className={s.closing} aria-labelledby="close-h">
       <DragStickers items={BOARD} className={s.closingStickers} />
       <div className={s.wrapNarrow}>
-        <BounceWords as="h2" className={`${s.display} ${s.h1} ${s.center}`} text="Sẵn sàng biến boss thành *cục bông?*" />
-        <p className={`${s.lead} ${s.center}`} id="close-h">Gửi yêu cầu tư vấn với tóm tắt từ công cụ, chúng mình sẽ báo giá cụ thể và gợi ý khung giờ phù hợp cho bé.</p>
+        <BounceWords as="h2" className={`${s.display} ${s.h1} ${s.center}`} text="Hẹn lịch để boss thành *cục bông?*" />
+        <p className={`${s.lead} ${s.center}`} id="close-h">Gửi yêu cầu cùng khung giờ mong muốn và bản ước tính, tiệm sẽ báo giá cụ thể và xác nhận lịch cho bé.</p>
         <div className={`${s.heroCtas} ${s.centerRow}`}>
-          <WagButton href={buildConsultHref("pet-vui")} tone="red" magnetic>Gửi yêu cầu tư vấn</WagButton>
-          <WagButton href="#chon-goi" tone="white">Quay lại chọn gói</WagButton>
+          <WagButton href={buildConsultHref("pet-vui")} tone="red" magnetic>Gửi yêu cầu đặt lịch</WagButton>
+          <WagButton href="#bang-gia" tone="white">Xem lại bảng giá</WagButton>
         </div>
       </div>
     </section>
@@ -200,18 +221,20 @@ export function Footer() {
         <div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/demos/pet-vui/identity/logo-primary-reversed.svg" alt="Bông Xù" width={150} height={165} className={s.footLogo} />
-          <p>Pet spa &amp; grooming chó mèo tại Đà Nẵng.</p>
+          <p>Tiệm tắm và cắt tỉa lông chó mèo tại Quận Sơn Trà, Đà Nẵng.</p>
         </div>
         <div>
           <h2 className={s.footH}>Liên hệ</h2>
           <p><a href="mailto:chao@bongxu.example">chao@bongxu.example</a></p>
           <p>0236&nbsp;000&nbsp;0000</p>
-          <p>Đà Nẵng</p>
+          <p>Quận Sơn Trà, Đà Nẵng</p>
+          <p>Mở 8:00 – 19:00, nghỉ Thứ Hai</p>
         </div>
         <div>
           <h2 className={s.footH}>Trong trang</h2>
-          <p><a href="#goi">Gói chăm sóc</a></p>
-          <p><a href="#chon-goi">Chọn gói cho bé</a></p>
+          <p><a href="#dich-vu">Dịch vụ</a></p>
+          <p><a href="#bang-gia">Bảng giá</a></p>
+          <p><a href="#dat-lich">Lịch hẹn</a></p>
           <p><a href="#hoi-dap">Hỏi đáp</a></p>
           <p><a href="/demos/pet-vui/credits">Ảnh &amp; ghi công</a></p>
         </div>

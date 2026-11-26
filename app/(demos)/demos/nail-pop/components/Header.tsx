@@ -1,15 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MagneticButton } from "@/features/showroom/effects";
-import { buildConsultHref } from "@/features/showroom/consultation";
 import s from "../brand.module.css";
 
 const NAV = [
-  { href: "#dich-vu", t: "Dịch vụ" },
-  { href: "#builder", t: "Thiết kế móng" },
-  { href: "#cam-hung", t: "Cảm hứng" },
-  { href: "#quy-trinh", t: "Quy trình" },
+  { href: "#dich-vu", t: "Dịch vụ và giá" },
+  { href: "#builder", t: "Dựng móng" },
+  { href: "#mau-mong", t: "Mẫu móng" },
+  { href: "#chinh-sach", t: "Chính sách" },
   { href: "#hoi-dap", t: "Hỏi đáp" },
 ];
 
@@ -17,7 +15,6 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const btn = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
-  const consult = buildConsultHref("nail-pop");
 
   useEffect(() => {
     if (!open) return;
@@ -46,9 +43,7 @@ export function Header() {
           {NAV.map((n) => <a key={n.href} href={n.href}>{n.t}</a>)}
         </nav>
         <div className={s.headerCta}>
-          <MagneticButton strength={0.25} max={8}>
-            <a className={`${s.btn} ${s.btnPink}`} href={consult}>Đặt lịch</a>
-          </MagneticButton>
+          <a className={`${s.btn} ${s.btnPink}`} href="#dat-lich">Đặt lịch</a>
         </div>
         <button ref={btn} type="button" className={s.burger} aria-expanded={open} aria-controls="np-menu" aria-label={open ? "Đóng menu" : "Mở menu"} onClick={() => setOpen((v) => !v)}>
           <span aria-hidden="true" className={s.burgerBars} data-open={open ? "1" : "0"} />
@@ -57,7 +52,7 @@ export function Header() {
       {open && (
         <div id="np-menu" ref={panel} className={s.menu}>
           {NAV.map((n) => <a key={n.href} href={n.href} onClick={() => setOpen(false)}>{n.t}</a>)}
-          <a className={`${s.btn} ${s.btnPink}`} href={consult}>Đặt lịch</a>
+          <a className={`${s.btn} ${s.btnPink}`} href="#dat-lich" onClick={() => setOpen(false)}>Đặt lịch</a>
         </div>
       )}
     </header>

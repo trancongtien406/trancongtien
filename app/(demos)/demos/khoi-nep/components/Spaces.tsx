@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { PinnedHorizontalScroll } from "@/features/showroom/effects";
 import { Photo } from "./Photo";
 import { EV, emit, scrollToId } from "./events";
 import { CONCEPTS, type Concept } from "../data/content";
@@ -27,47 +28,50 @@ export function Spaces() {
       <div className={s.wrap}>
         <i className={s.rule} data-rule />
         <div className={s.secHead}>
-          <p className={s.label}>02 / Bộ sưu tập không gian</p>
+          <p className={s.label}>03 / Theo loại công trình</p>
           <h2 id="spaces-title" className={s.h2}>
-            Những không gian được hình dung.
+            Bốn loại công trình chúng tôi nhận.
           </h2>
           <p className={s.secLead}>
-            Bốn hướng tiếp cận dành cho những nhu cầu sống khác nhau. Mỗi concept là một hướng nghiên cứu về tỷ lệ,
-            công năng và vật liệu.
+            Cuộn ngang để xem từng loại: diện tích thường gặp, hạng mục hay làm, thời gian và mức chi phí tham khảo. Đây là hồ sơ theo loại công trình, không phải danh sách khách hàng.
           </p>
         </div>
-        <ul className={s.conceptGrid}>
-          {CONCEPTS.map((c, i) => (
-            <li key={c.id} className={s[`concept${i + 1}` as "concept1"]}>
-              <figure className={s.conceptFig} style={{ aspectRatio: c.ratio }} data-veil>
-                <Photo
-                  name={c.photo as ImageName}
-                  sizes="(min-width: 1024px) 55vw, 100vw"
-                  alt={c.alt}
-                />
-                <span className={s.chip}>Concept</span>
-              </figure>
-              <div className={s.conceptMeta}>
-                <span className={s.idx}>{c.id}</span>
-                <h3 className={s.h3}>{c.name}</h3>
-                <p className={s.metaLine}>
-                  {c.type} · {c.area} · {c.style}
-                </p>
-                <button
-                  type="button"
-                  className={s.textBtn}
-                  onClick={(e) => {
-                    opener.current = e.currentTarget;
-                    setActive(c);
-                  }}
-                >
-                  Xem ý tưởng <span aria-hidden="true">↗</span>
-                  <span className={s.srOnly}> — {c.name}</span>
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
+      </div>
+      <PinnedHorizontalScroll className={s.spPin} trackClassName={s.spTrack} minWidth={1000} mobile="scroll" label="Bốn loại công trình, cuộn ngang">
+        {CONCEPTS.map((c) => (
+          <article key={c.id} className={s.spPanel} data-sp-panel>
+            <figure className={s.spFig} data-veil>
+              <Photo name={c.photo as ImageName} sizes="(min-width: 1000px) 40vw, 86vw" alt={c.alt} />
+              <span className={s.chip}>{c.id}</span>
+            </figure>
+            <div className={s.spBody}>
+              <p className={s.label}>{c.type}</p>
+              <h3 className={s.spTitle}>{c.name}</h3>
+              <p className={s.metaLine}>{c.area} · {c.style}</p>
+              <p className={s.spDesc}>{c.desc}</p>
+              <ul className={s.spScope} aria-label="Hạng mục thường làm">
+                {c.scope.map((x) => <li key={x}>{x}</li>)}
+              </ul>
+              <dl className={s.spFacts}>
+                <div><dt>Thời gian</dt><dd>{c.time}</dd></div>
+                <div><dt>Chi phí</dt><dd>{c.budget}</dd></div>
+              </dl>
+              <button
+                type="button"
+                className={s.textBtn}
+                onClick={(e) => {
+                  opener.current = e.currentTarget;
+                  setActive(c);
+                }}
+              >
+                Xem hồ sơ <span aria-hidden="true">↗</span>
+                <span className={s.srOnly}> — {c.name}</span>
+              </button>
+            </div>
+          </article>
+        ))}
+      </PinnedHorizontalScroll>
+      <div className={s.wrap}>
       </div>
 
       <dialog
@@ -86,7 +90,7 @@ export function Spaces() {
             </figure>
             <div className={s.dlgText}>
               <p className={s.label}>
-                {active.id} · Concept
+                {active.id} · Loại công trình
               </p>
               <h3 id="dlg-title" className={s.dlgTitle}>
                 {active.name}
@@ -97,7 +101,7 @@ export function Spaces() {
                   <dd>{active.type}</dd>
                 </div>
                 <div>
-                  <dt>Diện tích</dt>
+                  <dt>Diện tích thường gặp</dt>
                   <dd>{active.area}</dd>
                 </div>
                 <div>
@@ -106,7 +110,7 @@ export function Spaces() {
                 </div>
               </dl>
               <p>{active.desc}</p>
-              <p className={s.label}>Vật liệu đề xuất</p>
+              <p className={s.label}>Vật liệu hay dùng</p>
               <ul className={s.tagList}>
                 {active.materials.map((m) => (
                   <li key={m}>{m}</li>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { CursorSpotlight, SplitWords } from "@/features/showroom/effects";
+import { CursorSpotlight } from "@/features/showroom/effects";
 import s from "../brand.module.css";
 import { FLAVORS, vnd, type FlavorKey } from "../data/menu";
 import { match, validate, type AlcoholPref, type MatchResult, type Strength } from "../lib/match";
@@ -49,9 +49,9 @@ export function Matcher() {
     <section className={s.matcher} id="chon-ly" aria-label="Chọn ly theo vị">
       <div className={s.wrap}>
         <header className={s.secHead}>
-          <p className={s.kicker}>Tìm vị của bạn</p>
-          <SplitWords as="h2" className={s.h2} trigger="view">Tối nay bạn thuộc vị nào?</SplitWords>
-          <p className={s.mutedP}>Không biết gọi gì? Cho tụi mình biết bạn thích ngọt, chua, đắng hay một chút khói. Ba gợi ý hợp nhất sẽ hiện ra, kèm lý do.</p>
+          <p className={s.kicker}>Gợi ý ly theo vị</p>
+          <h2 className={s.h2} data-tm="lit">Chưa biết gọi gì? Chọn theo vị</h2>
+          <p className={s.mutedP}>Chọn vị bạn thích và độ mạnh, tụi mình gợi ý ba ly trong thực đơn, kèm lý do. Hợp với khách lần đầu ghé hoặc chưa quen cocktail.</p>
         </header>
         <CursorSpotlight className={s.console} radius={360} color="rgba(0,229,255,0.12)">
           <form className={s.consoleForm} onSubmit={submit} noValidate>
@@ -116,7 +116,7 @@ export function Matcher() {
                       <div className={s.resFoot}>
                         <span className={s.price}>{vnd(r.drink.price)} <small>Giá tham khảo</small></span>
                         <button type="button" className={s.linkBtn} aria-pressed={picked === r.drink.name} onClick={() => pick(r.drink.name)}>
-                          {picked === r.drink.name ? "Đã thêm vào đặt bàn" : "Thêm vào đặt bàn"}
+                          {picked === r.drink.name ? "Đã ghi chú vào đặt bàn" : "Ghi chú vào đặt bàn"}
                         </button>
                       </div>
                     </li>

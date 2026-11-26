@@ -5,7 +5,7 @@ import { gsap, ScrollTrigger, registerGsap, useIsoLayoutEffect } from "@/feature
 
 /**
  * Chuyển động chung của trang.
- * 1) Hero choreography ~2,8 giây: nhãn bản vẽ, mô tả, nút, các vạch chiều cao, số liệu, chú thích (tiêu đề do SplitWords, ảnh do ClipReveal, đường kích thước do SVGPathDraw).
+ * 1) Hero choreography ~2,8 giây: từng từ tiêu đề sáng lên ngẫu nhiên như đèn cửa sổ, ảnh tháp mở từ dưới lên như các tầng, nhãn bản vẽ, mô tả, nút, vạch chiều cao, số liệu (đường kích thước vẽ bằng CSS).
  * 2) Moment cuộn: ảnh hero trôi chậm + phóng nhẹ, chữ hero mờ dần; các lớp SVG của cảnh mặt tiền chạy lệch tốc độ (parallax nhiều lớp).
  * 3) Khối `data-cv="reveal"` nổi lên theo lô; mọi trạng thái ẩn chỉ đặt sau khi JS chạy.
  * Reduced-motion: không chạy gì, nội dung hiện đủ.
@@ -20,6 +20,10 @@ export function Motion() {
     const mm = gsap.matchMedia();
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" }, delay: 0.1 });
+      const words = q('[data-cv="hero-word"]');
+      if (words.length) tl.fromTo(words, { opacity: 0, filter: "blur(7px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.7, ease: "power2.out", stagger: { each: 0.1, from: "random" }, clearProps: "filter" }, 0.35);
+      const clip = q('[data-cv="hero-clip"]');
+      if (clip.length) tl.fromTo(clip, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.5, ease: "power3.inOut", clearProps: "clipPath" }, 0.2);
       tl.from(q('[data-cv="hero-eyebrow"]'), { y: 14, opacity: 0, duration: 0.8 }, 0.1)
         .from(q('[data-cv="hero-lead"]'), { y: 18, opacity: 0, duration: 0.9 }, 1.1)
         .from(q('[data-cv="hero-cta"] > *'), { y: 18, opacity: 0, duration: 0.8, stagger: 0.12 }, 1.4)

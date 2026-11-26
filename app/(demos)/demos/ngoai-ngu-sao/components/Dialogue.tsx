@@ -63,9 +63,9 @@ export function Dialogue() {
     <section id="hoi-thoai" className={`${styles.panel} ${styles.panelPink}`} aria-labelledby="dlg-title" ref={box}>
       <div className={styles.dlgGrid}>
         <div className={styles.dlgCopy}>
-          <p className={styles.kicker}>Hội thoại tình huống</p>
-          <h2 id="dlg-title" className={styles.h2}>Nghe một cuộc trò chuyện, rồi tự nói lại.</h2>
-          <p className={styles.lede}>Mỗi bài bắt đầu từ một đoạn hội thoại ngắn. Bấm vào từng bong bóng để xem nghĩa tiếng Việt.</p>
+          <p className={styles.kicker}>Phương pháp: nói theo tình huống</p>
+          <h2 id="dlg-title" className={styles.h2}>Một đoạn hội thoại mẫu của lớp giao tiếp.</h2>
+          <p className={styles.lede}>Mỗi bài trong lớp giao tiếp bắt đầu từ một đoạn hội thoại ngắn như thế này, rồi học viên tự đóng vai nói lại. Bấm vào bong bóng để xem nghĩa tiếng Việt.</p>
           <div className={`${styles.segment} ${styles.segOnPink}`} role="group" aria-label="Chọn ngôn ngữ hội thoại">
             {LANGS.map((l) => <button key={l.id} type="button" className={styles.segBtn} aria-pressed={lang === l.id} onClick={() => pick(l.id)}>{l.name}</button>)}
           </div>

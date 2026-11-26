@@ -40,10 +40,10 @@ export function Designer() {
       <div className={s.wrap}>
         <div className={s.pdHead}>
           <div>
-            <p className={s.hand}>Nặn bình</p>
-            <Engrave as="h2" id="pd-title" className={s.h2}>Nặn thử một chiếc bình trước khi chạm đất thật.</Engrave>
+            <p className={s.hand}>Phác bình theo ý bạn</p>
+            <Engrave as="h2" id="pd-title" className={s.h2}>Phác chiếc bình bạn muốn đặt làm.</Engrave>
           </div>
-          <p className={s.lead}>Chọn dáng, kéo độ phình, phủ men và hoạ tiết. Chiếc bình quay trên bàn xoay sẽ đổi hình theo từng lựa chọn, kèm một mã để bạn đưa cho người hướng dẫn.</p>
+          <p className={s.lead}>Chọn dáng, kéo độ phình, phủ men và hoạ tiết. Chiếc bình quay trên bàn xoay đổi hình theo từng lựa chọn, kèm một mã để bạn gửi cho xưởng khi đặt làm riêng hoặc đưa cho người hướng dẫn.</p>
         </div>
 
         <div className={s.pdGrid}>
@@ -114,7 +114,7 @@ export function Designer() {
               <div className={s.sumActions}>
                 <button type="button" className={`${s.btn} ${s.btnLine}`} onClick={copy}>Chép mã</button>
                 <button type="button" className={`${s.btn} ${s.btnLine}`} onClick={reset}>Nặn lại từ đầu</button>
-                <a className={s.btn} href={CONSULT}>Hỏi xưởng về bình này</a>
+                <a className={s.btn} href={CONSULT}>Gửi phác thảo cho xưởng</a>
               </div>
               <p className={s.fine} role="status">{msg}</p>
             </div>

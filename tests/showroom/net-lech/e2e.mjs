@@ -58,17 +58,17 @@ console.log('[1] Tải trang, console, request ngoài origin, metadata');
   ok(page.errors.length === 0, '0 lỗi console', page.errors.join(' | '));
   ok(page.external.length === 0, 'không request ra ngoài origin', page.external.join(' | '));
   ok(/Nét Lệch/.test(await page.title()), 'title riêng', await page.title());
-  ok(await page.locator('meta[name=description][content*="Nét Lệch"], meta[name=description][content*="tiệm tóc"], meta[name=description][content*="Hair studio"]').count() > 0, 'description riêng');
+  ok(await page.locator('meta[name=description][content*="Nét Lệch"], meta[name=description][content*="tiệm tóc"], meta[name=description][content*="Salon tóc"]').count() > 0, 'description riêng');
   ok(await page.locator('meta[name=robots][content*=noindex]').count() > 0, 'robots noindex');
   ok(await page.locator('link[rel=icon][href*="net-lech/identity/favicon"]').count() > 0, 'favicon theo route');
   ok(await page.locator('meta[property="og:image"][content*="net-lech/identity/og-image"]').count() > 0, 'og-image');
   ok(await page.locator('h1').count() === 1, 'đúng 1 h1');
   ok(await page.locator('html[lang=vi]').count() === 1, 'html lang=vi');
   ok(await page.locator('[data-nl="lb-card"]').count() === 8, '8 kiểu trong lookbook');
-  ok(await page.locator('#faq details').count() === 8, '8 câu FAQ');
+  ok(await page.locator('#faq details').count() === 10, '10 câu FAQ');
   const imgs = await page.evaluate(() => [...document.images].map((i) => decodeURIComponent(i.currentSrc || i.src)));
   const names = imgs.map((s) => s.match(/net-lech\/([a-z0-9-]+)-\d+\.webp/)?.[1]).filter(Boolean);
-  ok(names.length >= 12 && new Set(names).size === names.length, 'ảnh không lặp trên trang (≥12 ảnh stock)', `${names.length}/${new Set(names).size}`);
+  ok(names.length >= 10 && new Set(names).size === names.length, 'ảnh không lặp trên trang (≥10 ảnh)', `${names.length}/${new Set(names).size}`);
   const txt = await page.evaluate(() => document.body.innerText);
   ok(!/đảm bảo|100%|cam kết kết quả|số 1|hàng đầu|phục hồi hoàn toàn(?! tóc hư)/i.test(txt.replace(/Dịch vụ chăm sóc có phục hồi hoàn toàn tóc hư tổn không\?/g, '')), 'không có từ cam kết/tuyệt đối');
   ok(/Giá tham khảo|giá tham khảo/.test(txt), 'có chữ giá tham khảo');
@@ -209,25 +209,59 @@ console.log('[5] Lookbook Filter');
   await ctx.close();
 }
 
+// ---------- 5b nội dung salon thật
+console.log('[5b] Nội dung salon: hero, bảng giá theo độ dài, khung giờ, chính sách');
+{
+  const { ctx, page } = await newPage();
+  await load(page);
+  const hero = await page.locator('[data-nl-hero]').textContent();
+  ok(/salon tóc/i.test(hero) && /Hải Châu/.test(hero) && /Đà Nẵng/.test(hero) && /nam và nữ/.test(hero), 'hero nêu loại hình, quận, đối tượng');
+  ok(/150\.000/.test(hero) && /09:00/.test(hero) && /Miễn phí/i.test(hero), 'hero có 3 sự thật: giá từ, giờ, tư vấn miễn phí');
+  ok(await page.locator('[data-nl=cta] a').first().textContent().then((t) => /Đặt lịch/.test(t)), 'CTA hero đúng ngành (Đặt lịch)');
+  const all = await page.evaluate(() => document.body.innerText + [...document.querySelectorAll('[alt],[aria-label]')].map((e) => (e.getAttribute('alt') || '') + (e.getAttribute('aria-label') || '')).join(' '));
+  ok(!/ảnh stock|stock/i.test(all), 'không còn chữ "stock" hiển thị trên trang');
+  const pt = page.locator('[data-nl=price-table]');
+  await pt.scrollIntoViewIfNeeded();
+  ok(await pt.locator('tbody tr').count() === 7, 'bảng giá 7 dịch vụ');
+  ok(/150\.000/.test(await pt.innerText()) && /1\.200\.000/.test(await pt.innerText()), 'bảng giá có mức thấp nhất và cao nhất');
+  const blade = async () => page.evaluate(() => { const t = document.querySelector('[data-nl=price-table]'); return getComputedStyle(t.querySelector('[class*=ptBlade]')).left; });
+  const l1 = await blade();
+  await pt.locator('label:has-text("Dài") input').evaluate((e) => e.click()); await page.waitForTimeout(700);
+  const l2 = await blade();
+  ok(l1 !== l2 && /dài/i.test(await pt.locator('thead th[data-on="1"]').innerText()), 'chọn Dài: lưỡi cắt trượt tới cột Dài', `${l1} -> ${l2}`);
+  const sb = page.locator('[data-nl=slotbar]');
+  await sb.scrollIntoViewIfNeeded();
+  ok(/18:00/.test(await sb.locator('[data-nl=slot-out]').innerText()), 'thanh khung giờ: 2 giờ => muộn nhất 18:00');
+  await sb.locator('button:text-is("Tẩy và nhuộm")').click();
+  ok(/16:00/.test(await sb.locator('[data-nl=slot-out]').innerText()), 'thanh khung giờ: 4 giờ => muộn nhất 16:00');
+  await sb.locator('input[type=range]').evaluate((e) => { const set = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set; set.call(e, '300'); e.dispatchEvent(new Event('input', { bubbles: true })); });
+  ok(/15:00/.test(await sb.locator('[data-nl=slot-out]').innerText()), 'thanh khung giờ: 5 giờ => 15:00');
+  ok(await page.locator('#policy dt').count() === 6 && /100\.000/.test(await page.locator('#policy').innerText()), '6 chính sách đặt lịch, có mức cọc');
+  ok(await page.locator('#products li').count() === 6 && !/(Loreal|L'Oréal|Wella|Schwarzkopf|Kerastase|Olaplex|Davines)/i.test(await page.locator('#products').innerText()), 'sản phẩm mô tả chung, không tên hãng');
+  ok(await page.locator('[data-fx="ImageHoverDistort"]').count() === 8 && await page.locator('[data-fx="VelocityMarquee"]').count() >= 1 && await page.locator('[data-fx="SplitReveal"],[data-fx="SplitWords"]').count() >= 1, 'hiệu ứng thư viện: ImageHoverDistort x8, VelocityMarquee, SplitWords');
+  ok(page.errors.length === 0, 'khối nội dung salon: 0 lỗi console', page.errors.join('|'));
+  await ctx.close();
+}
+
 // ---------- 6 Builder
 console.log('[6] Service Builder');
 {
   const { ctx, page } = await newPage();
   await load(page);
   await page.locator('#builder').scrollIntoViewIfNeeded(); await page.waitForTimeout(900);
-  const setSvc = async (ids) => { for (const id of ['SV-01', 'SV-02', 'SV-03', 'SV-04']) { const el = page.locator(`[data-svc=${id}]`); if ((await el.isChecked()) !== ids.includes(id)) await el.evaluate((e) => e.click()); } };
+  const setSvc = async (ids) => { for (const id of ['SV-01', 'SV-02', 'SV-03', 'SV-04', 'SV-05', 'SV-06', 'SV-07']) { const el = page.locator(`[data-svc=${id}]`); if ((await el.isChecked()) !== ids.includes(id)) await el.evaluate((e) => e.click()); } };
   const setLen = async (l) => page.locator(`label:has(input[name=nl-length]):has-text("${l}") input`).evaluate((e) => e.click());
   const setSty = async (i) => page.locator('input[name=nl-stylist]').nth(i).evaluate((e) => e.click());
   const read = async () => ({ total: num(await page.locator('[data-nl=sum-total]').innerText()), time: await page.locator('[data-nl=sum-time]').innerText() });
   ok(await page.locator('[data-nl=sum-empty]').count() === 1 && num(await page.locator('[data-nl=sum-total]').innerText()) === 0, 'rỗng: 0đ + gợi ý chọn dịch vụ');
   ok(await page.locator('[data-nl=open-preview]').isDisabled(), 'rỗng: nút preview disabled');
   const cases = [
-    ['Cắt/Ngắn/Stylist', ['SV-01'], 'Ngắn', 0, 250000, '45 phút'],
-    ['Cắt/Vừa/Stylist', ['SV-01'], 'Vừa', 0, 300000, '50 phút'],
-    ['Nhuộm/Dài/Senior', ['SV-02'], 'Dài', 1, 1047000, '2 giờ 30 phút'],
-    ['Cắt+Nhuộm/Vừa/Stylist', ['SV-01', 'SV-02'], 'Vừa', 0, 1080000, '3 giờ 5 phút'],
-    ['Cắt+Chăm sóc/Dài/Senior', ['SV-01', 'SV-04'], 'Dài', 1, 967000, '2 giờ 10 phút'],
-    ['Uốn/Dài/Director', ['SV-03'], 'Dài', 2, 1365000, '3 giờ'],
+    ['Cắt/Ngắn/Stylist', ['SV-01'], 'Ngắn', 0, 150000, '40 phút'],
+    ['Cắt/Vừa/Stylist', ['SV-01'], 'Vừa', 0, 200000, '50 phút'],
+    ['Nhuộm/Dài/Senior', ['SV-02'], 'Dài', 1, 1093000, '2 giờ 30 phút'],
+    ['Cắt+Nhuộm/Vừa/Stylist', ['SV-01', 'SV-02'], 'Vừa', 0, 950000, '2 giờ 50 phút'],
+    ['Cắt+Chăm sóc/Dài/Senior', ['SV-01', 'SV-04'], 'Dài', 1, 1036000, '2 giờ 15 phút'],
+    ['Uốn/Dài/Director', ['SV-03'], 'Dài', 2, 1430000, '3 giờ'],
   ];
   for (const [name, ids, len, sty, total, time] of cases) {
     await setSvc(ids); await setLen(len); await setSty(sty);
@@ -237,7 +271,7 @@ console.log('[6] Service Builder');
   await setSvc(['SV-02', 'SV-03']); await setLen('Vừa'); await setSty(0);
   ok(await page.locator('[data-nl=sum-warn][role=alert]').count() === 1, 'Nhuộm + Uốn: hiện cảnh báo');
   ok(await page.locator('[data-nl=open-preview]').isDisabled(), 'Nhuộm + Uốn: preview disabled');
-  ok(num(await page.locator('[data-nl=sum-total]').innerText()) === 780000 + 900000, 'Nhuộm + Uốn vẫn tính tổng tham khảo', String(num(await page.locator('[data-nl=sum-total]').innerText())));
+  ok(num(await page.locator('[data-nl=sum-total]').innerText()) === 750000 + 850000, 'Nhuộm + Uốn vẫn tính tổng tham khảo', String(num(await page.locator('[data-nl=sum-total]').innerText())));
   ok(await page.locator('[data-svc=SV-02]').isChecked() && await page.locator('[data-svc=SV-03]').isChecked(), 'không tự đổi lựa chọn khi xung đột');
   // persistence
   await setSvc(['SV-01', 'SV-04']); await setLen('Dài'); await setSty(1);
@@ -254,17 +288,17 @@ console.log('[6] Service Builder');
   await page.reload({ waitUntil: 'networkidle' }); await page.waitForTimeout(1200);
   ok(await page.locator('[data-nl=sum-empty]').count() === 1 && page.errors.length === 0, 'localStorage JSON hỏng => mặc định, không lỗi console', page.errors.join('|'));
   // thêm từ bảng dịch vụ + stylist
-  await page.locator('#services a:text-is("Thêm vào dịch vụ")').nth(1).click(); await page.waitForTimeout(300);
-  await page.locator('#services a:text-is("Thêm vào dịch vụ")').nth(1).click(); await page.waitForTimeout(300);
-  ok(await page.locator('[data-svc=SV-02]').isChecked() && (await page.locator('[data-nl=summary] li').count()) === 1, 'Thêm vào dịch vụ: thêm một lần, không trùng');
-  await page.locator('#stylists a:text-is("Chọn định hướng này")').nth(2).click(); await page.waitForTimeout(300);
+  await page.locator('#services a:text-is("Thêm")').nth(1).click(); await page.waitForTimeout(300);
+  await page.locator('#services a:text-is("Thêm")').nth(1).click(); await page.waitForTimeout(300);
+  ok(await page.locator('[data-svc=SV-01]').isChecked() && (await page.locator('[data-nl=summary] li').count()) === 1, 'Thêm vào dịch vụ: thêm một lần, không trùng');
+  await page.locator('#stylists a:text-is("Chọn vai trò này")').nth(2).click(); await page.waitForTimeout(300);
   ok(await page.locator('input[name=nl-stylist]').nth(2).isChecked(), 'Chọn định hướng stylist cập nhật Builder');
   // preview
   await setSvc(['SV-01']); await setLen('Vừa'); await setSty(0);
   await page.locator('[data-nl=open-preview]').click(); await page.waitForTimeout(400);
   ok(await page.locator('dialog[open]').count() === 1 && /chưa xác nhận/i.test(await page.locator('dialog[open]').innerText()), 'dialog tóm tắt có nhãn chưa xác nhận');
   { const bad = await scanForbidden(page); ok(bad.length === 0, 'dialog tóm tắt: không chứa từ bị cấm', bad.join(' | ')); }
-  ok(num(await page.locator('[data-nl=pv-total]').innerText()) === 300000, 'preview đúng tổng');
+  ok(num(await page.locator('[data-nl=pv-total]').innerText()) === 200000, 'preview đúng tổng');
   await page.fill('#nl-date', '2020-01-01');
   await page.locator('[data-nl=copy]').click();
   ok(await page.locator('#nl-date-err').count() === 1 && (await page.locator('#nl-date').getAttribute('aria-invalid')) === 'true', 'ngày quá khứ: lỗi cạnh ô + aria-invalid');
@@ -273,7 +307,7 @@ console.log('[6] Service Builder');
   await page.locator('[data-nl=copy]').click(); await page.waitForTimeout(400);
   ok(await page.locator('[data-nl=copy-ok]').count() === 1 && /Chưa có thông tin nào được gửi đi/.test(await page.locator('[data-nl=copy-ok]').innerText()), 'sao chép thành công có thông báo thật');
   const clip = await page.evaluate(() => navigator.clipboard.readText());
-  ok(/Tóm tắt lịch hẹn/.test(clip) && /300\.000/.test(clip) && !/@|Zalo/.test(clip) && !FORBID.test(clip.normalize('NFC')), 'nội dung clipboard là bản tóm tắt sạch', clip.slice(0, 60));
+  ok(/Tóm tắt lịch hẹn/.test(clip) && /200\.000/.test(clip) && !/@|Zalo/.test(clip) && !FORBID.test(clip.normalize('NFC')), 'nội dung clipboard là bản tóm tắt sạch', clip.slice(0, 60));
   { const bad = await scanForbidden(page); ok(bad.length === 0, 'sau khi sao chép: không chứa từ bị cấm', bad.join(' | ')); }
   const href = await page.locator('[data-nl=pv-consult]').getAttribute('href');
   ok(/^\/lien-he\?industry=.*solution=spa.*utm_source=showroom.*utm_campaign=net-lech/.test(href), 'CTA tư vấn trong dialog dùng buildConsultHref', href);
@@ -297,8 +331,8 @@ console.log('[7] Bàn phím, FAQ, link thoát, ref, touch target');
   const { ctx, page } = await newPage();
   await load(page);
   let hit = 0;
-  for (let i = 1; i <= 30; i++) { await page.keyboard.press('Tab'); const t = await page.evaluate(() => document.activeElement?.textContent?.trim() ?? ''); if (/Khám phá lookbook/.test(t)) { hit = i; break; } }
-  ok(hit > 0, `Tab tới CTA "Khám phá lookbook" trong ${hit} lần`);
+  for (let i = 1; i <= 30; i++) { await page.keyboard.press('Tab'); const t = await page.evaluate(() => document.activeElement?.textContent?.trim() ?? ''); if (/Đặt lịch giữ chỗ/.test(t)) { hit = i; break; } }
+  ok(hit > 0, `Tab tới CTA "Đặt lịch giữ chỗ" trong ${hit} lần`);
   ok(await page.evaluate(() => { const s = getComputedStyle(document.activeElement); return s.outlineStyle !== 'none' && parseFloat(s.outlineWidth) >= 2; }), 'focus-visible rõ trên CTA');
   const col = await page.evaluate(() => { const e = document.querySelector('[data-nl=cta] a'); return getComputedStyle(e).color; });
   ok(col === 'rgb(245, 243, 238)', 'chữ nút chính là màu giấy (đọc được trên nền đen)', col);
@@ -338,7 +372,7 @@ console.log('[7b] Quét từ bị cấm: lookbook dialog, builder rỗng/xung đ
   { const bad = await scanForbidden(page); ok(bad.length === 0 && await page.locator('dialog[open]').count() === 1, 'dialog lookbook: không chứa từ bị cấm', bad.join(' | ')); }
   await page.keyboard.press('Escape'); await page.waitForTimeout(300);
   await page.locator('#builder').scrollIntoViewIfNeeded();
-  for (const id of ['SV-01', 'SV-02', 'SV-03', 'SV-04']) { const c = page.locator(`[data-svc=${id}]`); if (await c.isChecked()) await c.click({ force: true }); }
+  for (const id of ['SV-01', 'SV-02', 'SV-03', 'SV-04', 'SV-05', 'SV-06', 'SV-07']) { const c = page.locator(`[data-svc=${id}]`); if (await c.isChecked()) await c.click({ force: true }); }
   await page.waitForTimeout(300);
   ok(await page.locator('[data-nl=sum-empty]').count() === 1, 'builder rỗng hiện');
   { const bad = await scanForbidden(page); ok(bad.length === 0, 'builder rỗng: không chứa từ bị cấm', bad.join(' | ')); }

@@ -22,3 +22,6 @@ Reduced-motion: không con trỏ chân thú, không nhảy/vẫy/loang/marquee d
 
 ## Tương tác công cụ
 Luật tính ở `data/care.ts` (cân nặng quyết định giá nền và hệ số thời gian; độ dài lông nhân giá và thời gian; mỗi tình trạng thêm bước + phụ phí; mục tiêu thêm bước tỉa/ủ-massage; mèo có bước và ghi chú riêng). Trạng thái rỗng liệt kê mục còn thiếu; cờ da bật cảnh báo mạnh "hỏi bác sĩ thú y trước"; cảnh báo chung luôn hiện. Lưu localStorage (try/catch). Không thu họ tên/SĐT; hành động cuối là liên kết tới `buildConsultHref("pet-vui")`.
+
+
+Ghi chú rework 2026-11-25: nội dung, section và hiệu ứng đã đổi, xem design/REWORK.md (bản này mô tả giao diện gốc; công cụ chọn gói nay là section "Ước tính cho bé", bảng giá/quy trình/lịch hẹn là section chính, hiệu ứng đại trà chỉ còn MagneticButton).

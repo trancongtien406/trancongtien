@@ -25,3 +25,6 @@
 - Đường kẻ vẽ dần: SVGPathDraw (đường mật độ, đường quy trình theo cuộn), `.rule` dưới nhãn section.
 - Thư viện: SplitWords (tiêu đề), ScrollScrubText (tuyên ngôn), ClipReveal (ảnh), Counter/NumberTicker (số, giá), VelocityMarquee (2 dải), MagneticButton (3 nút), ScrollProgress.
 - Reduced-motion: không hiệu ứng, mọi nội dung hiện đủ; crosshair vẫn bám con trỏ nhưng không có chuyển động trễ. Touch: không crosshair, không từ tính.
+
+## Cập nhật 2026-11-25 (xem REWORK.md)
+Thứ tự section mới: Hero (3 sự thật) -> Giờ mở cửa -> Giới thiệu -> Loại chỗ và bảng giá -> Không gian -> Sơ đồ chọn chỗ -> Nhịp ngày -> Tiện ích và quy định -> Dùng thử 1 ngày -> Cộng đồng (lịch tháng) -> Đặt chỗ và tham quan -> FAQ -> Đặt lịch. Bỏ hai dải chạy chữ, tuyên ngôn sáng dần, nút từ tính, ClipReveal, SVGPathDraw; ảnh mở bằng lưới ô 4x3 (TileFrame). Mục "Chuyển động" ở trên đã lỗi thời: chỉ còn SplitWords, ScrollProgress, TextScramble, Counter/NumberTicker và các chữ ký riêng liệt kê trong REWORK.md.

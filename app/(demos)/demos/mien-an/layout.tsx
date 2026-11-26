@@ -4,9 +4,9 @@ import styles from "./brand.module.css";
 const ID = "/images/demos/mien-an/identity";
 
 export const metadata: Metadata = {
-  title: "Miên An Wellness — Spa & wellness",
+  title: "Miên An Wellness — Spa massage & chăm sóc da tại Hải Châu, Đà Nẵng",
   description:
-    "Miên An Wellness: những nghi thức chăm sóc nhẹ nhàng, công cụ gợi ý liệu trình theo nhu cầu và tóm tắt lịch hẹn ngay trên trang.",
+    "Miên An Wellness: spa & massage trị liệu tại Quận Hải Châu, Đà Nẵng. Bảng giá liệu trình 45–120 phút, combo, giờ mở cửa 9:00–20:00, chính sách đặt và huỷ, chọn giờ trên lịch hai phòng.",
   robots: { index: false, follow: true },
   icons: {
     icon: [
@@ -16,11 +16,11 @@ export const metadata: Metadata = {
     apple: `${ID}/apple-touch-icon.png`,
   },
   openGraph: {
-    title: "Miên An Wellness — Spa & wellness",
-    description: "Chậm lại, để trở về với mình. Nghi thức chăm sóc và gợi ý liệu trình tại Miên An.",
+    title: "Miên An Wellness — Spa massage & chăm sóc da tại Hải Châu, Đà Nẵng",
+    description: "Massage, chăm sóc da mặt, ngâm chân tại Hải Châu, Đà Nẵng. Giá từ 320.000 ₫, mở 9:00–20:00 mỗi ngày.",
     type: "website",
     locale: "vi_VN",
-    images: [{ url: `${ID}/og-image.webp`, width: 1200, height: 630, alt: "Miên An Wellness — Chậm lại, để trở về với mình" }],
+    images: [{ url: `${ID}/og-image.webp`, width: 1200, height: 630, alt: "Miên An Wellness — spa & massage trị liệu tại Hải Châu, Đà Nẵng" }],
   },
   twitter: { card: "summary_large_image", images: [`${ID}/og-image.webp`] },
 };

@@ -36,8 +36,8 @@ export function Rooms() {
         </div>
 
         <div className={styles.roomsHead}>
-          <p className={styles.eyebrowLight}>03 / Phòng nghỉ</p>
-          <h2 id="rooms-h" className={styles.h2Light}>Những khoảng riêng.</h2>
+          <p className={styles.eyebrowLight}>Phòng nghỉ</p>
+          <h2 id="rooms-h" className={styles.h2Light}>Bốn cách ở tại Hiên Mặn.</h2>
         </div>
 
         <div className={styles.roomPlate} role="tabpanel" id="room-panel" aria-labelledby={`room-tab-${cur.id}`} data-hm="room-plate" key={cur.id}>
@@ -46,9 +46,10 @@ export function Rooms() {
           <p className={styles.roomMeta}>{cur.meta}</p>
           <p className={styles.roomText}>{cur.text}</p>
           <ul className={styles.roomBul}>{cur.bullets.map((b) => <li key={b}>{b}</li>)}</ul>
+          <p className={styles.roomSpec}>{cur.area} · {cur.bed} · {cur.cap}</p>
           <div className={styles.roomFoot}>
             <p className={styles.roomFrom}>{cur.from}</p>
-            <a className={styles.btnLight} href="#lich-gia">Xem lịch & tính chi phí</a>
+            <a className={styles.btnLight} href="#lich-gia">Xem lịch phòng và giá</a>
           </div>
         </div>
 
@@ -74,7 +75,7 @@ export function Rooms() {
           ))}
         </div>
       </div>
-      <p className={styles.legalBand}>Giá &ldquo;từ&rdquo; áp dụng cho đêm ngày thường mùa thấp. Giá, thông số phòng và tình trạng phòng chỉ mang tính tham khảo.</p>
+      <p className={styles.legalBand}>Giá &ldquo;từ&rdquo; áp dụng cho đêm ngày thường mùa thấp. Bảng giá đầy đủ theo mùa ở phần ngay dưới. Giá và tình trạng phòng chỉ mang tính tham khảo.</p>
     </section>
   );
 }

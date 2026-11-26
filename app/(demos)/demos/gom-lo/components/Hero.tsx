@@ -2,12 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { MagneticButton, ParallaxLayer, SVGPathDraw, ScrollTrigger, prefersReducedMotion, registerGsap } from "@/features/showroom/effects";
+import { ScrollTrigger, prefersReducedMotion, registerGsap } from "@/features/showroom/effects";
 import s from "../brand.module.css";
 import { Engrave } from "./Engrave";
 import { Fingerprint } from "./Fingerprint";
 import { Pot } from "./Pot";
 import { GLAZES } from "../lib/pot";
+import { AREA, FACTS } from "../data/data";
 
 export function Hero() {
   const [bulge, setBulge] = useState(0.62);
@@ -34,21 +35,17 @@ export function Hero() {
       <Fingerprint className={s.heroPrint} strokeWidth={0.7} />
       <div className={`${s.wrap} ${s.heroGrid}`}>
         <div className={s.heroText}>
-          <p className={s.hand} data-gl="fade">Xưởng gốm và workshop · Đà Nẵng</p>
-          <Engrave as="h1" id="hero-title" trigger="load" delay={350} className={s.heroTitle}>Đất trong tay, bình yên trong lòng.</Engrave>
+          <p className={s.hand} data-gl="fade">Xưởng gốm thủ công và workshop · {AREA}</p>
+          <Engrave as="h1" id="hero-title" trigger="load" delay={350} className={s.heroTitle}>Xưởng gốm thủ công và workshop làm gốm.</Engrave>
           <p className={s.heroLead} data-gl="fade">
-            Ở Đất Mơ, bạn nặn một món gốm bằng chính đôi tay mình: trên bàn xoay, bằng đất vê tay hay phủ men lên phôi có sẵn. Chưa từng chạm vào đất cũng không sao.
+            Đất Mơ bán cốc, bát, bình làm tay và mở lớp nặn tay, bàn xoay, vẽ men cho người lớn, bạn bè và nhóm nhỏ. Chưa từng chạm vào đất cũng không sao: mỗi lớp có người hướng dẫn cầm tay.
           </p>
           <div className={s.ctaRow} data-gl="fade">
-            <MagneticButton strength={0.32} max={12}>
-              <a className={s.btn} href="#buoi-lam-gom" data-cursor="Đặt">Đặt một buổi hẹn với đất</a>
-            </MagneticButton>
-            <a className={s.linkHand} href="#ke-gom">Xem những món gốm <span aria-hidden="true">→</span></a>
+            <a className={s.btn} href="#buoi-lam-gom" data-cursor="Đặt">Đặt chỗ workshop</a>
+            <a className={s.linkHand} href="#ke-gom">Xem gốm bán tại xưởng <span aria-hidden="true">→</span></a>
           </div>
           <ul className={s.heroFacts} data-gl="fade">
-            <li><b>3 cách làm</b><span>nặn tay, bàn xoay, vẽ men</span></li>
-            <li><b>Tối đa 8 người</b><span>một lớp, có người cầm tay chỉ</span></li>
-            <li><b>Nung tại xưởng</b><span>ngày lấy món tuỳ lò, báo khi đặt</span></li>
+            {FACTS.map((f) => (<li key={f.b}><b>{f.b}</b><span>{f.s}</span></li>))}
           </ul>
         </div>
 
@@ -63,14 +60,8 @@ export function Hero() {
             <label className={s.sliderLabel} htmlFor="hero-bulge"><span className={s.hand}>Nặn thử: độ phình</span><output htmlFor="hero-bulge">{Math.round(bulge * 100)}%</output></label>
             <input id="hero-bulge" className={s.range} type="range" min={0} max={100} value={Math.round(bulge * 100)} onChange={(e) => setBulge(Number(e.target.value) / 100)} aria-valuetext={`${Math.round(bulge * 100)} phần trăm`} />
           </div>
-          <SVGPathDraw className={s.scribble} viewBox="0 0 120 80" mode="view" duration={1.2} aria-hidden="true">
-            <path d="M8 10C30 6 70 14 96 52" strokeWidth="2" strokeLinecap="round" />
-            <path d="M82 50L97 54L100 38" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </SVGPathDraw>
           <figure className={s.heroPhoto}>
-            <ParallaxLayer distance={26}>
-              <Image src="/images/demos/gom-lo/binh-dat-nung-1200.webp" alt="Những chiếc bình đất nung màu terracotta xếp sát nhau" width={1200} height={1500} sizes="(max-width: 900px) 40vw, 240px" priority />
-            </ParallaxLayer>
+            <Image src="/images/demos/gom-lo/binh-dat-nung-1200.webp" alt="Những chiếc bình đất nung màu terracotta xếp sát nhau" width={1200} height={1500} sizes="(max-width: 900px) 40vw, 240px" priority />
           </figure>
         </div>
       </div>

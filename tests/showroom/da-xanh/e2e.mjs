@@ -54,7 +54,8 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   });
   const fx = await p.evaluate(() => [...new Set([...document.querySelectorAll("[data-fx]")].map((e) => e.dataset.fx))]);
   console.log("INFO fx:", fx.join(","));
-  for (const n of ["SplitReveal", "CursorSpotlight", "TiltCard", "MagneticButton", "ScrollScrubText", "SVGPathDraw", "CanvasParticles", "VelocityMarquee", "ClipReveal", "ShineSweep", "MeshBackground", "SerumDrop", "HaloRing"]) ok(fx.includes(n), `effect present: ${n}`);
+  for (const n of ["CursorSpotlight", "CanvasParticles", "ClipReveal", "MeshBackground", "SerumDrop", "HaloRing", "FlowThread", "HoursToday"]) ok(fx.includes(n), `effect present: ${n}`);
+  for (const n of ["SplitReveal", "TiltCard", "MagneticButton", "ScrollScrubText", "SVGPathDraw", "VelocityMarquee", "ShineSweep"]) ok(!fx.includes(n), `effect removed (đại trà): ${n}`);
   ok(await p.evaluate(() => document.querySelector('[data-fx="SerumDrop"]').dataset.fxReady === "1"), "serum drop ready");
   ok(await p.evaluate(() => document.querySelector('[data-fx="CursorSpotlight"]').dataset.fxReady === "1"), "cursor spotlight ready (fine pointer)");
 
@@ -90,9 +91,9 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   const d0 = await dropY();
   const total = await p.evaluate(() => document.documentElement.scrollHeight);
   const bf0 = await p.evaluate(() => [...document.querySelectorAll("[data-bfs]")].filter((e) => e.getAttribute("data-bfs") === "0").length);
-  ok(bf0 > 5, `blur-fade: ${bf0} blocks start hidden (JS ran)`);
-  const filt = await p.evaluate(() => { const e = document.querySelector('[data-bfs="0"]'); return getComputedStyle(e).filter; });
-  ok(/blur\(1[0-9]/.test(filt), `blur-fade initial filter blur ~14px (${filt})`);
+  ok(bf0 > 5, `glass-wipe: ${bf0} blocks start hidden (JS ran)`);
+  const filt = await p.evaluate(() => { const e = document.querySelector('[data-bfs="0"]'); const c = getComputedStyle(e); return c.clipPath + "|" + c.filter; });
+  ok(/inset\(.*100%/.test(filt) && /\|none$/.test(filt), `glass-wipe initial: clip-path trượt, không blur (${filt})`);
   let mid = 0;
   for (let y = 0; y < total; y += 600) {
     await p.evaluate((y) => window.scrollTo(0, y), y); await p.waitForTimeout(120);
@@ -102,14 +103,17 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   const dEnd = await dropY();
   ok(mid > d0 + 80 && dEnd > mid, `serum drop falls with scroll (${d0.toFixed(0)} -> ${mid.toFixed(0)} -> ${dEnd.toFixed(0)})`);
   const hidden = await p.evaluate(() => [...document.querySelectorAll("[data-bfs]")].filter((e) => e.getAttribute("data-bfs") === "0").length);
-  ok(hidden === 0, `blur-fade: all blocks revealed after scrolling (${hidden} left)`);
+  ok(hidden === 0, `glass-wipe: all blocks revealed after scrolling (${hidden} left)`);
   const lt = await p.evaluate(() => window.__ltc);
   console.log("INFO long tasks >200ms while scrolling @1440:", lt);
-  ok(await p.evaluate(() => getComputedStyle(document.querySelector('[data-bfs="1"]')).filter === "none"), "blur-fade final filter none (keeps backdrop-filter working)");
-  // scroll scrub text
-  await p.evaluate(() => { const t = document.querySelector('[data-fx="ScrollScrubText"]'); window.scrollTo(0, t.getBoundingClientRect().top + window.scrollY - innerHeight * 0.62); }); await p.waitForTimeout(1200);
-  const ops = await p.evaluate(() => [...document.querySelectorAll('[data-fx="ScrollScrubText"] [data-fx-w]')].map((e) => +getComputedStyle(e).opacity));
-  ok(ops.length > 10 && Math.max(...ops) > Math.min(...ops), "scroll-scrub text: words at differing opacity");
+  ok(await p.evaluate(() => getComputedStyle(document.querySelector('[data-bfs="1"]')).filter === "none"), "glass-wipe final filter none (keeps backdrop-filter working)");
+  // sợi serum nối các bước quy trình chảy theo cuộn
+  await p.evaluate(() => { const f = document.querySelector("#quy-trinh ol"); const r = f.getBoundingClientRect(); window.scrollTo(0, r.top + window.scrollY + r.height * 0.55 - innerHeight * 0.62); }); await p.waitForTimeout(1200);
+  const sy = await p.evaluate(() => new DOMMatrixReadOnly(getComputedStyle(document.querySelector('[data-fx="FlowThread"] i:nth-of-type(2)')).transform).d);
+  ok(sy > 0.3 && sy < 1, `FlowThread: vệt serum chảy theo cuộn (scaleY ${sy.toFixed(2)})`);
+  // lịch: hôm nay được tô
+  await p.evaluate(() => document.querySelector("#dat-lich").scrollIntoView()); await p.waitForTimeout(900);
+  ok((await p.locator('#dat-lich tr[data-today="1"]').count()) === 1, "giờ mở cửa: đúng một dòng 'hôm nay' được tô");
 
   // chữ cấm ở trạng thái đầu
   const t0 = await visibleText(p);
@@ -155,7 +159,7 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   // Tab tới CTA chính
   await p.evaluate(() => window.scrollTo(0, 0)); await p.waitForTimeout(500);
   let focusedCta = false;
-  for (let i = 0; i < 12; i++) { await p.keyboard.press("Tab"); if (await p.evaluate(() => document.activeElement?.textContent?.includes("Thử Skin Routine Builder"))) { focusedCta = true; break; } }
+  for (let i = 0; i < 12; i++) { await p.keyboard.press("Tab"); if (await p.evaluate(() => document.activeElement?.textContent?.includes("Đặt lịch chăm da"))) { focusedCta = true; break; } }
   ok(focusedCta, "Tab reaches hero CTA");
   ok(await p.evaluate(() => { const s = getComputedStyle(document.activeElement); return s.outlineStyle !== "none" && parseFloat(s.outlineWidth) >= 2; }), "focus ring visible on CTA");
   await ctx.close();
@@ -166,25 +170,51 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   const { ctx, p } = await open(1440, 900);
   await p.evaluate(() => document.querySelector("#lieu-trinh").scrollIntoView()); await p.waitForTimeout(1200);
   const names = await p.locator('#lieu-trinh input[type="radio"]').count();
-  ok(names === 6, `6 treatment options (${names})`);
+  ok(names === 12, `7 liệu trình + 5 lựa chọn cảm giác da (${names})`);
+  ok((await p.locator('#lieu-trinh input[name="dx-treat"]').count()) === 7, "7 liệu trình");
+  const rows = await p.locator("#lieu-trinh [class*=treatMeta]").allInnerTexts();
+  ok(rows.length === 7 && rows.every((r) => /\d+\s*phút/.test(r)), `mỗi liệu trình có thời lượng: ${rows.join(" | ")}`);
+  await p.locator("#lieu-trinh label", { hasText: "Da dầu, bí" }).click(); await p.waitForTimeout(700);
+  ok(await p.locator('#lieu-trinh input[name="dx-treat"]').nth(1).isChecked(), "chọn cảm giác 'da dầu, bí' tự chọn liệu trình làm sạch chuyên sâu");
+  ok(/hợp với bạn/.test(await p.locator("#lieu-trinh fieldset").nth(1).innerText()), "liệu trình hợp được đánh dấu");
+  await p.locator("#lieu-trinh button", { hasText: "Bỏ chọn" }).click();
+  await p.locator('#lieu-trinh input[name="dx-treat"]').nth(0).check();
   const title0 = await p.locator("#lieu-trinh h3").first().innerText();
-  await p.locator('#lieu-trinh input[type="radio"]').nth(0).focus();
+  await p.locator('#lieu-trinh input[name="dx-treat"]').nth(0).focus();
   await p.keyboard.press("ArrowDown"); await p.waitForTimeout(900);
   const title1 = await p.locator("#lieu-trinh h3").first().innerText();
   ok(title0 !== title1, `ArrowDown switches treatment (${title0} -> ${title1})`);
   const price = await p.locator("#lieu-trinh strong").first().innerText();
   ok(/₫|đ/.test(price) && /\d\.\d{3}/.test(price), `price formatted vi-VN (${price})`);
   const on = await p.evaluate(() => [...document.querySelectorAll("#lieu-trinh [data-on]")].map((e) => e.dataset.on).join(""));
-  ok(on === "010000", `image cross-fade state (${on})`);
+  ok(on === "0100000", `image cross-fade state (${on})`);
   const tintOpacity = await p.evaluate(() => [...document.querySelectorAll("#lieu-trinh section > div:first-child i, #lieu-trinh > div:first-child i")].map((e) => e.style.opacity).join(""));
-  ok(tintOpacity === "010000", `background tint layers (${tintOpacity})`);
-  const href = await p.locator("#lieu-trinh a", { hasText: "Hỏi lịch" }).getAttribute("href");
+  ok(tintOpacity === "0100000", `background tint layers (${tintOpacity})`);
+  const href = await p.locator("#lieu-trinh a", { hasText: "Đặt lịch cho liệu trình" }).getAttribute("href");
   ok(/^\/lien-he/.test(href), `treatment CTA goes to consult form (${href})`);
   const tf = visibleTextCheck(await visibleText(p)); ok(tf, "no forbidden words in treatments");
   await p.screenshot({ path: `${SHOT}treatments-1440.png` });
   await ctx.close();
 }
 function visibleTextCheck(t) { return !FORBID.test(t); }
+
+// 3b. nội dung studio: hero, quy trình, lưu ý, giờ, chính sách, hỏi đáp, không hứa kết quả
+{
+  const { ctx, p } = await open(1440, 900);
+  const h = await p.locator('[data-dx="hero"]').innerText();
+  ok(/Studio chăm sóc da cơ bản/i.test(h) && /Quận Thanh Khê, Đà Nẵng/i.test(h), "hero nêu loại hình và quận");
+  ok(/350\.000/.test(h) && /9:00 – 20:00/.test(h) && /Phòng riêng/.test(h), "hero có 3 sự thật: giá từ, giờ mở cửa, phòng riêng");
+  ok(/Đặt lịch chăm da/.test(h) && /Xem các liệu trình/.test(h), "hero: CTA đặt lịch và xem liệu trình");
+  const main = await p.locator("main").innerText();
+  for (const k of ["Soi da dưới ánh sáng ngày", "Làm sạch", "Dặn dò và ghi lại", "Trước liệu trình", "Sau liệu trình", "Giờ mở cửa", "Dời và huỷ", "Đến trễ", "Giữ chỗ", "Chăm sóc vùng mắt và cổ", "Skin Routine Builder"]) ok(main.includes(k), `có mục: ${k}`);
+  ok((await p.locator("#quy-trinh li").count()) === 5, "quy trình 5 bước");
+  ok((await p.locator("#hoi-dap details").count()) >= 9, "hỏi đáp >= 9 câu");
+  ok(!/(ảnh trước|ảnh sau|trước\/sau|cam kết (kết quả|hiệu quả)|đảm bảo (kết quả|hiệu quả)|điều trị khỏi|trị mụn|xoá nhăn|trắng da|tái tạo|laser|tiêm)/i.test(main.replace(/không cam kết kết quả và không dùng ảnh trước sau/gi, "").replace(/Không hứa xoá nếp nhăn hay quầng thâm\./g, "").replace(/không dùng kim hay thiết bị xâm lấn/gi, "").replace(/Trước liệu trình|Sau liệu trình|Trước và sau mỗi liệu trình|Trước và sau/g, "")), "không cam kết kết quả/điều trị/ảnh trước sau");
+  ok(!/(chẩn đoán là|kê đơn:)/i.test(main), "không chẩn đoán/kê đơn");
+  const href = await p.locator("#dat-lich a", { hasText: "Đặt lịch chăm da" }).getAttribute("href");
+  ok(/^\/lien-he/.test(href || ""), `đặt lịch dẫn tới form tư vấn: ${href}`);
+  await ctx.close();
+}
 
 // 4. Routine builder: lỗi, kết quả, cờ an toàn, link thoát
 {
@@ -234,10 +264,10 @@ function visibleTextCheck(t) { return !FORBID.test(t); }
   const t1 = await visibleText(p); ok(!FORBID.test(t1), `no forbidden words (builder result) ${(t1.match(FORBID) || [])[0] || ""}`);
   await p.screenshot({ path: `${SHOT}builder-result-1440.png` });
   // đổi một lựa chọn: kết quả xoá
-  await p.getByLabel(/Da khô/).check(); await p.waitForTimeout(400);
+  await p.locator("#routine").getByLabel(/Da khô/).check(); await p.waitForTimeout(400);
   ok(await p.locator("#routine").getByText("Routine của bạn sẽ hiện ở đây").isVisible(), "changing input resets result to empty state");
   // cờ an toàn
-  await p.getByLabel(/Da khô/).check();
+  await p.locator("#routine").getByLabel(/Da khô/).check();
   await p.getByLabel(/Thiếu nước/).check(); await p.getByLabel(/Khoảng 5 phút/).check(); await p.getByLabel(/Tiết kiệm/).check();
   await p.getByLabel(/Đang điều trị da/).check();
   await p.getByRole("button", { name: "Tạo routine của tôi" }).click();

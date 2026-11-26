@@ -5,9 +5,9 @@ import styles from "./brand.module.css";
 const ID = "/images/demos/ngoai-ngu-sao/identity";
 
 export const metadata: Metadata = {
-  title: "Mở Lời · Trung tâm tiếng Anh, tiếng Nhật, tiếng Hàn tại Đà Nẵng",
+  title: "Mở Lời · Trung tâm ngoại ngữ tại Quận Hải Châu, Đà Nẵng",
   description:
-    "Mở Lời dạy tiếng Anh, tiếng Nhật và tiếng Hàn theo cách nói trước: thẻ từ vựng lật, hội thoại tình huống thật, lớp nhóm nhỏ. Làm bài kiểm tra cấp độ nhanh và xem lịch lớp trong tuần.",
+    "Trung tâm ngoại ngữ Mở Lời ở Quận Hải Châu, Đà Nẵng: tiếng Anh giao tiếp, IELTS, tiếng Nhật JLPT N5 – N3, tiếng Hàn sơ cấp. Lớp tối đa 12 học viên, học phí từ 2.400.000 ₫ một khoá, học thử miễn phí một buổi.",
   robots: { index: false, follow: true },
   icons: {
     icon: [
@@ -17,8 +17,8 @@ export const metadata: Metadata = {
     apple: `${ID}/apple-touch-icon.png`,
   },
   openGraph: {
-    title: "Mở Lời · Mở lời ngôn ngữ mới, mở thêm một thế giới",
-    description: "Học tiếng Anh, Nhật, Hàn ở Đà Nẵng bằng hội thoại, thẻ từ vựng và lộ trình rõ ràng.",
+    title: "Mở Lời · Trung tâm ngoại ngữ ở Đà Nẵng",
+    description: "Tiếng Anh giao tiếp, IELTS, tiếng Nhật, tiếng Hàn. Lớp nhỏ, lịch khai giảng và học phí rõ ràng, học thử miễn phí.",
     type: "website",
     locale: "vi_VN",
     images: [{ url: `${ID}/og-image.webp`, width: 1200, height: 630, alt: "Mở Lời, trung tâm ngoại ngữ" }],

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
-import { MagneticButton } from "@/features/showroom/effects";
 import { buildConsultHref } from "@/features/showroom/consultation";
 import { CHECKLIST, IMG, SLUG } from "../data/content";
 import { AGES, LEVELS, SESSIONS, SLOTS, buildPlan, planSummary, vnd, type Age, type Level, type Sessions, type Slot } from "../lib/planner";
@@ -76,16 +75,16 @@ export function Planner() {
   };
 
   const count = done.filter(Boolean).length;
-  const extra = age === "nhi" ? "Phụ huynh ở bờ trong tầm nhìn (lớp Sóng Nhí)." : age === "teen" ? "Giấy xác nhận của phụ huynh (13 đến 17 tuổi)." : null;
+  const extra = age === "nhi" ? "Phụ huynh ở bờ trong tầm nhìn (lớp trẻ em)." : age === "teen" ? "Giấy xác nhận của phụ huynh (13 đến 17 tuổi)." : null;
   const total = CHECKLIST.length;
 
   return (
-    <section id="lap-ke-hoach" className={styles.planner} aria-labelledby="lp-title">
-      <Divider fill="var(--rs-orange)" className={styles.dividerTop} />
+    <section id="chon-khoa" className={styles.planner} aria-labelledby="lp-title">
+      <Divider fill="var(--rs-sand)" className={styles.dividerTop} />
       <div className={styles.wrap}>
-        <p className={styles.kickerLight} data-rs="reveal">Lesson Planner</p>
-        <h2 id="lp-title" className={`${styles.h2} ${styles.h2Light}`} data-rs="reveal">Một kế hoạch <span className={styles.scriptSun}>vừa vặn với bạn</span></h2>
-        <p className={`${styles.lede} ${styles.ledeLight}`} data-rs="reveal">Chọn trình độ, độ tuổi, số buổi và khung giờ để nhận khoá gợi ý, thứ tự bài học, giá tham khảo và danh sách đồ mang theo.</p>
+        <p className={styles.kickerLight} data-rs="reveal">Chọn khoá phù hợp</p>
+        <h2 id="lp-title" className={`${styles.h2} ${styles.h2Light}`} data-rs="reveal">Bạn hợp <span className={styles.scriptSun}>khoá nào?</span></h2>
+        <p className={`${styles.lede} ${styles.ledeLight}`} data-rs="reveal">Chọn trình độ, nhóm tuổi, số buổi và khung giờ. Trường gợi ý khoá, thứ tự bài học từng buổi, giá tham khảo và danh sách đồ mang theo. Phần này chỉ để bạn hình dung; giờ và lịch thật được xác nhận khi đặt.</p>
 
         <div className={styles.plannerGrid}>
           <form className={styles.plannerForm} onSubmit={submit} noValidate aria-label="Chọn thông tin buổi học">
@@ -94,7 +93,7 @@ export function Planner() {
             <Group name={`${uid}-ses`} legend="3. Số buổi" value={sessions} onChange={(v) => setSessions(v as Sessions)} options={SESSIONS.map((n) => ({ v: n, label: `${n} buổi` }))} error={errs.sessions && !sessions} errorId={`${uid}-e3`} cols={4} />
             <Group name={`${uid}-slot`} legend="4. Khung giờ mong muốn" value={slot} onChange={setSlot} options={SLOTS.map((s) => ({ v: s.v, label: s.label, hint: s.time }))} error={errs.slot && !slot} errorId={`${uid}-e4`} cols={1} />
             <div className={styles.formActions}>
-              <MagneticButton><button type="submit" className={`${styles.btn} ${styles.btnBrown}`}>Xem khoá gợi ý</button></MagneticButton>
+              <button type="submit" className={`${styles.btn} ${styles.btnBrown}`}>Xem khoá gợi ý</button>
               <button type="button" className={`${styles.btn} ${styles.btnGhost}`} onClick={reset}>Chọn lại</button>
             </div>
           </form>
@@ -106,7 +105,7 @@ export function Planner() {
                 <img src={`${IMG}/ra-bien-600.webp`} alt="Hai người cầm ván chạy xuống sóng, chụp từ xa" width={600} height={750} loading="lazy" />
                 <div>
                   <h3 className={styles.emptyTitle}>Chọn đủ bốn mục rồi bấm xem</h3>
-                  <p>Khoá gợi ý, thứ tự bài học và giá tham khảo sẽ hiện ở đây. Bạn có thể đổi lựa chọn bất cứ lúc nào, kết quả cập nhật theo.</p>
+                  <p>Khoá gợi ý, thứ tự bài học và giá sẽ hiện ở đây. Bạn có thể đổi lựa chọn bất cứ lúc nào, kết quả cập nhật theo.</p>
                 </div>
               </div>
             ) : (
@@ -116,13 +115,13 @@ export function Planner() {
                 <h3 className={styles.resTitle} ref={head} tabIndex={-1}>{plan.courseName}</h3>
                 <p className={styles.resGoal}>{plan.goal}</p>
                 <p className={styles.resPrice}><small>Giá tham khảo</small><b>{vnd(plan.price)}</b><small>mỗi người</small></p>
-                <p className={styles.fineDark}>{plan.priceNote} Phần bao gồm ván, đồ bảo hộ, ảnh, bảo hiểm và di chuyển được xác nhận khi trao đổi lịch.</p>
+                <p className={styles.fineDark}>{plan.priceNote} Giá gồm ván, dây leash, áo lycra mượn trong buổi và huấn luyện viên; chưa gồm di chuyển và bảo hiểm cá nhân.</p>
 
                 <p className={styles.noteLine}>{plan.ageNote}</p>
                 <p className={styles.noteLine}>{plan.slotNote}</p>
                 <p className={styles.noteLine}>Mỗi buổi đều mở đầu bằng việc huấn luyện viên đọc biển và nhắc lại quy tắc an toàn.</p>
                 <div className={styles.resActions}>
-                  <MagneticButton><a className={`${styles.btn} ${styles.btnOrange}`} href={buildConsultHref(SLUG)} data-rs-consult>Trao đổi lịch với huấn luyện viên</a></MagneticButton>
+                  <a className={`${styles.btn} ${styles.btnOrange}`} href={buildConsultHref(SLUG)} data-rs-consult>Trao đổi lịch với huấn luyện viên</a>
                   <button type="button" className={`${styles.btn} ${styles.btnGhostDark}`} onClick={copy}>Chép bản tóm tắt</button>
                 </div>
                 {copied ? <p className={styles.copied} role="status">{copied}</p> : null}
@@ -152,7 +151,7 @@ export function Planner() {
                   ))}
                   {extra ? <li className={styles.checkExtra}>{extra}</li> : null}
                 </ul>
-                <p className={styles.fineDark}>Ván lướt, dây leash và thiết bị bảo hộ do trường cung cấp theo gói học đã xác nhận.</p>
+                <p className={styles.fineDark}>Ván lướt, dây leash và áo lycra mượn trong buổi do trường chuẩn bị.</p>
                 <button type="button" className={styles.linkBtn} onClick={resetChecklist}>Đặt lại danh sách</button>
                </div>
               </div>

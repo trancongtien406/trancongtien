@@ -3,7 +3,8 @@ import { buildConsultHref } from "@/features/showroom/consultation";
 import { Header } from "./components/Header";
 import { Hero, Manifesto, Process, Closing, Footer } from "./components/Sections";
 import { Spaces } from "./components/Spaces";
-import { Services } from "./components/Services";
+import { Quote, Services } from "./components/Services";
+import { FloorplanSlider } from "./components/FloorplanSlider";
 import { Estimator } from "./components/Estimator";
 import { Materials } from "./components/Materials";
 import { BoardBuilder } from "./components/BoardBuilder";
@@ -12,17 +13,17 @@ import { Motion } from "./components/Motion";
 import s from "./brand.module.css";
 
 export const metadata: Metadata = {
-  title: "Khối Nếp — Studio thiết kế không gian & nội thất",
+  title: "Khối Nếp — Thiết kế & thi công nội thất tại Đà Nẵng",
   description:
-    "Studio thiết kế không gian và nội thất: công cụ dự toán ngân sách tham khảo và bảng vật liệu tương tác.",
+    "Công ty thiết kế và thi công nội thất tại Đà Nẵng: căn hộ, nhà phố, văn phòng, cửa hàng. Quy trình 5 bước, báo giá theo khảo sát, ước tính chi phí và bảng vật liệu.",
   alternates: { canonical: "/demos/khoi-nep" },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  name: "Khối Nếp — Studio thiết kế không gian & nội thất",
-  description: "Studio thiết kế không gian và nội thất.",
+  name: "Khối Nếp — Thiết kế & thi công nội thất tại Đà Nẵng",
+  description: "Thiết kế và thi công nội thất tại Đà Nẵng.",
   inLanguage: "vi",
   isPartOf: { "@type": "WebSite", name: "Khối Nếp" },
 };
@@ -31,16 +32,18 @@ export default function KhoiNepPage() {
   const consultHref = buildConsultHref("khoi-nep");
   return (
     <>
-      <Header />
+      <Header consultHref={consultHref} />
       <main id="main" className={s.main}>
         <Hero consultHref={consultHref} />
         <Manifesto />
-        <Spaces />
         <Services />
+        <Spaces />
+        <Process />
+        <FloorplanSlider />
+        <Quote />
         <Estimator consultHref={consultHref} />
         <Materials />
         <BoardBuilder />
-        <Process />
         <Faq />
         <Closing consultHref={consultHref} />
       </main>

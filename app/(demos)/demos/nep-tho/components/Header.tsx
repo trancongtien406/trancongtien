@@ -8,6 +8,7 @@ const NAV = [
   { href: "#lich-tap", label: "Lịch tập" },
   { href: "#khong-gian", label: "Không gian" },
   { href: "#goi-tap", label: "Gói tập" },
+  { href: "#quy-dinh", label: "Quy định" },
 ];
 
 export function Header() {
@@ -22,7 +23,7 @@ export function Header() {
         <nav className={styles.nav} aria-label="Điều hướng chính" data-open={open ? "1" : "0"} id="nt-nav">
           <ul>
             {NAV.map((n) => (<li key={n.href}><a href={n.href} onClick={() => setOpen(false)}>{n.label}</a></li>))}
-            <li className={styles.navCtaItem}><a className={`${styles.btn} ${styles.btnAccent}`} href="#tim-lop" onClick={() => setOpen(false)}>Tìm lớp phù hợp</a></li>
+            <li className={styles.navCtaItem}><a className={`${styles.btn} ${styles.btnAccent}`} href="#tap-thu" onClick={() => setOpen(false)}>Đăng ký tập thử</a></li>
           </ul>
         </nav>
         <button type="button" className={styles.menuBtn} aria-expanded={open} aria-controls="nt-nav" aria-label={open ? "Đóng menu" : "Mở menu"} onClick={() => setOpen((v) => !v)}>

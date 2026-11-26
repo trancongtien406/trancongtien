@@ -10,6 +10,7 @@ import { Experiences } from "./components/Experiences";
 import { Campfire } from "./components/Campfire";
 import { Planner } from "./components/Planner";
 import { Faq } from "./components/Faq";
+import { Itinerary, Practical } from "./components/Practical";
 import { Closing } from "./components/Closing";
 
 export default function GlampingNuiPage() {
@@ -21,10 +22,12 @@ export default function GlampingNuiPage() {
       <main id="main">
         <Hero />
         <Manifesto />
-        <Journey />
         <Stay />
+        <Journey />
         <Experiences />
         <Campfire />
+        <Itinerary />
+        <Practical />
         <Planner consultHref={consultHref} />
         <Faq />
       </main>

@@ -79,11 +79,18 @@ await section("desktop", async () => {
   const { ctx, p } = await open(1440, 900);
   await p.evaluate(() => { window.__ltc = 0; new PerformanceObserver((l) => l.getEntries().forEach((e) => { if (e.duration > 200) window.__ltc++; })).observe({ entryTypes: ["longtask"] }); });
   const fx = await p.evaluate(() => [...new Set([...document.querySelectorAll("[data-fx]")].map((e) => e.dataset.fx))]);
-  for (const n of ["SplitReveal", "ScrollScrubText", "VelocityMarquee", "Counter", "ParallaxLayer", "SVGPathDraw", "GrainOverlay", "ShineSweep", "ScrollProgress", "CustomCursor", "GoldGlare", "GoldShimmer", "GemSparkle", "Ring3D"]) ok(fx.includes(n), `effect present: ${n}`);
+  for (const n of ["Counter", "SVGPathDraw", "GrainOverlay", "ShineSweep", "ScrollProgress", "CustomCursor", "GoldGlare", "GoldShimmer", "GemSparkle", "Ring3D"]) ok(fx.includes(n), `effect present: ${n}`);
+  for (const n of ["SplitReveal", "ScrollScrubText", "VelocityMarquee", "ParallaxLayer", "MagneticButton", "ClipReveal"]) ok(!fx.includes(n), `common effect dropped: ${n}`);
+  for (const id of ["danh-muc", "cach-tinh", "cau-hinh", "dich-vu", "che-tac", "bao-hanh", "gio-mo-cua", "hoi-dap", "lien-he", "tuoi-vang"]) ok((await p.locator("#" + id).count()) === 1, `section #${id}`);
+  const top = await p.evaluate(() => document.querySelector("#top").innerText.replace(/\s+/g, " "));
+  ok(/Tiệm kim hoàn/.test(top) && /Hải Châu/.test(top) && /Đặt làm trang sức/i.test(top) && /9:00 – 20:00/.test(top) && /10K – 24K/.test(top) && /từ \d+,\d triệu/.test(top), `hero states type, district, CTA, 3 facts (${top.slice(0, 120)})`);
+  const body0 = await p.evaluate(() => document.body.innerText);
+  ok(/24K/.test(body0) && /thu đổi/i.test(body0) && /Khắc chữ/.test(body0) && /nới/i.test(body0) && /không phải giá (vàng )?thời gian thực/i.test(body0), "content: 24K, thu đổi, khắc chữ, nới size, không phải giá thời gian thực");
+  ok(!/chứng thư|kiểm định|GIA\b|PNJ|SJC|DOJI/.test(body0), "no invented certificate/real brand");
   ok(await p.evaluate(() => document.querySelector('[data-site="kim-hoan"]').dataset.knJs === "1"), "Motion mounted");
   ok(await p.evaluate(() => [...document.querySelectorAll('[data-kn="hero-line"]')].every((e) => new DOMMatrix(getComputedStyle(e).transform).m42 === 0)), "hero lines revealed");
   ok(await p.evaluate(() => [...document.querySelectorAll('[data-kn="hero-copy"]')].every((e) => +getComputedStyle(e).opacity === 1)), "hero copy visible after choreography");
-  ok((await p.locator("h1").innerText()).replace(/\s+/g, " ").includes("Vẻ đẹp lưu dấu thời gian"), "h1 text");
+  ok((await p.locator("h1").innerText()).replace(/\s+/g, " ").includes("Nhẫn cưới, trang sức vàng chế tác theo ý bạn"), "h1 text");
   // shimmer
   ok(await p.evaluate(() => document.querySelector("h1 [data-fx=GoldShimmer]").dataset.run === "1"), "hero shimmer running");
   ok(await p.evaluate(() => getComputedStyle(document.querySelector("h1 [data-fx=GoldShimmer]")).animationName.includes("shine")), "shimmer animation applied");
@@ -99,10 +106,7 @@ await section("desktop", async () => {
   // product reveal: clip mở + parallax
   await p.locator('[data-kn="pr"]').first().scrollIntoViewIfNeeded(); await p.waitForTimeout(2600);
   ok(await p.evaluate(() => { const c = document.querySelector('[data-kn="pr-clip"]'); const cp = getComputedStyle(c).clipPath; return cp === "none" || /inset\(0/.test(cp); }), "product clip revealed");
-  const y1 = await p.locator('[data-kn="pr-img"]').first().evaluate((e) => getComputedStyle(e).transform);
-  await p.evaluate(() => window.scrollBy(0, 260)); await p.waitForTimeout(1200);
-  const y2 = await p.locator('[data-kn="pr-img"]').first().evaluate((e) => getComputedStyle(e).transform);
-  ok(y1 !== y2, "product image parallax moves with scroll");
+  ok(await p.evaluate(() => { const i = document.querySelector('[data-kn="pr-img"]'); return !/brightness\(0\./.test(getComputedStyle(i).filter); }), "product image lit after glass-case opening");
   // đường kẻ vàng + nút
   await p.locator("#che-tac").scrollIntoViewIfNeeded(); await p.evaluate(() => window.scrollBy(0, 700)); await p.waitForTimeout(1200);
   const sc = await p.locator('[data-kn="goldline"]').evaluate((e) => new DOMMatrix(getComputedStyle(e).transform).d);
@@ -121,12 +125,41 @@ await section("desktop", async () => {
   await p.mouse.move(5, 5);
   // sparkle canvas vẽ
   ok(await p.evaluate(() => { const c = document.querySelector("canvas[data-fx=GemSparkle]"); const d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data; for (let i = 3; i < d.length; i += 4) if (d[i] > 0) return true; return false; }), "sparkle canvas has painted pixels");
-  // marquee
-  const mq = p.locator("[data-fx=VelocityMarquee]").first();
-  await p.evaluate(() => window.scrollTo(0, 0)); await p.waitForTimeout(900);
-  const tr = () => mq.locator("[data-fx-track]").evaluate((e) => getComputedStyle(e).transform);
-  const t1 = await tr(); await p.waitForTimeout(500); ok(t1 !== (await tr()), "marquee moves");
-  const mb = mq.getByRole("button"); await mb.first().click(); await p.waitForTimeout(150); const a = await tr(); await p.waitForTimeout(400); ok(a === (await tr()), "marquee pause button works"); await mb.first().click();
+  // chữ ký: cân tiểu ly
+  await p.locator('[data-testid="scale"]').scrollIntoViewIfNeeded(); await p.waitForTimeout(1500);
+  const rg = p.locator('[data-testid="scale"] input[type=range]');
+  const wt = async () => (await p.locator('[data-testid="scale-g"]').innerText());
+  const m0 = await p.locator('[data-testid="scale-math"]').innerText();
+  await rg.focus(); await p.keyboard.press("ArrowRight"); await p.keyboard.press("ArrowRight"); await p.waitForTimeout(300);
+  ok((await wt()) !== "5,0 g" && (await p.locator('[data-testid="scale-math"]').innerText()) !== m0, `scale: weight slider updates price (${await wt()})`);
+  ok(await p.evaluate(() => { const b = document.querySelector('[data-testid="scale"] [class*=beam]'); return !!b && getComputedStyle(b).animationName.includes("settle"); }), "scale: beam swings (settle animation)");
+  ok(/Quả cân: .*g/.test(await p.locator('[data-testid="scale"]').innerText()), "scale: weights listed");
+  await p.locator('[data-testid="scale"] input[inputmode=numeric]').fill("0"); await p.waitForTimeout(200);
+  ok((await p.locator('[data-testid="scale"] input[inputmode=numeric]').getAttribute("aria-invalid")) === "true", "scale: invalid unit price flagged");
+  await p.locator('[data-testid="scale"] input[inputmode=numeric]').fill("4000000");
+  // chữ ký: khắc chữ
+  await p.locator('[data-testid="engrave"]').scrollIntoViewIfNeeded(); await p.waitForTimeout(400);
+  const eng = p.locator('[data-testid="engrave"] input');
+  await eng.fill("Ngày 20.11"); await p.waitForTimeout(250);
+  ok((await p.locator('[data-testid="engrave"] [data-kn-eng]').count()) === 10, "engrave: one glyph per char");
+  const o1 = await p.evaluate(() => getComputedStyle(document.querySelector('[data-kn-eng="0"]')).animationName);
+  ok(o1.includes("carve"), "engrave: letters carved by animation");
+  await p.waitForTimeout(2200);
+  ok(await p.evaluate(() => [...document.querySelectorAll("[data-kn-eng]")].every((e) => +getComputedStyle(e).opacity === 1)), "engrave: all letters visible at end");
+  await eng.fill("A".repeat(20)); ok((await eng.inputValue()).length === 14, "engrave: capped at 14 chars");
+  // chữ ký: thước nới size
+  await p.locator('[data-testid="gauge"]').scrollIntoViewIfNeeded();
+  const gs = p.locator('[data-testid="gauge"] input[type=range]');
+  await gs.nth(0).fill("10"); await gs.nth(1).fill("12"); await p.waitForTimeout(200);
+  ok(/Nới 2 cỡ/.test(await p.locator('[data-testid="gauge-verdict"]').innerText()), "gauge: widen 2 sizes");
+  await gs.nth(1).fill("9"); await p.waitForTimeout(200);
+  ok(/Thu 1 cỡ/.test(await p.locator('[data-testid="gauge-verdict"]').innerText()), "gauge: reduce 1 size");
+  // chữ ký: bảng đèn giờ mở cửa
+  const sg = await p.locator('[data-testid="hours"] [role=status]').getAttribute("data-open");
+  ok(sg === "0" || sg === "1", `hours sign resolves open/closed state (${sg})`);
+  ok((await p.locator('[data-testid="hours"] tr[data-today="1"]').count()) === 1, "hours: today row highlighted");
+  // tiêu đề ánh kim đã lộ
+  await p.evaluate(() => window.scrollTo(0, 0)); await p.waitForTimeout(300);
   // chữ cấm + glyph + font
   const text = await p.evaluate(() => document.body.innerText + " " + [...document.querySelectorAll("[alt],[aria-label],[title]")].map((e) => (e.getAttribute("alt") || "") + " " + (e.getAttribute("aria-label") || "") + " " + (e.getAttribute("title") || "")).join(" ") + " " + document.title + " " + (document.querySelector('meta[name=description]')?.content || ""));
   const m = text.match(FORBID);
@@ -172,7 +205,7 @@ await section("tool", async () => {
   ok(/3,1 – 3,6 g/.test(await p.locator('[data-testid="weight"]').innerText()), "weight range shown");
   ok((await p.locator('[data-testid="breakdown"] > div').count()) === 4, "breakdown rows (metal, labor, stone, setting)");
   // đổi loại
-  await p.getByLabel("Mặt dây", { exact: true }).check(); await p.waitForTimeout(600);
+  await p.locator("#cau-hinh").getByLabel("Mặt dây", { exact: true }).check(); await p.waitForTimeout(600);
   ok((await p.locator("svg.kn-prev").getAttribute("data-type")) === "pendant", "preview switches to pendant");
   ok(!(await price()).includes("12.670.000"), "price changes with type");
   // chất liệu
@@ -191,7 +224,7 @@ await section("tool", async () => {
   const low = await price(); await inp.fill("3000000"); await p.waitForTimeout(400);
   ok((await price()) !== low, "price follows gold unit price");
   // preset từ thẻ sản phẩm
-  await p.locator('#bo-suu-tap a:has-text("Cấu hình mẫu này")').first().click(); await p.waitForTimeout(1200);
+  await p.locator('#danh-muc a:has-text("Ước tính mẫu này")').first().click(); await p.waitForTimeout(1200);
   ok((await p.locator("svg.kn-prev").getAttribute("data-type")) === "ring" && (await p.locator('input[name=material][value=g18]').isChecked()), "preset from collection card sets ring 18K");
   ok(await p.evaluate(() => Math.abs(document.getElementById("cau-hinh").getBoundingClientRect().top) < 140), "preset scrolls to tool");
   // chọn đá không đá → hàng đá biến mất
@@ -199,8 +232,8 @@ await section("tool", async () => {
   ok((await p.locator('[data-testid="breakdown"] > div').count()) === 2, "no stone: 2 breakdown rows");
   ok(/Đá: Không đá/.test(await p.locator('[data-testid="summary"]').innerText()), "summary text reflects config");
   // bàn phím: radio mũi tên
-  await p.getByLabel("Nhẫn", { exact: true }).focus(); await p.keyboard.press("ArrowRight"); await p.waitForTimeout(300);
-  ok(await p.getByLabel("Mặt dây", { exact: true }).isChecked(), "arrow key moves radio selection");
+  await p.locator("#cau-hinh").getByLabel("Nhẫn", { exact: true }).focus(); await p.keyboard.press("ArrowRight"); await p.waitForTimeout(300);
+  ok(await p.locator("#cau-hinh").getByLabel("Mặt dây", { exact: true }).isChecked(), "arrow key moves radio selection");
   // sao chép (clipboard có thể bị chặn: chấp nhận cả hai trạng thái có thông báo)
   await ctx.grantPermissions(["clipboard-read", "clipboard-write"]).catch(() => {});
   await p.locator("button", { hasText: "Sao chép tóm tắt" }).click(); await p.waitForTimeout(400);
@@ -222,6 +255,12 @@ await section("mobile", async () => {
   ok((await p.getByRole("dialog").count()) === 0 && (await p.evaluate(() => document.activeElement?.getAttribute("aria-label"))) === "Mở menu", "Escape closes menu and returns focus");
   const sizes = await p.evaluate(() => [...document.querySelectorAll("a,button,summary,label.chip")].filter((e) => e.getBoundingClientRect().width > 0 && getComputedStyle(e).visibility !== "hidden").map((e) => { const r = e.getBoundingClientRect(); return [r.height, e.textContent.trim().slice(0, 20)]; }).filter(([h]) => h < 43));
   ok(sizes.length === 0, `touch targets >=44px (${JSON.stringify(sizes.slice(0, 4))})`);
+  await p.evaluate(() => { window.__ltc = 0; new PerformanceObserver((l) => l.getEntries().forEach((e) => { if (e.duration > 200) window.__ltc++; })).observe({ entryTypes: ["longtask"] }); });
+  await scrollThrough(p, 450, 70);
+  const lt2 = await p.evaluate(() => window.__ltc);
+  console.log(`INFO long tasks >200ms while scrolling @390: ${lt2}`);
+  ok(lt2 <= 6, `long tasks (>200ms) while scrolling @390 = ${lt2}`);
+  ok(await p.evaluate(() => document.documentElement.scrollWidth - innerWidth) <= 1, "mobile: no horizontal overflow after interactions");
   await ctx.close();
 });
 
@@ -230,10 +269,11 @@ await section("reduced", async () => {
   const { ctx, p } = await open(1440, 900, { reducedMotion: "reduce" }, PAGE, 1500);
   ok((await p.locator('[data-kn="intro"]').evaluate((e) => getComputedStyle(e).display).catch(() => "none")) === "none", "intro hidden under reduced motion");
   await scrollThrough(p, 500, 40); await p.evaluate(() => window.scrollTo(0, 0)); await p.waitForTimeout(400);
-  const hidden = await p.evaluate(() => [...document.querySelectorAll('h1, h2, [data-kn="rise"], [data-kn="pr-clip"], [data-kn="hero-copy"], [data-fx=ScrollScrubText] span')].filter((e) => { const s = getComputedStyle(e); return +s.opacity < 0.95 || (s.clipPath !== "none" && /inset\(\s*100/.test(s.clipPath)); }).map((e) => e.tagName + ":" + (e.textContent || "").slice(0, 20)));
+  const hidden = await p.evaluate(() => [...document.querySelectorAll('h1, h2, [data-kn="rise"], [data-kn="lit"], [data-kn="wipe"], [data-kn="pr-clip"], [data-kn="hero-copy"]')].filter((e) => { const s = getComputedStyle(e); return +s.opacity < 0.95 || (s.clipPath !== "none" && /inset\([^)]*100%/.test(s.clipPath)); }).map((e) => e.tagName + ":" + (e.textContent || "").slice(0, 20)));
   ok(hidden.length === 0, `all content visible under reduced motion (${hidden.slice(0, 3).join("|")})`);
   ok(await p.evaluate(() => getComputedStyle(document.querySelector("[class*=rSpin]")).animationName === "none"), "ring static under reduced motion");
   ok(await p.evaluate(() => getComputedStyle(document.querySelector("h1 [data-fx=GoldShimmer]")).animationName === "none"), "shimmer static under reduced motion");
+  ok(await p.evaluate(() => [...document.querySelectorAll("[data-kn-eng]")].every((e) => +getComputedStyle(e).opacity === 1)) && (await p.evaluate(() => getComputedStyle(document.querySelector('[class*=beam]')).animationName)) === "none", "engrave letters visible and scale beam still under reduced motion");
   await ctx.close();
 });
 
@@ -242,9 +282,9 @@ await section("nojs", async () => {
   const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, javaScriptEnabled: false });
   const p = await ctx.newPage();
   await p.goto(PAGE, { waitUntil: "load", timeout: 120000 }); await p.waitForTimeout(1800);
-  ok(await p.locator("h1").isVisible() && (await p.locator("h1").innerText()).includes("Vẻ đẹp"), "no-JS: hero heading visible");
+  ok(await p.locator("h1").isVisible() && (await p.locator("h1").innerText()).includes("Nhẫn cưới"), "no-JS: hero heading visible");
   ok(await p.evaluate(() => { const i = document.querySelector('[data-kn="intro"]'); return !i || getComputedStyle(i).visibility === "hidden"; }), "no-JS: intro overlay self-removes via CSS");
-  ok((await p.locator("#cau-hinh").innerText()).includes("Thiết kế trang sức"), "no-JS: tool section text present");
+  ok((await p.locator("#cau-hinh").innerText()).includes("Ước tính giá món trang sức"), "no-JS: tool section text present");
   await ctx.close();
 });
 

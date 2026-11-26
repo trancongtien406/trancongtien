@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import { MagneticButton, SplitWords, gsap, prefersReducedMotion } from "@/features/showroom/effects";
+import { SplitWords, gsap, prefersReducedMotion } from "@/features/showroom/effects";
 import { buildConsultHref } from "@/features/showroom/consultation";
 import {
   CERTS, EXPERIENCES, GOALS, recommend, toggleCert, validate,
@@ -81,8 +81,8 @@ export function Finder() {
       <div className={styles.wrap}>
         <div className={styles.finderGrid}>
           <div className={styles.finderIntro} data-lb="reveal">
-            <p className={styles.kicker}>Dive Level Finder</p>
-            <h2 id="finder-title" className={styles.h2}><SplitWords as="span">Bạn đang ở tầng nào?</SplitWords></h2>
+            <p className={styles.kicker}>Chọn khoá phù hợp</p>
+            <h2 id="finder-title" className={styles.h2}><SplitWords as="span">Bạn nên bắt đầu từ khoá nào?</SplitWords></h2>
             <p className={styles.lede}>Không phải ai cũng bắt đầu từ cùng một điểm. Chia sẻ một chút về trải nghiệm, nền tảng hiện tại và điều bạn muốn khám phá. Tầng Xanh sẽ gợi ý chương trình để bạn tìm hiểu kỹ hơn trước khi trao đổi với hướng dẫn viên.</p>
             <p className={styles.finderNote}>Đây là công cụ định hướng ban đầu. Nó không đánh giá điều kiện sức khoẻ, không cấp phép lặn và không thay quyết định của hướng dẫn viên. Kết quả chỉ tính trong trình duyệt của bạn, chúng tôi không thu thập thông tin ở bước này.</p>
           </div>
@@ -148,7 +148,7 @@ export function Finder() {
                     </ul>
                     <p className={styles.resultFine} data-stagger="">Gợi ý này không xác nhận bạn đủ điều kiện sức khoẻ hoặc đủ điều kiện cho một buổi lặn cụ thể. Quyết định cuối cùng thuộc về hướng dẫn viên sau khi trao đổi với bạn.</p>
                     <div className={styles.resultCtas} data-stagger="">
-                      <MagneticButton><a className={`${styles.btn} ${styles.btnCoral}`} href={href}>Trao đổi với Tầng Xanh</a></MagneticButton>
+                      <a className={`${styles.btn} ${styles.btnCoral}`} href={href}>Trao đổi với Tầng Xanh</a>
                       {res.courseId && <a className={`${styles.btn} ${styles.btnGhost}`} href="#khoa-hoc">Xem khoá học</a>}
                     </div>
                   </div>

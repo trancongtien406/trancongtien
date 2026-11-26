@@ -73,7 +73,8 @@ await section("[2] desktop: hiệu ứng, chữ cấm, glyph, hiệu năng", asy
   const { ctx, p } = await open(1440, 900);
   await p.evaluate(() => { window.__ltc = 0; new PerformanceObserver((l) => l.getEntries().forEach((e) => { if (e.duration > 200) window.__ltc++; })).observe({ entryTypes: ["longtask"] }); });
   const fx = await p.evaluate(() => [...new Set([...document.querySelectorAll("[data-fx]")].map((e) => e.dataset.fx))]);
-  for (const n of ["OutlineText", "StackingCards", "Counter", "VelocityMarquee", "ScrollScrubText", "ClipReveal", "ParallaxLayer", "BarbellLift", "GrainOverlay", "CustomCursor", "ScrollProgress"]) ok(fx.includes(n), `effect present: ${n}`);
+  for (const n of ["OutlineText", "StackingCards", "Counter", "TextScramble", "BarbellLift", "GrainOverlay", "CustomCursor", "ScrollProgress"]) ok(fx.includes(n), `effect present: ${n}`);
+  for (const n of ["VelocityMarquee", "ScrollScrubText", "ClipReveal", "ParallaxLayer", "MagneticButton", "SplitWords", "SVGPathDraw"]) ok(!fx.includes(n), `effect removed (hạn mức đại trà): ${n}`);
   ok(await p.evaluate(() => document.querySelector('[data-site="sat-gym"]').dataset.sgJs === "1"), "Motion (hero choreography) mounted");
   // hero choreography đã xong: nút CTA hiện, thanh thông số hiện
   ok(await p.evaluate(() => [...document.querySelectorAll('[data-sg="hero-cta"] a')].every((a) => +getComputedStyle(a).opacity === 1)), "hero choreography finished: CTAs visible");
@@ -106,7 +107,7 @@ await section("[2] desktop: hiệu ứng, chữ cấm, glyph, hiệu năng", asy
   await num.scrollIntoViewIfNeeded(); await num.hover(); await p.waitForTimeout(800);
   ok(await num.evaluate((e) => parseFloat(getComputedStyle(e).getPropertyValue("--sg-hover"))) > 90, "card number outline fills on hover");
   // stacking cards: sticky + thu nhỏ thẻ dưới
-  ok(await p.evaluate(() => [...document.querySelectorAll("[data-fx-card]")].every((c) => getComputedStyle(c).position === "sticky")) && (await p.locator("[data-fx-card]").count()) === 4, "4 program cards are position:sticky");
+  ok(await p.evaluate(() => [...document.querySelectorAll("[data-fx-card]")].every((c) => getComputedStyle(c).position === "sticky")) && (await p.locator("[data-fx-card]").count()) === 5, "5 program cards are position:sticky");
   await p.locator("[data-fx-card]").nth(3).scrollIntoViewIfNeeded(); await p.evaluate(() => window.scrollBy(0, 500)); await p.waitForTimeout(900);
   const sc0 = await p.locator("[data-fx-card] > div").first().evaluate((e) => new DOMMatrix(getComputedStyle(e).transform).a);
   ok(sc0 < 0.99, `first card scaled down once covered (scale ${sc0.toFixed(3)})`);
@@ -131,14 +132,23 @@ await section("[2] desktop: hiệu ứng, chữ cấm, glyph, hiệu năng", asy
   const st = p.locator('[data-sg="stencil"]').first();
   ok(await p.locator('[data-sg="stencil"]').count() >= 8, "stencil labels present (>=8)");
   await p.evaluate(() => window.scrollTo(0, 0));
-  // marquee
-  const mq = p.locator("[data-fx='VelocityMarquee']").first();
-  await mq.scrollIntoViewIfNeeded(); await p.waitForTimeout(400);
-  const tr = async () => mq.locator("[data-fx-track]").evaluate((e) => getComputedStyle(e).transform);
-  const t1 = await tr(); await p.waitForTimeout(500); const t2 = await tr();
-  ok(t1 !== t2, "velocity marquee moves");
-  const mb = mq.getByRole("button");
-  if (await mb.count()) { await mb.first().click(); await p.waitForTimeout(150); const a = await tr(); await p.waitForTimeout(400); const c = await tr(); ok(a === c, "marquee pause button stops motion"); await mb.first().click(); }
+  // đồng hồ buổi tập 60 phút chạy khi vào khung
+  await p.locator("#mot-buoi-tap").scrollIntoViewIfNeeded(); await p.waitForTimeout(1500);
+  const c1 = await p.locator('[data-testid="session-clock"]').innerText(); await p.waitForTimeout(2500);
+  const c2 = await p.locator('[data-testid="session-clock"]').innerText();
+  ok(/60:00 \/ 60:00/.test(c2) || c1 !== c2, `SessionClock đã chạy hết 60 phút: ${c1} -> ${c2}`);
+  await p.locator("#mot-buoi-tap button", { hasText: "Khởi động" }).click(); await p.waitForTimeout(300);
+  ok((await p.locator('[data-testid="session-active"]').innerText()).toLowerCase() === "khởi động" && /05:00/.test(await p.locator('[data-testid="session-clock"]').innerText()), "bấm chặng Khởi động: nhảy tới 05:00");
+  await p.locator("#mot-buoi-tap button", { hasText: "Bài WOD" }).click(); await p.waitForTimeout(300);
+  ok(/30:00/.test(await p.locator('[data-testid="session-clock"]').innerText()), "bấm chặng Bài WOD: 30:00");
+  // sơ đồ sàn tập
+  await p.locator("#khong-gian").scrollIntoViewIfNeeded();
+  await p.getByRole("button", { name: "Khu rack và thanh tạ" }).click(); await p.waitForTimeout(700);
+  ok(/Rack squat/.test(await p.locator('[data-testid="zone-note"]').innerText()) && (await p.locator('[data-zone="rack"]').getAttribute("data-on")) === "1" && (await p.locator('[data-zone="wod"]').getAttribute("data-on")) === "0", "FloorPlan: chọn khu rack");
+  ok(await p.locator("#mot-buoi-tap [data-fx=TextScramble]").count() === 6, "bảng bài: 6 dòng TextScramble");
+  const hn = await p.locator("main").innerText();
+  for (const w of ["Quận Ngũ Hành Sơn", "CrossFit WOD", "Strength", "Conditioning", "Mobility", "Đăng ký tập thử", "Quy định", "180.000"]) ok(hn.toLowerCase().includes(w.toLowerCase()), `nội dung có: ${w}`);
+  ok(!/giảm (cân|mỡ)|đốt mỡ|cam kết/i.test(hn), "không hứa giảm cân/kết quả");
   // rung nhẹ có kiểm soát
   const cta = p.locator('[data-sg="hero-cta"] a[data-shake]').first();
   await p.evaluate(() => window.scrollTo(0, 0)); await p.waitForTimeout(500);
@@ -388,7 +398,7 @@ await section("[7] mobile: menu, bàn phím, hiệu năng, cảm ứng", async (
   ok(!(await p.locator("#sg-menu").isVisible()), "Escape closes menu");
   ok(await p.evaluate(() => document.activeElement?.getAttribute("aria-controls") === "sg-menu"), "focus returns to menu button");
   await p.getByRole("button", { name: "Mở menu" }).tap(); await p.locator("#sg-menu a").nth(1).tap(); await p.waitForTimeout(700);
-  ok(!(await p.locator("#sg-menu").isVisible()) && (await p.evaluate(() => location.hash)) === "#chon-bai", "menu link navigates and closes menu");
+  ok(!(await p.locator("#sg-menu").isVisible()) && (await p.evaluate(() => location.hash)) === "#lich-lop", "menu link navigates and closes menu");
   const total = await p.evaluate(() => document.documentElement.scrollHeight);
   for (let y = 0; y < total; y += 500) { await p.evaluate((y) => window.scrollTo(0, y), y); await p.waitForTimeout(90); }
   console.log("INFO long tasks >200ms @390:", await p.evaluate(() => window.__ltc));
@@ -413,7 +423,7 @@ await section("[8] desktop: dài hạn - 1440 long task khi cuộn, bàn phím, 
   await p.keyboard.press("Tab"); const first = await p.evaluate(() => document.activeElement?.textContent?.trim().slice(0, 30));
   ok(first && /Bỏ qua/.test(first), `first Tab = skip link (${first})`);
   let reached = false;
-  for (let i = 0; i < 14; i++) { await p.keyboard.press("Tab"); const t = await p.evaluate(() => document.activeElement?.textContent?.trim()); if (t === "Chọn bài tập hôm nay") { reached = true; break; } }
+  for (let i = 0; i < 14; i++) { await p.keyboard.press("Tab"); const t = await p.evaluate(() => document.activeElement?.textContent?.trim()); if (t === "Đăng ký tập thử") { reached = true; break; } }
   ok(reached, "Tab reaches hero CTA");
   ok(await p.evaluate(() => { const o = getComputedStyle(document.activeElement).outlineStyle; return o !== "none"; }), "CTA shows visible focus outline");
   await scrollThrough(p, 450, 80);

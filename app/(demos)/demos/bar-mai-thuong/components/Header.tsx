@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MagneticButton } from "@/features/showroom/effects";
 import s from "../brand.module.css";
 
 const NAV = [
   { href: "#thuc-don", label: "Thực đơn" },
-  { href: "#chon-ly", label: "Chọn ly" },
+  { href: "#happy-hour", label: "Happy hour" },
   { href: "#khong-gian", label: "Không gian" },
-  { href: "#nhip-tuan", label: "Nhịp tuần" },
+  { href: "#su-kien", label: "Nhóm & sự kiện" },
+  { href: "#hoi-dap", label: "Hỏi đáp" },
 ];
 
 export function Logo({ className }: { className?: string }) {
@@ -46,9 +46,7 @@ export function Header() {
           ))}
         </nav>
         <div className={s.headerCta}>
-          <MagneticButton>
-            <a className={`${s.btn} ${s.btnPink} ${s.btnSm}`} href="#dat-ban">Giữ chỗ</a>
-          </MagneticButton>
+          <a className={`${s.btn} ${s.btnPink} ${s.btnSm}`} href="#dat-ban">Đặt bàn</a>
           <button ref={btn} type="button" className={s.burger} aria-expanded={open} aria-controls="tm-menu" aria-label={open ? "Đóng menu" : "Mở menu"} onClick={() => setOpen((v) => !v)}>
             <span aria-hidden="true" className={s.burgerBars} data-open={open || undefined} />
           </button>
@@ -58,7 +56,7 @@ export function Header() {
         {NAV.map((n) => (
           <a key={n.href} href={n.href} className={s.drawerLink} onClick={() => setOpen(false)}>{n.label}</a>
         ))}
-        <a href="#dat-ban" className={`${s.btn} ${s.btnPink}`} onClick={() => setOpen(false)}>Giữ chỗ trên mái</a>
+        <a href="#dat-ban" className={`${s.btn} ${s.btnPink}`} onClick={() => setOpen(false)}>Đặt bàn</a>
       </div>
     </header>
   );

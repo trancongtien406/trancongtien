@@ -3,20 +3,20 @@ import { buildConsultHref } from "@/features/showroom/consultation";
 import styles from "./brand.module.css";
 import { Header } from "./components/Header";
 import { Motion } from "./components/Motion";
-import { BuilderSection, Craft, FaqSection, Final, Footer, Hero, LookbookSection, Manifesto, People, Process, Space, Strip } from "./components/Sections";
+import { BuilderSection, Craft, FaqSection, Final, Footer, Hero, LookbookSection, Manifesto, People, Policies, Process, Products, Space, Strip } from "./components/Sections";
 
 export const metadata: Metadata = {
-  title: "Nét Lệch · Hair Studio, Lookbook và Service Builder",
+  title: "Nét Lệch · Salon tóc Hải Châu, Đà Nẵng: cắt, uốn, duỗi, nhuộm",
   description:
-    "Hair studio: Lookbook lọc kiểu tóc theo độ dài, loại, phong cách và mức chăm sóc; Service Builder tóm tắt dịch vụ với giá tham khảo và thời gian dự kiến.",
+    "Salon tóc nam nữ tại Quận Hải Châu, Đà Nẵng. Bảng giá cắt, uốn, duỗi, nhuộm, tẩy, phục hồi theo độ dài tóc, giờ mở cửa 09:00–20:00, chính sách đặt cọc và ước tính thời gian.",
   alternates: { canonical: "/demos/net-lech" },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  name: "Nét Lệch · Hair Studio",
-  description: "Hair studio phong cách tạp chí thời trang: cắt, nhuộm, tạo kiểu.",
+  name: "Nét Lệch · Salon tóc Đà Nẵng",
+  description: "Salon tóc nam nữ tại Quận Hải Châu, Đà Nẵng.",
   inLanguage: "vi",
 };
 
@@ -25,18 +25,20 @@ export default function Page() {
   return (
     <div className={styles.brand} data-nl-root>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <a className={styles.skip} href="#lookbook">Bỏ qua, tới Lookbook</a>
+      <a className={styles.skip} href="#main">Bỏ qua, tới nội dung</a>
       <Header />
       <main id="main">
         <Hero />
         <Strip />
+        <Craft />
         <Manifesto />
         <LookbookSection />
-        <Craft />
+        <Process />
         <BuilderSection consultHref={consult} />
         <People />
+        <Products />
         <Space />
-        <Process />
+        <Policies />
         <FaqSection />
         <Final consultHref={consult} />
       </main>

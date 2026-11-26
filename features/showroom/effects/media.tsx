@@ -73,15 +73,20 @@ export function DraggableGallery({
       offs.push(
         on(vp, "pointerdown", (e) => {
           if (e.pointerType === "touch" || e.button !== 0) return;
+          // Không bắt con trỏ khi bấm vào phần tử tương tác bên trong (nút, liên kết, ô nhập): để click chạy bình thường.
+          if ((e.target as Element | null)?.closest?.("button,a,input,select,textarea,label,summary,[role=button],[data-no-drag]")) return;
           down = true; moved = 0; vel = 0; lastX = e.clientX; lastT = performance.now();
           stopTick();
-          vp.style.scrollSnapType = "none"; vp.style.cursor = "grabbing"; vp.style.userSelect = "none";
-          vp.setPointerCapture(e.pointerId);
+          vp.style.scrollSnapType = "none";
         }),
         on(vp, "pointermove", (e) => {
           if (!down) return;
           const dx = e.clientX - lastX, n = performance.now();
           moved += Math.abs(dx);
+          if (!vp.hasPointerCapture(e.pointerId)) {
+            if (moved < 5) { lastX = e.clientX; lastT = n; return; } // chưa đủ ngưỡng kéo: vẫn là click
+            vp.setPointerCapture(e.pointerId); vp.style.cursor = "grabbing"; vp.style.userSelect = "none";
+          }
           vp.scrollLeft -= dx;
           vel = dx / Math.max(1, n - lastT) * 16.67 * 0.9 + vel * 0.1;
           lastX = e.clientX; lastT = n;

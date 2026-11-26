@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ClipReveal } from "@/features/showroom/effects";
 import { LEVEL_WORD, MONTHS } from "../lib/seasons";
 import { Divider, wavePath } from "./Art";
 import { Photo } from "./Photo";
@@ -19,8 +18,8 @@ export function Seasons() {
       <Divider fill="var(--rs-deep)" className={styles.dividerTop} />
       <div className={styles.wrap}>
         <p className={styles.kickerDark} data-rs="reveal">Mùa sóng</p>
-        <h2 id="ms-title" className={styles.h2} data-rs="reveal">Mỗi tháng, <span className={styles.script}>một tính cách của biển</span></h2>
-        <p className={styles.lede} data-rs="reveal">Đây là mô tả chung theo tháng để bạn hình dung mùa, không phải dự báo thời tiết hay dự báo sóng của một ngày cụ thể.</p>
+        <h2 id="ms-title" className={styles.h2} data-rs="reveal">Học vào tháng nào, <span className={styles.script}>biển ra sao?</span></h2>
+        <p className={styles.lede} data-rs="reveal">Mô tả chung theo tháng để bạn chọn mùa học. Đây không phải dự báo thời tiết hay dự báo sóng của một ngày cụ thể; trường nhìn biển thật mỗi sáng.</p>
 
         <div className={styles.seasonGrid}>
           <div className={styles.dialWrap}>
@@ -66,9 +65,9 @@ export function Seasons() {
               ))}
             </div>
             <div className={styles.monthCard} aria-live="polite">
-              <ClipReveal variant="inset" from="left" className={styles.monthPhoto} innerScale={1.08}>
+              <div className={styles.monthPhoto}>
                 <div className={styles.monthPhotoFrame}><Photo file="ong-song" alt="Bên trong ống sóng xanh ngọc nhìn ra bãi cát" sizes="(max-width: 900px) 90vw, 36vw" w={1200} pos="50% 50%" /></div>
-              </ClipReveal>
+              </div>
               <p className={styles.monthKicker}>Tháng {m} · {LEVEL_WORD[cur.level]}</p>
               <h3 className={styles.monthTitle}>{cur.title}</h3>
               <p>{cur.text}</p>

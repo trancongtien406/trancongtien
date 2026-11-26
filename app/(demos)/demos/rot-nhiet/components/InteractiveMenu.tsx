@@ -78,12 +78,12 @@ export function InteractiveMenu() {
       <div className={styles.wrap}>
         <div className={styles.sectionHead}>
           <div>
-            <span className={`${styles.label} ${styles.eyebrow}`}>01 / THE MENU</span>
+            <span className={`${styles.label} ${styles.eyebrow}`}>01 / MENU TẠI QUÁN</span>
             <h2 id="rn-menu-h" className={`${styles.display} ${styles.h2}`}>Uống gì?</h2>
           </div>
           <div>
-            <p className={styles.lead}>Mỗi gu một ly. Chọn thứ bạn thích hôm nay: đậm, nhẹ, nóng, lạnh hay một chút sữa.</p>
-            <p className={styles.helper}>Giá dưới đây là giá tham khảo.</p>
+            <p className={styles.lead}>18 món pha tại quầy: cà phê phin, espresso, pour-over, cold brew và đồ uống không cà phê. Lọc theo độ đậm, nhiệt độ hay sữa, rồi thêm vào khay để đọc cho nhân viên.</p>
+            <p className={styles.helper}>Giá tại quán, ghi theo từng ly.</p>
           </div>
         </div>
         <div className={styles.toolbar} role="group" aria-label="Lọc theo gu của bạn">

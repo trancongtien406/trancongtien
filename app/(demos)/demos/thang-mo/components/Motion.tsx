@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 /**
  * "Lật từng trang": hero mở như bìa album (tấm phủ giấy kéo lên, tiêu đề trồi từng dòng, ảnh phụ xoay nhẹ vào chỗ),
- * moment 1: ảnh album đặt xuống như đặt ảnh lên bàn (y + xoay nhẹ, stagger), moment 2: ba ảnh photo essay trôi dọc khác tốc độ (chỉ ảnh, chỉ desktop).
+ * các khối còn lại đặt xuống như đặt ảnh lên bàn (xoay nhẹ + mờ dần, không trượt).
  * Chỉ transform/opacity. reduced-motion: không hiệu ứng, nội dung hiện đủ.
  */
 export function Motion() {
@@ -31,27 +31,16 @@ export function Motion() {
         .set(q('[data-tm="meta"],[data-tm="photo"],[data-tm="h1"],[data-tm="body"],[data-tm="caption"]'), clear)
         .set(q('[data-tm="inset"]'), { clearProps: "opacity,y" });
 
-      q("[data-tm-reveal]").forEach((el) => {
-        gsap.fromTo(el, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", ...clear, scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+      // ngôn ngữ chuyển động: "đặt ảnh xuống bàn". Khối vào bằng xoay rất nhẹ + mờ dần (không trượt lên); ảnh in rơi xuống rồi nằm yên.
+      q("[data-tm-reveal]").forEach((el, i) => {
+        const rot = el.classList.toString().includes("print") || el.querySelector("figure") ? (i % 2 ? 1.6 : -1.6) : (i % 2 ? 0.5 : -0.5);
+        gsap.fromTo(el, { opacity: 0, rotate: rot, transformOrigin: "50% 0%" }, { opacity: 1, rotate: 0, duration: 0.9, ease: "power3.out", ...clear, scrollTrigger: { trigger: el, start: "top 88%", once: true } });
       });
-
-      // moment 1: những trang ảnh mở ra
-      const items = q("[data-tm-album]");
-      items.forEach((el, i) => {
-        const rot = i % 2 === 0 ? -2.5 : 2.5;
-        gsap.fromTo(el, { opacity: 0, y: 32, rotate: rot }, { opacity: 1, y: 0, rotate: 0, duration: 0.85, delay: (i % 2) * 0.12, ease: "power3.out", ...clear, scrollTrigger: { trigger: el, start: "top 82%", once: true } });
+      // đường kẻ "gáy sách" của bảng giá vẽ ra khi vào khung
+      q("[data-tm-rule]").forEach((el) => {
+        gsap.fromTo(el, { scaleX: 0, transformOrigin: "0 50%" }, { scaleX: 1, duration: 0.9, ease: "power2.out", clearProps: "transform", scrollTrigger: { trigger: el, start: "top 90%", once: true } });
       });
-
-      // moment 2: ba ảnh photo essay trôi dọc nhẹ (chỉ desktop)
-      const mq = gsap.matchMedia();
-      mq.add("(min-width: 1024px)", () => {
-        const disp: [number, number][] = [[18, -12], [28, -20], [12, -8]];
-        q("[data-tm-essay]").forEach((el, i) => {
-          const [a, b] = disp[i] ?? [12, -8];
-          gsap.fromTo(el, { y: a }, { y: b, ease: "none", scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: 0.8 } });
-        });
-      });
-      return () => { mq.revert(); root.removeAttribute("data-tm-armed"); };
+      return () => { root.removeAttribute("data-tm-armed"); };
     });
     return () => { mm.revert(); };
   }, []);

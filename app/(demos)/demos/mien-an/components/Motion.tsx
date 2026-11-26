@@ -2,13 +2,18 @@
 
 import { useEffect } from "react";
 
-/** GSAP: chỉ là progressive enhancement. Nội dung vẫn đủ khi JS lỗi hoặc reduced-motion. */
+/**
+ * Ngôn ngữ chuyển động của Miên An: "thở".
+ * - Khối nội dung nở ra từ 0.97 → 1 rất chậm (sine), như hít vào; không trượt lên-xuống.
+ * - Chữ hero rõ dần từ mờ (blur → nét) thay vì trượt qua mặt nạ.
+ * - Ảnh liệu trình, không gian mở ra theo vòng tròn từ tâm như gợn nước.
+ * Chỉ là progressive enhancement: nội dung vẫn đủ khi JS lỗi hoặc reduced-motion.
+ */
 export function Motion() {
   useEffect(() => {
     const root = document.querySelector<HTMLElement>("[data-ma-root]");
     if (!root) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let ctx: { revert: () => void } | undefined;
     let cancelled = false;
     (async () => {
@@ -16,47 +21,29 @@ export function Motion() {
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
       if (cancelled) return;
       gsap.registerPlugin(ScrollTrigger);
-      const c = gsap.context(() => {
+      ctx = gsap.context(() => {
         root.dataset.motion = "on";
         const q = (s: string) => gsap.utils.toArray<HTMLElement>(s, root);
 
-        // Hero choreography ~2s (xếp chồng thời gian)
-        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-        tl.from('[data-hero="eyebrow"]', { opacity: 0, y: 10, duration: 0.5 }, 0.15)
-          .from("[data-hero-line]", { yPercent: 105, duration: 0.95, stagger: 0.14 }, 0.3)
-          .from('[data-hero="art"]', { opacity: 0, duration: 1.2, ease: "power2.out" }, 0.18)
-          .from('[data-hero="art"] img', { scale: 1.06, duration: 1.45, ease: "power2.out" }, 0.18)
-          .from('[data-hero="desc"]', { opacity: 0, y: 14, duration: 0.65 }, 1.0)
-          .from('[data-hero="cta"]', { opacity: 0, y: 10, duration: 0.65 }, 1.18)
-          .from('[data-hero="caption"]', { opacity: 0, duration: 0.5 }, 1.5);
-        // tránh ẩn vĩnh viễn nếu from() không áp dụng (đặt lại sau khi xong)
-        tl.eventCallback("onComplete", () => { gsap.set('[data-hero], [data-hero-line]', { clearProps: "all" }); });
+        // Hero: chữ rõ dần như sương tan, rồi mô tả và CTA nở ra.
+        const tl = gsap.timeline({ defaults: { ease: "sine.inOut" } });
+        tl.from('[data-hero="eyebrow"]', { opacity: 0, duration: 0.9 }, 0.1)
+          .from("[data-hero-line]", { opacity: 0, filter: "blur(14px)", scale: 0.97, transformOrigin: "0% 60%", duration: 1.5, stagger: 0.28 }, 0.2)
+          .from('[data-hero="desc"]', { opacity: 0, scale: 0.98, duration: 1.2 }, 1.0)
+          .from('[data-hero="cta"]', { opacity: 0, scale: 0.97, duration: 1.1 }, 1.25)
+          .from('[data-hero="caption"]', { opacity: 0, duration: 1 }, 1.6);
+        tl.eventCallback("onComplete", () => { gsap.set("[data-hero], [data-hero-line]", { clearProps: "opacity,filter,transform,scale" }); });
 
-        // Reveal một lần cho các khối
+        // Khối nội dung "hít vào": nở nhẹ + hiện dần, một lần.
         q("[data-reveal]").forEach((el) => {
-          gsap.fromTo(el, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.85, ease: "power2.out", clearProps: "transform", scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+          gsap.fromTo(el, { opacity: 0, scale: 0.968 }, { opacity: 1, scale: 1, duration: 1.4, ease: "sine.out", clearProps: "transform", scrollTrigger: { trigger: el, start: "top 90%", once: true } });
         });
 
-        // Moment 1: The Unfolding Story
-        const story = root.querySelector("[data-story]");
-        if (story) {
-          gsap.from(q("[data-story-text]"), { opacity: 0, y: 20, duration: 0.8, stagger: 0.1, ease: "power2.out", scrollTrigger: { trigger: story, start: "top 75%", once: true } });
-          gsap.from("[data-story-detail]", { opacity: 0, y: 20, duration: 0.8, delay: 0.2, ease: "power2.out", scrollTrigger: { trigger: story, start: "top 60%", once: true } });
-          const mm = gsap.matchMedia();
-          mm.add("(min-width: 1024px)", () => {
-            gsap.fromTo("[data-story-img] img", { yPercent: 0 }, { yPercent: -12, ease: "none", scrollTrigger: { trigger: story, start: "top 85%", end: "bottom 20%", scrub: 0.6 } });
-          });
-        }
-
-        // Moment 2: The Sanctuary Reveal
-        const san = root.querySelector("#sanctuary");
-        if (san) {
-          const figs = q("#sanctuary [data-san]");
-          gsap.from(figs, { opacity: 0, y: 24, duration: 0.85, stagger: 0.12, ease: "power2.out", scrollTrigger: { trigger: san.querySelector("[data-san]"), start: "top 80%", once: true } });
-          gsap.from("#sanctuary [data-san-btn]:first-of-type", { clipPath: "inset(100% 0 0 0)", duration: 0.85, ease: "power3.out", clearProps: "clipPath", scrollTrigger: { trigger: san.querySelector("[data-san]"), start: "top 80%", once: true } });
-        }
+        // Ảnh: mở vòng tròn từ tâm như gợn nước.
+        q('[data-ripple]').forEach((el) => {
+          gsap.fromTo(el, { clipPath: "circle(0% at 50% 50%)" }, { clipPath: "circle(78% at 50% 50%)", duration: 1.6, ease: "power2.inOut", clearProps: "clipPath", scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+        });
       }, root);
-      ctx = c;
     })();
     return () => {
       cancelled = true;

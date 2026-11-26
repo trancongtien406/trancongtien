@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { SVGPathDraw } from "@/features/showroom/effects";
 import s from "../brand.module.css";
 import { DAY_BEATS } from "../data/content";
 import { DAY_NAMES, HOURS_MAX, HOURS_MIN, density, vnNow } from "../lib/seatmap";
@@ -54,13 +53,13 @@ export function Workday() {
         <p className={s.wdDay}>{DAY_NAMES[day]} · Đà Nẵng</p>
         <p className={s.wdPeak}>Khu mở đông nhất quanh {pad(peak)}:00</p>
       </div>
-      <div className={s.wdChart} role="img" aria-label={`Mật độ thường gặp trong ngày ${DAY_NAMES[day].toLowerCase()}, đông nhất quanh ${pad(peak)} giờ`}>
+      <div className={s.wdChart} data-cg-rule role="img" aria-label={`Mật độ thường gặp trong ngày ${DAY_NAMES[day].toLowerCase()}, đông nhất quanh ${pad(peak)} giờ`}>
         <svg className={s.wdArea} viewBox={`0 0 ${W} ${H}`} aria-hidden="true">
           <path d={area} />
         </svg>
-        <SVGPathDraw className={s.wdLine} viewBox={`0 0 ${W} ${H}`} aria-hidden="true" duration={2.1} stagger={0}>
+        <svg className={s.wdLine} viewBox={`0 0 ${W} ${H}`} aria-hidden="true" fill="none" stroke="currentColor">
           <path d={line} />
-        </SVGPathDraw>
+        </svg>
         <ul className={s.wdAxis} aria-hidden="true">
           {Array.from({ length: HOURS_MAX - HOURS_MIN + 1 }, (_, i) => HOURS_MIN + i).map((h) => (
             <li key={h} data-major={h % 2 === 1 ? "1" : undefined}><span>{pad(h)}</span></li>

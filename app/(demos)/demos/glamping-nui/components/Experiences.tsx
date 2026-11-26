@@ -1,7 +1,8 @@
-import { CursorSpotlight, ParallaxLayer, SplitWords, VelocityMarquee } from "@/features/showroom/effects";
+import { CursorSpotlight, ParallaxLayer } from "@/features/showroom/effects";
 import styles from "../brand.module.css";
 import { ACTIVITIES } from "../data/content";
 import { vnd } from "../lib/format";
+import { Ignite } from "./Ignite";
 import { Photo } from "./Photo";
 import { PickButton } from "./Pick";
 
@@ -19,17 +20,10 @@ export function Experiences() {
         <header className={styles.secHead}>
           <p className={styles.eyebrow}>Hoạt động</p>
           <h2 id="exp-title" className={styles.h2}>
-            <SplitWords as="span">Không chỉ là một nơi để ngủ.</SplitWords>
+            <Ignite as="span">Bốn hoạt động, chọn tuỳ thích.</Ignite>
           </h2>
-          <p className={styles.lead}>Bốn cách để tận hưởng thời gian giữa thiên nhiên. Chọn một, vài hoặc không chọn gì cả và chỉ ngồi nhìn lửa.</p>
+          <p className={styles.lead}>Mỗi hoạt động có giờ cố định, thời lượng và giá theo người. Chọn một, vài hoặc không chọn gì cả và chỉ ngồi nhìn lửa.</p>
         </header>
-      </div>
-      <div className={styles.marqueeBand}>
-        <VelocityMarquee mode="velocity" speed={46} boost={1.6} gap="3rem" controls buttonClassName={styles.marqBtn} className={styles.marquee}>
-          {["BBQ giữa rừng", "Trekking nhẹ", "Ngắm sao", "Xe địa hình", "Võng chiều", "Cà phê sương", "Lửa trại"].map((w) => (
-            <span key={w} className={styles.marqueeItem}>{w}<i /></span>
-          ))}
-        </VelocityMarquee>
       </div>
       <div className={styles.wrap}>
         <ul className={styles.acts}>
@@ -40,7 +34,8 @@ export function Experiences() {
                 <p className={styles.actNo} aria-hidden="true">{String(i + 1).padStart(2, "0")}</p>
                 <h3 className={styles.h3}>{a.name}</h3>
                 <p>{a.text}</p>
-                <p className={styles.actPrice}>Từ&nbsp;{vnd(a.price)}/người · giá tham khảo</p>
+                <dl className={styles.actMeta}><div><dt>Giờ</dt><dd>{a.when}</dd></div><div><dt>Thời lượng</dt><dd>{a.length}</dd></div><div><dt>Lưu ý</dt><dd>{a.note}</dd></div></dl>
+                <p className={styles.actPrice}>{vnd(a.price)}/người · giá tham khảo</p>
                 <PickButton detail={{ activity: a.id }} className={styles.actLink}>Thêm vào chuyến đi</PickButton>
               </CursorSpotlight>
             </li>

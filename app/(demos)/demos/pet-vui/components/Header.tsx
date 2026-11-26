@@ -5,9 +5,10 @@ import { WagButton } from "./WagButton";
 import s from "../brand.module.css";
 
 const NAV = [
-  ["#goi", "Gói chăm sóc"],
-  ["#chon-goi", "Chọn gói cho bé"],
+  ["#dich-vu", "Dịch vụ"],
+  ["#bang-gia", "Bảng giá"],
   ["#quy-trinh", "Quy trình"],
+  ["#dat-lich", "Lịch hẹn"],
   ["#hoi-dap", "Hỏi đáp"],
 ] as const;
 
@@ -34,7 +35,7 @@ export function Header() {
         <nav className={s.nav} aria-label="Điều hướng chính">
           {NAV.map(([h, l]) => <a key={h} href={h}>{l}</a>)}
         </nav>
-        <span className={s.headerCta}><WagButton href="#chon-goi" tone="red">Chọn gói</WagButton></span>
+        <span className={s.headerCta}><WagButton href="#dat-lich" tone="red">Đặt lịch</WagButton></span>
         <button ref={btn} type="button" className={s.menuBtn} aria-expanded={open} aria-controls="pv-menu" onClick={() => setOpen((v) => !v)}>
           <span className={s.menuIcon} aria-hidden="true" data-open={open ? "1" : "0"}><i /><i /><i /></span>
           <span className={s.srOnly}>{open ? "Đóng menu" : "Mở menu"}</span>
@@ -42,7 +43,7 @@ export function Header() {
       </div>
       <div id="pv-menu" ref={panel} className={s.menuPanel} hidden={!open}>
         {NAV.map(([h, l]) => <a key={h} href={h} onClick={() => setOpen(false)}>{l}</a>)}
-        <a href="#chon-goi" className={s.menuCta} onClick={() => setOpen(false)}>Chọn gói cho bé</a>
+        <a href="#dat-lich" className={s.menuCta} onClick={() => setOpen(false)}>Đặt lịch cho bé</a>
       </div>
     </header>
   );

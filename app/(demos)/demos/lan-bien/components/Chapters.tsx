@@ -9,9 +9,9 @@ import styles from "../brand.module.css";
 function Text({ c, i }: { c: Chapter; i: number }) {
   const prev = i === 0 ? 0 : CHAPTERS[i - 1].depth;
   return (
-    <article className={styles.chText} data-depth={c.depth} data-depth-name={`Chương ${c.n} · ${c.label}`} aria-labelledby={`ch-${c.id}`}>
+    <article className={styles.chText} data-depth={c.depth} data-depth-name={`Tour ${c.n} · ${c.label}`} aria-labelledby={`ch-${c.id}`}>
       <p className={styles.chMeta}>
-        <span>Chương {c.n} / 05</span>
+        <span>Tour {c.n} / 05</span>
         <span className={styles.chBadge} aria-label={`Độ sâu ${c.depth} mét`}>
           <Counter value={c.depth} from={prev} duration={1.2} className={styles.chNum} />
           <small>m</small>
@@ -22,8 +22,10 @@ function Text({ c, i }: { c: Chapter; i: number }) {
       </h3>
       <p className={styles.chLead}>{c.lead}</p>
       <dl className={styles.chFacts}>
-        <div><dt>Hệ sinh thái</dt><dd>{c.eco}</dd></div>
-        <div><dt>Trải nghiệm</dt><dd>{c.exp}</dd></div>
+        <div><dt>Khu vực</dt><dd>{c.where}</dd></div>
+        <div><dt>Thời lượng</dt><dd>{c.time}</dd></div>
+        <div><dt>Dành cho</dt><dd>{c.who}</dd></div>
+        <div><dt>Giá tham khảo</dt><dd>{c.price}</dd></div>
       </dl>
       <a className={styles.link} href={c.href}>{c.cta}<span aria-hidden="true">→</span></a>
     </article>
@@ -49,7 +51,7 @@ function Visual({ c }: { c: Chapter }) {
 
 export function Chapters() {
   return (
-    <section id="chuong" className={styles.chapters} aria-label="Năm tầng sinh thái từ mặt biển xuống vùng nước sâu" data-depth-end="">
+    <section id="chuong" className={styles.chapters} aria-label="Năm loại tour lặn xếp theo độ sâu, từ snorkeling đến lặn sâu" data-depth-end="">
       <StickyChapters
         chapters={CHAPTERS.map((c, i) => ({ id: c.id, content: <Text c={c} i={i} />, visual: <Visual c={c} /> }))}
         columns="minmax(0,1fr) minmax(0,1fr)"
@@ -58,7 +60,7 @@ export function Chapters() {
         visualRight
         className={styles.chGrid}
       />
-      <p className={styles.chNote}>Các mốc độ sâu trong trang chỉ để kể câu chuyện từng tầng sinh thái. Chúng không phải khuyến nghị độ sâu cho người mới, và điều kiện thực tế phụ thuộc địa điểm, thời tiết, địa hình và môi trường biển.</p>
+      <p className={styles.chNote}>Con số độ sâu chỉ để xếp tour theo cấp. Đó không phải khuyến nghị độ sâu cho người mới; độ sâu thực tế của mỗi buổi do huấn luyện viên quyết định theo điểm lặn, thời tiết và cấp độ của nhóm.</p>
     </section>
   );
 }

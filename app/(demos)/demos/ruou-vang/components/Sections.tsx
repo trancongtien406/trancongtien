@@ -1,24 +1,25 @@
 import Link from "next/link";
-import { ClipReveal, DraggableGallery, ParallaxLayer, ScrollScrubText, SplitWords, VelocityMarquee } from "@/features/showroom/effects";
+import { DraggableGallery, ParallaxLayer } from "@/features/showroom/effects";
 import { siteConfig } from "@/lib/site";
 import s from "../brand.module.css";
 import { IMGS } from "../data/images";
 import { PLATES, vnd } from "../data/wines";
+import { BOARDS, EVENTS, FAQ, INFO, RULES, TAKEAWAY } from "../data/venue";
 import { Candle } from "./Candle";
 import { Logo } from "./Header";
 import { Photo } from "./Photo";
 
-export function Band() {
+export function Info() {
   return (
-    <section className={s.band} aria-label="Khẩu hiệu">
-      <VelocityMarquee mode="css" duration={46} gap="2.6rem" pauseOnHover className={s.bandRow}>
-        {["Đỏ", "Trắng", "Hồng", "Sủi"].flatMap((k, i) => [
-          <span key={k} className={s.bandWord}>{k}</span>,
-          <span key={`${k}-d`} className={s.bandDot} aria-hidden="true">{i % 2 ? "❖" : "◆"}</span>,
-          <span key={`${k}-t`} className={s.bandSmall}>{["một ly thôi cũng đủ lễ", "rót chậm, nói khẽ", "bàn gỗ, ánh nến", "chọn theo món, không theo tên"][i]}</span>,
-          <span key={`${k}-e`} className={s.bandDot} aria-hidden="true">◆</span>,
-        ])}
-      </VelocityMarquee>
+    <section className={s.band} aria-label="Thông tin nhanh về quán">
+      <dl className={`${s.wrap} ${s.infoGrid}`}>
+        {INFO.map(([t, d]) => (
+          <div key={t}>
+            <dt>{t}</dt>
+            <dd>{d}</dd>
+          </div>
+        ))}
+      </dl>
     </section>
   );
 }
@@ -34,10 +35,10 @@ export function Story() {
       </div>
       <div className={s.wrap}>
         <p className={s.kicker}>Câu chuyện</p>
-        <h2 id="rv-story-h" className={s.srOnly}>Câu chuyện của Mộc Vang</h2>
-        <ScrollScrubText as="p" className={s.manifesto} dim={0.18}>
-          Mộc Vang bắt đầu từ một chiếc bàn gỗ và một ý nghĩ rất nhỏ: uống vang không cần biết nhiều, chỉ cần có người ngồi cùng và một ly đến đúng lúc. Chúng tôi giữ danh sách ngắn, rót theo phong cách nho quen thuộc, rồi để ánh nến làm phần còn lại.
-        </ScrollScrubText>
+        <h2 id="rv-story-h" className={s.srOnly}>Về Mộc Vang, wine bar ở Đà Nẵng</h2>
+        <p className={s.manifesto} data-rv="rv">
+          Mộc Vang là wine bar nhỏ ở Quận Ngũ Hành Sơn, Đà Nẵng, bắt đầu từ một chiếc bàn gỗ và một ý nghĩ rất nhỏ: uống vang không cần biết nhiều, chỉ cần có người ngồi cùng và một ly đến đúng lúc. Danh sách vang ngắn, rót theo phong cách nho quen thuộc, đồ nhắm ra từng đợt, còn ánh nến làm phần còn lại.
+        </p>
         <ul className={s.vows}>
           <li data-rv="rv"><b>01</b><span>Danh sách ngắn, đổi theo mùa món.</span></li>
           <li data-rv="rv"><b>02</b><span>Gọi theo phong cách, không cần thuộc tên nhà vang.</span></li>
@@ -96,7 +97,7 @@ export function Pour() {
           </div>
           <div className={s.pourCopy}>
             <p className={s.kicker}>Một ly vang, bốn nhịp</p>
-            <SplitWords as="h2" className={s.h2} trigger="view">Rót, xoay, ngửi, nhấp.</SplitWords>
+            <h2 className={s.h2} data-rv="rv">Rót, xoay, ngửi, nhấp.</h2>
                         <ol className={s.steps}>
               {STEPS.map(([t, d], i) => (
                 <li key={t} className={s.step} data-rv="step" data-on={i === 0 ? "" : undefined}>
@@ -116,18 +117,27 @@ export function Plates() {
   return (
     <section className={s.plates} id="mon-nham" aria-labelledby="rv-plates-h">
       <div className={`${s.wrap} ${s.platesGrid}`}>
-        <ClipReveal className={s.platesPhoto} variant="inset" from="left" innerScale={1.12}>
+        <div className={s.platesPhoto} data-rv="rv">
           <Photo img={IMGS.charcuterie} sizes="(max-width: 900px) 92vw, 52vw" quality={1000} className={s.cover} />
-        </ClipReveal>
+        </div>
         <div className={s.platesCopy}>
           <p className={s.kicker}>Món nhắm</p>
-          <h2 id="rv-plates-h" className={s.h2}>Vài đĩa nhỏ cho bàn vang</h2>
+          <h2 id="rv-plates-h" className={s.h2} data-rv="rv">Đồ nhắm và khay charcuterie cho bàn vang.</h2>
           <p className={s.mutedP}>Đĩa chia sẻ, ra từng đợt để bạn nhấp vang chậm. Giá tham khảo, có thể đổi theo mùa nguyên liệu.</p>
           <ul className={s.plateList}>
             {PLATES.map((p) => (
               <li key={p.name} data-rv="rv">
                 <div className={s.plateTop}><h3 className={s.h3}>{p.name}</h3><span className={s.dots} aria-hidden="true" /><span className={s.price}>{vnd(p.price)}</span></div>
                 <p>{p.desc} <em>{p.with}.</em></p>
+              </li>
+            ))}
+          </ul>
+          <h3 className={`${s.h3} ${s.boardH}`}>Khay charcuterie chia sẻ</h3>
+          <ul className={s.plateList}>
+            {BOARDS.map((b) => (
+              <li key={b.name} data-rv="rv">
+                <div className={s.plateTop}><h4 className={s.h3}>{b.name}</h4><span className={s.dots} aria-hidden="true" /><span className={s.price}>{vnd(b.price)}</span></div>
+                <p>{b.desc}</p>
               </li>
             ))}
           </ul>
@@ -145,7 +155,7 @@ export function Cellar() {
       <div className={s.wrap}>
         <header className={s.secHead}>
           <p className={s.kicker}>Căn phòng</p>
-          <SplitWords as="h2" className={s.h2} trigger="view">Hầm nhỏ, bàn gỗ, vài ngọn nến.</SplitWords>
+          <h2 className={s.h2} data-rv="rv">Hầm nhỏ, bàn gỗ, vài ngọn nến.</h2>
                     <p className={s.mutedP}>Kéo ngang để xem; đèn trong phòng đủ dịu để nhìn rõ màu vang và đủ tối để nói chuyện.</p>
         </header>
       </div>
@@ -160,13 +170,71 @@ export function Cellar() {
   );
 }
 
-const FAQ: [string, string][] = [
-  ["Mình không rành về vang, có hợp không?", "Rất hợp. Bạn chỉ cần nói món và dịp, hoặc dùng công cụ Chọn vang ở trên để ra ba gợi ý theo phong cách. Nhân viên sẽ giải thích ngắn gọn, không dùng thuật ngữ."],
-  ["Có đồ uống không cồn không?", "Có. Danh sách không cồn gồm nước ép, trà lạnh và soda tự pha; bạn có thể gọi cùng bàn vang."],
-  ["Nhóm đông có đặt được không?", "Bàn nhận đến 12 khách qua tóm tắt đặt bàn. Nhóm đông hơn, hãy ghi rõ số người và dịp trong form tư vấn."],
-  ["Có bán theo ly không?", "Phần lớn vang đỏ, trắng, hồng và sủi có giá theo ly. Một số chai ủ lâu chỉ bán nguyên chai."],
-  ["Đặt bàn có mất phí không?", "Tóm tắt trên trang chỉ giúp bạn chuẩn bị thông tin; yêu cầu thật được gửi qua form tư vấn của website."],
-];
+export function Events() {
+  return (
+    <section className={s.events} id="su-kien" aria-labelledby="rv-events-h">
+      <div className={s.wrap}>
+        <header className={s.secHead}>
+          <p className={s.kicker}>Bàn nhóm và sự kiện</p>
+          <h2 id="rv-events-h" className={s.h2} data-rv="rv">Đi đông, ngồi lâu, hoặc đến thử vang.</h2>
+          <p className={s.mutedP}>Mức chi tối thiểu và cọc dưới đây là mức tham khảo của quán; số liệu chốt khi bạn đặt bàn.</p>
+        </header>
+        <ul className={s.eventGrid}>
+          {EVENTS.map((e) => (
+            <li key={e.t} className={s.event} data-rv="rv">
+              <h3 className={s.h3}>{e.t}</h3>
+              <p>{e.d}</p>
+              <ul className={s.eventMeta}>{e.meta.map((m) => <li key={m}>{m}</li>)}</ul>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+export function Takeaway() {
+  return (
+    <section className={s.takeaway} id="mang-ve" aria-labelledby="rv-take-h">
+      <div className={s.wrap}>
+        <header className={s.secHead}>
+          <p className={s.kicker}>Mua mang về và quà tặng</p>
+          <h2 id="rv-take-h" className={s.h2} data-rv="rv">Một chai ngon thì nên mang về.</h2>
+        </header>
+        <ul className={s.takeGrid}>
+          {TAKEAWAY.map((t) => (
+            <li key={t.t} className={s.take} data-rv="rv">
+              <h3 className={s.h3}>{t.t}</h3>
+              <p>{t.d}</p>
+              <p className={s.takePrice}>{t.price}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+export function Rules() {
+  return (
+    <section className={s.rules} id="quy-dinh" aria-labelledby="rv-rules-h">
+      <div className={s.wrap}>
+        <header className={s.secHead}>
+          <p className={s.kicker}>Quy định của quán</p>
+          <h2 id="rv-rules-h" className={s.h2} data-rv="rv">Dành cho khách từ 18 tuổi.</h2>
+        </header>
+        <ul className={s.ruleGrid}>
+          {RULES.map((r) => (
+            <li key={r.t} data-rv="rv">
+              <h3 className={s.h3}>{r.t}</h3>
+              <p>{r.d}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
 
 export function Faq() {
   return (
@@ -175,7 +243,7 @@ export function Faq() {
         <div className={s.faqGrid}>
           <header>
             <p className={s.kicker}>Hỏi nhanh</p>
-            <h2 id="rv-faq-h" className={s.h2}>Trước khi ghé</h2>
+            <h2 id="rv-faq-h" className={s.h2} data-rv="rv">Trước khi ghé</h2>
           </header>
           <div className={s.faqList}>
             {FAQ.map(([q, a]) => (
@@ -203,17 +271,21 @@ export function Footer() {
           <div>
             <Logo />
             <p className={s.footLine}>Chậm lại một ly vang.</p>
-            <p className={s.footSmall}>Wine bar · Đà Nẵng</p>
+            <p className={s.footSmall}>Wine bar · Quận Ngũ Hành Sơn, Đà Nẵng</p>
           </div>
           <nav aria-label="Chân trang" className={s.footNav}>
             <a href="#thuc-don">Thực đơn</a>
-            <a href="#chon-vang">Chọn vang</a>
+            <a href="#thu-ruou">Set thử rượu</a>
             <a href="#mon-nham">Món nhắm</a>
-            <a href="#can-ham">Căn phòng</a>
+            <a href="#gio-mo-cua">Giờ mở cửa</a>
+            <a href="#su-kien">Bàn nhóm, sự kiện</a>
+            <a href="#mang-ve">Mang về, quà tặng</a>
+            <a href="#quy-dinh">Quy định</a>
             <a href="#dat-ban">Đặt bàn</a>
             <a href="#hoi-dap">Hỏi đáp</a>
           </nav>
           <div className={s.footSmall}>
+            <p>Mở 17:00 – 23:00, cuối tuần đến 24:00</p>
             <p>chao@mocvang.example</p>
             <p>Dành cho khách từ 18 tuổi. Hãy thưởng thức có trách nhiệm và không lái xe sau khi uống.</p>
           </div>

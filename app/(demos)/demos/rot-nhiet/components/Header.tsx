@@ -6,11 +6,11 @@ import { useTray } from "./TrayProvider";
 
 const LINKS = [
   { href: "#menu", label: "Menu" },
-  { href: "#tim-gu", label: "Tìm gu" },
   { href: "#hat-ca-phe", label: "Hạt cà phê" },
-  { href: "#rang-pha", label: "Rang & pha" },
-  { href: "#cau-chuyen", label: "Câu chuyện" },
-  { href: "#faq", label: "Hỏi đáp" },
+  { href: "#do-rang", label: "Độ rang" },
+  { href: "#cach-pha", label: "Cách pha" },
+  { href: "#quan", label: "Quán" },
+  { href: "#ban-buon", label: "Bán buôn" },
 ];
 const LOGO = "/images/demos/rot-nhiet/identity/logo-horizontal.svg";
 
@@ -28,7 +28,7 @@ export function Header({ consultHref }: { consultHref: string }) {
           {LINKS.map((l) => <a key={l.href} className={styles.navLink} href={l.href}>{l.label}</a>)}
         </nav>
         <div className={styles.headerActions}>
-          <a className={`${styles.btn} ${styles.btnPrimary} ${styles.consultLink}`} href={consultHref}>Làm web như thế này</a>
+          <a className={`${styles.btn} ${styles.btnPrimary} ${styles.consultLink}`} href={consultHref}>Đăng ký bán buôn</a>
           <button type="button" className={styles.trayBtn} onClick={openTray} aria-haspopup="dialog">
             Khay<span className={styles.trayCount} aria-label={`${count} ly trong khay`}>{count}</span>
           </button>
@@ -39,7 +39,7 @@ export function Header({ consultHref }: { consultHref: string }) {
       </div>
       <nav id="rn-mobile-nav" className={styles.mobileNav} data-open={nav} aria-label="Điều hướng di động">
         {LINKS.map((l) => <a key={l.href} href={l.href} onClick={() => setNav(false)} tabIndex={nav ? 0 : -1}>{l.label}</a>)}
-        <a href={consultHref} tabIndex={nav ? 0 : -1}>Làm web như thế này</a>
+        <a href={consultHref} tabIndex={nav ? 0 : -1}>Đăng ký bán buôn</a>
       </nav>
     </header>
   );

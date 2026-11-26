@@ -4,6 +4,6 @@ export const meta = {
   brand: "Gương Phẩm",
   industry: "Car detailing",
   solutionSlug: "sme-ops",
-  tagline: "Chăm sóc xe hơi chuẩn chi tiết ở Đà Nẵng",
+  tagline: "Cửa hàng chăm sóc xe hơi ở Ngũ Hành Sơn: rửa chi tiết, đánh bóng, phủ ceramic",
   look: "Carbon & chrome: đen sợi carbon #0c0d0f, bạc chrome #c9ced6, đỏ #e10600 điểm nhấn nhỏ; vệt sáng quét, bụi bẩn tan theo cuộn, slider lớp phủ và bộ chọn gói theo dòng xe",
 } as const;

@@ -1,7 +1,10 @@
 import { siteConfig } from "@/lib/site";
 import { buildConsultHref } from "@/features/showroom/consultation";
+import { ClipReveal } from "@/features/showroom/effects";
 import s from "../brand.module.css";
 import { Photo } from "./Photo";
+import { Embers } from "./Embers";
+import { FAQ, POLICIES } from "../data/restaurant";
 
 export function Journey() {
   const steps = [
@@ -11,16 +14,17 @@ export function Journey() {
   ];
   return (
     <section id="tu-ben-toi-ban" className={`${s.section} ${s.journey} ${s.noPrint}`} aria-labelledby="journey-h">
-      <div className={s.wrap}>
+      <Embers />
+      <div className={`${s.wrap} ${s.above}`}>
         <div className={s.secHead} data-bv="reveal">
-          <span className={s.eyebrow}>Từ bến tới bàn</span>
-          <h2 id="journey-h" className={`${s.display} ${s.h2}`}>Ba chặng ngắn, <span className={s.italic}>một vị tươi</span></h2>
-          <p className={s.lead}>Bến Vị theo một ý đơn giản: càng ít chặng trung gian, hải sản càng giữ được vị biển.</p>
+          <span className={s.eyebrow}>Nguồn hải sản</span>
+          <h2 id="journey-h" className={`${s.display} ${s.h2}`}>Từ bến tới bàn, <span className={s.italic}>qua bếp lửa</span></h2>
+          <p className={s.lead}>Hải sản về theo từng chuyến thuyền nhỏ, nằm ở quầy đá trong ngày và lên bếp than khi bạn gọi. Càng ít chặng trung gian, vị biển càng còn nguyên.</p>
         </div>
         <ol className={s.arches}>
           {steps.map((st) => (
             <li key={st.n} className={s.arch} data-bv="reveal">
-              <div className={s.archImg}><Photo file={st.file} alt={st.alt} sizes="(max-width: 960px) 90vw, 30vw" pos={st.pos} /></div>
+              <ClipReveal className={s.archImg} from="bottom" duration={1.2}><Photo file={st.file} alt={st.alt} sizes="(max-width: 960px) 90vw, 30vw" pos={st.pos} /></ClipReveal>
               <p className={s.archNo}>{st.n}</p>
               <h3>{st.h}</h3>
               <span className={s.rule} data-bv="rule" aria-hidden="true" />
@@ -39,33 +43,41 @@ export function Space() {
       <div className={s.wrap}>
         <div className={s.secHead} data-bv="reveal">
           <span className={s.eyebrow}>Không gian bàn tiệc</span>
-          <h2 id="space-h" className={`${s.display} ${s.h2}`}>Gỗ tối, gốm thủ công, <span className={s.italic}>tiếng lửa tí tách</span></h2>
-          <p className={s.lead}>Bàn dài cho nhóm đông, quầy bếp lửa cho hai ba người, sảnh hướng biển cho buổi chiều tà. Đĩa gốm để nổi bật màu của món, ánh đèn vàng ấm để mọi người ngồi lại lâu hơn.</p>
+          <h2 id="space-h" className={`${s.display} ${s.h2}`}>Sảnh biển, bếp lửa, <span className={s.italic}>và phòng riêng</span></h2>
+          <p className={s.lead}>Bốn khu vực chỗ ngồi: sảnh hướng biển, sân vườn, quầy bếp lửa và phòng riêng. Bàn gỗ dài cho nhóm đông, đèn vàng ấm, đĩa gốm để nổi màu của món.</p>
         </div>
         <div className={s.mosaic}>
-          <figure className={`${s.tile} ${s.t1}`} data-bv="tile"><Photo file="ban-tiec-go" alt="Bàn gỗ nhìn từ trên, nhiều đĩa hải sản và ly đồ uống" sizes="(max-width: 960px) 96vw, 54vw" pos="50% 55%" /><figcaption className={s.tcap}>Bàn tiệc</figcaption></figure>
-          <figure className={`${s.tile} ${s.t2}`} data-bv="tile"><Photo file="hau-da-lanh" alt="Hàu mở vỏ xếp trên đá lạnh" sizes="(max-width: 960px) 46vw, 30vw" pos="50% 45%" /></figure>
-          <figure className={`${s.tile} ${s.t3}`} data-bv="tile"><Photo file="xien-nuong" alt="Xiên hải sản nướng trên đĩa trắng cùng chén nước chấm" sizes="(max-width: 960px) 46vw, 30vw" pos="50% 25%" /><figcaption className={s.tcap}>Nướng than</figcaption></figure>
-          <figure className={`${s.tile} ${s.t4}`} data-bv="tile"><Photo file="nghe-so" alt="Nghêu tươi xếp dày, vỏ nâu xám" sizes="(max-width: 960px) 46vw, 26vw" /></figure>
-          <figure className={`${s.tile} ${s.t5}`} data-bv="tile"><Photo file="tom-sot" alt="Tôm sốt cam trên đĩa gốm đen, đũa đang gắp" sizes="(max-width: 960px) 46vw, 20vw" pos="62% 50%" /></figure>
+          <ClipReveal as="figure" className={`${s.tile} ${s.t1}`}><Photo file="ban-tiec-go" alt="Bàn gỗ nhìn từ trên, nhiều đĩa hải sản và ly đồ uống" sizes="(max-width: 960px) 96vw, 54vw" pos="50% 55%" /><figcaption className={s.tcap}>Bàn tiệc</figcaption></ClipReveal>
+          <ClipReveal as="figure" className={`${s.tile} ${s.t2}`}><Photo file="hau-da-lanh" alt="Hàu mở vỏ xếp trên đá lạnh" sizes="(max-width: 960px) 46vw, 30vw" pos="50% 45%" /></ClipReveal>
+          <ClipReveal as="figure" className={`${s.tile} ${s.t3}`}><Photo file="xien-nuong" alt="Xiên hải sản nướng trên đĩa trắng cùng chén nước chấm" sizes="(max-width: 960px) 46vw, 30vw" pos="50% 25%" /><figcaption className={s.tcap}>Nướng than</figcaption></ClipReveal>
+          <ClipReveal as="figure" className={`${s.tile} ${s.t4}`}><Photo file="nghe-so" alt="Nghêu tươi xếp dày, vỏ nâu xám" sizes="(max-width: 960px) 46vw, 26vw" /></ClipReveal>
+          <ClipReveal as="figure" className={`${s.tile} ${s.t5}`}><Photo file="tom-sot" alt="Tôm sốt cam trên đĩa gốm đen, đũa đang gắp" sizes="(max-width: 960px) 46vw, 20vw" pos="62% 50%" /></ClipReveal>
         </div>
         <dl className={s.facts} data-bv="reveal">
           <div><dt><b>Sảnh biển</b></dt><dd><span>Bàn nhìn ra mặt nước, hợp nhóm 2 đến 8 khách.</span></dd></div>
           <div><dt><b>Quầy bếp lửa</b></dt><dd><span>Ngồi sát bếp than, tối đa 4 khách mỗi lượt.</span></dd></div>
-          <div><dt><b>Phòng riêng</b></dt><dd><span>Bàn tròn xoay cho 6 đến 12 khách, đặt trước.</span></dd></div>
+          <div><dt><b>Phòng riêng</b></dt><dd><span>Bàn tròn xoay cho 6 đến 12 khách, có màn hình trình chiếu, đặt trước và chốt thực đơn trước 1 ngày.</span></dd></div>
         </dl>
       </div>
     </section>
   );
 }
 
-const FAQ = [
-  ["Giá trên trang có cố định không?", "Giá trên trang là giá tham khảo và thay đổi theo ngày, chưa gồm thuế và phí phục vụ. Giá chính thức được xác nhận khi bạn gọi món."],
-  ["Bộ ghép thực đơn tính thế nào?", "Công cụ chọn số món chính theo số khách, thêm một món rau, một món khai vị, và từ 4 khách thì thêm cơm hoặc lẩu. Món hợp khẩu vị bạn chọn được ưu tiên, tổng luôn nằm trong ngân sách đã đặt. Kết quả chỉ là gợi ý để tham khảo."],
-  ["Đặt bàn ở đây có giữ chỗ ngay không?", "Chưa. Phần đặt bàn chỉ tạo phiếu tóm tắt trên trình duyệt, không gửi đi đâu và không lưu thông tin cá nhân. Bàn chỉ được giữ khi nhà hàng xác nhận."],
-  ["Tôi dị ứng hải sản vỏ cứng thì sao?", "Hãy bật tuỳ chọn tránh tôm cua ghẹ và nghêu sò ốc trong bộ ghép thực đơn. Bạn nên báo dị ứng cho nhân viên khi đặt bàn."],
-  ["Một website như thế này làm trong bao lâu?", "Tuỳ phạm vi, thường vài tuần cho phần thiết kế, nội dung và tích hợp đặt bàn thật. Bạn có thể gửi yêu cầu tư vấn để nhận đề xuất theo ngành của mình."],
-] as const;
+export function Policies() {
+  return (
+    <section id="chinh-sach" className={`${s.section} ${s.policy} ${s.noPrint}`} aria-labelledby="pol-h">
+      <div className={s.wrap}>
+        <div className={s.secHead} data-bv="reveal">
+          <span className={s.eyebrow}>Chính sách</span>
+          <h2 id="pol-h" className={`${s.display} ${s.h2}`}>Những điều <span className={s.italic}>nên biết trước</span></h2>
+        </div>
+        <dl className={s.polGrid} data-bv="reveal">
+          {POLICIES.map((p) => (<div key={p.h}><dt>{p.h}</dt><dd>{p.p}</dd></div>))}
+        </dl>
+      </div>
+    </section>
+  );
+}
 
 export function Faq() {
   return (
@@ -73,7 +85,7 @@ export function Faq() {
       <div className={s.wrap}>
         <div className={s.secHead} data-bv="reveal">
           <span className={s.eyebrow}>Hỏi đáp</span>
-          <h2 id="faq-h" className={`${s.display} ${s.h2}`}>Trước khi <span className={s.italic}>ngồi vào bàn</span></h2>
+          <h2 id="faq-h" className={`${s.display} ${s.h2}`}>Câu hỏi <span className={s.italic}>thường gặp</span></h2>
         </div>
         <div className={s.faqList} data-bv="reveal">
           {FAQ.map(([q, a]) => <details key={q}><summary>{q}</summary><p>{a}</p></details>)}
@@ -87,11 +99,13 @@ export function Closing() {
   return (
     <section className={`${s.closing} ${s.noPrint}`} aria-labelledby="close-h">
       <div className={s.wrap}>
-        <span className={s.eyebrow}>Bạn cũng có nhà hàng?</span>
-        <h2 id="close-h" className={`${s.display} ${s.h2}`}>Một website khiến người ta <span className={s.italic}>thèm đặt bàn</span></h2>
-        <p className={s.lead}>Ảnh món, thực đơn tương tác và đặt bàn nằm chung một trải nghiệm. Gửi yêu cầu để làm bản dành riêng cho nhà hàng của bạn.</p>
+        <span className={s.eyebrow}>Quận Sơn Trà, Đà Nẵng</span>
+        <h2 id="close-h" className={`${s.display} ${s.h2}`}>Một bàn nhìn ra biển <span className={s.italic}>đang chờ bạn</span></h2>
+        <p className={s.lead}>Phục vụ trưa và tối mỗi ngày. Đặt bàn trước nếu đi nhóm từ 6 người, và báo dị ứng khi đặt để bếp chuẩn bị.</p>
         <div className={s.heroCtas}>
-          <a className={`${s.btn} ${s.btnGold}`} href={buildConsultHref("ben-vi")}>Nhận tư vấn website nhà hàng</a>
+          <a className={`${s.btn} ${s.btnGold}`} href="#dat-ban">Đặt bàn</a>
+          <a className={`${s.btn} ${s.btnLine}`} href="#thuc-don">Xem thực đơn</a>
+          <a className={`${s.btn} ${s.btnLine}`} href={buildConsultHref("ben-vi")}>Chuyển sang form liên hệ</a>
         </div>
       </div>
     </section>
@@ -106,22 +120,24 @@ export function Footer() {
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/images/demos/ben-vi/identity/logo-reversed.svg" alt="Bến Vị" width={273} height={52} />
-            <p>Vị biển, trọn cuộc vui.<br />Hải sản tươi, nướng lửa, ven biển Đà Nẵng.</p>
+            <p>Vị biển, trọn cuộc vui.<br />Nhà hàng hải sản ven biển, Quận Sơn Trà, Đà Nẵng.</p>
           </div>
           <div>
             <h4>Trang</h4>
             <ul>
-              <li><a href="#tu-ben-toi-ban">Từ bến tới bàn</a></li>
-              <li><a href="#mon-noi-bat">Món nổi bật</a></li>
-              <li><a href="#ghep-thuc-don">Ghép thực đơn</a></li>
+              <li><a href="#quay-hai-san">Quầy hải sản</a></li>
+              <li><a href="#thuc-don">Thực đơn</a></li>
+              <li><a href="#set-tiec">Set theo số người</a></li>
               <li><a href="#dat-ban">Đặt bàn</a></li>
+              <li><a href="#chinh-sach">Chính sách</a></li>
             </ul>
           </div>
           <div>
             <h4>Nhà hàng</h4>
             <ul>
-              <li>Ven biển Đà Nẵng</li>
-              <li>Phục vụ trưa và tối</li>
+              <li>Quận Sơn Trà, Đà Nẵng</li>
+              <li>Mở cửa 10:00 đến 22:00 mỗi ngày</li>
+              <li>Đặt bàn: 0236 000 0000</li>
               <li>xinchao@benvi.example</li>
             </ul>
           </div>

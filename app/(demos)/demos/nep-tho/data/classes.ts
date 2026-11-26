@@ -23,12 +23,13 @@ export const CLASSES: StudioClass[] = [
 ];
 
 export const INSTRUCTORS: { id: InstructorId; name: string; role: string; bio: string }[] = [
-  { id: "an", name: "An", role: "Reformer Pilates", bio: "Phong cách hướng dẫn có nhịp rõ ràng, chú ý cách làm quen với thiết bị." },
-  { id: "may", name: "Mây", role: "Yoga", bio: "Phong cách dẫn lớp nhẹ nhàng, dành thời gian cho từng chuyển động." },
-  { id: "lam", name: "Lam", role: "Mat Pilates & Yoga", bio: "Phong cách hướng dẫn gần gũi, tập trung vào những lựa chọn động tác khác nhau." },
+  { id: "an", name: "Reformer", role: "Huấn luyện viên Reformer Pilates", bio: "Dẫn các lớp trên máy Reformer: hướng dẫn làm quen thiết bị, chỉnh lò xo theo từng người, nhịp lớp rõ ràng." },
+  { id: "may", name: "Yoga", role: "Huấn luyện viên Yoga", bio: "Dẫn Yoga Nền tảng, Yoga Chậm và Yoga Flow: nhịp nhẹ nhàng, dành thời gian cho từng chuyển động và hơi thở." },
+  { id: "lam", name: "Mat & Yoga", role: "Huấn luyện viên Mat Pilates và Yoga", bio: "Dẫn Mat Pilates và một số lớp Yoga: gợi ý nhiều lựa chọn động tác để mỗi người tập vừa sức." },
 ];
-
 export const SLOTS = ["06:30", "09:00", "12:15", "18:00", "19:15"] as const;
+/** Nhóm giờ cho bộ lọc theo khung giờ: chỉ xem buổi bắt đầu từ mốc đã chọn. */
+export const TIME_MARKS = ["Cả ngày", ...SLOTS] as const;
 export const DAYS = ["T2", "T3", "T4", "T5", "T6", "T7", "CN"] as const;
 export const DAY_LONG = ["Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy", "Chủ nhật"] as const;
 
@@ -78,7 +79,7 @@ export const endTime = (time: string, minutes: number) => {
 };
 
 export const PLANS = [
-  { id: "P01", name: "Nhịp đầu", note: "Một lần trải nghiệm", price: 250000, sessions: "1 buổi tập", per: null as number | null, lines: ["Reformer, Mat hoặc Yoga", "Dùng trong 14 ngày", "Chọn lớp còn chỗ"], featured: false },
+  { id: "P01", name: "Nhịp đầu", note: "Buổi tập thử", price: 250000, sessions: "1 buổi tập", per: null as number | null, lines: ["Reformer, Mat hoặc Yoga", "Dùng trong 14 ngày", "Chọn lớp còn chỗ"], featured: false },
   { id: "P02", name: "Nhịp đều", note: "Lịch tập linh hoạt", price: 1600000, sessions: "8 buổi tập", per: 200000, lines: ["Tất cả lớp nhóm", "Dùng trong 30 ngày", "Không tự động gia hạn"], featured: true },
   { id: "P03", name: "Nhịp riêng", note: "Nhiều thời gian hơn", price: 2800000, sessions: "16 buổi tập", per: 175000, lines: ["Tất cả lớp nhóm", "Dùng trong 60 ngày", "Không tự động gia hạn"], featured: false },
 ];

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ClipReveal, ScrollScrubText, SplitWords, TiltCard, VelocityMarquee } from "@/features/showroom/effects";
+import { ScrollScrubText, TiltCard, VelocityMarquee } from "@/features/showroom/effects";
 import { siteConfig } from "@/lib/site";
 import s from "../brand.module.css";
 import { DRINKS, SIGNATURES, vnd } from "../data/menu";
@@ -10,16 +10,16 @@ import { Logo } from "./Header";
 export function Band() {
   return (
     <section className={s.band} id="nhip" aria-label="Khẩu hiệu">
-      <VelocityMarquee mode="velocity" speed={55} boost={1.4} gap="2.5rem" className={s.mq1} pauseOnHover={false} label="Uống chậm, đèn lên, thành phố dưới chân">
-        {["Uống chậm", "Đèn lên", "Thành phố dưới chân", "Một ly vừa gu"].map((t, i) => (
+      <VelocityMarquee mode="velocity" speed={55} boost={1.4} gap="2.5rem" className={s.mq1} pauseOnHover={false} label="Mở cửa 17:00 đến 00:00, happy hour 17:00 đến 19:00">
+        {["Mở 17:00–00:00", "Happy hour 17:00–19:00", "Sân thượng 90 chỗ", "Từ 18 tuổi"].map((t, i) => (
           <span key={i} className={s.mqItem}>
             <span className={s.mqText}>{t}</span>
             <i className={s.mqStar} aria-hidden="true">✦</i>
           </span>
         ))}
       </VelocityMarquee>
-      <VelocityMarquee mode="velocity" speed={40} direction={-1} boost={1.1} reverseOnScrollUp gap="2.5rem" className={s.mq2} pauseOnHover={false} label="Cocktail, mocktail, món nhắm, rooftop">
-        {["Cocktail", "Không cồn", "Món nhắm", "Rooftop", "Neon"].map((t, i) => (
+      <VelocityMarquee mode="velocity" speed={40} direction={-1} boost={1.1} reverseOnScrollUp gap="2.5rem" className={s.mq2} pauseOnHover={false} label="Cocktail, mocktail, món nhắm, đặt bàn nhóm">
+        {["Cocktail", "Không cồn", "Món nhắm", "Bàn nhóm", "Sự kiện riêng"].map((t, i) => (
           <span key={i} className={s.mqItem}>
             <span className={s.mqTextSolid}>{t}</span>
             <i className={s.mqStarC} aria-hidden="true">●</i>
@@ -32,26 +32,26 @@ export function Band() {
 
 export function Manifesto() {
   return (
-    <section className={s.manifesto} aria-label="Tinh thần Tầng Mây">
+    <section className={s.manifesto} aria-label="Giới thiệu Tầng Mây">
       <div className={s.wrap}>
         <div className={s.manGrid}>
           <div className={s.manText}>
-            <p className={s.kicker}>Trên cả thường ngày</p>
-            <SplitWords as="h2" className={s.h2} trigger="view">Thành phố dưới chân. Cảm hứng trên cao.</SplitWords>
+            <p className={s.kicker}>Về Tầng Mây</p>
+            <h2 className={s.h2} data-tm="lit">Quán bar trên tầng thượng, cách bờ biển Sơn Trà vài phút đi bộ</h2>
             <ScrollScrubText className={s.scrub} dim={0.22}>
-              Có những buổi tối chẳng cần kế hoạch cầu kỳ. Chỉ cần một góc ngồi dễ chịu, một ly hợp vị và vài giai điệu đúng tâm trạng. Tầng Mây là lời mời tạm rời bộn bề, nhìn Đà Nẵng từ một góc khác và dành thời gian cho chính mình.
+              Tầng Mây có bốn khu ngồi, khoảng 90 chỗ, một quầy bar tám ghế và bảng thực đơn gần hai mươi ly, từ cocktail signature, cổ điển đến mocktail. Quán mở từ 17:00 để kịp hoàng hôn, nhạc đổi theo giờ, và nhận cả bàn nhóm lẫn tiệc riêng.
             </ScrollScrubText>
             <ul className={s.triad}>
-              <li><b>Tầm nhìn</b><span>Ngắm nhịp thành phố từ mái nhà.</span></li>
-              <li><b>Hương vị</b><span>Từng lớp vị trong mỗi ly.</span></li>
-              <li><b>Âm thanh</b><span>Nhạc đổi theo tinh thần buổi tối.</span></li>
+              <li><b>Khu ngồi</b><span>Sân thượng, Hiên kính, Quầy bar, Góc neon.</span></li>
+              <li><b>Thực đơn</b><span>14 cocktail, 5 mocktail, 6 món nhắm.</span></li>
+              <li><b>Âm nhạc</b><span>Lounge đầu giờ, house và dance về khuya.</span></li>
             </ul>
           </div>
           <div className={s.manPhoto}>
-            <ClipReveal variant="inset" from="bottom" className={s.manClip}>
+            <div className={s.manClip}>
               <Photo img={IMGS.city} sizes="(max-width: 900px) 92vw, 44vw" className={s.cover} />
-            </ClipReveal>
-            <span className={s.chipNeon} aria-hidden="true">Thành phố lên đèn</span>
+            </div>
+            <span className={s.chipNeon} aria-hidden="true">Sơn Trà về đêm</span>
           </div>
         </div>
       </div>
@@ -67,13 +67,13 @@ export function Pour() {
     { t: "Lên đèn", d: "Thêm lát cam, hơi khói hoặc bọt mịn, rồi mang ra mái nhà." },
   ];
   return (
-    <section className={s.pour} data-tm="pour" aria-label="Cách một ly ra đời">
+    <section className={s.pour} data-tm="pour" aria-label="Cách một ly cocktail được rót">
       <div className={s.pourSticky}>
         <div className={s.wrap}>
           <div className={s.pourGrid}>
             <div className={s.pourCopy}>
-              <p className={s.kicker}>Cách một ly ra đời</p>
-              <SplitWords as="h2" className={s.h2} trigger="view">Mỗi ly rót theo nhịp thành phố</SplitWords>
+              <p className={s.kicker}>Ly signature</p>
+              <h2 className={s.h2} data-tm="lit">Ly cocktail được rót thế nào</h2>
               <ol className={s.steps}>
                 {steps.map((x, i) => (
                   <li key={x.t} data-tm="step" data-i={i} className={s.step}>
@@ -126,15 +126,15 @@ export function Signature() {
     <section className={s.sig} aria-label="Ba ly nên thử trước">
       <div className={s.wrap}>
         <header className={s.secHead}>
-          <p className={s.kicker}>Ba ly nên thử trước</p>
-          <SplitWords as="h2" className={s.h2} trigger="view">Ly của đêm</SplitWords>
+          <p className={s.kicker}>Ly của quầy</p>
+          <h2 className={s.h2} data-tm="lit">Ba ly signature nên thử trước</h2>
         </header>
         <ul className={s.sigGrid}>
           {SIGNATURES.map((g, i) => {
             const d = DRINKS.find((x) => x.id === g.id)!;
             const img = g.img === "smoke-red" ? IMGS.smokeRed : g.img === "pink-coupes" ? IMGS.coupes : IMGS.pourBlue;
             return (
-              <li key={g.id} data-tm="rv" className={`${s.sigItem} ${s[`sigItem${i}` as keyof typeof s]}`}>
+              <li key={g.id} data-tm="lit" className={`${s.sigItem} ${s[`sigItem${i}` as keyof typeof s]}`}>
                 <TiltCard className={`${s.sigCard} ${s[`tone_${d.tone}` as keyof typeof s]}`} max={7} glareColor="rgba(255,255,255,0.14)" scale={1.015}>
                   <div className={s.sigPhoto}>
                     <Photo img={img} sizes="(max-width: 900px) 90vw, 30vw" className={s.cover} />
@@ -165,14 +165,14 @@ export function Ingredients() {
     { img: IMGS.smokeCoupe, w: "Khói", t: "Một lớp thơm gỗ phủ lên mặt ly.", cls: s.ing3 },
   ];
   return (
-    <section className={s.ingr} aria-label="Nguyên liệu quầy bar">
+    <section className={s.ingr} aria-label="Nguyên liệu tại quầy bar">
       <div className={s.wrap}>
         <ul className={s.ingGrid}>
           {items.map((x) => (
-            <li key={x.w} data-tm="rv" className={`${s.ingItem} ${x.cls}`}>
-              <ClipReveal variant="inset" from="bottom" className={s.ingClip}>
+            <li key={x.w} data-tm="lit" className={`${s.ingItem} ${x.cls}`}>
+              <div className={s.ingClip}>
                 <Photo img={x.img} sizes="(max-width: 900px) 92vw, 33vw" className={s.cover} />
-              </ClipReveal>
+              </div>
               <div className={s.ingCap}><b>{x.w}</b><span>{x.t}</span></div>
             </li>
           ))}
@@ -184,23 +184,23 @@ export function Ingredients() {
 
 export function Rhythm() {
   const rows = [
-    ["Đầu tuần", "Hạ tốc", "Lofi, chill, cocktail nhẹ"],
-    ["Giữa tuần", "Tín hiệu retro", "Synth, funk, disco"],
-    ["Cuối tuần", "Đêm neon", "House, dance, đèn lên cao nhất"],
-    ["Chủ nhật", "Mây chậm", "Lounge, mellow, ly có khói"],
+    ["Thứ Hai – Thứ Tư", "Hạ tốc", "Lofi, chill, bossa. Phù hợp hẹn hò, trò chuyện."],
+    ["Thứ Năm", "Tín hiệu retro", "Synth, funk, disco. Bắt đầu đông khách sau 20:00."],
+    ["Thứ Sáu – Thứ Bảy", "Đêm neon", "House, dance, âm lượng cao nhất. Mở đến 01:00."],
+    ["Chủ nhật", "Mây chậm", "Lounge, mellow. Cuối tuần nhẹ nhàng, có ly khói."],
   ];
   return (
-    <section className={s.rhythm} id="nhip-tuan" aria-label="Nhịp tuần">
+    <section className={s.rhythm} id="nhip-tuan" aria-label="Nhạc theo ngày trong tuần">
       <div className={s.wrap}>
         <div className={s.rhythmGrid}>
           <header>
-            <p className={s.kicker}>Đêm có nhịp riêng</p>
-            <SplitWords as="h2" className={s.h2} trigger="view">Âm nhạc cũng có hương vị</SplitWords>
-            <p className={s.mutedP}>Có đêm cần giai điệu chậm, có đêm chỉ muốn nhún theo bass. Chủ đề dưới đây mang tính định hướng; chương trình cụ thể được cập nhật theo từng tuần.</p>
+            <p className={s.kicker}>Nhạc theo tuần</p>
+            <h2 className={s.h2} data-tm="lit">Mỗi ngày một thể loại nhạc</h2>
+            <p className={s.mutedP}>Nhạc do quầy chọn theo thể loại chung cho từng ngày, không bán vé và không thu phí vào cửa. Lịch chủ đề đặc biệt được cập nhật trên trang này trước một tuần.</p>
           </header>
           <ul className={s.rhythmList}>
             {rows.map((r, i) => (
-              <li key={r[0]} data-tm="rv" className={s.rhythmRow}>
+              <li key={r[0]} data-tm="lit" className={s.rhythmRow}>
                 <span className={s.rhythmNo}>0{i + 1}</span>
                 <span className={s.rhythmDay}>{r[0]}</span>
                 <b className={s.rhythmTheme}>{r[1]}</b>
@@ -215,13 +215,14 @@ export function Rhythm() {
 }
 
 const FAQ = [
-  ["Tầng Mây có nhận đặt bàn trước không?", "Có. Bạn chọn ngày, giờ, số khách và khu vực ở phần đặt bàn, rồi gửi bản tóm tắt qua form tư vấn để bên mình trao đổi về khả năng sắp xếp."],
-  ["Tôi có thể ghé mà không đặt bàn không?", "Bạn có thể ghé trực tiếp. Chỗ ngồi phụ thuộc vào tình trạng thực tế lúc bạn đến, nên đặt trước sẽ chắc chỗ hơn vào cuối tuần."],
-  ["Có đồ uống không cồn không?", "Có. Thực đơn có nhóm không cồn và bạn có thể chọn “Không cồn” trong phần chọn ly để nhận gợi ý riêng."],
-  ["Tôi chưa quen uống cocktail, nên chọn gì?", "Hãy thử phần chọn ly theo vị. Chỉ cần chọn vị bạn thích và mức mạnh nhẹ, ba gợi ý kèm lý do sẽ hiện ra."],
-  ["Giá trên website là giá cuối cùng à?", "Giá ghi là giá tham khảo. Bạn nên xác nhận thực đơn và giá tại thời điểm sử dụng dịch vụ."],
-  ["Nhóm đông người thì sao?", "Hãy ghi số khách khi gửi yêu cầu. Từ 9 khách trở lên, bên mình sẽ trao đổi riêng về cách sắp xếp chỗ."],
-  ["Độ tuổi khách được phục vụ?", "Dành cho khách từ 18 tuổi."],
+  ["Tầng Mây mở cửa lúc mấy giờ, có happy hour không?", "Quán mở từ 17:00 đến 00:00, thứ Sáu và thứ Bảy đến 01:00. Happy hour chạy 17:00–19:00 từ thứ Hai đến thứ Sáu: cocktail cổ điển đồng giá 110.000₫, mocktail giảm 20%."],
+  ["Có cần đặt bàn trước không?", "Ngày thường có thể ghé trực tiếp. Tối thứ Sáu, thứ Bảy và dịp lễ nên đặt trước, đặc biệt nếu muốn ngồi Sân thượng hoặc Góc neon. Bàn được giữ 15 phút."],
+  ["Nhóm đông hoặc tổ chức sinh nhật thì làm sao?", "Từ 9 khách trở lên, bên mình ghép bàn và báo mức chi tối thiểu. Tiệc 15 khách trở lên cần đặt cọc 30%, hoàn lại nếu báo huỷ trước 48 giờ. Xem phần Nhóm & sự kiện."],
+  ["Tôi không uống rượu thì gọi gì?", "Có năm mocktail từ 80.000₫ và sáu món nhắm. Có thể chọn nhóm Không cồn trong thực đơn hoặc dùng phần gợi ý theo vị."],
+  ["Trời mưa thì sao?", "Sân thượng đóng khi mưa, khách được chuyển vào Hiên kính có mái. Nếu đã đặt bàn Sân thượng, bên mình báo trước khi bạn đến."],
+  ["Trẻ em hoặc người dưới 18 tuổi có vào được không?", "Không. Quán dành cho khách từ 18 tuổi, và có thể yêu cầu xuất trình giấy tờ có ngày sinh."],
+  ["Có chỗ gửi xe và giá đã gồm VAT chưa?", "Có bãi gửi xe máy và ô tô của toà nhà. Giá trong thực đơn là giá tham khảo đã gồm VAT, chưa gồm phí phục vụ cho nhóm trên 12 khách."],
+  ["Dress code thế nào?", "Smart casual: gọn gàng, không áo ba lỗ, không cởi trần, không dép lê đi trong nhà."],
 ] as const;
 
 export function Faq() {
@@ -230,12 +231,12 @@ export function Faq() {
       <div className={s.wrap}>
         <div className={s.faqGrid}>
           <header>
-            <p className={s.kicker}>Hỏi nhanh</p>
-            <SplitWords as="h2" className={s.h2} trigger="view">Trước khi lên mái</SplitWords>
+            <p className={s.kicker}>Câu hỏi thường gặp</p>
+            <h2 className={s.h2} data-tm="lit">Hỏi nhanh trước khi lên tầng thượng</h2>
           </header>
           <div className={s.faqList}>
             {FAQ.map(([q, a]) => (
-              <details key={q} data-tm="rv" className={s.faqItem}>
+              <details key={q} data-tm="lit" className={s.faqItem}>
                 <summary>{q}<i aria-hidden="true" /></summary>
                 <p>{a}</p>
               </details>
@@ -257,19 +258,22 @@ export function Footer() {
           <div>
             <Logo />
             <p className={s.footLine}>Chạm tầng mây, chạm vị đêm.</p>
-            <p className={s.footSmall}>Rooftop · Cocktail · Đà Nẵng</p>
+            <p className={s.footSmall}>Rooftop bar &amp; cocktail · Quận Sơn Trà, Đà Nẵng</p>
           </div>
           <nav aria-label="Chân trang" className={s.footNav}>
             <a href="#thuc-don">Thực đơn</a>
-            <a href="#chon-ly">Chọn ly</a>
+            <a href="#happy-hour">Happy hour</a>
             <a href="#khong-gian">Không gian</a>
-            <a href="#nhip-tuan">Nhịp tuần</a>
+            <a href="#su-kien">Nhóm &amp; sự kiện</a>
+            <a href="#quy-dinh">Quy định</a>
             <a href="#dat-ban">Đặt bàn</a>
             <a href="#hoi-dap">Hỏi đáp</a>
+            <a href="#lien-he">Liên hệ</a>
           </nav>
           <div className={s.footSmall}>
             <p>hello@tangmay.example</p>
-            <p>Dành cho khách từ 18 tuổi.</p>
+            <p>0236 000 0000</p>
+            <p>Mở 17:00 – 00:00. Dành cho khách từ 18 tuổi.</p>
           </div>
         </div>
         <div className={s.footBase}>

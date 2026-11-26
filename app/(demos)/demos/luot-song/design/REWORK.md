@@ -1,0 +1,17 @@
+# REWORK — Ráng Sóng Surf Club (2026-11-25)
+(a) Đề tài trước: trang cảm hứng "chạm sóng, bắt nắng" (tuyên ngôn, khoá học chung chung, Lesson Planner chiếm vai trò chính); thiếu giá bao gồm gì, lịch học, quy định an toàn, chính sách dời lịch, đội ngũ. Hero là khẩu hiệu. Sau: website MỘT TRƯỜNG DẠY LƯỚT SÓNG ở bãi biển quận Sơn Trà, Đà Nẵng (buổi trải nghiệm 1 buổi, khoá 3/5/10 buổi, lớp trẻ em 6 đến 12 tuổi, thuê ván và đồ). Tên và nhận diện giữ nguyên.
+(b) Section thật của ngành: Hero (loại hình, khu vực, CTA Đặt buổi trải nghiệm, 3 sự thật: trải nghiệm từ 750.000 ₫, ba khung giờ 05:30/08:00/15:30, tối đa 6 học viên/HLV) · Băng dịch vụ · Về trường · Khoá học (6 thẻ: thời lượng, đối tượng, giá) · Một buổi học ~2 giờ (4 bước theo phút) · Lịch học theo khung giờ + lịch lớp thường kỳ · Giá, bao gồm/chưa gồm, thuê ván và đồ, đồ cần mang · Chọn khoá phù hợp (công cụ, chỉ một section) · Mùa sóng (mô tả chung, không dự báo) · Đội ngũ theo 4 vai trò · An toàn, quy định, ba mức cờ, chính sách dời lịch · Hỏi đáp (10) · Đặt lịch (4 bước, cọc một phần) · Footer.
+(c) Nội dung đổi: data/content.ts viết lại (khoá, bước, khung giờ, giá, thuê, gồm/không gồm, đội ngũ, quy tắc, cờ, chính sách, FAQ); lib/planner.ts đổi bậc buổi 1/3/5/10 và giá khớp bảng giá; Hero, Bands, About (thay Manifesto), Courses, Process, Schedule, Pricing, Crew, Safety mới; FinalCta thành đặt lịch. Liên hệ `.example`, 0236 000 0000, chỉ "quận Sơn Trà". Giá là giá tham khảo; không số học viên, năm kinh nghiệm, đánh giá, chứng nhận; quy định an toàn nói thận trọng, cờ là quy ước nội bộ không thay cảnh báo chính thức.
+(d) Hiệu ứng (ma trận thư viện): trước đại trà 8 (SplitWords, ClipReveal, ParallaxLayer, ScrollScrubText, VelocityMarquee, MagneticButton, SVGPathDraw, ScrollProgress) VƯỢT, chữ ký thư viện 3 | sau đại trà 2/2 (VelocityMarquee, ParallaxLayer), chữ ký thư viện 3 (ShineSweep, DraggableGallery, GrainOverlay). Bỏ: SplitWords (thành từ đẩy vào bờ riêng), ScrollScrubText, ClipReveal (8 chỗ, ảnh thành khung tĩnh), SVGPathDraw (đường sóng quy trình thành đồng hồ), MagneticButton (6 chỗ), ScrollProgress (vòng tiến độ).
+Chữ ký (thư viện 3 + riêng 8):
+- DraggableGallery / ShineSweep / GrainOverlay (thư viện): thẻ khoá học kéo ngang; nút đặt lịch; hạt film.
+- Wave SVG nhiều lớp phản ứng cuộn (components/Art.tsx WaveStack + Motion.tsx --rs-amp): biên độ sóng tăng theo vận tốc cuộn.
+- Ván lướt trượt theo đường sóng (components/Ride.tsx): getPointAtLength theo tiến độ cuộn hero.
+- Mặt trời lên theo cuộn + tem tròn quay (Art.tsx Sun/Sticker, brand.module.css): quay theo scrollY.
+- Chữ cong theo sóng (components/TextWave.tsx): textPath startOffset chạy theo cuộn.
+- Hero "sóng đẩy chữ vào bờ" (Hero.tsx Words + Motion.tsx): từng từ trượt ngang + nghiêng rồi về chỗ, thay SplitWords.
+- Đồng hồ buổi học (components/Process.tsx): cuộn qua 4 bước thì phao đồng hồ chạy 0 → 120 phút dọc đường sóng, bước tương ứng nổi lên.
+- Cung nắng chọn khung giờ (components/Schedule.tsx): chọn sáng sớm/sáng/chiều muộn thì mặt trời trượt dọc cung tới đúng giờ tập trung, bầu trời đổi màu, thẻ giờ đổi.
+- Ba cờ biển (components/Safety.tsx): cờ xanh/vàng/đỏ phấp phới, chọn cờ để xem biển ra sao, buổi học đổi thế nào, lịch xử lý ra sao.
+- Đồng hồ nước theo tháng (components/Seasons.tsx): mực nước và 12 tia nắng theo mức sóng thường gặp.
+Ngôn ngữ chuyển động chính: SÓNG và NẮNG TRƯỢT (sóng chạy ngang, mặt trời di chuyển theo cung, chữ trượt vào, phao chạy trên đường sóng) thay vì fade-up. Khác lan-bien (nổi lên từ nước), phuot-xe (cắt chéo), da-xanh.

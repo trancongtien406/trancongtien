@@ -4,6 +4,6 @@ export const meta = {
   brand: "Miên An Wellness",
   industry: "Spa",
   solutionSlug: "spa",
-  tagline: "Spa & wellness",
+  tagline: "Spa & massage trị liệu",
   look: "Organic luxury, khung vòm, nền kem và xanh rêu",
 } as const;

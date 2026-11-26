@@ -96,23 +96,20 @@
 .heroInner { position: relative; z-index: 2; padding-block: 56px 40px; pointer-events: none; }
 .heroInner > * { pointer-events: auto; }
 .heroSub { font-family: var(--dx-head); font-weight: 500; font-size: 13px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--dx-chrome); }
-.heroTitle { font-size: clamp(2.35rem, 6.4vw, 6.2rem); max-width: 13ch; }
+.heroTitle { font-size: clamp(2rem, 5vw, 4.9rem); max-width: 20ch; }
 .heroLead { max-width: 50ch; }
 .ctaRow { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
 .specBar { position: relative; z-index: 2; border-top: 1px solid var(--dx-line); background: rgba(12, 13, 15, 0.72); backdrop-filter: blur(8px); }
-.specGrid { display: grid; grid-template-columns: repeat(2, 1fr); }
+.specGrid { display: grid; grid-template-columns: 1fr; }
 .specCell { padding: 20px 0 22px; }
 .specCell + .specCell { border-left: 1px solid var(--dx-line); padding-left: 20px; }
-.specCell:nth-child(3) { border-left: 0; padding-left: 0; }
-.specCell:nth-child(n + 3) { border-top: 1px solid var(--dx-line); }
+.specCell + .specCell { border-left: 0; padding-left: 0; border-top: 1px solid var(--dx-line); }
 .specCell dt { font-family: var(--dx-head); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dx-mute); }
 .specCell dd { font-family: var(--dx-head); font-weight: 700; font-size: clamp(1.5rem, 3vw, 2.3rem); line-height: 1.2; margin-top: 4px; color: var(--dx-chrome-hi); font-variant-numeric: tabular-nums; }
 .specCell small { font-size: 0.5em; font-weight: 500; color: var(--dx-mute); letter-spacing: 0.08em; text-transform: uppercase; }
 @media (min-width: 860px) {
-  .specGrid { grid-template-columns: repeat(4, 1fr); }
-  .specCell:nth-child(3) { border-left: 1px solid var(--dx-line); padding-left: 24px; }
-  .specCell:nth-child(n + 3) { border-top: 0; }
-  .specCell + .specCell { padding-left: 24px; }
+  .specGrid { grid-template-columns: repeat(3, 1fr); }
+  .specCell + .specCell { border-top: 0; border-left: 1px solid var(--dx-line); padding-left: 24px; }
 }
 .streak { position: absolute; top: -20%; bottom: -20%; left: 0; width: 22%; pointer-events: none; mix-blend-mode: screen; opacity: 0; transform: translate3d(-140%, 0, 0) skewX(-18deg); background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.05) 30%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0.05) 70%, transparent 100%); filter: blur(10px); will-change: transform, opacity; }
 .hairRed { display: inline-block; width: 38px; height: 2px; background: var(--dx-red); vertical-align: middle; }
@@ -344,4 +341,37 @@
 @media (max-height: 700px) and (max-width: 899px) {
   .scrubFrame { height: 26svh; min-height: 150px; }
   .meter { display: none; }
+}
+
+/* ---------- đợt sửa 2026-11-25 */
+.specNote { color: var(--dx-mute); font-size: 14px; margin: 4px 0 0; }
+.priceWrap { margin-top: 36px; overflow-x: auto; }
+.priceTbl { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 640px; }
+.priceTbl caption { text-align: left; color: var(--dx-mute); font-size: 13px; padding-bottom: 10px; }
+.priceTbl th, .priceTbl td { padding: 16px 14px; border-top: 1px solid var(--dx-line); text-align: right; font-variant-numeric: tabular-nums; }
+.priceTbl thead th { font-family: var(--dx-head); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dx-chrome); font-weight: 600; }
+.priceTbl th:first-child { text-align: left; font-family: var(--dx-head); font-weight: 600; letter-spacing: 0.04em; }
+.priceTbl tbody tr:last-child th, .priceTbl tbody tr:last-child td { border-bottom: 1px solid var(--dx-line); }
+.priceTbl tbody td { color: var(--dx-chrome-hi); font-weight: 600; }
+.handover { border: 1px solid var(--dx-line2); padding: 26px 24px; align-self: start; background: var(--dx-panel); }
+.handover h3 { font-family: var(--dx-head); font-size: 1.1rem; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 14px; }
+.handover li, .careCol li { padding: 12px 0 12px 20px; border-top: 1px solid var(--dx-line); position: relative; color: var(--dx-mute); }
+.handover li::before, .careCol li::before { content: ""; position: absolute; left: 0; top: 22px; width: 8px; height: 2px; background: var(--dx-red); }
+.careGrid { display: grid; gap: 40px; margin-top: 40px; }
+.careCol h3 { font-family: var(--dx-head); font-size: 1.15rem; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 12px; }
+@media (min-width: 900px) { .careGrid { grid-template-columns: 1fr 1fr; gap: 72px; } }
+.policyGrid { display: grid; gap: 1px; margin-top: 40px; background: var(--dx-line); border: 1px solid var(--dx-line); }
+.policyItem { background: var(--dx-bg); padding: 26px 22px; }
+.policyItem h3 { font-family: var(--dx-head); font-size: 1.05rem; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 8px; }
+.policyItem p { color: var(--dx-mute); margin: 0; font-size: 15.5px; }
+@media (min-width: 720px) { .policyGrid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .policyGrid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 719px) {
+  .priceWrap { overflow: visible; }
+  .priceTbl { min-width: 0; }
+  .priceTbl thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .priceTbl tr { display: block; border-top: 1px solid var(--dx-line); padding: 10px 0; }
+  .priceTbl th, .priceTbl td { display: block; border: 0 !important; padding: 5px 0; text-align: left; }
+  .priceTbl td { display: flex; justify-content: space-between; gap: 12px; }
+  .priceTbl td::before { content: attr(data-l); color: var(--dx-mute); font-weight: 400; }
 }

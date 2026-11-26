@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import s from "../brand.module.css";
 
 const NAV = [
-  ["#dip", "Dịp"],
-  ["#vuon", "Khu vườn"],
-  ["#bo-hoa", "Bó hoa"],
-  ["#tay-nghe", "Tay nghề"],
+  ["#bang-gia", "Bảng giá"],
+  ["#dip", "Theo dịp"],
+  ["#cuoi-su-kien", "Cưới và sự kiện"],
+  ["#dinh-ky", "Định kỳ"],
   ["#hoi-dap", "Hỏi đáp"],
 ] as const;
 
@@ -46,7 +46,7 @@ export function Header() {
         </a>
         <nav className={`${s.nav} ${s.navRight}`} aria-label="Điều hướng phụ">
           {NAV.slice(3).map(([h, l]) => <a key={h} href={h}>{l}</a>)}
-          <a className={`${s.btn} ${s.btnVerm} ${s.btnSm}`} href="#bo-hoa">Dựng bó hoa</a>
+          <a className={`${s.btn} ${s.btnVerm} ${s.btnSm}`} href="#dat-hoa">Đặt hoa</a>
         </nav>
         <button ref={btn} type="button" className={s.menuBtn} aria-expanded={open} aria-controls="nr-menu" onClick={() => setOpen((v) => !v)}>
           <span className={s.menuIcon} aria-hidden="true" data-open={open ? "1" : "0"}><i /><i /></span>
@@ -55,7 +55,7 @@ export function Header() {
       </div>
       <div id="nr-menu" ref={panel} className={s.menuPanel} hidden={!open}>
         {NAV.map(([h, l]) => <a key={h} href={h} onClick={() => setOpen(false)}>{l}</a>)}
-        <a className={`${s.btn} ${s.btnVerm}`} href="#bo-hoa" onClick={() => setOpen(false)}>Dựng bó hoa</a>
+        <a className={`${s.btn} ${s.btnVerm}`} href="#dat-hoa" onClick={() => setOpen(false)}>Đặt hoa</a>
       </div>
     </header>
   );

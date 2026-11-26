@@ -14,3 +14,6 @@ Section (desktop 1440 / mobile 390):
 9. Hỏi đáp (mint), Kết (pink, chữ khổng lồ + confetti), Footer choco với kem chảy hồng ở mép trên.
 
 Hiệu ứng (>=6 có chủ đích): chữ nảy theo từ (riêng), cốm rơi + tương tác + confetti burst (riêng), kem chảy SVG (riêng), nhãn dán kéo/xoay/dán xuống (riêng), wobble hover có kiểm soát (riêng), TiltCard + glare, MagneticButton, ParallaxLayer, SlotText, VelocityMarquee (chữ và ảnh), StackingCards, ScrollScrubText, ClipReveal, bản vẽ bánh "thạch" khi đổi lựa chọn + nến nhấp nháy. Touch: tắt tilt/magnetic/repel; reduced-motion: không animation, nội dung đủ.
+
+## Cập nhật REWORK (2026-11-25)
+Xem `REWORK.md`. Thứ tự section: Hero (dải 3 sự thật), Tủ bánh 4 nhóm + lưới ảnh, Tủ kính xoay, Giờ ra lò, Bảng giá + cắt bánh, Dựng bánh, Thiệp & thổi nến, Bánh theo mùa, Đặt bánh 3 bước, Giao nhận & bảo quản, Một ngày ở tiệm, FAQ, Closing. Chuyển động chính: nảy (back.out/elastic). Mobile: cắt bánh lên trên bảng giá, tủ kính cao 270px, lưới ảnh 2 cột.

@@ -41,7 +41,34 @@ for (const w of [320, 390, 768, 1024, 1440]) {
     new PerformanceObserver((l) => l.getEntries().forEach((e) => { if (e.duration > 200) window.__ltc++; })).observe({ entryTypes: ["longtask"] });
   });
   const fx = await p.evaluate(() => [...new Set([...document.querySelectorAll("[data-fx]")].map((e) => e.dataset.fx))]);
-  for (const n of ["StickyChapters", "CanvasParticles", "VelocityMarquee", "SVGPathDraw", "DepthEngine", "ScrollScrubText", "MagneticButton", "CustomCursor", "water-hero", "water-chapter", "Counter"]) ok(fx.includes(n), `effect present: ${n}`);
+  for (const n of ["StickyChapters", "CanvasParticles", "SVGPathDraw", "DepthEngine", "CustomCursor", "water-hero", "water-chapter", "Counter", "DepartureBoard", "SeasonTide"]) ok(fx.includes(n), `effect present: ${n}`);
+  for (const n of ["VelocityMarquee", "ScrollScrubText", "MagneticButton"]) ok(!fx.includes(n), `effect removed: ${n}`);
+  // nội dung đề tài: trung tâm lặn ở Đà Nẵng
+  const h1 = await p.locator("h1").innerText();
+  ok(/Đà Nẵng/.test(h1) && /lặn/i.test(h1), `h1 states topic and area (${h1.replace(/\n/g, " ")})`);
+  const eyebrow = await p.locator('[data-lb="eyebrow"]').innerText();
+  ok(/Trung tâm lặn biển/i.test(eyebrow) && /Sơn Trà/i.test(eyebrow), "hero eyebrow: loại hình + khu vực");
+  ok(await p.locator('[data-lb="hero"] dl > div').count() === 3, "hero has 3 concrete facts");
+  ok(/1\.450\.000/.test(await p.locator('[data-lb="hero"] dl').innerText()), "hero fact shows lặn thử price");
+  ok(await p.locator('a[href="#dat-cho"]').count() >= 2, "CTA đặt chỗ present");
+  for (const id of ["gioi-thieu", "chuong", "khoa-hoc", "lich-khoi-hanh", "bang-gia", "mua-bien", "cong-cu", "doi-ngu", "an-toan", "hoi-dap", "dat-cho"]) ok(await p.locator("#" + id).count() === 1, `section #${id} exists`);
+  ok(await p.locator("#bang-gia li h4", { hasText: "Không bao gồm" }).count() >= 4, "pricing lists included/excluded per package");
+  ok(await p.locator("#bang-gia tbody tr").count() >= 5, "gear rental table rows");
+  ok(await p.locator("#hoi-dap details").count() >= 8, "faq >= 8 items");
+  // lịch khởi hành: đổi ngày thì đổi hàng
+  await p.locator("#lich-khoi-hanh").scrollIntoViewIfNeeded();
+  const before = await p.locator("#lb-board-panel").innerText();
+  await p.locator("#lb-day-2").click(); await p.waitForTimeout(900);
+  const after = (await p.locator("#lb-board-panel").innerText()).replace(/\s+/g, " ");
+  ok(before !== after && /Thứ Tư/i.test(after) && /Cù Lao Chàm/i.test(after), "schedule tab switches day and rows");
+  await p.locator("#lb-day-2").press("ArrowRight"); await p.waitForTimeout(300);
+  ok(await p.locator("#lb-day-3").getAttribute("aria-selected") === "true", "schedule tabs: ArrowRight moves selection");
+  // mùa biển
+  await p.locator("#mua-bien").scrollIntoViewIfNeeded(); await p.waitForTimeout(1500);
+  ok(await p.locator('[data-fx="SeasonTide"]').getAttribute("data-in") === "1", "season bars animate in");
+  await p.locator("#mua-bien button", { hasText: "T11" }).click();
+  ok(/Tháng 11/.test(await p.locator("#mua-bien [role=status]").innerText()), "season month note updates");
+  await p.evaluate(() => window.scrollTo(0, 0)); await p.waitForTimeout(900);
   ok(await p.evaluate(() => document.querySelector('[data-fx="water-hero"]').dataset.fxReady === "1"), "water ripple ready (hero)");
   // ripple thật: hover làm filter gắn vào
   await p.mouse.move(700, 300); await p.mouse.move(760, 340, { steps: 6 }); await p.waitForTimeout(700);
@@ -148,6 +175,8 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   ok(vis, "reduced-motion: all reveal blocks visible");
   ok(await p.evaluate(() => document.querySelector('[data-fx="water-chapter"]').dataset.fxReady === "static"), "reduced-motion: water ripple static");
   ok(await p.evaluate(() => !document.querySelector('[data-fx="CanvasParticles"]')), "reduced-motion: bubble canvas not mounted");
+  await p.locator("#lb-day-1").click();
+  ok(/Thứ Ba/i.test(await p.locator("#lb-board-panel").innerText()), "reduced-motion: schedule still switches");
   await p.evaluate(() => window.scrollTo(0, 4000)); await p.waitForTimeout(400);
   ok(+(await p.evaluate(() => document.querySelector('[data-fx="DepthEngine"]').dataset.depthNow)) > 0, "reduced-motion: depth readout still updates");
   await ctx.close();
@@ -169,6 +198,17 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   console.log("INFO tiny targets (<40px both dims):", tt);
   await p.evaluate(() => window.scrollTo(0, 3200)); await p.waitForTimeout(500);
   await p.screenshot({ path: `${SHOT}chapter-390.png` });
+  await ctx.close();
+}
+
+// 4b. chụp từng section ở 1440 và 390 (cuộn tới, chờ hiệu ứng)
+for (const [w, h, o] of [[1440, 900, {}], [390, 844, { hasTouch: true, isMobile: true }]]) {
+  const { ctx, p } = await open(w, h, o);
+  for (const id of ["gioi-thieu", "chuong", "khoa-hoc", "lich-khoi-hanh", "bang-gia", "mua-bien", "doi-ngu", "an-toan", "dat-cho"]) {
+    await p.evaluate((id) => { const e = document.getElementById(id); window.scrollTo(0, e.getBoundingClientRect().top + window.scrollY - 70); }, id);
+    await p.waitForTimeout(1600);
+    await p.screenshot({ path: `${SHOT}sec-${id}-${w}.png` });
+  }
   await ctx.close();
 }
 

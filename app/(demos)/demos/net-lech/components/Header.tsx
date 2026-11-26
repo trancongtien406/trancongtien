@@ -20,11 +20,11 @@ export function Header() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/demos/net-lech/identity/logo-reversed.svg" alt="" width={150} height={44} />
         </a>
-        <p className={styles.issueLine} aria-hidden="true"><span>Issue 010</span><i /><span>The Difference Issue</span></p>
+        <p className={styles.issueLine} aria-hidden="true"><span>Salon tóc nam nữ</span><i /><span>Hải Châu, Đà Nẵng</span></p>
         <nav className={styles.nav} aria-label="Điều hướng chính" id="nl-nav" data-open={open ? "1" : "0"}>
           <ul>
             {NAV.map((n) => (<li key={n.href}><a href={n.href} onClick={() => setOpen(false)}>{n.label}</a></li>))}
-            <li><a className={`${styles.btn} ${styles.btnLime}`} href="#builder" onClick={() => setOpen(false)}>Dựng dịch vụ</a></li>
+            <li><a className={`${styles.btn} ${styles.btnLime}`} href="#builder" onClick={() => setOpen(false)}>Đặt lịch</a></li>
           </ul>
         </nav>
         <button ref={btn} type="button" className={styles.menuBtn} aria-expanded={open} aria-controls="nl-nav" onClick={() => setOpen((v) => !v)}>

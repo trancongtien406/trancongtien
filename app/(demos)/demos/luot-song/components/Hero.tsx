@@ -1,8 +1,23 @@
-import { MagneticButton, ParallaxLayer, SplitWords } from "@/features/showroom/effects";
+import { ParallaxLayer } from "@/features/showroom/effects";
+import { HERO_FACTS } from "../data/content";
 import { Photo } from "./Photo";
 import { Ride } from "./Ride";
 import { Sticker, Sun, WaveStack } from "./Art";
 import styles from "../brand.module.css";
+
+/** Mỗi từ là một span riêng; Motion đẩy từng từ vào bờ như sóng (trượt ngang + nghiêng), không dùng thư viện. */
+function Words({ text }: { text: string }) {
+  return (
+    <>
+      {text.split(" ").map((w, i, a) => (
+        <span key={i} className={styles.heroWordBox}>
+          <span className={styles.heroWord} data-rs="hero-word">{w}</span>
+          {i < a.length - 1 ? " " : null}
+        </span>
+      ))}
+    </>
+  );
+}
 
 export function Hero() {
   return (
@@ -10,21 +25,23 @@ export function Hero() {
       <div className={styles.heroGrid}>
         <div className={styles.heroCopy}>
           <p className={styles.eyebrow} data-rs="eyebrow">
-            <span>Trường dạy lướt sóng</span><span aria-hidden="true" className={styles.eyebrowDot} /><span>Bãi biển Đà Nẵng</span>
+            <span>Trường dạy lướt sóng</span><span aria-hidden="true" className={styles.eyebrowDot} /><span>Quận Sơn Trà, Đà Nẵng</span>
           </p>
           <h1 id="hero-title" className={styles.heroTitle}>
-            <SplitWords as="span" className={styles.heroLine} trigger="load" delay={0.7} duration={1} stagger={0.1} padY="0.18em">Đừng chỉ ngắm biển.</SplitWords>
-            <SplitWords as="span" className={`${styles.heroLine} ${styles.heroScript}`} trigger="load" delay={1.05} duration={1} stagger={0.12} padY="0.3em">Hãy cưỡi sóng!</SplitWords>
+            <span className={styles.heroLine}><Words text="Học lướt sóng" /></span>
+            <span className={`${styles.heroLine} ${styles.heroScript}`}><Words text="từ buổi đầu tiên." /></span>
           </h1>
           <p className={styles.heroLead} data-rs="hero-lead">
-            Học lướt sóng cùng huấn luyện viên, từ buổi đầu tiên đến lúc bạn tự đứng trên ván. Nhóm nhỏ, ván và đồ bảo hộ chuẩn bị sẵn, biển được đọc kỹ trước mỗi buổi.
+            Ráng Sóng dạy người chưa từng đứng trên ván, trẻ em từ 6 tuổi và người đã lướt muốn chỉnh kỹ thuật. Mỗi buổi khoảng 2 giờ trên biển Sơn Trà, nhóm nhỏ, ván và đồ bảo hộ chuẩn bị sẵn.
           </p>
           <div className={styles.heroCtas}>
-            <span data-rs="hero-cta"><MagneticButton><a className={`${styles.btn} ${styles.btnBrown}`} href="#lap-ke-hoach">Lên kế hoạch buổi học</a></MagneticButton></span>
-            <span data-rs="hero-cta"><a className={`${styles.btn} ${styles.btnGhost}`} href="#khoa-hoc">Xem các khoá học</a></span>
+            <span data-rs="hero-cta"><a className={`${styles.btn} ${styles.btnBrown}`} href="#dat-lich">Đặt buổi trải nghiệm</a></span>
+            <span data-rs="hero-cta"><a className={`${styles.btn} ${styles.btnGhost}`} href="#khoa-hoc">Xem khoá học và giá</a></span>
           </div>
-          <ul className={styles.chips} data-rs="hero-cta">
-            <li>Nhóm nhỏ</li><li>Ván và đồ bảo hộ có sẵn</li><li>Từ 6 tuổi</li>
+          <ul className={styles.facts} data-rs="hero-cta">
+            {HERO_FACTS.map((f) => (
+              <li key={f.k}><small>{f.k}</small><b>{f.v}</b></li>
+            ))}
           </ul>
         </div>
         <div className={styles.heroArt}>
@@ -43,7 +60,7 @@ export function Hero() {
       </div>
       <Ride />
       <WaveStack />
-      <a className={styles.heroHint} href="#tuyen-ngon" data-rs="hero-hint" aria-label="Cuộn xuống nội dung chính"><span aria-hidden="true">↓</span></a>
+      <a className={styles.heroHint} href="#khoa-hoc" data-rs="hero-hint" aria-label="Cuộn xuống phần khoá học"><span aria-hidden="true">↓</span></a>
     </section>
   );
 }

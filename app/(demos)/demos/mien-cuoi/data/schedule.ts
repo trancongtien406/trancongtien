@@ -1,21 +1,22 @@
-/** Appointment Scheduler: dữ liệu mock + thuật toán lịch (phút từ đầu ngày). Không có đặt lịch thật. */
+/** Lịch hẹn: ca làm việc + thuật toán khung giờ (phút từ đầu ngày). Công cụ chỉ tóm tắt lựa chọn, không gửi đặt lịch. */
 export type Interval = { start: number; end: number };
 
 export const SERVICES = [
   { id: "checkup", name: "Khám tổng quát", duration: 30, price: "150000" },
-  { id: "hygiene", name: "Tư vấn vệ sinh răng miệng", duration: 30, price: "300000-600000" },
-  { id: "restoration", name: "Tư vấn phục hồi", duration: 30, price: null },
-  { id: "orthodontics", name: "Tư vấn chỉnh nha", duration: 45, price: "250000" },
+  { id: "hygiene", name: "Khám và lấy cao răng", duration: 30, price: "300000-600000" },
+  { id: "restoration", name: "Tư vấn trám răng", duration: 30, price: null },
+  { id: "orthodontics", name: "Tư vấn niềng răng", duration: 45, price: "250000" },
   { id: "whitening", name: "Tư vấn tẩy trắng", duration: 30, price: null },
   { id: "pain", name: "Khám đau, ê buốt", duration: 30, price: "200000" },
   { id: "extraction", name: "Tư vấn nhổ răng", duration: 45, price: "200000" },
+  { id: "implant", name: "Tư vấn implant", duration: 45, price: "250000" },
 ] as const;
 export type ServiceId = (typeof SERVICES)[number]["id"];
 
 export const DOCTORS = [
-  { id: "minh-an", name: "BS. Minh An", role: "Nha khoa tổng quát", services: ["checkup", "hygiene", "pain"], days: [1, 2, 3, 4, 5, 6], dayLabel: "Thứ 2 đến Thứ 7" },
-  { id: "thanh-lam", name: "BS. Thanh Lam", role: "Tư vấn chỉnh nha", services: ["orthodontics", "whitening"], days: [1, 3, 5], dayLabel: "Thứ 2, 4, 6" },
-  { id: "hoai-nam", name: "BS. Hoài Nam", role: "Tư vấn phục hồi răng", services: ["restoration", "extraction", "pain"], days: [2, 4, 6], dayLabel: "Thứ 3, 5, 7" },
+  { id: "minh-an", name: "Bác sĩ nha khoa tổng quát", role: "Khám, lấy cao răng, trám", services: ["checkup", "hygiene", "pain", "restoration"], days: [1, 2, 3, 4, 5, 6], dayLabel: "Thứ 2 đến Thứ 7" },
+  { id: "thanh-lam", name: "Bác sĩ chỉnh nha", role: "Tư vấn niềng răng, tẩy trắng", services: ["orthodontics", "whitening"], days: [1, 3, 5], dayLabel: "Thứ 2, 4, 6" },
+  { id: "hoai-nam", name: "Bác sĩ phục hồi và phẫu thuật", role: "Trám, nhổ răng, implant", services: ["restoration", "extraction", "implant", "pain"], days: [2, 4, 6], dayLabel: "Thứ 3, 5, 7" },
 ] as const;
 export type DoctorId = (typeof DOCTORS)[number]["id"] | "any";
 

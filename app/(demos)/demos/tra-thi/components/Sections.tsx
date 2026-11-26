@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ParallaxLayer, ScrollScrubText, SVGPathDraw } from "@/features/showroom/effects";
+import { ScrollScrubText, SVGPathDraw } from "@/features/showroom/effects";
 import { siteConfig } from "@/lib/site";
 import { buildConsultHref } from "@/features/showroom/consultation";
 import s from "../brand.module.css";
@@ -13,21 +13,19 @@ export function Manifesto() {
   return (
     <section id="tuyen-ngon" className={s.manifesto}>
       <div className={s.manifestoBg} aria-hidden="true">
-        <ParallaxLayer distance={90} className={s.parallaxFill}>
-          <Image src={`${P}/doi-che-suong-2000.webp`} alt="" fill sizes="100vw" className={s.cover} loading="lazy" />
-        </ParallaxLayer>
+        <Image src={`${P}/doi-che-suong-2000.webp`} alt="" fill sizes="100vw" className={s.cover} loading="lazy" />
         <div className={s.manifestoShade} />
       </div>
       <LeafDrift leaves={6} />
       <div className={`${s.wrap} ${s.manifestoInner}`}>
-        <p className={s.kicker}>Tuyên ngôn</p>
+        <p className={s.kicker}>Về nhà trà</p>
         <ScrollScrubText as="p" className={s.scrub} dim={0.16} start="top 82%" end="bottom 62%">
-          Tịch là yên lặng. Chúng tôi pha trà chậm, để nước đủ nóng, ấm đủ ấm và lá trà kịp thức dậy. Một bàn trà không cần nhiều lời. Chỉ cần hơi nước bay lên, tiếng rót khe khẽ và một người chịu ngồi lại. Ở đây, bạn không phải vội đi đâu cả.
+          Tịch Trà là một nhà trà nhỏ ở Quận Hải Châu. Mỗi bàn có một bộ ấm chén và bếp nước đun tại chỗ, nhân viên pha nước đầu rồi để bạn tự rót những nước sau. Chúng tôi bán trà theo ấm hoặc theo chén, có bánh trà ăn kèm, nhận đặt phòng trà cho nhóm và đóng gói trà khô mang về. Ở đây không có nhạc to, không có đồ uống pha sẵn đá.
         </ScrollScrubText>
         <SVGPathDraw mode="scroll" start="top 85%" end="bottom 70%" className={s.brushRule} viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true">
           <path d="M4 24C150 10 300 34 520 20S900 8 1196 22" stroke="currentColor" strokeWidth="3" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
         </SVGPathDraw>
-        <p className={s.manifestoEnd}>Uống trà. Ngồi yên. Để mọi thứ diễn ra tự nhiên.</p>
+        <p className={s.manifestoEnd}>Một chén trà, vạn khoảng lặng.</p>
       </div>
     </section>
   );
@@ -46,8 +44,9 @@ export function Rituals() {
   return (
     <section id="nghi-thuc" className={s.rituals}>
       <div className={s.wrap}>
-        <p className={s.kicker}>Ba nghi thức</p>
-        <InkTitle as="h2" className={s.h2}>Ba cách trở về với hiện tại.</InkTitle>
+        <p className={s.kicker}>Cách pha và nghi thức</p>
+        <InkTitle as="h2" className={s.h2}>Ba bước pha một ấm trà tại bàn.</InkTitle>
+        <p className={s.lead} style={{ marginTop: 20 }}>Nhân viên làm bước đầu cho bạn xem, sau đó bạn tự rót. Nước đủ nóng, đúng giờ, rót cạn từng nước.</p>
       </div>
       <div className={`${s.wrap} ${s.ritualList}`}>
         <SVGPathDraw mode="scroll" start="top 65%" end="bottom 55%" className={s.ritualPath} viewBox="0 0 100 1000" preserveAspectRatio="none" aria-hidden="true">
@@ -67,47 +66,20 @@ export function Rituals() {
             </div>
           </article>
         ))}
-        <p className={s.ritualCta}><a className={`${s.btn} ${s.btnLine}`} href="#ghep-tra">Xem cách pha từng loại</a></p>
-      </div>
-    </section>
-  );
-}
-
-export function Space() {
-  return (
-    <section id="khong-gian" className={s.space}>
-      <div className={s.wrap}>
-        <p className={s.kicker}>Không gian</p>
-        <InkTitle as="h2" className={s.h2}>Một căn phòng nhỏ, ánh sáng thấp.</InkTitle>
-        <p className={s.lead} style={{ marginTop: 20 }}>
-          Mặt bàn gỗ, đèn dịu, vài món gốm được chọn kỹ. Mỗi bàn có một bộ trà và nước đun tại bàn, để bạn tự rót khi muốn.
-        </p>
-      </div>
-      <div className={`${s.wrap} ${s.spaceGrid}`}>
-        <figure className={s.spaceA}>
-          <InkReveal className={s.spaceImg}><Image src={`${P}/ban-tra-den-1200.webp`} alt="Bàn trà gỗ có ấm, chén và đèn dầu nhỏ" width={2000} height={1600} sizes="(max-width: 900px) 92vw, 52vw" className={s.cover} loading="lazy" data-cursor="Ngắm" /></InkReveal>
-          <figcaption><b>Bàn trà gỗ.</b> Mỗi bàn một bộ trà, đủ chỗ để ấm, chén và tay bạn.</figcaption>
-        </figure>
-        <figure className={s.spaceB}>
-          <InkReveal className={s.spaceImg} delay={0.1}><Image src={`${P}/am-den-1200.webp`} alt="Ấm gốm đen nhìn từ trên xuống" width={2000} height={3000} sizes="(max-width: 900px) 60vw, 26vw" className={s.cover} loading="lazy" data-cursor="Ngắm" /></InkReveal>
-          <figcaption><b>Ấm gốm giữ nhiệt.</b> Mỗi nước pha đều đủ nóng.</figcaption>
-        </figure>
-        <figure className={s.spaceC}>
-          <InkReveal className={s.spaceImg} delay={0.2}><Image src={`${P}/bot-matcha-1200.webp`} alt="Bột trà xanh trong bát gốm xanh trên nền đen" width={2000} height={3000} sizes="(max-width: 900px) 60vw, 26vw" className={s.cover} loading="lazy" data-cursor="Ngắm" /></InkReveal>
-          <figcaption><b>Bột trà đánh tại bàn.</b> Rây và đánh ngay khi bạn gọi.</figcaption>
-        </figure>
+        <p className={s.ritualCta}><a className={`${s.btn} ${s.btnLine}`} href="#ghep-tra">Xem nhiệt độ và đồng hồ từng loại</a></p>
       </div>
     </section>
   );
 }
 
 const FAQ = [
-  ["Tôi chưa biết gì về trà, nên bắt đầu từ đâu?", "Hãy dùng công cụ Ghép trà ở trên: chọn tâm trạng, thời điểm và món ăn kèm, bạn sẽ có một gợi ý cùng cách pha. Với người mới, các loại ít chát như Bạch trà hay Genmaicha là điểm bắt đầu dễ chịu."],
-  ["Giá trong danh mục là giá gì?", "Là giá tham khảo cho một ấm thưởng trà tại bàn. Giá thực tế có thể thay đổi theo mùa vụ và nguồn cung; chúng tôi sẽ báo rõ khi bạn liên hệ."],
-  ["Bản tóm tắt buổi trà dùng để làm gì?", "Để bạn gom sẵn số người, khung giờ và bộ trà, rồi sao chép gửi kèm khi liên hệ. Đây chưa phải đặt chỗ; chỗ chỉ được giữ sau khi chúng tôi xác nhận lại với bạn."],
-  ["Có cần dụng cụ riêng để pha trà ở nhà không?", "Không nhất thiết. Một ấm nhỏ, một chiếc chén, nước sạch và đồng hồ là đủ. Đồng hồ pha trà trên trang này tính theo mốc thời gian thật nên chạy đúng cả khi bạn chuyển tab."],
+  ["Tôi chưa biết gì về trà, nên gọi gì?", "Hãy nhờ nhân viên gợi ý theo khẩu vị, hoặc dùng mục Chọn trà ở trên để xem trước. Người mới thường bắt đầu với Bạch trà, Genmaicha hoặc Hồng trà vì ít chát."],
+  ["Một ấm trà đủ cho mấy người?", "Một ấm khoảng 150 ml, đủ 2 đến 3 người và pha được từ 3 đến 6 nước tuỳ loại. Nhóm đông hơn nên chọn bộ trà theo số người ở mục Phòng trà và bàn nhóm."],
+  ["Có cần đặt trước không?", "Bàn thấp trước hiên nhận khách tại chỗ. Phòng trà Tĩnh và Lặng cần đặt trước ít nhất 1 ngày và đặt cọc 30%. Nhóm từ 5 người nên báo trước dù ngồi bàn thường."],
+  ["Giá trong menu là giá gì?", "Là giá tham khảo cho một ấm hoặc một chén thưởng trà tại bàn, chưa gồm bánh trà và phụ phí phòng. Giá có thể thay đổi theo mùa vụ và nguồn cung; nhân viên báo rõ khi bạn gọi."],
+  ["Có thể mang trà về không?", "Có. Trà khô đóng gói theo gam, có kèm hướng dẫn nhiệt độ và số giây pha. Bạn cũng có thể mua ấm chén gốm và que đánh matcha."],
   ["Trà có tốt cho sức khoẻ không?", "Chúng tôi không đưa ra khẳng định về công dụng sức khoẻ. Trà ở đây là để thưởng thức hương vị. Nếu bạn có chỉ định riêng về ăn uống, hãy hỏi bác sĩ của bạn."],
-  ["Có thể mang trà về không?", "Có. Trà khô đóng gói theo gam, bạn có thể hỏi khi ngồi tại bàn hoặc ghi chú trong lúc liên hệ."],
+  ["Có chỗ cho trẻ em không?", "Có, khi đi cùng người lớn. Quán yên tĩnh và bàn gỗ thấp nên chúng tôi đề nghị phụ huynh trông bé, nhất là gần bếp nước nóng."],
 ];
 
 export function Faq() {
@@ -141,8 +113,8 @@ export function Closing() {
       <div className={`${s.wrap} ${s.closingInner}`}>
         <span className={s.seal} aria-hidden="true">Tịch</span>
         <InkTitle as="h2" className={s.h1small}>Ngồi xuống một chút.</InkTitle>
-        <p className={s.lead}>Gửi bản tóm tắt buổi trà của bạn, chúng tôi sẽ cùng chọn trà và sắp bàn.</p>
-        <a className={`${s.btn} ${s.btnPrimary}`} href={CONSULT} data-cursor="Gửi">Trao đổi về buổi trà</a>
+        <p className={s.lead}>Gửi bản tóm tắt số người và khung giờ, chúng tôi sẽ xác nhận bàn hoặc phòng trà cho bạn.</p>
+        <a className={`${s.btn} ${s.btnPrimary}`} href={CONSULT} data-cursor="Gửi">Hỏi đặt bàn, phòng trà</a>
       </div>
     </section>
   );
@@ -158,16 +130,17 @@ export function Footer() {
         <div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/demos/tra-thi/identity/logo-reversed.svg" alt="Tịch Trà" width={168} height={38} />
-          <p className={s.footNote}>Nhà trà tĩnh lặng ở Đà Nẵng. Một chén trà, vạn khoảng lặng.</p>
+          <p className={s.footNote}>Nhà trà ở Quận Hải Châu, Đà Nẵng. Trà pha tại bàn, phòng trà nhóm, trà mang về.</p>
         </div>
         <nav aria-label="Chân trang">
           <ul>{NAV.slice(0, 4).map((n) => <li key={n.href}><a href={n.href}>{n.label}</a></li>)}</ul>
           <ul>{NAV.slice(4).map((n) => <li key={n.href}><a href={n.href}>{n.label}</a></li>)}</ul>
         </nav>
         <div className={s.footContact}>
-          <p>Đà Nẵng</p>
+          <p>Quận Hải Châu, Đà Nẵng</p>
           <p><a href="mailto:xin-chao@tichtra.example">xin-chao@tichtra.example</a></p>
-          <p className={s.footMute}>Địa chỉ và giờ mở cửa được gửi khi bạn liên hệ.</p>
+          <p>0236&nbsp;000&nbsp;0000</p>
+          <p className={s.footMute}>Mở cửa 8:30 đến 21:30 (cuối tuần 8:00 đến 22:00).</p>
         </div>
       </div>
       <div className={`${s.wrap} ${s.footBottom}`}>

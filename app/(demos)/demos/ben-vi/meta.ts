@@ -4,6 +4,6 @@ export const meta = {
   brand: "Bến Vị",
   industry: "Hải sản",
   solutionSlug: "fnb",
-  tagline: "Nhà hàng hải sản",
-  look: "Nền tối điện ảnh, đĩa tròn, vàng cát trên xanh biển",
+  tagline: "Nhà hàng hải sản ven biển Sơn Trà",
+  look: "Nền tối điện ảnh, bàn xoay, thực đơn lật trang, bếp lửa",
 } as const;

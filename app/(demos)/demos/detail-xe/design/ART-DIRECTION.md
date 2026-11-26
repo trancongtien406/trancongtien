@@ -16,3 +16,6 @@ Nguyên tắc: nền đen vân carbon, chữ hoa Saira cách chữ rộng, đư�
 ## Hiệu ứng (thư viện = L, riêng = R)
 SplitWords hero (L), Counter hero/quy trình (L), CursorSpotlight hero (L), ShineSweep nút CTA/thẻ (L), ScrollScrubText triết lý (L), ClipReveal + ParallaxLayer ảnh (L), SVGPathDraw đường quy trình (L), DraggableGallery (L), NumberTicker trong builder (L), ScrollProgress (L); hero choreography có blur-to-sharp (R), scroll-scrub bụi -> sạch với mép sáng và đồng hồ (R), light streak scrub theo cuộn (R), slider lớp phủ (R), ánh sáng phản chiếu theo con trỏ trên thẻ gói (R), blur-to-sharp khi vào khung (R), vân carbon CSS (R).
 Mọi chuyển động chỉ transform/opacity/filter/clip-path; reduced-motion: nội dung đủ, scrub bỏ ghim và giữ trạng thái sạch; hiệu ứng con trỏ chỉ chuột.
+
+## Cập nhật 2026-11-25 (xem REWORK.md)
+Thứ tự mới: Hero (3 sự thật) -> Dịch vụ -> Giá theo dòng xe -> Cách làm việc -> Scrub bụi -> sạch -> Quy trình 4 giai đoạn + phiếu bàn giao -> Phủ ceramic -> Chọn gói -> Chuẩn bị và chăm sóc -> Đặt lịch và bảo hành -> Dụng cụ và vật tư (gallery) -> FAQ -> Đặt lịch. Bỏ SplitWords, ScrollScrubText, ClipReveal, ScrollProgress; chỉ giữ ParallaxLayer (ảnh nguyên tắc) và SVGPathDraw (đường quy trình). Danh sách hiệu ứng ở trên đã lỗi thời, xem REWORK.md.

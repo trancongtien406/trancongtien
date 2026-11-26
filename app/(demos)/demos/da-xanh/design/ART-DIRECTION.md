@@ -4,3 +4,6 @@ Desktop: header pill kính nổi; hero 2 cột (chữ trái, vòm ảnh + vòng 
 Mobile: một cột, danh sách liệu trình cuộn ngang, đường quy trình dọc bên trái, thẻ hero thu nhỏ, bỏ chip fact, blur kính 12px.
 Hiệu ứng (≥6): thư viện: SplitWords, CursorSpotlight, TiltCard, MagneticButton, ScrollScrubText, SVGPathDraw, CanvasParticles bubbles, VelocityMarquee, ClipReveal, ShineSweep. Riêng: blur-fade vào khung, mesh động, depth parallax 5 lớp (con trỏ + cuộn), giọt serum rơi theo cuộn, vòng sáng Halo, tint/ảnh crossfade ở liệu trình, hero choreography ~2.6s.
 Reduced-motion: mọi thứ tĩnh, nội dung hiện đủ. Touch: không parallax con trỏ/spotlight/tilt.
+
+
+Ghi chú rework 2026-11-25: nội dung, section và hiệu ứng đã đổi, xem design/REWORK.md (bản này mô tả giao diện gốc; Skin Routine Builder nay là một section, chuyển động chính là lướt kính, đại trà chỉ còn ClipReveal).

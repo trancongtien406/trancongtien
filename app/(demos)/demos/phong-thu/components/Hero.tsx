@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ClipReveal, MagneticButton, SplitWords, TextScramble } from "@/features/showroom/effects";
+import { MagneticButton, TextScramble } from "@/features/showroom/effects";
+import { buildConsultHref } from "@/features/showroom/consultation";
 import s from "../brand.module.css";
+import { AREA, FACTS } from "../data/content";
 import { IMGS } from "../data/images";
 import { elapsed, startAudition, stopAudition, useAudition } from "../lib/audio";
 import { EqBars, HeroWave, Vu } from "./Viz";
@@ -53,25 +55,29 @@ export function Hero() {
         <div className={s.heroCopy} data-pt="copy">
           <p className={s.kicker} data-pt="rv-hero">
             <span className={s.recDot} aria-hidden="true" />
-            <TextScramble trigger="load" className={s.mono}>CH 01 · VOCAL · TÍN HIỆU SẴN SÀNG</TextScramble>
+            <TextScramble trigger="load" className={s.mono}>PHÒNG THU ÂM · QUẬN HẢI CHÂU, ĐÀ NẴNG</TextScramble>
           </p>
           <h1 className={s.h1}>
-            <SplitWords as="span" trigger="load" className={s.h1Line} delay={0.15}>Bắt đúng</SplitWords>
-            <SplitWords as="span" trigger="load" className={`${s.h1Line} ${s.hot}`} delay={0.3}>tần số</SplitWords>
-            <SplitWords as="span" trigger="load" className={s.h1Line} delay={0.45}>của bạn.</SplitWords>
+            <span className={s.h1Line} data-pt="hl">Phòng thu âm</span>
+            <span className={`${s.h1Line} ${s.hot}`} data-pt="hl">bắt đúng tần số</span>
+            <span className={`${s.h1Line} ${s.h1Sub}`} data-pt="hl">của bạn.</span>
           </h1>
           <p className={s.lead} data-pt="rv-hero">
-            Phòng thu âm tại Đà Nẵng cho giọng hát, band, podcast và voice-over. Thu sạch, mix gọn, master đúng chất bạn muốn nghe.
+            Phòng thu âm tại {AREA}, dành cho ca sĩ, ban nhạc, podcaster và đơn vị làm quảng cáo: thu giọng, thu band, podcast, voice-over, sản xuất beat, mix và master.
           </p>
           <div className={s.heroCta} data-pt="rv-hero">
-            <MagneticButton><a className={`${s.btn} ${s.btnHot}`} href="#uoc-tinh">Ước tính buổi thu</a></MagneticButton>
+            <MagneticButton><a className={`${s.btn} ${s.btnHot}`} href={buildConsultHref("phong-thu")}>Đặt lịch thu</a></MagneticButton>
+            <a className={`${s.btn} ${s.btnGhost}`} href="#bang-gia">Xem bảng giá</a>
             <AuditionButton />
           </div>
+          <ul className={s.facts} data-pt="rv-hero" aria-label="Thông tin nhanh">
+            {FACTS.map((f) => (<li key={f.k}><span className={`${s.mono} ${s.factK}`}>{f.k}</span><b>{f.v}</b><span>{f.s}</span></li>))}
+          </ul>
         </div>
         <figure className={s.heroShot} data-pt="shot">
-          <ClipReveal variant="circle" from="center" origin="30% 60%" duration={1.3} innerScale={1.18} className={s.heroClip}>
+          <div className={s.heroClip} data-pt="rise-hero">
             <Photo img={IMGS.hero} sizes="(max-width: 900px) 100vw, 46vw" priority quality={1200} className={s.heroImg} />
-          </ClipReveal>
+          </div>
           <span className={s.scan} aria-hidden="true" />
           <figcaption className={s.shotTag}><span className={s.recDot} aria-hidden="true" /> <span className={s.mono}>REC · BUỒNG THU GIỌNG</span></figcaption>
           <div className={s.shotMeters} aria-hidden="true">

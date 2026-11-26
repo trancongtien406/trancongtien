@@ -15,6 +15,8 @@ export type FinishId = "gloss" | "satin" | "engrave";
 
 export const DEFAULT_GOLD_24K_PER_GRAM = 4_000_000;
 export const SILVER_PER_GRAM = 40_000;
+/** Hàm lượng vàng 24K dùng cho bảng đơn giá (vàng ròng ≈ 99,9%). */
+export const PURITY_24K = 0.999;
 
 export const TYPES: ReadonlyArray<{ id: TypeId; label: string; sizeLabel: string; unit: string; sizes: readonly number[]; defaultSize: number; stones: number; hint: string }> = [
   { id: "ring", label: "Nhẫn", sizeLabel: "Cỡ tay", unit: "", sizes: [8, 10, 12, 14, 16, 18, 20], defaultSize: 12, stones: 1, hint: "Cỡ tay chỉ để ước tính trọng lượng; cỡ chính xác được đo khi tư vấn." },
@@ -56,7 +58,7 @@ export const FINISHES: ReadonlyArray<{ id: FinishId; label: string; mult: number
   { id: "engrave", label: "Chạm hoa văn", mult: 1.45 },
 ];
 
-const LABOR_BASE: Record<TypeId, number> = { ring: 1_400_000, pendant: 1_000_000, earring: 1_300_000, bracelet: 1_800_000 };
+export const LABOR_BASE: Record<TypeId, number> = { ring: 1_400_000, pendant: 1_000_000, earring: 1_300_000, bracelet: 1_800_000 };
 const SILVER_LABOR_FACTOR = 0.55;
 const SPREAD = { metal: 0.05, labor: 0.1, weight: 0.08 };
 

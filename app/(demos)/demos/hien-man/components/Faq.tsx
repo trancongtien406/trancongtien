@@ -5,9 +5,9 @@ export function Faq() {
   return (
     <section className={styles.faq} id="hoi-dap" aria-labelledby="faq-h">
       <div className={styles.faqLeft}>
-        <p className={styles.eyebrow}>07 / Những điều cần biết</p>
-        <h2 id="faq-h" className={styles.h2}>Trước khi đến Hiên.</h2>
-        <p className={styles.lead}>Chính sách lưu trú, viết ngắn để dễ đọc.</p>
+        <p className={styles.eyebrow}>Quy định và hỏi đáp</p>
+        <h2 id="faq-h" className={styles.h2}>Nhận phòng, đặt cọc, huỷ và quy định.</h2>
+        <p className={styles.lead}>Chính sách lưu trú ghi ngắn gọn; câu hỏi thường gặp bên phải.</p>
         <dl className={styles.policies}>
           {POLICIES.map((p) => (<div key={p.t}><dt>{p.t}</dt><dd>{p.d}</dd></div>))}
         </dl>

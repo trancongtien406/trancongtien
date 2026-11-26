@@ -118,15 +118,17 @@ console.log('[4] prefers-reduced-motion: nội dung hiện đủ');
     const op = (s) => [...document.querySelectorAll(s)].map((e) => +getComputedStyle(e).opacity);
     const tr = (s) => [...document.querySelectorAll(s)].map((e) => getComputedStyle(e).transform);
     return {
-      meta: op('[data-rn=meta],[data-rn=sub],[data-rn=desc],[data-rn=cta],[data-rn=frame]'), ch: op('.rn-ch'), words: op('[data-rn-word]'), reveal: op('[data-rn-reveal]'),
-      chT: tr('.rn-ch'), track: getComputedStyle(document.querySelector('[data-rn-track]')).transform,
+      meta: op('[data-rn=meta],[data-rn=sub],[data-rn=desc],[data-rn=cta],[data-rn=frame],[data-rn=specs]'), ch: op('.rn-ch'), reveal: op('[data-rn-reveal]'),
+      chT: tr('.rn-ch'), track: getComputedStyle(document.querySelector('[data-fx=VelocityMarquee] [data-fx-track]')).transform,
+      clip: [...document.querySelectorAll('[data-rn-reveal],[data-rn]')].filter((e) => getComputedStyle(e).clipPath !== 'none').length,
+      grinder: getComputedStyle(document.querySelector('[data-testid=grinder]')).getPropertyValue('--p').trim(),
     };
   });
   ok(r.meta.every((o) => o === 1), 'hero hiện đủ', JSON.stringify(r.meta));
   ok(r.ch.every((o) => o === 1) && r.chT.every((t) => t === 'none'), 'chữ H1 không bị ẩn/dịch');
-  ok(r.words.length > 5 && r.words.every((o) => o === 1), 'manifesto hiện đủ');
-  ok(r.reveal.every((o) => o === 1), 'các khối reveal hiện đủ');
-  ok(r.track === 'none', 'dải nhiệt không chuyển động');
+  ok(r.reveal.every((o) => o === 1) && r.clip === 0, 'các khối reveal hiện đủ, không bị cắt clip-path', String(r.clip));
+  ok(r.track === 'none', 'dải thông tin (VelocityMarquee) không chuyển động');
+  ok(r.grinder === '1', 'máy xay đứng ở trạng thái đầy khi reduced-motion', r.grinder);
   await ctx.close();
 }
 // và khi bật motion, sau khi cuộn mọi thứ cũng phải hiện (không kẹt opacity 0)
@@ -136,8 +138,10 @@ console.log('[4] prefers-reduced-motion: nội dung hiện đủ');
   await slowScroll(page);
   const r = await page.evaluate(() => [...document.querySelectorAll('[data-rn-reveal],.rn-ch,[data-rn=cta]')].filter((e) => +getComputedStyle(e).opacity < 0.99).length);
   ok(r === 0, 'motion bật: không phần tử nào kẹt ẩn sau khi cuộn', String(r));
-  const inline = await page.evaluate(() => [...document.querySelectorAll('[data-rn=meta],[data-rn=sub],[data-rn=desc],[data-rn=cta],[data-rn=frame]')].map((e) => e.style.opacity));
-  ok(inline.length === 5 && inline.every((o) => o === '1'), 'hero do GSAP đưa về opacity 1 (không dựa vào failsafe CSS)', JSON.stringify(inline));
+  const inline = await page.evaluate(() => [...document.querySelectorAll('[data-rn=meta],[data-rn=sub],[data-rn=desc],[data-rn=cta],[data-rn=frame],[data-rn=specs]')].map((e) => e.style.opacity));
+  ok(inline.length === 6 && inline.every((o) => o === '1'), 'hero do GSAP đưa về opacity 1 (không dựa vào failsafe CSS)', JSON.stringify(inline));
+  const clipped = await page.evaluate(() => [...document.querySelectorAll('[data-rn-reveal],[data-rn]')].filter((e) => getComputedStyle(e).clipPath !== 'none').length);
+  ok(clipped === 0, 'sau khi cuộn không khối nào kẹt clip-path (rót xong hết)', String(clipped));
   await ctx.close();
 }
 
@@ -277,8 +281,8 @@ console.log('[7] FAQ, bàn phím, link thoát, ref');
   // Tab tới CTA hero
   await page.goto(URL_, { waitUntil: 'networkidle' }); await page.waitForTimeout(1500);
   let hit = -1;
-  for (let i = 1; i <= 25; i++) { await page.keyboard.press('Tab'); const t = await page.evaluate(() => document.activeElement?.textContent?.trim() ?? ''); if (/Khám phá menu/i.test(t)) { hit = i; break; } }
-  ok(hit > 0, `Tab tới CTA "Khám phá menu" trong ${hit} lần`);
+  for (let i = 1; i <= 25; i++) { await page.keyboard.press('Tab'); const t = await page.evaluate(() => document.activeElement?.textContent?.trim() ?? ''); if (/Xem menu/i.test(t)) { hit = i; break; } }
+  ok(hit > 0, `Tab tới CTA "Xem menu" trong ${hit} lần`);
   ok(await page.evaluate(() => { const s = getComputedStyle(document.activeElement); return s.outlineStyle !== 'none' && parseFloat(s.outlineWidth) >= 2; }), 'focus-visible có outline rõ');
   // link thoát
   const hrefs = await page.locator('a[href^="/lien-he"]').evaluateAll((els) => els.map((e) => e.getAttribute('href')));
@@ -317,6 +321,104 @@ console.log('[8] Trang credits');
   const bad = await page.evaluate(() => [...document.querySelectorAll('li img')].filter((i) => !i.naturalWidth).length);
   ok(bad === 0, 'ảnh credits đều tải được', String(bad));
   await ctx.close();
+}
+
+// ---------- 8b. Nội dung quán + hiệu ứng chữ ký
+console.log('[8b] Nội dung quán thật + hiệu ứng chữ ký (độ rang, đồng hồ pha, máy xay, giờ mở cửa, bán buôn)');
+{
+  const { ctx, page } = await newPage();
+  await load(page);
+  const h1 = await page.locator('h1').innerText();
+  ok(/rót nhiệt/i.test(h1) && /quán cà phê rang xay/i.test(h1) && /sơn trà/i.test(h1), 'h1 nêu loại hình + khu vực cấp quận', h1);
+  const hero = await page.locator('section#top').innerText();
+  ok(/Quận Sơn Trà/.test(hero) && /06:30–21:30/.test(hero) && /165\.000/.test(hero) && /29\.000/.test(hero), 'hero có khu vực, giờ mở, giá hạt, giá ly');
+  ok(await page.locator('section#top [data-rn=specs] > div').count() === 3, 'hero có 3 sự thật cụ thể');
+  ok(await page.locator('section#top a[href="#ban-buon"]').count() === 1 && await page.locator('section#top a[href="#hat-ca-phe"]').count() === 1, 'CTA đúng ngành: xem menu / mua hạt / bán buôn');
+  const ids = await page.evaluate(() => ['menu', 'tim-gu', 'hat-ca-phe', 'do-rang', 'rang-pha', 'cach-pha', 'quan', 'cau-chuyen', 'ban-buon', 'faq'].filter((i) => !document.getElementById(i)));
+  ok(ids.length === 0, '10 section của quán cà phê rang đều có mặt', ids.join(','));
+  // nguồn gốc: không nhãn nông trại/chứng nhận
+  const body = await page.locator('body').innerText();
+  ok(!/(chứng nhận|certified|organic|rainforest|fair ?trade|specialty coffee association|SCA|điểm cupping|\d+ ?điểm)/i.test(body), 'không bịa chứng nhận / nhãn nông trại / điểm cupping');
+  ok(!/(Review|AggregateRating|LocalBusiness)/.test(await page.content()), 'không có JSON-LD Review/Rating/LocalBusiness');
+  // dải thông tin: VelocityMarquee chạy
+  ok(await page.locator('[data-fx=VelocityMarquee][data-fx-ready]').count() === 1, 'VelocityMarquee khởi chạy');
+  ok(await page.locator('[data-fx=MagneticButton]').count() >= 1, 'MagneticButton có ở CTA hero');
+  ok(await page.locator('[data-fx=Odometer]').count() === 1 && await page.locator('[data-fx=ShineSweep]').count() === 3, 'Odometer + 3 ShineSweep');
+  // độ rang: kéo thanh -> hạt đổi màu, nhiệt độ đổi, hạt gần nhất đổi
+  const rng = page.locator('[data-testid=roast-range]');
+  await rng.scrollIntoViewIfNeeded();
+  const col0 = await page.locator('[data-testid=roast-bean]').evaluate((e) => getComputedStyle(e).getPropertyValue('--bean'));
+  await rng.fill('0'); await page.waitForTimeout(500);
+  const colL = await page.locator('[data-testid=roast-bean]').evaluate((e) => getComputedStyle(e).getPropertyValue('--bean'));
+  ok(/nhiệt sáng/i.test(await page.locator('[data-testid=roast-match]').innerText()), 'rang sáng -> gợi ý Nhiệt Sáng');
+  const tL = await page.locator('[data-fx=Odometer]').evaluate((e) => e.querySelector('span').textContent);
+  await rng.fill('100'); await page.waitForTimeout(1200);
+  const colD = await page.locator('[data-testid=roast-bean]').evaluate((e) => getComputedStyle(e).getPropertyValue('--bean'));
+  const tD = await page.locator('[data-fx=Odometer]').evaluate((e) => e.querySelector('span').textContent);
+  ok(/nhiệt đậm/i.test(await page.locator('[data-testid=roast-match]').innerText()), 'rang đậm -> gợi ý Nhiệt Đậm');
+  ok(colL !== colD && colL !== col0 && tL === '196' && tD === '230', 'hạt đổi màu + nhiệt độ lăn số 196 -> 230', `${colL} ${colD} ${tL} ${tD}`);
+  ok(await rng.getAttribute('aria-valuetext').then((v) => /Rang đậm/.test(v)), 'thanh kéo có aria-valuetext');
+  await expectClean(page, 'độ rang');
+  // đồng hồ pha: bắt đầu -> đếm thật
+  const clk = () => page.locator('[data-testid=brew-clock]').innerText();
+  await page.locator('[data-testid=brew-toggle]').scrollIntoViewIfNeeded();
+  ok((await clk()) === '02:45', 'V60 mặc định 02:45', await clk());
+  await page.locator('[data-testid=brew-toggle]').click();
+  await page.waitForTimeout(2300);
+  const c1 = await clk();
+  ok(c1 !== '02:45' && /^02:4[0-3]$|^02:3\d$/.test(c1), 'đồng hồ pha chạy thật theo giây', c1);
+  ok(/Ủ nở|Rót lượt/.test(await page.locator('[data-testid=brew-stage]').innerText()), 'hiển thị bước pha hiện tại');
+  await page.locator('[data-testid=brew-toggle]').click();
+  const cp = await clk(); await page.waitForTimeout(900);
+  ok((await clk()) === cp, 'tạm dừng giữ nguyên thời gian', cp);
+  await page.locator('[data-testid=brew-phin]').click();
+  ok((await clk()) === '04:30', 'đổi sang phin: 04:30 và đặt lại', await clk());
+  await page.locator('[data-testid=brew-reset]').click();
+  // máy xay theo cuộn: --p tăng khi cuộn qua phần Từ hạt đến ly
+  await page.evaluate(() => window.scrollTo(0, 0));
+  const secTop = await page.evaluate(() => document.getElementById('rang-pha').getBoundingClientRect().top + scrollY);
+  await page.evaluate((y) => window.scrollTo(0, y - 100), secTop); await page.waitForTimeout(400);
+  const p0 = +(await page.locator('[data-testid=grinder]').evaluate((e) => e.style.getPropertyValue('--p')));
+  await page.evaluate((y) => window.scrollTo(0, y + 700), secTop); await page.waitForTimeout(500);
+  const p1 = +(await page.locator('[data-testid=grinder]').evaluate((e) => e.style.getPropertyValue('--p')));
+  ok(p1 > p0 && p1 > 0.2, 'máy xay: tiến độ cuộn tăng (--p)', `${p0} -> ${p1}`);
+  // quán + giờ mở cửa
+  await page.locator('#quan').scrollIntoViewIfNeeded();
+  const st = await page.locator('[data-testid=open-status]').innerText();
+  ok(/Đang mở|Đã đóng|Chưa mở/.test(st), 'trạng thái mở/đóng theo giờ Việt Nam', st);
+  ok(await page.locator('#quan tr[data-today="1"]').count() === 1, 'dòng hôm nay được tô');
+  await page.locator('[data-zone=rang]').click();
+  ok(/Máy rang/.test(await page.locator('[data-testid=plan-caption]').innerText()), 'chạm vùng Góc rang -> mô tả đổi');
+  // đổi đồng hồ giả: thứ hai 07:00 -> đang mở, 23:00 -> đã đóng
+  for (const [iso, re] of [['2026-11-23T00:00:00Z', /Đang mở/], ['2026-11-23T16:30:00Z', /Đã đóng/], ['2026-11-22T22:00:00Z', /Chưa mở/]]) {
+    const c2 = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+    const pg = await c2.newPage();
+    await pg.clock.install({ time: new Date(iso) });
+    await pg.goto(URL_, { waitUntil: 'networkidle' }); await pg.waitForTimeout(1200);
+    const t2 = await pg.locator('[data-testid=open-status]').innerText();
+    ok(re.test(t2), `giả lập giờ ${iso}: ${t2}`);
+    await c2.close();
+  }
+  // bán buôn
+  const ws = await page.locator('[data-testid=wholesale-table]').innerText();
+  ok(/540\.000/.test(ws) && /640\.000/.test(ws) && /780\.000/.test(ws) && /5 kg/i.test(ws), 'bảng giá bán buôn theo kg');
+  ok(await page.locator('#ban-buon a[href^="/lien-he"]').count() === 1, 'CTA bán buôn dẫn tới form tư vấn');
+  await expectClean(page, 'toàn bộ trang sau khi dùng các công cụ');
+  ok(page.errors.length === 0, '0 lỗi console khi dùng hiệu ứng chữ ký', page.errors.join('|'));
+  await ctx.close();
+}
+// long task khi cuộn toàn trang
+{
+  for (const [w, h] of [[1440, 900], [390, 844]]) {
+    const { ctx, page } = await newPage({ viewport: { width: w, height: h } });
+    await page.addInitScript(() => { window.__lt = []; try { new PerformanceObserver((l) => l.getEntries().forEach((e) => window.__lt.push(e.duration))).observe({ entryTypes: ['longtask'] }); } catch {} });
+    await load(page);
+    await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 240) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 90)); } });
+    const lt = await page.evaluate(() => window.__lt.filter((d) => d > 200));
+    console.log(`  (đo) long task >200ms ở ${w}px: ${lt.length}`);
+    ok(lt.length <= 3, `long task >200ms khi cuộn toàn trang ${w}px (cho phép <=3)`, JSON.stringify(lt));
+    await ctx.close();
+  }
 }
 
 // ---------- 9. mobile menu + ảnh chụp

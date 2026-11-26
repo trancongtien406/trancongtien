@@ -1,4 +1,4 @@
-import { SplitWords } from "@/features/showroom/effects";
+import { Ignite } from "./Ignite";
 import styles from "../brand.module.css";
 import { FAQ } from "../data/content";
 
@@ -7,9 +7,9 @@ export function Faq() {
     <section id="giai-dap" className={`${styles.section} ${styles.faq}`} aria-labelledby="faq-title">
       <div className={`${styles.wrap} ${styles.faqGrid}`}>
         <header>
-          <p className={styles.eyebrow}>Trước khi lên đường</p>
+          <p className={styles.eyebrow}>Hỏi đáp</p>
           <h2 id="faq-title" className={styles.h2}>
-            <SplitWords as="span">Những điều bạn nên biết.</SplitWords>
+            <Ignite as="span">Những điều bạn nên biết.</Ignite>
           </h2>
         </header>
         <div className={styles.faqList}>

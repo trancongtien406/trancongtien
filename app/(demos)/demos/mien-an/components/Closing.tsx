@@ -1,3 +1,4 @@
+import { CONTACT } from "../data/content";
 import styles from "../brand.module.css";
 
 export function Closing() {
@@ -6,11 +7,11 @@ export function Closing() {
       <div className={styles.container}>
         <div className={styles.closingArch} data-reveal>
           <h2 id="closing-title" className={styles.h2}>
-            Hôm nay, hãy dành một chút thời gian <em>cho mình.</em>
+            Còn lịch trống hôm nay, <em>bạn muốn đến giờ nào?</em>
           </h2>
-          <p>Không cần một dịp đặc biệt để bắt đầu chăm sóc bản thân.</p>
-          <a href="#ritual-finder" className={`${styles.btn} ${styles.btnPrimary}`}>
-            Tìm nghi thức của bạn <span aria-hidden="true">↗</span>
+          <p>Mở cửa 9:00 – 20:00 mỗi ngày tại {CONTACT.area}. Đặt trước ít nhất 1 giờ.</p>
+          <a href="#appointment" className={`${styles.btn} ${styles.btnPrimary}`}>
+            Chọn giờ đặt lịch <span aria-hidden="true">↗</span>
           </a>
         </div>
       </div>

@@ -4,9 +4,9 @@ import { fontVars } from "./fonts";
 const base = "/images/demos/phuot-xe/identity";
 
 export const metadata: Metadata = {
-  title: "Vọt · Thuê xe máy và mô tô phượt ở Đà Nẵng",
+  title: "Vọt · Cho thuê xe máy và mô tô ở Đà Nẵng",
   description:
-    "Chọn xe số, tay ga, côn tay hay mô tô phượt ở Đà Nẵng, xem giá ngày và giá tuần rõ từng dòng, tính tiền giao nhận, phụ kiện, bảo hiểm và kiểm tra điều kiện thuê.",
+    "Cửa hàng cho thuê xe số, tay ga, côn tay và mô tô ở Quận Hải Châu, Đà Nẵng: giá ngày và giá tuần, giao xe tận khách sạn và sân bay, điều kiện thuê, đặt cọc, bảo hiểm và cung đường gợi ý.",
   icons: {
     icon: [
       { url: `${base}/favicon.svg`, type: "image/svg+xml" },
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     apple: `${base}/apple-touch-icon.png`,
   },
   openGraph: {
-    title: "Vọt · Chọn xe. Lên đường. Vọt đi.",
+    title: "Vọt · Thuê xe máy. Lên đường. Vọt đi.",
     description: "Thuê xe máy và mô tô phượt ở Đà Nẵng, giá ngày và giá tuần rõ ràng.",
     images: [{ url: `${base}/og-image.webp`, width: 1200, height: 630, alt: "Vọt, thuê xe phượt ở Đà Nẵng" }],
     locale: "vi_VN",

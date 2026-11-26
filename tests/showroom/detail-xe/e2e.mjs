@@ -90,7 +90,12 @@ const scrollToId = (page, id, off = 0) => page.evaluate(([id, off]) => { const e
   const { ctx, page } = await open();
   const fx = await page.evaluate(() => Object.fromEntries([...new Set([...document.querySelectorAll("[data-fx]")].map((e) => e.dataset.fx))].map((n) => [n, [...document.querySelectorAll(`[data-fx="${n}"]`)].map((e) => e.dataset.fxReady)])));
   const names = Object.keys(fx);
-  ok(names.length >= 6, `thư viện hiệu ứng có mặt (${names.join(", ")})`);
+  ok(names.length >= 4, `thư viện hiệu ứng có mặt (${names.join(", ")})`);
+  const MASS = ["SplitReveal", "ScrollScrubText", "VelocityMarquee", "MagneticButton", "ClipReveal", "ScrollProgress"];
+  ok(!names.some((n) => MASS.includes(n)), `không còn hiệu ứng đại trà ngoài PL/PD (${names.join(", ")})`);
+  ok(names.includes("ParallaxLayer") && names.includes("SVGPathDraw"), "giữ ParallaxLayer và SVGPathDraw");
+  const body = await page.locator("main").innerText();
+  ok(/Ngũ Hành Sơn/i.test(body) && /Tiếp nhận/i.test(body) && /Bảo hành thi công/i.test(body) && /Giá khởi điểm/i.test(body) && /Trước khi mang xe tới/i.test(body), "nội dung ngành: khu vực, quy trình, bảo hành, giá theo dòng xe, chuẩn bị");
   ok(Object.values(fx).flat().every((v) => v === "1" || v === "static" || v === "css" || v === undefined), "data-fx-ready hợp lệ");
   // scroll-scrub
   await scrollToId(page, "quy-trinh", 0); await page.waitForTimeout(600);
@@ -140,7 +145,7 @@ const scrollToId = (page, id, off = 0) => page.evaluate(([id, off]) => { const e
   // counter hero
   await page.evaluate(() => scrollTo(0, 0)); await page.waitForTimeout(400);
   const spec = await page.evaluate(() => [...document.querySelectorAll("[class*=specCell] dd")].map((e) => (e.querySelector("[data-fx-view]")?.textContent || "").trim()));
-  ok(spec[0] === "5" && /350\.000/.test(spec[3]), `counter hero về số cuối (${spec.join(" | ")})`);
+  ok(/350\.000/.test(spec[0]), `counter hero về số cuối (${spec.join(" | ")})`);
   await ctx.close();
 }
 
@@ -153,16 +158,16 @@ const scrollToId = (page, id, off = 0) => page.evaluate(([id, off]) => { const e
   const hrefEmpty = await page.locator("[class*=resBtns] a").count();
   ok(hrefEmpty === 0, "không có nút chuyển đổi khi chưa có gói");
   // 3.1 sedan + rửa chi tiết
-  await page.getByLabel("Rửa chi tiết").check();
+  await page.getByLabel("Rửa chi tiết").and(page.locator("input")).check();
   await page.waitForTimeout(900);
   let txt = await page.locator("[class*=result]").first().innerText();
   ok(/Gói rửa chi tiết/i.test(txt) && txt.includes(vnd(350000)) && txt.includes(vnd(420000)), "sedan + rửa chi tiết: 350.000 ₫ đến 420.000 ₫");
   ok(/2,5 giờ/.test(txt) || /2,5/.test(txt), "giờ làm 2,5 (2 + 0,5 kiểm tra)");
   // 3.2 SUV + sơn xoáy + ceramic
-  await page.getByLabel("SUV / Crossover").check();
-  await page.getByLabel("Xoáy mờ, xỉn nhẹ").check();
-  await page.getByLabel("Phủ ceramic").check();
-  await page.getByLabel("Rửa chi tiết").uncheck();
+  await page.getByLabel("SUV / Crossover").and(page.locator("input")).check();
+  await page.getByLabel("Xoáy mờ, xỉn nhẹ").and(page.locator("input")).check();
+  await page.getByLabel("Phủ ceramic").and(page.locator("input")).check();
+  await page.getByLabel("Rửa chi tiết").and(page.locator("input")).uncheck();
   await page.waitForTimeout(1600);
   txt = await page.locator("[class*=result]").first().innerText();
   const corr = Math.round(2500000 * 1.25 * 1.3 / 10000) * 10000, coat = Math.round(4500000 * 1.25 / 10000) * 10000;
@@ -171,20 +176,20 @@ const scrollToId = (page, id, off = 0) => page.evaluate(([id, off]) => { const e
   const exact = await page.locator("[class*=resKpis] dd").allInnerTexts();
   ok(/^15,5/.test(exact[0]) && /^15/.test(exact[1]), `KPI giờ/bước: ${exact.join(" | ")}`);
   // 3.3 xe điện + khoang máy
-  await page.getByLabel("Xe điện").check();
-  await page.getByLabel("Khoang máy").check();
+  await page.getByLabel("Xe điện").and(page.locator("input")).check();
+  await page.getByLabel("Khoang máy").and(page.locator("input")).check();
   await page.waitForTimeout(800);
   txt = await page.locator("[class*=result]").first().innerText();
   ok(/khoang kỹ thuật/i.test(txt) && /không xịt nước/i.test(txt), "xe điện: đổi thành khoang kỹ thuật, làm sạch khô");
   // 3.4 xoá hết
-  for (const l of ["Phủ ceramic", "Khoang máy"]) await page.getByLabel(l).uncheck();
+  for (const l of ["Phủ ceramic", "Khoang máy"]) await page.getByLabel(l).and(page.locator("input")).uncheck();
   await page.waitForTimeout(500);
   ok(await page.getByText("Chưa có hạng mục nào").isVisible(), "bỏ chọn hết quay lại trạng thái rỗng");
   // 3.5 chọn từ thẻ gói
   await scrollToId(page, "goi", 300);
   await page.locator("article[data-lit]").nth(1).getByRole("link", { name: "Chọn gói này" }).click();
   await page.waitForTimeout(1200);
-  ok(await page.getByLabel("Đánh bóng sơn").isChecked(), "nút 'Chọn gói này' chọn sẵn hạng mục trong bộ chọn");
+  ok(await page.getByLabel("Đánh bóng sơn").and(page.locator("input")).isChecked(), "nút 'Chọn gói này' chọn sẵn hạng mục trong bộ chọn");
   txt = await page.locator("[class*=result]").first().innerText();
   ok(/Gói hiệu chỉnh sơn/i.test(txt), "gói gợi ý cập nhật theo thẻ đã chọn");
   // 3.6 chữ cấm ở mọi trạng thái, link thoát, sao chép
@@ -201,7 +206,7 @@ const scrollToId = (page, id, off = 0) => page.evaluate(([id, off]) => { const e
   ok(!bad, `không chữ cấm khi có kết quả${bad ? ": " + bad[0] : ""}`);
   // 3.7 lưu lựa chọn khi tải lại
   await page.reload({ waitUntil: "networkidle" }); await page.waitForTimeout(1500);
-  ok(await page.getByLabel("Đánh bóng sơn").isChecked() && await page.getByLabel("Xe điện").isChecked(), "lựa chọn được nhớ sau khi tải lại (localStorage)");
+  ok(await page.getByLabel("Đánh bóng sơn").and(page.locator("input")).isChecked() && await page.getByLabel("Xe điện").and(page.locator("input")).isChecked(), "lựa chọn được nhớ sau khi tải lại (localStorage)");
   ok(errs.length === 0, `0 lỗi console trong luồng builder (${errs.length}) ${errs[0] || ""}`);
   await ctx.close();
 }
@@ -215,7 +220,7 @@ const scrollToId = (page, id, off = 0) => page.evaluate(([id, off]) => { const e
   await page.keyboard.press("Tab");
   ok(await page.evaluate(() => document.activeElement?.textContent?.includes("Bỏ qua")), "Tab đầu tiên là liên kết bỏ qua");
   let reached = false;
-  for (let i = 0; i < 12; i++) { await page.keyboard.press("Tab"); if (await page.evaluate(() => document.activeElement?.textContent?.includes("Chọn gói cho xe của bạn"))) { reached = true; break; } }
+  for (let i = 0; i < 12; i++) { await page.keyboard.press("Tab"); if (await page.evaluate(() => document.activeElement?.textContent?.includes("Đặt lịch kiểm tra xe"))) { reached = true; break; } }
   ok(reached, "Tab tới CTA chính ở hero");
   const outline = await page.evaluate(() => getComputedStyle(document.activeElement).outlineStyle);
   ok(outline !== "none", "focus-visible rõ trên CTA");

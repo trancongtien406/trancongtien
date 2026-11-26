@@ -12,7 +12,7 @@ export function Faq() {
         <i className={s.rule} data-rule />
         <div className={s.faqGrid}>
           <div>
-            <p className={s.label}>08 / Những điều cần biết</p>
+            <p className={s.label}>10 / Câu hỏi thường gặp</p>
             <h2 id="faq-title" className={s.h2}>
               Trước khi bắt đầu.
             </h2>

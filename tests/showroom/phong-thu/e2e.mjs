@@ -74,7 +74,7 @@ const fx = await p.evaluate(() => ({
   gallery: !!document.querySelector("[data-fx=DraggableGallery]"), ticker: !!document.querySelector("[data-fx=NumberTicker],[data-fx=Counter]"),
   canvases: document.querySelectorAll("canvas").length, faders: document.querySelectorAll("[role=slider]").length,
 }));
-ok(fx.scramble >= 8 && fx.split >= 8 && fx.clip >= 6 && fx.marquee === 1 && fx.magnetic >= 3 && fx.spot === 1 && fx.scrub === 1 && fx.par === 1 && fx.grain && fx.gallery, `FX thư viện: scramble ${fx.scramble}, split ${fx.split}, clip ${fx.clip}, marquee ${fx.marquee}, magnetic ${fx.magnetic}, spotlight ${fx.spot}, scrub ${fx.scrub}, parallax ${fx.par}, gallery`);
+ok(fx.scramble >= 8 && fx.marquee === 1 && fx.magnetic >= 3 && fx.spot === 1 && fx.grain && fx.gallery && fx.cursor && fx.clip === 0 && fx.split === 0 && fx.scrub === 0 && fx.par === 0 && !fx.draw, `FX thư viện chỉ giữ VM + MB (+ chữ ký): scramble ${fx.scramble}, marquee ${fx.marquee}, magnetic ${fx.magnetic}, spotlight ${fx.spot}; đã bỏ clip ${fx.clip}, split ${fx.split}, scrub ${fx.scrub}, parallax ${fx.par}, draw ${fx.draw}`);
 ok(fx.canvases >= 12 && fx.faders >= 5, `canvas ${fx.canvases}, fader ${fx.faders}`);
 
 // waveform: vẽ thật + phản ứng theo con trỏ
@@ -108,7 +108,7 @@ const vuSig = () => p.evaluate(() => document.querySelector("canvas[class*=vuSm]
 const v1 = await vuSig(); await p.waitForTimeout(400); const v2 = await vuSig(); await p.waitForTimeout(400); const v3 = await vuSig();
 ok(new Set([v1, v2, v3]).size >= 2, "VU meter hero chạy");
 // scramble giải mã: nhãn hero kết thúc đúng chữ
-ok(/CH 01 · VOCAL · TÍN HIỆU SẴN SÀNG/.test(await p.locator("section#top p").first().innerText()), "text scramble kết thúc đúng chữ (NFC)");
+ok(/PHÒNG THU ÂM · QUẬN HẢI CHÂU, ĐÀ NẴNG/.test(await p.locator("section#top p").first().innerText()), "text scramble kết thúc đúng chữ (NFC)");
 
 // ---------- nghe thử (WebAudio chỉ sau cử chỉ)
 ok((await p.evaluate(() => window.__ac)) === 0, "chưa tạo AudioContext khi chưa bấm");
@@ -138,7 +138,7 @@ const mBtn = p.getByRole("button", { name: /Tắt tiếng kênh Thu giọng/ });
 await mBtn.click(); ok((await mBtn.getAttribute("aria-pressed")) === "true" && (await p.locator("#dich-vu li[class*=track][data-off]").count()) === 1, "nút M tắt tiếng kênh");
 await mBtn.click();
 await p.getByRole("button", { name: /Nghe riêng kênh Thu band/ }).click();
-ok((await p.locator("#dich-vu li[class*=track][data-off]").count()) === 4, "nút S nghe riêng: 4 kênh còn lại mờ");
+ok((await p.locator("#dich-vu li[class*=track][data-off]").count()) === 5, "nút S nghe riêng: 5 kênh còn lại mờ");
 await p.getByRole("button", { name: /Nghe riêng kênh Thu band/ }).click();
 ok((await p.locator("#dich-vu li[class*=track][data-off]").count()) === 0, "bỏ solo: các kênh sáng lại");
 ok((await p.locator("#dich-vu [class*=trPrice]").allInnerTexts()).every((t) => /\d/.test(t) && /₫|đ/.test(t) && /Giá tham khảo/i.test(t)), "5 kênh có giá tham khảo VND");
@@ -175,7 +175,26 @@ let peak = 0; for (let i = 0; i < 8; i++) { for (let k = 0; k < 3; k++) await p.
 ok(peak * 1000 / 60 > base * 1.4, `marquee tăng tốc theo cuộn (nền ${base.toFixed(0)}px/s, đỉnh ~${(peak * 1000 / 60).toFixed(0)}px/s)`);
 
 // ---------- bảng giá
-ok((await p.locator("#bang-gia tbody tr").count()) === 5, "bảng giá 5 hàng");
+ok((await p.locator("#bang-gia tbody tr").count()) === 6, "bảng giá 6 hàng (có Sản xuất beat)");
+ok((await p.locator("#bang-gia ul[aria-label='Các gói dịch vụ'] > li").count()) === 4, "4 gói trọn bài có giá");
+
+// ---------- nội dung phòng thu thật: hero, giao file, thiết bị, đặt lịch
+const heroTxt = await p.locator("section#top").innerText();
+ok(/Hải Châu, Đà Nẵng/.test(heroTxt) && /220\.000/.test(heroTxt) && /09:00/.test(heroTxt) && /WAV 24-bit/.test(heroTxt) && /Đặt lịch thu/.test(heroTxt), "hero: loại hình, quận, giá từ, giờ làm, định dạng file, CTA đặt lịch");
+for (const id of ["dich-vu", "quy-trinh", "giao-file", "phong-thu", "master", "bang-gia", "uoc-tinh", "dat-lich", "hoi-dap", "lien-he"]) ok((await p.locator("#" + id).count()) === 1, "có section #" + id);
+const bk = await p.locator("#dat-lich").innerText();
+ok(/30%/.test(bk) && /24 giờ/.test(bk) && /48 giờ/.test(bk) && /09:00 đến 22:00/i.test(bk), "đặt lịch: cọc 30%, dời 24 giờ, huỷ 48 giờ, giờ làm");
+ok((await p.locator("#hoi-dap details").count()) >= 8, "FAQ ≥8 câu");
+ok(/MIC/.test(await p.locator("#phong-thu").innerText()) && (await p.locator("#phong-thu ul[aria-label='Thiết bị theo loại'] > li").count()) === 6, "thiết bị theo loại (6 nhóm, không tên hãng)");
+// máy tính dung lượng file giao
+await p.evaluate(() => document.getElementById("giao-file").scrollIntoView()); await p.waitForTimeout(900);
+const sz = () => p.locator("#giao-file [class*=sizerOut]").innerText();
+const sz0 = await sz();
+ok(/60,5 MB/.test(sz0) && /8,4 MB/.test(sz0), "dung lượng 3:30: WAV 24-bit 60,5 MB, MP3 8,4 MB");
+await p.locator("#giao-file [role=slider]").first().focus(); await p.keyboard.press("End"); await p.waitForTimeout(700);
+ok((await sz()) !== sz0 && /172,8 MB/.test(await sz()), "kéo độ dài 10:00: WAV 24-bit 172,8 MB");
+await p.locator("#giao-file [role=slider]").nth(1).focus(); await p.keyboard.press("Home"); await p.waitForTimeout(500);
+ok(!/stem WAV/i.test(await sz()), "0 stem: ẩn dòng bộ stem");
 ok(/Giá tham khảo/.test(await p.locator("#bang-gia").innerText()), "ghi 'Giá tham khảo'");
 
 // ---------- Session Estimator
@@ -201,6 +220,9 @@ out = await p.locator("#uoc-tinh [class*=estOut]").innerText();
 ok(/tối thiểu tính 2 giờ/i.test(await p.locator("#uoc-tinh [class*=estIn]").innerText()) && /2 giờ tính phí/.test(out), "1 giờ: tính tối thiểu 2 giờ");
 await p.locator("#uoc-tinh label", { hasText: "Thu band" }).click(); await p.waitForTimeout(800);
 ok(await p.getByRole("switch").isDisabled() && /Thu band cần engineer/.test(await p.locator("#uoc-tinh [class*=estIn]").innerText()), "thu band: bắt buộc engineer, switch khoá");
+await p.locator("#uoc-tinh label", { hasText: "Sản xuất beat" }).click(); await p.waitForTimeout(800);
+ok(await p.getByRole("switch").isDisabled() && /producer/.test(await p.locator("#uoc-tinh [class*=estIn]").innerText()), "sản xuất beat: luôn có producer, switch khoá");
+ok(/Bài tham chiếu|bài tham chiếu/.test(await p.locator("#uoc-tinh [class*=estOut]").innerText()), "beat: checklist riêng");
 await p.locator("#uoc-tinh label", { hasText: "Mix & Master" }).click(); await p.waitForTimeout(800);
 ok(!(await p.locator("#uoc-tinh label", { hasText: "Số người" }).count()) && (await p.locator("#uoc-tinh [role=slider]").count()) === 2, "mix: ẩn ô số người");
 await p.locator("#uoc-tinh label", { hasText: "Podcast" }).focus(); // radio bằng bàn phím
@@ -253,6 +275,15 @@ await m.context().close();
 const dl = await open({ width: 1440, height: 900 });
 console.log(`INFO long task >200ms khi cuộn toàn trang 1440: ${await lt(dl)}`);
 await dl.context().close();
+
+// ---------- ngôn ngữ chuyển động: playhead quét (--rv) thay vì fade-up
+const wipe = await open({ width: 1440, height: 900 });
+await wipe.evaluate(() => scrollTo(0, 0));
+const rv0 = await wipe.evaluate(() => { const e = [...document.querySelectorAll("[data-pt=rv]")].find((x) => x.getBoundingClientRect().top > innerHeight); return e ? getComputedStyle(e).getPropertyValue("--rv").trim() || e.style.getPropertyValue("--rv") : "none"; });
+ok(rv0 === "0", `khối chưa vào khung có --rv=0 (${rv0})`);
+await wipe.evaluate(() => document.getElementById("hoi-dap").scrollIntoView()); await wipe.waitForTimeout(2200);
+ok(await wipe.evaluate(() => { const e = document.querySelector("#hoi-dap [data-pt=rv]"); return e.getAttribute("data-done") === "1" && getComputedStyle(e).clipPath === "none"; }), "khối quét xong: data-done và gỡ clip-path");
+await wipe.context().close();
 
 // ---------- reduced motion
 const r = await open({ width: 1440, height: 900 }, { reduced: true });

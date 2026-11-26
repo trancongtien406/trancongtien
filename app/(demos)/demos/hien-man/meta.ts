@@ -4,6 +4,6 @@ export const meta = {
   brand: "Hiên Mặn Villa",
   industry: "Villa",
   solutionSlug: "hospitality",
-  tagline: "Villa nghỉ dưỡng",
+  tagline: "Villa nghỉ dưỡng ven biển Sơn Trà",
   look: "Ảnh toàn màn hình điện ảnh, thanh đặt phòng nổi",
 } as const;

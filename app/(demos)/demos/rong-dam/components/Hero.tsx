@@ -1,3 +1,4 @@
+import { MagneticButton, SVGPathDraw } from "@/features/showroom/effects";
 import { COPY } from "../data/copy";
 import type { Lang } from "../data/tours";
 import styles from "../brand.module.css";
@@ -20,20 +21,33 @@ export function Hero({ lang }: { lang: Lang }) {
               <span className={`${styles.line} ${styles.line2}`} data-rd="h1-line">{t.h1b}</span>
             </h1>
             <p className={styles.heroDesc} data-rd="hero-fade">{t.desc}</p>
+            <p className={styles.heroWho} data-rd="hero-fade">{t.who}</p>
             <div className={styles.ctaRow} data-rd="hero-fade">
-              <a className={`${styles.btn} ${styles.btnRed}`} href="#trip-finder">
-                {t.cta} <span aria-hidden="true">↗</span>
-              </a>
-              <a className={styles.link} href="#tours">
+              <MagneticButton>
+                <a className={`${styles.btn} ${styles.btnRed}`} href="#dat-tour">
+                  {t.cta} <span aria-hidden="true">↗</span>
+                </a>
+              </MagneticButton>
+              <a className={styles.link} href="#lich">
                 {t.cta2}
               </a>
             </div>
-            <div className={styles.doodleWrap} aria-hidden="true">
-              <svg viewBox="0 0 420 70" fill="none">
-                <path d="M6 44 C40 8 70 70 110 36 S176 8 214 40 S290 66 330 28 S386 18 408 38" stroke="#b83e2b" strokeWidth="4" strokeLinecap="round" strokeDasharray="2 11" />
-                <path d="M392 22 L410 38 L388 48" stroke="#b83e2b" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-                <rect data-rd="doodle-cover" x="-4" y="-4" width="430" height="80" fill="#f5f0e3" />
-              </svg>
+            <dl className={styles.facts} data-rd="hero-fade">
+              {t.facts.map((f) => (
+                <div key={f.k} className={styles.fact}>
+                  <dt>{f.k}</dt>
+                  <dd>{f.v}</dd>
+                  <dd className={styles.factSub}>{f.s}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className={styles.routeDoodle} aria-hidden="true">
+              <SVGPathDraw viewBox="0 0 420 60" stroke="#b83e2b" strokeWidth={4} strokeLinecap="round" strokeLinejoin="round" duration={2.2} stagger={0.4}>
+                <path d="M12 38 C60 6 96 62 150 34 S236 6 280 36 S360 56 404 22" />
+              </SVGPathDraw>
+              <span className={styles.rdA}>{t.route[0]}</span>
+              <span className={styles.rdB}>{t.route[1]}</span>
+              <span className={styles.rdC}>{t.route[2]}</span>
             </div>
             <p className={`${styles.heroFoot} ${styles.label}`} data-rd="hero-fade">
               <span>{t.coords}</span>

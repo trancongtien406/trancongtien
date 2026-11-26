@@ -4,6 +4,8 @@ import type { Lang } from "../data/tours";
 import styles from "../brand.module.css";
 import { Photo } from "./Photo";
 
+const PLACE_TRIPS = ["RD-04 · RD-06", "RD-02 · RD-06", "RD-01 · RD-06", "RD-03 · RD-05"];
+
 export function Rhythm({ lang }: { lang: Lang }) {
   const t = COPY[lang].rhythm;
   const rot = [styles.rotA, styles.rotB, styles.rotC, styles.rotD];
@@ -22,6 +24,7 @@ export function Rhythm({ lang }: { lang: Lang }) {
               <span className={styles.passNo} aria-hidden="true">0{i + 1}</span>
               <h3 className={styles.h3}>{p.name}</h3>
               <p>{p.line}</p>
+              <p className={`${styles.label} ${styles.passTrips}`}>{PLACE_TRIPS[i]}</p>
             </li>
           ))}
         </ul>

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { SANCTUARY } from "../data/content";
+import { SANCTUARY, SPACE_FACTS } from "../data/content";
 import { Close } from "./Icons";
 import styles from "../brand.module.css";
 
@@ -29,7 +29,7 @@ export function Sanctuary() {
     const s = SANCTUARY[i];
     return (
       <figure className={`${styles.sanFig} ${cls}`} data-san>
-        <button type="button" className={styles.sanBtn} onClick={() => setIdx(i)} aria-label={`Phóng to ảnh: ${s.caption}`} data-san-btn>
+        <button type="button" className={styles.sanBtn} onClick={() => setIdx(i)} aria-label={`Phóng to ảnh: ${s.caption}`} data-san-btn data-ripple>
           <Image src={`/images/demos/mien-an/ma-${s.key}-1200.webp`} alt={s.alt} fill={false} width={1200} height={1600} sizes="(min-width: 1024px) 700px, 92vw" style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }} />
         </button>
         <figcaption>{s.caption}</figcaption>
@@ -41,11 +41,11 @@ export function Sanctuary() {
     <section id="sanctuary" className={`${styles.section} ${styles.linen}`} aria-labelledby="san-title">
       <div className={styles.container}>
         <div className={styles.sanHead} data-reveal>
-          <p className={styles.eyebrow}>The sanctuary</p>
+          <p className={styles.eyebrow}>Không gian</p>
           <h2 id="san-title" className={styles.h2}>
-            Không gian của những <em>điều dịu nhẹ.</em>
+            Hai phòng trị liệu và <em>một khu đón khách.</em>
           </h2>
-          <p className={styles.lead}>Ánh sáng tự nhiên, chất liệu mộc mạc và những sắc màu lấy cảm hứng từ thiên nhiên. Một không gian được tạo nên để mọi giác quan có thể chậm lại.</p>
+          <p className={styles.lead}>Tường vữa màu kem, cửa sổ rèm gỗ, ánh sáng ấm chỉnh được. Bấm vào ảnh để xem lớn hơn.</p>
         </div>
         <div className={styles.sanGrid}>
           {fig(0, styles.sanMain)}
@@ -54,6 +54,11 @@ export function Sanctuary() {
             {fig(2, styles.sanSm)}
           </div>
         </div>
+        <dl className={styles.spaceFacts} data-reveal>
+          {SPACE_FACTS.map((f) => (
+            <div key={f.k}><dt>{f.k}</dt><dd>{f.v}</dd></div>
+          ))}
+        </dl>
       </div>
 
       <dialog

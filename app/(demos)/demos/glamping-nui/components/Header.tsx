@@ -1,15 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MagneticButton } from "@/features/showroom/effects";
 import styles from "../brand.module.css";
 
 const NAV = [
-  { href: "#hanh-trinh", label: "Hành trình" },
-  { href: "#luu-tru", label: "Lều" },
+  { href: "#luu-tru", label: "Lều và giá" },
   { href: "#hoat-dong", label: "Hoạt động" },
-  { href: "#lua-trai", label: "Lửa trại" },
-  { href: "#lap-ke-hoach", label: "Lên kế hoạch" },
+  { href: "#lua-trai", label: "Ăn uống" },
+  { href: "#lich-trinh", label: "Lịch 2N1Đ" },
+  { href: "#quy-dinh", label: "Quy định" },
 ];
 
 export function Header() {
@@ -43,9 +42,7 @@ export function Header() {
           </ul>
         </nav>
         <div className={styles.headerTools}>
-          <MagneticButton max={6} strength={0.2}>
-            <a className={`${styles.btn} ${styles.btnFire} ${styles.btnSm}`} href="#lap-ke-hoach">Lên lịch chuyến đi</a>
-          </MagneticButton>
+          <a className={`${styles.btn} ${styles.btnFire} ${styles.btnSm}`} href="#lap-ke-hoach">Đặt lều</a>
           <button ref={btn} type="button" className={styles.menuBtn} aria-expanded={open} aria-controls="gl-nav" onClick={() => setOpen((v) => !v)}>
             <span className={styles.menuIcon} aria-hidden="true" />
             <span className={styles.srOnly}>{open ? "Đóng menu" : "Mở menu"}</span>

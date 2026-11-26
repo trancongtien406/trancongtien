@@ -85,7 +85,7 @@ export function Scheduler({ consultHref }: { consultHref: string }) {
           <label htmlFor="mc-doctor">Bác sĩ</label>
           <select id="mc-doctor" value={doctorId} disabled={!svc} onChange={(e) => pickDoctor(e.target.value as DoctorId)}>
             <option value="any">Bất kỳ bác sĩ phù hợp</option>
-            {docs.map((d) => (<option key={d.id} value={d.id}>{d.name} · {d.role}</option>))}
+            {docs.map((d) => (<option key={d.id} value={d.id}>{d.name}</option>))}
           </select>
           {!svc && <p className={styles.helper}>Hãy chọn một nhu cầu chăm sóc để xem lịch hẹn.</p>}
         </div>
@@ -139,7 +139,7 @@ export function Scheduler({ consultHref }: { consultHref: string }) {
           <button type="button" className={`${styles.btn} ${styles.btnPrimary}`} onClick={preview} aria-describedby={error ? "mc-sched-err" : undefined}>Xem trước lịch hẹn</button>
           <button type="button" className={styles.btnText} onClick={reset}>Đặt lại</button>
         </div>
-        <p className={styles.panelFoot}>Phần này chỉ tóm tắt lựa chọn của bạn. Chưa có yêu cầu đặt lịch nào được gửi đến cơ sở y tế.</p>
+        <p className={styles.panelFoot}>Phần này chỉ tóm tắt lựa chọn của bạn trên trình duyệt. Chưa có yêu cầu đặt lịch nào được gửi đi.</p>
       </div>
 
       <aside className={styles.preview} data-mc="sched-preview" aria-label="Tóm tắt lịch hẹn">
@@ -162,8 +162,8 @@ export function Scheduler({ consultHref }: { consultHref: string }) {
             </div>
           </div>
         )}
-        <a className={styles.previewCta} href={consultHref} data-testid="consult-cta">Muốn website như thế này cho phòng khám của bạn? Nhận tư vấn <span aria-hidden="true">→</span></a>
-        <p className={styles.previewNote}>Giá tham khảo, không phải báo giá điều trị.</p>
+        <a className={styles.previewCta} href={consultHref} data-testid="consult-cta">Chuyển sang form liên hệ <span aria-hidden="true">→</span></a>
+        <p className={styles.previewNote}>Giá tham khảo; chi phí điều trị được báo sau khi khám.</p>
       </aside>
     </div>
   );

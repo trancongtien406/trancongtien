@@ -61,8 +61,8 @@ export function Moodboard({ consultHref }: { consultHref: string }) {
     <section className={styles.mood} id="moodboard" ref={rootRef} aria-labelledby="tm-mood-h" data-tm-mood>
       <div className={styles.wrap}>
         <header className={styles.sectionHead}>
-          <p className={styles.eyebrow}>06 / Bản phác thảo của hai bạn</p>
-          <h2 id="tm-mood-h" className={styles.h2}>Ngày cưới trong hình dung của hai bạn.</h2>
+          <p className={styles.eyebrow}>Moodboard concept</p>
+          <h2 id="tm-mood-h" className={styles.h2}>Phác thảo concept trước khi tư vấn.</h2>
           <p className={styles.body}>Chọn những sắc thái mình yêu thích. Từ phong cách, bảng màu đến bối cảnh và gói chụp, từng lựa chọn ghép thành một bản moodboard nhỏ. Mọi thứ chỉ chạy trên trình duyệt của bạn.</p>
         </header>
         <div className={styles.moodGrid}>
@@ -134,7 +134,7 @@ export function Moodboard({ consultHref }: { consultHref: string }) {
               <p className={styles.sumLine} data-tm="sum-pkg">{pkg.name} · {pkg.hours} · {pkg.photos} ảnh</p>
               <p className={styles.codeLine}>Tổng giá gói tham khảo</p>
               <p className={styles.price} data-tm="sum-price" aria-live="polite">{vnd(pkg.price)}</p>
-              <p className={styles.helper}>Ảnh tham khảo stock. {pkg.album}. Chưa bao gồm các chi phí ngoài gói.</p>
+              <p className={styles.helper}>Ảnh tham khảo. {pkg.album}. Chưa bao gồm các chi phí ngoài gói.</p>
             </div>
           </div>
         </div>

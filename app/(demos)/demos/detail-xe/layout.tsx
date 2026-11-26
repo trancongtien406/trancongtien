@@ -4,9 +4,9 @@ import { fontVars } from "./fonts";
 const base = "/images/demos/detail-xe/identity";
 
 export const metadata: Metadata = {
-  title: "Gương Phẩm · Chăm sóc xe hơi chuẩn chi tiết ở Đà Nẵng",
+  title: "Gương Phẩm · Chăm sóc xe hơi ở Quận Ngũ Hành Sơn, Đà Nẵng",
   description:
-    "Rửa chi tiết, đánh bóng sơn, phủ ceramic, nội thất và khoang máy. Chọn dòng xe, tình trạng sơn và nhu cầu để nhận gói gợi ý, các bước thi công, thời gian và giá tham khảo.",
+    "Cửa hàng chăm sóc xe hơi ở Quận Ngũ Hành Sơn, Đà Nẵng: rửa chi tiết từ 350.000 đ, đánh bóng sơn, phủ ceramic, nội thất, khoang máy. Giá theo dòng xe, quy trình từng bước, mở 08:00 đến 18:00.",
   icons: {
     icon: [
       { url: `${base}/favicon.svg`, type: "image/svg+xml" },
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
     apple: `${base}/apple-touch-icon.png`,
   },
   openGraph: {
-    title: "Gương Phẩm · Đánh thức vẻ đẹp nguyên bản",
-    description: "Chăm sóc xe hơi theo quy trình rõ từng bước, giá tham khảo công khai.",
+    title: "Gương Phẩm · Rửa chi tiết, đánh bóng, phủ ceramic ở Đà Nẵng",
+    description: "Kiểm tra xe miễn phí, báo giá theo dòng xe, quy trình rõ từng bước.",
     images: [{ url: `${base}/og-image.webp`, width: 1200, height: 630, alt: "Gương Phẩm, chăm sóc xe hơi ở Đà Nẵng" }],
     locale: "vi_VN",
     type: "website",

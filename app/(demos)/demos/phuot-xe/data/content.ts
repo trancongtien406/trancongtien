@@ -1,8 +1,9 @@
 export const NAV = [
   { href: "#doi-xe", label: "Đội xe" },
-  { href: "#tinh-gia", label: "Tính giá" },
+  { href: "#tinh-gia", label: "Ước tính giá" },
   { href: "#cung-duong", label: "Cung đường" },
-  { href: "#quy-trinh", label: "Quy trình" },
+  { href: "#giao-nhan", label: "Giao nhận" },
+  { href: "#dieu-kien", label: "Điều kiện thuê" },
   { href: "#hoi-dap", label: "Hỏi đáp" },
 ] as const;
 
@@ -49,8 +50,8 @@ export const ROUTES: readonly Route[] = [
 
 export const STEPS = [
   { n: "01", t: "Chọn xe", d: "Lọc theo xe số, tay ga hoặc côn tay. Mỗi mẫu có thông số và giá ngày, giá tuần ngay trên thẻ." },
-  { n: "02", t: "Tính giá", d: "Chọn số ngày, cách nhận xe, phụ kiện và bảo hiểm. Phiếu giá hiện từng dòng, cộng ra tổng." },
-  { n: "03", t: "Gửi tư vấn", d: "Mở form tư vấn, dán bản tóm tắt vào ghi chú. Chúng tôi xác nhận xe, giờ nhận và tiền cọc." },
+  { n: "02", t: "Ước tính giá", d: "Chọn số ngày, cách nhận xe, phụ kiện và bảo hiểm. Phiếu giá hiện từng dòng, cộng ra tổng." },
+  { n: "03", t: "Gửi yêu cầu đặt xe", d: "Mở form, dán bản tóm tắt vào ghi chú. Cửa hàng xác nhận xe, giờ nhận và tiền cọc." },
   { n: "04", t: "Nhận xe, đi", d: "Cùng kiểm xe, chụp ảnh hiện trạng, nhận mũ bảo hiểm rồi lên đường." },
 ] as const;
 
@@ -63,6 +64,32 @@ export const CHECKS = [
   "Gương hai bên chỉnh được, không lỏng",
   "Bình xăng đầy hoặc ghi mức xăng khi giao",
   "Mũ bảo hiểm đúng size, quai cài chắc",
+] as const;
+
+export const SHOP = {
+  lead: "Vọt là cửa hàng cho thuê xe máy và mô tô ở Quận Hải Châu, Đà Nẵng, dành cho khách du lịch và người đi phượt. Tám mẫu xe từ xe số 110 cc đến mô tô 250 cc, thuê theo ngày hoặc theo tuần. Mỗi xe được kiểm tám điểm trước khi giao, và bạn cùng kiểm lại khi nhận.",
+  facts: [
+    { k: "Nhận và trả xe", v: "07:00 đến 21:00 mỗi ngày", d: "Ngoài giờ: hẹn trước, có thể tính phí giao." },
+    { k: "Ngôn ngữ", v: "Tiếng Việt và tiếng Anh", d: "Khách nước ngoài xem mục Hỏi đáp về giấy tờ." },
+    { k: "Phạm vi chạy", v: "Đà Nẵng, Hội An, Huế", d: "Đi xa hơn: báo trước để cửa hàng xác nhận." },
+  ],
+} as const;
+
+export const TERMS = [
+  { k: "Giấy tờ", v: "CCCD hoặc hộ chiếu còn hạn, cộng giấy phép lái xe phù hợp dung tích xe. Cửa hàng đối chiếu bản gốc và chụp ảnh lưu thỏa thuận, không giữ bản gốc của bạn." },
+  { k: "Tuổi và bằng lái", v: "Người lái phải đủ tuổi và có giấy phép lái xe đúng hạng cho dung tích xe. Mẫu 175 cc và 250 cc cần hạng bằng tương ứng; bạn tự kiểm tra quy định hiện hành trước khi đặt." },
+  { k: "Tiền cọc", v: "Từ 2.000.000 ₫ đến 8.000.000 ₫ tùy mẫu xe, hiện sẵn trên phiếu giá. Hoàn đủ khi bạn trả xe đúng hạn, nguyên trạng và đúng mức xăng. Cọc không nằm trong tổng tiền thuê." },
+  { k: "Cách tính ngày", v: "Một ngày là 24 giờ kể từ giờ nhận. Trả muộn quá 1 giờ thì tính thêm theo thỏa thuận; cần gia hạn hãy báo trước." },
+  { k: "Xăng", v: "Nhận xe mức nào thì trả xe mức đó. Mức xăng được ghi vào phiếu giao xe và chụp ảnh đồng hồ." },
+  { k: "Huỷ và đổi lịch", v: "Huỷ hoặc đổi ngày nhận trước giờ hẹn 24 giờ thì không mất phí. Sát giờ hơn, cửa hàng trao đổi trực tiếp với bạn." },
+  { k: "Khi lái xe", v: "Đội mũ bảo hiểm và cài quai. Không lái xe sau khi uống rượu bia. Không cho người khác lái thay và không chở quá số người của xe." },
+] as const;
+
+export const INCIDENT = [
+  { n: "01", t: "Dừng ở nơi an toàn", d: "Đưa xe vào lề, bật xi-nhan cảnh báo. Có người bị thương thì gọi cấp cứu 115 trước." },
+  { n: "02", t: "Gọi cho cửa hàng", d: "Số liên hệ ghi trong thỏa thuận thuê. Cho biết vị trí, tình trạng xe và người đi cùng." },
+  { n: "03", t: "Chụp ảnh hiện trường", d: "Chụp xe, biển số, vị trí và người liên quan. Không tự thỏa thuận bồi thường tại chỗ." },
+  { n: "04", t: "Xe thay hoặc cứu hộ", d: "Tùy gói bảo hiểm và vị trí, cửa hàng cử xe cứu hộ hoặc đổi xe khác. Chi phí xử lý theo thỏa thuận thuê." },
 ] as const;
 
 export const FAQ = [
@@ -87,8 +114,21 @@ export const FAQ = [
     a: "Liên hệ cửa hàng theo thông tin ghi trong thỏa thuận. Gói bảo hiểm Trọn hành trình có hỗ trợ cứu hộ xe trong khu vực Đà Nẵng, Hội An và Huế; các gói còn lại xử lý theo điều khoản thuê.",
   },
   {
+    q: "Cửa hàng mở giờ nào, nhận xe sớm hơn được không?",
+    a: "Nhận và trả xe từ 07:00 đến 21:00 mỗi ngày. Chuyến bay sớm hoặc muộn thì báo trước giờ đến, cửa hàng sắp xếp người giao xe, có thể tính thêm phí giao ngoài giờ.",
+  },
+  {
+    q: "Thuê cả nhóm năm, sáu người thì sao?",
+    a: "Mỗi xe chở tối đa hai người, nên nhóm đông thuê nhiều xe. Hãy ghi số xe và loại xe vào form đặt xe, cửa hàng báo lại xe còn trống cho những ngày bạn chọn.",
+  },
+  {
     q: "Tôi có thể chạy đèo Hải Vân hoặc đi Huế không?",
     a: "Được, nếu lộ trình nằm trong phạm vi thỏa thuận. Hãy báo trước điểm đến khi tư vấn để chúng tôi gợi ý xe phù hợp và dặn kỹ về đoạn đường, thời tiết.",
+  },
+  {
+    q: "Foreign visitor: what do I need to rent a bike?",
+    lang: "en",
+    a: "Bring your passport and your driving licence. Whether a foreign or international licence is accepted for a given engine size depends on current Vietnamese regulations, so please check before you book. Our staff speak English and will tell you which documents to show at pickup. The deposit is returned when you bring the bike back on time and in the same condition.",
   },
 ] as const;
 

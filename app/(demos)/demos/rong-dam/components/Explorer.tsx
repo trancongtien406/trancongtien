@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { COPY } from "../data/copy";
 import { CANCEL_POLICY, PLACES, TOURS, getTour, type Lang } from "../data/tours";
 import { pick, vnd } from "../lib/format";
 import { MAX_GUESTS, calculateTripPrice } from "../lib/pricing";
 import styles from "../brand.module.css";
-import { RouteMap } from "./RouteMap";
+import { RouteMap, fmtMin, stopAt, toMin } from "./RouteMap";
 import { useTrip } from "./TripProvider";
 
 const SAVED_KEY = "rd-saved-v1";
@@ -26,6 +26,49 @@ export function Explorer({ consultHref }: { consultHref: string }) {
   const [status, setStatus] = useState<{ kind: "ok" | "bad"; msg: string } | null>(null);
   const [saved, setSaved] = useState<Saved | null>(null);
   const [fallbackText, setFallbackText] = useState<string | null>(null);
+
+  // Đồng hồ hành trình: thanh giờ điều khiển xe chạy trên bản đồ
+  const startMin = toMin(day.stops[0].time);
+  const endMin = toMin(day.stops[day.stops.length - 1].time);
+  const [clock, setClock] = useState(startMin);
+  const [playing, setPlaying] = useState(false);
+  const lastStop = useRef<string | null>(null);
+  const clockRef = useRef(startMin);
+  useEffect(() => { const m = toMin(day.stops[0].time); clockRef.current = m; setClock(m); setPlaying(false); lastStop.current = null; }, [tour.id, day.id, day.stops]);
+  const clockStop = stopAt(day.stops, clock);
+  const syncStop = (m: number) => {
+    const sid = stopAt(day.stops, m).id;
+    if (sid !== lastStop.current) { lastStop.current = sid; patch({ stopId: sid }); }
+  };
+  useEffect(() => {
+    if (!playing) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      // reduced-motion: nhảy từng điểm dừng, không chạy liên tục
+      const id = window.setInterval(() => {
+        const nx = day.stops.map((s) => toMin(s.time)).find((x) => x > clockRef.current);
+        if (nx === undefined) { setPlaying(false); return; }
+        clockRef.current = nx; setClock(nx); syncStop(nx);
+      }, 1400);
+      return () => window.clearInterval(id);
+    }
+    let raf = 0;
+    let last = performance.now();
+    const perMs = (endMin - startMin) / 14000; // cả ngày chạy trong khoảng 14 giây
+    const frame = (now: number) => {
+      const dt = Math.min(now - last, 64);
+      last = now;
+      const nx = Math.min(endMin, clockRef.current + dt * perMs);
+      clockRef.current = nx;
+      setClock(nx);
+      syncStop(nx);
+      if (nx >= endMin) { setPlaying(false); return; }
+      raf = requestAnimationFrame(frame);
+    };
+    raf = requestAnimationFrame(frame);
+    return () => cancelAnimationFrame(raf);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playing, day.id, tour.id]);
 
   useEffect(() => {
     try {
@@ -133,7 +176,7 @@ export function Explorer({ consultHref }: { consultHref: string }) {
               {day.stops.map((s) => (
                 <li key={s.id}>
                   <button type="button" className={styles.stopBtn} aria-pressed={s.id === stop?.id} data-stop={s.id}
-                    onClick={() => patch({ stopId: s.id === stop?.id ? null : s.id })}>
+                    onClick={() => { if (s.id !== stop?.id) { clockRef.current = toMin(s.time); setClock(clockRef.current); setPlaying(false); lastStop.current = s.id; } patch({ stopId: s.id === stop?.id ? null : s.id }); }}>
                     <span className={styles.stopTime}>{s.time}</span>
                     <span>{pick(s.label, lang)}</span>
                     <span className={styles.stopWhere}>{PLACES[s.place].name[lang]}</span>
@@ -153,7 +196,22 @@ export function Explorer({ consultHref }: { consultHref: string }) {
             </div>
             {state.showMap && (
               <div className={styles.mapBox}>
-                <RouteMap lang={lang} stops={day.stops} selectedId={stop?.id ?? null} onSelect={(id) => patch({ stopId: id })} />
+                <RouteMap lang={lang} stops={day.stops} selectedId={stop?.id ?? null} onSelect={(id) => { const st = day.stops.find((x) => x.id === id); if (st) { clockRef.current = toMin(st.time); setClock(clockRef.current); lastStop.current = id; } patch({ stopId: id }); }} clock={clock} />
+              </div>
+            )}
+            {state.showMap && (
+              <div className={styles.clockBar} data-testid="journey-clock">
+                <button type="button" className={styles.clockPlay} aria-pressed={playing} onClick={() => { if (!playing && clock >= endMin) { clockRef.current = startMin; setClock(startMin); lastStop.current = null; } setPlaying((p) => !p); }} data-testid="clock-play">
+                  <span aria-hidden="true">{playing ? "❚❚" : "▶"}</span>
+                  <span className={styles.sr}>{playing ? t.clockPause : t.clockPlay}</span>
+                </button>
+                <label className={styles.clockLabel}>
+                  <span className={styles.label}>{t.clockLabel}</span>
+                  <input type="range" min={startMin} max={endMin} step={5} value={Math.round(clock / 5) * 5}
+                    aria-valuetext={`${fmtMin(clock)} · ${pick(clockStop.label, lang)}`} data-testid="clock-range"
+                    onChange={(e) => { const m = Number(e.target.value); setPlaying(false); clockRef.current = m; setClock(m); syncStop(m); }} />
+                </label>
+                <output className={styles.clockOut} aria-hidden="true">{fmtMin(clock)}</output>
               </div>
             )}
             <div className={styles.mapSel} aria-live="polite" data-testid="selected-stop">

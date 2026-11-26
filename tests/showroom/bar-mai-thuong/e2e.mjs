@@ -83,6 +83,8 @@ const fx = await p.evaluate(() => {
     spot: !!q("[data-tm=spot]"), pour: !!q("[data-tm=pour]"),
     cspot: document.querySelectorAll("[data-fx=CursorSpotlight]").length,
     magnetic: document.querySelectorAll("[data-fx=MagneticButton]").length,
+    clock: !!q("[data-fx-own=happy-clock]"), night: !!q("#nhip-dem input[type=range]"), board: !!q("section[aria-label='Bảng pha chế tại quầy']"),
+    lit: document.querySelectorAll("[data-tm=lit]").length,
   };
 });
 ok(fx.ignite, "FX hero ignite (neon châm lần lượt)");
@@ -91,7 +93,51 @@ ok(fx.beams === 2, "FX hai đèn quét chạy");
 ok(fx.arch, "FX cửa vòm mở (hero choreography)");
 ok(fx.marquee >= 2, `FX marquee velocity (${fx.marquee})`);
 ok(fx.grain, "FX grain overlay");
-ok(fx.tilt === 3 && fx.clip >= 4 && fx.split >= 6 && fx.scrub && fx.cspot >= 2 && fx.magnetic >= 3, `FX thư viện: tilt ${fx.tilt}, clip ${fx.clip}, split ${fx.split}, scrub, cursorSpot ${fx.cspot}, magnetic ${fx.magnetic}`);
+ok(fx.tilt === 3 && fx.scrub && fx.cspot >= 2, `FX thư viện chữ ký: tilt ${fx.tilt}, scrub, cursorSpot ${fx.cspot}`);
+ok(fx.clip === 0 && fx.split === 0 && fx.magnetic === 0, `đã bỏ hiệu ứng đại trà thừa (clip ${fx.clip}, split ${fx.split}, magnetic ${fx.magnetic})`);
+ok(fx.clock && fx.night && fx.board && fx.lit >= 12, `FX riêng: đồng hồ happy hour, đêm neon, bảng pha chế, bật đèn (${fx.lit} phần tử)`);
+// nội dung hero: loại hình, khu vực, CTA, 3 sự thật
+const heroTxt = await p.locator("section#top").innerText();
+ok(/Rooftop bar/i.test(heroTxt) && /Quận Sơn Trà/i.test(heroTxt) && /17:00–00:00/.test(heroTxt) && /Happy hour/i.test(heroTxt) && /140\.000/.test(heroTxt) && /18 tuổi/.test(heroTxt), "hero: loại hình, Quận Sơn Trà, giờ mở, happy hour, giá từ, 18 tuổi");
+ok(await p.getByRole("link", { name: "Đặt bàn" }).first().isVisible() && await p.getByRole("link", { name: "Xem thực đơn" }).isVisible(), "hero: CTA Đặt bàn + Xem thực đơn");
+for (const id of ["happy-hour", "thuc-don", "khong-gian", "nhip-dem", "nhip-tuan", "su-kien", "dat-ban", "quy-dinh", "hoi-dap", "lien-he"]) ok((await p.locator("#" + id).count()) === 1, `section #${id} có mặt`);
+ok((await p.locator("#hoi-dap details").count()) >= 8, "FAQ >= 8 câu");
+// đồng hồ happy hour: số đổi theo giây, đúng định dạng
+await p.evaluate(() => document.getElementById("happy-hour").scrollIntoView());
+const ck1 = await p.locator("#happy-hour [role=timer]").getAttribute("aria-label"); await p.waitForTimeout(2300);
+const ck2 = await p.locator("#happy-hour [role=timer]").getAttribute("aria-label");
+ok(/^\d\d giờ \d\d phút \d\d giây$/.test(ck2) && ck1 !== ck2, `đồng hồ happy hour chạy (${ck1} -> ${ck2})`);
+ok((await p.locator("#happy-hour [data-today]").count()) === 1, "bảng giờ mở cửa đánh dấu hôm nay");
+// giả lập giờ: kiểm logic đếm ngược bằng đồng hồ máy khách (thứ Tư 17:30 VN => đang happy hour)
+{
+  const ctx = await b.newContext({ viewport: { width: 1440, height: 900 } });
+  await ctx.addInitScript(() => { const T = Date.UTC(2026, 10, 25, 10, 30, 0); const R = Date; const off = T - R.now(); globalThis.Date = class extends R { constructor(...a) { if (a.length) super(...a); else super(R.now() + off); } static now() { return R.now() + off; } }; });
+  const q = await ctx.newPage(); await q.goto(PAGE, { waitUntil: "networkidle" }); await q.waitForTimeout(1500);
+  const a = await q.locator("#happy-hour [role=timer]").getAttribute("aria-label"); const hd = await q.locator("#happy-hour").innerText();
+  ok(/^01 giờ 2\d phút/.test(a) && /đang diễn ra/i.test(hd), `17:30 thứ Tư: happy hour đang diễn ra, còn ${a}`);
+  await ctx.close();
+  const ctx2 = await b.newContext({ viewport: { width: 1440, height: 900 } });
+  await ctx2.addInitScript(() => { const T = Date.UTC(2026, 10, 28, 4, 0, 0); const R = Date; const off = T - R.now(); globalThis.Date = class extends R { constructor(...a) { if (a.length) super(...a); else super(R.now() + off); } static now() { return R.now() + off; } }; });
+  const q2 = await ctx2.newPage(); await q2.goto(PAGE, { waitUntil: "networkidle" }); await q2.waitForTimeout(1500);
+  const a2 = await q2.locator("#happy-hour [role=timer]").getAttribute("aria-label"); const hd2 = await q2.locator("#happy-hour").innerText();
+  ok(/bắt đầu sau/i.test(hd2) && /^5[0-9] giờ/.test(a2), `thứ Bảy 11:00: đếm ngược tới thứ Hai (${a2})`);
+  await ctx2.close();
+}
+// đêm neon: kéo thanh giờ đổi cảnh + bảng neon
+await p.evaluate(() => document.getElementById("nhip-dem").scrollIntoView());
+const signOf = () => p.locator("#nhip-dem [class*=sign_]").first().innerText();
+await p.locator("#tm-hour").fill("22");
+await p.waitForTimeout(500);
+ok((await signOf()) === "NEON NIGHT" && /Đêm đầy/.test(await p.locator("#nhip-dem h3").innerText()), "đêm neon: 22:00 -> NEON NIGHT, khung Đêm đầy");
+await p.getByRole("button", { name: "Hoàng hôn", exact: true }).click(); await p.waitForTimeout(400);
+ok((await signOf()) === "HAPPY HOUR" && (await p.locator("#tm-hour").inputValue()) === "17", "đêm neon: nút Hoàng hôn -> HAPPY HOUR, 17:00");
+await p.getByRole("button", { name: "Khuya", exact: true }).click(); await p.waitForTimeout(400);
+ok((await signOf()) === "LAST CALL", "đêm neon: Khuya -> LAST CALL");
+// bảng pha chế chạy
+await p.evaluate(() => document.querySelector("section[aria-label='Bảng pha chế tại quầy']").scrollIntoView());
+const tkf = () => p.locator("section[aria-label='Bảng pha chế tại quầy'] li[class*=ticketCard]").evaluateAll((l) => l.map((e) => e.innerText.replace(/\s+/g, " ").slice(0, 24)).join("|"));
+const tk1 = await tkf(); await p.waitForTimeout(5500); const tk2 = await tkf();
+ok(tk1 !== tk2 && (await p.locator("section[aria-label='Bảng pha chế tại quầy'] li[data-ready]").count()) + (await p.locator("section[aria-label='Bảng pha chế tại quầy'] [class*=tkEmpty]").count()) >= 1, "bảng pha chế: vé chuyển bước/sang Sẵn sàng");
 // marquee tăng tốc theo cuộn (bánh xe thật)
 await p.evaluate(() => { const band = document.getElementById("nhip").getBoundingClientRect().top + scrollY; scrollTo(0, band - 700); });
 await p.waitForTimeout(900);
@@ -120,15 +166,18 @@ ok(pourInfo.a < 35 && pourInfo.m > 25 && pourInfo.m < 85 && pourInfo.z >= 95, `l
 // ---------- menu
 await p.evaluate(() => document.getElementById("thuc-don").scrollIntoView());
 const n = async () => p.locator("#thuc-don ul li h3").count();
-ok((await n()) === 16, "menu 16 mục");
-await p.getByRole("button", { name: /Không cồn/ }).first().click();
-ok((await n()) === 3, "lọc Không cồn = 3");
-await p.getByRole("button", { name: /Món nhắm/ }).click();
-ok((await n()) === 2, "lọc Món nhắm = 2");
-await p.getByRole("button", { name: /Tất cả/ }).click();
-const prices = await p.locator("#thuc-don [class*=menuPrice]").allInnerTexts();
-ok(prices.length === 16 && prices.every((t) => /\d/.test(t) && /₫|đ/.test(t)), "giá hiển thị VND đủ 16");
-ok(/Giá tham khảo/.test(await p.locator("#thuc-don").innerText()), "ghi 'Giá tham khảo'");
+ok((await n()) === 8, "menu mặc định nhóm Signature = 8 ly");
+let tot = 8;
+for (const [name, c] of [["Cổ điển", 6], ["Không cồn", 5], ["Đồ ăn nhẹ", 6]]) {
+  await p.locator("#thuc-don button[aria-pressed]").filter({ hasText: name }).click();
+  ok((await n()) === c, `nhóm ${name} = ${c}`); tot += c;
+  const prices = await p.locator("#thuc-don [class*=menuPrice]").allInnerTexts();
+  ok(prices.length === c && prices.every((t) => /\d/.test(t) && /₫|đ/.test(t)), `giá VND đủ ${c} (${name})`);
+}
+ok(tot === 25, "tổng 25 mục thực đơn (14 cocktail, 5 mocktail, 6 món nhắm)");
+await p.locator("#thuc-don button[aria-pressed]").filter({ hasText: "Signature" }).click();
+ok(/110\.000/.test(await p.locator("#thuc-don").innerText()), "thực đơn nêu giá happy hour");
+
 
 // ---------- matcher
 await p.evaluate(() => document.getElementById("chon-ly").scrollIntoView());
@@ -185,7 +234,7 @@ ok(!BAN.test(txt), "không chữ cấm (đặt bàn)");
 // Tab tới CTA (trang mới)
 const tp = await open({ width: 1440, height: 900 });
 let seen = false;
-for (let i = 0; i < 12 && !seen; i++) { await tp.keyboard.press("Tab"); seen = await tp.evaluate(() => /Giữ chỗ trên mái/i.test(document.activeElement?.textContent || "")); }
+for (let i = 0; i < 12 && !seen; i++) { await tp.keyboard.press("Tab"); seen = await tp.evaluate(() => /Đặt bàn/i.test(document.activeElement?.textContent || "")); }
 await tp.context().close();
 ok(seen, "Tab tới CTA hero");
 ok((await p.locator("a[href='/demos/bar-mai-thuong/credits']").count()) >= 1, "link Ảnh & ghi công ở footer");
@@ -232,7 +281,7 @@ const rm = await r.evaluate(() => {
   const anims = document.getAnimations().filter((a) => a.playState === "running" && a.effect?.target?.closest?.("main,header")).length;
   const h1 = getComputedStyle(document.querySelector("h1 span")).opacity;
   const mqTrack = document.querySelector("[data-fx=VelocityMarquee]")?.getAttribute("data-fx-ready");
-  return { anims, h1, mqTrack, liquid: document.querySelector("[data-tm=level]").textContent, rv: [...document.querySelectorAll("[data-tm=rv]")].every((e) => getComputedStyle(e).opacity === "1") };
+  return { anims, h1, mqTrack, liquid: document.querySelector("[data-tm=level]").textContent, rv: [...document.querySelectorAll("[data-tm=lit]")].every((e) => getComputedStyle(e).opacity === "1") };
 });
 ok(rm.anims <= 3, `reduced: không animation đang chạy trong main/header (${rm.anims})`);
 ok(rm.h1 === "1" && rm.rv, "reduced: nội dung hiện đủ");

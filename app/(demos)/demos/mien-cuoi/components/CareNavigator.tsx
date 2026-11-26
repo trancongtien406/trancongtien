@@ -55,7 +55,7 @@ export function CareNavigator() {
   return (
     <div className={styles.navPanel} data-mc="nav-panel">
       <div className={styles.panelTop}>
-        <span className={styles.panelTitle}>Care Navigator</span>
+        <span className={styles.panelTitle}>Kiểm tra nhanh</span>
         <span className={styles.panelStep} aria-live="polite">Bước {step} / 3</span>
       </div>
       <div className={styles.safety} role="note">
@@ -126,7 +126,7 @@ export function CareNavigator() {
             <p>{o.copy}</p>
             {(outcome === "planned" || outcome === "assessment") && (
               <dl className={styles.resultDl}>
-                <div><dt>Nhóm dịch vụ có thể tìm hiểu</dt><dd>{needObj.service}</dd></div>
+                <div><dt>Dịch vụ có thể tìm hiểu</dt><dd>{needObj.service}</dd></div>
                 <div><dt>Có thể chuẩn bị</dt><dd>{needObj.prepare}</dd></div>
               </dl>
             )}

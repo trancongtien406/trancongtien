@@ -1,3 +1,8 @@
+# QA · Nét Lệch — cập nhật rework 2026-11-25
+
+Lệnh: `BASE=http://localhost:3100 node tests/showroom/net-lech/e2e.mjs` chạy foreground tới dòng cuối: **141 pass, 0 fail**. Test mới ([5b]): hero nêu loại hình/quận/đối tượng + 3 sự thật + CTA Đặt lịch; không còn chữ "stock" hiển thị; bảng giá 7 dịch vụ, chọn Dài thì lưỡi cắt trượt sang cột Dài; thanh khung giờ (2 giờ => 18:00, 4 giờ => 16:00, 5 giờ => 15:00); 6 chính sách có mức cọc; 6 nhóm sản phẩm không tên hãng; ImageHoverDistort x8, VelocityMarquee, SplitWords có mặt. Builder viết lại theo bảng giá theo độ dài (ví dụ Nhuộm/Dài/Senior 1.093.000, 2 giờ 30; Uốn/Dài/Director 1.430.000, 3 giờ); xung đột uốn+duỗi và hoá chất tạo kết cấu + màu. FAQ 10 câu. Ma trận: `node scripts/showroom-effects-matrix.mjs net-lech`: đại trà 2 (SplitWords, VelocityMarquee), chữ ký thư viện 1 (ImageHoverDistort); trước 0/0/0. og-image dựng lại, không chữ demo/minh hoạ (đã xem ảnh). Lỗi tự thấy rồi sửa: dấu chồng Ẵ của "ĐÀ NẴNG" đè hàng trên của h1 (thêm khoảng cách dòng), chữ mờ trong khối giờ mở cửa nền đen. Ảnh chụp lại 1440/390 và tự xem. Chưa kiểm: Safari/Firefox, thiết bị thật, screen reader, Lighthouse. Phần dưới là QA của lần trước (số liệu cũ: 113 pass, 8 FAQ, nhãn giả định...).
+
+---
 # QA · Nét Lệch (LP-10) — kết quả THẬT, 2026-11-25
 
 ## Lệnh đã chạy

@@ -2,20 +2,24 @@ import type { Metadata } from "next";
 import { buildConsultHref } from "@/features/showroom/consultation";
 import styles from "./brand.module.css";
 import { Beans } from "./components/Beans";
+import { BrewTimer } from "./components/BrewTimer";
 import { CoffeeSelector } from "./components/CoffeeSelector";
 import { Header } from "./components/Header";
 import { HeatStrip } from "./components/HeatStrip";
 import { Hero } from "./components/Hero";
 import { InteractiveMenu } from "./components/InteractiveMenu";
 import { Motion } from "./components/Motion";
+import { RoastDial } from "./components/RoastDial";
+import { Space } from "./components/Space";
+import { Wholesale } from "./components/Wholesale";
 import { FAQSection, Final, Footer, Manifesto, Process } from "./components/Sections";
 import { TrayDrawer } from "./components/TrayDrawer";
 import { TrayProvider } from "./components/TrayProvider";
 
 export const metadata: Metadata = {
-  title: "Rót Nhiệt Coffee · Cà phê rang theo gu của bạn",
+  title: "Rót Nhiệt Coffee · Quán cà phê rang xay ở Sơn Trà, Đà Nẵng",
   description:
-    "Cà phê rang: menu 18 món có bộ lọc và khay tạm tính, Coffee Selector 3 câu hỏi gợi ý hạt và cách pha hợp gu.",
+    "Quán cà phê rang xay ở Quận Sơn Trà, Đà Nẵng: menu 18 món, hạt rang 250g mang về, bán buôn từ 5 kg, giờ mở cửa 06:30–21:30.",
   alternates: { canonical: "/demos/rot-nhiet" },
 };
 
@@ -32,8 +36,12 @@ export default function Page() {
           <InteractiveMenu />
           <CoffeeSelector />
           <Beans />
+          <RoastDial />
           <Process />
+          <BrewTimer />
+          <Space />
           <Manifesto />
+          <Wholesale consultHref={consult} />
           <FAQSection />
           <Final consultHref={consult} />
         </main>

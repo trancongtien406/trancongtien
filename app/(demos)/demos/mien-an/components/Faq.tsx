@@ -10,9 +10,9 @@ export function Faq() {
     <section id="faq" className={styles.section} aria-labelledby="faq-title">
       <div className={`${styles.container} ${styles.faqGrid}`}>
         <div className={styles.faqHead} data-reveal>
-          <p className={styles.eyebrow}>Good to know</p>
+          <p className={styles.eyebrow}>Câu hỏi thường gặp</p>
           <h2 id="faq-title" className={styles.h2}>
-            Những điều bạn <em>có thể muốn biết.</em>
+            Trước khi đặt lịch, <em>bạn có thể hỏi.</em>
           </h2>
         </div>
         <div className={styles.faqList}>

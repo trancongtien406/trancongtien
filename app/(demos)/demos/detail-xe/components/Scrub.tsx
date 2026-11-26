@@ -66,11 +66,10 @@ export function Scrub() {
             <svg className={s.scrubEdge} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
               <line data-sc="edge" x1="-18" y1="0" x2="-34" y2="100" style={{ opacity: 0 }} />
             </svg>
-            <span className={s.scrubChip}>Ảnh xe stock · lớp bụi là đồ hoạ thể hiện quy trình</span>
           </div>
 
           <div>
-            <p className={`${s.kicker} ${s.kickerRed}`}>Quy trình</p>
+            <p className={`${s.kicker} ${s.kickerRed}`}>Một ngày làm việc với xe</p>
             <h2 id="scrub-title" className={s.h2}>Từ bụi đường đến <span className={s.chrome}>mặt gương</span></h2>
             <dl className={s.meter}>
               <div><dt>Giờ làm</dt><dd><span data-sc="hours">8,0</span><small>&nbsp;giờ</small></dd></div>

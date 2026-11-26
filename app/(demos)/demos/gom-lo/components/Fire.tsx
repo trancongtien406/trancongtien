@@ -44,7 +44,7 @@ export function Fire() {
         const si = p < 0.28 ? 0 : p < 0.55 ? 1 : p < 0.8 ? 2 : 3;
         if (stage.textContent !== STAGES[si]) stage.textContent = STAGES[si];
         mer.style.transform = `scaleY(${Math.max(0.03, tempAt(p) / 1240)})`;
-        steps.forEach((st, i) => st.toggleAttribute("data-on", i === Math.min(3, Math.floor(p * 4.2))));
+        steps.forEach((st, i) => st.toggleAttribute("data-on", i === Math.min(steps.length - 1, Math.floor(p * (steps.length + 0.2)))));
       },
     });
     markReady(el, "1");
@@ -58,7 +58,7 @@ export function Fire() {
       <div className={`${s.wrap} ${s.fireGrid}`}>
         <div className={s.fireSticky}>
           <p className={s.hand}>Từ đất đến men</p>
-          <Engrave as="h2" id="fire-title" className={s.h2}>Một món gốm đi qua lửa hai lần.</Engrave>
+          <Engrave as="h2" id="fire-title" className={s.h2}>Từ đất đến men: một món gốm đi qua lửa hai lần.</Engrave>
           <div className={s.gauge} role="group" aria-label="Nhiệt kế lò nung, đổi theo khi bạn cuộn">
             <div className={s.thermo} aria-hidden="true"><i data-mercury="" /></div>
             <div>

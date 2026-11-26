@@ -83,7 +83,7 @@ console.log('[1] Tải trang, console, request ngoài origin, metadata');
   ok(await page.locator('link[rel=icon][href*="hien-man/identity/favicon"]').count() > 0, 'favicon theo route');
   ok(await page.locator('meta[property="og:image"][content*="hien-man/identity/og-image"]').count() > 0, 'og-image theo route');
   ok(await page.locator('h1').count() === 1, 'đúng 1 h1');
-  for (const id of ['ve-hien', 'mot-ngay', 'phong', 'khong-gian', 'trai-nghiem', 'lich-gia', 'hoi-dap', 'ket']) ok(await page.locator('#' + id).count() === 1, `có section #${id}`);
+  for (const id of ['ve-hien', 'mot-ngay', 'phong', 'bang-phong', 'khong-gian', 'so-do', 'an-uong', 'trai-nghiem', 'vi-tri', 'lich-gia', 'hoi-dap', 'ket']) ok(await page.locator('#' + id).count() === 1, `có section #${id}`);
   const srcs = await page.evaluate(() => [...document.querySelectorAll('main img')].map((i) => new URL(i.currentSrc || i.src).searchParams.get('url') || i.src));
   ok(new Set(srcs).size >= 11, 'ảnh stock không lặp (≥11 ảnh khác nhau)', `${new Set(srcs).size}/${srcs.length}`);
   ok(await page.locator('footer a[href="/demos/hien-man/credits"]').count() > 0 && (await page.locator('footer').innerText()).includes('Ảnh & ghi công'), 'footer có link "Ảnh & ghi công"');
@@ -206,7 +206,7 @@ console.log('[5] Rooms stage: tab, bàn phím, đồng bộ với công cụ tí
   ok(await page.getByRole('heading', { level: 3, name: 'Hiên Biển' }).isVisible(), 'Home về tab đầu');
   await page.getByRole('tab', { name: /Hiên Bình Minh/ }).click();
   await goto(page, 'lich-gia', 800);
-  ok(await page.getByRole('radio', { name: /Hiên Bình Minh/ }).isChecked(), 'chọn phòng ở stage đồng bộ sang công cụ tính');
+  ok(await page.locator('#lich-gia').getByRole('radio', { name: /Hiên Bình Minh/ }).isChecked(), 'chọn phòng ở stage đồng bộ sang công cụ tính');
   await ctx.close();
 }
 
@@ -298,7 +298,7 @@ console.log('[6] Availability Calendar + Stay Calculator');
   }
 
   // bao trọn villa: số khách mặc định 12, qty khoá
-  const villa = page.getByRole('radio', { name: /Bao trọn villa/ });
+  const villa = page.locator('#lich-gia').getByRole('radio', { name: /Bao trọn villa/ });
   await villa.evaluate((e) => e.scrollIntoView({ block: 'center' }));
   await page.waitForTimeout(400);
   if (process.env.ONLY6) { const bx = await villa.boundingBox(); console.log('BOX', JSON.stringify(bx), await page.evaluate(([x, y]) => { const e = document.elementFromPoint(x, y); return e ? e.tagName + ' ' + e.className + ' ' + (e.closest('label')?.innerText || '').slice(0, 30) : 'none'; }, [bx.x + bx.width / 2, bx.y + bx.height / 2]), await page.evaluate(() => window.scrollY)); }

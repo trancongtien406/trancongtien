@@ -330,3 +330,70 @@
   .glitch[data-glitch="1"] .glitchGhost { animation: none; }
   .btn, .swatch, .opt { transition: none; }
 }
+
+/* =====================================================================
+   Tiệm nail: các phần mới (2026-11)
+   ===================================================================== */
+.heroTry { display: inline-flex; align-items: center; min-height: 44px; margin-top: 10px; font-weight: 800; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 3px; text-decoration-color: var(--np-pink); }
+.heroFacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr)); gap: 12px; margin-top: 22px; width: 100%; }
+.heroFacts > div { border: var(--np-bw) solid var(--np-ink); border-radius: 16px; padding: 10px 14px; background: var(--np-white); box-shadow: 4px 4px 0 var(--np-ink); }
+.heroFacts dt { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--np-grey); }
+.heroFacts dd { margin: 0; font-family: var(--np-ff-h); font-weight: 900; font-size: 1.3rem; line-height: 1.15; }
+.heroFacts .heroFactSub { font-family: var(--np-ff-b); font-weight: 600; font-size: 13.5px; line-height: 1.3; color: #2b2b33; margin-top: 2px; }
+.heroFacts > div:nth-child(2) { background: var(--np-lime); }
+.heroFacts > div:nth-child(3) { background: var(--np-pink); }
+.heroFacts > div:nth-child(3) dt { color: var(--np-ink); }
+
+/* Phụ phí */
+.fees { margin-top: 56px; padding-top: 32px; border-top: var(--np-bw) dashed var(--np-ink); }
+.feeGrid { display: grid; gap: 16px; margin-top: 18px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
+.feeCard { border: var(--np-bw) solid var(--np-ink); border-radius: 20px; padding: 16px 18px; background: var(--np-white); box-shadow: 5px 5px 0 var(--np-ink); }
+.feeCard:nth-child(2) { background: var(--np-lime); } .feeCard:nth-child(3) { background: #ffe3f1; } .feeCard:nth-child(4) { background: #e1e6ff; }
+.feeH { font-family: var(--np-ff-h); font-weight: 900; text-transform: uppercase; font-size: 1.05rem; margin-bottom: 8px; }
+.feeRow { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-top: 2px dashed rgba(13,13,15,.35); font-size: 15px; }
+.feeRow b { text-align: right; white-space: nowrap; }
+@media (max-width: 420px) { .feeRow { flex-wrap: wrap; } .feeRow b { text-align: left; white-space: normal; } }
+
+/* Về tiệm */
+.aboutGrid { position: relative; display: grid; gap: 32px; align-items: start; }
+.aboutBody { display: grid; gap: 18px; font-size: 1.1rem; max-width: 60ch; }
+.aboutList { display: grid; gap: 10px; }
+.aboutList li { border-left: 6px solid var(--np-lime); padding-left: 14px; font-size: 1rem; }
+.aboutList b { color: var(--np-lime); }
+.manifesto .mText { font-size: clamp(1.8rem, 4.8vw, 3.6rem); max-width: 18ch; }
+@media (min-width: 900px) { .aboutGrid { grid-template-columns: 1.1fr .9fr; gap: 64px; } }
+
+/* Mẫu móng: chú thích */
+.moodMeta { font-size: 13.5px; font-weight: 600; opacity: .92; margin-top: -4px; }
+
+/* Quy trình không cần SVG vẽ nét */
+.procMain { border: var(--np-bw) solid var(--np-ink); border-radius: 50% 50% 46% 54% / 50% 50% 50% 50%; box-shadow: var(--np-shadow); overflow: hidden; aspect-ratio: 1; background: var(--np-lime); }
+.procList::before { content: ""; position: absolute; left: 31px; top: 36px; bottom: 36px; width: 0; border-left: 5px dotted var(--np-pink); }
+
+/* Chính sách */
+.policies { background: var(--np-lime); border-block: var(--np-bw) solid var(--np-ink); }
+.polGrid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+.polCard { border: var(--np-bw) solid var(--np-ink); border-radius: 22px; background: var(--np-white); box-shadow: var(--np-shadow); padding: 20px 22px 22px; display: grid; gap: 8px; align-content: start; }
+.polCard[data-c="1"] { background: #ffe3f1; } .polCard[data-c="2"] { background: #e1e6ff; }
+.polCard h3 { text-transform: uppercase; font-size: 1.15rem; }
+
+/* Đặt lịch */
+.booking { background: var(--np-white); }
+.bkGrid { display: grid; gap: 22px; align-items: start; }
+.bkLeft, .bkRight { display: grid; gap: 20px; }
+.count { font-weight: 800; font-size: 15px; margin: 10px 0 12px; }
+.slotGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 8px; }
+.slot2 { min-height: 48px; border: var(--np-bw) solid var(--np-ink); border-radius: 12px; background: var(--np-white); font-weight: 800; font-size: 15px; cursor: pointer; transition: transform .15s ease, background-color .15s ease; }
+.slot2[data-ok="0"] { cursor: not-allowed; background: repeating-linear-gradient(135deg, #fff 0 6px, #ececf1 6px 12px); color: #8a8a96; border-style: dashed; }
+.slot2[data-busy="1"] { background: var(--np-ink); color: #8a8a96; border-style: solid; }
+.slot2[data-in="1"] { background: var(--np-pick); transform: translateY(-2px); box-shadow: 3px 3px 0 var(--np-ink); }
+.slot2[data-start="1"] { background: var(--np-ink); color: var(--np-lime); box-shadow: 3px 3px 0 var(--np-pick); }
+.slotKey { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 14px; font-size: 13.5px; font-weight: 700; }
+.slotKey li { display: inline-flex; align-items: center; gap: 8px; }
+.slotKey i { width: 18px; height: 18px; border: 2px solid var(--np-ink); border-radius: 5px; background: var(--np-white); }
+.slotKey i[data-k="pick"] { background: var(--np-pick); } .slotKey i[data-k="busy"] { background: var(--np-ink); }
+.bkSum { border: var(--np-bw) solid var(--np-ink); border-radius: 22px; background: var(--np-lime); box-shadow: var(--np-shadow); padding: 18px 20px; display: grid; gap: 10px; }
+.summaryTxt { background: var(--np-white); border: 2px solid var(--np-ink); border-radius: 12px; padding: 10px 14px; font-weight: 700; user-select: text; }
+.bkSum .status { color: var(--np-ink); }
+@media (min-width: 960px) { .bkGrid { grid-template-columns: .8fr 1.2fr; gap: 36px; } }
+@media (prefers-reduced-motion: reduce) { .slot2 { transition: none; } }

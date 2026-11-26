@@ -53,24 +53,39 @@ export function Motion() {
         gsap.to(q('[data-kn="hero-copy"]'), { y: -30, opacity: 0.25, ease: "none", immediateRender: false, scrollTrigger: { trigger: hero, start: "55% top", end: "bottom top", scrub: 0.6 } });
       }
 
-      // moment cuộn (b): sản phẩm trồi lên từ lớp + parallax chậm
-      const wide = window.matchMedia("(min-width: 768px)").matches;
+      // moment cuộn (b): "mở tủ kính": hai cánh kính tách ra từ giữa, ảnh lùi về vị trí
       q('[data-kn="pr"]').forEach((el) => {
         const clip = el.querySelector<HTMLElement>('[data-kn="pr-clip"]');
         const img = el.querySelector<HTMLElement>('[data-kn="pr-img"]');
         if (!clip || !img) return;
-        gsap.set(clip, { clipPath: "inset(100% 0% 0% 0%)" });
-        gsap.set(img, { scale: 1.18 });
+        gsap.set(clip, { clipPath: "inset(0% 50% 0% 50%)" });
+        gsap.set(img, { scale: 1.14, filter: "brightness(0.35)" });
         ScrollTrigger.create({
           trigger: el,
           start: "top 88%",
           once: true,
           onEnter: () => {
-            gsap.to(clip, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.25, ease: "power3.inOut", onComplete: () => { gsap.set(clip, { clearProps: "clipPath" }); } });
-            gsap.to(img, { scale: 1, duration: 1.7, ease: "power2.out" });
+            gsap.to(clip, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.2, ease: "expo.inOut", onComplete: () => { gsap.set(clip, { clearProps: "clipPath" }); } });
+            gsap.to(img, { scale: 1, filter: "brightness(1)", duration: 1.6, ease: "power2.out", clearProps: "filter" });
           },
         });
-        gsap.fromTo(img, { yPercent: wide ? -5 : -2 }, { yPercent: wide ? 5 : 2, ease: "none", scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: 0.8 } });
+      });
+
+      // tiêu đề: dải ánh kim quét từ trái sang phải
+      q('[data-kn="wipe"]').forEach((el) => {
+        gsap.set(el, { clipPath: "inset(0% 100% 0% 0%)", filter: "brightness(2.2)" });
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top 92%",
+          once: true,
+          onEnter: () => gsap.to(el, { clipPath: "inset(0% 0% 0% 0%)", filter: "brightness(1)", duration: 1.15, ease: "power2.inOut", clearProps: "clipPath,filter" }),
+        });
+      });
+
+      // thanh hàm lượng vàng theo tuổi K: kéo dài từ trái
+      q('[data-kn="bar"]').forEach((el) => {
+        gsap.set(el, { scaleX: 0 });
+        ScrollTrigger.create({ trigger: el, start: "top 92%", once: true, onEnter: () => gsap.to(el, { scaleX: 1, duration: 1.5, ease: "power3.out" }) });
       });
 
       // moment cuộn (c): đường kẻ vàng chế tác
@@ -85,13 +100,13 @@ export function Motion() {
         });
       }
 
-      // (d) khối nổi lên theo lô
-      const rv = q('[data-kn="rise"]');
-      gsap.set(rv, { y: 34, opacity: 0 });
+      // (d) khối "lên đèn tủ kính": sáng dần từ tối, không trượt
+      const rv = q('[data-kn="rise"], [data-kn="lit"]');
+      gsap.set(rv, { opacity: 0, filter: "brightness(0.3)" });
       ScrollTrigger.batch(rv, {
-        start: "top 90%",
+        start: "top 92%",
         once: true,
-        onEnter: (els) => gsap.to(els, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", stagger: 0.1, overwrite: true }),
+        onEnter: (els) => gsap.to(els, { opacity: 1, filter: "brightness(1)", duration: 1.1, ease: "sine.out", stagger: 0.08, overwrite: true, clearProps: "filter" }),
       });
 
       // con trỏ: dịch nhẹ ảnh hero ngược chiều con trỏ (chỉ pointer fine)

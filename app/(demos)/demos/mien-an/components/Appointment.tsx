@@ -2,7 +2,9 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { buildConsultHref } from "@/features/showroom/consultation";
-import { BUFFER_MINUTES, CLOSE_MINUTES, LEAD_MINUTES, RESOURCES, RITUALS, WINDOW_DAYS } from "../data/rituals";
+import { BUFFER_MINUTES, BUSY, CLOSE_MINUTES, LEAD_MINUTES, OPEN_MINUTES, RESOURCES, RITUALS, WINDOW_DAYS } from "../data/rituals";
+import { CONTACT } from "../data/content";
+import { getOil } from "../data/oils";
 import type { Pressure, Scent } from "../data/types";
 import { formatMinutes, formatVnd } from "../lib/format";
 import { getAvailableSlots, isDateInWindow } from "../lib/slots";
@@ -12,10 +14,10 @@ import { useMienAn } from "./Provider";
 import styles from "../brand.module.css";
 
 type Errors = Partial<Record<"ritual" | "date" | "time" | "ack", string>>;
-type Preview = { id: string; ritualId: string; date: string; start: number; end: number; resourceId: string; price: number; pressure: Pressure; scent: Scent };
+type Preview = { id: string; ritualId: string; date: string; start: number; end: number; resourceId: string; price: number; pressure: Pressure; scent: Scent; oilName: string | null };
 
 const MSG = {
-  ritual: "Hãy chọn nghi thức bạn muốn trải nghiệm.",
+  ritual: "Hãy chọn liệu trình bạn muốn đặt.",
   date: "Hãy chọn một ngày để xem các khung giờ.",
   time: "Hãy chọn một khung giờ.",
   stale: "Khung giờ này không còn phù hợp với lựa chọn hiện tại. Vui lòng chọn lại.",
@@ -28,7 +30,7 @@ function refId() {
 }
 
 export function Appointment() {
-  const { selection } = useMienAn();
+  const { selection, oil } = useMienAn();
   const [now, setNow] = useState<VnNow | null>(null);
   const [ritualId, setRitualId] = useState<string | null>(null);
   const [offset, setOffset] = useState<number | null>(null);
@@ -48,6 +50,11 @@ export function Appointment() {
 
   const ritual = RITUALS.find((r) => r.id === ritualId) ?? null;
 
+  // Chọn tinh dầu ở phần trên: đồng bộ vào lựa chọn hương liệu của lịch hẹn.
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (oil) setScent(oil === "khong-huong" ? "unscented" : "natural");
+  }, [oil]);
   // nhận lựa chọn từ Ritual Finder / dialog
   useEffect(() => {
     if (!selection.ritualId) return;
@@ -115,7 +122,7 @@ export function Appointment() {
       return;
     }
     if (!ritual || offset === null || start === null || !slot) return;
-    setPreview({ id: refId(), ritualId: ritual.id, date: days[offset], start, end: start + ritual.durationMinutes, resourceId: slot.resourceId, price: ritual.priceVnd, pressure, scent });
+    setPreview({ id: refId(), ritualId: ritual.id, date: days[offset], start, end: start + ritual.durationMinutes, resourceId: slot.resourceId, price: ritual.priceVnd, pressure, scent, oilName: oil && oil !== "khong-huong" ? (getOil(oil)?.name ?? null) : null });
     window.setTimeout(() => successHead.current?.focus(), 30);
   };
 
@@ -142,12 +149,12 @@ export function Appointment() {
     <section id="appointment" className={`${styles.section} ${styles.linen}`} aria-labelledby="ap-heading">
       <div className={styles.container}>
         <div className={styles.apHead} data-reveal>
-          <p className={styles.eyebrow}>Make time for yourself</p>
+          <p className={styles.eyebrow}>Đặt lịch</p>
           <h2 id="ap-heading" tabIndex={-1} className={styles.h2} style={{ outline: "none" }}>
-            Dành một khoảng thời gian <em>cho mình.</em>
+            Chọn giờ, <em>xem phòng nào còn trống.</em>
           </h2>
-          <p className={styles.lead}>Chọn nghi thức và khung giờ bạn mong muốn để xem trước một lịch hẹn tại Miên An.</p>
-          <p className={styles.apDisclosure}>Chọn nghi thức và khung giờ để xem tóm tắt lịch hẹn. Bản tóm tắt chỉ lưu trên thiết bị của bạn, chưa phải yêu cầu đã gửi đi; bước này không cần thông tin cá nhân và không phát sinh thanh toán.</p>
+          <p className={styles.lead}>Chọn liệu trình, ngày và giờ. Lịch cho thấy hai phòng bận lúc nào trong ngày để bạn chọn đúng khung còn trống.</p>
+          <p className={styles.apDisclosure}>Bản tóm tắt chỉ lưu trên thiết bị của bạn, chưa phải yêu cầu đã gửi đi; bước này không cần thông tin cá nhân và không phát sinh thanh toán.</p>
         </div>
 
         <div className={styles.apGrid}>
@@ -160,11 +167,11 @@ export function Appointment() {
               </h3>
               <p className={styles.successNote}>Tóm tắt lịch hẹn đã sẵn sàng trên thiết bị của bạn. Chưa có yêu cầu nào được gửi đến spa; để tiếp tục, hãy dùng nút liên hệ bên dưới.</p>
               <dl className={styles.facts}>
-                <div><dt>Nghi thức</dt><dd>{summaryRitual.name} · {summaryRitual.subtitle}</dd></div>
+                <div><dt>Liệu trình</dt><dd>{summaryRitual.name} · {summaryRitual.subtitle}</dd></div>
                 <div><dt>Ngày</dt><dd>{describeDate(preview.date).long}</dd></div>
                 <div><dt>Giờ</dt><dd>{formatMinutes(preview.start)} – {formatMinutes(preview.end)} ({summaryRitual.durationMinutes}&nbsp;phút)</dd></div>
                 <div><dt>Phòng</dt><dd>{res(preview.resourceId)?.name} · {res(preview.resourceId)?.therapist}</dd></div>
-                <div><dt>Sở thích</dt><dd>Áp lực {preview.pressure === "light" ? "nhẹ" : "vừa"} · {preview.scent === "unscented" ? "không hương liệu" : "hương tự nhiên"}</dd></div>
+                <div><dt>Sở thích</dt><dd>Áp lực {preview.pressure === "light" ? "nhẹ" : "vừa"} · {preview.scent === "unscented" ? "không hương liệu" : preview.oilName ? `dầu ${preview.oilName}` : "hương tự nhiên"}</dd></div>
                 <div><dt>Chi phí dự kiến</dt><dd>{formatVnd(preview.price)} (giá tham khảo)</dd></div>
               </dl>
               <div className={styles.dialogActions}>
@@ -177,7 +184,7 @@ export function Appointment() {
             <form ref={formRef} className={styles.apForm} onSubmit={submit} noValidate>
               <div className={`${styles.group} ${errors.ritual ? styles.fieldInvalid : ""}`} data-field="ritual">
                 <fieldset className={styles.fieldset} aria-describedby={errors.ritual ? "e-ritual" : undefined}>
-                  <legend className={styles.groupTitle}><span>01</span> Chọn nghi thức</legend>
+                  <legend className={styles.groupTitle}><span>01</span> Chọn liệu trình</legend>
                   <div className={styles.ritualOpts}>
                     {RITUALS.map((r) => (
                       <label key={r.id} className={styles.opt}>
@@ -202,7 +209,7 @@ export function Appointment() {
                         const x = describeDate(d);
                         return (
                           <label key={d} className={`${styles.opt} ${styles.day}`}>
-                            <input type="radio" name="date" value={d} checked={offset === i} aria-invalid={!!errors.date} onChange={() => chooseDate(i)} aria-label={`${x.long}${fullFlags[i] && ritualId ? ", đã kín lịch mẫu" : ""}`} />
+                            <input type="radio" name="date" value={d} checked={offset === i} aria-invalid={!!errors.date} onChange={() => chooseDate(i)} aria-label={`${x.long}${fullFlags[i] && ritualId ? ", đã kín lịch" : ""}`} />
                             <span className={styles.optBox}>
                               <span className={styles.wd}>{i === 0 ? "Hôm nay" : x.weekday}</span>
                               <span className={styles.dd}>{x.day}</span>
@@ -235,7 +242,7 @@ export function Appointment() {
                           <input type="radio" name="resource" value={r.id} disabled={!ok} checked={resource === r.id} onChange={() => { setResource(r.id); setStart(null); }} />
                           <span className={`${styles.optBox} ${styles.compact}`}>
                             <span className={styles.tick}><Check /></span>
-                            <span className={styles.txt}>{r.name}<small>{ok ? r.therapist : "Không thực hiện nghi thức này"}</small></span>
+                            <span className={styles.txt}>{r.name}<small>{ok ? r.therapist : "Không thực hiện liệu trình này"}</small></span>
                           </span>
                         </label>
                       );
@@ -258,6 +265,7 @@ export function Appointment() {
                     </p>
                   )}
                   {errors.time && <p id="e-time" className={styles.error} role="alert">{errors.time}</p>}
+                  {ritual && offset !== null && now && <DaySchedule dayOffset={offset} date={days[offset]} ritualMinutes={ritual.durationMinutes} start={start} resourceId={resource} nowMinutes={offset === 0 ? now.minutes : null} />}
                 </fieldset>
               </div>
 
@@ -303,7 +311,7 @@ export function Appointment() {
               <h3>Tóm tắt lịch hẹn</h3>
               <p className={styles.sub}>Bản tóm tắt lưu trên thiết bị của bạn</p>
               <dl aria-live="polite">
-                <div><dt>Nghi thức</dt>{summaryRitual ? <dd>{summaryRitual.name}</dd> : <dd className={styles.muted}>Chưa chọn</dd>}</div>
+                <div><dt>Liệu trình</dt>{summaryRitual ? <dd>{summaryRitual.name}</dd> : <dd className={styles.muted}>Chưa chọn</dd>}</div>
                 <div><dt>Thời lượng</dt>{summaryRitual ? <dd>{summaryRitual.durationMinutes}&nbsp;phút</dd> : <dd className={styles.muted}>Chưa chọn</dd>}</div>
                 <div><dt>Ngày</dt>{(preview ? preview.date : offset !== null ? days[offset] : null) ? <dd>{describeDate((preview ? preview.date : days[offset as number]) as string).long}</dd> : <dd className={styles.muted}>Chưa chọn</dd>}</div>
                 <div><dt>Thời gian</dt>{(preview ? preview.start : start) !== null ? <dd>{formatMinutes((preview ? preview.start : start) as number)}</dd> : <dd className={styles.muted}>Chưa chọn</dd>}</div>
@@ -312,9 +320,43 @@ export function Appointment() {
               </dl>
               <a className={styles.summaryLink} href={consult}>Muốn website như thế này? Trao đổi về dự án ↗</a>
             </div>
+            <div className={styles.contactCard}>
+              <h3>Liên hệ trực tiếp</h3>
+              <p>Điện thoại, Zalo: <b className={styles.num}>{CONTACT.phone}</b></p>
+              <p>Email: {CONTACT.email}</p>
+              <p>{CONTACT.area}</p>
+            </div>
           </aside>
         </div>
       </div>
     </section>
+  );
+}
+
+/** Lịch hai phòng trong ngày: khoảng bận, giờ đã chọn, giờ hiện tại. Chỉ hiển thị (không nhận thao tác). */
+function DaySchedule({ dayOffset, date, ritualMinutes, start, resourceId, nowMinutes }: { dayOffset: number; date: string; ritualMinutes: number; start: number | null; resourceId: string; nowMinutes: number | null }) {
+  const span = CLOSE_MINUTES - OPEN_MINUTES;
+  const pct = (m: number) => `${((Math.min(Math.max(m, OPEN_MINUTES), CLOSE_MINUTES) - OPEN_MINUTES) / span) * 100}%`;
+  const wid = (a: number, b: number) => `${((Math.min(b, CLOSE_MINUTES) - Math.max(a, OPEN_MINUTES)) / span) * 100}%`;
+  const rows = RESOURCES.map((r) => ({ r, busy: BUSY.filter((b) => b.resourceId === r.id && b.dayOffset === dayOffset) }));
+  const summary = rows.map(({ r, busy }) => `${r.name}: ${busy.length ? "bận " + busy.map((b) => `${formatMinutes(b.startMinutes)} đến ${formatMinutes(b.endMinutes)}`).join(", ") : "trống cả ngày"}`).join("; ");
+  const hours = [9, 11, 13, 15, 17, 19];
+  return (
+    <div className={styles.sched} role="img" aria-label={`Lịch hai phòng ngày ${describeDate(date).long}. ${summary}.`} data-testid="day-schedule">
+      <div className={styles.schedHead} aria-hidden="true">
+        {hours.map((h) => <span key={h} style={{ left: pct(h * 60) }} className={styles.num}>{h}h</span>)}
+      </div>
+      {rows.map(({ r, busy }) => (
+        <div key={r.id} className={`${styles.schedRow} ${resourceId !== "auto" && resourceId !== r.id ? styles.schedDim : ""}`} aria-hidden="true">
+          <b>{r.name}</b>
+          <div className={styles.schedTrack}>
+            {busy.map((b) => <i key={b.id} className={styles.schedBusy} style={{ left: pct(b.startMinutes), width: wid(b.startMinutes, b.endMinutes) }} />)}
+            {start !== null && <i className={styles.schedPick} style={{ left: pct(start), width: wid(start, start + ritualMinutes) }} />}
+            {nowMinutes !== null && nowMinutes >= OPEN_MINUTES && nowMinutes < CLOSE_MINUTES && <u className={styles.schedNow} style={{ left: pct(nowMinutes) }} />}
+          </div>
+        </div>
+      ))}
+      <p className={styles.schedLegend} aria-hidden="true"><span><i className={styles.schedBusy} /> Đã có khách</span><span><i className={styles.schedPick} /> Giờ bạn chọn</span></p>
+    </div>
   );
 }

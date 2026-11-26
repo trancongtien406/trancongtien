@@ -6,7 +6,7 @@ const base = "/images/demos/nep-tho/identity";
 export const metadata: Metadata = {
   title: "Nếp Thở · Studio pilates & yoga",
   description:
-    "Studio pilates và yoga với thời khoá biểu lọc lớp theo loại, cấp độ, huấn luyện viên và Class Finder gợi ý lớp tập phù hợp.",
+    "Studio Pilates và Yoga lớp nhỏ tại quận Sơn Trà, Đà Nẵng: lớp Reformer, Mat Pilates, Yoga, lịch tuần, gói tập và buổi tập thử.",
   icons: {
     icon: [
       { url: `${base}/favicon.svg`, type: "image/svg+xml" },
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Nếp Thở · Studio pilates & yoga",
-    description: "Studio pilates và yoga với thời khoá biểu tương tác.",
+    description: "Pilates và Yoga lớp nhỏ tại Sơn Trà, Đà Nẵng. Lịch tuần, gói tập, tập thử.",
     images: [{ url: `${base}/og-image.webp`, width: 1200, height: 630, alt: "Nếp Thở, studio pilates và yoga" }],
     locale: "vi_VN",
     type: "website",

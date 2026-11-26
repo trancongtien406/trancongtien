@@ -6,7 +6,7 @@ const base = "/images/demos/phong-thu/identity";
 export const metadata: Metadata = {
   title: "Tần Số Studio · Phòng thu âm Đà Nẵng",
   description:
-    "Phòng thu âm tại Đà Nẵng: thu giọng, thu band, podcast, voice-over, mix và master. Ước tính số giờ, chi phí tham khảo và checklist chuẩn bị cho buổi thu.",
+    "Phòng thu âm ở Quận Hải Châu, Đà Nẵng: thu giọng, thu band, podcast, voice-over, sản xuất beat, mix và master. Giá từ 220.000 ₫/giờ, mở 09:00 đến 22:00, nhận file WAV 24-bit.",
   icons: {
     icon: [
       { url: `${base}/favicon.svg`, type: "image/svg+xml" },

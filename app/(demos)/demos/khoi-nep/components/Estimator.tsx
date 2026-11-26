@@ -130,7 +130,7 @@ export function Estimator({ consultHref }: { consultHref: string }) {
       <div className={s.wrap}>
         <i className={s.rule} data-rule />
         <div className={s.secHead}>
-          <p className={s.label}>04 / Công cụ dự toán</p>
+          <p className={s.label}>07 / Ước tính chi phí</p>
           <h2 id="budget-title" className={s.h2}>
             Một ngân sách vừa vặn.
           </h2>

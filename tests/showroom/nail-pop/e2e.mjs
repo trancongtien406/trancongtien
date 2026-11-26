@@ -159,6 +159,48 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   await ctx.close();
 }
 
+// 3b) nội dung tiệm nail thật: hero, bảng giá, chính sách, đặt lịch
+{
+  const { ctx, page } = await open();
+  const hero = page.locator("section[aria-labelledby=np-h1]");
+  const ht = await hero.innerText();
+  ok(/Tiệm nail/.test(ht) && /Hải Châu/.test(ht) && /sơn gel/i.test(ht) && /đắp gel/i.test(ht), "hero: nói rõ tiệm nail, quận, dịch vụ");
+  ok(/150\.000/.test(ht) && /9:00/.test(ht) && /100\.000/.test(ht), "hero: 3 sự thật (giá từ, giờ mở cửa, đặt cọc)");
+  ok((await hero.getByRole("link", { name: /Đặt lịch làm móng/ }).getAttribute("href")) === "#dat-lich", "hero CTA đặt lịch -> #dat-lich");
+  const secs = await page.evaluate(() => [...document.querySelectorAll("main > section")].map((e) => e.id).filter(Boolean));
+  for (const id of ["dich-vu", "builder", "gioi-thieu", "mau-mong", "quy-trinh", "chinh-sach", "dat-lich", "hoi-dap"]) ok(secs.includes(id), `section có mặt: #${id}`);
+  ok((await page.locator("#dich-vu [class*=feeCard]").count()) === 4, "bảng phụ phí: dáng, độ dài, hoạ tiết, charm");
+  ok(/\+20\.000/.test(await page.locator("#dich-vu").innerText()), "phụ phí hiển thị bằng VND");
+  const pol = await page.locator("#chinh-sach").innerText();
+  ok(/đặt cọc/i.test(pol) && /huỷ/i.test(pol) && /5 ngày/.test(pol) && /không cam kết vô trùng tuyệt đối/i.test(pol) && /dị ứng/i.test(pol), "chính sách: cọc, huỷ, chỉnh sửa, vệ sinh thận trọng, dị ứng");
+  ok((await page.locator("#chinh-sach li").count()) === 6, "6 thẻ chính sách");
+  // Đặt lịch
+  const bk = page.locator("#dat-lich");
+  await bk.scrollIntoViewIfNeeded(); await page.waitForTimeout(300);
+  ok((await bk.locator("button[class*=slot2]").count()) === 22, "22 ô giờ 9:00 - 19:30");
+  await bk.locator("label", { hasText: "Nail art vẽ tay" }).click();
+  await bk.locator("label", { hasText: "Thứ Bảy" }).click();
+  ok(/còn 1 giờ bắt đầu/.test(await bk.locator("[role=status]").first().innerText()), "Nail art (150 phút) + Thứ Bảy: chỉ còn 1 giờ bắt đầu");
+  const enabled = await bk.locator("button[class*=slot2]:not([disabled])").evaluateAll((els) => els.map((e) => e.textContent));
+  ok(enabled.length === 1 && enabled[0] === "17:30", `ô bấm được: ${enabled.join(",")}`);
+  const blocked = await bk.locator("button[class*=slot2][disabled]").first().getAttribute("aria-label");
+  ok(/đã có khách|không đủ thời gian/.test(blocked), `ô bị khoá có nhãn: ${blocked}`);
+  await bk.locator("button[class*=slot2]:not([disabled])").first().hover(); await page.waitForTimeout(150);
+  ok((await bk.locator("button[class*=slot2][data-in='1']").count()) === 5, "hover: khối 5 ô liền nhau được tô");
+  await bk.locator("button[class*=slot2]:not([disabled])").first().click();
+  const sum = await bk.locator("[class*=bkSum]").innerText();
+  ok(/17:30 – 20:00/.test(sum) && /đặt cọc 100\.000/.test(sum), "tóm tắt đặt lịch có giờ và tiền cọc");
+  const bh = await bk.getByRole("link", { name: /Gửi yêu cầu đặt lịch/ }).getAttribute("href");
+  ok(/^\/lien-he/.test(bh), `đặt lịch -> form tư vấn: ${bh}`);
+  await bk.locator("label", { hasText: "Sơn gel cơ bản" }).click(); await bk.locator("label", { hasText: "Thứ Hai" }).click();
+  ok((await bk.locator("button[class*=slot2]:not([disabled])").count()) > 5, "dịch vụ ngắn + ngày thưa: nhiều giờ trống");
+  ok(/không cần đặt cọc|Chọn một giờ/.test(await bk.locator("[class*=bkSum]").innerText()), "đổi dịch vụ: bỏ chọn giờ cũ");
+  await bk.locator("label", { hasText: "Đắp gel nối móng" }).click(); await bk.locator("label", { hasText: "Thứ Sáu" }).click();
+  ok(/không còn khung|còn \d+ giờ/.test(await bk.locator("[role=status]").first().innerText()), "trạng thái đủ/không đủ khung giờ có thông báo");
+  await bk.screenshot({ path: path.join(shots, "booking-1440.png") });
+  await ctx.close();
+}
+
 // 4) hiệu ứng ký hiệu
 {
   const { ctx, page } = await open();
@@ -207,7 +249,7 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   await card.getByRole("link", { name: /Thử kiểu này/ }).click(); await page.waitForTimeout(500);
   ok(await page.locator("#builder-tool label[data-on='1']", { hasText: "Ombre" }).count() === 1, "bấm Thử kiểu này: công cụ nhận hoạ tiết Ombre");
   // glitch
-  await page.locator("#cam-hung").scrollIntoViewIfNeeded(); await page.waitForTimeout(300);
+  await page.locator("#mau-mong").scrollIntoViewIfNeeded(); await page.waitForTimeout(300);
   const gi = page.locator("[data-fx=GlitchImage]").nth(1);
   await gi.scrollIntoViewIfNeeded(); await page.waitForTimeout(250);
   const had = await gi.evaluate((e) => e.getAttribute("data-glitch"));
@@ -219,9 +261,8 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   // hiệu ứng thư viện
   await page.evaluate(() => window.scrollTo(0, 0)); await scrollThrough(page, 900);
   const fxn = await page.evaluate(() => [...new Set([...document.querySelectorAll("[data-fx]")].map((e) => e.getAttribute("data-fx")))]);
-  for (const n of ["SlotText", "VelocityMarquee", "ScrollScrubText", "ClipReveal", "MagneticButton", "ScrollProgress", "SVGPathDraw", "CustomCursor", "ColorFlood", "GlitchImage", "HeroChoreo"]) ok(fxn.includes(n), `hiệu ứng có mặt: ${n}`);
-  const draw = await page.locator("[data-fx=SVGPathDraw] path").first().evaluate((e) => getComputedStyle(e).strokeDashoffset);
-  ok(draw !== "1" && draw !== "1px", `đường quy trình vẽ theo cuộn (dashoffset ${draw})`);
+  for (const n of ["SlotText", "VelocityMarquee", "CustomCursor", "ColorFlood", "GlitchImage", "HeroChoreo", "SlotPicker"]) ok(fxn.includes(n), `hiệu ứng có mặt: ${n}`);
+  for (const n of ["ScrollScrubText", "ClipReveal", "MagneticButton", "ScrollProgress", "SVGPathDraw"]) ok(!fxn.includes(n), `đã bỏ hiệu ứng đại trà: ${n}`);
   const cur = await page.locator("[data-fx=CustomCursor]").count();
   ok(cur === 1, "con trỏ tuỳ biến bật (pointer fine)");
   await ctx.close();
@@ -231,7 +272,7 @@ for (const w of [320, 390, 768, 1024, 1440]) {
 {
   const { ctx, page } = await open();
   let reached = false;
-  for (let i = 0; i < 25; i++) { await page.keyboard.press("Tab"); const t = await page.evaluate(() => document.activeElement?.textContent || ""); if (/Dựng bộ móng của bạn/.test(t)) { reached = true; break; } }
+  for (let i = 0; i < 25; i++) { await page.keyboard.press("Tab"); const t = await page.evaluate(() => document.activeElement?.textContent || ""); if (/Đặt lịch làm móng/.test(t)) { reached = true; break; } }
   ok(reached, "Tab tới CTA chính ở hero");
   ok((await page.evaluate(() => getComputedStyle(document.activeElement).outlineStyle)) !== "none", "CTA có viền focus rõ");
   await ctx.close();

@@ -1,4 +1,3 @@
-import { MagneticButton } from "@/features/showroom/effects";
 import s from "../brand.module.css";
 import { IMGS } from "../data/images";
 import { Photo } from "./Photo";
@@ -21,29 +20,29 @@ export function Hero() {
       <div className={s.heroGrid}>
         <div className={s.heroText}>
           <p className={`${s.eyebrow} ${s.heroFade}`} style={{ "--d": "0.5s" } as React.CSSProperties}>
-            <span className={s.dot} aria-hidden="true" /> Rooftop bar &amp; cocktail · Đà Nẵng
+            <span className={s.dot} aria-hidden="true" /> Rooftop bar &amp; cocktail · Quận Sơn Trà, Đà Nẵng
           </p>
           <h1 id="tm-h1" className={s.h1}>
             <span className={s.h1Row}>
-              <span className={`${s.ignite} ${s.nWhite}`} style={{ "--d": "0.55s" } as React.CSSProperties}>Chạm</span>{" "}
-              <span className={`${s.ignite} ${s.nPink} ${s.flickA}`} style={{ "--d": "0.8s" } as React.CSSProperties}>tầng mây,</span>
+              <span className={`${s.ignite} ${s.nWhite}`} style={{ "--d": "0.55s" } as React.CSSProperties}>Rooftop bar</span>{" "}
+              <span className={`${s.ignite} ${s.nPink} ${s.flickA}`} style={{ "--d": "0.85s" } as React.CSSProperties}>&amp; cocktail</span>
             </span>
             <span className={s.h1Row}>
-              <span className={`${s.ignite} ${s.nWhite}`} style={{ "--d": "1.15s" } as React.CSSProperties}>chạm</span>{" "}
-              <span className={`${s.ignite} ${s.nCyan} ${s.flickB}`} style={{ "--d": "1.35s" } as React.CSSProperties}>vị đêm.</span>
+              <span className={`${s.ignite} ${s.nWhite}`} style={{ "--d": "1.15s" } as React.CSSProperties}>trên mái</span>{" "}
+              <span className={`${s.ignite} ${s.nCyan} ${s.flickB}`} style={{ "--d": "1.35s" } as React.CSSProperties}>nhìn ra biển.</span>
             </span>
           </h1>
           <p className={`${s.lead} ${s.heroFade}`} style={{ "--d": "1.5s" } as React.CSSProperties}>
-            Thành phố lên đèn, một ly vừa gu và một khoảng trời dành riêng cho bạn. Tầng Mây pha cocktail ngẫu hứng trên mái nhà Đà Nẵng, mở vào buổi tối.
+            Tầng Mây là quán bar trên tầng thượng ở Sơn Trà: cocktail signature và cổ điển, đồ uống không cồn, món nhắm chia cho cả bàn. Dành cho nhóm bạn, cặp đôi và tiệc nhỏ, mở cửa từ chiều đến khuya.
           </p>
           <div className={`${s.heroCtas} ${s.heroFade}`} style={{ "--d": "1.65s" } as React.CSSProperties}>
-            <MagneticButton>
-              <a className={`${s.btn} ${s.btnPink}`} href="#dat-ban">Giữ chỗ trên mái</a>
-            </MagneticButton>
-            <a className={`${s.btn} ${s.btnGhost}`} href="#chon-ly">Chọn ly theo vị</a>
+            <a className={`${s.btn} ${s.btnPink}`} href="#dat-ban">Đặt bàn</a>
+            <a className={`${s.btn} ${s.btnGhost}`} href="#thuc-don">Xem thực đơn</a>
           </div>
           <ul className={`${s.heroFacts} ${s.heroFade}`} style={{ "--d": "1.8s" } as React.CSSProperties}>
-            <li>Cocktail · Không cồn · Món nhắm</li>
+            <li>Mở 17:00–00:00 hằng ngày</li>
+            <li>Happy hour 17:00–19:00, thứ Hai đến thứ Sáu</li>
+            <li>Cocktail từ 140.000₫</li>
             <li>Dành cho khách từ 18 tuổi</li>
           </ul>
         </div>
@@ -55,7 +54,7 @@ export function Hero() {
             </div>
             <span className={`${s.archTube}`} aria-hidden="true" />
           </div>
-          <p className={s.vertical} aria-hidden="true">Rooftop · Đà Nẵng · Đêm nay lên đèn</p>
+          <p className={s.vertical} aria-hidden="true">Rooftop · Sơn Trà · Đà Nẵng</p>
         </div>
       </div>
       <a className={s.scrollCue} href="#nhip" aria-label="Cuộn xuống">

@@ -62,7 +62,7 @@ console.log('[1] Tải trang, console, request ngoài origin, metadata');
   ok(await page.locator('link[rel=icon][href*="mien-cuoi/identity/favicon"]').count() > 0, 'favicon theo route');
   ok(await page.locator('meta[property="og:image"][content*="mien-cuoi/identity/og-image"]').count() > 0, 'og-image');
   ok(await page.locator('h1').count() === 1, 'đúng 1 h1');
-  ok(await page.locator('#services li').count() >= 6, '6 dịch vụ');
+  ok(await page.locator('#services > div > ul > li').count() === 6, '6 dịch vụ');
   ok(await page.locator('#faq details').count() === 8, '8 câu FAQ');
   const imgs = await page.evaluate(() => [...document.images].map((i) => i.currentSrc || i.src));
   ok(imgs.length >= 10 && new Set(imgs.map((s) => decodeURIComponent(s).match(/mien-cuoi\/([a-z0-9-]+)-\d+\.webp/)?.[1]).filter(Boolean)).size === imgs.filter((s) => /webp/.test(decodeURIComponent(s))).length, 'ảnh không lặp trên trang', String(imgs.length));
@@ -143,6 +143,8 @@ console.log('[4] prefers-reduced-motion: nội dung hiện đủ');
   await load(page); await slowScroll(page);
   const r = await page.evaluate(() => [...document.querySelectorAll('[data-mc-reveal],[data-mc=h1a],[data-mc=h1b],[data-mc=cta],[data-mc=desc],[data-mc=nav-panel],[data-mc=sched-form],[data-mc=sched-preview],[role=radio]')].filter((e) => +getComputedStyle(e).opacity < 0.99).length);
   ok(r === 0, 'motion bật: không phần tử nào kẹt ẩn sau khi cuộn', String(r));
+  const clipped = await page.evaluate(() => [...document.querySelectorAll('[data-mc-reveal],[data-mc]')].filter((e) => { const c = getComputedStyle(e).clipPath; return c !== 'none' && !/inset\(0(px|%)? 0(px|%)? 0(px|%)? 0(px|%)?\)/.test(c); }).length);
+  ok(clipped === 0, 'motion bật: không khối nào kẹt clip-path sau khi cuộn', String(clipped));
   const hero = await page.evaluate(() => { const m = new DOMMatrix(getComputedStyle(document.querySelector('[data-mc=cover]')).transform); return m.a; });
   ok(hero === 0, 'motion bật: tấm phủ ảnh hero đã mở', String(hero));
   await ctx.close();
@@ -214,11 +216,6 @@ console.log('[5] Care Navigator');
   await nav.getByLabel('Tôi không chắc').check(); await nav.getByRole('button', { name: 'Xem định hướng' }).click();
   ok(await nav.locator('[data-outcome=assessment]').isVisible(), 'tẩy trắng + không chắc = assessment');
   ok(!(await page.evaluate(() => JSON.stringify(localStorage) + JSON.stringify(sessionStorage))).includes('whitening'), 'không lưu lựa chọn sức khỏe vào storage');
-  // service card preset
-  await page.locator('#services').getByRole('link', { name: /Tìm hiểu hướng chăm sóc/ }).nth(2).click();
-  await page.waitForTimeout(600);
-  ok(await nav.getByRole('radio', { name: 'Tìm hiểu chỉnh nha' }).getAttribute('aria-checked') === 'true', 'thẻ dịch vụ chọn trước nhu cầu chỉnh nha, vẫn ở bước sàng lọc');
-  ok(await nav.getByRole('heading', { name: /Điều gì đưa bạn đến đây/ }).isVisible(), 'không bỏ qua bước 1');
   ok(page.errors.length === 0, 'không lỗi console khi dùng Navigator', page.errors.join('|'));
   await ctx.close();
 }
@@ -273,7 +270,7 @@ console.log('[6] Appointment Scheduler');
   await sch.locator('#mc-service').selectOption('whitening');
   ok(await sch.locator('#mc-doctor').inputValue() === 'any', 'đổi sang dịch vụ không tương thích: bác sĩ về "bất kỳ"');
   const opts = await sch.locator('#mc-doctor option').allInnerTexts();
-  ok(opts.length === 2 && /Thanh Lam/.test(opts[1]), 'danh sách bác sĩ chỉ gồm người phù hợp dịch vụ', opts.join('|'));
+  ok(opts.length === 2 && /chỉnh nha/.test(opts[1]), 'danh sách bác sĩ chỉ gồm người phù hợp dịch vụ', opts.join('|'));
   // luồng đầy đủ
   await sch.locator('#mc-service').selectOption('checkup');
   const d2 = await findDay('ok'); await d2.click();
@@ -281,7 +278,7 @@ console.log('[6] Appointment Scheduler');
   await prevBtn.click();
   ok(await sch.getByRole('heading', { name: 'Tóm tắt lịch hẹn đã sẵn sàng.' }).isVisible(), 'xem trước lịch hẹn sẵn sàng');
   const pv = await sch.locator('aside').innerText();
-  ok(/Khám tổng quát/.test(pv) && /BS\. Minh An/.test(pv) && /150\.000/.test(pv) && /\d\d:\d\d đến \d\d:\d\d/.test(pv) && /30\s*phút/.test(pv), 'preview có dịch vụ/bác sĩ/giờ/thời lượng/giá giả định', pv.replace(/\n/g, ' ').slice(0, 300));
+  ok(/Khám tổng quát/.test(pv) && /nha khoa tổng quát/.test(pv) && /150\.000/.test(pv) && /\d\d:\d\d đến \d\d:\d\d/.test(pv) && /30\s*phút/.test(pv), 'preview có dịch vụ/bác sĩ/giờ/thời lượng/giá giả định', pv.replace(/\n/g, ' ').slice(0, 300));
   ok(/Chưa có yêu cầu đặt lịch nào được gửi đi/.test(pv) && !/thành công|mã bệnh nhân/i.test(pv), 'preview không giả vờ đặt thật');
   await expectClean(page, 'scheduler: tóm tắt lịch hẹn');
   await page.waitForTimeout(300);
@@ -296,7 +293,7 @@ console.log('[6] Appointment Scheduler');
   ok(await sch.getByText(/liên hệ cơ sở nha khoa hoặc cấp cứu ngay/).isVisible(), 'khám đau: nhắc liên hệ cơ sở/cấp cứu');
   await expectClean(page, 'scheduler: nhắc triệu chứng');
   // team prefill
-  await page.locator('#team').getByRole('link', { name: /Xem lịch hẹn/ }).nth(1).click();
+  await page.locator('#team').getByRole('link', { name: /Xem lịch khám/ }).nth(1).click();
   await page.waitForTimeout(600);
   ok(await sch.locator('#mc-service').inputValue() === 'orthodontics' && await sch.locator('#mc-doctor').inputValue() === 'thanh-lam', 'thẻ bác sĩ điền sẵn dịch vụ + bác sĩ');
   // CTA tư vấn
@@ -322,8 +319,8 @@ console.log('[7] Bàn phím, FAQ, link thoát, ref');
   const { ctx, page } = await newPage();
   await load(page);
   let hit = 0;
-  for (let i = 1; i <= 25; i++) { await page.keyboard.press('Tab'); const t = await page.evaluate(() => document.activeElement?.textContent?.trim() ?? ''); if (/Tìm hướng chăm sóc/.test(t)) { hit = i; break; } }
-  ok(hit > 0, `Tab tới CTA "Tìm hướng chăm sóc" trong ${hit} lần`);
+  for (let i = 1; i <= 25; i++) { await page.keyboard.press('Tab'); const t = await page.evaluate(() => document.activeElement?.textContent?.trim() ?? ''); if (/Đặt lịch khám/.test(t)) { hit = i; break; } }
+  ok(hit > 0, `Tab tới CTA "Đặt lịch khám" trong ${hit} lần`);
   const ol = await page.evaluate(() => { const s = getComputedStyle(document.activeElement); return s.outlineStyle !== 'none' && parseFloat(s.outlineWidth) >= 2; });
   ok(ol, 'focus-visible rõ trên CTA');
   const f = page.locator('#faq summary').first();
@@ -347,6 +344,86 @@ console.log('[7] Bàn phím, FAQ, link thoát, ref');
   ok(hrefs.length >= 3 && hrefs.every((h) => h.startsWith('/lien-he?industry=')), 'link tư vấn tương đối cùng origin (giữ cookie ref first-party)');
   const p2 = await ctx.newPage(); await p2.goto(BASE + hrefs[0] + '&ref=TESTREF', { waitUntil: 'domcontentloaded' });
   ok(p2.url().includes('industry=Nha') && p2.url().includes('ref=TESTREF'), '/lien-he nhận industry + ref');
+  await ctx.close();
+}
+
+console.log('[10] Nội dung đúng đề tài phòng khám nha khoa');
+{
+  const { ctx, page } = await newPage(); await load(page);
+  const txt = await page.evaluate(() => document.body.innerText);
+  ok(/Phòng khám nha khoa/.test(txt) && /Quận Hải Châu, Đà Nẵng/.test(txt), 'hero nêu loại hình + khu vực cấp quận');
+  ok(/Từ 150\.000₫/.test(txt) && /Thứ 2 – Thứ 7/.test(txt) && /Báo giá trước/.test(txt), 'hero có 3 sự thật cụ thể');
+  ok(/115/.test(await page.locator('section#top').innerText()), 'hero có cảnh báo cấp cứu 115');
+  for (const id of ['services', 'process', 'prepare', 'pricing', 'care-navigator', 'appointment', 'about', 'team', 'space', 'policy', 'faq']) ok(await page.locator('#' + id).count() === 1, 'có section #' + id);
+  for (const k of ['Khám và lấy cao răng', 'Trám răng', 'Nhổ răng', 'Niềng răng', 'Tẩy trắng răng', 'Implant']) ok(txt.includes(k), 'có dịch vụ: ' + k);
+  ok(!/BS\.|Tiến sĩ|Thạc sĩ|chứng chỉ|trước và sau|trước - sau/i.test(txt), 'không bằng cấp/tên bác sĩ/ảnh trước-sau');
+  ok(!/hành trình|trải nghiệm đẳng cấp|giải pháp/i.test(txt), 'không câu sáo rỗng');
+  ok(await page.locator('section#top img[alt*="Ghế nha khoa"]').count() === 1, 'ảnh hero đúng ngành');
+  await expectClean(page, 'nội dung mới');
+  await ctx.close();
+}
+
+console.log('[11] Sơ đồ hàm răng tương tác');
+{
+  const { ctx, page } = await newPage(); await load(page);
+  const sec = page.locator('#services'); await sec.scrollIntoViewIfNeeded(); await page.waitForTimeout(1800);
+  ok(await sec.locator('svg rect').count() === 32, 'sơ đồ có 32 răng', String(await sec.locator('svg rect').count()));
+  const on = () => sec.locator('svg rect[data-on="1"]').count();
+  ok(await on() === 12, 'mặc định vùng răng cửa + nanh: 12 răng sáng', String(await on()));
+  await sec.getByTestId('region-molar').click(); await page.waitForTimeout(400);
+  ok(await on() === 8 && /Răng hàm lớn/.test(await sec.getByTestId('region-info').innerText()), 'chọn răng hàm lớn: 8 răng sáng + thông tin đổi');
+  await sec.getByTestId('region-wisdom').click(); await page.waitForTimeout(300);
+  ok(await on() === 4 && /nhổ răng/i.test(await sec.getByTestId('region-info').innerText()), 'răng khôn: 4 răng + gợi ý nhổ răng');
+  await sec.getByTestId('region-gum').click(); await page.waitForTimeout(300);
+  ok(await on() === 0, 'nướu: không răng nào tô, viền nướu sáng');
+  await sec.getByTestId('region-premolar').click();
+  await sec.getByTestId('region-info').getByRole('link', { name: /Khám đau/ }).click(); await page.waitForTimeout(600);
+  ok(await page.locator('#mc-service').inputValue() === 'pain', 'link dịch vụ điền sẵn Scheduler');
+  await sec.locator('svg').scrollIntoViewIfNeeded();
+  await sec.locator('svg g[data-tooth]').first().click({ force: true }); await page.waitForTimeout(200);
+  ok(await sec.getByRole('radio', { name: 'Răng cửa và răng nanh' }).getAttribute('aria-checked') === 'true', 'bấm vào răng chọn vùng tương ứng');
+  await expectClean(page, 'sơ đồ hàm răng');
+  await ctx.close();
+}
+
+console.log('[12] Timeline quy trình + checklist chuẩn bị');
+{
+  const { ctx, page } = await newPage(); await load(page);
+  const sec = page.locator('#process'); await sec.scrollIntoViewIfNeeded(); await page.waitForTimeout(800);
+  ok(await sec.locator('[data-fx=StickyChapters]').count() === 1, 'StickyChapters có mặt');
+  ok(await sec.locator('[data-fx-chapter]').count() === 6, '6 bước quy trình');
+  await page.locator('#buoc-04').scrollIntoViewIfNeeded(); await page.evaluate(() => document.querySelector('#buoc-04').scrollIntoView({ block: 'center' })); await page.waitForTimeout(1200);
+  ok(await page.locator('[data-fx=StickyChapters]').getAttribute('data-active') === '3', 'cuộn tới bước 4: bước 4 là bước đang đọc');
+  ok(/Trao đổi phương án và chi phí/.test(await page.locator('[data-fx-visual][aria-hidden=false]').innerText()), 'thẻ bên phải đổi theo bước');
+  const pr = page.locator('#prepare'); await pr.scrollIntoViewIfNeeded();
+  ok(/0\/6/.test(await pr.getByTestId('prep-count').innerText()), 'checklist: 0/6');
+  await pr.getByLabel(/Danh sách thuốc/).check(); await pr.getByLabel(/Phim chụp/).check();
+  ok(/2\/6/.test(await pr.getByTestId('prep-count').innerText()), 'tick 2 mục: 2/6');
+  await pr.getByLabel(/Phim chụp/).uncheck();
+  ok(/1\/6/.test(await pr.getByTestId('prep-count').innerText()), 'bỏ tick: 1/6');
+  ok(!(await page.evaluate(() => JSON.stringify(localStorage))).includes('prep'), 'checklist không lưu storage');
+  ok(await page.locator('#about [data-fx=ScrollScrubText]').count() === 1, 'ScrollScrubText ở phần Về phòng khám');
+  ok(await page.locator('#policy dt').count() === 5, '5 mục chính sách');
+  const fx = await page.evaluate(() => [...new Set([...document.querySelectorAll('[data-fx]')].map((e) => e.getAttribute('data-fx')))].sort());
+  ok(fx.join(',') === 'ScrollScrubText,StickyChapters', 'thư viện: chỉ SST + StickyChapters', fx.join(','));
+  await ctx.close();
+}
+{
+  const { ctx, page } = await newPage({ reducedMotion: 'reduce' }); await load(page);
+  const sec = page.locator('#services'); await sec.scrollIntoViewIfNeeded(); await page.waitForTimeout(500);
+  ok(await sec.locator('svg rect').count() === 32, 'reduced-motion: sơ đồ răng hiện đủ 32 răng');
+  const op = await sec.locator('svg g[data-tooth]').evaluateAll((e) => e.every((g) => getComputedStyle(g).opacity === '1'));
+  ok(op, 'reduced-motion: răng không bị ẩn');
+  await ctx.close();
+}
+for (const [w, mobile] of [[1440, false], [390, true]]) {
+  const { ctx, page } = await newPage({ viewport: { width: w, height: mobile ? 844 : 900 }, isMobile: mobile, hasTouch: mobile });
+  await page.addInitScript(() => { window.__lt = []; try { new PerformanceObserver((l) => l.getEntries().forEach((e) => window.__lt.push(e.duration))).observe({ type: 'longtask', buffered: true }); } catch {} });
+  await load(page);
+  await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 400) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 120)); } window.scrollTo(0, 0); });
+  const lt = await page.evaluate(() => window.__lt.filter((d) => d > 200).length);
+  console.log(`  INFO long task >200ms khi cuộn toàn trang w=${w}: ${lt}`);
+  ok(lt <= 3, `w=${w}: long task >200ms ≤ 3`, String(lt));
   await ctx.close();
 }
 

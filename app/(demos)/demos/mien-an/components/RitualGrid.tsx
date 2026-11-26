@@ -9,28 +9,28 @@ import { useMienAn } from "./Provider";
 import styles from "../brand.module.css";
 
 export function RitualGrid() {
-  const { openDetail } = useMienAn();
+  const { openDetail, choose } = useMienAn();
   return (
     <section id="rituals" className={`${styles.section} ${styles.linen}`} aria-labelledby="rituals-title">
       <div className={styles.container}>
         <div className={styles.ritualHead} data-reveal>
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-            <p className={styles.eyebrow}>Signature rituals</p>
+            <p className={styles.eyebrow}>Bảng liệu trình</p>
             <h2 id="rituals-title" className={styles.h2}>
-              Những nghi thức <em>dành cho bạn.</em>
+              Sáu liệu trình, <em>giá rõ ràng.</em>
             </h2>
           </div>
           <div>
             <p className={styles.lead}>
-              Mỗi cơ thể có một nhịp điệu riêng. Khám phá những nghi thức được xây dựng quanh cảm giác thư giãn, sự nhẹ nhàng và thời gian chăm sóc bản thân.
+              Từ 45 phút ngâm chân đến 120 phút chăm sóc kết hợp cơ thể và da mặt. Mỗi liệu trình ghi rõ thời lượng, giá, mức áp lực và ai nên chọn.
             </p>
-            <p className={styles.priceNote}>Giá tham khảo, có thể điều chỉnh theo thời điểm.</p>
+            <p className={styles.priceNote}>Giá tham khảo, có thể thay đổi theo thời điểm.</p>
           </div>
         </div>
         <ul className={styles.ritualGrid}>
           {RITUALS.map((r, i) => (
             <li key={r.id} className={styles.ritualCard} data-reveal>
-              <div className={styles.ritualImg}>
+              <div className={styles.ritualImg} data-ripple>
                 <Image src={`${r.image}-1200.webp`} alt={r.imageAlt} fill sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 92vw" loading={i < 2 ? "eager" : "lazy"} />
               </div>
               <div className={styles.ritualBody}>
@@ -40,13 +40,35 @@ export function RitualGrid() {
                 <p className={styles.ritualMeta}>
                   {r.durationMinutes}&nbsp;phút · {formatVnd(r.priceVnd)}
                 </p>
-                <button type="button" className={styles.link} onClick={() => openDetail(r.id)} aria-label={`Xem nghi thức ${r.name}`}>
-                  Xem nghi thức <span className={styles.arrow} aria-hidden="true">↗</span>
+                <button type="button" className={styles.link} onClick={() => openDetail(r.id)} aria-label={`Xem liệu trình ${r.name}`}>
+                  Xem liệu trình <span className={styles.arrow} aria-hidden="true">↗</span>
                 </button>
               </div>
             </li>
           ))}
         </ul>
+        <div className={styles.priceTableWrap} data-reveal>
+          <h3 className={styles.h3}>Bảng giá liệu trình</h3>
+          <div className={styles.tableScroll} role="region" aria-label="Bảng giá liệu trình" tabIndex={0}>
+            <table className={styles.priceTable}>
+              <thead>
+                <tr><th scope="col">Liệu trình</th><th scope="col">Gồm</th><th scope="col">Thời lượng</th><th scope="col">Giá</th><th scope="col"><span className={styles.srOnly}>Đặt lịch</span></th></tr>
+              </thead>
+              <tbody>
+                {RITUALS.map((r) => (
+                  <tr key={r.id}>
+                    <th scope="row"><b>{r.name}</b><small>{r.subtitle}</small></th>
+                    <td>{r.steps.map((s) => `${s.minutes}′ ${s.label.toLowerCase()}`).join(" · ")}</td>
+                    <td className={styles.num}>{r.durationMinutes}&nbsp;phút</td>
+                    <td className={styles.num}>{formatVnd(r.priceVnd)}</td>
+                    <td><button type="button" className={styles.link} onClick={() => choose(r.id)} aria-label={`Đặt lịch ${r.name}`}>Đặt lịch</button></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className={styles.priceNote}>Giá tham khảo đã gồm dầu hoặc sản phẩm dùng trong liệu trình, khăn và trà gừng sau buổi. Chưa gồm tip.</p>
+        </div>
       </div>
       <RitualDialog />
     </section>
@@ -115,7 +137,7 @@ function RitualDialog() {
             </dl>
             <div className={styles.dialogActions}>
               <button type="button" className={`${styles.btn} ${styles.btnPrimary}`} onClick={() => choose(ritual.id)}>
-                Chọn nghi thức này
+                Chọn liệu trình này
               </button>
               <button type="button" className={`${styles.btn} ${styles.btnSecondary}`} onClick={() => ref.current?.close()}>
                 Quay lại khám phá

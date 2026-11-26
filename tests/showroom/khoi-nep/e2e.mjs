@@ -316,13 +316,13 @@ console.log("== 7. Dialog + bàn phím + link ref");
   for (let i = 0; i < 20; i++) { await page.keyboard.press("Tab"); if (await page.evaluate(() => document.activeElement?.getAttribute("data-cta") === "primary")) { reached = true; break; } }
   ok(reached, "Tab tới được CTA chính");
   // dialog
-  const trigger = page.getByRole("button", { name: /Xem ý tưởng.*Nếp Nhà/ });
+  const trigger = page.getByRole("button", { name: /Xem hồ sơ.*Căn hộ/ });
   await trigger.scrollIntoViewIfNeeded();
   await trigger.focus();
   await page.keyboard.press("Enter");
   await page.waitForTimeout(300);
   ok(await page.locator("dialog[open]").count() === 1, "dialog mở");
-  ok((await scanAll(page)).length === 0, "dialog concept sạch", JSON.stringify(await scanAll(page)));
+  ok((await scanAll(page)).length === 0, "dialog loại công trình sạch", JSON.stringify(await scanAll(page)));
   await page.keyboard.press("Escape");
   await page.waitForTimeout(300);
   ok(await page.locator("dialog[open]").count() === 0, "Escape đóng dialog");
@@ -344,6 +344,61 @@ console.log("== 7. Dialog + bàn phím + link ref");
   await m.page.keyboard.press("Escape");
   ok(await m.page.locator("#kn-menu").isHidden(), "Escape đóng menu mobile");
   await m.ctx.close();
+}
+
+
+console.log("== 9. Rework: nội dung công ty thật + hiệu ứng chữ ký");
+{
+  const { ctx, page, errors } = await newPage(1440, 900);
+  await page.goto(URL_, { waitUntil: "networkidle" });
+  await page.waitForTimeout(1500);
+  const hero = await page.locator("#hero").innerText();
+  ok(/thi công nội thất/i.test(hero) && /Hải Châu, Đà Nẵng/i.test(hero) && /Đặt lịch khảo sát/.test(hero) && /250\.000/.test(hero) && /2\.000\.000/.test(hero), "hero: loại hình, khu vực, CTA khảo sát, 3 sự thật");
+  ok(await page.locator("#hero li").count() === 3, "hero 3 sự thật");
+  for (const id of ["services", "spaces", "process", "floorplan", "packages", "budget", "materials", "board", "faq", "start"]) ok(await page.locator("#" + id).count() === 1, "có section #" + id);
+  ok(await page.locator("#process ol > li").count() === 5, "quy trình 5 bước");
+  ok((await page.locator("#process").innerText()).split("Bạn nhận:").length === 6, "mỗi bước có đầu ra");
+  ok(await page.locator("#spaces article").count() === 4, "4 loại công trình");
+  ok(await page.locator("#faq li").count() === 10, "10 câu FAQ");
+  const body = await page.evaluate(() => document.body.innerText);
+  ok(/bảo hành/i.test(body) && /theo đợt/i.test(body), "có bảo hành + thanh toán theo đợt");
+  ok(await page.locator('[data-fx=PinnedHorizontalScroll]').count() === 1, "PinnedHorizontalScroll cho loại công trình");
+  ok((await scanAll(page)).length === 0, "rework: quét nhãn cấm sạch", JSON.stringify(await scanAll(page)));
+  // slider mặt bằng -> phối cảnh
+  const fp = page.getByTestId("floorplan");
+  await fp.scrollIntoViewIfNeeded(); await page.waitForTimeout(2600);
+  const rng = page.getByTestId("floorplan-range");
+  await rng.fill("20");
+  const c1 = await page.locator('[data-testid=floorplan] > div').nth(1).evaluate((e) => e.style.clipPath);
+  await rng.fill("80");
+  const c2 = await page.locator('[data-testid=floorplan] > div').nth(1).evaluate((e) => e.style.clipPath);
+  ok(c1 !== c2 && /inset/.test(c1), "slider mặt bằng→phối cảnh đổi clip-path", c1 + " | " + c2);
+  await fp.scrollIntoViewIfNeeded(); await page.waitForTimeout(300);
+  const box = await fp.boundingBox();
+  await page.mouse.move(box.x + box.width * 0.5, box.y + box.height / 2); await page.mouse.down();
+  await page.mouse.move(box.x + box.width * 0.9, box.y + box.height / 2, { steps: 6 }); await page.mouse.up();
+  ok(Number(await rng.inputValue()) >= 85, "kéo chuột đổi vị trí slider", await rng.inputValue());
+  // kéo-thả vật liệu
+  const drop = page.getByTestId("material-drop");
+  await drop.scrollIntoViewIfNeeded();
+  const chip = drop.locator('[data-mat=F02]'); const floor = drop.locator('[data-zone=floor]');
+  const cb = await chip.boundingBox(); const fb = await floor.boundingBox();
+  await page.mouse.move(cb.x + 20, cb.y + 20); await page.mouse.down();
+  await page.mouse.move(fb.x + fb.width / 2, fb.y + fb.height / 2, { steps: 8 }); await page.mouse.up();
+  ok(/Sàn\s*Vải olive/.test((await page.getByTestId("drop-summary").innerText()).replace(/\n/g, "")), "kéo-thả: Vải olive vào Sàn");
+  // bàn phím: chọn mẫu rồi bấm vùng
+  await drop.locator('[data-mat=S01]').focus(); await page.keyboard.press("Enter");
+  await drop.locator('[data-zone=wall]').click();
+  ok(/Tường\s*Travertine/.test((await page.getByTestId("drop-summary").innerText()).replace(/\n/g, "")), "bàn phím: chọn mẫu + bấm vùng Tường");
+  ok(errors.length === 0, "rework: 0 lỗi console", errors.join("|"));
+  await ctx.close();
+}
+{
+  const { ctx, page } = await newPage(390, 844);
+  await page.goto(URL_, { waitUntil: "networkidle" });
+  const r = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, cw: document.documentElement.clientWidth }));
+  ok(r.sw <= r.cw, "mobile không tràn ngang sau rework", JSON.stringify(r));
+  await ctx.close();
 }
 
 console.log("== 8. FAQ + credits");

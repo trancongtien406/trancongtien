@@ -1,12 +1,13 @@
 import Image from "next/image";
-import { BlobMorph, MagneticButton } from "@/features/showroom/effects";
+import { BlobMorph } from "@/features/showroom/effects";
 import s from "../brand.module.css";
+import c from "./shop.module.css";
 import { BloomText } from "./BloomText";
 import { HeroMotion } from "./HeroMotion";
 import { PetalMask } from "./PetalMask";
 import { BLOOM_PATHS, Leaf } from "./Shapes";
 
-const RING = "DỰNG BÓ HOA CỦA RIÊNG BẠN · BOUQUET BUILDER · ";
+const RING = "BÓ · LẴNG · HOA HỘP · HOA CƯỚI · ĐỊNH KỲ · ĐẶT HOA · ";
 
 export function Hero() {
   return (
@@ -20,16 +21,16 @@ export function Hero() {
 
       <div className={`${s.wrap} ${s.heroGrid}`}>
         <div className={s.heroCopy}>
-          <p className={s.eyebrow} data-h="fade">Hoa tươi · Đà Nẵng</p>
+          <p className={s.eyebrow} data-h="fade">Nở Rừng · Tiệm hoa tươi · Quận Thanh Khê, Đà Nẵng</p>
           <h1 id="h1" className={s.heroTitle}>
-            <BloomText trigger="load" delay={1.0} accent={["nở"]} accentClassName={s.accent}>Hoa cho những điều đang nở.</BloomText>
+            <BloomText trigger="load" delay={1.0} accent={["theo", "dịp."]} accentClassName={s.accent}>Bó, lẵng và hoa hộp theo dịp.</BloomText>
           </h1>
           <p className={s.lead} data-h="fade">
-            Những bó hoa được tạo nên từ sắc màu, hình dáng và cảm xúc. Tự nhiên một chút, khác biệt một chút, dành riêng cho những khoảnh khắc đáng nhớ.
+            Hoa sinh nhật, khai trương, cưới và hoa định kỳ cho quán, văn phòng. Cắm tay từng bó, đặt trước qua tin nhắn, nhận tại tiệm hoặc nhờ tiệm gửi tới người nhận.
           </p>
           <div className={s.heroCtas}>
-            <span data-h="cta"><MagneticButton><a className={`${s.btn} ${s.btnVerm} ${s.btnBig}`} href="#bo-hoa">Tự tay dựng bó hoa</a></MagneticButton></span>
-            <span data-h="cta"><a className={`${s.btn} ${s.btnLine} ${s.btnBig}`} href="#vuon">Xem khu vườn</a></span>
+            <span data-h="cta"><a className={`${s.btn} ${s.btnVerm} ${s.btnBig}`} href="#dat-hoa">Đặt hoa</a></span>
+            <span data-h="cta"><a className={`${s.btn} ${s.btnLine} ${s.btnBig}`} href="#bang-gia">Xem bảng giá</a></span>
           </div>
         </div>
 
@@ -40,7 +41,7 @@ export function Hero() {
           <PetalMask shape="flower" className={s.heroFlower} trigger="load" delay={0.3} outline outlineClassName={s.heroOutline}>
             <Image src="/images/demos/hoa-tuoi/mau-don-hong-1200.webp" alt="Mẫu đơn hồng sen nở rộ, cánh còn đọng sương" fill priority sizes="(max-width: 900px) 86vw, 46vw" style={{ objectFit: "cover" }} />
           </PetalMask>
-          <a className={s.ring} href="#bo-hoa" data-h="ring" aria-label="Dựng bó hoa của riêng bạn bằng Bouquet Builder">
+          <a className={s.ring} href="#dat-hoa" data-h="ring" aria-label="Đặt hoa: bó, lẵng, hoa hộp, hoa cưới, hoa định kỳ">
             <svg viewBox="0 0 200 200" className={s.ringSvg} data-spin="" aria-hidden="true" focusable="false">
               <defs><path id="nr-ring" d="M100 100 m-78 0 a78 78 0 1 1 156 0 a78 78 0 1 1 -156 0" /></defs>
               <text className={s.ringText}><textPath href="#nr-ring" startOffset="0" textLength="482" lengthAdjust="spacing">{RING}</textPath></text>
@@ -52,7 +53,11 @@ export function Hero() {
         </div>
       </div>
 
-      <p className={`${s.wrap} ${s.heroFoot}`} data-h="fade">Hoa cắt theo mùa · Cắm tay từng bó · Gói giấy kraft và dây gai</p>
+      <dl className={`${s.wrap} ${c.facts}`} data-h="fade" aria-label="Thông tin nhanh về tiệm">
+        <div><dt>Giá</dt><dd>Bó từ 200.000&nbsp;₫</dd></div>
+        <div><dt>Mở cửa</dt><dd>7:00 đến 21:00 hằng ngày</dd></div>
+        <div><dt>Báo trước</dt><dd>Bó từ 3 giờ, lẵng và hộp 1 ngày</dd></div>
+      </dl>
       <HeroMotion />
     </section>
   );

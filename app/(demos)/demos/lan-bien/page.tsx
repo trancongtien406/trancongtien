@@ -7,7 +7,8 @@ import { Chapters } from "./components/Chapters";
 import { Courses } from "./components/Courses";
 import { Journey } from "./components/Journey";
 import { Finder } from "./components/Finder";
-import { Band, Faq, FinalCta, Footer, Manifesto, Safety } from "./components/Sections";
+import { About, Faq, FinalCta, Footer, Safety } from "./components/Sections";
+import { Crew, Pricing, Schedule, Seasons } from "./components/Operations";
 import styles from "./brand.module.css";
 
 export default function LanBienPage() {
@@ -18,12 +19,15 @@ export default function LanBienPage() {
       <Header />
       <main id="main" className={styles.main}>
         <Hero />
-        <Manifesto />
+        <About />
         <Chapters />
-        <Band />
         <Courses />
+        <Schedule />
+        <Pricing />
+        <Seasons />
         <Journey />
         <Finder />
+        <Crew />
         <Safety />
         <Faq />
         <FinalCta />

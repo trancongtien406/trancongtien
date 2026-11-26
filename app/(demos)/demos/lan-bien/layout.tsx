@@ -5,9 +5,9 @@ import styles from "./brand.module.css";
 const ID = "/images/demos/lan-bien/identity";
 
 export const metadata: Metadata = {
-  title: "Tầng Xanh · Lặn biển và thể thao nước miền Trung",
+  title: "Tầng Xanh · Trung tâm lặn biển và thể thao nước ở Đà Nẵng",
   description:
-    "Tầng Xanh đưa bạn xuống năm tầng nước từ mặt biển đến vùng xanh thẫm: snorkeling, lặn có bình khí, freediving ở Cù Lao Chàm, Sơn Trà và biển miền Trung. Tìm cấp độ phù hợp trước khi trao đổi với hướng dẫn viên.",
+    "Trung tâm lặn biển ở Quận Sơn Trà, Đà Nẵng: lặn thử, khoá Open Water và Advanced, tour lặn ngắm san hô Sơn Trà và Cù Lao Chàm, thuê trang thiết bị. Xem lịch khởi hành, giá theo gói và mùa biển.",
   robots: { index: false, follow: true },
   icons: {
     icon: [
@@ -17,8 +17,8 @@ export const metadata: Metadata = {
     apple: `${ID}/apple-touch-icon.png`,
   },
   openGraph: {
-    title: "Tầng Xanh · Chạm mặt biển, chạm một thế giới khác",
-    description: "Lặn biển và thể thao nước ở Cù Lao Chàm, Sơn Trà và biển miền Trung, đi cùng hướng dẫn viên.",
+    title: "Tầng Xanh · Học lặn, ngắm san hô ngay từ biển Đà Nẵng",
+    description: "Lặn thử, khoá lặn và tour san hô ở Sơn Trà, Cù Lao Chàm, đi cùng hướng dẫn viên.",
     type: "website",
     locale: "vi_VN",
     images: [{ url: `${ID}/og-image.webp`, width: 1200, height: 630, alt: "Tầng Xanh, lặn biển và thể thao nước" }],

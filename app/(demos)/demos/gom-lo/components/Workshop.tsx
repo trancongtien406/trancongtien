@@ -5,7 +5,7 @@ import Image from "next/image";
 import { ImageHoverDistort } from "@/features/showroom/effects";
 import { buildConsultHref } from "@/features/showroom/consultation";
 import s from "../brand.module.css";
-import { FIRING_FEE, SESSIONS, SLOTS, vnd, type Session } from "../data/data";
+import { FIRING_FEE, POLICY, SCHEDULE, SESSIONS, SLOTS, vnd, type Session } from "../data/data";
 import { Engrave } from "./Engrave";
 
 const CONSULT = buildConsultHref("gom-lo");
@@ -17,6 +17,7 @@ export function Workshop() {
   const [slot, setSlot] = useState<string>("");
   const [fire, setFire] = useState<"co" | "khong">("co");
   const [tried, setTried] = useState(false);
+  const [cell, setCell] = useState("");
   const [copied, setCopied] = useState<"" | "ok" | "fail">("");
 
   const sess = SESSIONS.find((x) => x.id === sid);
@@ -58,10 +59,29 @@ export function Workshop() {
     <section id="buoi-lam-gom" className={s.workshop} aria-labelledby="ws-title">
       <div className={s.wrap}>
         <div className={s.wsHead}>
-          <p className={s.hand}>Buổi làm gốm</p>
-          <Engrave as="h2" id="ws-title" className={s.h2}>Chọn buổi, xem trước chi phí.</Engrave>
-          <p className={s.lead}>Ba cách làm gốm, một lớp nhỏ tối đa {MAX} người. Chọn buổi bạn thích, số người và khung giờ, bên cạnh sẽ hiện bản tóm tắt để bạn đem đi hỏi hoặc gửi cho xưởng.</p>
+          <p className={s.hand}>Workshop làm gốm</p>
+          <Engrave as="h2" id="ws-title" className={s.h2}>Workshop: lịch lớp, giá và những gì đã gồm.</Engrave>
+          <p className={s.lead}>Ba cách làm gốm, mỗi lớp tối đa {MAX} người và có người hướng dẫn cầm tay chỉ việc. Xem lịch lớp trong tuần, chọn một ô để điền sẵn buổi và khung giờ, bên dưới sẽ hiện bản tóm tắt để bạn đem đi hỏi hoặc gửi cho xưởng.</p>
         </div>
+
+        <div className={s.timetable} role="group" aria-label="Lịch lớp trong tuần. Chọn một buổi để điền sẵn vào bản tóm tắt">
+          {SCHEDULE.map((d) => (
+            <div key={d.day} className={s.ttDay} data-gl="fade">
+              <p className={s.ttHead}>{d.day}</p>
+              {d.rows.map((r) => {
+                const ss = SESSIONS.find((x) => x.id === r.sid)!;
+                const key = `${d.day}-${r.slot}`;
+                return (
+                  <button key={key} type="button" className={`${s.ttCell} ${cell === key ? s.ttOn : ""}`} data-k={r.sid} aria-pressed={cell === key} onClick={() => { setSid(r.sid); setSlot(r.slot); setCell(key); setCopied(""); }}>
+                    <b>{ss.kind}</b>
+                    <span>{r.time}</span>
+                  </button>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+        <p className={s.fine}>Lịch lặp lại hằng tuần, nghỉ Thứ Hai. Lớp mở khi có từ 2 người; nhóm riêng hoặc giờ khác, hỏi xưởng.</p>
 
         <div className={s.wsGrid}>
           <div className={s.wsForm}>
@@ -70,15 +90,17 @@ export function Workshop() {
               <div className={s.sessGrid}>
                 {SESSIONS.map((x) => (
                   <label key={x.id} className={`${s.sess} ${sid === x.id ? s.sessOn : ""}`} data-cursor="Chọn">
-                    <input type="radio" name="session" value={x.id} checked={sid === x.id} onChange={() => { setSid(x.id); setCopied(""); }} />
+                    <input type="radio" name="session" value={x.id} checked={sid === x.id} onChange={() => { setSid(x.id); setCell(""); setCopied(""); }} />
                     <ImageHoverDistort className={s.sessImg} strength={30} frequency={0.016}>
                       <Image src={`/images/demos/gom-lo/${x.img.file}-600.webp`} alt={x.img.alt} fill sizes="(max-width: 700px) 90vw, 280px" style={{ objectFit: "cover" }} draggable={false} />
                     </ImageHoverDistort>
                     <span className={s.sessBody}>
-                      <span className={s.sessKind}>{x.kind} · {x.minutes} phút</span>
+                      <span className={s.sessKind}>{x.kind} · {x.minutes} phút · tối đa {MAX} người</span>
                       <span className={s.sessName}>{x.name}</span>
                       <span className={s.sessBlurb}>{x.blurb}</span>
                       <ul>{x.bullets.map((b) => <li key={b}>{b}</li>)}</ul>
+                      <span className={s.sessInc}>Đã gồm: {x.includes.join("; ")}.</span>
+                      <span className={s.sessInc}>Phù hợp: {x.level}.</span>
                       <span className={s.sessPrice}>{vnd(x.price)}<small>/người</small></span>
                     </span>
                   </label>
@@ -102,7 +124,7 @@ export function Workshop() {
                 <div className={s.chips}>
                   {SLOTS.map((x) => (
                     <label key={x} className={`${s.chip} ${slot === x ? s.chipOn : ""}`}>
-                      <input type="radio" name="slot" value={x} checked={slot === x} onChange={() => { setSlot(x); setCopied(""); }} />{x}
+                      <input type="radio" name="slot" value={x} checked={slot === x} onChange={() => { setSlot(x); setCell(""); setCopied(""); }} />{x}
                     </label>
                   ))}
                 </div>
@@ -146,6 +168,10 @@ export function Workshop() {
             )}
           </aside>
         </div>
+
+        <ul className={s.policy} data-gl="fade" aria-label="Chính sách giữ chỗ và dời lịch">
+          {POLICY.map((p) => (<li key={p.k}><span className={s.policyK}>{p.k}</span><b>{p.v}</b><span>{p.s}</span></li>))}
+        </ul>
       </div>
     </section>
   );

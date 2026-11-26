@@ -47,14 +47,14 @@ export function Planner() {
   const g = (n: string) => `${uid}-${n}`;
 
   return (
-    <section id="chon-goi" className={s.planner} aria-labelledby="planner-h">
+    <section id="uoc-tinh" className={s.planner} aria-labelledby="planner-h">
       <div className={s.wrap}>
         <header className={s.sectionHead}>
-          <p className={s.chipInk}>Công cụ chọn gói</p>
-          <BounceWords as="h2" className={`${s.display} ${s.h2}`} text="Bé nhà bạn hợp *gói nào?*" />
-          <p className={s.lead}>Chọn bốn điều về bé, bên phải hiện ngay các bước chăm sóc, thời gian dự kiến và giá tham khảo. Công cụ chỉ lên kế hoạch chăm sóc lông, không chẩn đoán sức khoẻ.</p>
+          <p className={s.chipInk}>Ước tính cho bé</p>
+          <BounceWords as="h2" className={`${s.display} ${s.h2}`} text="Ước tính *thời gian và chi phí*" />
+          <p className={s.lead}>Chọn vài điều về bé, bên phải hiện ngay các bước chăm sóc, thời gian dự kiến và giá tham khảo. Công cụ chỉ lên kế hoạch chăm sóc lông, không chẩn đoán sức khoẻ.</p>
         </header>
-        <span id="planner-h" className={s.srOnly}>Chọn gói chăm sóc cho bé</span>
+        <span id="planner-h" className={s.srOnly}>Ước tính chăm sóc cho bé</span>
         <div className={s.plannerGrid}>
           <form className={s.plannerForm} onSubmit={(e) => e.preventDefault()} aria-label="Thông tin của bé">
             <fieldset className={s.fs}>
@@ -131,7 +131,7 @@ export function Planner() {
               </div>
             ) : (
               <>
-                <p className={s.planKicker}>Gói gợi ý</p>
+                <p className={s.planKicker}>Gói phù hợp</p>
                 <h3 className={`${s.display} ${s.planName}`}>{plan.pack}</h3>
                 <div className={s.planStats}>
                   <div><span>Thời gian dự kiến</span><b>{fmtTime(plan.totalMins)}</b></div>
@@ -151,7 +151,7 @@ export function Planner() {
                 </ol>
                 <p className={s.warn}>Bông Xù chỉ chăm sóc lông và vệ sinh, không chẩn đoán hay điều trị. Nếu bé có bệnh da hoặc vấn đề sức khoẻ, hãy hỏi bác sĩ thú y trước khi đặt lịch. Giá và thời gian là tham khảo, sẽ báo chính xác sau khi xem lông của bé.</p>
                 <div className={s.planActions}>
-                  <WagButton href={buildConsultHref("pet-vui")} tone="red">Gửi yêu cầu tư vấn</WagButton>
+                  <WagButton href={buildConsultHref("pet-vui")} tone="red">Gửi yêu cầu đặt lịch</WagButton>
                   <button type="button" className={`${s.btn} ${s.btn_white}`} onClick={copy}>Sao chép tóm tắt</button>
                 </div>
                 <p className={s.copyMsg} role="status">{copied === "ok" ? "Đã sao chép tóm tắt." : copied === "err" ? "Không sao chép được, bạn hãy bôi đen và sao chép thủ công." : ""}</p>

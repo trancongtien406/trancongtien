@@ -1,39 +1,42 @@
 import type { Metadata } from "next";
+import { About } from "./components/About";
 import { Appointment } from "./components/Appointment";
+import { Combos } from "./components/Combos";
 import { Closing } from "./components/Closing";
 import { Faq } from "./components/Faq";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
-import { Journey } from "./components/Journey";
 import { Motion } from "./components/Motion";
-import { Philosophy } from "./components/Philosophy";
+import { Oils } from "./components/Oils";
+import { Policy } from "./components/Policy";
+import { Prepare } from "./components/Prepare";
 import { MienAnProvider } from "./components/Provider";
 import { RitualFinder } from "./components/RitualFinder";
 import { RitualGrid } from "./components/RitualGrid";
 import { Ribbon } from "./components/Ribbon";
 import { Sanctuary } from "./components/Sanctuary";
-import { Story } from "./components/Story";
+import { Session } from "./components/Session";
 
 export const metadata: Metadata = {
-  title: "Miên An Wellness — Spa & wellness",
+  title: "Miên An Wellness — Spa massage & chăm sóc da tại Hải Châu, Đà Nẵng",
   description:
-    "Miên An Wellness: những nghi thức chăm sóc nhẹ nhàng, công cụ gợi ý liệu trình theo nhu cầu và tóm tắt lịch hẹn ngay trên trang.",
+    "Miên An Wellness: spa & massage trị liệu tại Quận Hải Châu, Đà Nẵng. Bảng giá liệu trình 45–120 phút, combo, giờ mở cửa 9:00–20:00, chính sách đặt và huỷ, chọn giờ trên lịch hai phòng.",
   robots: { index: false, follow: true },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  name: "Miên An Wellness — Spa & wellness",
+  name: "Miên An Wellness — Spa massage & chăm sóc da tại Hải Châu, Đà Nẵng",
   inLanguage: "vi",
-  description: "Nghi thức chăm sóc, gợi ý liệu trình và tóm tắt lịch hẹn tại Miên An Wellness.",
+  description: "Bảng giá liệu trình, combo, giờ mở cửa và chính sách đặt lịch tại Miên An Wellness, Quận Hải Châu, Đà Nẵng.",
   mainEntity: {
     "@type": "CreativeWork",
     name: "Miên An Wellness",
-    genre: "Spa & wellness",
+    genre: "Spa & massage trị liệu",
     inLanguage: "vi",
-    description: "Spa & wellness với các nghi thức chăm sóc nhẹ nhàng.",
+    description: "Spa & massage trị liệu với hai phòng riêng.",
   },
 };
 
@@ -45,12 +48,15 @@ export default function MienAnPage() {
       <Header />
       <main id="main">
         <Hero />
-        <Philosophy />
+        <About />
         <RitualGrid />
+        <Combos />
         <RitualFinder />
-        <Story />
+        <Session />
+        <Prepare />
+        <Oils />
         <Sanctuary />
-        <Journey />
+        <Policy />
         <Appointment />
         <Faq />
         <Closing />

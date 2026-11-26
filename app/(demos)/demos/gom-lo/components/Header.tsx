@@ -43,9 +43,9 @@ export function Header() {
           <img src="/images/demos/gom-lo/identity/logo-reversed.svg" alt="Đất Mơ" width={150} height={40} />
         </a>
         <nav className={s.nav} aria-label="Mục chính">
-          {NAV.slice(0, 5).map((n) => <a key={n.href} href={n.href}>{n.label}</a>)}
+          {NAV.slice(0, 6).map((n) => <a key={n.href} href={n.href}>{n.label}</a>)}
         </nav>
-        <a className={`${s.btn} ${s.btnSmall} ${s.headerCta}`} href="#buoi-lam-gom">Đặt buổi làm gốm</a>
+        <a className={`${s.btn} ${s.btnSmall} ${s.headerCta}`} href="#buoi-lam-gom">Đặt chỗ workshop</a>
         <button ref={btn} type="button" className={s.menuBtn} aria-expanded={open} aria-controls="gl-menu" onClick={() => setOpen((o) => !o)}>
           <span className={s.menuIcon} aria-hidden="true" />
           <span>{open ? "Đóng" : "Mục lục"}</span>
@@ -60,7 +60,7 @@ export function Header() {
               </li>
             ))}
           </ul>
-          <a className={`${s.btn}`} href="#buoi-lam-gom" onClick={() => setOpen(false)}>Đặt buổi làm gốm</a>
+          <a className={`${s.btn}`} href="#buoi-lam-gom" onClick={() => setOpen(false)}>Đặt chỗ workshop</a>
         </div>
       )}
     </header>

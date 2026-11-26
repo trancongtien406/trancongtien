@@ -55,9 +55,9 @@ export function Summary() {
   return (
     <div className={`${s.wrap} ${s.summary}`}>
       <div className={s.sumHead}>
-        <p className={s.kicker}>Buổi trà</p>
-        <InkTitle as="h2" className={s.h2}>Một buổi trà mang sắc thái của riêng bạn.</InkTitle>
-        <p className={s.lead}>Gom sẵn số người, khung giờ và bộ trà để việc trao đổi nhanh hơn. Bản tóm tắt này chưa phải đặt chỗ.</p>
+        <p className={s.kicker}>Đặt bàn, đặt phòng trà</p>
+        <InkTitle as="h2" className={s.h2}>Chọn số người, khung giờ và bộ trà.</InkTitle>
+        <p className={s.lead}>Bộ trà tính một lần mỗi bàn, ấm tính theo số người (3 người một ấm). Bản tóm tắt này chưa phải đặt chỗ: chỗ chỉ được giữ sau khi chúng tôi xác nhận lại.</p>
         <InkReveal className={s.sumImg}>
           <Image src="/images/demos/tra-thi/bo-chen-1200.webp" alt="Bộ chén và bát gốm xếp trên mặt bàn tối" width={2000} height={1333} sizes="(max-width: 900px) 92vw, 34vw" className={s.cover} loading="lazy" />
         </InkReveal>

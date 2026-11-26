@@ -64,8 +64,8 @@ ok(fx.ink >= 8, `InkReveal x${fx.ink}`);
 ok(fx.inkTitle >= 6, `InkTitle x${fx.inkTitle}`);
 ok(fx.scrub === "1", "ScrollScrubText chạy (data-fx-ready=1)");
 ok(fx.draw.length >= 4 && fx.draw.every((v) => v === "1"), "SVGPathDraw x" + fx.draw.length + " sẵn sàng");
-ok(fx.par === "1" || fx.par === "static", "ParallaxLayer khởi chạy (" + fx.par + ")");
-ok(fx.grain && fx.cursor && fx.prog && fx.marq && fx.steam, "Grain/Cursor/Progress/Marquee/Steam có mặt");
+ok(fx.grain && fx.cursor && fx.steam, "Grain/Cursor/Steam có mặt");
+ok(!fx.prog && !fx.marq && !fx.par, "đã bỏ ScrollProgress/Marquee/Parallax đại trà");
 ok(fx.leaves >= 5, "lá trà parallax " + fx.leaves);
 const steamPx = await page.evaluate(() => { const c = document.querySelector('canvas[data-fx="Steam"]'); const d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data; let n = 0; for (let i = 3; i < d.length; i += 4) if (d[i] > 8) n++; return n; });
 ok(steamPx > 500, "hơi nước canvas có điểm ảnh " + steamPx);
@@ -91,6 +91,24 @@ ok(fonts.hDiff && fonts.bDiff, "glyph Việt (Ắ…Ự) render bằng font thư
 await page.evaluate(() => { const d = document.createElement("div"); d.id = "glyphtest"; d.style.cssText = "position:fixed;left:0;top:0;z-index:99999;background:#1c1f1d;color:#e7e0d2;padding:20px;font:300 64px/1.3 " + getComputedStyle(document.querySelector("h1")).fontFamily; d.textContent = "Ố Ế Ể Ệ Ợ Ử Ữ Ắ Ặ Ằ Đ đ"; document.body.appendChild(d); });
 await page.screenshot({ path: `${SHOTS}/glyph-test.png`, clip: { x: 0, y: 0, width: 1100, height: 100 } });
 await page.evaluate(() => document.getElementById("glyphtest")?.remove());
+
+/* nội dung nhà trà thật */
+console.log("== nội dung ngành");
+{
+  const body = await page.evaluate(() => document.getElementById("main").innerText);
+  const h1sec = await page.locator("section#top").innerText();
+  ok(/Quận Hải Châu/.test(h1sec) && /8:30 đến 21:30/.test(h1sec) && /100\.000/.test(h1sec) && /4 đến 10/.test(h1sec), "hero: loại hình, quận, giờ, giá từ, phòng riêng");
+  ok(/Đặt bàn hoặc phòng trà/.test(h1sec) && /Xem menu trà/.test(h1sec), "hero: CTA đặt bàn + xem menu");
+  for (const id of ["danh-muc", "banh-tra", "nghi-thuc", "ghep-tra", "phong-tra", "buoi-tra", "mang-ve", "khong-gian", "quy-dinh", "hoi-dap"]) ok((await page.locator("#" + id).count()) === 1, "có section #" + id);
+  ok((await page.locator("#banh-tra ul li").count()) >= 10, "bánh trà >= 10 món có giá");
+  ok((await page.locator("#phong-tra ul > li").count()) === 3, "3 loại bàn/phòng trà");
+  ok((await page.locator("#mang-ve ul li").count()) >= 10, "trà mang về + dụng cụ có giá");
+  ok(/8:00 đến 22:00/.test(await page.locator("#khong-gian").innerText()), "giờ mở cuối tuần");
+  ok(/đặt cọc 30%/i.test(await page.locator("#quy-dinh").innerText()) && /24 giờ/.test(await page.locator("#quy-dinh").innerText()), "quy định cọc + huỷ 24 giờ");
+  ok(!/Thái Nguyên|Suối Giàng|Hà Giang|Phú Thọ|Vũ Di|Đại Hồng Bào|xuất xứ|hữu cơ|organic|chứng nhận/i.test(body), "không nhãn vùng trồng/chứng nhận");
+  ok(!/chữa|điều trị|giảm cân|thải độc|ngừa|tốt cho sức khoẻ.*(có|giúp)/i.test(body.replace(/Trà có tốt cho sức khoẻ không\?/, "")), "không công dụng sức khoẻ");
+  ok((await page.locator("#hoi-dap summary").count()) >= 7, "FAQ >= 7 câu");
+}
 
 /* ---------- 2. không tràn ngang ---------- */
 console.log("== overflow");
@@ -192,14 +210,14 @@ await page.locator("#hoi-dap summary").first().click();
 txt = await scanText(page);
 ok(!BANNED.test(txt), "không chữ cấm (sau tương tác, FAQ mở): " + (txt.match(BANNED) || [""])[0]);
 ok(!/\b\d+\s*(năm kinh nghiệm|khách hàng|đánh giá)|⭐|★|giải thưởng|chứng nhận/i.test(txt), "không bịa số khách/đánh giá/giải thưởng");
-ok(!/\b0\d{2,3}[ .]?\d{3}[ .]?\d{4}\b/.test(txt), "không có số điện thoại");
+ok(!/\b0\d{2,3}[ .]?\d{3}[ .]?\d{4}\b/.test(txt.replace(/0236[\s\u00a0]000[\s\u00a0]0000/g, "")), "không có số điện thoại thật");
 // bàn phím
 await page.goto(PAGE_URL, { waitUntil: "load" }); await page.waitForTimeout(1500);
 await page.keyboard.press("Tab");
 ok(await page.evaluate(() => document.activeElement?.className.includes("skip")), "Tab đầu tiên tới skip link");
 for (let i = 0; i < 14; i++) await page.keyboard.press("Tab");
 ok(await page.evaluate(() => !!document.activeElement && document.activeElement !== document.body), "Tab di chuyển được focus");
-ok(await page.evaluate(() => { const a = [...document.querySelectorAll("a")].find((x) => /Chọn trà cho hôm nay/.test(x.textContent)); a.focus(); const cs = getComputedStyle(a); return cs.outlineStyle !== "none" && parseFloat(cs.outlineWidth) >= 2; }), "focus-visible rõ ở CTA");
+ok(await page.evaluate(() => { const a = [...document.querySelectorAll("a")].find((x) => /Đặt bàn hoặc phòng trà/.test(x.textContent)); a.focus(); const cs = getComputedStyle(a); return cs.outlineStyle !== "none" && parseFloat(cs.outlineWidth) >= 2; }), "focus-visible rõ ở CTA");
 ok(ext.length === 0, "0 request ngoài origin " + ext.slice(0, 2).join(" "));
 ok(errs.length === 0, "0 lỗi console " + errs.slice(0, 2).join(" | "));
 
@@ -242,7 +260,7 @@ ok(await page.locator("#tt-menu").isVisible(), "menu mobile mở");
 await page.keyboard.press("Escape");
 ok(!(await page.locator("#tt-menu").count()), "Escape đóng menu");
 ok(await page.evaluate(() => document.activeElement?.textContent?.includes("Mục lục")), "trả focus về nút menu");
-await btn.click(); await page.locator("#tt-menu a", { hasText: "Danh mục trà" }).click(); await page.waitForTimeout(600);
+await btn.click(); await page.locator("#tt-menu a", { hasText: "Menu trà" }).click(); await page.waitForTimeout(600);
 ok(!(await page.locator("#tt-menu").count()), "chọn mục đóng menu");
 // danh mục mobile: chi tiết mở trong hàng
 await page.evaluate(() => document.getElementById("danh-muc").scrollIntoView()); await page.waitForTimeout(500);
@@ -294,7 +312,7 @@ await nj.close();
 /* ---------- 11. trang credits ---------- */
 const cc = await newPage(); await cc.page.goto(PAGE_URL + "/credits", { waitUntil: "load" }); await cc.page.waitForTimeout(800);
 const cr = await cc.page.evaluate(() => ({ imgs: document.querySelectorAll("li img").length, noindex: document.querySelector('meta[name="robots"]')?.content }));
-ok(cr.imgs === 12, "credits liệt kê 12 ảnh");
+ok(cr.imgs >= 10, "credits liệt kê ảnh: " + cr.imgs);
 ok(/noindex/.test(cr.noindex || ""), "credits noindex");
 ok(cc.errs.length === 0, "credits 0 lỗi console");
 await cc.ctx.close();

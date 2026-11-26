@@ -9,7 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
  *  - Ánh nến theo con trỏ (dark spotlight): vầng sáng ấm đi theo con trỏ trên nền tối (chỉ pointer fine, tắt khi reduced).
  *  - Moment cuộn 1: đường rượu rót vẽ dần (stroke-dashoffset), ly dâng đầy theo tiến độ, bốn bước sáng lần lượt.
  *  - Moment cuộn 2: khung tranh hero trôi chậm hơn nội dung + đèn rọi mờ dần khi rời hero.
- *  - Reveal nhẹ một lần cho thẻ/dòng khi vào khung.
+ *  - "Vang dâng": khối nội dung hiện dần từ đáy lên như mực vang dâng trong ly (mặt nạ mềm, một lần khi vào khung).
  * Reduced-motion: không đăng ký gì; ly đầy 70% và đường rượu đã vẽ đủ.
  */
 export function Motion() {
@@ -19,8 +19,16 @@ export function Motion() {
     const q = (sel: string) => Array.from(document.querySelectorAll<HTMLElement>(sel));
 
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      q('[data-rv="rv"]').forEach((el, i) => {
-        gsap.from(el, { y: 24, opacity: 0, duration: 0.8, delay: (i % 3) * 0.07, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 90%", once: true } });
+      // "vang dâng": khối hiện dần từ đáy lên như mực vang trong ly dâng lên (mặt nạ mềm, không trượt)
+      q('[data-rv="rv"]').forEach((el) => {
+        el.setAttribute("data-lv", "1");
+        gsap.set(el, { "--lv": -26 });
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top 92%",
+          once: true,
+          onEnter: () => gsap.to(el, { "--lv": 100, duration: 1.5, ease: "power2.out", onComplete: () => { el.removeAttribute("data-lv"); el.style.removeProperty("--lv"); } }),
+        });
       });
 
       const pour = document.querySelector<HTMLElement>('[data-rv="pour"]');

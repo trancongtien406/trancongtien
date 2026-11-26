@@ -27,3 +27,8 @@
 ## Tương tác
 - Lookbook Filter: OR trong nhóm, AND giữa nhóm, giữ thứ tự dữ liệu, aria-live số kết quả, empty state có nút xoá, dialog `<dialog>` (Escape, trả focus, khoá cuộn). "Dùng kiểu này làm cảm hứng" thêm dịch vụ gợi ý vào Builder (không trùng, không đổi độ dài tóc) và chuyển focus tới tiêu đề Builder.
 - Service Builder: dịch vụ + độ dài + stylist (ba hướng phong cách); giá = làm tròn 1.000đ (giá gốc × hệ số độ dài × hệ số stylist) rồi cộng; thời gian = gốc + phút thêm theo độ dài. Nhuộm + Uốn: cảnh báo, khoá preview, vẫn tính giá. Preview là dialog (ngày không quá khứ, buổi, sao chép yêu cầu mẫu, clipboard lỗi thì hiện textarea). localStorage `demo:net-lech:builder:v1` (chỉ trạng thái builder, validate khi đọc).
+
+
+## Cập nhật 2026-11-25 (rework)
+Thứ tự section: Hero (chữ "Salon tóc Đà Nẵng." + 3 sự thật, ảnh đen trắng cắt chéo, không còn chú thích trên ảnh) -> Strip lime chạy tên dịch vụ (VelocityMarquee, có nút Dừng) -> Dịch vụ và bảng giá (chọn Ngắn/Vừa/Dài, lưỡi lime hình bình hành trượt tới cột; mobile: bảng thành thẻ, chỉ hiện giá của độ dài đã chọn) -> Về salon (SplitWords, 3 lời hứa) -> Lookbook (ImageHoverDistort, thẻ vào bằng mép cắt chéo) -> Quy trình 4 bước có thời gian -> Đặt lịch và ước tính (Builder) -> Stylist 3 vai trò (vector chéo) -> Sản phẩm sử dụng (6 nhóm) -> Salon và giờ mở cửa (ảnh ghế, bảng giờ, thanh khung giờ) -> Chính sách (nền đen, 2 cột) -> FAQ 10 -> Đặt lịch (nền lime, quét chéo).
+Motion: ngôn ngữ "đường cắt chéo": khối vào trượt ngang từ trái thay vì fade-up. Đại trà giữ: SplitWords, VelocityMarquee.

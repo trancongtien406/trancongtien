@@ -6,7 +6,7 @@ import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { Intro } from "./components/Intro";
 import { Motion } from "./components/Motion";
-import { Care, Collections, Contact, Craft, Faq, Footer, Karat, Manifesto, Marquee, RingSection } from "./components/Sections";
+import { About, Care, Collections, Contact, Craft, Faq, Footer, Info, Karat, Pricing, RingSection, Services, Visit } from "./components/Sections";
 import styles from "./brand.module.css";
 
 export default function KimHoanPage() {
@@ -19,14 +19,17 @@ export default function KimHoanPage() {
       <Header consultHref={consultHref} />
       <main id="main" className={styles.main}>
         <Hero />
-        <Marquee />
-        <Manifesto />
+        <Info />
+        <About />
         <Collections />
         <RingSection />
-        <Configurator consultHref={consultHref} />
-        <Craft />
         <Karat />
+        <Pricing />
+        <Configurator consultHref={consultHref} />
+        <Services />
+        <Craft />
         <Care />
+        <Visit />
         <Faq />
         <Contact consultHref={consultHref} />
       </main>

@@ -4,9 +4,9 @@ import { fontVars } from "./fonts";
 const base = "/images/demos/tiem-banh/identity";
 
 export const metadata: Metadata = {
-  title: "Mây Kẹo · Tiệm bánh ngọt làm tay ở Đà Nẵng",
+  title: "Mây Kẹo · Tiệm bánh ngọt và bánh kem sinh nhật ở Hải Châu, Đà Nẵng",
   description:
-    "Bánh kem, macaron, croissant và đồ ngọt làm tay mỗi sáng ở Đà Nẵng. Tự dựng chiếc bánh của bạn bằng Cake Builder: vị bánh, size, lớp kem, chữ viết và trang trí, kèm giá tham khảo.",
+    "Mây Kẹo, tiệm bánh ngọt ở Quận Hải Châu, Đà Nẵng: bánh kem sinh nhật, bánh lạnh, bánh mì croissant, cookie macaron. Bán 7:00–21:00, bánh kem từ 320.000₫, đặt bánh sinh nhật trước 2 ngày.",
   icons: {
     icon: [
       { url: `${base}/favicon.svg`, type: "image/svg+xml" },
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Mây Kẹo · Tiệm bánh ngọt làm tay",
-    description: "Ngọt vừa đủ, vui vừa đủ.",
+    description: "Tiệm bánh ngọt làm tay ở Quận Hải Châu, Đà Nẵng.",
     images: [{ url: `${base}/og-image.webp`, width: 1200, height: 630, alt: "Mây Kẹo, tiệm bánh ngọt làm tay ở Đà Nẵng" }],
     locale: "vi_VN",
     type: "website",

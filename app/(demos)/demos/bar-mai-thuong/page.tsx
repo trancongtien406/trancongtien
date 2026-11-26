@@ -8,6 +8,10 @@ import { Matcher } from "./components/Matcher";
 import { Zones } from "./components/Zones";
 import { Reserve } from "./components/Reserve";
 import { Motion } from "./components/Motion";
+import { Happy } from "./components/Happy";
+import { Board } from "./components/Board";
+import { Night } from "./components/Night";
+import { Contact, Events, Rules } from "./components/Info";
 
 export default function BarMaiThuongPage() {
   return (
@@ -18,15 +22,21 @@ export default function BarMaiThuongPage() {
         <Hero />
         <Band />
         <Manifesto />
+        <Happy />
         <Pour />
         <Signature />
         <Menu />
+        <Board />
         <Ingredients />
         <Matcher />
         <Zones />
+        <Night />
         <Rhythm />
+        <Events />
         <Reserve />
+        <Rules />
         <Faq />
+        <Contact />
       </main>
       <Footer />
       <div className={s.spot} data-tm="spot" aria-hidden="true" />

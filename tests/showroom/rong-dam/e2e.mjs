@@ -248,7 +248,7 @@ console.log("[5] Itinerary Explorer: lịch trình, bản đồ, giá");
   ok(meta.length === 6, "6 thẻ tour", String(meta.length));
   ok(meta.every((m) => /Khởi hành/i.test(m) && /Thời lượng/i.test(m) && /Điểm đón/i.test(m) && /Vé \(tách riêng\)/i.test(m)), "mỗi thẻ có giờ khởi hành, thời lượng, điểm đón, vé tách riêng");
   const body = await page.locator("body").innerText();
-  ok(/xác nhận lại với đơn vị vận hành/i.test(body), "ghi chú xác nhận lại với đơn vị vận hành");
+  ok(/giá chốt được nhân viên xác nhận/i.test(body), "ghi chú giá chốt do nhân viên xác nhận");
   ok(/giá tham khảo/i.test(body), "ghi rõ giá tham khảo");
   await noBanned(page, "danh sách tour + công cụ tính giá");
   ok(!/\b(Review|AggregateRating)\b/.test(await page.content()), "không có Review/AggregateRating");
@@ -343,7 +343,7 @@ console.log("[8] Link thoát (industry/solution/utm), ref, bàn phím, menu mobi
   await page.keyboard.press("Tab");
   ok(await page.evaluate(() => document.activeElement?.textContent?.includes("Bỏ qua điều hướng")), "Tab đầu tiên là skip link");
   let reached = false;
-  for (let i = 0; i < 25; i++) { await page.keyboard.press("Tab"); if (await page.evaluate(() => /Tìm chuyến đi của mình|Lên đường thôi/.test(document.activeElement?.textContent || ""))) { reached = true; break; } }
+  for (let i = 0; i < 25; i++) { await page.keyboard.press("Tab"); if (await page.evaluate(() => /Đặt tour/.test(document.activeElement?.textContent || ""))) { reached = true; break; } }
   ok(reached, "Tab tới CTA chính");
   await ctx.close();
   const m = await newPage({ viewport: { width: 390, height: 844 } });
@@ -369,9 +369,9 @@ console.log("[9] prefers-reduced-motion: nội dung hiện đủ");
   await load(page);
   const r = await page.evaluate(() => {
     const els = [...document.querySelectorAll('[data-rd]')];
-    return { n: els.length, hidden: els.filter((e) => parseFloat(getComputedStyle(e).opacity) < 0.99 && e.getAttribute("data-rd") !== "doodle-cover").length, cover: getComputedStyle(document.querySelector('[data-rd="doodle-cover"]')).transform };
+    return { n: els.length, hidden: els.filter((e) => parseFloat(getComputedStyle(e).opacity) < 0.99).length, pin: document.querySelector('[data-fx=PinnedHorizontalScroll]')?.getAttribute("data-fx-mode") };
   });
-  ok(r.n > 10 && r.hidden === 0, "mọi phần tử data-rd hiện đủ, không hiệu ứng", JSON.stringify(r));
+  ok(r.n > 10 && r.hidden === 0 && r.pin === "native", "mọi phần tử data-rd hiện đủ; combo cuộn ngang chuyển sang native", JSON.stringify(r));
   ok(await page.locator('[data-testid="finder-form"]').isVisible() && await page.locator("#rd-h1").isVisible(), "tiêu đề và form hiện");
   await ctx.close();
 }
@@ -401,6 +401,86 @@ console.log("[10] Credits, ảnh không lặp, ảnh load");
   await p2.ctx.close();
 }
 
+// ---------- 10b. Nội dung công ty tour + hiệu ứng chữ ký
+console.log("[10b] Nội dung công ty tour + bảng giờ, vé lật, bảng giá, combo, đồng hồ hành trình, đặt tour (VI/EN)");
+for (const [lang, url] of [["vi", VI], ["en", EN]]) {
+  const { ctx, page } = await newPage();
+  await load(page, url);
+  await page.evaluate(() => localStorage.clear());
+  await load(page, url);
+  const heroTxt = await page.locator("section#top").innerText();
+  ok(lang === "vi" ? /quận hải châu/i.test(heroTxt) && /450\.000/.test(heroTxt) && /06:30–15:00/.test(heroTxt) && /tối đa 12/i.test(heroTxt) : /hai chau/i.test(heroTxt) && /450[,.]000/.test(heroTxt) && /max 12/i.test(heroTxt), `${lang}: hero có loại hình, khu vực, 3 sự thật`, heroTxt.slice(0, 80));
+  ok(await page.locator("section#top dl > div").count() === 3, `${lang}: 3 sự thật`);
+  const ids = await page.evaluate(() => ["destinations", "lich", "tours", "trip-finder", "itinerary", "combo", "team", "journal", "about", "dat-tour", "faq"].filter((i) => !document.getElementById(i)));
+  ok(ids.length === 0, `${lang}: đủ section của công ty tour`, ids.join(","));
+  ok(await page.locator("#faq details").count() === 8, `${lang}: FAQ 8 câu`);
+  // bảng giờ
+  ok(await page.locator('[data-testid="board-row"]').count() === 6, `${lang}: bảng giờ 6 chuyến`);
+  await page.locator("#lich").scrollIntoViewIfNeeded();
+  await page.waitForTimeout(1200);
+  const t1 = await page.locator('[data-testid="countdown"] [role=timer]').getAttribute("aria-label");
+  await page.waitForTimeout(2200);
+  const t2 = await page.locator('[data-testid="countdown"] [role=timer]').getAttribute("aria-label");
+  ok(/^\d\d:\d\d:\d\d$/.test(t1) && t1 !== t2, `${lang}: đếm ngược khởi hành chạy thật`, `${t1} -> ${t2}`);
+  const boardTxt = await page.locator('[data-testid="board-row"]').first().innerText();
+  ok(/RD-05/.test(boardTxt) && /06:30/.test(boardTxt), `${lang}: dòng đầu bảng giờ là RD-05 06:30`);
+  // vé lật
+  const card = page.locator('[data-testid="tour-card"][data-tour="RD-02"]');
+  await card.scrollIntoViewIfNeeded();
+  await card.locator('[data-testid="flip-open"]').click();
+  ok((await card.getAttribute("data-flipped")) === "1", `${lang}: vé lật sang mặt sau`);
+  ok(await card.locator("[class*=faceFront]").evaluate((e) => e.inert) && !(await card.locator("[class*=faceBack]").evaluate((e) => e.inert)), `${lang}: mặt không hiển thị bị inert`);
+  ok(/(Xe đưa đón|Transfers)/.test(await card.locator("[class*=faceBack]").innerText()), `${lang}: mặt sau liệt kê phần bao gồm`);
+  await card.locator('[data-testid="flip-close"]').click();
+  ok((await card.getAttribute("data-flipped")) === "0", `${lang}: lật về mặt trước`);
+  // bảng giá nhóm
+  ok((await page.locator('[data-testid="pt-RD-01-2"]').innerText().then(norm)) === "1.300.000 ₫", `${lang}: bảng giá RD-01 2 người lớn chưa vé = 1.300.000`);
+  await page.locator('[data-testid="pt-adm"]').check();
+  ok((await page.locator('[data-testid="pt-RD-01-2"]').innerText().then(norm)) === "3.200.000 ₫", `${lang}: gồm vé = 3.200.000`);
+  // combo ghim ngang
+  ok(await page.locator('[data-testid="combo-day"]').count() === 3, `${lang}: combo 3 ngày`);
+  ok(["pinned", "native"].includes(await page.locator("[data-fx=PinnedHorizontalScroll]").getAttribute("data-fx-mode")), `${lang}: PinnedHorizontalScroll khởi chạy`);
+  // đội ngũ
+  ok(await page.locator("#team li[class*=role]").count() === 4, `${lang}: 4 vai trò`);
+  // đồng hồ hành trình
+  await page.locator('[data-testid="tour-tab"][data-tour="RD-01"]').click();
+  const pos = () => page.locator('[data-testid="vehicle"]').getAttribute("transform");
+  const p0 = await pos();
+  await page.locator('[data-testid="clock-range"]').fill("600");
+  await page.waitForTimeout(200);
+  const p1 = await pos();
+  ok(p0 !== p1, `${lang}: kéo thanh giờ -> xe đổi vị trí`, `${p0} / ${p1}`);
+  ok(await page.locator('[data-testid="selected-stop"]').innerText().then((t) => /10:00/.test(t)), `${lang}: điểm dừng theo giờ 10:00`);
+  await page.locator('[data-testid="clock-range"]').fill("450");
+  await page.locator('[data-testid="clock-play"]').click();
+  await page.waitForTimeout(2500);
+  const out = await page.locator('[class*=clockOut]').innerText();
+  ok(out !== "07:30", `${lang}: nút chạy làm giờ tiến`, out);
+  await page.locator('[data-testid="clock-play"]').evaluate((e) => e.click());
+  // đặt tour phản ánh công cụ
+  await page.locator('[data-testid="tour-tab"][data-tour="RD-05"]').evaluate((e) => e.click());
+  await page.getByLabel(lang === "vi" ? "Thêm người lớn" : "Add an adult").click();
+  ok(/RD-05/.test(await page.locator('[data-testid="sum-tour"]').innerText()) && /3/.test(await page.locator('[data-testid="sum-guests"]').innerText()), `${lang}: tóm tắt đặt tour theo công cụ`);
+  ok((await page.locator('[data-testid="sum-total"]').innerText().then(norm)) === (await total(page)), `${lang}: tổng tiền khớp`);
+  await noBanned(page, `${lang}: toàn trang sau khi dùng công cụ`);
+  const fx = await page.evaluate(() => ({ pd: !!document.querySelector("[data-fx=SVGPathDraw]"), mb: document.querySelectorAll("[data-fx=MagneticButton]").length }));
+  ok(fx.pd && fx.mb >= 2, `${lang}: giữ đúng PD + MB`, JSON.stringify(fx));
+  ok(page.errors.length === 0, `${lang}: 0 lỗi console`, page.errors.join("|"));
+  await ctx.close();
+}
+{
+  for (const [w, h] of [[1440, 900], [390, 844]]) {
+    const { ctx, page } = await newPage({ viewport: { width: w, height: h } });
+    await page.addInitScript(() => { window.__lt = []; try { new PerformanceObserver((l) => l.getEntries().forEach((e) => window.__lt.push(e.duration))).observe({ entryTypes: ["longtask"] }); } catch {} });
+    await load(page);
+    await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 240) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 90)); } });
+    const lt = await page.evaluate(() => window.__lt.filter((d) => d > 200));
+    console.log(`  (đo) long task >200ms ở ${w}px: ${lt.length}`);
+    ok(lt.length <= 3, `long task >200ms khi cuộn toàn trang ${w}px (<=3)`, JSON.stringify(lt));
+    await ctx.close();
+  }
+}
+
 // ---------- 11. Ảnh chụp
 console.log("[11] Ảnh chụp 1440x900 và 390x844 (VI, EN)");
 for (const [lang, url] of [["vi", VI], ["en", EN]]) {
@@ -411,15 +491,15 @@ for (const [lang, url] of [["vi", VI], ["en", EN]]) {
     await slowScroll(page);
     await page.screenshot({ path: path.join(SHOTS, `${lang}-${w}-full.png`), fullPage: true });
     // trạng thái tương tác
-    await page.getByLabel(lang === "vi" ? "1 ngày" : "One day", { exact: true }).check();
-    await page.getByLabel(lang === "vi" ? "Văn hoá" : "Culture & heritage", { exact: true }).check();
-    await page.getByLabel(lang === "vi" ? "Cặp đôi" : "As a couple", { exact: true }).check();
-    await page.locator('[data-testid="finder-submit"]').click();
+    await page.getByLabel(lang === "vi" ? "1 ngày" : "One day", { exact: true }).evaluate((e) => e.click());
+    await page.getByLabel(lang === "vi" ? "Văn hoá" : "Culture & heritage", { exact: true }).evaluate((e) => e.click());
+    await page.getByLabel(lang === "vi" ? "Cặp đôi" : "As a couple", { exact: true }).evaluate((e) => e.click());
+    await page.locator('[data-testid="finder-submit"]').evaluate((e) => e.click());
     await page.waitForSelector('[data-testid="finder-result"]');
     await page.addStyleTag({ content: "header[class*=header]{position:relative!important}" });
     await page.locator("#trip-finder").screenshot({ path: path.join(SHOTS, `${lang}-${w}-finder.png`) });
-    await page.locator('[data-testid="tour-tab"][data-tour="RD-06"]').click();
-    await page.locator('[data-stop="6-1-3"]').click();
+    await page.locator('[data-testid="tour-tab"][data-tour="RD-06"]').evaluate((e) => e.click());
+    await page.locator('[data-stop="6-1-3"]').evaluate((e) => e.click());
     await page.locator("#itinerary").screenshot({ path: path.join(SHOTS, `${lang}-${w}-explorer.png`) });
     ok(true, `chụp ${lang} ${w}`);
     await ctx.close();

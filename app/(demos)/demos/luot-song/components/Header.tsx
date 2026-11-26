@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MagneticButton } from "@/features/showroom/effects";
 import { ID, NAV } from "../data/content";
 import styles from "../brand.module.css";
 
@@ -39,9 +38,7 @@ export function Header() {
           {NAV.map((n) => <a key={n.href} href={n.href}>{n.label}</a>)}
         </nav>
         <div className={styles.headerCta}>
-          <MagneticButton>
-            <a className={`${styles.btn} ${styles.btnOrange} ${styles.btnSm}`} href="#lap-ke-hoach">Lên kế hoạch</a>
-          </MagneticButton>
+          <a className={`${styles.btn} ${styles.btnOrange} ${styles.btnSm}`} href="#dat-lich">Đặt lịch học</a>
         </div>
         <button ref={btn} type="button" className={styles.menuBtn} aria-expanded={open} aria-controls="rs-menu" aria-label={open ? "Đóng menu" : "Mở menu"} onClick={() => setOpen((v) => !v)}>
           <span aria-hidden="true" className={styles.menuIcon}><i /><i /><i /></span>
@@ -53,7 +50,7 @@ export function Header() {
             <li key={n.href} style={{ ["--i" as string]: i }}><a href={n.href} onClick={close}>{n.label}</a></li>
           ))}
         </ul>
-        <a className={`${styles.btn} ${styles.btnOrange}`} href="#lap-ke-hoach" onClick={close}>Lên kế hoạch buổi học</a>
+        <a className={`${styles.btn} ${styles.btnOrange}`} href="#dat-lich" onClick={close}>Đặt lịch học</a>
       </div>
     </header>
   );

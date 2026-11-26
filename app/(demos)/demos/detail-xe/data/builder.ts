@@ -143,3 +143,13 @@ export function summaryText(vehicle: VehicleId, paint: PaintId, needs: NeedId[])
     `Giá tham khảo: ${formatVnd(r.priceFrom)} đến ${formatVnd(r.priceTo)}`,
   ].join("\n");
 }
+
+/** Bảng giá theo dòng xe: giá khởi điểm của từng hạng mục nhân hệ số dòng xe (đánh bóng tính cho sơn còn tốt). */
+export const PRICE_ROWS: { id: string; label: string; base: number; fixed?: boolean }[] = [
+  { id: "rua", label: "Rửa chi tiết", base: 350000 },
+  { id: "danhbong", label: "Đánh bóng sơn", base: 2500000 },
+  { id: "ceramic", label: "Phủ ceramic", base: 4500000 },
+  { id: "noithat", label: "Nội thất", base: 900000 },
+  { id: "khoangmay", label: "Khoang máy", base: 700000, fixed: true },
+];
+export const priceFor = (base: number, mult: number, fixed?: boolean) => (fixed ? base : Math.round((base * mult) / 10000) * 10000);

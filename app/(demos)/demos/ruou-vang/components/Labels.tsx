@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { SplitWords } from "@/features/showroom/effects";
 import s from "../brand.module.css";
 import { KINDS, type WineKind } from "../data/wines";
 
@@ -43,7 +42,7 @@ export function Labels() {
       <div className={s.wrap}>
         <header className={s.secHead}>
           <p className={s.kicker}>Bốn lối vào</p>
-          <SplitWords as="h2" className={s.h2} trigger="view">Chọn một nhãn, lật để đọc.</SplitWords>
+          <h2 className={s.h2} data-rv="rv">Chọn một nhãn, lật để đọc.</h2>
           <p className={s.mutedP}>Mỗi nhãn là một phong cách. Lật mặt sau để xem vị chính và món hợp.</p>
         </header>
         <ul className={s.labelRow}>

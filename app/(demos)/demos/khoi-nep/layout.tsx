@@ -5,9 +5,9 @@ import styles from "./brand.module.css";
 const ID = "/images/demos/khoi-nep/identity";
 
 export const metadata: Metadata = {
-  title: "Khối Nếp — Studio thiết kế không gian & nội thất",
+  title: "Khối Nếp — Thiết kế & thi công nội thất tại Đà Nẵng",
   description:
-    "Studio thiết kế không gian và nội thất: công cụ dự toán ngân sách tham khảo và bảng vật liệu tương tác.",
+    "Công ty thiết kế và thi công nội thất tại Đà Nẵng: căn hộ, nhà phố, văn phòng, cửa hàng. Quy trình 5 bước, báo giá theo khảo sát, ước tính chi phí và bảng vật liệu.",
   icons: {
     icon: [
       { url: `${ID}/favicon.svg`, type: "image/svg+xml" },
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     apple: `${ID}/apple-touch-icon.png`,
   },
   openGraph: {
-    title: "Khối Nếp — Studio thiết kế không gian & nội thất",
+    title: "Khối Nếp — Thiết kế & thi công nội thất tại Đà Nẵng",
     description: "Thiết kế không gian và nội thất từ ý tưởng đến hoàn thiện.",
     images: [{ url: `${ID}/og-image.webp`, width: 1200, height: 630 }],
     locale: "vi_VN",

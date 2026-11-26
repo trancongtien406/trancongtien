@@ -6,7 +6,7 @@ import s from "../brand.module.css";
 
 const ID = "/images/demos/khoi-nep/identity";
 
-export function Header() {
+export function Header({ consultHref }: { consultHref: string }) {
   const [open, setOpen] = useState(false);
   const btn = useRef<HTMLButtonElement>(null);
 
@@ -40,8 +40,8 @@ export function Header() {
               </a>
             ))}
           </nav>
-          <a className={s.headCta} href="#budget">
-            Dự toán ngân sách <span aria-hidden="true">↗</span>
+          <a className={s.headCta} href={consultHref}>
+            Đặt lịch khảo sát <span aria-hidden="true">↗</span>
           </a>
           <button
             ref={btn}
@@ -56,7 +56,7 @@ export function Header() {
         </div>
         <div id="kn-menu" className={s.menuPanel} hidden={!open}>
           <ul className={s.wrap}>
-            {[...NAV, { href: "#board", label: "Tạo bảng vật liệu" }, { href: "#budget", label: "Dự toán ngân sách" }].map((n) => (
+            {[...NAV, { href: "#budget", label: "Ước tính chi phí" }, { href: "#board", label: "Bảng vật liệu" }].map((n) => (
               <li key={n.href + n.label}>
                 <a href={n.href} onClick={() => setOpen(false)}>
                   {n.label}

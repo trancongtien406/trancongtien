@@ -142,9 +142,9 @@ function Payment({ price, summary }: { price: number; summary: string }) {
     <section className={styles.pay} id="du-toan" aria-labelledby="cv-pay-h" data-cv="pay">
       <div className={styles.wrap}>
         <header className={styles.secHead} data-cv="reveal">
-          <p className={styles.sheet}><span>07</span><i aria-hidden="true" />Bản vẽ A-07 · Dự toán thanh toán</p>
-          <h2 id="cv-pay-h" className={styles.h2}>Chia nhỏ khoản thanh toán thành từng đợt dễ nhìn.</h2>
-          <p className={styles.lede}>Giá lấy từ cấu hình căn hộ bạn vừa chọn. Nhập tỉ lệ vay, lãi suất và thời hạn để xem số tiền mỗi đợt và khoản trả hàng tháng. Mọi con số tính ngay trong trình duyệt của bạn.</p>
+          <p className={styles.sheet}><span>07</span><i aria-hidden="true" />Bản vẽ A-07 · Chính sách thanh toán tham khảo</p>
+          <h2 id="cv-pay-h" className={styles.h2}>Chính sách thanh toán tham khảo và cách tính khoản vay.</h2>
+          <p className={styles.lede}>Hai phương án chia đợt dưới đây lấy giá từ căn bạn vừa cấu hình. Nhập tỉ lệ vay, lãi suất và thời hạn để xem số tiền mỗi đợt và khoản trả hàng tháng; công thức hiển thị ngay bên dưới. Đây là cách tính tham khảo, không phải tư vấn tài chính; chính sách chính thức do đội tư vấn gửi.</p>
         </header>
 
         <div className={styles.payGrid} data-cv="reveal">

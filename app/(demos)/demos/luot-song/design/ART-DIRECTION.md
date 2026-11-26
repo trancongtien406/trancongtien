@@ -3,19 +3,23 @@
 Phong cách: retro in ấn thập niên 70. Nền màu phẳng (vàng sa mạc, teal đậm, cam, nâu), hình khối bo cong, vòng cung đồng tâm (vòm ảnh viền cam/vàng/teal/nâu), mặt trời lớn có tia, sọc cầu vồng nâu-cam-vàng, hạt film grain toàn trang. Chữ Paytone One tròn dày + Pacifico viết tay làm nhấn.
 
 ## Section (desktop / mobile)
-1. Header: viên thuốc nâu cố định, logo ngang đảo màu, 6 liên kết, nút cam; mobile: nút tròn cam mở menu toàn màn hình (dialog, Escape, bẫy Tab).
-2. Hero (nền vàng sa mạc): 2 cột (chữ / vòm ảnh + mặt trời sau vòm + tem quay). Dưới cùng: 5 lớp sóng chuyển động + ván lướt trượt theo đường chấm nét. Mobile: chữ trên, vòm ảnh dưới, 3 lớp sóng.
-3. Băng chữ: hai dải chéo nhau (cam / vàng), chữ hoa Paytone + sao 4 cánh; nút Dừng chạy chữ.
-4. Tuyên ngôn (teal đậm): dải chữ cong theo sóng (textPath), đoạn văn sáng dần theo cuộn, vòm ảnh bóng người lướt.
-5. Khoá học (vàng): tiêu đề + ảnh ván tròn; 6 thẻ màu (cam, teal đậm, vàng nhạt, nâu) kéo ngang được, nút Trước/Sau; giá tham khảo.
-6. Một buổi bốn bước (cam): đường sóng nét nâu vẽ theo cuộn nối 4 số; 4 vòm ảnh so le (so le ở desktop, 1-2 cột ở mobile).
-7. Lesson Planner (teal đậm): biểu mẫu thẻ vàng 4 nhóm chọn (2x2) + thẻ kết quả vàng nhạt (khoá, giá, thứ tự bài học theo buổi, ghi chú tuổi/giờ, checklist có tiến độ) + nút "Trao đổi lịch" (buildConsultHref).
-8. Mùa sóng (vàng): vòng 12 tia nắng (độ dài = mức sóng thường gặp), đồng hồ nước ở tâm dâng theo tháng, chip tháng, thẻ chi tiết, ghi chú dạng khung nét đứt.
-9. FAQ (nâu): 7 mục details/summary, ảnh tròn.
-10. CTA cuối: ảnh bọt sóng vàng phủ teal, tiêu đề lớn, nút cam, tem quay.
-11. Footer (teal đậm): 4 sọc, dải ảnh, logo, liên kết (có "Ảnh & ghi công"), liên hệ `.example`, ký tên.
+1. Header: viên thuốc nâu cố định, logo ngang đảo màu, 6 liên kết (Khoá học, Một buổi học, Lịch học, Giá và đồ, An toàn, Hỏi đáp), nút cam "Đặt lịch học"; mobile: nút tròn cam mở menu toàn màn hình (dialog, Escape, bẫy Tab).
+2. Hero (vàng sa mạc): 2 cột (chữ / vòm ảnh + mặt trời sau vòm + tem quay). Chữ: nhãn "Trường dạy lướt sóng · Quận Sơn Trà, Đà Nẵng", h1 "Học lướt sóng từ buổi đầu tiên.", mô tả đối tượng, 2 nút (Đặt buổi trải nghiệm, Xem khoá học và giá), 3 thẻ sự thật. Dưới: 5 lớp sóng + ván lướt trượt theo đường chấm nét. Mobile: chữ trên, vòm ảnh dưới, 3 lớp sóng.
+3. Băng chữ (nâu): hai dải chéo cam/vàng, chạy theo vận tốc cuộn, nội dung là danh mục dịch vụ; nút Dừng.
+4. Về trường (teal đậm): dải chữ cong theo sóng, giới thiệu, 4 thông tin (địa điểm, nhóm, mỗi buổi, dụng cụ), vòm ảnh bóng người lướt.
+5. Khoá học (vàng): 6 thẻ màu kéo ngang (Buổi trải nghiệm, Khoá 3, 5, 10 buổi, Lớp trẻ em, Thuê ván và đồ) + nút Trước/Sau, giá tham khảo.
+6. Một buổi học khoảng 2 giờ (cam): đồng hồ buổi học (phao chạy 0 → 120 phút dọc đường sóng theo cuộn), 4 bước so le với ảnh vòm, nhãn phút từng bước.
+7. Lịch học (nâu): thẻ trời có cung nắng (mặt trời trượt theo khung giờ, đổi màu trời), 3 nút khung giờ, thẻ giờ tập trung/kết thúc/hợp với ai, bảng lịch lớp thường kỳ.
+8. Giá và đồ (vàng): bảng giá, thuê ván và đồ, giá đã gồm/chưa gồm, đồ cần mang (thẻ kem viền nâu).
+9. Chọn khoá phù hợp (teal đậm): biểu mẫu 4 nhóm (trình độ, tuổi, số buổi 1/3/5/10, khung giờ) + thẻ kết quả (khoá, giá, thứ tự bài học, checklist) + "Trao đổi lịch".
+10. Mùa sóng (vàng): vòng 12 tia nắng, đồng hồ nước theo tháng, thẻ chi tiết, ghi chú không phải dự báo.
+11. Đội ngũ (cam): 4 thẻ vai trò với huy hiệu vector.
+12. An toàn (teal đậm): 6 quy định, hộp ba cờ biển (xanh/vàng/đỏ phấp phới), 3 thẻ chính sách dời lịch.
+13. Hỏi đáp (nâu): 10 mục, ảnh tròn.
+14. Đặt lịch (ảnh bọt sóng phủ teal): 4 bước đặt lịch, nút "Đặt lịch học" (buildConsultHref) + ShineSweep, tem quay.
+15. Footer (teal đậm): 4 sọc, dải ảnh, logo, liên kết đủ section, liên hệ `.example`, ký tên.
 
-## Hiệu ứng (≥6 có chủ đích; ký hiệu in đậm)
-Thư viện: SplitWords (h1 hero), **VelocityMarquee** (băng chữ, 2 dải ngược chiều, nút Dừng), ScrollScrubText (tuyên ngôn), ClipReveal (ảnh vòm/tròn, 8 chỗ), ParallaxLayer (ảnh hero), DraggableGallery (khoá học), SVGPathDraw (đường sóng quy trình, scroll), GrainOverlay (film grain toàn trang, nhấp nháy steps), MagneticButton (CTA chính), ShineSweep (CTA cuối), ScrollProgress (vòng tiến độ).
-Riêng: **Wave SVG** nhiều lớp chạy ngang (CSS translateX), biên độ (scaleY) đọc `--rs-amp` do Motion tính từ tiến độ hero + vận tốc cuộn; **mặt trời lên theo cuộn** (nhô lên khi tải bằng gsap, rồi translateY/scale/quay theo `--rs-hp`, `--rs-sy`); **tem tròn quay theo cuộn** (textPath trên vòng tròn, quay 0.24deg mỗi px + quay chậm nền); **ván lướt SVG trượt theo đường sóng** (getPointAtLength + góc tiếp tuyến, bù tỉ lệ khi svg co giãn); **chữ cong theo sóng** (textPath, startOffset chạy theo cuộn, đường nhấp nhô); **đồng hồ nước/thuỷ triều** (mực nước + sóng chạy trong đĩa tháng); đường sóng nét vẽ theo cuộn; hero choreography ~3s (mặt trời, vòm ảnh mở clip-path, nhãn, tiêu đề tách từ, mô tả, nút, tem nảy), có tua nhanh khi cuộn sớm.
-Reduced-motion: Motion ở chế độ tĩnh, sóng/tia nắng/tem đứng yên, mọi khối hiện đủ. Mobile: ẩn 2/5 lớp sóng; không có hiệu ứng con trỏ nặng (MagneticButton chỉ pointer fine). Chỉ animate transform/opacity/clip-path.
+## Hiệu ứng
+Thư viện đại trà giữ 2: VelocityMarquee (băng dịch vụ), ParallaxLayer (ảnh hero). Thư viện chữ ký: DraggableGallery (thẻ khoá học), ShineSweep (nút đặt lịch), GrainOverlay (film grain).
+Riêng: sóng SVG nhiều lớp (biên độ theo vận tốc cuộn), mặt trời theo cuộn, tem tròn quay, ván lướt trượt theo đường sóng, chữ cong theo sóng, hero "sóng đẩy chữ vào bờ", đồng hồ buổi học, cung nắng chọn khung giờ, ba cờ biển, đồng hồ nước theo tháng. Chi tiết và file: REWORK.md.
+Reduced-motion: Motion ở chế độ tĩnh, sóng/tia nắng/tem/cờ đứng yên, mọi khối hiện đủ, đồng hồ buổi học hiện 120 phút. Mobile: ẩn 2/5 lớp sóng; không hiệu ứng con trỏ. Chỉ animate transform/opacity/clip-path.

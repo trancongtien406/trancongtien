@@ -4,9 +4,9 @@ import { fontVars } from "./fonts";
 const base = "/images/demos/net-lech/identity";
 
 export const metadata: Metadata = {
-  title: "Nét Lệch · Hair Studio, cắt nhuộm tạo kiểu",
+  title: "Nét Lệch · Salon tóc Hải Châu, Đà Nẵng: cắt, uốn, duỗi, nhuộm",
   description:
-    "Hair studio phong cách tạp chí thời trang: Lookbook lọc kiểu tóc và Service Builder tóm tắt dịch vụ, giá tham khảo và thời gian dự kiến.",
+    "Salon tóc nam nữ tại Quận Hải Châu, Đà Nẵng. Bảng giá cắt, uốn, duỗi, nhuộm, tẩy, phục hồi theo độ dài tóc, giờ mở cửa 09:00–20:00, chính sách đặt cọc và ước tính thời gian.",
   icons: {
     icon: [
       { url: `${base}/favicon.svg`, type: "image/svg+xml" },
@@ -15,9 +15,9 @@ export const metadata: Metadata = {
     apple: `${base}/apple-touch-icon.png`,
   },
   openGraph: {
-    title: "Nét Lệch · Hair Studio",
-    description: "Hair studio phong cách tạp chí thời trang: cắt, nhuộm, tạo kiểu.",
-    images: [{ url: `${base}/og-image.webp`, width: 1200, height: 630, alt: "Nét Lệch Hair Studio" }],
+    title: "Nét Lệch · Salon tóc Đà Nẵng",
+    description: "Cắt, uốn, duỗi, nhuộm, phục hồi tóc tại Quận Hải Châu, Đà Nẵng.",
+    images: [{ url: `${base}/og-image.webp`, width: 1200, height: 630, alt: "Nét Lệch, salon tóc Đà Nẵng" }],
     locale: "vi_VN",
     type: "website",
   },

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MagneticButton, SplitWords } from "@/features/showroom/effects";
 import { buildConsultHref } from "@/features/showroom/consultation";
 import s from "../brand.module.css";
 import { MAX_GUESTS, TIMES, ZONES, formatDate, summaryLines, todayISO, validateReserve, type ReserveErrors, type ZoneId } from "../lib/reserve";
@@ -50,9 +49,9 @@ export function Reserve() {
     <section className={s.reserve} id="dat-ban" aria-label="Tóm tắt đặt bàn">
       <div className={s.wrap}>
         <header className={s.secHead}>
-          <p className={s.kicker}>Giữ chỗ</p>
-          <SplitWords as="h2" className={s.h2} trigger="view">Giữ một chỗ trên Tầng Mây</SplitWords>
-          <p className={s.mutedP}>Chọn ngày, giờ, số khách và khu vực. Bản tóm tắt giúp bạn gửi yêu cầu rõ ràng; bên mình sẽ phản hồi về khả năng sắp xếp.</p>
+          <p className={s.kicker}>Đặt bàn</p>
+          <h2 className={s.h2} data-tm="lit">Đặt bàn tại Tầng Mây</h2>
+          <p className={s.mutedP}>Chọn ngày, giờ, số khách và khu vực. Bàn được giữ 15 phút so với giờ hẹn. Nhóm từ 9 khách hoặc tiệc riêng xem phần Nhóm & sự kiện bên dưới.</p>
         </header>
         <div className={s.resGrid}>
           <form className={s.resForm} onSubmit={submit} noValidate>
@@ -78,7 +77,7 @@ export function Reserve() {
                 <output aria-live="polite"><b>{guests}</b> khách</output>
                 <button type="button" aria-label="Tăng số khách" disabled={guests >= MAX_GUESTS} onClick={() => { setGuests((g) => Math.min(MAX_GUESTS, g + 1)); touch(); }}>+</button>
               </div>
-              {guests >= 9 ? <p className={s.hint}>Nhóm từ 9 khách: bên mình sẽ trao đổi riêng về cách sắp xếp chỗ.</p> : null}
+              {guests >= 9 ? <p className={s.hint}>Nhóm từ 9 khách: bên mình trao đổi riêng về cách ghép bàn và mức chi tối thiểu.</p> : null}
             </div>
             <fieldset className={s.fld} aria-invalid={errors.zone ? true : undefined} aria-describedby={errors.zone ? "tm-zone-e" : undefined}>
               <legend className={s.lbl}>Khu vực</legend>
@@ -95,9 +94,7 @@ export function Reserve() {
             {drink ? (
               <p className={s.drinkNote}>Ly muốn thử: <b>{drink}</b> <button type="button" className={s.linkBtn} onClick={() => { setDrink(""); touch(); }}>Bỏ</button></p>
             ) : null}
-            <MagneticButton>
-              <button type="submit" className={`${s.btn} ${s.btnPink}`}>Xem tóm tắt đặt bàn</button>
-            </MagneticButton>
+            <button type="submit" className={`${s.btn} ${s.btnPink}`}>Xem tóm tắt đặt bàn</button>
           </form>
           <div className={s.ticketCol} aria-live="polite">
             {done ? (

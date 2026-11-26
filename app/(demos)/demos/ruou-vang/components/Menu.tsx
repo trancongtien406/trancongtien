@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { SplitWords } from "@/features/showroom/effects";
 import s from "../brand.module.css";
 import { IMGS } from "../data/images";
 import { KINDS, WINES, vnd, type WineKind } from "../data/wines";
@@ -42,7 +41,7 @@ export function Menu() {
       <div className={s.wrap}>
         <header className={s.secHead}>
           <p className={s.kicker}>Thực đơn</p>
-          <SplitWords as="h2" className={s.h2} trigger="view">Mười bốn ly và chai, chia theo phong cách.</SplitWords>
+          <h2 className={s.h2} data-rv="rv">Mười bốn ly và chai, chia theo phong cách.</h2>
           <p className={s.mutedP}>Giá tham khảo, tính theo ly (150 ml) và theo chai (750 ml). Dành cho khách từ 18 tuổi.</p>
         </header>
         <div className={s.menuGrid}>

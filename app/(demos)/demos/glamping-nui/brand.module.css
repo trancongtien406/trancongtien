@@ -364,3 +364,46 @@
   .cdBar span { transition: none; }
 }
 @media (max-width: 767px) { .skyStars circle:nth-child(n + 46) { display: none; } }
+
+/* ---- Rework: nội dung ngành ---- */
+.heroFacts { display: flex; flex-wrap: wrap; gap: 8px 26px; margin-top: 22px; font-size: 0.98rem; color: var(--gl-dim); }
+.heroFacts b { color: var(--gl-gold); font-family: var(--gl-head); font-weight: 800; font-size: 1.15rem; }
+.factList { display: grid; gap: 14px; }
+.factList li { display: grid; gap: 2px; padding: 14px 0 14px 20px; border-left: 3px solid var(--gl-fire); }
+.factList b { font-family: var(--gl-head); font-size: 1.3rem; color: var(--gl-gold); }
+.factList span { color: var(--gl-dim); }
+.amen { display: grid; gap: 4px; margin: 4px 0 10px; padding-left: 18px; list-style: disc; font-size: 0.93rem; color: var(--gl-dim); }
+.priceTable { margin-top: clamp(30px, 4vw, 52px); border: 1px solid var(--gl-line); border-radius: 14px; overflow: hidden; background: var(--gl-card); }
+.ptHead, .ptRow { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 12px; padding: 14px 20px; align-items: baseline; }
+.ptHead { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gl-fire-text); border-bottom: 1px solid var(--gl-line); }
+.ptRow + .ptRow { border-top: 1px solid var(--gl-line); }
+.ptRow span:not(:first-child) { font-family: var(--gl-head); font-weight: 700; font-size: 1.15rem; color: var(--gl-gold); font-variant-numeric: tabular-nums; }
+@media (max-width: 640px) {
+  .ptHead { display: none; }
+  .ptRow { grid-template-columns: 1fr 1fr 1fr; }
+  .ptRow span:first-child { grid-column: 1 / -1; }
+  .ptRow span[data-l]::before { content: attr(data-l); display: block; font-family: var(--gl-body); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gl-dim); }
+  .ptRow span:not(:first-child) { font-size: 1rem; }
+}
+.actMeta { display: grid; gap: 4px; margin: 4px 0 8px; font-size: 0.9rem; }
+.actMeta > div { display: flex; gap: 8px; }
+.actMeta dt { color: var(--gl-fire-text); min-width: 5.2rem; }
+.actMeta dd { color: var(--gl-dim); margin: 0; }
+.mealList { margin: 22px 0 24px; border-top: 1px solid var(--gl-line); }
+.mealList li { display: flex; justify-content: space-between; gap: 18px; padding: 12px 0; border-bottom: 1px solid var(--gl-line); }
+.mealList b { display: block; }
+.mealList small { display: block; color: var(--gl-dim); font-size: 0.88rem; max-width: 40ch; }
+.mealPrice { font-family: var(--gl-head); font-weight: 700; color: var(--gl-gold); text-align: right; max-width: 16ch; font-size: 0.98rem; }
+.itinGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(18px, 3vw, 40px); }
+.itinDay { border: 1px solid var(--gl-line); border-radius: 18px; padding: clamp(22px, 3vw, 36px); background: var(--gl-card); }
+.itinTag { color: var(--gl-fire-text); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.82rem; }
+.itinList { margin-top: 16px; border-left: 2px dashed rgba(255, 122, 26, 0.5); margin-left: 6px; }
+.itinList li { display: grid; grid-template-columns: 4.2rem minmax(0, 1fr); gap: 12px; padding: 10px 0 10px 18px; position: relative; }
+.itinList li::before { content: ""; position: absolute; left: -6px; top: 18px; width: 10px; height: 10px; border-radius: 50%; background: var(--gl-fire); }
+.itinList time { font-family: var(--gl-head); font-weight: 800; color: var(--gl-gold); font-variant-numeric: tabular-nums; }
+.pracGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(28px, 5vw, 72px); align-items: start; }
+.dl { margin-top: 14px; border-top: 1px solid var(--gl-line); }
+.dl > div { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--gl-line); }
+.dl dt { font-weight: 700; color: var(--gl-gold); }
+.dl dd { margin: 0; color: var(--gl-dim); }
+@media (max-width: 900px) { .itinGrid, .pracGrid { grid-template-columns: minmax(0, 1fr); } .dl > div { grid-template-columns: minmax(0, 1fr); gap: 2px; } }

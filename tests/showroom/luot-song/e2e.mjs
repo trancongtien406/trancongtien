@@ -91,10 +91,13 @@ console.log('4) Hiệu ứng');
 const fx = await p.evaluate(() => {
   const q = (n) => [...document.querySelectorAll(`[data-fx="${n}"]`)];
   const r = {};
-  for (const n of ['SplitReveal', 'VelocityMarquee', 'ScrollScrubText', 'ClipReveal', 'DraggableGallery', 'SVGPathDraw', 'GrainOverlay', 'MagneticButton', 'ParallaxLayer', 'ShineSweep', 'ScrollProgress']) r[n] = q(n).map((e) => e.getAttribute('data-fx-ready'));
+  for (const n of ['VelocityMarquee', 'DraggableGallery', 'GrainOverlay', 'ParallaxLayer', 'ShineSweep']) r[n] = q(n).map((e) => e.getAttribute('data-fx-ready'));
+  r.__absent = ['SplitReveal', 'ScrollScrubText', 'ClipReveal', 'SVGPathDraw', 'MagneticButton', 'ScrollProgress'].map((n) => [n, q(n).length]);
   return r;
 });
+const absent = fx.__absent; delete fx.__absent;
 for (const [k, v] of Object.entries(fx)) ok(v.length > 0 && v.every((x) => x), `${k}: ${v.length} gốc, ready=${[...new Set(v)].join(',')}`);
+ok(absent.every(([, n]) => n === 0), `đã bỏ hiệu ứng đại trà vượt hạn mức (${absent.map(([k, n]) => k + '=' + n).join(', ')})`);
 // tuỳ chỉnh: đọc trạng thái trước/sau cuộn
 const snap = () => p.evaluate(() => {
   const root = document.querySelector('[data-site="luot-song"]');
@@ -152,36 +155,39 @@ const sl1 = await p.evaluate(() => document.querySelector('[data-fx="DraggableGa
 ok(sl1 > sl0, `gallery khoá học cuộn khi bấm Khoá sau (${sl0} -> ${sl1})`);
 
 // ---------------------------------------------------------------- 5. Lesson Planner
-console.log('5) Lesson Planner');
-await p.locator('#lap-ke-hoach').scrollIntoViewIfNeeded();
+console.log('5) Chọn khoá phù hợp');
+await p.locator('#chon-khoa').scrollIntoViewIfNeeded();
 const resultSel = '[class*="result"]';
 await p.getByRole('button', { name: 'Xem khoá gợi ý' }).click(); await sleep(300);
-ok(await p.locator('#lap-ke-hoach [role=alert]').count() === 4, 'bỏ trống: 4 lỗi cạnh nhóm chọn');
+ok(await p.locator('#chon-khoa [role=alert]').count() === 4, 'bỏ trống: 4 lỗi cạnh nhóm chọn');
 ok(await p.locator('[role=radiogroup][aria-invalid="true"]').count() === 4, 'aria-invalid trên 4 nhóm');
 ok(await p.getByText('Chọn đủ bốn mục rồi bấm xem').count() === 1, 'trạng thái rỗng hiện');
-const pick = async (lv, age, ses, slot) => { for (const v of [lv, age, String(ses), slot]) await p.locator(`#lap-ke-hoach input[type=radio][value="${v}"]`).check({ force: true }); };
+const pick = async (lv, age, ses, slot) => { for (const v of [lv, age, String(ses), slot]) await p.locator(`#chon-khoa input[type=radio][value="${v}"]`).check({ force: true }); };
 await pick('moi', 'lon', 3, 'chieu');
 await p.getByRole('button', { name: 'Xem khoá gợi ý' }).click(); await sleep(500);
-let txt = await p.locator('#lap-ke-hoach').innerText();
-ok(/Đứng Vững/.test(txt) && /1\.650\.000/.test(txt.replace(/\s/g, ' ').replace(/ /g, ' ')) || /1\.650\.000/.test(txt), 'moi/3 buổi -> Đứng Vững, 1.650.000');
+let txt = await p.locator('#chon-khoa').innerText();
+ok(/Khoá 3 buổi · Đứng vững/.test(txt) && /1\.950\.000/.test(txt), 'moi/3 buổi -> Khoá 3 buổi Đứng vững, 1.950.000');
 const idx = ['An toàn', 'Chèo ván', 'Pop-up', 'Đọc sóng'].map((k) => txt.indexOf(k, txt.indexOf('Thứ tự bài học')));
 ok(idx.every((i) => i > 0) && idx[0] < idx[1] && idx[1] < idx[2] && idx[2] < idx[3], `thứ tự bài học an toàn < chèo < pop-up < đọc sóng (${idx.join(',')})`);
 ok(/Giá tham khảo/.test(txt) && /Điều kiện thực tế|huấn luyện viên xác nhận/i.test(txt), 'có chú thích giá tham khảo và điều kiện do huấn luyện viên');
 // đổi lựa chọn -> cập nhật tức thì
 await pick('luot', 'cao', 5, 'som'); await sleep(300);
-txt = await p.locator('#lap-ke-hoach').innerText();
-ok(/Tiến Bậc Sóng/.test(txt) && /3\.300\.000/.test(txt) && /40 tuổi|Từ 40|thể trạng/.test(txt), 'luot/5/40+ -> Tiến Bậc Sóng, 3.300.000, ghi chú thể trạng');
+txt = await p.locator('#chon-khoa').innerText();
+ok(/Tiến bậc sóng/.test(txt) && /3\.900\.000/.test(txt) && /40 tuổi|Từ 40|thể trạng/.test(txt), 'luot/5/40+ -> Tiến bậc sóng, 3.900.000, ghi chú thể trạng');
+await pick('moi', 'lon', 10, 'sang'); await sleep(300);
+txt = await p.locator('#chon-khoa').innerText();
+ok(/Khoá 10 buổi/.test(txt) && /5\.800\.000/.test(txt) && (txt.match(/Buổi \d+/g) || []).length >= 10, 'moi/10 buổi -> Khoá 10 buổi, 5.800.000, đủ 10 buổi trong thứ tự bài học');
 await pick('moi', 'nhi', 1, 'sang'); await sleep(300);
-txt = await p.locator('#lap-ke-hoach').innerText();
-ok(/Sóng Nhí/.test(txt) && /750\.000/.test(txt) && /phụ huynh/i.test(txt), 'trẻ 6-12 -> Sóng Nhí, 750.000, phụ huynh ở bờ');
-await pick('dung', 'teen', 2, 'sang'); await sleep(300);
-txt = await p.locator('#lap-ke-hoach').innerText();
-ok(/Điều Ván/.test(txt) && /phụ huynh xác nhận/i.test(txt), 'teen -> cần phụ huynh xác nhận');
+txt = await p.locator('#chon-khoa').innerText();
+ok(/Lớp trẻ em/.test(txt) && /650\.000/.test(txt) && /phụ huynh/i.test(txt), 'trẻ 6-12 -> Lớp trẻ em, 650.000, phụ huynh ở bờ');
+await pick('dung', 'teen', 3, 'sang'); await sleep(300);
+txt = await p.locator('#chon-khoa').innerText();
+ok(/Điều ván/.test(txt) && /2\.100\.000/.test(txt) && /phụ huynh xác nhận/i.test(txt), 'teen -> cần phụ huynh xác nhận');
 // checklist
-const cbs = p.locator('#lap-ke-hoach input[type=checkbox]');
+const cbs = p.locator('#chon-khoa input[type=checkbox]');
 ok(await cbs.count() === 7, 'checklist 7 mục');
 await cbs.nth(0).check({ force: true }); await cbs.nth(1).check({ force: true }); await sleep(200);
-ok((await p.locator('[role=progressbar][aria-valuenow="2"]').count()) >= 1 && /2\/7/.test(await p.locator('#lap-ke-hoach').innerText()), 'tiến độ checklist 2/7');
+ok((await p.locator('[role=progressbar][aria-valuenow="2"]').count()) >= 1 && /2\/7/.test(await p.locator('#chon-khoa').innerText()), 'tiến độ checklist 2/7');
 await scan(p, 'planner có kết quả');
 const href = await p.locator('a[data-rs-consult]').getAttribute('href');
 console.log('   href tư vấn:', href);
@@ -194,8 +200,44 @@ ok(await p.locator('[role=status]').count() >= 1, 'chép tóm tắt có phản h
 await p.getByRole('button', { name: 'Chọn lại' }).click(); await sleep(200);
 ok(await p.getByText('Chọn đủ bốn mục rồi bấm xem').count() === 1, 'Chọn lại -> trạng thái rỗng');
 // bàn phím: Tab tới CTA, mũi tên chọn radio
-await p.locator('#lap-ke-hoach input[type=radio][value="moi"]').focus(); await p.keyboard.press('ArrowDown'); await sleep(100);
-ok(await p.locator('#lap-ke-hoach input[type=radio][value="dung"]').isChecked(), 'mũi tên đổi radio trong nhóm');
+await p.locator('#chon-khoa input[type=radio][value="moi"]').focus(); await p.keyboard.press('ArrowDown'); await sleep(100);
+ok(await p.locator('#chon-khoa input[type=radio][value="dung"]').isChecked(), 'mũi tên đổi radio trong nhóm');
+
+// ---------------------------------------------------------------- 5b. nội dung ngành + chữ ký riêng
+console.log('5b) Nội dung ngành và chữ ký riêng');
+{
+  const hero = await p.locator('[data-rs="hero"]').innerText();
+  ok(/trường dạy lướt sóng/i.test(hero) && /sơn trà/i.test(hero) && /Đặt buổi trải nghiệm/i.test(hero), 'hero nêu loại hình, khu vực, CTA đúng ngành');
+  ok(/750\.000/.test(hero) && /05:30/.test(hero) && /tối đa 6 học viên/.test(hero), 'hero có 3 sự thật: giá từ, giờ tập trung, sĩ số');
+  const kh = await p.locator('#khoa-hoc').innerText();
+  ok(['Buổi trải nghiệm', 'Khoá 3 buổi', 'Khoá 5 buổi', 'Khoá 10 buổi', 'Lớp trẻ em', 'Thuê ván và đồ'].every((k) => kh.includes(k)), 'đủ 6 thẻ khoá học theo ngành');
+  const gia = await p.locator('#bang-gia').innerText();
+  ok(/750\.000/.test(gia) && /5\.800\.000/.test(gia) && /Thuê ván/.test(gia) && /Giá đã gồm/.test(gia) && /Đồ cần mang/.test(gia), 'bảng giá, thuê ván, bao gồm, đồ cần mang');
+  ok((await p.locator('#huan-luyen-vien li').count()) === 4, 'đội ngũ theo 4 vai trò');
+  const an = await p.locator('#an-toan').innerText();
+  ok(/Chính sách dời lịch/.test(an) && /biển động/i.test(an) && /không tính phí/.test(an), 'an toàn + chính sách dời lịch khi biển động');
+  await p.locator('#buoi-hoc').scrollIntoViewIfNeeded(); await p.evaluate(() => window.scrollBy(0, -300)); await sleep(500);
+  const m0 = await p.locator('#buoi-hoc [class*="clockMark"] span').textContent();
+  await p.evaluate(() => window.scrollBy(0, 900)); await sleep(900);
+  const m1 = await p.locator('#buoi-hoc [class*="clockMark"] span').textContent();
+  ok(Number(m1) > Number(m0), `đồng hồ buổi học chạy theo cuộn (phút ${m0} -> ${m1})`);
+  ok((await p.locator('#buoi-hoc [data-step][data-on="1"]').count()) === 1, 'đúng một bước đang nổi lên');
+  await p.locator('#lich-hoc').scrollIntoViewIfNeeded(); await sleep(400);
+  const sunT0 = await p.locator('#lich-hoc [class*="skySun"]').evaluate((e) => getComputedStyle(e).transform);
+  await p.locator('#lich-hoc').getByRole('radio', { name: /Chiều muộn/ }).click(); await sleep(1300);
+  const sunT1 = await p.locator('#lich-hoc [class*="skySun"]').evaluate((e) => getComputedStyle(e).transform);
+  ok(sunT0 !== sunT1, 'mặt trời trượt dọc cung nắng khi đổi khung giờ');
+  ok(/15:30/.test(await p.locator('#lich-hoc [class*="slotCard"]').innerText()), 'thẻ khung giờ đổi: tập trung 15:30');
+  await p.locator('#lich-hoc').getByRole('radio', { name: /Sáng sớm/ }).focus(); await p.keyboard.press('ArrowRight'); await sleep(300);
+  ok(/08:00/.test(await p.locator('#lich-hoc [class*="slotCard"]').innerText()), 'mũi tên đổi khung giờ');
+  await p.locator('#an-toan').scrollIntoViewIfNeeded();
+  await p.locator('#an-toan').getByRole('radio', { name: /Cờ đỏ/ }).click(); await sleep(200);
+  const fl = await p.locator('#an-toan [class*="flagInfo"]').innerText();
+  ok(/Không xuống nước/.test(fl) && /Dời sang buổi trống/.test(fl), 'cờ đỏ: không xuống nước, dời lịch không tính phí');
+  ok(/quy ước nội bộ/i.test(await p.locator('#an-toan').innerText()), 'ghi rõ quy ước nội bộ, không thay cảnh báo chính thức');
+  const anim = await p.locator('#an-toan [class*="flagCloth"]').first().evaluate((e) => getComputedStyle(e).animationName);
+  ok(anim !== 'none', 'cờ phấp phới (animation chạy)');
+}
 
 // ---------------------------------------------------------------- 6. Mùa sóng
 console.log('6) Mùa sóng');
@@ -219,7 +261,7 @@ const foc = await p.evaluate(() => document.activeElement?.textContent?.slice(0,
 ok(!!foc, `Tab đi tiếp có phần tử focus (${foc})`);
 // Tab tới nút CTA hero
 let reached = false;
-for (let i = 0; i < 40 && !reached; i++) { await p.keyboard.press('Tab'); reached = await p.evaluate(() => /Lên kế hoạch buổi học/.test(document.activeElement?.textContent || '')); }
+for (let i = 0; i < 40 && !reached; i++) { await p.keyboard.press('Tab'); reached = await p.evaluate(() => /Đặt buổi trải nghiệm/.test(document.activeElement?.textContent || '')); }
 ok(reached, 'Tab tới CTA hero');
 const hasLink = await p.locator('a[href="/demos/luot-song/credits"]').count();
 ok(hasLink >= 1, 'footer có link Ảnh & ghi công');
@@ -237,7 +279,7 @@ console.log('8) ?ref=');
 {
   const r = await open(1280, 800, { url: `${URL_}?ref=abc123` });
   const cookies = await r.ctx.cookies();
-  const h = await r.p.locator('#lap-ke-hoach').count();
+  const h = await r.p.locator('#chon-khoa').count();
   ok(h === 1, 'mở được với ?ref=');
   ok(!r.errors.length, '?ref= 0 lỗi console');
   console.log('   cookie tct_ref (do proxy.ts đặt, không phải demo):', cookies.some((c) => c.name === 'tct_ref'));
@@ -281,7 +323,7 @@ console.log('11) reduced-motion');
     const hid = [...root.querySelectorAll('[data-rs="reveal"],[data-fx]')].filter((e) => { const cs = getComputedStyle(e); return cs.opacity === '0' || cs.visibility === 'hidden'; }).length;
     const waveAnim = getComputedStyle(document.querySelector('[data-rs="waves"] svg')).animationName;
     const sunRay = getComputedStyle(root.querySelector('[class*="sunRays"]')).animationName;
-    return { hid, waveAnim, sunRay, st: root.getAttribute('data-rs-static'), txt: root.innerText.includes('Đừng chỉ ngắm biển') && root.innerText.includes('Một kế hoạch') && root.innerText.includes('Bạn hỏi') };
+    return { hid, waveAnim, sunRay, st: root.getAttribute('data-rs-static'), txt: root.innerText.includes('Học lướt sóng') && root.innerText.includes('Bạn hợp') && root.innerText.includes('Câu hỏi hay gặp') };
   });
   ok(rm.hid === 0, `reduced: không có khối ẩn (${rm.hid})`);
   ok(rm.waveAnim === 'none' && rm.sunRay === 'none', 'reduced: sóng và tia nắng đứng yên');
@@ -299,7 +341,7 @@ console.log('12) No-JS');
   const ctx2 = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 1280, height: 800 } });
   const pg = await ctx2.newPage(); await pg.goto(URL_, { waitUntil: 'load', timeout: 150000 });
   const t = await pg.evaluate(() => document.querySelector('[data-site="luot-song"]').innerText);
-  ok(/Đừng chỉ ngắm biển/.test(t) && /Chọn con sóng/.test(t) && /Bạn hỏi/.test(t) && /Một kế hoạch/.test(t), 'no-JS: hero, khoá học, planner, FAQ có trong HTML');
+  ok(/Học lướt sóng/.test(t) && /Sáu cách/.test(t) && /Câu hỏi hay gặp/.test(t) && /Bạn hợp/.test(t) && /Bảng giá khoá học/.test(t) && /Chính sách dời lịch/.test(t), 'no-JS: hero, khoá học, giá, planner, chính sách, FAQ có trong HTML');
   await ctx2.close();
 }
 

@@ -5,3 +5,5 @@ Hiệu ứng (thư viện): VelocityMarquee (hai dải), Odometer + Counter (her
 Hiệu ứng riêng: SpeedLines (22 vạch CSS, độ đậm theo --vx-v vận tốc cuộn), Speedometer SVG (kim quay theo tiến độ cuộn + rung theo vận tốc, ≥1280px), RoadDivider (xe lướt ngang theo cuộn, kéo vệt vàng; 3 chỗ), StartLights (đèn sáng lần lượt, GO!), Preloader cờ caro (1.1s, lần đầu/phiên, click/phím để bỏ qua), hero choreography (clip chéo 0.95s, dòng trượt nghiêng stagger 0.12s, burst vệt tốc độ), Odometer đổi số tổng tiền.
 Reduced-motion: tất cả ở trạng thái cuối, ẩn đồng hồ, không preloader. Touch: tilt/magnetic tắt (thư viện), đồng hồ ẩn <1280px.
 Tool: chọn xe -> số ngày (stepper + chọn nhanh) -> giao nhận -> phụ kiện -> bảo hiểm -> checklist -> phiếu giá. Luật: mỗi 7 ngày giá tuần, ngày lẻ <= giá tuần (lib/pricing.ts, test vitest).
+
+Cập nhật 2026-11-25: xem design/REWORK.md (cửa hàng thuê xe thật; section mới Giao nhận, Điều kiện, Bảo hiểm và sự cố; bỏ ClipReveal, ParallaxLayer, ScrollScrubText, SVGPathDraw, ScrollProgress; thêm RouteLine, nhát cắt chéo).

@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "../brand.module.css";
 import {
-  INITIAL_BUILDER, LENGTHS, SERVICES, STORAGE_KEY, STYLISTS, buildRequestText, formatDuration, parseBuilder, quote, vnd,
+  INITIAL_BUILDER, LENGTHS, SERVICES, STORAGE_KEY, STYLISTS, buildRequestText, formatDuration, minutesOf, parseBuilder, priceOf, quote, vnd,
   type BuilderState, type HairLength, type ServiceId, type StylistId,
 } from "../data/builder";
 import { LOOKS } from "../data/lookbook";
@@ -90,8 +90,8 @@ export function Builder({ consultHref }: { consultHref: string }) {
                 <input type="checkbox" checked={st.selected.includes(s.id)} onChange={() => toggle(s.id)} data-svc={s.id} />
                 <span className={styles.optBox}>
                   <span className={styles.optMark} aria-hidden="true" />
-                  <span><span className={styles.optTitle}>{s.name}</span><span className={styles.optSub}>{s.tag} · khoảng {s.baseMinutes}&nbsp;phút (tóc ngắn)</span></span>
-                  <span className={styles.optPrice}>{vnd(line ? line.price : s.basePrice)}</span>
+                  <span><span className={styles.optTitle}>{s.name}</span><span className={styles.optSub}>{s.tag} · khoảng {minutesOf(s, st.length)}&nbsp;phút</span></span>
+                  <span className={styles.optPrice}>{vnd(line ? line.price : priceOf(s, st.length, st.stylist))}</span>
                 </span>
               </label>
             );
@@ -149,7 +149,7 @@ export function Builder({ consultHref }: { consultHref: string }) {
           <p className={styles.totalLbl}>Tổng giá tham khảo</p>
           <p className={styles.total} data-nl="sum-total" aria-live="polite">{vnd(q.total)}</p>
         </div>
-        {q.conflict && <p className={styles.warn} role="alert" data-nl="sum-warn">Nhuộm và uốn trong cùng một buổi phụ thuộc tình trạng tóc nên bản tóm tắt lịch hẹn chưa thể tạo khi chọn cả hai. Giá tham khảo vẫn được tính. Hãy bỏ một dịch vụ để tiếp tục.</p>}
+        {q.conflict && <p className={styles.warn} role="alert" data-nl="sum-warn">Uốn, duỗi và nhuộm hoặc tẩy trong cùng một buổi phụ thuộc tình trạng tóc, nên bản tóm tắt chưa thể tạo khi chọn các dịch vụ này cùng nhau. Giá tham khảo vẫn được tính. Hãy bỏ bớt một dịch vụ để tiếp tục.</p>}
         <div className={styles.sumBtns}>
           <button ref={openBtn} type="button" className={`${styles.btn} ${styles.btnLime}`} onClick={openPv} disabled={!canPreview} data-nl="open-preview">Tóm tắt lịch hẹn</button>
           <button type="button" className={`${styles.btn} ${styles.btnGhost}`} onClick={reset}>Đặt lại lựa chọn</button>

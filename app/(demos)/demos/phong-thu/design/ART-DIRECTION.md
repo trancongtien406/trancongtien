@@ -1,19 +1,7 @@
-# ART-DIRECTION — Tần Số Studio
-Ý tưởng: cả trang là một bàn mixer + timeline DAW. Mỗi section có thẻ "CH 0X" kiểu nhãn kênh; con trỏ/cuộn điều khiển sóng, playhead, đĩa than.
+# ART-DIRECTION — Tần Số Studio (cập nhật 2026-11-25, xem REWORK.md)
+Ý tưởng: bàn mixer + timeline DAW của một phòng thu âm thật ở Quận Hải Châu, Đà Nẵng. Mỗi section có nhãn "CH 0X".
 
-Section (desktop / mobile)
-1. Hero: 2 cột (chữ lớn Archivo rộng 3 dòng, "tần số" cam / ảnh micro khung dọc mở vòng tròn, quét dòng scanline, 2 VU L/R). Dưới: dải sóng canvas toàn bề ngang (thước tick, playhead cam chạy 17s/vòng), thanh transport (timecode, equalizer 32 cột, ghi chú nghe thử). Mobile: ảnh ngang đầu, chữ, nút, sóng rút còn 170px.
-2. Band cam: dải VelocityMarquee tên dịch vụ + thông số, tăng tốc theo cuộn, có nút Dừng.
-3. Kênh thu (#dich-vu): bàn mixer 5 hàng ngang: tên kênh (TextScramble) + mô tả + chip, clip sóng canvas, nút M/S, fader kéo được (dB), VU, giá tham khảo. Mobile: mỗi kênh xếp dọc.
-4. Quy trình (#quy-trinh): timeline 5 làn, 5 clip bậc thang, playhead trắng quét theo cuộn, clip/bước sáng khi playhead đi qua; mobile: danh sách dọc với đường dọc cam fill theo cuộn.
-5. Phòng thu (#phong-thu): ảnh phòng điều khiển parallax + chuỗi tín hiệu 5 bước (đường sóng SVG vẽ ra) + gallery kéo ngang 4 phòng.
-6. Master: đĩa than SVG quay theo cuộn (540 độ qua khung), cần gạt nghiêng; đoạn chữ ScrollScrub sáng dần; 4 hệ nghe kiểm tra.
-7. Bảng giá: bảng theo giờ (có engineer / tự thu); mobile: thẻ xếp dọc.
-8. Estimator (#uoc-tinh): bảng INPUT (loại, 3 fader + nút ±, switch engineer) và OUTPUT (khoảng giá NumberTicker, giờ nên dự trù, VU "độ chật", checklist, nút gửi yêu cầu qua buildConsultHref, sao chép tóm tắt).
-9. FAQ details; Liên hệ ảnh micro + EQ phản chiếu; footer.
+Section (12): Hero (chữ lớn 3 dòng, loại hình + khu vực, CTA Đặt lịch thu / Xem bảng giá / Nghe thử, 3 sự thật; ảnh micro, 2 VU; dải sóng canvas, transport timecode + equalizer) → Band cam VelocityMarquee (dịch vụ, giá từ, giờ làm) → Dịch vụ 6 kênh mixer (M/S, fader dB, VU, clip sóng, giá) → Quy trình 5 chặng timeline (playhead quét theo cuộn, ghi thời gian) → Giao file & chỉnh sửa (3 thẻ, FileSizer) → Phòng & thiết bị (ảnh phòng điều khiển, chuỗi tín hiệu, 6 nhóm thiết bị theo loại, gallery kéo ngang 4 phòng) → Mix & master (đĩa than quay theo cuộn, 4 hệ nghe) → Bảng giá (bảng 6 dịch vụ + 4 gói) → Ước tính buổi thu (công cụ 6 loại) → Đặt lịch (giờ làm, cọc 30%, dời 24 giờ, huỷ 48 giờ, đến trễ) → FAQ 9 → Liên hệ.
 
-Hiệu ứng (≥6; thư viện + riêng)
-- Thư viện: TextScramble (nhãn CH, tên kênh), SplitWords (mọi tiêu đề), ClipReveal (hero circle, ảnh inset/circle), VelocityMarquee, MagneticButton (CTA), CursorSpotlight (bàn mixer), ScrollScrubText (Master), ParallaxLayer (phòng điều khiển), SVGPathDraw (chuỗi tín hiệu), DraggableGallery, NumberTicker (giá), GrainOverlay, CustomCursor.
-- Riêng: HeroWave (waveform canvas theo con trỏ + cuộn + phổ thật khi nghe thử), EqBars, Vu, ClipWave, Fader (Pointer Events + bàn phím), Timeline playhead (--p từ cuộn), Vinyl quay theo cuộn, timecode header theo cuộn, đường ray tiến độ, nghe thử WebAudio (nhạc tổng hợp, gain 0.09, tự dừng 40s, AudioContext chỉ tạo sau cú bấm).
-- Hero choreography: header trượt xuống, nhãn giải mã, 3 dòng chữ tách từ, ảnh mở vòng tròn (1.3s), chữ phụ/nút/transport lên lần lượt, sóng mở từ giữa ra (1.5s). Cuộn sớm thì tua nhanh.
-- Reduced-motion: không GSAP, sóng/EQ/VU vẽ một khung tĩnh, timeline sáng đủ, marquee tĩnh, vinyl đứng, nút Nghe thử vẫn dùng khi bấm.
+Ngôn ngữ chuyển động: "playhead quét" (vạch cam chạy ngang làm lộ khối) và "mức VU dâng" (ảnh lộ từ đáy lên); hover gói: nền cam dâng từ đáy. Hiệu ứng thư viện: VelocityMarquee, MagneticButton (đại trà, tối đa 2); TextScramble, CursorSpotlight, DraggableGallery, NumberTicker, GrainOverlay, CustomCursor. Riêng: HeroWave, EqBars, Vu, ClipWave, Fader, Timeline, Vinyl, FileSizer, chuỗi tín hiệu, timecode header, nghe thử WebAudio (chỉ sau cú bấm, gain 0.09, tự dừng 40s).
+Reduced-motion: không GSAP, sóng/EQ/VU một khung tĩnh, timeline sáng đủ, marquee tĩnh, vinyl đứng.

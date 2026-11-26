@@ -65,13 +65,22 @@ export const ALBUMS: Album[] = [
   },
 ];
 
-export type Pkg = { id: PackageId; roman: string; name: string; blurb: string; price: number; hours: string; places: string; outfits: string; photographers: string; photos: number; album: string; delivery: string };
+export type Pkg = {
+  id: PackageId; roman: string; kind: string; name: string; blurb: string; price: number; hours: string; places: string; outfits: string; photographers: string; photos: number; album: string; delivery: string;
+  deliveryDays: [number, number]; includes: string[]; excludes: string[];
+};
 export const PACKAGES: Pkg[] = [
-  { id: "TM-P01", roman: "I", name: "Một Ngày Nhỏ", blurb: "Một buổi chụp, một câu chuyện giản dị.", price: 5900000, hours: "4 giờ", places: "1 bối cảnh", outfits: "1 bộ", photographers: "1", photos: 25, album: "Không bao gồm album in", delivery: "14–21 ngày" },
-  { id: "TM-P02", roman: "II", name: "Tháng Dịu Dàng", blurb: "Thêm thời gian cho những khung hình khác nhau.", price: 9900000, hours: "8 giờ", places: "Tối đa 2 bối cảnh", outfits: "Tối đa 2 bộ", photographers: "1", photos: 50, album: "Album 20×20 cm, 20 trang", delivery: "21–30 ngày" },
-  { id: "TM-P03", roman: "III", name: "Một Đời Thương", blurb: "Một hành trình dài hơn, một cuốn album đầy hơn.", price: 15900000, hours: "12 giờ, chia 2 ngày", places: "Tối đa 3 bối cảnh", outfits: "Tối đa 3 bộ", photographers: "2", photos: 80, album: "Album 25×25 cm, 30 trang", delivery: "30–45 ngày" },
+  { id: "TM-P01", roman: "I", kind: "Pre-wedding studio", name: "Studio Ánh Sáng Tự Nhiên", blurb: "Chụp trong studio có cửa sổ lớn, phông giấy và bộ phụ kiện. Hợp cặp đôi muốn gọn một buổi, không phụ thuộc thời tiết.", price: 5900000, hours: "3 giờ chụp", places: "1 phim trường trong studio", outfits: "2 bộ (thuê tại studio)", photographers: "1", photos: 30, album: "Không bao gồm album in", delivery: "14–21 ngày", deliveryDays: [14, 21],
+    includes: ["Trang điểm cô dâu 2 kiểu, làm tóc chú rể", "Thuê 2 bộ váy/vest từ kho trang phục của studio", "Chọn ảnh trực tiếp tại studio sau buổi chụp", "30 ảnh chỉnh màu và dặm da, gửi qua đường link tải về", "1 ảnh in 40×60 cm đóng khung"],
+    excludes: ["Album in (mua thêm)", "Hoa cầm tay", "Thêm giờ chụp"] },
+  { id: "TM-P02", roman: "II", kind: "Pre-wedding ngoại cảnh", name: "Ngoại Cảnh Một Ngày", blurb: "Một buổi sáng sớm và một buổi chiều giờ vàng ở hai địa điểm khác nhau quanh Đà Nẵng: biển, bán đảo, vườn hoặc phố cũ.", price: 11900000, hours: "8 giờ, gồm di chuyển", places: "Tối đa 2 địa điểm ngoại cảnh", outfits: "3 bộ (thuê tại studio)", photographers: "1 chính, 1 phụ", photos: 60, album: "Album 20×20 cm, 20 trang", delivery: "21–30 ngày", deliveryDays: [21, 30],
+    includes: ["Tư vấn concept và khảo sát địa điểm qua ảnh trước ngày chụp", "Trang điểm cô dâu 3 kiểu, chỉnh lại giữa buổi", "Thuê 3 bộ váy/vest", "Xe đưa đón trong nội thành Đà Nẵng", "60 ảnh chỉnh sửa + album 20×20 cm 20 trang", "Phương án dự phòng khi mưa"],
+    excludes: ["Phí vào cổng địa điểm (nếu có)", "Di chuyển ngoài Đà Nẵng và Hội An", "Hoa cưới"] },
+  { id: "TM-P03", roman: "III", kind: "Phóng sự cưới", name: "Phóng Sự Ngày Cưới", blurb: "Hai nhiếp ảnh đi cùng từ lúc chuẩn bị đến hết tiệc: lễ gia tiên, đón dâu, nghi thức, tiệc. Chụp tự nhiên, ít dàn dựng.", price: 15900000, hours: "10 giờ liên tục", places: "Nhà hai họ và nơi tổ chức tiệc trong Đà Nẵng", outfits: "Theo trang phục ngày cưới của hai bạn", photographers: "2", photos: 300, album: "Album 25×25 cm, 30 trang", delivery: "30–45 ngày", deliveryDays: [30, 45],
+    includes: ["Trao đổi lịch trình ngày cưới trước 7 ngày", "2 nhiếp ảnh, ít nhất 1 người ở cạnh cô dâu chú rể suốt buổi", "300 ảnh chỉnh sửa, gửi theo từng phần (chuẩn bị, lễ, tiệc)", "Album 25×25 cm 30 trang, duyệt layout trước khi in", "Ảnh gia đình theo danh sách hai bạn đưa"],
+    excludes: ["Quay phim", "Trang điểm ngày cưới", "Giờ chụp quá 10 giờ (tính thêm theo giờ)"] },
 ];
-export const EXCLUDED = "Chưa bao gồm: trang điểm, thuê trang phục, hoa cưới, phí vào địa điểm, di chuyển ngoài khu vực dự kiến và các yêu cầu phát sinh.";
+export const EXCLUDED = "Giá tham khảo, chưa gồm VAT nếu cần xuất hoá đơn. Mọi khoản ngoài phần \"Bao gồm\" của gói sẽ được báo trước khi chốt, không tính ngầm.";
 
 export type Mood = {
   id: StyleId; name: string; title: string; description: string; main: string; detail: string;
@@ -93,21 +102,28 @@ export const MOODS: Mood[] = [
 ];
 
 export const PROCESS = [
-  { n: "01", title: "Hẹn một cuộc trò chuyện", text: "Hai bạn chia sẻ phong cách yêu thích, thời điểm dự kiến và những điều muốn có trong bộ ảnh. Từ đó, bối cảnh và gói chụp được phác thảo." },
-  { n: "02", title: "Ngày của hai bạn", text: "Trang phục, lịch trình, thời tiết và các chi tiết cần chuẩn bị được thống nhất trước buổi chụp. Thời lượng phụ thuộc vào gói đã chọn." },
-  { n: "03", title: "Chọn những điều muốn nhớ", text: "Hai bạn xem bộ ảnh dự kiến và chọn những khung hình muốn đưa vào danh sách chỉnh sửa hoặc album in." },
-  { n: "04", title: "Một cuốn album để dành", text: "Ảnh được hoàn thiện theo cấu hình đã thống nhất. Nếu có album in, bố cục được duyệt trước khi sản xuất rồi mới giao." },
+  { n: "01", title: "Tư vấn", when: "Trong ngày làm việc", text: "Hai bạn nhắn qua form hoặc gọi, cho biết ngày cưới, phong cách thích và ngân sách. Studio gợi ý gói và địa điểm phù hợp." },
+  { n: "02", title: "Chọn concept, giữ lịch", when: "Trước ngày chụp 2–4 tuần", text: "Chốt phong cách, bảng màu, trang phục. Đặt cọc 30% giá gói để giữ ngày chụp." },
+  { n: "03", title: "Ngày chụp", when: "3–10 giờ tuỳ gói", text: "Trang điểm, thay trang phục, chụp theo kịch bản đã thống nhất. Ngoại cảnh chụp sáng sớm và giờ vàng cuối chiều." },
+  { n: "04", title: "Chọn ảnh", when: "Trong 7 ngày sau chụp", text: "Hai bạn xem ảnh gốc qua đường link và chọn đúng số ảnh của gói để chỉnh sửa." },
+  { n: "05", title: "Hậu kỳ", when: "7–21 ngày", text: "Chỉnh màu, dặm da, cân bằng ánh sáng. Gửi bản xem trước 3 ảnh để hai bạn góp ý tông màu trước khi chỉnh hàng loạt." },
+  { n: "06", title: "Duyệt album", when: "3–5 ngày", text: "Studio dàn trang album và gửi bản PDF. Hai bạn sửa tối đa 2 lần trước khi in." },
+  { n: "07", title: "In và giao", when: "7–14 ngày", text: "In album, đóng khung ảnh, giao tại studio hoặc gửi trong Đà Nẵng. File ảnh chỉnh sửa gửi qua link tải về." },
 ];
 
 export const FAQ = [
-  { q: "Các gói chụp trên website đã bao gồm váy cưới và trang điểm chưa?", a: "Chưa. Ba gói chỉ gồm các hạng mục trong bảng. Trang phục, trang điểm, hoa cưới và phụ kiện cần dự trù riêng." },
-  { q: "Nên chuẩn bị trước buổi chụp bao lâu?", a: "Với một khung giờ ngoài trời, hai bạn nên bắt đầu hình dung phong cách và bối cảnh từ 4 đến 8 tuần trước. Đây là gợi ý để lập kế hoạch; thời gian thực tế tuỳ từng bối cảnh." },
-  { q: "Nếu ngày chụp gặp trời mưa thì sao?", a: "Một kế hoạch tốt luôn có phương án dự phòng: đổi giờ, đổi bối cảnh trong nhà hoặc dời sang ngày kế. Phương án cụ thể sẽ được trao đổi trước buổi chụp." },
-  { q: "Có thể kết hợp nhiều phong cách trong cùng một bộ ảnh không?", a: "Có thể. Gói nhiều bối cảnh hơn sẽ có nhiều chỗ để kết hợp, ví dụ một buổi chiều ven biển và một góc cổ điển trong nhà." },
-  { q: "Hai bạn có được tự chọn ảnh để chỉnh sửa không?", a: "Trong quy trình, hai bạn xem bộ ảnh dự kiến rồi chọn số khung hình tương ứng với gói (25, 50 hoặc 80 ảnh)." },
-  { q: "Bao lâu thì nhận được ảnh và album?", a: "Thời gian giao trong bảng gói là dự kiến: từ 14 đến 45 ngày tuỳ gói. Album in thường cần thêm thời gian duyệt bố cục." },
-  { q: "Chi phí di chuyển và phí địa điểm được tính thế nào?", a: "Các khoản này nằm ngoài giá gói tham khảo và không được cộng tự động trong công cụ Moodboard." },
-  { q: "Làm sao để trao đổi về buổi chụp?", a: "Bấm nút tư vấn để mở form liên hệ của website và chia sẻ nhu cầu của hai bạn. Công cụ moodboard trên trang không gửi dữ liệu đi." },
+  { q: "Giá gói đã gồm váy cưới và trang điểm chưa?", a: "Hai gói pre-wedding đã gồm thuê trang phục từ kho studio và trang điểm cô dâu theo số kiểu ghi trong gói. Gói phóng sự ngày cưới không gồm trang điểm vì hai bạn thường có đội trang điểm riêng." },
+  { q: "Nên đặt lịch trước ngày chụp bao lâu?", a: "Pre-wedding nên đặt trước 3–4 tuần, mùa cưới (tháng 9–12) nên trước 6–8 tuần. Phóng sự ngày cưới nên giữ lịch càng sớm càng tốt vì mỗi ngày studio chỉ nhận một đám." },
+  { q: "Đặt cọc bao nhiêu và có hoàn lại không?", a: "Cọc 30% giá gói để giữ lịch. Nếu huỷ trước ngày chụp ít nhất 14 ngày, khoản cọc được bảo lưu để dùng cho một ngày chụp khác trong 6 tháng. Huỷ muộn hơn, cọc không được hoàn." },
+  { q: "Dời lịch chụp được không?", a: "Được một lần miễn phí nếu báo trước ít nhất 3 ngày, tuỳ lịch còn trống. Từ lần dời thứ hai tính phí 500.000 đ." },
+  { q: "Ngày chụp ngoại cảnh gặp mưa thì sao?", a: "Studio theo dõi dự báo từ 2 ngày trước và quyết định cùng hai bạn trước giờ chụp ít nhất 6 giờ: dời sang ngày kế gần nhất không mất phí, hoặc chuyển sang chụp trong studio và địa điểm có mái che." },
+  { q: "Bao lâu thì nhận ảnh và album?", a: "Ảnh chỉnh sửa nhận sau 14–45 ngày tuỳ gói. Album in cần thêm khoảng 10–19 ngày cho duyệt layout, in và đóng bìa. Công cụ Lịch giao ảnh trên trang giúp ước tính theo ngày chụp." },
+  { q: "Hai bạn có được tự chọn ảnh không?", a: "Có. Sau buổi chụp hai bạn nhận link ảnh gốc, chọn đúng số ảnh của gói. Muốn thêm ảnh chỉnh sửa tính 120.000 đ mỗi ảnh." },
+  { q: "Có nhận file ảnh gốc chưa chỉnh không?", a: "Có, như một dịch vụ mua thêm (xem bảng Album, ảnh in và file). Studio vẫn giữ quyền chọn ảnh để chỉnh sửa theo phong cách chung của bộ ảnh." },
+  { q: "Chụp ngoài Đà Nẵng có được không?", a: "Hội An và các điểm trong bán kính khoảng 40 km nhận được, phụ phí di chuyển báo trước. Xa hơn cần trao đổi riêng." },
+  { q: "Studio có đăng ảnh của hai bạn lên mạng không?", a: "Chỉ khi hai bạn đồng ý bằng văn bản trong phiếu thoả thuận. Không đồng ý thì ảnh chỉ nằm trong bộ giao cho hai bạn." },
+  { q: "Cả gia đình có chụp thêm được không?", a: "Ngày cưới, ảnh gia đình theo danh sách hai bạn đưa đã nằm trong gói phóng sự. Với pre-wedding, thêm người chụp cùng tính theo thoả thuận." },
+  { q: "Làm sao để trao đổi về buổi chụp?", a: "Bấm Đặt lịch tư vấn để mở form liên hệ của website. Công cụ Moodboard và Lịch giao ảnh trên trang chỉ chạy trên trình duyệt, không gửi dữ liệu đi." },
 ];
 
 export const vnd = (n: number) => new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(n).replace(/\s/g, " ");

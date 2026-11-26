@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import { ImageHoverDistort } from "@/features/showroom/effects";
 import styles from "../brand.module.css";
 import { EMPTY_FILTERS, LABELS, LOOKS, filterLooks, type LbFilters, type Look } from "../data/lookbook";
 import { SERVICES } from "../data/builder";
@@ -106,7 +107,7 @@ export function Lookbook() {
                   onClick={(e) => { lastBtn.current = e.currentTarget; setActive(l); }}>
                   <div className={styles.lbFig} style={{ aspectRatio: l.image.ratio }}>
                     <span className={styles.lbTag}>{l.id}</span>
-                    <Image src={`${BASE}/${l.image.file}-600.webp`} alt={l.image.alt} fill sizes="(max-width: 860px) 46vw, 24vw" loading="lazy" style={{ objectFit: "cover", objectPosition: l.image.pos }} />
+                    <ImageHoverDistort className={styles.lbDist} strength={26} frequency={0.014}><Image src={`${BASE}/${l.image.file}-600.webp`} alt={l.image.alt} fill sizes="(max-width: 860px) 46vw, 24vw" loading="lazy" style={{ objectFit: "cover", objectPosition: l.image.pos }} /></ImageHoverDistort>
                   </div>
                   <div className={styles.lbCap}>
                     <span className={styles.lbName}>{l.name}<span className={styles.lbArrow} aria-hidden="true">↗</span></span>
@@ -117,7 +118,7 @@ export function Lookbook() {
             ))}
           </ul>
         )}
-        <p className={`${styles.note} ${styles.lbNote}`}>Lookbook là bộ ảnh tham khảo phong cách, chỉ để tham khảo. Kết quả thực tế phụ thuộc chất tóc, nền tóc và kỹ thuật thực hiện.</p>
+        <p className={`${styles.note} ${styles.lbNote}`}>Mỗi kiểu là mô tả phong cách để mang đến buổi tư vấn. Kết quả thực tế phụ thuộc chất tóc, nền tóc và kỹ thuật thực hiện.</p>
       </div>
 
       <dialog ref={dlg} className={styles.dlg} aria-labelledby="nl-dlg-title" onClose={() => { if (active) close(); }} onCancel={(e) => { e.preventDefault(); close(); }}
@@ -146,7 +147,7 @@ export function Lookbook() {
                   <div><dt>Dịch vụ gợi ý</dt><dd>{active.services.map((id) => SERVICES.find((s) => s.id === id)?.name).join(", ")}</dd></div>
                 </dl>
                 <button type="button" className={styles.btn} onClick={() => inspire(active)}>Dùng kiểu này làm cảm hứng</button>
-                <p className={styles.note}>Kiểu tham khảo, không cam kết tái tạo giống ảnh.</p>
+                <p className={styles.note}>Kiểu tham khảo; stylist tư vấn mức phù hợp với tóc của bạn.</p>
               </div>
             </div>
           </>

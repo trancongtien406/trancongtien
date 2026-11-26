@@ -97,7 +97,7 @@ export function Picker() {
     <section className={styles.pick} id="chon-bai" aria-labelledby="pick-title">
       <div className={styles.wrap}>
         <header className={styles.secHead}>
-          <p className={styles.label} data-sg="stencil"><span>03</span> Chọn bài tập</p>
+          <p className={styles.label} data-sg="stencil"><span>07</span> Thử một bài WOD</p>
           <h2 id="pick-title" className={styles.h2Big}>
             <span className={styles.h2Solid}>Hôm nay</span>
             <span className={styles.h2OutInk}>tập gì?</span>

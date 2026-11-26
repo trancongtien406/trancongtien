@@ -29,8 +29,8 @@ export function Vocab() {
   return (
     <section id="the-tu" className={`${styles.panel} ${styles.panelMist}`} aria-labelledby="vocab-title" ref={root as never}>
       <div className={styles.panelHead}>
-        <p className={styles.kicker}>Thẻ từ vựng</p>
-        <h2 id="vocab-title" className={styles.h2}>Lật thẻ, thấy nghĩa, nhớ lâu hơn.</h2>
+        <p className={styles.kicker}>Phương pháp: ôn từ vựng</p>
+        <h2 id="vocab-title" className={styles.h2}>Thẻ từ vựng lật, cách lớp ôn từ mỗi buổi.</h2>
         <p className={styles.lede}>Bấm hoặc nhấn Enter, Space để lật. Nhấn Esc để úp hết thẻ.</p>
       </div>
       <div className={styles.vocabBar}>

@@ -30,9 +30,9 @@ export function Hero({ consultHref }: { consultHref: string }) {
     <section id="hero" className={s.hero} aria-labelledby="hero-title">
       <div className={s.wrap}>
         <div className={s.issueBar}>
-          <span>Số 08 · Mùa 2026</span>
-          <span className={s.issueMid}>Studio thiết kế không gian &amp; nội thất</span>
           <span>Thiết kế &amp; thi công nội thất</span>
+          <span className={s.issueMid}>Căn hộ · Nhà phố · Văn phòng · Cửa hàng</span>
+          <span>Quận Hải Châu, Đà Nẵng</span>
         </div>
         <div className={s.cover}>
           <div className={s.coverImg} data-hero-img>
@@ -50,19 +50,23 @@ export function Hero({ consultHref }: { consultHref: string }) {
           </p>
           <div className={s.coverFoot}>
             <h1 id="hero-title" className={s.h1} data-hero-line>
-              Không gian có <span className={s.nowrap}>nếp sống.</span>
+              Nội thất trọn gói, từ khảo sát đến bàn giao.
             </h1>
             <div className={s.coverSide} data-hero-line>
               <p>
-                Từ căn hộ nhỏ đến những ngôi nhà nhiều thế hệ, chúng tôi hình dung không gian bằng công năng,
-                vật liệu và những thói quen sống rất riêng.
+                Công ty thiết kế và thi công nội thất cho căn hộ, nhà phố, văn phòng và cửa hàng tại Đà Nẵng. Một đội làm từ bản vẽ đến đồ gỗ hoàn thiện.
               </p>
+              <ul className={s.heroFacts} aria-label="Thông tin nhanh">
+                <li><b>Từ 250.000 ₫/m²</b><span>phí thiết kế, giá tham khảo</span></li>
+                <li><b>Từ 2.000.000 ₫/m²</b><span>thi công hoàn thiện</span></li>
+                <li><b>Khảo sát tại công trình</b><span>miễn phí trong nội thành</span></li>
+              </ul>
               <div className={s.ctaRow}>
                 <a className={s.btnLight} href={consultHref} data-cta="primary">
-                  Bắt đầu dự án <span aria-hidden="true">↗</span>
+                  Đặt lịch khảo sát <span aria-hidden="true">↗</span>
                 </a>
                 <a className={s.btnGhostLight} href="#budget">
-                  Thử dự toán chi phí
+                  Ước tính chi phí
                 </a>
               </div>
             </div>
@@ -71,11 +75,11 @@ export function Hero({ consultHref }: { consultHref: string }) {
         <div className={s.coverCap}>
           <span data-rule-host>
             <i className={s.rule} data-hero-rule />
-            01 / Không gian sống
+            Đà Nẵng · nhận công trình nội thành
           </span>
           <span>Ánh sáng · Vật liệu · Tỷ lệ</span>
           <span className={s.capNote}>
-            Ảnh stock tham khảo định hướng thiết kế, không phải công trình do Khối Nếp thực hiện.
+            Ảnh tham khảo phong cách; ghi công tại trang Ảnh &amp; ghi công.
           </span>
         </div>
       </div>
@@ -90,7 +94,7 @@ export function Manifesto() {
         <i className={s.rule} data-rule />
         <div className={s.manGrid}>
           <aside className={s.manAside}>
-            <p className={s.label}>01 / Triết lý thiết kế</p>
+            <p className={s.label}>01 / Cách chúng tôi làm</p>
             <figure className={s.matFig} data-veil>
               <Photo name="mat-wood" w={600} sizes="(min-width: 1024px) 22vw, 60vw" alt="Vân gỗ sồi có mắt gỗ, nhìn cận cảnh" />
             </figure>
@@ -98,7 +102,7 @@ export function Manifesto() {
           </aside>
           <div className={s.manMain}>
             <h2 id="studio-title" className={s.h2}>
-              Thiết kế từ cách sống, không từ một khuôn mẫu.
+              Một đội, từ bản vẽ đầu tiên đến chìa khóa trao tay.
             </h2>
             <p className={s.story}>{STORY}</p>
             <blockquote className={s.pull}>
@@ -114,7 +118,7 @@ export function Manifesto() {
               ))}
             </ol>
             <a className={s.textLink} href="#process">
-              Tìm hiểu cách tiếp cận <span aria-hidden="true">↓</span>
+              Xem quy trình 5 bước <span aria-hidden="true">↓</span>
             </a>
           </div>
         </div>
@@ -129,18 +133,14 @@ export function Process() {
       <div className={s.wrap}>
         <i className={s.rule} data-rule />
         <div className={s.secHead}>
-          <p className={s.label}>07 / Quy trình thiết kế</p>
+          <p className={s.label}>04 / Quy trình làm việc</p>
           <h2 id="process-title" className={s.h2}>
-            Mỗi quyết định đều có trình tự.
+            Năm bước, mỗi bước có đầu ra rõ ràng.
           </h2>
           <p className={s.secLead}>
-            Một quy trình rõ ràng giúp kết nối mong muốn, điều kiện công trình và ngân sách thành những quyết định
-            thiết kế nhất quán.
+            Từ lúc hẹn khảo sát đến ngày nhận bàn giao, bạn biết mình sẽ nhận gì ở mỗi bước và mất bao lâu. Thời gian là ước tính cho căn hộ 60–100 m².
           </p>
         </div>
-        <figure className={s.processFig} data-veil>
-          <Photo name="dining" sizes="100vw" position="50% 62%" alt="Bàn ăn tròn bằng gỗ với bình cây nhỏ, ghế trắng và nắng chiều chiếu xiên" />
-        </figure>
         <ol className={s.steps}>
           {PROCESS.map((p) => (
             <li key={p.n}>
@@ -151,6 +151,7 @@ export function Process() {
                 <p className={s.time}>
                   {p.time} <span>· thời gian dự kiến</span>
                 </p>
+                <p className={s.stepOut}><span>Bạn nhận:</span> {p.out}</p>
               </div>
             </li>
           ))}
@@ -166,28 +167,26 @@ export function Closing({ consultHref }: { consultHref: string }) {
       <div className={s.wrap}>
         <div className={s.closeGrid}>
           <div>
-            <p className={`${s.label} ${s.labelLight}`}>09 / Bắt đầu từ một ý tưởng</p>
+            <p className={`${s.label} ${s.labelLight}`}>11 / Đặt lịch khảo sát</p>
             <h2 id="start-title" className={`${s.h2} ${s.h2Light}`}>
-              Bắt đầu từ không gian của bạn.
+              Hẹn một buổi khảo sát tại công trình.
             </h2>
             <p className={s.closeLead}>
-              Một bảng vật liệu, một khoảng ngân sách hay đơn giản là một ý tưởng về cách bạn muốn sống. Mọi không gian
-              đều bắt đầu từ những điều như thế.
+              Gửi diện tích, loại công trình và khu vực; studio gọi lại để hẹn ngày giờ. Buổi khảo sát kéo dài khoảng 1–2 giờ, bạn nhận biên bản đo và gợi ý hướng bố trí. Hạn xử lý yêu cầu: trong giờ hành chính, thứ Hai đến thứ Bảy.
             </p>
           </div>
           <div className={s.closeCtas}>
             <a className={s.btnLight} href={consultHref}>
-              Bắt đầu dự án <span aria-hidden="true">↗</span>
+              Đặt lịch khảo sát <span aria-hidden="true">↗</span>
             </a>
             <a className={s.btnGhostLight} href="#budget">
-              Lập dự toán ngân sách
+              Ước tính chi phí
             </a>
             <a className={s.btnGhostLight} href="#board">
               Tạo bảng vật liệu
             </a>
             <p className={s.micro}>
-              Công cụ miễn phí · Không cần đăng nhập · Không gửi dữ liệu lên máy chủ. Nút “Bắt đầu dự án” mở form tư
-              vấn.
+              Công cụ trên trang không cần đăng nhập và không gửi dữ liệu lên máy chủ. Nút “Đặt lịch khảo sát” mở form tư vấn.
             </p>
           </div>
         </div>
@@ -205,7 +204,7 @@ export function Footer() {
           <div className={s.footBrand}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={`${ID}/logo-reversed.svg`} width={240} height={58} alt="Khối Nếp — Interior & Spatial Design" />
-            <p>Khối Nếp là studio thiết kế không gian và nội thất, làm việc từ ý tưởng đến hoàn thiện. Đơn giá và thời gian trên trang chỉ mang tính tham khảo.</p>
+            <p>Khối Nếp: thiết kế và thi công nội thất tại Đà Nẵng. Quận Hải Châu. Giờ làm việc 08:00 – 17:30, thứ Hai đến thứ Bảy. Đơn giá và thời gian trên trang mang tính tham khảo.</p>
           </div>
           {FOOTER_GROUPS.map((g) => (
             <nav key={g.title} aria-label={g.title}>

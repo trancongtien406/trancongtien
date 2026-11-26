@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import styles from "../brand.module.css";
 import {
-  CATEGORY_LABEL, CLASSES, DAYS, DAY_LONG, INSTRUCTORS, LEVEL_LABEL, WEEKS, availability, endTime, sessionsForWeek, vnd, weekDates,
+  CATEGORY_LABEL, CLASSES, DAYS, DAY_LONG, INSTRUCTORS, LEVEL_LABEL, SLOTS, TIME_MARKS, WEEKS, availability, endTime, sessionsForWeek, vnd, weekDates,
   type Category, type InstructorId, type Level, type Session,
 } from "../data/classes";
 
@@ -30,6 +30,8 @@ function Chips<T extends string>({ label, value, options, onChange }: { label: s
 export function Timetable({ consultHref }: { consultHref: string }) {
   const [week, setWeek] = useState(0);
   const [f, setF] = useState<Filters>(ALL);
+  /** Mốc giờ: 0 = cả ngày, i>0 = chỉ xem buổi bắt đầu từ SLOTS[i-1]. */
+  const [from, setFrom] = useState(0);
   const [day, setDay] = useState(0);
   const [open, setOpen] = useState<Session | null>(null);
   const [done, setDone] = useState(false);
@@ -38,15 +40,19 @@ export function Timetable({ consultHref }: { consultHref: string }) {
   const opener = useRef<HTMLElement | null>(null);
 
   const all = useMemo(() => sessionsForWeek(week), [week]);
-  const shown = useMemo(() => all.filter((s) => {
+  const byFilter = useMemo(() => all.filter((s) => {
     const c = cls(s.classId);
     return (f.category === "all" || c.category === f.category) && (f.level === "all" || c.level === f.level) && (f.instructor === "all" || s.instructor === f.instructor) && (f.classId === "all" || c.id === f.classId);
   }), [all, f]);
+  const shown = useMemo(() => byFilter.filter((s) => from === 0 || SLOTS.indexOf(s.time as (typeof SLOTS)[number]) >= from - 1), [byFilter, from]);
+  const perSlot = SLOTS.map((t) => byFilter.filter((s) => s.time === t).length);
+  const maxSlot = Math.max(1, ...perSlot);
   const dates = weekDates(week);
 
   const apply = useCallback((d: FilterDetail) => {
     const { open: o, ...rest } = d;
     setF({ ...ALL, ...rest });
+    setFrom(0);
     setWeek(0);
     if (o) { const s = sessionsForWeek(0).find((x) => x.id === o); if (s) { setDay(s.day); } }
     const el = document.getElementById("lich-tap");
@@ -64,7 +70,7 @@ export function Timetable({ consultHref }: { consultHref: string }) {
   useEffect(() => {
     if (first.current) { first.current = false; return; }
     setLive(`Tìm thấy ${shown.length} buổi tập trong tuần đang xem.`);
-  }, [shown.length, f, week]);
+  }, [shown.length, f, week, from]);
 
   // dialog
   useEffect(() => {
@@ -76,7 +82,7 @@ export function Timetable({ consultHref }: { consultHref: string }) {
   const close = () => { setOpen(null); setDone(false); requestAnimationFrame(() => opener.current?.focus()); };
 
   const set = <K extends keyof Filters>(k: K, v: Filters[K]) => setF((p) => ({ ...p, [k]: v, ...(k === "category" ? { classId: "all" } : {}) }));
-  const dirty = f.category !== "all" || f.level !== "all" || f.instructor !== "all" || f.classId !== "all";
+  const dirty = from !== 0 || f.category !== "all" || f.level !== "all" || f.instructor !== "all" || f.classId !== "all";
   const od = open ? cls(open.classId) : null;
 
   return (
@@ -93,12 +99,24 @@ export function Timetable({ consultHref }: { consultHref: string }) {
       <div className={styles.filters}>
         <Chips label="Loại lớp" value={f.category} onChange={(v) => set("category", v)} options={[["all", "Tất cả"], ["reformer", "Reformer"], ["mat", "Mat Pilates"], ["yoga", "Yoga"]]} />
         <Chips label="Cấp độ" value={f.level} onChange={(v) => set("level", v)} options={[["all", "Tất cả"], ["beginner", "Nhập môn"], ["every", "Mọi cấp độ"], ["experienced", "Có kinh nghiệm"]]} />
-        <Chips label="Huấn luyện viên" value={f.instructor} onChange={(v) => set("instructor", v)} options={[["all", "Tất cả"], ...INSTRUCTORS.map((i) => [i.id, i.name] as [InstructorId, string])]} />
+        <Chips label="Dẫn lớp" value={f.instructor} onChange={(v) => set("instructor", v)} options={[["all", "Tất cả"], ...INSTRUCTORS.map((i) => [i.id, i.name] as [InstructorId, string])]} />
+      </div>
+
+      <div className={styles.timeRail} data-nt="time-rail">
+        <label className={styles.timeLabel} htmlFor="nt-from">Chỉ xem buổi bắt đầu từ <b data-nt="from-label">{TIME_MARKS[from]}</b></label>
+        <div className={styles.timeTrack}>
+          <ul className={styles.timeBars} aria-hidden="true">
+            {SLOTS.map((t, i) => (
+              <li key={t} data-off={from !== 0 && i < from - 1 ? "1" : "0"}><i style={{ height: `${10 + (perSlot[i] / maxSlot) * 38}px` }} /><span>{t}</span><b>{perSlot[i]}</b></li>
+            ))}
+          </ul>
+          <input id="nt-from" type="range" min={0} max={SLOTS.length} step={1} value={from} onChange={(e) => setFrom(Number(e.target.value))} aria-valuetext={from === 0 ? "Cả ngày" : `Từ ${SLOTS[from - 1]}`} data-nt="from" />
+        </div>
       </div>
 
       <div className={styles.ttMeta}>
         <p data-nt="count"><b>{shown.length}</b> buổi tập trong tuần này{f.classId !== "all" && <> · lớp <b>{cls(f.classId).name}</b></>}</p>
-        {dirty && <button type="button" className={styles.linkBtn} onClick={() => setF(ALL)}>Đặt lại bộ lọc</button>}
+        {dirty && <button type="button" className={styles.linkBtn} onClick={() => { setF(ALL); setFrom(0); }}>Đặt lại bộ lọc</button>}
       </div>
       <p className={styles.srOnly} role="status" aria-live="polite">{live}</p>
 
@@ -114,7 +132,7 @@ export function Timetable({ consultHref }: { consultHref: string }) {
         <div className={styles.empty} data-nt="empty" role="status">
           <p className={styles.emptyTitle}>Chưa có buổi nào khớp bộ lọc này.</p>
           <p>Thử bỏ bớt một lựa chọn, hoặc xem toàn bộ lịch trong tuần.</p>
-          <button type="button" className={`${styles.btn} ${styles.btnPrimary}`} onClick={() => setF(ALL)}>Đặt lại bộ lọc</button>
+          <button type="button" className={`${styles.btn} ${styles.btnPrimary}`} onClick={() => { setF(ALL); setFrom(0); }}>Đặt lại bộ lọc</button>
         </div>
       ) : (
         <div className={styles.week}>
@@ -152,10 +170,13 @@ export function Timetable({ consultHref }: { consultHref: string }) {
                 <ul className={styles.dlgList}>
                   <li><span>Thời gian</span><b>{DAY_LONG[open.day]}, {dates[open.day].d}/{dates[open.day].m}/2026 · {open.time} – {endTime(open.time, od.minutes)}</b></li>
                   <li><span>Huấn luyện viên</span><b>HLV {inst(open.instructor).name}</b></li>
-                  <li><span>Chỗ còn lại</span><b>{availability(open.left).label} / {od.capacity}
-                    <span className={styles.dots} aria-hidden="true">{Array.from({ length: od.capacity }, (_, k) => <i key={k} data-on={k < od.capacity - open.left} />)}</span></b></li>
+                  <li><span>Chỗ còn lại</span><b>{availability(open.left).label} / {od.capacity}</b></li>
                   <li><span>Giá lẻ tham khảo</span><b>{vnd(od.price)}</b></li>
                 </ul>
+                <ul className={styles.seatMap} data-kind={od.category === "reformer" ? "machine" : "mat"} data-nt="seatmap" aria-hidden="true">
+                  {Array.from({ length: od.capacity }, (_, k) => <li key={k} data-taken={k < od.capacity - open.left ? "1" : "0"} style={{ ["--i" as string]: k }}><i /><span>{k + 1}</span></li>)}
+                </ul>
+                <p className={styles.srOnly}>{od.category === "reformer" ? "Sơ đồ máy Reformer" : "Sơ đồ thảm"}: còn {open.left} trên {od.capacity} chỗ.</p>
                 <p className={styles.dlgNote}>{od.desc} Số chỗ có thể thay đổi; để giữ chỗ, hãy trao đổi qua nút bên dưới. Trang này không thu thông tin cá nhân hay thanh toán.</p>
                 <div className={styles.dlgActions}>
                   <a className={`${styles.btn} ${styles.btnPrimary}`} href={consultHref} data-nt="consult-dialog">Trao đổi về lớp này</a>

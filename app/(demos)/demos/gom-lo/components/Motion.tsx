@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const useIso = typeof window === "undefined" ? useEffect : useLayoutEffect;
 
-/** Fade nhẹ cho [data-gl="fade"] (hero phát sau tiêu đề, phần còn lại khi vào khung). Chỉ transform/opacity; reduced-motion: không làm gì. */
+/** Ngôn ngữ chuyển động "đất nén rồi nở": khối [data-gl="fade"] hạ xuống như cục đất bị ấn (bẹp dưới, nở ngang) rồi bật về dáng cũ, đáy giữ nguyên. Chỉ transform/opacity; reduced-motion: không làm gì. */
 export function Motion() {
   useIso(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -15,9 +15,9 @@ export function Motion() {
       const els = Array.from(document.querySelectorAll<HTMLElement>('[data-gl="fade"]'));
       const hero = els.filter((e) => e.closest("#top"));
       const rest = els.filter((e) => !e.closest("#top"));
-      gsap.set(els, { opacity: 0, y: 18 });
-      gsap.to(hero, { opacity: 1, y: 0, duration: 1, stagger: 0.12, delay: 0.7, ease: "power3.out", clearProps: "transform,opacity" });
-      rest.forEach((el) => gsap.to(el, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out", clearProps: "transform,opacity", scrollTrigger: { trigger: el, start: "top 90%", once: true } }));
+      gsap.set(els, { opacity: 0, y: 10, scaleY: 0.9, scaleX: 1.03, transformOrigin: "50% 100%" });
+      gsap.to(hero, { opacity: 1, y: 0, scaleY: 1, scaleX: 1, duration: 0.9, stagger: 0.14, delay: 0.7, ease: "back.out(1.7)", clearProps: "transform,opacity" });
+      rest.forEach((el) => gsap.to(el, { opacity: 1, y: 0, scaleY: 1, scaleX: 1, duration: 0.85, ease: "back.out(1.7)", clearProps: "transform,opacity", scrollTrigger: { trigger: el, start: "top 90%", once: true } }));
     });
     return () => mm.revert();
   }, []);

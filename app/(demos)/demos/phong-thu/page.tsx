@@ -2,7 +2,7 @@ import { CustomCursor, GrainOverlay } from "@/features/showroom/effects";
 import s from "./brand.module.css";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
-import { Band, Contact, EstimatorSection, Faq, Footer, Master, Process, Rates, Services, Studio } from "./components/Sections";
+import { Band, Booking, Contact, Delivery, EstimatorSection, Faq, Footer, Master, Process, Rates, Services, Studio } from "./components/Sections";
 import { Motion } from "./components/Motion";
 
 export default function PhongThuPage() {
@@ -16,10 +16,12 @@ export default function PhongThuPage() {
         <Band />
         <Services />
         <Process />
+        <Delivery />
         <Studio />
         <Master />
         <Rates />
         <EstimatorSection />
+        <Booking />
         <Faq />
         <Contact />
       </main>

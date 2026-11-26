@@ -7,7 +7,7 @@ import { gsap, ScrollTrigger, hasFinePointer, on, prefersReducedMotion, register
  * Chuyển động chung của trang.
  * 1) Hero choreography ~4 giây (ảnh mặt nước hiện, ánh sáng, nhãn, tiêu đề do SplitWords, mô tả, nút, số 00 m, bong bóng, gợi ý cuộn).
  *    Người dùng cuộn sớm thì timeline nhường: các mốc còn lại chạy nhanh về trạng thái cuối.
- * 2) Moment cuộn: ảnh hero trôi chậm + phóng nhẹ; khối `data-lb="reveal"` nổi lên theo lô.
+ * 2) Moment cuộn: ảnh hero trôi chậm + phóng nhẹ; khối `data-lb="reveal"` nổi lên từ vùng nước mờ (làm nét dần) theo lô.
  * 3) Bong bóng nổ khi bấm vào vùng trống (chỉ chuột).
  * Reduced-motion: không chạy gì, nội dung hiện đủ. Trạng thái ẩn ban đầu chỉ được đặt sau khi JS chạy.
  */
@@ -46,7 +46,7 @@ export function Motion() {
       // moment cuộn 2: khối nội dung nổi lên theo lô
       ScrollTrigger.batch(q('[data-lb="reveal"]'), {
         start: "top 90%", once: true,
-        onEnter: (els) => gsap.fromTo(els, { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: 0.85, ease: "power3.out", stagger: 0.1, overwrite: true }),
+        onEnter: (els) => gsap.fromTo(els, { y: 26, opacity: 0, filter: "blur(9px)" }, { y: 0, opacity: 1, filter: "blur(0px)", duration: 1.3, ease: "sine.out", stagger: 0.12, overwrite: true, clearProps: "filter" }),
       });
       gsap.set(q('[data-lb="reveal"]'), { opacity: 0 });
       // đường kẻ vẽ ra

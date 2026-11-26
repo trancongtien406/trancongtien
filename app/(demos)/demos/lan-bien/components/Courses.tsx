@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MagneticButton, SplitWords } from "@/features/showroom/effects";
+import { SplitWords } from "@/features/showroom/effects";
 import { buildConsultHref } from "@/features/showroom/consultation";
 import { COURSES } from "../data/content";
 import { Photo } from "./Photo";
@@ -43,9 +43,9 @@ export function Courses() {
     <section id="khoa-hoc" className={styles.courses} aria-labelledby="courses-title">
       <div className={styles.wrap}>
         <header className={styles.secHead} data-lb="reveal">
-          <p className={styles.kicker}>Khoá học &amp; hoạt động</p>
-          <h2 id="courses-title" className={styles.h2}><SplitWords as="span">Chọn tầng nước phù hợp với bạn.</SplitWords></h2>
-          <p className={styles.lede}>Năm chương trình đi từ mặt nước đến lặn có bình khí và lặn tự do. Chọn một mục để xem nội dung. Giá và lịch cụ thể được trao đổi khi bạn liên hệ.</p>
+          <p className={styles.kicker}>Khoá học tại Tầng Xanh</p>
+          <h2 id="courses-title" className={styles.h2}><SplitWords as="span">Năm chương trình, từ snorkeling đến Advanced.</SplitWords></h2>
+          <p className={styles.lede}>Chọn một khoá để xem thời lượng, giá tham khảo và điều kiện tham gia. Lịch khai giảng nằm ở mục Lịch và giá; chỗ được xác nhận khi bạn đặt.</p>
         </header>
         <ul ref={root} className={styles.courseList}>
           {COURSES.map((c, i) => {
@@ -73,18 +73,17 @@ export function Courses() {
                     <p className={styles.courseTagM}>{c.tag}</p>
                     <h3>{c.name}</h3>
                     <p>{c.summary}</p>
+                    <dl className={styles.courseFacts}>{c.facts.map((f) => <div key={f.k}><dt>{f.k}</dt><dd>{f.v}</dd></div>)}</dl>
                     <ul>{c.items.map((t) => <li key={t}>{t}</li>)}</ul>
                     <p className={styles.courseNote}>{c.note}</p>
-                    <MagneticButton>
-                      <a className={`${styles.btn} ${styles.btnCoral}`} href={href} tabIndex={on ? 0 : -1}>{c.cta}</a>
-                    </MagneticButton>
+                    <a className={`${styles.btn} ${styles.btnCoral}`} href={href} tabIndex={on ? 0 : -1}>{c.cta}</a>
                   </div>
                 </div>
               </li>
             );
           })}
         </ul>
-        <p className={styles.fine}>OWD và AOWD là tên gọi cấp độ phổ biến trong đào tạo lặn. Nội dung cụ thể phụ thuộc chương trình đào tạo và đánh giá của hướng dẫn viên.</p>
+        <p className={styles.fine}>Open Water và Advanced là tên gọi cấp độ phổ biến trong đào tạo lặn. Nội dung cụ thể phụ thuộc chương trình đào tạo và đánh giá của huấn luyện viên. Giá là giá tham khảo.</p>
       </div>
     </section>
   );

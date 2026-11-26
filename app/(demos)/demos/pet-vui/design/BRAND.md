@@ -8,3 +8,5 @@
 - Liên hệ trong footer: `chao@bongxu.example`, `0236 000 0000`, "Đà Nẵng". Không địa chỉ/giờ mở cửa.
 - Tra cứu tên: WebSearch `"Bông Xù" pet spa grooming Đà Nẵng` không trả kết quả cho tiệm tên này ở Đà Nẵng (chỉ có các tiệm khác như Phú Spa, Punky Spa, TOP PETS...). KHÔNG tra được Google Maps, Facebook, Zalo, WIPO, Cục SHTT từ môi trường này. "Bông Xù" là cụm từ thông dụng nên khả năng có tiệm trùng tên ở nơi khác là cao; chủ cần tự tra và đăng ký nhãn hiệu trước khi dùng thật.
 - Chính sách nhãn (mục 11): trang không có chữ Demo/minh hoạ/giả định/mô phỏng/dữ liệu mẫu; e2e quét tự động.
+
+- Rework 2026-11-25: tiệm đặt ở Quận Sơn Trà, giờ 8:00 – 19:00 (nghỉ Thứ Hai, Chủ nhật đến 17:00); trang có giờ mở cửa và quận (cấp quận), vẫn không địa chỉ đường.

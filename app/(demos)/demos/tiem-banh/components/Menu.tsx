@@ -9,19 +9,20 @@ import { Treat } from "./Treat";
 const BG = ["var(--mk-butter)", "var(--mk-pink-soft)", "var(--mk-lilac)", "var(--mk-paper)"];
 
 export function Menu() {
-  const [cat, setCat] = useState<MenuCategory | "all">("all");
+  const [cat, setCat] = useState<MenuCategory>("banh-kem");
   const [touched, setTouched] = useState(false);
-  const items = MENU.filter((m) => cat === "all" || m.cat === cat);
+  const items = MENU.filter((m) => m.cat === cat);
+  const note = CATEGORIES.find((c) => c.id === cat)?.note;
   return (
     <div>
       <div className={s.chips} role="group" aria-label="Lọc theo nhóm món">
         {CATEGORIES.map((c) => (
           <button key={c.id} type="button" className={s.chip} aria-pressed={cat === c.id} onClick={() => { setCat(c.id); setTouched(true); }}>
-            {c.label}
+            {c.label} <span className={s.chipCount}>{MENU.filter((m) => m.cat === c.id).length}</span>
           </button>
         ))}
       </div>
-      <p className={s.srOnly} role="status" aria-live="polite">Đang hiện {items.length} món</p>
+      <p className={s.catNote} role="status" aria-live="polite">{note} <span className={s.srOnly}>Đang hiện {items.length} món.</span></p>
       <ul className={s.menuGrid}>
         {items.map((m, i) => (
           <li key={`${cat}-${m.id}`} className={`${s.menuLi} ${touched ? s.popIn : ""}`} data-mk="pop" style={{ animationDelay: `${(i % 8) * 40}ms` }}>

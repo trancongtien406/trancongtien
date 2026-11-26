@@ -47,7 +47,7 @@ export function Header() {
         <nav className={styles.nav} aria-label="Điều hướng chính">
           {NAV.map((n) => <a key={n.href} href={n.href}>{n.label}</a>)}
         </nav>
-        <a className={`${styles.btn} ${styles.btnInk} ${styles.btnSm} ${styles.headerCta}`} href="#routine">Thử Routine Builder</a>
+        <a className={`${styles.btn} ${styles.btnInk} ${styles.btnSm} ${styles.headerCta}`} href="#dat-lich">Đặt lịch</a>
         <button
           ref={btn} type="button" className={styles.menuBtn} aria-expanded={open} aria-controls="dx-menu"
           aria-label={open ? "Đóng menu" : "Mở menu"} onClick={() => setOpen((v) => !v)}
@@ -61,7 +61,7 @@ export function Header() {
             <li key={n.href} style={{ ["--i" as string]: i }}><a href={n.href} onClick={close}>{n.label}</a></li>
           ))}
         </ul>
-        <a className={`${styles.btn} ${styles.btnInk}`} href="#routine" onClick={close}>Thử Routine Builder</a>
+        <a className={`${styles.btn} ${styles.btnInk}`} href="#dat-lich" onClick={close}>Đặt lịch chăm da</a>
       </div>
     </header>
   );

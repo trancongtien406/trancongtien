@@ -7,7 +7,7 @@ const ID = "/images/demos/luot-song/identity";
 export const metadata: Metadata = {
   title: "Ráng Sóng Surf Club · Trường dạy lướt sóng ở Đà Nẵng",
   description:
-    "Ráng Sóng dạy lướt sóng cho người mới và người đã lướt ở bãi biển Đà Nẵng: an toàn, chèo ván, pop-up, đọc sóng. Chọn trình độ, số buổi, khung giờ để nhận khoá học gợi ý, thứ tự bài học và giá tham khảo.",
+    "Ráng Sóng là trường dạy lướt sóng ở bãi biển quận Sơn Trà, Đà Nẵng: buổi trải nghiệm từ 750.000 ₫, khoá 3, 5, 10 buổi, lớp trẻ em từ 6 tuổi, thuê ván và đồ. Xem lịch học theo khung giờ, bảng giá, quy định an toàn và chính sách dời lịch khi biển động.",
   robots: { index: false, follow: true },
   icons: {
     icon: [
@@ -17,8 +17,8 @@ export const metadata: Metadata = {
     apple: `${ID}/apple-touch-icon.png`,
   },
   openGraph: {
-    title: "Ráng Sóng Surf Club · Chạm sóng, bắt nắng",
-    description: "Học lướt sóng ở Đà Nẵng cùng huấn luyện viên, từ buổi đầu tiên đến lúc tự đứng trên ván.",
+    title: "Ráng Sóng Surf Club · Trường dạy lướt sóng ở Sơn Trà",
+    description: "Học lướt sóng ở Đà Nẵng: buổi trải nghiệm, khoá 3, 5, 10 buổi, lớp trẻ em, thuê ván và đồ.",
     type: "website",
     locale: "vi_VN",
     images: [{ url: `${ID}/og-image.webp`, width: 1200, height: 630, alt: "Ráng Sóng Surf Club" }],

@@ -15,3 +15,8 @@ Desktop 1440 / Mobile 390
 Immersive Album: nền cocoa đậm, trang giấy ngà. Desktop ≥1024×600: bìa → spread hai trang (có bóng gáy) → trang cuối; mobile: từng trang. Chuyển trang: desktop lật nhẹ (rotateY ±9°, 480ms, perspective 1200), mobile trượt 16px + mờ 280ms, reduced-motion tức thời. Chừa 88px đáy cho thanh DemoNotice dùng chung (luôn nổi trên cùng).
 
 Motion (GSAP, chỉ transform/opacity): hero ~1.6s (tấm phủ giấy kéo lên, H1 trồi từng dòng trong mặt nạ, ảnh phụ xoay -4°→-2°, mô tả/CTA/caption), moment 1 albums đặt xuống (y32 + xoay ±2.5°, stagger), moment 2 ba ảnh essay trôi dọc khác tốc độ (scrub 0.8, chỉ ≥1024px), reveal các khối khác; hover chỉ trong `(hover:hover) and (pointer:fine)`. reduced-motion: không hiệu ứng, tấm phủ không bao giờ hiện (chỉ bật khi JS + motion được phép).
+
+
+## Cập nhật 2026-11-25 (rework)
+Thứ tự section: Hero (3 sự thật) -> Về studio (ScrollScrubText + ảnh ClipReveal) -> Dịch vụ (4 hàng số nghiêng, không ảnh) -> Gói chụp (hàng giá: thông số, Bao gồm / Không bao gồm, giá) + bảng Album, ảnh in và file -> Danh mục phong cách (DraggableGallery 4 thẻ in, mỗi thẻ có địa điểm/giờ/trang phục/mùa, mở ImmersiveAlbum) -> Trang phục và make-up (bảng theo gói + ảnh in nghiêng) -> Giờ chụp theo ánh sáng (GoldenHour: nền trời đổi tông, mặt trời trượt trên cung) -> Moodboard concept -> Quy trình 7 bước + Lịch giao ảnh (thanh mốc) -> Chính sách (2 cột, ảnh thiệp) -> FAQ 12 -> Đặt lịch (nền cocoa, ảnh ClipReveal từ phải). Mobile: bảng thành 2 cột (ẩn cột ghi chú), gallery vuốt ngang với nút Trước/Sau 48px.
+Motion: ngôn ngữ "đặt ảnh xuống bàn" (xoay nhẹ + mờ dần, không fade-up); bỏ scrub essay. Đại trà giữ: ClipReveal, ScrollScrubText.

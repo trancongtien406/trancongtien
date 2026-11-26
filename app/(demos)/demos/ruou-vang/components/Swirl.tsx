@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { SplitWords } from "@/features/showroom/effects";
 import s from "../brand.module.css";
 
 const BOWL = "M95 40C75 110 70 200 118 262c14 10 24 14 32 15 8-1 18-5 32-15 48-62 43-152 23-222z";
@@ -91,7 +90,7 @@ export function Swirl() {
       <div className={`${s.wrap} ${s.swirlGrid}`}>
         <div className={s.swirlCopy}>
           <p className={s.kicker}>Thử xoay</p>
-          <SplitWords as="h2" className={s.h2} trigger="view">Cho vang thở trước khi nhấp.</SplitWords>
+          <h2 className={s.h2} data-rv="rv">Cho vang thở trước khi nhấp.</h2>
           <p className={s.mutedP}>Xoay ly giúp vang gặp không khí, hương bay lên rõ hơn. Kéo ngang trên ly bên cạnh, hoặc chọn ly rồi nhấn phím ← →.</p>
           <div className={s.breath} role="progressbar" aria-label="Vang đã thở" aria-valuemin={0} aria-valuemax={100} aria-valuenow={pct}>
             <span className={s.breathBar}><i style={{ transform: `scaleX(${pct / 100})` }} /></span>

@@ -253,6 +253,106 @@ for (const [name, vp, mobile] of [['1440', { width: 1440, height: 900 }, false],
   await ctx.close();
 }
 
+console.log('[10] Nội dung đúng đề tài nhà hàng hải sản');
+{
+  const { ctx, page } = await newPage(); await load(page);
+  const txt = await page.evaluate(() => document.body.innerText);
+  ok(/Nhà hàng hải sản/.test(txt) && /Sơn Trà, Đà Nẵng/.test(txt), 'hero nêu loại hình + khu vực cấp quận');
+  ok(/10:00 – 22:00/.test(txt) && /Từ 160\.000₫\/kg/.test(txt) && /6 – 12 khách/.test(txt), 'hero có 3 sự thật: giờ, giá, phòng riêng');
+  ok(await page.locator('#hero-h').count() === 1 && /theo cân/.test(await page.locator('#hero-h').innerText()), 'H1 nói rõ gọi theo cân');
+  for (const id of ['quay-hai-san', 'thuc-don', 'mon-noi-bat', 'tu-ben-toi-ban', 'set-tiec', 'ghep-thuc-don', 'khong-gian', 'dat-ban', 'chinh-sach', 'hoi-dap']) ok(await page.locator('#' + id).count() === 1, 'có section #' + id);
+  ok(/đặt cọc/.test(txt) && /Giờ|10:00 đến 14:00/.test(txt) && /phí chế biến/i.test(txt), 'có chính sách đặt cọc, giờ phục vụ, phí chế biến');
+  ok((await page.locator('#hoi-dap details').count()) === 6, '6 câu hỏi thường gặp');
+  ok(!/giải pháp|hành trình|trải nghiệm đẳng cấp|số một|tươi 100%/i.test(txt), 'không câu sáo rỗng/tuyệt đối');
+  await expectClean(page, 'trang chủ đầy đủ nội dung mới');
+  await ctx.close();
+}
+
+console.log('[11] Bàn xoay chọn món (gọi theo cân)');
+{
+  const { ctx, page } = await newPage(); await load(page);
+  const sec = page.locator('#quay-hai-san'); await sec.scrollIntoViewIfNeeded(); await page.waitForTimeout(1500);
+  ok(/Tôm sú/.test(await sec.getByTestId('tt-name').innerText()), 'mặc định: Tôm sú');
+  ok(/840\.000/.test((await sec.getByTestId('tt-total').innerText()).replace(/\s/g, '')) || /840\.000/.test(await sec.getByTestId('tt-total').innerText()), '1 kg tôm sú nướng than = 840.000₫', await sec.getByTestId('tt-total').innerText());
+  const ring0 = await sec.locator('[role=radiogroup]').first().evaluate((e) => getComputedStyle(e).getPropertyValue('--ring').trim());
+  await sec.getByRole('radio', { name: 'Cua' }).click(); await page.waitForTimeout(1500);
+  const ring1 = await sec.locator('[role=radiogroup]').first().evaluate((e) => getComputedStyle(e).getPropertyValue('--ring').trim());
+  ok(ring0 !== ring1 && Math.abs(parseFloat(ring1) - -60) < 1, 'bàn xoay quay về loại đã chọn (-60°)', `${ring0} -> ${ring1}`);
+  ok(/Cua thịt/.test(await sec.getByTestId('tt-name').innerText()), 'đĩa giữa đổi sang Cua thịt');
+  await sec.getByRole('button', { name: 'Tăng nửa cân' }).click();
+  await sec.getByRole('button', { name: /Rang me/ }).click();
+  const tot = (await sec.getByTestId('tt-total').innerText()).replace(/\D/g, '') | 0;
+  ok(tot === 1155000, '1,5 kg cua rang me = 1.155.000₫', String(tot));
+  ok(/1,5 kg/.test(await sec.getByTestId('tt-kg').innerText()), 'hiển thị 1,5 kg');
+  await sec.getByRole('button', { name: 'Giảm nửa cân' }).click(); await sec.getByRole('button', { name: 'Giảm nửa cân' }).click();
+  ok(await sec.getByRole('button', { name: 'Giảm nửa cân' }).isDisabled(), 'số cân tối thiểu 0,5 kg');
+  // bàn phím
+  await sec.getByRole('radio', { name: 'Cua' }).focus(); await page.keyboard.press('ArrowRight'); await page.waitForTimeout(1300);
+  ok(/Mực/.test(await sec.getByTestId('tt-name').innerText()), 'phím mũi tên chuyển loại kế tiếp');
+  ok(await sec.getByText(/Giá tham khảo, thay đổi theo ngày/).count() > 0, 'ghi chú giá tham khảo theo ngày');
+  await expectClean(page, 'bàn xoay');
+  await ctx.close();
+}
+{
+  const { ctx, page } = await newPage({ reducedMotion: 'reduce' }); await load(page);
+  const sec = page.locator('#quay-hai-san'); await sec.scrollIntoViewIfNeeded();
+  await sec.getByRole('radio', { name: 'Hàu' }).click(); await page.waitForTimeout(100);
+  const r = await sec.locator('[role=radiogroup]').first().evaluate((e) => parseFloat(getComputedStyle(e).getPropertyValue('--ring')));
+  ok(Math.abs(r - -240) < 1 || Math.abs(r - 120) < 1, 'reduced-motion: bàn xoay đổi tức thì', String(r));
+  await ctx.close();
+}
+
+console.log('[12] Thực đơn lật trang');
+{
+  const { ctx, page } = await newPage(); await load(page);
+  const sec = page.locator('#thuc-don'); await sec.scrollIntoViewIfNeeded(); await page.waitForTimeout(1200);
+  ok(/Trang 1 \/ 4/.test(await sec.getByTestId('book-pos').innerText()), 'bắt đầu ở bìa (trang 1/4)');
+  ok(await sec.getByRole('button', { name: 'Trang trước' }).isDisabled(), 'ở bìa: Trang trước bị vô hiệu');
+  await sec.getByRole('button', { name: 'Trang sau' }).click(); await page.waitForTimeout(1300);
+  ok(/Trang 2 \/ 4/.test(await sec.getByTestId('book-pos').innerText()) && /Hải sản tươi sống/.test(await sec.getByTestId('book-pos').innerText()), 'lật sang trang Hải sản tươi sống');
+  const st = await sec.locator('[data-sheet]').evaluateAll((els) => els.map((e) => ({ op: +getComputedStyle(e).opacity, inert: e.hasAttribute('inert'), hid: e.getAttribute('aria-hidden') })));
+  ok(st[0].op === 0 && st[0].inert && st[1].op === 1 && !st[1].inert && st[1].hid === 'false', 'bìa đã lật (ẩn + inert), trang 2 hiện', JSON.stringify(st));
+  ok(await sec.getByText('780.000₫/kg').isVisible(), 'trang hải sản hiện giá theo kg');
+  await sec.getByRole('button', { name: 'Trang sau' }).click(); await page.waitForTimeout(1200);
+  await sec.getByRole('button', { name: 'Trang sau' }).click(); await page.waitForTimeout(1200);
+  ok(/Trang 4 \/ 4/.test(await sec.getByTestId('book-pos').innerText()) && await sec.getByRole('button', { name: 'Trang sau' }).isDisabled(), 'trang cuối: Trang sau bị vô hiệu');
+  ok(await sec.getByText('Cơm chiên hải sản').first().isVisible(), 'trang món ăn kèm hiện');
+  await sec.getByRole('button', { name: 'Trang trước' }).click(); await page.waitForTimeout(1300);
+  ok(/Trang 3 \/ 4/.test(await sec.getByTestId('book-pos').innerText()) && await sec.getByText('Lẩu hải sản bếp lửa').first().isVisible(), 'lật ngược về trang Lẩu');
+  await expectClean(page, 'thực đơn lật trang');
+  await ctx.close();
+}
+
+console.log('[13] Hiệu ứng chữ ký: bếp lửa canvas, TiltCard, thư viện, hiệu năng');
+{
+  const { ctx, page } = await newPage(); await load(page);
+  const sec = page.locator('#tu-ben-toi-ban'); await sec.scrollIntoViewIfNeeded(); await page.waitForTimeout(800);
+  const sh = async () => page.evaluate(() => { const c = document.querySelector('#tu-ben-toi-ban canvas'); const x = c.getContext('2d'); const d = x.getImageData(0, 0, c.width, c.height).data; let h = 0; for (let i = 0; i < d.length; i += 97) h = (h * 31 + d[i]) | 0; return { h, w: c.width, hh: c.height }; });
+  const a = await sh(); await page.waitForTimeout(700); const b = await sh();
+  ok(a.w > 100 && a.hh > 100 && a.h !== b.h, 'canvas bếp lửa vẽ và chuyển động', JSON.stringify([a, b]));
+  const fx = await page.evaluate(() => [...new Set([...document.querySelectorAll('[data-fx]')].map((e) => e.getAttribute('data-fx')))].sort());
+  ok(['ClipReveal', 'SplitReveal', 'TiltCard'].every((n) => fx.includes(n)), 'dùng SplitWords, ClipReveal, TiltCard từ thư viện', fx.join(','));
+  ok(await page.locator('#set-tiec [data-fx=TiltCard]').count() === 4, '4 thẻ set có TiltCard');
+  await ctx.close();
+}
+{
+  const { ctx, page } = await newPage({ reducedMotion: 'reduce' }); await load(page);
+  await page.locator('#tu-ben-toi-ban').scrollIntoViewIfNeeded(); await page.waitForTimeout(500);
+  const a = await page.evaluate(() => { const c = document.querySelector('#tu-ben-toi-ban canvas'); const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; let n = 0; for (let i = 3; i < d.length; i += 4) if (d[i]) n++; return n; });
+  ok(a > 0, 'reduced-motion: canvas bếp lửa vẽ một khung tĩnh', String(a));
+  await ctx.close();
+}
+for (const [w, mobile] of [[1440, false], [390, true]]) {
+  const { ctx, page } = await newPage({ viewport: { width: w, height: mobile ? 844 : 900 }, isMobile: mobile, hasTouch: mobile });
+  await page.addInitScript(() => { window.__lt = []; try { new PerformanceObserver((l) => l.getEntries().forEach((e) => window.__lt.push(e.duration))).observe({ type: 'longtask', buffered: true }); } catch {} });
+  await load(page);
+  await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 400) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 120)); } window.scrollTo(0, 0); });
+  const lt = await page.evaluate(() => window.__lt.filter((d) => d > 200).length);
+  console.log(`  INFO long task >200ms khi cuộn toàn trang w=${w}: ${lt}`);
+  ok(lt <= 3, `w=${w}: long task >200ms ≤ 3`, String(lt));
+  await ctx.close();
+}
+
 await browser.close();
 console.log(`\nKẾT QUẢ: ${pass} pass, ${fail} fail`);
 if (fail) { console.log(failures.join('\n')); process.exit(1); }

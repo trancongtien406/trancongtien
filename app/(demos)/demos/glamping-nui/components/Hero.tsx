@@ -2,9 +2,10 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { MagneticButton, ParallaxLayer, SplitWords, gsap, hasFinePointer, markReady, prefersReducedMotion, useFxLayout } from "@/features/showroom/effects";
+import { ParallaxLayer, gsap, hasFinePointer, markReady, prefersReducedMotion, useFxLayout } from "@/features/showroom/effects";
 import styles from "../brand.module.css";
 import { Countdown } from "./Countdown";
+import { Ignite } from "./Ignite";
 import { Embers } from "./Embers";
 import { Fire } from "./Fire";
 import { trees } from "../lib/scenery";
@@ -103,25 +104,28 @@ export function Hero() {
 
       <div className={`${styles.wrap} ${styles.heroInner}`}>
         <div className={styles.heroCopy}>
-          <p className={styles.eyebrow} data-hero-fade="">Glamping núi gần Đà Nẵng</p>
+          <p className={styles.eyebrow} data-hero-fade="">Khu glamping · Chân núi Bà Nà, Hòa Vang, Đà Nẵng</p>
           <h1 id="hero-title" className={styles.h1}>
-            <SplitWords as="span" className={styles.h1Line} trigger="load" delay={0.7} stagger={0.07} padY="0.2em">Đêm chạm rừng.</SplitWords>
-            <SplitWords as="span" className={`${styles.h1Line} ${styles.h1Fire}`} trigger="load" delay={0.95} stagger={0.07} padY="0.2em">Ngày chạm mây.</SplitWords>
+            <Ignite as="span" className={styles.h1Line} trigger="load" delay={0.7} stagger={0.1}>Đêm chạm rừng.</Ignite>
+            <Ignite as="span" className={`${styles.h1Line} ${styles.h1Fire}`} trigger="load" delay={1.05} stagger={0.1}>Ngày chạm mây.</Ignite>
           </h1>
           <p className={styles.heroSub} data-hero-fade="">
-            Rời xa những ồn ào quen thuộc. Tìm một khoảng trời giữa núi rừng Đà Nẵng, nơi bạn ngủ trong lều, ngồi bên ánh lửa và thức dậy cùng màn sương đầu ngày.
+            Khu glamping có 3 loại lều cho 2 đến 4 người, ngủ đêm hoặc trọn 2 ngày 1 đêm, dành cho cặp đôi, gia đình nhỏ và nhóm bạn đến 8 người. Có BBQ bên lửa trại, trekking nhẹ và ngắm sao.
           </p>
+          <ul className={styles.heroFacts} data-hero-fade="">
+            <li><b>Từ 890.000₫</b> một lều, một đêm</li>
+            <li>Nhận lều <b>14:00</b>, trả lều <b>11:00</b></li>
+            <li>Lều <b>2 đến 4</b> người, ghép đến 8</li>
+          </ul>
           <div className={styles.heroCtas}>
             <span data-hero-cta="">
-              <MagneticButton max={8} strength={0.25}>
-                <a className={`${styles.btn} ${styles.btnFire}`} href="#hanh-trinh">Khám phá kỳ nghỉ</a>
-              </MagneticButton>
+              <a className={`${styles.btn} ${styles.btnFire}`} href="#luu-tru">Xem lều và giá</a>
             </span>
             <span data-hero-cta="">
-              <a className={`${styles.btn} ${styles.btnLine}`} href="#lap-ke-hoach">Lên lịch chuyến đi</a>
+              <a className={`${styles.btn} ${styles.btnLine}`} href="#lap-ke-hoach">Ước tính và hỏi đặt lều</a>
             </span>
           </div>
-          <p className={styles.heroMicro} data-hero-fade="">Khu vực núi Bà Nà, Hải Vân và bán đảo Sơn Trà</p>
+          <p className={styles.heroMicro} data-hero-fade="">Cách trung tâm Đà Nẵng khoảng 40 phút, ngoài khu Bà Nà, Hòa Vang</p>
         </div>
         <div className={styles.heroSide} data-hero-fade="">
           <Countdown />

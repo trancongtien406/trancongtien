@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { siteConfig } from "@/lib/site";
 import { buildConsultHref } from "@/features/showroom/consultation";
-import { ClipReveal, MagneticButton, SVGPathDraw, ScrollScrubText, VelocityMarquee } from "@/features/showroom/effects";
-import { FAQ, MOODBOARD, SERVICES, STEPS } from "../data/content";
+import { SplitWords, VelocityMarquee } from "@/features/showroom/effects";
+import { CHARMS, CHARM_MIN, CHARM_PRICE, FAQ, FEE_NOTE, LENGTHS, MOODBOARD, PATTERNS, POLICIES, SERVICES, SHAPES, STEPS, STUDIO } from "../data/content";
 import { Flood } from "./Flood";
 import { PresetLink } from "./PresetLink";
 import { Builder } from "./Builder";
@@ -49,8 +49,35 @@ export function Services() {
           ))}
         </div>
         <p className={s.fine}>Giá tham khảo, chưa gồm phụ phí charm, độ dài đặc biệt hoặc thiết kế phức tạp. Tụi mình báo giá chính xác khi tư vấn.</p>
+        <PriceTable />
       </div>
     </section>
+  );
+}
+
+const vnd = new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND", maximumFractionDigits: 0 });
+const fee = (k: number) => (k ? `+${vnd.format(k * 1000)}` : "Không phụ phí");
+
+function PriceTable() {
+  const groups = [
+    { t: "Dáng móng", rows: SHAPES.map((x) => [x.name, fee(x.price)]) },
+    { t: "Độ dài", rows: LENGTHS.map((x) => [x.name, fee(x.price)]) },
+    { t: "Hoạ tiết", rows: PATTERNS.map((x) => [x.name, fee(x.price)]) },
+    { t: "Charm", rows: [[CHARMS.filter((c) => c.id !== "khong").map((c) => c.name).join(", "), `+${vnd.format(CHARM_PRICE * 1000)} mỗi charm (+${CHARM_MIN} phút)`]] },
+  ];
+  return (
+    <div className={s.fees} aria-labelledby="np-fee">
+      <h3 id="np-fee" className={s.h3}>Phụ phí theo lựa chọn</h3>
+      <p className={s.fine}>{FEE_NOTE}</p>
+      <div className={s.feeGrid}>
+        {groups.map((g) => (
+          <dl key={g.t} className={s.feeCard}>
+            <dt className={s.feeH}>{g.t}</dt>
+            {g.rows.map(([a, b]) => <dd key={a} className={s.feeRow}><span>{a}</span><b>{b}</b></dd>)}
+          </dl>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -71,33 +98,51 @@ export function BuilderSection() {
 
 export function Manifesto() {
   return (
-    <section className={s.manifesto} aria-label="Tuyên ngôn">
+    <section className={s.manifesto} id="gioi-thieu" aria-labelledby="np-ab">
       <i className={s.mDots} aria-hidden="true" />
-      <div className={s.wrap}>
-        <ScrollScrubText as="p" className={s.mText} dim={0.16}>
-          Móng không cần ngoan. Chọn màu to, chọn chấm bi lớn, chọn kiểu mà sáng thứ Hai nhìn xuống tay vẫn thấy vui.
-        </ScrollScrubText>
+      <div className={`${s.wrap} ${s.aboutGrid}`}>
+        <div>
+          <p className={`${s.kicker} ${s.kickerLight}`}>Về Chấm Chanh</p>
+          <h2 id="np-ab" className={s.mText}>
+            <SplitWords as="span">Móng không cần ngoan. Chọn màu to, chọn chấm bi lớn.</SplitWords>
+          </h2>
+        </div>
+        <div className={s.aboutBody}>
+          <p>Chấm Chanh là tiệm nail nhỏ ở {STUDIO.area}. Tụi mình làm sơn gel, đắp gel nối móng, nail art vẽ tay, chrome và đính charm; khách mang mẫu của mình tới hoặc chọn từ bảng mẫu của tiệm.</p>
+          <ul className={s.aboutList}>
+            <li><b>Báo giá trước khi làm.</b> Giá và thời gian ước tính ghi rõ theo lựa chọn của bạn.</li>
+            <li><b>Làm theo dáng móng thật.</b> Mẫu được điều chỉnh theo độ dài và dáng móng của từng người.</li>
+            <li><b>Hỏi dị ứng trước.</b> Sản phẩm dùng được trao đổi trước khi bắt đầu.</li>
+          </ul>
+        </div>
       </div>
     </section>
   );
 }
 
+const MOOD_META = [
+  "Sơn gel design · 60 – 90 phút · từ 220.000 ₫",
+  "Nail art vẽ tay, hoạ tiết zebra · 90 – 150 phút · từ 350.000 ₫",
+  "Gel design, mỗi ngón một màu · 60 – 90 phút · từ 220.000 ₫",
+  "Sơn gel cơ bản, màu tươi · 45 – 60 phút · từ 150.000 ₫",
+  "Gel design, hai tay cùng tông · 60 – 90 phút · từ 220.000 ₫",
+];
+
 export function Moodboard() {
   const sizes = "(max-width: 700px) 46vw, (max-width: 1100px) 30vw, 22vw";
   return (
-    <section className={`${s.section} ${s.mood}`} id="cam-hung" aria-labelledby="np-mood">
+    <section className={`${s.section} ${s.mood}`} id="mau-mong" aria-labelledby="np-mood">
       <div className={s.wrap}>
         <header className={s.sectionHead}>
-          <p className={`${s.kicker} ${s.kickerLight}`}>Moodboard tháng này</p>
-          <h2 id="np-mood" className={`${s.h2} ${s.onDark}`}>Cảm hứng để mang tới tiệm.</h2>
+          <p className={`${s.kicker} ${s.kickerLight}`}>Mẫu móng để tham khảo</p>
+          <h2 id="np-mood" className={`${s.h2} ${s.onDark}`}>Mẫu móng, kiểu làm và giá đi kèm.</h2>
         </header>
         <ul className={s.moodGrid}>
           {MOODBOARD.map((m, i) => (
             <li key={m.file} className={s.moodItem} data-i={i}>
-              <ClipReveal variant="inset" from={i % 2 ? "top" : "bottom"} duration={0.8} delay={(i % 3) * 0.08} innerScale={1.15}>
-                <GlitchImage file={m.file} alt={m.alt} sizes={sizes} ratio={m.w > m.h ? "3 / 2" : "2 / 3"} />
-              </ClipReveal>
+              <GlitchImage file={m.file} alt={m.alt} sizes={sizes} ratio={m.w > m.h ? "3 / 2" : "2 / 3"} />
               <p className={s.moodLabel}>{m.label}</p>
+              <p className={s.moodMeta}>{MOOD_META[i]}</p>
             </li>
           ))}
         </ul>
@@ -111,18 +156,15 @@ export function Process() {
     <section className={`${s.section} ${s.process}`} id="quy-trinh" aria-labelledby="np-pr">
       <div className={`${s.wrap} ${s.procGrid}`}>
         <div className={s.procPhoto}>
-          <ClipReveal variant="circle" from="center" duration={1} innerScale={1.2}>
+          <div className={s.procMain}>
             <Image src={`${IMG}/chon-mau-khay-hong-1200.webp`} alt="Khách chọn màu trên bảng mẫu móng, khăn hồng" width={1200} height={800} sizes="(max-width: 900px) 92vw, 520px" className={s.procImg} />
-          </ClipReveal>
+          </div>
           <Image src={`${IMG}/bang-mau-que-nail-600.webp`} alt="Các que mẫu móng xếp cánh quạt trên nền trắng" width={600} height={400} sizes="220px" className={s.procSmall} />
         </div>
         <div className={s.procBody}>
-          <p className={s.kicker}>Quy trình</p>
+          <p className={s.kicker}>Quy trình làm móng</p>
           <h2 id="np-pr" className={s.h2}>Bốn bước, không vội.</h2>
           <div className={s.procList}>
-            <SVGPathDraw mode="scroll" viewBox="0 0 40 1000" preserveAspectRatio="none" className={s.procLine} aria-hidden="true" focusable="false">
-              <path d="M20 0 C 46 120 -6 200 20 330 S 46 520 20 660 S -6 860 20 1000" fill="none" stroke="#ff2e93" strokeWidth="6" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
-            </SVGPathDraw>
             <ol>
               {STEPS.map((x, i) => (
                 <li key={x.t} className={s.step}>
@@ -133,6 +175,28 @@ export function Process() {
             </ol>
           </div>
         </div>
+      </div>
+    </section>
+  );
+}
+
+export function Policies() {
+  return (
+    <section className={`${s.section} ${s.policies}`} id="chinh-sach" aria-labelledby="np-po">
+      <div className={s.wrap}>
+        <header className={s.sectionHead}>
+          <p className={s.kicker}>Chính sách của tiệm</p>
+          <h2 id="np-po" className={s.h2}>Đặt cọc, đổi lịch, chỉnh sửa và vệ sinh.</h2>
+          <p className={s.lead}>Viết rõ để bạn biết trước điều gì xảy ra khi đặt lịch, đổi giờ hoặc móng cần chỉnh lại.</p>
+        </header>
+        <ul className={s.polGrid}>
+          {POLICIES.map((p, i) => (
+            <li key={p.t} className={s.polCard} data-c={i % 3}>
+              <h3 className={s.h3}>{p.t}</h3>
+              <p>{p.d}</p>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
@@ -168,9 +232,7 @@ export function Closing() {
       </div>
       <div className={`${s.wrap} ${s.closeInner}`}>
         <h2 id="np-cl" className={s.closeTitle}>Cho móng một cuộc chơi mới.</h2>
-        <MagneticButton strength={0.3} max={12}>
-          <a className={`${s.btn} ${s.btnLime} ${s.btnHuge}`} href={buildConsultHref("nail-pop")} data-cursor="Đặt lịch">Gửi yêu cầu tư vấn →</a>
-        </MagneticButton>
+        <a className={`${s.btn} ${s.btnLime} ${s.btnHuge}`} href={buildConsultHref("nail-pop")} data-cursor="Đặt lịch">Gửi yêu cầu tư vấn →</a>
         <p className={s.closeNote}>Báo trước nếu bạn dị ứng hoá chất, keo hoặc gel để tụi mình chọn sản phẩm phù hợp.</p>
       </div>
     </section>
@@ -187,13 +249,16 @@ export function Footer() {
           <p className={s.footTag}>Nail studio ở Đà Nẵng. Màu to, móng vui.</p>
         </div>
         <ul className={s.footList}>
-          <li>Đà Nẵng</li>
+          <li>{STUDIO.area}</li>
+          <li>Mở cửa {STUDIO.hours}</li>
           <li>hello@chamchanh.example</li>
           <li>0236 000 0000</li>
         </ul>
         <ul className={s.footList}>
-          <li><a href="#dich-vu">Dịch vụ</a></li>
+          <li><a href="#dich-vu">Dịch vụ và giá</a></li>
           <li><a href="#builder">Dựng móng</a></li>
+          <li><a href="#dat-lich">Đặt lịch</a></li>
+          <li><a href="#chinh-sach">Chính sách</a></li>
           <li><a href="/demos/nail-pop/credits">Ảnh &amp; ghi công</a></li>
         </ul>
       </div>

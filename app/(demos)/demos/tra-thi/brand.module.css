@@ -417,3 +417,46 @@
   .teaPanelImg img { transition: transform 0.6s var(--tt-ease); }
   .teaPanelImg:hover img { transform: scale(1.035); }
 }
+
+/* ---- Rework: menu, bánh, phòng trà, mang về, giờ, quy định ---- */
+.biteWrap { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+.biteHead { position: sticky; top: 96px; }
+.biteImg { margin-top: 32px; aspect-ratio: 3 / 2; background: #000; }
+.biteCols { display: grid; gap: clamp(32px, 4vw, 52px); }
+.biteHint { color: var(--tt-tea-lt); font-size: 14px; letter-spacing: 0.04em; margin: 6px 0 14px; }
+.priceList { list-style: none; padding: 0; margin: 0; }
+.priceList li { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 14px 0; border-top: 1px solid var(--tt-line); transition: background-color 0.3s, padding 0.3s; }
+.priceList li:last-child { border-bottom: 1px solid var(--tt-line); }
+.priceList b { font-weight: 500; display: block; }
+.priceList small { display: block; color: var(--tt-mute); font-size: 14px; margin-top: 2px; }
+.priceNum { font-family: var(--tt-serif); font-size: 1.15rem; font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--tt-paper); }
+@media (hover: hover) and (pointer: fine) { .priceList li:hover { background: rgba(91, 127, 75, 0.1); padding-inline: 10px; } }
+.roomGrid { list-style: none; padding: 0; margin: clamp(36px, 5vw, 64px) 0 clamp(40px, 6vw, 72px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2vw, 28px); }
+.room { position: relative; border: 1px solid var(--tt-line-strong); padding: clamp(24px, 3vw, 40px); background: var(--tt-bg2); display: grid; align-content: start; gap: 10px; transition: border-color 0.4s, transform 0.5s var(--tt-ease); }
+.roomNo { font-family: var(--tt-serif); font-size: 3rem; line-height: 1; color: transparent; -webkit-text-stroke: 1px var(--tt-tea-lt); }
+.roomSeats { color: var(--tt-tea-lt); font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; }
+.roomMeta { margin-top: 12px; display: grid; gap: 10px; }
+.roomMeta dt { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--tt-mute); }
+.roomMeta dd { font-size: 15px; margin-top: 2px; }
+@media (hover: hover) and (pointer: fine) { .room:hover { border-color: var(--tt-tea-lt); transform: translateY(-4px); } }
+.takeGrid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+.takeImg { margin-top: 32px; aspect-ratio: 3 / 4; max-width: 360px; background: #000; }
+.hoursGrid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(32px, 6vw, 96px); align-items: end; }
+.hoursList { display: grid; gap: 0; border-top: 1px solid var(--tt-line-strong); }
+.hoursList > div { display: flex; justify-content: space-between; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--tt-line); }
+.hoursList dt { color: var(--tt-mute); }
+.hoursList dd { font-family: var(--tt-serif); font-size: 1.3rem; font-variant-numeric: tabular-nums; text-align: right; }
+.rulesGrid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(32px, 6vw, 96px); }
+.ruleList { display: grid; }
+.ruleList > div { display: grid; grid-template-columns: 10rem minmax(0, 1fr); gap: 20px; padding: 18px 0; border-top: 1px solid var(--tt-line); }
+.ruleList > div:last-child { border-bottom: 1px solid var(--tt-line); }
+.ruleList dt { font-family: var(--tt-serif); font-size: 1.2rem; color: var(--tt-tea-lt); }
+.ruleList dd { color: var(--tt-mute); max-width: 56ch; }
+.teaPrice small { color: var(--tt-mute); font-size: 12px; }
+@media (max-width: 900px) {
+  .biteWrap, .takeGrid, .hoursGrid, .rulesGrid { grid-template-columns: minmax(0, 1fr); }
+  .biteHead { position: static; }
+  .roomGrid { grid-template-columns: minmax(0, 1fr); }
+  .ruleList > div { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .takeImg { max-width: 100%; }
+}

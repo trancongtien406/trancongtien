@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { SplitWords, gsap, prefersReducedMotion } from "@/features/showroom/effects";
+import { gsap, prefersReducedMotion } from "@/features/showroom/effects";
+import { Ignite } from "./Ignite";
 import styles from "../brand.module.css";
 import { ACTIVITIES, TENTS } from "../data/content";
 import { vnd } from "../lib/format";
@@ -66,11 +67,11 @@ export function Planner({ consultHref }: { consultHref: string }) {
     <section id="lap-ke-hoach" className={`${styles.section} ${styles.planner}`} aria-labelledby="plan-title">
       <div className={styles.wrap}>
         <header className={styles.secHead}>
-          <p className={styles.eyebrow}>Lên kế hoạch</p>
+          <p className={styles.eyebrow}>Ước tính chi phí</p>
           <h2 id="plan-title" className={styles.h2}>
-            <SplitWords as="span">Chuyến đi của bạn, theo cách riêng.</SplitWords>
+            <Ignite as="span">Ước tính chi phí chuyến đi.</Ignite>
           </h2>
-          <p className={styles.lead}>Chọn số đêm, loại lều và những hoạt động bạn muốn. Rừng Thức sẽ giúp bạn hình dung lịch trình từng ngày và chi phí tham khảo.</p>
+          <p className={styles.lead}>Chọn số đêm, loại lều và những hoạt động bạn muốn. Công cụ tính theo giá ngày thường và cho bạn lịch trình từng ngày, chi phí tham khảo.</p>
         </header>
 
         <div className={styles.planGrid}>

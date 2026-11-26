@@ -6,7 +6,7 @@ import { Motion } from "./components/Motion";
 import { Picker } from "./components/Picker";
 import { Schedule } from "./components/Schedule";
 import { ShakeProvider } from "./components/Shake";
-import { Band, Beat, Faq, FinalCta, Footer, Manifesto, Pricing, Programs, Space } from "./components/Sections";
+import { About, Coaches, Faq, FinalCta, Footer, Pricing, Programs, Rules, Session, Space } from "./components/Sections";
 import styles from "./brand.module.css";
 
 export default function SatGymPage() {
@@ -17,14 +17,15 @@ export default function SatGymPage() {
       <Header />
       <main id="main" className={styles.main}>
         <Hero />
-        <Band />
-        <Manifesto />
+        <About />
         <Programs />
+        <Schedule />
+        <Coaches />
+        <Session />
         <Barbell />
         <Picker />
         <Space />
-        <Schedule />
-        <Beat />
+        <Rules />
         <Pricing />
         <Faq />
         <FinalCta />

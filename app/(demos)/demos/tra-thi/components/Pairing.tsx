@@ -149,9 +149,9 @@ export function Pairing() {
   return (
     <div className={`${s.wrap} ${s.pairing}`}>
       <div className={s.pairHead}>
-        <p className={s.kicker}>Ghép trà</p>
-        <InkTitle as="h2" className={s.h2}>Hôm nay, bạn muốn thưởng thức điều gì?</InkTitle>
-        <p className={s.lead}>Không cần biết nhiều về trà. Chọn cảm giác, thời điểm và món ăn kèm, rồi pha theo gợi ý với đồng hồ đếm giờ.</p>
+        <p className={s.kicker}>Chọn trà và đồng hồ pha</p>
+        <InkTitle as="h2" className={s.h2}>Chưa biết gọi trà nào? Chọn theo khẩu vị.</InkTitle>
+        <p className={s.lead}>Chọn cảm giác, thời điểm và món ăn kèm để có gợi ý, rồi pha ở nhà theo đồng hồ từng nước: nhiệt độ, số gam, số giây.</p>
         <InkReveal className={s.pairImg}>
           <Image src="/images/demos/tra-thi/chen-den-1200.webp" alt="Chén gốm đen trên mặt đá xám" width={2000} height={3000} sizes="(max-width: 900px) 92vw, 30vw" className={s.cover} loading="lazy" />
         </InkReveal>
@@ -178,7 +178,7 @@ export function Pairing() {
           <div className={s.result} key={tea.id}>
             <p className={s.resultTag}>{override && !picks.some((p) => p.tea.id === tea.id) ? "Từ danh mục" : "Gợi ý cho bạn"}</p>
             <h3 className={s.resultName}>{tea.name}</h3>
-            <p className={s.resultKind}><i className={s.swatch} style={{ background: tea.swatch }} />{tea.kind} · {tea.origin}</p>
+            <p className={s.resultKind}><i className={s.swatch} style={{ background: tea.swatch }} />{tea.kind}</p>
             <p className={s.resultFlavor}>{tea.flavor}.</p>
             {reasons.length > 0 && <p className={s.reasons}>Vì: {reasons.join(", ")}.</p>}
 
@@ -195,7 +195,7 @@ export function Pairing() {
               <div><dt>Nhiệt độ nước</dt><dd>{tea.tempC}&nbsp;°C</dd></div>
               <div><dt>Lượng trà khô</dt><dd>{String(grams).replace(".", ",")}&nbsp;g</dd></div>
               <div><dt>Lượng nước</dt><dd>{ml}&nbsp;ml</dd></div>
-              <div><dt>Giá tham khảo</dt><dd>{vnd(tea.price)}</dd></div>
+              <div><dt>Giá một ấm</dt><dd>{vnd(tea.price)}</dd></div>
             </dl>
             <p className={s.steepList}><span>Các nước pha</span>{tea.steeps.map((t, i) => <b key={i}>{i + 1}. {fmtSec(t)}</b>)}</p>
             <p className={s.brewNote}>{tea.note}</p>

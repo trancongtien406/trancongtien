@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import { NumberTicker, MagneticButton, gsap, prefersReducedMotion } from "@/features/showroom/effects";
+import { NumberTicker, gsap, prefersReducedMotion } from "@/features/showroom/effects";
 import { buildConsultHref } from "@/features/showroom/consultation";
 import s from "../brand.module.css";
 import {
@@ -220,9 +220,7 @@ export function Builder() {
           </div>
 
           <div className={s.bActions}>
-            <MagneticButton>
-              <a className={`${s.btn} ${s.btnVerm}`} href={buildConsultHref("hoa-tuoi")} data-testid="builder-cta">Nhắn tiệm về bó hoa này</a>
-            </MagneticButton>
+            <a className={`${s.btn} ${s.btnVerm}`} href={buildConsultHref("hoa-tuoi")} data-testid="builder-cta">Nhắn tiệm về bó hoa này</a>
             <button type="button" className={`${s.btn} ${s.btnLine}`} onClick={copy}>Chép bản tóm tắt</button>
           </div>
           <p className={s.bFoot} role="status">

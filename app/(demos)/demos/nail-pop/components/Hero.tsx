@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { ClipReveal, MagneticButton, SlotText, prefersReducedMotion } from "@/features/showroom/effects";
-import { SWATCHES, swatchById, type SwatchId } from "../data/content";
+import { SlotText, prefersReducedMotion } from "@/features/showroom/effects";
+import { HERO_FACTS, STUDIO, SWATCHES, swatchById, type SwatchId } from "../data/content";
 import { HandSVG } from "./HandSVG";
 import { GlitchImage } from "./Glitch";
 import s from "../brand.module.css";
@@ -47,18 +47,22 @@ export function Hero() {
     <section ref={root} className={s.hero} id="top" aria-labelledby="np-h1">
       <div className={`${s.wrap} ${s.heroGrid}`}>
         <div className={s.heroCopy}>
-          <p className={s.chip} data-chip=""><span aria-hidden="true" className={s.dotLive} /> Nail studio · Đà Nẵng</p>
+          <p className={s.chip} data-chip=""><span aria-hidden="true" className={s.dotLive} /> Tiệm nail · {STUDIO.area}</p>
           <h1 id="np-h1" className={s.heroTitle}>
             <span className={s.heroLine}>Móng</span>
             <span className={s.slotBox}><SlotText words={WORDS} interval={2400} duration={0.55} className={s.slot} /></span>
           </h1>
-          <p className={s.lead}>Màu to, chấm bi, chrome và charm. Chọn dáng, chọn màu, xem ngay bộ móng của bạn trên bàn tay rồi mới quyết định lên lịch.</p>
+          <p className={s.lead}>Chấm Chanh là tiệm nail nhỏ ở {STUDIO.area}: sơn gel, đắp gel nối móng, nail art vẽ tay, chrome và charm. Báo giá rõ trước khi làm, đặt lịch theo khung giờ trống.</p>
           <div className={s.ctaRow}>
-            <MagneticButton strength={0.3} max={10}>
-              <a className={`${s.btn} ${s.btnInk} ${s.btnBig}`} href="#builder" onClick={useColor} data-cursor="Dựng">Dựng bộ móng của bạn →</a>
-            </MagneticButton>
+            <a className={`${s.btn} ${s.btnInk} ${s.btnBig}`} href="#dat-lich" data-cursor="Đặt lịch">Đặt lịch làm móng →</a>
             <a className={`${s.btn} ${s.btnLine} ${s.btnBig}`} href="#dich-vu">Xem bảng giá</a>
           </div>
+          <a className={s.heroTry} href="#builder" onClick={useColor} data-cursor="Dựng">Hoặc dựng thử bộ móng trên bàn tay để chọn màu trước</a>
+          <dl className={s.heroFacts} data-chip="">
+            {HERO_FACTS.map((f) => (
+              <div key={f.k}><dt>{f.k}</dt><dd>{f.v}</dd><dd className={s.heroFactSub}>{f.sub}</dd></div>
+            ))}
+          </dl>
         </div>
 
         <div className={s.heroStage}>
@@ -68,9 +72,7 @@ export function Hero() {
           </div>
           <HandSVG colors={colors} shape="almond" length="vua" pattern="tron" label={`Bàn tay xem trước với màu ${mix ? "trộn 5 màu" : swatchById(pick).name}`} />
           <div className={s.photoSticker}>
-            <ClipReveal variant="inset" from="left" duration={0.9} delay={0.4} innerScale={1.2}>
-              <GlitchImage file="tay-cam-son-cmy" alt="Bàn tay móng chấm bi cầm ba lọ sơn hồng, vàng, xanh" sizes="(max-width: 900px) 46vw, 300px" priority ratio="4 / 3" />
-            </ClipReveal>
+            <GlitchImage file="tay-cam-son-cmy" alt="Bàn tay móng chấm bi cầm ba lọ sơn hồng, vàng, xanh" sizes="(max-width: 900px) 46vw, 300px" priority ratio="4 / 3" />
           </div>
           <div className={s.picker} data-chip="" role="group" aria-label="Chọn màu móng">
             <div className={s.swatches} role="radiogroup" aria-label="Màu móng">

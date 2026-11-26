@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Counter, MagneticButton, Odometer, ShineSweep, gsap, prefersReducedMotion, useFxLayout } from "@/features/showroom/effects";
 import s from "../brand.module.css";
 import { BIKES } from "../data/fleet";
-import { ROUTES } from "../data/content";
 import { SpeedLines } from "./SpeedLines";
 import { INTRO_KEY } from "./Preloader";
 
@@ -52,14 +51,14 @@ export function Hero() {
       </div>
 
       <div className={`${s.wrap} ${s.heroInner}`}>
-        <p className={s.kicker} data-h="fade">Thuê xe máy &amp; mô tô phượt · Đà Nẵng</p>
-        <h1 className={s.h1} aria-label="Chọn xe. Lên đường. Vọt đi.">
-          <span className={s.h1Line} aria-hidden="true"><span data-h="line">CHỌN XE.</span></span>
+        <p className={s.kicker} data-h="fade">Cho thuê xe máy &amp; mô tô · Quận Hải Châu, Đà Nẵng</p>
+        <h1 className={s.h1} aria-label="Thuê xe máy. Lên đường. Vọt đi.">
+          <span className={s.h1Line} aria-hidden="true"><span data-h="line">THUÊ XE MÁY.</span></span>
           <span className={s.h1Line} aria-hidden="true"><span data-h="line">LÊN ĐƯỜNG.</span></span>
           <span className={`${s.h1Line} ${s.h1Hot}`} aria-hidden="true"><span data-h="line">VỌT ĐI.</span></span>
         </h1>
         <p className={s.lead} data-h="fade">
-          Xe số, tay ga, côn tay và mô tô phượt cho những ngày ở Đà Nẵng. Giá ngày, giá tuần rõ từng dòng, tính xong là biết cọc bao nhiêu.
+          Cửa hàng cho thuê xe số, tay ga, côn tay và mô tô 250 cc cho khách du lịch và dân phượt, theo ngày hoặc theo tuần. Giao xe tận khách sạn, sân bay và ga ở Đà Nẵng; có tiếng Anh cho khách nước ngoài.
         </p>
         <div className={s.ctaRow} data-h="fade">
           <MagneticButton strength={0.35} max={14}>
@@ -67,7 +66,7 @@ export function Hero() {
               <a className={`${s.btn} ${s.btnYellow}`} href="#doi-xe">Chọn xe ngay</a>
             </ShineSweep>
           </MagneticButton>
-          <a className={`${s.btn} ${s.btnGhost}`} href="#tinh-gia">Tính giá thuê</a>
+          <a className={`${s.btn} ${s.btnGhost}`} href="#tinh-gia">Ước tính tiền thuê</a>
         </div>
       </div>
 
@@ -75,9 +74,9 @@ export function Hero() {
         <span className={s.flag} data-h="flag" aria-hidden="true" />
         <dl className={s.odoRow}>
           <div><dt>Mẫu xe</dt><dd><Odometer value={BIKES.length} trigger="load" className={s.odoNum} /></dd></div>
-          <div><dt>Cung đường gợi ý</dt><dd><Odometer value={ROUTES.length} trigger="load" className={s.odoNum} /></dd></div>
           <div><dt>Thuê từ</dt><dd className={s.odoPrice}><Counter value={FROM} trigger="load" duration={1.6} className={s.odoNum} /><small>&nbsp;₫ / ngày</small></dd></div>
-          <div><dt>Giá tuần</dt><dd className={s.odoText}>rẻ hơn 7 ngày lẻ</dd></div>
+          <div><dt>Nhận và trả xe</dt><dd className={s.odoText}>07:00 đến 21:00 mỗi ngày</dd></div>
+          <div><dt>Giao tận nơi</dt><dd className={s.odoText}>từ 50.000 ₫, cả sân bay</dd></div>
         </dl>
       </div>
     </section>

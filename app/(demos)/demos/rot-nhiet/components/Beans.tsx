@@ -17,12 +17,12 @@ export function Beans() {
       <div className={styles.wrap}>
         <div className={styles.sectionHead} data-rn-reveal>
           <div>
-            <span className={`${styles.label} ${styles.eyebrow}`}>03 / THE BEANS</span>
+            <span className={`${styles.label} ${styles.eyebrow}`}>03 / HẠT RANG MANG VỀ</span>
             <h2 id="rn-beans-h" className={`${styles.display} ${styles.h2}`}>Mỗi hạt, một cá tính.</h2>
           </div>
           <div>
-            <p className={styles.lead}>Ba hướng rang, ba cá tính hương vị. Từ đậm đà quen thuộc đến thanh sáng và nhiều tầng hương.</p>
-            <p className={styles.helper}>Giá tham khảo cho túi hạt 250g.</p>
+            <p className={styles.lead}>Ba loại hạt rang tại quán, bán theo túi 250g và xay theo cách pha của bạn. Từ đậm đà quen thuộc đến thanh sáng và nhiều tầng hương.</p>
+            <p className={styles.helper}>Giá tham khảo cho túi hạt 250g, mua tại quán.</p>
           </div>
         </div>
         <ul className={styles.beanGrid}>
@@ -49,7 +49,7 @@ export function Beans() {
             </li>
           ))}
         </ul>
-        <p className={styles.beanNote}>Hồ sơ hạt và hương vị được mô tả theo cảm nhận khi nếm. Chưa có nút mua hạt trực tuyến trên trang này. <a href="#tim-gu">Tìm loại hạt hợp gu</a>.</p>
+        <p className={styles.beanNote}>Hồ sơ hạt và hương vị mô tả theo cảm nhận khi nếm. Mua hạt trực tiếp tại quán, hoặc <a href="#ban-buon">đăng ký bán buôn</a>. Chưa biết chọn loại nào? <a href="#tim-gu">Tìm loại hạt hợp gu</a>.</p>
       </div>
     </section>
   );

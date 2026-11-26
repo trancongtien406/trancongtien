@@ -36,8 +36,8 @@ export function Signature() {
       <div className={s.wrap}>
         <div className={s.secHead} data-bv="reveal">
           <span className={s.eyebrow}>Món nổi bật</span>
-          <h2 id="sig-h" className={`${s.display} ${s.h2}`}>Bốn đĩa <span className={s.italic}>nên gọi đầu tiên</span></h2>
-          <p className={s.lead}>Cuộn để xem từng đĩa. Giá tham khảo cho một phần 2 đến 3 người, thay đổi theo ngày.</p>
+          <h2 id="sig-h" className={`${s.display} ${s.h2}`}>Bốn đĩa bếp <span className={s.italic}>nướng và rang</span></h2>
+          <p className={s.lead}>Bốn món nướng, rang quen thuộc của bếp. Cuộn để xem từng đĩa; giá tham khảo cho một phần 2 đến 3 người, thay đổi theo ngày.</p>
         </div>
         <div className={s.sigGrid}>
           <ol className={s.sigList}>

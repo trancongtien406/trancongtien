@@ -26,21 +26,20 @@ export function Motion() {
         .fromTo(q('[data-nl="eyebrow"],[data-nl="slogan"]'), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.08 }, 0.7)
         .fromTo(q('[data-nl="desc"]'), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4 }, 0.86)
         .fromTo(q('[data-nl="cta"]'), { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.45 }, 0.89)
-        .fromTo(q('[data-nl="caption"]'), { opacity: 0 }, { opacity: 1, duration: 0.45 }, 1.05)
-        .set(q('[data-nl="issue"],[data-nl="cover"],[data-nl="h1a"],[data-nl="h1b"],[data-nl="eyebrow"],[data-nl="slogan"],[data-nl="desc"],[data-nl="cta"],[data-nl="caption"]'), clear);
+        .set(q('[data-nl="issue"],[data-nl="cover"],[data-nl="h1a"],[data-nl="h1b"],[data-nl="eyebrow"],[data-nl="slogan"],[data-nl="desc"],[data-nl="cta"]'), clear);
 
       q("[data-nl-rule]").forEach((el) => {
         gsap.fromTo(el, { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.out", clearProps: "transform", scrollTrigger: { trigger: el, start: "top 88%", once: true } });
       });
       q("[data-nl-reveal]").forEach((el) => {
-        gsap.fromTo(el, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out", ...clear, scrollTrigger: { trigger: el, start: "top 90%", once: true } });
+        gsap.fromTo(el, { opacity: 0, x: -28 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out", ...clear, scrollTrigger: { trigger: el, start: "top 90%", once: true } });
       });
 
       // scroll moment 1: Lookbook contact sheet
       const lb = root.querySelector<HTMLElement>("[data-nl-lookbook]");
       if (lb) {
         const cards = q('[data-nl="lb-card"]', lb);
-        gsap.fromTo(cards, { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.07, ease: "power3.out", ...clear, scrollTrigger: { trigger: lb.querySelector('[data-nl="lb-layout"]'), start: "top 82%", once: true } });
+        gsap.fromTo(cards, { opacity: 0.001, clipPath: "polygon(0 0, 0 0, -14% 100%, -14% 100%)" }, { opacity: 1, clipPath: "polygon(0 0, 114% 0, 100% 100%, -14% 100%)", duration: 0.7, stagger: 0.08, ease: "power3.inOut", clearProps: "clipPath,opacity", scrollTrigger: { trigger: lb.querySelector('[data-nl="lb-layout"]'), start: "top 82%", once: true } });
       }
       // scroll moment 2: closing diagonal takeover
       const fin = root.querySelector<HTMLElement>("[data-nl-final]");

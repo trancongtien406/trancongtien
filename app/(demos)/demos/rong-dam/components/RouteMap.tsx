@@ -1,14 +1,23 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { PLACES, type Lang, type PlaceId, type Stop } from "../data/tours";
 import { COPY } from "../data/copy";
 import styles from "../brand.module.css";
 
-type Props = { lang: Lang; stops: Stop[]; selectedId: string | null; onSelect: (id: string) => void };
+type Props = { lang: Lang; stops: Stop[]; selectedId: string | null; onSelect: (id: string) => void; clock?: number | null };
+
+export const toMin = (hhmm: string) => Number(hhmm.slice(0, 2)) * 60 + Number(hhmm.slice(3, 5));
+export const fmtMin = (m: number) => `${String(Math.floor(m / 60) % 24).padStart(2, "0")}:${String(Math.round(m % 60)).padStart(2, "0")}`;
+/** Điểm dừng "đang diễn ra" tại thời điểm m (phút trong ngày): điểm gần nhất đã qua. */
+export function stopAt(stops: Stop[], m: number): Stop {
+  let cur = stops[0];
+  for (const s of stops) if (toMin(s.time) <= m) cur = s;
+  return cur;
+}
 
 /** Bản đồ SVG nét tay, không theo tỷ lệ. Điểm dừng đang chọn được phóng to và tô vàng. */
-export function RouteMap({ lang, stops, selectedId, onSelect }: Props) {
+export function RouteMap({ lang, stops, selectedId, onSelect, clock = null }: Props) {
   const t = COPY[lang].explorer;
   const order = useMemo(() => {
     const seq: PlaceId[] = [];
@@ -20,10 +29,9 @@ export function RouteMap({ lang, stops, selectedId, onSelect }: Props) {
   const activePlace = selectedStop?.place ?? null;
 
   // đường đi nét đứt: nối các điểm theo thứ tự, mỗi đoạn là đường cong lệch nhẹ để có cảm giác vẽ tay
-  const d = useMemo(() => {
+  const segs = useMemo(() => {
     const pts = order.map((p) => PLACES[p]);
-    if (pts.length < 2) return "";
-    let out = `M${pts[0].x} ${pts[0].y}`;
+    const out: string[] = [];
     for (let i = 1; i < pts.length; i++) {
       const a = pts[i - 1];
       const b = pts[i];
@@ -33,10 +41,47 @@ export function RouteMap({ lang, stops, selectedId, onSelect }: Props) {
       const ny = b.x - a.x;
       const len = Math.hypot(nx, ny) || 1;
       const k = (i % 2 ? 1 : -1) * 22;
-      out += ` Q${(mx + (nx / len) * k).toFixed(1)} ${(my + (ny / len) * k).toFixed(1)} ${b.x} ${b.y}`;
+      out.push(`M${a.x} ${a.y} Q${(mx + (nx / len) * k).toFixed(1)} ${(my + (ny / len) * k).toFixed(1)} ${b.x} ${b.y}`);
     }
     return out;
   }, [order]);
+  const d = segs.join(" ");
+
+  // xe chạy theo giờ: nội suy dọc đoạn đường giữa hai điểm dừng liên tiếp
+  const segRefs = useRef<(SVGPathElement | null)[]>([]);
+  const markerRef = useRef<SVGGElement>(null);
+  const labelRef = useRef<SVGTextElement>(null);
+  useEffect(() => {
+    const mk = markerRef.current;
+    if (!mk || clock === null) return;
+    const mins = stops.map((s) => toMin(s.time));
+    let x = PLACES[stops[0].place].x;
+    let y = PLACES[stops[0].place].y;
+    let idx = 0;
+    if (clock >= mins[mins.length - 1]) {
+      x = PLACES[stops[stops.length - 1].place].x;
+      y = PLACES[stops[stops.length - 1].place].y;
+    } else if (clock > mins[0]) {
+      let changes = 0;
+      for (let i = 0; i < stops.length - 1; i++) {
+        const same = stops[i].place === stops[i + 1].place;
+        if (clock >= mins[i] && clock < mins[i + 1]) {
+          idx = i;
+          if (same) { x = PLACES[stops[i].place].x; y = PLACES[stops[i].place].y; }
+          else {
+            const path = segRefs.current[changes];
+            const f = (clock - mins[i]) / (mins[i + 1] - mins[i]);
+            if (path) { const pt = path.getPointAtLength(path.getTotalLength() * f); x = pt.x; y = pt.y; }
+          }
+          break;
+        }
+        if (!same) changes++;
+      }
+    }
+    mk.setAttribute("transform", `translate(${x.toFixed(1)} ${y.toFixed(1)})`);
+    if (labelRef.current) labelRef.current.textContent = fmtMin(clock);
+    void idx;
+  }, [clock, stops, segs]);
 
   const firstStopOf = (p: PlaceId) => stops.find((s) => s.place === p)!;
   const visitNo = (p: PlaceId) => order.indexOf(p) + 1;
@@ -89,6 +134,7 @@ export function RouteMap({ lang, stops, selectedId, onSelect }: Props) {
 
       {/* đường đi */}
       {d && <path d={d} fill="none" stroke="#b83e2b" strokeWidth="5" strokeLinecap="round" strokeDasharray="2 12" data-rd="route" />}
+      {segs.map((sd, i) => <path key={i} ref={(el) => { segRefs.current[i] = el; }} d={sd} fill="none" stroke="none" aria-hidden="true" />)}
 
       {/* các điểm dừng */}
       {unique.map((p) => {
@@ -122,6 +168,20 @@ export function RouteMap({ lang, stops, selectedId, onSelect }: Props) {
           </g>
         );
       })}
+
+      {/* xe đưa đón chạy theo thanh giờ */}
+      {clock !== null && (
+        <g ref={markerRef} data-testid="vehicle" pointerEvents="none" aria-hidden="true">
+          <rect x="-34" y="-54" width="68" height="26" rx="13" fill="#24392d" />
+          <text ref={labelRef} y="-36" textAnchor="middle" fontSize="16" fontWeight="800" fill="#f2b84b">{fmtMin(clock)}</text>
+          <g stroke="#24392d" strokeWidth="3" strokeLinejoin="round">
+            <rect x="-17" y="-13" width="34" height="22" rx="6" fill="#f2b84b" />
+            <path d="M-11 -6h9v8h-9zM2 -6h9v8H2z" fill="#fffdf7" strokeWidth="2" />
+            <circle cx="-9" cy="10" r="5" fill="#24392d" />
+            <circle cx="9" cy="10" r="5" fill="#24392d" />
+          </g>
+        </g>
+      )}
 
       {/* nhãn bản đồ */}
       <text x="322" y="654" fontSize="17" fontWeight="600" fill="#4d5c48">{t.mapNote}</text>

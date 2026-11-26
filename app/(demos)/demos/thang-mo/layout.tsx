@@ -4,9 +4,9 @@ import { fontVars } from "./fonts";
 const base = "/images/demos/thang-mo/identity";
 
 export const metadata: Metadata = {
-  title: "Tháng Mơ · Studio ảnh cưới phong cách photobook",
+  title: "Tháng Mơ · Studio ảnh cưới Đà Nẵng: pre-wedding, phóng sự cưới, album",
   description:
-    "Studio ảnh cưới phong cách analog photobook: Immersive Album lật trang toàn màn hình và Wedding Moodboard dựng bảng mood cùng gói chụp tham khảo.",
+    "Studio ảnh cưới tại Quận Sơn Trà, Đà Nẵng. Pre-wedding studio và ngoại cảnh, phóng sự ngày cưới, album và ảnh in. Gói từ 5.900.000 đ, ghi rõ bao gồm, quy trình và chính sách đặt cọc.",
   icons: {
     icon: [
       { url: `${base}/favicon.svg`, type: "image/svg+xml" },
@@ -15,9 +15,9 @@ export const metadata: Metadata = {
     apple: `${base}/apple-touch-icon.png`,
   },
   openGraph: {
-    title: "Tháng Mơ · Studio ảnh cưới",
-    description: "Album cảm hứng, gói chụp tham khảo và moodboard cho ngày cưới.",
-    images: [{ url: `${base}/og-image.webp`, width: 1200, height: 630, alt: "Tháng Mơ, studio ảnh cưới" }],
+    title: "Tháng Mơ · Studio ảnh cưới Đà Nẵng",
+    description: "Pre-wedding, phóng sự ngày cưới, album và ảnh in tại Đà Nẵng.",
+    images: [{ url: `${base}/og-image.webp`, width: 1200, height: 630, alt: "Tháng Mơ, studio ảnh cưới Đà Nẵng" }],
     locale: "vi_VN",
     type: "website",
   },

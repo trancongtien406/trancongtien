@@ -370,7 +370,7 @@ export function BoardBuilder() {
       <div className={s.wrap}>
         <i className={s.rule} data-rule />
         <div className={s.secHead}>
-          <p className={s.label}>06 / Material board</p>
+          <p className={s.label}>09 / Bảng vật liệu</p>
           <h2 id="board-title" className={s.h2} ref={fontProbe}>
             Phối vật liệu theo cách của bạn.
           </h2>

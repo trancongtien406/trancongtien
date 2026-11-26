@@ -4,6 +4,6 @@ export const meta = {
   brand: "Tháng Mơ",
   industry: "Ảnh cưới",
   solutionSlug: "agency",
-  tagline: "Studio ảnh cưới phong cách photobook",
+  tagline: "Studio ảnh cưới Đà Nẵng: pre-wedding, phóng sự, album",
   look: "Photobook analog: khung ảnh, viền giấy, ghi chú tay",
 } as const;

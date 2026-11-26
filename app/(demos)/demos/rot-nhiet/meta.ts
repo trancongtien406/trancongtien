@@ -4,6 +4,6 @@ export const meta = {
   brand: "Rót Nhiệt Coffee",
   industry: "Cafe",
   solutionSlug: "fnb",
-  tagline: "Cà phê rang",
+  tagline: "Quán cà phê rang xay",
   look: "Áp phích đồ hoạ, chữ khổng lồ, viền đậm đỏ đen",
 } as const;

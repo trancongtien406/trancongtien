@@ -10,3 +10,6 @@ Hiệu ứng riêng: ly cocktail SVG rót theo tiến độ cuộn (mực, dòng
 Từ thư viện: SplitWords (tiêu đề), ScrollScrubText, ClipReveal (ảnh), TiltCard (3 thẻ), MagneticButton (CTA), CursorSpotlight, VelocityMarquee, GrainOverlay.
 Công cụ: Matcher (chip aria-pressed, radio, lỗi cạnh ô, kết quả stagger + thanh % chạy, focus vào tiêu đề, nút thêm ly vào đặt bàn qua sự kiện tm:pick); Đặt bàn (lỗi từng ô, stepper 1-12, gợi ý nhóm 9+, vé tóm tắt, sao chép, nút cuối buildConsultHref).
 Reduced-motion: mọi animation tắt, ly đầy sẵn, marquee dạng tĩnh, spotlight tắt, nội dung hiện đủ.
+
+## Cập nhật REWORK (2026-11-25)
+Xem `REWORK.md`. Thứ tự section: Hero, Dải thông tin, Giới thiệu, Happy hour, Ly rót, Signature, Thực đơn, Bảng pha chế, Nguyên liệu, Gợi ý ly, Không gian, Một đêm trên mái, Nhạc theo tuần, Bàn nhóm & sự kiện, Đặt bàn, Quy định, FAQ, Liên hệ. Chuyển động chính: bật đèn neon (data-arm/data-lit trong Motion.tsx). Mobile: thanh giờ 44px, nút khung giờ wrap, bảng pha chế một cột.

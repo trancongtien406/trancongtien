@@ -34,9 +34,9 @@ export function Header({ lang, home }: { lang: Lang; home?: string }) {
       <div className={styles.demoStrip}>
         <div className={`${styles.wrap} ${styles.demoStripRow}`}>
           <span>
-            <b>Rong Dặm</b> · {lang === "vi" ? "Tour miền Trung" : "Central Vietnam tours"}
+            <b>Rong Dặm Tour</b> · {t.strip.office}
           </span>
-          <span>{lang === "vi" ? "Giá tham khảo · Lịch trình có thể thay đổi" : "Reference prices · Itineraries may change"}</span>
+          <span>{t.strip.hours}</span>
         </div>
       </div>
       <header className={styles.header}>
@@ -74,7 +74,7 @@ export function Header({ lang, home }: { lang: Lang; home?: string }) {
                 </>
               )}
             </div>
-            <a className={`${styles.btn} ${styles.btnYellow} ${styles.headerCta}`} href="#trip-finder">
+            <a className={`${styles.btn} ${styles.btnYellow} ${styles.headerCta}`} href="#dat-tour">
               {t.headerCta}
             </a>
             <button
@@ -97,7 +97,7 @@ export function Header({ lang, home }: { lang: Lang; home?: string }) {
                 {n.label}
               </a>
             ))}
-            <a href="#trip-finder" onClick={() => setOpen(false)}>
+            <a href="#dat-tour" onClick={() => setOpen(false)}>
               {t.headerCta} →
             </a>
           </div>

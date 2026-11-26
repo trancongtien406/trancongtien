@@ -198,7 +198,7 @@ export function Builder() {
             {copied === "ok" && "Đã sao chép tóm tắt, bạn có thể dán vào form tư vấn."}
             {copied === "fail" && "Chưa sao chép được. Hãy chọn và sao chép phần tóm tắt ở trên."}
           </p>
-          <a className={`${s.btn} ${s.btnBig} ${s.btnChoco} ${s.sumCta}`} href={buildConsultHref("tiem-banh")} data-confetti="1">Gửi yêu cầu tư vấn</a>
+          <a className={`${s.btn} ${s.btnBig} ${s.btnChoco} ${s.sumCta}`} href={buildConsultHref("tiem-banh")} data-confetti="1">Gửi yêu cầu đặt bánh</a>
         </div>
       </aside>
     </div>

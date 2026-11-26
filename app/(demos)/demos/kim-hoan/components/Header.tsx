@@ -70,7 +70,7 @@ export function Header({ consultHref }: { consultHref: string }) {
             <a key={n.href} href={n.href}>{n.label}</a>
           ))}
         </nav>
-        <a className={styles.headCta} href={consultHref} data-cursor="">Nhận tư vấn</a>
+        <a className={styles.headCta} href={consultHref} data-cursor="">Đặt làm</a>
         <button
           ref={btn}
           type="button"
@@ -92,7 +92,7 @@ export function Header({ consultHref }: { consultHref: string }) {
               </li>
             ))}
           </ul>
-          <a className={styles.btnGold} href={consultHref} onClick={() => setOpen(false)}>Nhận tư vấn</a>
+          <a className={styles.btnGold} href={consultHref} onClick={() => setOpen(false)}>Đặt làm</a>
         </div>
       ) : null}
     </header>

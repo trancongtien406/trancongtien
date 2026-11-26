@@ -4,6 +4,6 @@ export const meta = {
   brand: "Chấm Chanh",
   industry: "Nail studio",
   solutionSlug: "spa",
-  tagline: "Nail studio Đà Nẵng, màu to, móng vui",
-  look: "Pop art màu gắt: hồng nóng, vàng chanh, cobalt trên trắng và đen; halftone chuyển động, color-flood, bàn tay SVG đổi màu theo thời gian thực",
+  tagline: "Tiệm nail ở Đà Nẵng: sơn gel, đắp gel, nail art, đặt lịch theo giờ trống",
+  look: "Pop art màu gắt: hồng nóng, vàng chanh, cobalt trên trắng và đen; halftone chuyển động, color-flood, bàn tay SVG đổi màu, chọn khung giờ đặt lịch",
 } as const;

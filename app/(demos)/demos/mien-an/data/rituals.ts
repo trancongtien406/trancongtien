@@ -14,8 +14,8 @@ export const RITUALS: readonly Ritual[] = [
     notes: ["Có thể lựa chọn dầu không hương liệu."],
   },
   {
-    id: "R02", slug: "moc-nhiet", name: "Mộc Nhiệt", subtitle: "Nghi thức đá ấm",
-    description: "Hơi ấm từ đá kết hợp chuyển động massage chậm rãi, tạo nên trải nghiệm chăm sóc ấm áp và dễ chịu.",
+    id: "R02", slug: "moc-nhiet", name: "Mộc Nhiệt", subtitle: "Liệu trình đá ấm",
+    description: "Đá bazan nóng đặt dọc lưng và vai, kết hợp massage chậm, cho cảm giác ấm sâu và dễ chịu.",
     durationMinutes: 90, priceVnd: 790000, goals: ["body", "relax"], primaryGoal: "body",
     pressures: ["medium"], pressureLabel: "Vừa", usesHotStone: true, supportsUnscented: true,
     image: img("moc-nhiet"), imageAlt: "Cột đá bazan đen xếp chồng và vài hoa hồi khô trên nền khăn trắng",
@@ -25,7 +25,7 @@ export const RITUALS: readonly Ritual[] = [
   },
   {
     id: "R03", slug: "thanh-moc", name: "Thanh Mộc", subtitle: "Chăm sóc da mặt dịu nhẹ",
-    description: "Làm sạch, massage nhẹ và dưỡng ẩm trong một nghi thức chú trọng cảm giác dễ chịu của làn da.",
+    description: "Làm sạch, massage nhẹ và dưỡng ẩm trong một liệu trình chú trọng cảm giác dễ chịu của làn da.",
     durationMinutes: 60, priceVnd: 590000, goals: ["face"], primaryGoal: "face",
     pressures: ["light"], pressureLabel: "Nhẹ", usesHotStone: false, supportsUnscented: true,
     image: img("thanh-moc"), imageAlt: "Đĩa gỗ với cánh hoa hồng nhạt và nến nổi trên nền vải linen kem",
@@ -44,8 +44,8 @@ export const RITUALS: readonly Ritual[] = [
     notes: [],
   },
   {
-    id: "R05", slug: "duong-nguyen", name: "Dưỡng Nguyên", subtitle: "Nghi thức chăm sóc toàn diện",
-    description: "Kết hợp chăm sóc cơ thể và da mặt trong một hành trình chậm rãi, dành cho ngày bạn muốn có nhiều thời gian hơn cho mình.",
+    id: "R05", slug: "duong-nguyen", name: "Dưỡng Nguyên", subtitle: "Liệu trình chăm sóc toàn diện",
+    description: "Massage toàn thân rồi chăm sóc da mặt trong một lần, dành cho ngày bạn có hơn hai tiếng để nghỉ.",
     durationMinutes: 120, priceVnd: 1190000, goals: ["full", "relax", "body", "face"], primaryGoal: "full",
     pressures: ["light", "medium"], pressureLabel: "Nhẹ đến vừa", usesHotStone: false, supportsUnscented: true,
     image: img("duong-nguyen"), imageAlt: "Giường massage phủ khăn trắng cuộn, nến và lọ tinh dầu trên kệ gỗ tối",
@@ -71,14 +71,14 @@ export const GOALS: { value: RitualGoal; label: string; hint: string }[] = [
   { value: "face", label: "Chăm sóc da mặt", hint: "Làm sạch và dưỡng ẩm nhẹ" },
   { value: "head", label: "Thả lỏng đầu, cổ và vai", hint: "Một khoảng nghỉ ngắn" },
   { value: "feet", label: "Chăm sóc bàn chân", hint: "Ngâm chân, massage chân" },
-  { value: "full", label: "Trải nghiệm chăm sóc toàn diện", hint: "Nhiều thời gian cho mình" },
+  { value: "full", label: "Cả cơ thể và da mặt trong một buổi", hint: "Buổi dài, nhiều thời gian" },
 ];
 
 export const DURATIONS = [45, 60, 90, 120] as const;
 
 export const RESOURCES: readonly BookingResource[] = [
-  { id: "ROOM-01", name: "Phòng An", therapist: "Kỹ thuật viên · Ngọc Lan", supportedRitualIds: ["R01", "R02", "R04", "R06"] },
-  { id: "ROOM-02", name: "Phòng Miên", therapist: "Kỹ thuật viên · Thảo Vy", supportedRitualIds: ["R01", "R03", "R04", "R05", "R06"] },
+  { id: "ROOM-01", name: "Phòng An", therapist: "Kỹ thuật viên phòng An", supportedRitualIds: ["R01", "R02", "R04", "R06"] },
+  { id: "ROOM-02", name: "Phòng Miên", therapist: "Kỹ thuật viên phòng Miên", supportedRitualIds: ["R01", "R03", "R04", "R05", "R06"] },
 ];
 
 const m = (h: number, min = 0) => h * 60 + min;

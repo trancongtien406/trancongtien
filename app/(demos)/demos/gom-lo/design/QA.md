@@ -1,6 +1,6 @@
 # QA: Đất Mơ
 
-Lệnh: `BASE=http://localhost:3100 node tests/showroom/gom-lo/e2e.mjs` (Playwright + Chrome headless). Kết quả lần chạy cuối: **99 pass, 0 fail**. Kiểm kiểu: `npx tsc --noEmit` lọc `gom-lo` 0 lỗi; `eslint` thư mục demo 0 cảnh báo.
+Lệnh: `BASE=http://localhost:3100 node tests/showroom/gom-lo/e2e.mjs` (Playwright + Chrome headless). Kết quả lần chạy cuối: **121 pass, 0 fail**. Kiểm kiểu: `npx tsc --noEmit` lọc `gom-lo` 0 lỗi; `eslint` thư mục demo 0 cảnh báo.
 
 Đã kiểm: status 200, title/description riêng, một h1, favicon, skip link; quét chữ cấm (demo/minh hoạ/giả định/mô phỏng/dữ liệu mẫu) ở trạng thái đầu, sau tương tác, mobile, reduced; 0 lỗi console, 0 request ngoài origin; không tràn ngang 320/390/768/1024/1440; font Việt (Ắ...Ự, đ) render bằng Yeseva/Patrick/Nunito, có ảnh chụp glyph; bàn xoay SVG (đang quay, thanh độ phình đổi độ rộng bình, kéo ngang trên bình, đổi dáng sang cốc, hoạ tiết chấm, men, mã sản phẩm, nặn lại); vết nung (3 trạng thái theo cuộn, cuộn ngược về đúng); gallery (phím →/End/Home, nút Trước/Sau tự khoá ở hai đầu, kéo chuột, quán tính); ảnh méo (filter gắn khi rê, displacement scale>0, gỡ khi rời; mobile không có filter); Workshop (rỗng, tính 840.000 ₫ và 3.360.000 ₫, tối đa 8 người, không nung, cảnh báo vẽ men không nung, lỗi khung giờ aria-invalid + role=alert, chép tóm tắt); chữ khắc hoàn tất sau khi cuộn; menu mobile (Escape, trả focus); touch target >=40px; reduced-motion (chữ hiện đủ, bình không quay nhưng đổi hình theo thanh, nền không đổi); no-JS (tiêu đề hiện đủ); credits 12 ảnh + noindex; cookie tct_ref không bị trang ghi.
 
@@ -14,3 +14,6 @@ Chưa kiểm / hạn chế:
 - Chưa đo tương phản bằng công cụ; tính tay: chữ kem trên terracotta ~4.6:1 (chỉ dùng cỡ lớn hoặc đậm), nút ngọc #256863 chữ kem ~5.6:1.
 - Chưa tra tên ở Maps/Facebook/Zalo/WIPO/Cục SHTT.
 - Ảnh xưởng tối và hơi "cũ", không có ảnh lò nung chính diện.
+
+
+Rework 2026-11-25: assert hero/nội dung thật, 12 món + lọc 4 nhóm, lịch lớp 14 buổi điền sẵn tóm tắt, quy trình 5 bước, đặt riêng 3 nhóm, chăm sóc 6 mục, giờ mở, FX chỉ SST+CR. Ảnh chụp 1440/390 đã xem lại (hero 390 đúng; full-page có hero mờ do scrub lúc chụp, không phải lỗi). Lưu ý: chạy e2e phải từ thư mục gốc repo NHƯNG ảnh ghi vào `screenshots/` tương đối cwd; nên `cd tests/showroom/<slug>`.

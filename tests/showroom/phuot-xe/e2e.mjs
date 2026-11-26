@@ -167,7 +167,7 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   const clip = await page.evaluate(() => navigator.clipboard.readText().catch(() => "ERR"));
   ok(/Phượt 250 Adventure/.test(clip) && /Giá tham khảo/.test(clip), "sao chép bản tóm tắt vào clipboard");
   // CTA
-  const href = await receipt.getByRole("link", { name: /Tư vấn thuê xe/ }).getAttribute("href");
+  const href = await receipt.getByRole("link", { name: /Đặt xe/ }).getAttribute("href");
   ok(/^\/lien-he/.test(href || ""), `CTA cuối tới form tư vấn: ${href}`);
   if (/industry=/.test(href)) ok(/solution=/.test(href) && /utm_campaign=phuot-xe/.test(href), "href có industry/solution/utm_campaign");
   else console.log("INFO href chưa có industry/solution/utm: registry chưa có phuot-xe (xem design/REQUESTS.md)");
@@ -181,7 +181,23 @@ for (const w of [320, 390, 768, 1024, 1440]) {
 {
   const { ctx, page } = await open();
   const fx = await page.evaluate(() => [...new Set([...document.querySelectorAll("[data-fx]")].map((e) => e.getAttribute("data-fx")))]);
-  for (const n of ["VelocityMarquee", "Odometer", "Counter", "MagneticButton", "SpeedLines", "Speedometer", "RoadDivider", "TiltCard", "SVGPathDraw", "ClipReveal", "ScrollScrubText", "ShineSweep", "ScrollProgress"]) ok(fx.includes(n), `hiệu ứng có mặt: ${n}`);
+  for (const n of ["VelocityMarquee", "Odometer", "Counter", "MagneticButton", "SpeedLines", "Speedometer", "RoadDivider", "TiltCard", "ShineSweep", "RouteLine"]) ok(fx.includes(n), `hiệu ứng có mặt: ${n}`);
+  for (const n of ["SVGPathDraw", "ClipReveal", "ScrollScrubText", "ScrollProgress", "ParallaxLayer"]) ok(!fx.includes(n), `hiệu ứng đại trà đã bỏ: ${n}`);
+  // nội dung đề tài: cửa hàng cho thuê xe ở Đà Nẵng
+  const h1t = (await page.locator("h1").innerText()).replace(/\s+/g, " ");
+  ok(/THUÊ XE/i.test(h1t), `h1 nêu loại hình (${h1t})`);
+  const kick = await page.locator("p[class*=kicker]").first().innerText();
+  ok(/Cho thuê xe/i.test(kick) && /Hải Châu/i.test(kick) && /Đà Nẵng/i.test(kick), "hero: loại hình + khu vực");
+  ok(await page.locator("section[class*=hero] dl > div").count() === 4, "hero có 4 sự thật cụ thể");
+  const heroDl = await page.locator("section[class*=hero] dl").innerText();
+  ok(/130\.000|130/.test(heroDl) && /07:00/.test(heroDl) && /50\.000/.test(heroDl), "hero: giá từ, giờ nhận trả, giá giao xe");
+  for (const id of ["cua-hang", "doi-xe", "tinh-gia", "cung-duong", "giao-nhan", "dieu-kien", "bao-hiem", "quy-trinh", "hoi-dap", "dat-xe"]) ok(await page.locator("#" + id).count() === 1, `section #${id}`);
+  ok(await page.locator("#giao-nhan li").count() >= 10, "giao nhận + phụ kiện liệt kê");
+  ok(await page.locator("#dieu-kien dt").count() >= 7, "điều kiện thuê >= 7 mục");
+  ok(await page.locator("#bao-hiem li").count() >= 7, "bảo hiểm 3 gói + 4 bước sự cố");
+  ok(await page.locator("#hoi-dap details").count() >= 8, "FAQ >= 8 mục");
+  ok(await page.locator("#hoi-dap [lang=en]").count() >= 1, "FAQ khách nước ngoài (tiếng Anh)");
+  ok(!/được công nhận|hợp pháp|đảm bảo hợp lệ/i.test(await page.locator("#hoi-dap").innerText()), "FAQ không khẳng định pháp lý GPLX");
   // odometer hero chạy tới giá trị cuối
   const odo = await page.locator("#top [data-fx=Odometer]").first().evaluate((e) => ({ r: e.getAttribute("data-fx-ready"), t: e.firstElementChild.textContent }));
   ok(odo.t === "8" && odo.r === "1", `odometer hero chạy (${odo.t}, ready=${odo.r})`);
@@ -239,8 +255,9 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   ok(await page.locator("#quy-trinh [data-step][data-on='1']").count() === 4, "đèn xuất phát: 4 đèn sáng lần lượt");
   // route path draw
   await page.locator("#cung-duong").scrollIntoViewIfNeeded(); await page.waitForTimeout(800);
-  const dash = await page.locator("[data-fx=SVGPathDraw] path").first().evaluate((p) => p.style.strokeDashoffset || getComputedStyle(p).strokeDashoffset);
-  ok(dash !== "" && dash !== undefined, `đường vẽ theo cuộn có dashoffset (${dash})`);
+  await page.evaluate(() => { const t = document.querySelector("[data-fx=RouteLine]").parentElement; window.scrollTo(0, t.getBoundingClientRect().top + window.scrollY + t.offsetHeight * 0.6 - window.innerHeight * 0.5); }); await page.waitForTimeout(900);
+  const fillScale = await page.locator("[data-fx=RouteLine] [data-fill]").evaluate((e) => { const m = getComputedStyle(e).transform.match(/matrix\(([^)]+)\)/); return m ? parseFloat(m[1].split(",")[3]) : 1; });
+  ok(fillScale > 0.15 && fillScale <= 1, `đường cung đường tô theo cuộn (scaleY ${fillScale.toFixed(2)})`);
   // magnetic: rê chuột gần nút hero thì lớp trong dịch
   await page.evaluate(() => window.scrollTo(0, 0)); await page.waitForTimeout(500);
   const cta = page.locator("#top [data-fx=MagneticButton] a").first();
@@ -314,7 +331,7 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   ok(vis.pre === 0, "reduced: không preloader");
   ok(vis.mq === "static", `reduced: marquee ở chế độ tĩnh (${vis.mq})`);
   const txt = await page.locator("main").innerText();
-  ok(/Tám chiếc xe/.test(txt) && /Phiếu giá/.test(txt) && /Hỏi trước/.test(txt), "reduced: nội dung vẫn hiện đủ");
+  ok(/Tám mẫu xe/.test(txt) && /Phiếu giá/.test(txt) && /Hỏi trước/.test(txt), "reduced: nội dung vẫn hiện đủ");
   const od = await page.locator("#top [data-fx=Odometer]").first().evaluate((e) => e.getAttribute("data-fx-ready"));
   ok(od === "static", `reduced: odometer ở trạng thái cuối (${od})`);
   ok(errs.length === 0, "reduced: 0 lỗi console");
@@ -328,7 +345,7 @@ for (const w of [320, 390, 768, 1024, 1440]) {
   const page = await ctx.newPage();
   await page.goto(URL, { waitUntil: "load" });
   const t = await page.locator("main").innerText();
-  ok(/LÊN ĐƯỜNG|Lên đường/i.test(t) && /Tám chiếc xe/.test(t) && /Hỏi trước, đỡ lo sau/.test(t), "no-JS: nội dung hero, đội xe, hỏi đáp có trong HTML");
+  ok(/LÊN ĐƯỜNG|Lên đường/i.test(t) && /Tám mẫu xe/.test(t) && /Hỏi trước, đỡ lo sau/.test(t), "no-JS: nội dung hero, đội xe, hỏi đáp có trong HTML");
   ok(await page.locator("[data-fx=Preloader]").count() === 0, "no-JS: không có lớp chặn preloader");
   await ctx.close();
 }
@@ -336,7 +353,7 @@ for (const w of [320, 390, 768, 1024, 1440]) {
 // 9) ?ref, credits, long task, ảnh chụp
 {
   const { ctx, page } = await open({}, 1440, 900, "?ref=abc");
-  const href = await page.getByRole("link", { name: "Tư vấn thuê xe" }).first().getAttribute("href");
+  const href = await page.getByRole("link", { name: "Đặt xe ngay" }).first().getAttribute("href");
   ok(!!href && href.startsWith("/lien-he"), "link thoát cùng origin (cookie tct_ref đi theo, demo không đọc/ghi)");
   await ctx.close();
   const c2 = await browser.newContext({ viewport: { width: 1440, height: 900 } });
@@ -357,6 +374,11 @@ for (const w of [320, 390, 768, 1024, 1440]) {
     for (let y = 0; y < total; y += Math.round(h * 0.6)) { await p3.mouse.wheel(0, Math.round(h * 0.6)); await p3.waitForTimeout(90); }
     const lt = await p3.evaluate(() => window.__lt.filter((d) => d > 200).length);
     console.log(`INFO long task >200ms khi cuộn toàn trang ở ${label}: ${lt}`);
+    for (const id of ["cua-hang", "doi-xe", "cung-duong", "giao-nhan", "dieu-kien", "bao-hiem", "dat-xe"]) {
+      await p3.evaluate((id) => { const e = document.getElementById(id); window.scrollTo(0, e.getBoundingClientRect().top + window.scrollY - 60); }, id);
+      await p3.waitForTimeout(1500);
+      await p3.screenshot({ path: path.join(shots, `sec-${id}-${label}.png`) });
+    }
     await p3.evaluate(() => window.scrollTo(0, 0));
     await p3.waitForTimeout(700);
     await p3.screenshot({ path: path.join(shots, `full-${label}.png`), fullPage: true });

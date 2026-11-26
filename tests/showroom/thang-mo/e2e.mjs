@@ -87,10 +87,10 @@ console.log('[1] Tải trang, console, request ngoài origin, metadata, trung th
   ok(!/(\+84|0\d{9}|@gmail|@yahoo|zalo)/i.test(txt), 'không in SĐT/email/Zalo thật');
   ok(await page.locator('a[href="/demos/thang-mo/credits"]').count() >= 1, 'có link Ảnh & ghi công');
   ok(/Website do Trần Công Tiến thiết kế/.test(txt), 'dòng ký tên thiết kế website');
-  const pkgs = await page.locator('#packages li').count();
+  const pkgs = await page.locator('#packages [class*=pkgRow]').count();
   ok(pkgs === 3, '3 gói chụp', String(pkgs));
-  ok(/5\.900\.000/.test(txt) && /9\.900\.000/.test(txt) && /15\.900\.000/.test(txt), 'ba mức giá hiển thị');
-  ok(await page.locator('#journey li').count() === 4, 'quy trình 4 bước');
+  ok(/5\.900\.000/.test(txt) && /11\.900\.000/.test(txt) && /15\.900\.000/.test(txt), 'ba mức giá hiển thị');
+  ok(await page.locator('#journey ol > li').count() === 7, 'quy trình 7 bước');
   const txtL = txt.toLowerCase();
   ok(['hẹn', 'chụp', 'chọn', 'album'].every((w) => txtL.includes(w)), 'quy trình hẹn → chụp → chọn ảnh → album');
   await ctx.close();
@@ -176,7 +176,7 @@ console.log('[5] Reduced motion');
   ok(r.h1 && r.body, 'reduced-motion: hero hiện đủ, không dịch chuyển');
   ok(r.cover && r.armed === null, 'reduced-motion: tấm phủ ảnh không che');
   ok(r.reveals && r.albums, 'reduced-motion: các khối reveal/album hiện đủ');
-  await page.locator('button:has-text("Mở album cảm hứng")').first().click();
+  await page.locator('button[aria-label="Mở album Một chiều bên biển"]').first().click();
   await page.waitForTimeout(150);
   await page.keyboard.press('ArrowRight');
   await page.waitForTimeout(60);
@@ -201,7 +201,7 @@ console.log('[6] Immersive Album (desktop 1440)');
 {
   const { ctx, page } = await newPage();
   await load(page);
-  const trigger = page.locator('button:has-text("Mở album cảm hứng")').first();
+  const trigger = page.locator('button[aria-label="Mở album Một chiều bên biển"]').first();
   await trigger.focus();
   await page.keyboard.press('Enter');
   await dlg(page).waitFor();
@@ -243,7 +243,7 @@ console.log('[6] Immersive Album (desktop 1440)');
   await page.keyboard.press('Escape');
   await page.waitForTimeout(300);
   ok(await dlg(page).count() === 0, 'Escape đóng album');
-  ok(await page.evaluate(() => document.activeElement === document.querySelectorAll('button')[0] || document.activeElement.textContent.includes('Mở album cảm hứng')), 'trả focus về nút đã mở');
+  ok(await page.evaluate(() => document.activeElement?.getAttribute('aria-label') === 'Mở album Một chiều bên biển'), 'trả focus về nút đã mở');
   ok(await page.evaluate(() => document.body.style.overflow !== 'hidden'), 'mở khoá cuộn nền khi đóng');
   // nút X
   await page.locator('button[aria-label="Mở album Dưới tán lá xanh"]').click();
@@ -282,7 +282,7 @@ console.log('[6b] Album: mobile, vuốt, resize, ảnh lỗi');
 {
   const { ctx, page } = await newPage({ viewport: { width: 390, height: 844 }, hasTouch: false });
   await load(page);
-  await page.locator('button:has-text("Mở album cảm hứng")').first().click(); await dlg(page).waitFor();
+  await page.locator('button[aria-label="Mở album Một chiều bên biển"]').first().click(); await dlg(page).waitFor();
   ok((await counter(page)) === '01 / 04', 'mobile: bìa 01 / 04');
   ok(await page.locator('[data-tm-page]').count() === 1, 'mobile: một trang mỗi lần');
   await page.screenshot({ path: path.join(SHOTS, 'album-cover-390.png') });
@@ -316,7 +316,7 @@ console.log('[6b] Album: mobile, vuốt, resize, ảnh lỗi');
   await page.route('**/hoang-hon-bong-dang-1200.webp*', (r) => r.abort());
   await page.route('**/_next/image*hoang-hon-bong-dang-1200*', (r) => r.abort());
   await load(page);
-  await page.locator('button:has-text("Mở album cảm hứng")').first().click(); await dlg(page).waitFor(); await page.waitForTimeout(1200);
+  await page.locator('button[aria-label="Mở album Một chiều bên biển"]').first().click(); await dlg(page).waitFor(); await page.waitForTimeout(1200);
   ok(await dlg(page).count() === 1 && /Ảnh tham khảo chưa hiển thị được/.test(await dlg(page).innerText()), 'ảnh lỗi có fallback, modal không crash');
   await page.keyboard.press('ArrowRight'); await page.waitForTimeout(700);
   ok((await counter(page)) === '02 — 03 / 04', 'điều hướng bình thường sau ảnh lỗi');
@@ -331,12 +331,12 @@ console.log('[7] Wedding Moodboard');
   await load(page);
   await page.locator('#moodboard').scrollIntoViewIfNeeded();
   ok((await checkedVal(page, 'tm-style')) === 'coastal' && (await checkedVal(page, 'tm-palette')) === 'signature' && (await checkedVal(page, 'tm-loc')) === 'beach' && (await checkedVal(page, 'tm-pkg')) === 'TM-P02', 'mặc định: Biển/Nguyên bản/Bãi biển/TM-P02');
-  ok(/9\.900\.000/.test(await price(page)), 'mặc định giá P02 9.900.000');
+  ok(/11\.900\.000/.test(await price(page)), 'mặc định giá P02 11.900.000');
   ok(await page.locator('input[name="tm-style"]').count() === 4 && await page.locator('input[name="tm-palette"]').count() === 2 && await page.locator('input[name="tm-pkg"]').count() === 3, '4 phong cách, 2 palette, 3 gói');
-  ok(await page.locator('fieldset legend').count() === 4, 'radio có fieldset + legend');
+  ok(await page.locator('#moodboard fieldset legend').count() === 4, 'radio có fieldset + legend');
   await page.locator('input[name="tm-pkg"][value="TM-P01"]').check({ force: true });
   ok(/5\.900\.000/.test(await price(page)), 'giá P01 5.900.000');
-  ok(/4 giờ/.test(await page.locator('[data-tm="sum-pkg"]').innerText()) && /25 ảnh/.test(await page.locator('[data-tm="sum-pkg"]').innerText()), 'P01: 4 giờ, 25 ảnh');
+  ok(/3 giờ/.test(await page.locator('[data-tm="sum-pkg"]').innerText()) && /30 ảnh/.test(await page.locator('[data-tm="sum-pkg"]').innerText()), 'P01: 3 giờ, 30 ảnh');
   await page.locator('input[name="tm-pkg"][value="TM-P03"]').check({ force: true });
   ok(/15\.900\.000/.test(await price(page)), 'giá P03 15.900.000');
   ok(/Album 25×25 cm/.test(await page.locator('[data-tm="board"]').innerText()), 'P03: album 25×25 hiển thị');
@@ -380,13 +380,13 @@ console.log('[7] Wedding Moodboard');
   const pd = page.locator('[data-tm="preview-dialog"]'); await pd.waitFor();
   const ptxt = await pd.innerText();
   await clean(page, 'hộp tóm tắt bản phác thảo');
-  ok(/Vườn/.test(ptxt) && /Dịu nhẹ/.test(ptxt) && /Khu vườn/.test(ptxt) && /Một Ngày Nhỏ/.test(ptxt) && /4 giờ/.test(ptxt) && /25 ảnh/.test(ptxt) && /5\.900\.000/.test(ptxt), 'preview tổng hợp đúng lựa chọn');
+  ok(/Vườn/.test(ptxt) && /Dịu nhẹ/.test(ptxt) && /Khu vườn/.test(ptxt) && /Studio Ánh Sáng Tự Nhiên/.test(ptxt) && /3 giờ/.test(ptxt) && /30 ảnh/.test(ptxt) && /5\.900\.000/.test(ptxt), 'preview tổng hợp đúng lựa chọn');
   ok(/không phải báo giá/.test(ptxt) && /không thu họ tên/.test(ptxt) && !/thành công/i.test(ptxt), 'preview nói rõ không phải báo giá/không thu dữ liệu, không giả vờ gửi');
   ok(await pd.locator('input[type=text],input[type=email],input[type=tel]').count() === 0, 'preview không có ô nhập dữ liệu cá nhân');
   await pd.locator('button:has-text("Sao chép bản phác thảo")').click(); await page.waitForTimeout(300);
   ok(/Đã sao chép bản phác thảo/.test(await pd.innerText()), 'clipboard thành công có thông báo');
   const clip = await page.evaluate(() => navigator.clipboard.readText());
-  ok(/Một Ngày Nhỏ/.test(clip) && /5\.900\.000/.test(clip) && /Vườn/.test(clip), 'nội dung clipboard đúng', clip.slice(0, 60));
+  ok(/Studio Ánh Sáng Tự Nhiên/.test(clip) && /5\.900\.000/.test(clip) && /Vườn/.test(clip), 'nội dung clipboard đúng', clip.slice(0, 60));
   ok(!BANNED.test(clip), 'nội dung clipboard không có từ cấm');
   await page.evaluate(() => { navigator.clipboard.writeText = () => Promise.reject(new Error('blocked')); });
   await pd.locator('button:has-text("Sao chép bản phác thảo")').click(); await page.waitForTimeout(300);
@@ -429,6 +429,49 @@ console.log('[7] Wedding Moodboard');
   await c3.ctx.close();
 }
 
+// ---------- 7b nội dung studio thật
+console.log('[7b] Nội dung studio: hero, dịch vụ, gói, phong cách, giờ vàng, lịch giao ảnh, chính sách');
+{
+  const { ctx, page } = await newPage();
+  await load(page);
+  const hero = await page.locator('section[aria-labelledby="tm-h1"]').textContent();
+  ok(/studio ảnh cưới/i.test(hero) && /Sơn Trà/.test(hero) && /Đà Nẵng/.test(hero) && /pre-wedding/i.test(hero) && /cặp đôi/i.test(hero), 'hero nêu loại hình, quận, đối tượng, dịch vụ');
+  ok(/5\.900\.000/.test(hero) && /14–45 ngày/.test(hero) && /08:30–18:30/.test(hero), 'hero có 3 sự thật: giá từ, thời gian giao, giờ tư vấn');
+  ok(/Đặt lịch tư vấn/.test(await page.locator('[data-tm="body"] a').first().textContent()), 'CTA hero đúng ngành');
+  ok(await page.locator('#services [class*=svItem]').count() === 4, '4 dịch vụ');
+  const pk = await page.locator('#packages').innerText();
+  ok(/Bao gồm/i.test(pk) && /Không bao gồm/i.test(pk) && (await page.locator('#packages [class*=tick] li').count()) >= 12, 'mỗi gói có bao gồm / không bao gồm');
+  ok(await page.locator('#addons tbody tr').count() === 7 && /Album 20×20/.test(await page.locator('#addons').innerText()), 'bảng album, ảnh in, file');
+  ok(await page.locator('#albums [data-fx="DraggableGallery"]').count() === 1 && await page.locator('#albums article').count() === 4, 'danh mục phong cách: 4 thẻ trong DraggableGallery');
+  ok(await page.locator('#albums dt:text-is("Địa điểm hợp")').count() === 4, 'mỗi phong cách có địa điểm, giờ chụp, trang phục');
+  ok(await page.locator('#policy dt').count() === 6 && /30%/.test(await page.locator('#policy').innerText()) && /mưa/i.test(await page.locator('#policy').innerText()), '6 chính sách: cọc, huỷ, dời, mưa');
+  ok(await page.locator('#wardrobe tbody tr').count() === 6, 'bảng trang phục và make-up 6 hạng mục');
+  // giờ vàng
+  const gh = page.locator('[data-tm=golden]'); await gh.scrollIntoViewIfNeeded();
+  ok(/Giờ vàng/.test(await gh.locator('[data-tm=golden-name]').innerText()), 'giờ vàng: 16:45 tháng 3–5 là Giờ vàng');
+  const setT = (v) => gh.locator('input[type=range]').evaluate((e, val) => { const set = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set; set.call(e, String(val)); e.dispatchEvent(new Event('input', { bubbles: true })); }, v);
+  const sunX = () => gh.locator('svg g').evaluate((g) => g.style.transform);
+  const x1 = await sunX(); await setT(12 * 60); await page.waitForTimeout(300);
+  ok(/Nắng cao/.test(await gh.locator('[data-tm=golden-name]').innerText()) && (await sunX()) !== x1, 'giờ vàng: 12:00 là Nắng cao, mặt trời di chuyển');
+  await setT(5 * 60); ok(/Trời tối|Bình minh/.test(await gh.locator('[data-tm=golden-name]').innerText()), 'giờ vàng: 05:00 trời tối/bình minh');
+  await gh.locator('label:has-text("Tháng 9–12") input').evaluate((e) => e.click()); await setT(17 * 60 + 30);
+  ok(/Hoàng hôn|Sau hoàng hôn/.test(await gh.locator('[data-tm=golden-name]').innerText()), 'giờ vàng: mùa mưa hoàng hôn sớm hơn');
+  // lịch giao ảnh
+  const dp = page.locator('[data-tm=planner]'); await dp.scrollIntoViewIfNeeded();
+  ok(await dp.locator('[data-tm=planner-empty]').count() === 1, 'lịch giao ảnh: trạng thái rỗng khi chưa chọn ngày');
+  await dp.locator('input[type=date]').fill('2099-03-01'); await page.waitForTimeout(300);
+  const out = await dp.locator('[data-tm=planner-out]').innerText();
+  ok(/01\/03\/2099/.test(out) && /22\/03\/2099 đến 31\/03\/2099/.test(out) && /album in/i.test(out), 'lịch giao ảnh: P02 từ 01/03 => ảnh 22/03–31/03, có album');
+  await dp.locator('select').selectOption('TM-P01'); await page.waitForTimeout(200);
+  ok(!/album in/i.test(await dp.locator('[data-tm=planner-out]').innerText()), 'lịch giao ảnh: gói studio không có mốc album');
+  await dp.locator('input[type=date]').fill('2020-01-01'); await page.waitForTimeout(200);
+  ok(await dp.locator('[role=alert]').count() === 1 && await dp.locator('input[type=date]').getAttribute('aria-invalid') === 'true', 'lịch giao ảnh: ngày quá khứ báo lỗi cạnh ô');
+  const all = await page.evaluate(() => document.body.innerText);
+  ok(!/stock/i.test(all), 'không còn chữ "stock" trên trang chính');
+  ok(page.errors.length === 0 && page.nonGet.length === 0, 'khối nội dung studio: 0 lỗi, không gửi request', page.errors.join('|'));
+  await ctx.close();
+}
+
 // ---------- 8
 console.log('[8] Link tư vấn, ref, FAQ, bàn phím, mục tiêu chạm');
 {
@@ -445,18 +488,18 @@ console.log('[8] Link tư vấn, ref, FAQ, bàn phím, mục tiêu chạm');
   // Tab tới CTA
   await page.evaluate(() => { document.activeElement?.blur(); window.scrollTo(0, 0); });
   let reached = false, outline = '';
-  for (let i = 0; i < 14; i++) { await page.keyboard.press('Tab'); const t = await page.evaluate(() => { const a = document.activeElement; const cs = getComputedStyle(a); return { txt: a.textContent.trim(), ow: cs.outlineWidth, os: cs.outlineStyle }; }); if (/Mở album cảm hứng/.test(t.txt)) { reached = true; outline = t.ow + ' ' + t.os; break; } }
-  ok(reached, 'Tab tới CTA "Mở album cảm hứng"');
+  for (let i = 0; i < 14; i++) { await page.keyboard.press('Tab'); const t = await page.evaluate(() => { const a = document.activeElement; const cs = getComputedStyle(a); return { txt: a.textContent.trim(), ow: cs.outlineWidth, os: cs.outlineStyle }; }); if (/Đặt lịch tư vấn/.test(t.txt)) { reached = true; outline = t.ow + ' ' + t.os; break; } }
+  ok(reached, 'Tab tới CTA "Đặt lịch tư vấn"');
   ok(/^2px solid/.test(outline), 'focus-visible rõ (outline 2px)', outline);
   const skip = await page.evaluate(() => document.querySelector('a[href="#main"]')?.textContent);
   ok(/Bỏ qua/.test(skip || ''), 'có skip link');
   // FAQ
   const q = page.locator('#faq button[aria-expanded]');
-  ok(await q.count() === 8 && await q.nth(0).getAttribute('aria-expanded') === 'true', 'FAQ 8 câu, câu đầu mở');
+  ok(await q.count() === 12 && await q.nth(0).getAttribute('aria-expanded') === 'true', 'FAQ 12 câu, câu đầu mở');
   await q.nth(1).focus(); await page.keyboard.press('Enter');
   ok(await q.nth(1).getAttribute('aria-expanded') === 'true' && await q.nth(0).getAttribute('aria-expanded') === 'false', 'FAQ bằng Enter, chỉ mở một câu');
-  for (let i = 0; i < 8; i++) { await q.nth(i).click(); const h = await scanAll(page); if (h.length) { ok(false, 'FAQ câu ' + (i + 1) + ' sạch', JSON.stringify(h)); } }
-  ok(true, 'đã quét 8 câu FAQ');
+  for (let i = 0; i < 12; i++) { await q.nth(i).click(); const h = await scanAll(page); if (h.length) { ok(false, 'FAQ câu ' + (i + 1) + ' sạch', JSON.stringify(h)); } }
+  ok(true, 'đã quét 12 câu FAQ');
   await page.keyboard.press('Space');
   ok(await q.nth(1).getAttribute('aria-expanded') === 'false', 'FAQ đóng bằng Space');
   const aria = await q.nth(2).getAttribute('aria-controls');
@@ -478,7 +521,7 @@ console.log('[8] Link tư vấn, ref, FAQ, bàn phím, mục tiêu chạm');
   await page.screenshot({ path: path.join(SHOTS, 'menu-390.png') });
   await page.keyboard.press('Escape'); await page.waitForTimeout(100);
   ok(!(await page.locator('#tm-sheet').isVisible()), 'mobile: Escape đóng menu');
-  await btn.click(); await page.locator('#tm-sheet a:has-text("Gói chụp")').click(); await page.waitForTimeout(500);
+  await btn.click(); await page.locator('#tm-sheet a:has-text("Gói và giá")').click(); await page.waitForTimeout(500);
   ok(!(await page.locator('#tm-sheet').isVisible()), 'mobile: chọn link đóng menu');
   await ctx.close();
 }

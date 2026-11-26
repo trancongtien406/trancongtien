@@ -8,7 +8,9 @@ import { Hero } from "./components/Hero";
 import { Labels } from "./components/Labels";
 import { Menu } from "./components/Menu";
 import { Motion } from "./components/Motion";
-import { Band, Cellar, Faq, Footer, Plates, Pour, Story } from "./components/Sections";
+import { Cellar, Events, Faq, Footer, Info, Plates, Pour, Rules, Story, Takeaway } from "./components/Sections";
+import { Flight } from "./components/Flight";
+import { Hours } from "./components/Hours";
 import { Swirl } from "./components/Swirl";
 
 export default function RuouVangPage() {
@@ -18,15 +20,20 @@ export default function RuouVangPage() {
       <Header />
       <main id="main">
         <Hero />
-        <Band />
+        <Info />
         <Story />
         <Pour />
         <Swirl />
         <Labels />
         <Menu />
+        <Flight />
         <Plates />
+        <Hours />
+        <Events />
+        <Takeaway />
         <Cellar />
         <Finder consultHref={buildConsultHref("ruou-vang")} />
+        <Rules />
         <Faq />
       </main>
       <Footer />

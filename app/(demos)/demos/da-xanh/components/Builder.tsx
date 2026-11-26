@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import { ShineSweep, SplitWords, gsap, prefersReducedMotion } from "@/features/showroom/effects";
+import { gsap, prefersReducedMotion } from "@/features/showroom/effects";
 import { buildConsultHref } from "@/features/showroom/consultation";
 import {
   BUDGETS, CONCERNS, FLAGS, MAX_CONCERNS, SKINS, TIMES,
@@ -9,7 +9,6 @@ import {
   type Routine, type RoutineErrors, type RoutineInput, type Step,
 } from "../lib/routine";
 import { Halo } from "./Halo";
-import { Photo } from "./Photo";
 import styles from "../brand.module.css";
 
 const EMPTY: RoutineInput = { skin: "", concerns: [], minutes: 0, budget: "", flags: [] };
@@ -61,7 +60,7 @@ export function Builder() {
   useEffect(() => {
     if (status !== "result" || !out.current || prefersReducedMotion()) return;
     const items = out.current.querySelectorAll("[data-stagger]");
-    const t = gsap.fromTo(items, { y: 18, opacity: 0, filter: "blur(8px)" }, { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.7, stagger: 0.07, ease: "power3.out", clearProps: "transform,opacity,filter" });
+    const t = gsap.fromTo(items, { x: -16, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, stagger: 0.07, ease: "power3.out", clearProps: "transform,opacity" });
     return () => { t.kill(); };
   }, [status, res]);
 
@@ -115,8 +114,8 @@ export function Builder() {
     <section id="routine" className={styles.builder} aria-labelledby="builder-title">
       <div className={styles.wrap}>
         <header className={styles.sectionHead}>
-          <p className={styles.kicker} data-bf="">Công cụ</p>
-          <h2 id="builder-title" className={styles.h2}><SplitWords as="span">Skin Routine Builder</SplitWords></h2>
+          <p className={styles.kicker} data-bf="">Chăm da tại nhà</p>
+          <h2 id="builder-title" className={styles.h2}>Skin Routine Builder</h2>
           <p className={styles.lede} data-bf="" data-bf-delay="0.1">Mô tả làn da theo cảm nhận của bạn, nhận gợi ý quy trình sáng và tối từng bước cùng nhóm thành phần chung. Không chẩn đoán, không kê đơn, và mọi thứ chỉ chạy trong trình duyệt của bạn.</p>
         </header>
 
@@ -192,9 +191,7 @@ export function Builder() {
 
             <p className={styles.formNote}>Da nhạy cảm hoặc đang điều trị nên hỏi bác sĩ da liễu trước khi thêm hoạt chất mới. Công cụ này không thay thế tư vấn y tế.</p>
             <div className={styles.formActions}>
-              <ShineSweep trigger="hover" className={styles.shineBtn}>
-                <button type="submit" className={`${styles.btn} ${styles.btnInk}`}>Tạo routine của tôi</button>
-              </ShineSweep>
+              <button type="submit" className={`${styles.btn} ${styles.btnInk}`}>Tạo routine của tôi</button>
               <button type="button" className={`${styles.btn} ${styles.btnGlass}`} onClick={reset}>Làm lại</button>
             </div>
           </form>
@@ -203,7 +200,7 @@ export function Builder() {
             {status === "idle" && (
               <div className={styles.outEmpty}>
                 <Halo className={styles.outHalo}>
-                  <div className={styles.outPhoto}><Photo file="pipet-xanh" alt="Ống pipet nhỏ giọt tinh chất xuống chai thuỷ tinh nâu trên nền xanh nhạt" sizes="200px" pos="50% 30%" w={600} /></div>
+                  <div className={styles.outPhoto}><svg viewBox="0 0 24 34" width="54" height="76" aria-hidden="true"><defs><linearGradient id="dx-out" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#b9a7ff" /><stop offset="1" stopColor="#7fd6e6" /></linearGradient></defs><path d="M12 1C9 9 2 15 2 22c0 6 4.5 10 10 10s10-4 10-10C22 15 15 9 12 1z" fill="url(#dx-out)" stroke="#fff" strokeWidth="1" /></svg></div>
                 </Halo>
                 <h3>Routine của bạn sẽ hiện ở đây</h3>
                 <p>Chọn loại da, mối quan tâm, thời gian và ngân sách ở bên trái, rồi bấm “Tạo routine của tôi”.</p>

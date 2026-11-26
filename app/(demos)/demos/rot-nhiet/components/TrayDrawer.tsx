@@ -41,7 +41,7 @@ export function TrayDrawer() {
           {done ? (
             <div className={styles.drawerEmpty} role="status">
               <p>Tóm tắt khay</p>
-              <p>Đây là tóm tắt khay của bạn. Trang này chưa nhận đơn trực tuyến.</p>
+              <p>Đưa tóm tắt này cho nhân viên khi gọi món tại quầy. Trang này chưa nhận đơn trực tuyến.</p>
               <p style={{ marginTop: 12 }}><b>{done.cups} ly · {formatVnd(done.total)}</b> (tạm tính)</p>
               <button type="button" className={`${styles.btn} ${styles.btnPrimary}`} style={{ marginTop: 20 }} onClick={close}>Quay lại menu</button>
             </div>

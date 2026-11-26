@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import { useRef } from "react";
-import { Counter, MagneticButton, TextScramble, gsap, registerGsap, useFxLayout } from "@/features/showroom/effects";
+import { Counter, TextScramble, gsap, registerGsap, useFxLayout } from "@/features/showroom/effects";
 import { buildConsultHref } from "@/features/showroom/consultation";
 import s from "../brand.module.css";
-import { HERO, IMG, SPECS } from "../data/content";
+import { FACTS, HERO, IMG } from "../data/content";
+import { OpenBadge } from "./OpenNow";
 
 const COLS = 6;
 const ROWS = 4;
@@ -77,16 +78,13 @@ export function Hero() {
             ))}
           </h1>
           <p className={s.heroLead} data-hfade>{HERO.lead}</p>
+          <p className={s.heroOpen} data-hfade><OpenBadge /></p>
           <ul className={s.heroChips} data-hfade aria-label="Các loại chỗ">
             {HERO.chips.map((c) => <li key={c}>{c}</li>)}
           </ul>
           <div className={s.heroCtas}>
-            <span data-hcta>
-              <MagneticButton strength={0.3} max={10}>
-                <a className={`${s.btn} ${s.btnOrange}`} href="#so-do">Chọn chỗ trên sơ đồ</a>
-              </MagneticButton>
-            </span>
-            <span data-hcta><a className={`${s.btn} ${s.btnLine}`} href={consult}>Đặt lịch tham quan</a></span>
+            <span data-hcta><a className={`${s.btn} ${s.btnOrange}`} href={consult}>Đăng ký dùng thử 1 ngày</a></span>
+            <span data-hcta><a className={`${s.btn} ${s.btnLine}`} href="#so-do">Xem sơ đồ và chọn chỗ</a></span>
           </div>
         </div>
 
@@ -117,12 +115,15 @@ export function Hero() {
           </figcaption>
         </figure>
 
-        <ul className={s.specs} aria-label="Quy mô không gian">
-          {SPECS.map((sp) => (
-            <li key={sp.k} data-hfade>
-              <span className={s.specK}>{sp.k}</span>
-              <Counter value={sp.value} className={s.specN} duration={1.2} />
-              <span className={s.specL}>{sp.label}</span>
+        <ul className={s.specs} aria-label="Ba điều cần biết">
+          {FACTS.map((f) => (
+            <li key={f.k} data-hfade>
+              <span className={s.specK}>{f.k}</span>
+              <span className={s.specL}>{f.label}</span>
+              <span className={s.specN}>
+                {typeof f.value === "number" ? <><Counter value={f.value} duration={1.2} /><small>{f.suffix}</small></> : f.text}
+              </span>
+              <span className={s.specNote}>{f.note}</span>
             </li>
           ))}
         </ul>

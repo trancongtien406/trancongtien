@@ -1,6 +1,6 @@
 # QA — Ráng Sóng Surf Club
 
-Lệnh: `BASE=http://localhost:3100 node tests/showroom/luot-song/e2e.mjs` (Playwright + Chrome headless, dev server chung). Kết quả lần chạy cuối: xem phần "Kết quả" bên dưới.
+Lệnh: `BASE=http://localhost:3100 node tests/showroom/luot-song/e2e.mjs` (Playwright + Chrome headless, dev server chung). Kết quả lần chạy cuối (sau đợt chỉnh nội dung + hiệu ứng 2026-11-25): 101 pass, 0 fail.
 
 ## Đã kiểm (tự động)
 - Tải trang 1440: 0 lỗi console, 0 request ra ngoài origin, title/robots/lang, 1 h1.
@@ -19,3 +19,11 @@ Lệnh: `BASE=http://localhost:3100 node tests/showroom/luot-song/e2e.mjs` (Play
 - Ván lướt chạy theo đường chấm nét riêng, không bám sóng đang chuyển động.
 - Mô tả mùa sóng theo tháng là mô tả chung do agent viết, chưa đối chiếu số liệu sóng thật; cần người am hiểu lướt sóng Đà Nẵng duyệt.
 - Giá khoá cho "biết đứng/đã lướt" là giá tham khảo do agent tự đặt.
+
+## Đợt chỉnh 2026-11-25 (đề tài + hiệu ứng)
+- e2e cập nhật: hero nêu loại hình/khu vực/CTA/3 sự thật; 6 thẻ khoá; bảng giá + thuê + bao gồm + đồ mang; 4 vai trò; chính sách dời lịch; đồng hồ buổi học chạy theo cuộn (phút tăng, đúng một bước nổi); cung nắng (mặt trời trượt, thẻ 15:30, mũi tên); ba cờ (cờ đỏ, ghi quy ước nội bộ, cờ phấp phới); planner bậc 1/3/5/10 (đủ 10 buổi); xác nhận đã bỏ SplitReveal, ScrollScrubText, ClipReveal, SVGPathDraw, MagneticButton, ScrollProgress (0 gốc).
+- Ma trận hiệu ứng trước/sau: đại trà 8 (vượt) -> 2/2; chữ ký thư viện 3 (ShineSweep, DraggableGallery, GrainOverlay) + 8 chữ ký riêng (REWORK.md).
+- Long task >200ms khi cuộn: 0 ở 1440; ở 390 lần cuối có 1 (281ms, Chrome headless, máy tải do dev server chung), lần trước 0.
+- Chụp lại 1440/390 và tự xem: sửa thẻ trời tràn ngang ở 320/390, bảng giá tràn ở 320, bố cục lưới giá.
+- og-image vẽ lại, không chứa chữ demo/minh hoạ (tự xem).
+- Yếu: giá, giờ học, chính sách là nội dung do agent đặt cho trang, cần chủ trường duyệt; mô tả mùa sóng chưa đối chiếu số liệu thật.

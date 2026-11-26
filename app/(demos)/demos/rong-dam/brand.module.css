@@ -418,12 +418,12 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 22px;
+  gap: 16px;
 }
 .h1 {
   font-family: var(--rd-head);
   font-weight: 800;
-  font-size: clamp(2.3rem, 8.6vw, 4.5rem);
+  font-size: clamp(2.2rem, 7vw, 3.9rem);
   letter-spacing: -0.055em;
   line-height: 1.1;
   text-wrap: balance;
@@ -1698,4 +1698,506 @@
   .brand * {
     scroll-behavior: auto !important;
   }
+}
+
+/* =====================================================================
+   Rong Dặm Tour: các phần nghiệp vụ (hero số liệu, bảng giờ, vé lật, bảng giá,
+   combo 3 ngày, đội ngũ, đặt tour, đồng hồ hành trình)
+   ===================================================================== */
+.heroWho {
+  max-width: 34em;
+  color: var(--rd-muted);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  width: min(100%, 560px);
+  margin-top: 4px;
+}
+.fact {
+  padding: 10px 12px 12px;
+  background: var(--rd-white);
+  border: 2px solid var(--rd-forest);
+  border-radius: 10px;
+  box-shadow: 3px 3px 0 var(--rd-forest);
+  display: grid;
+  gap: 2px;
+  align-content: start;
+}
+.fact dt {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--rd-muted);
+  line-height: 1.3;
+}
+.fact dd:not(.factSub) {
+  font-family: var(--rd-head);
+  font-weight: 800;
+  font-size: clamp(1.05rem, 1.7vw, 1.35rem);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--rd-red);
+}
+.factSub {
+  font-size: 0.74rem;
+  line-height: 1.35;
+  color: var(--rd-muted);
+}
+.routeDoodle {
+  position: relative;
+  width: min(420px, 92%);
+  height: 60px;
+  color: var(--rd-red);
+}
+.routeDoodle svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.routeDoodle span {
+  position: absolute;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--rd-forest);
+  background: var(--rd-paper);
+  padding: 0 4px;
+}
+.rdA { left: 0; top: 46px; }
+.rdB { left: 38%; top: 0; }
+.rdC { right: 0; top: 36px; }
+.passTrips {
+  margin-top: 10px;
+  color: var(--rd-red);
+}
+
+/* ---------- Bảng giờ khởi hành ---------- */
+.boardSec {
+  background: var(--rd-forest);
+  color: var(--rd-paper);
+}
+.boardSec .lead { color: #d6dccb; }
+.boardSec .eyebrow::before { background: var(--rd-yellow); }
+.boardHead {
+  display: grid;
+  gap: 28px;
+  margin-bottom: clamp(24px, 3.4vw, 44px);
+}
+.countdown {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 20px 22px;
+  border: 2px solid var(--rd-yellow);
+  border-radius: 14px;
+  background: rgba(255, 253, 247, 0.06);
+}
+.cdDigits {
+  display: flex;
+  gap: 10px;
+}
+.cdCell {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+}
+.cdNum {
+  display: grid;
+  place-items: center;
+  min-width: 2.1ch;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: var(--rd-paper);
+  color: var(--rd-forest);
+  font-family: var(--rd-head);
+  font-weight: 800;
+  font-size: clamp(2rem, 4.4vw, 3rem);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  box-shadow: 0 3px 0 var(--rd-yellow);
+}
+.cdNum[data-changed="1"] {
+  animation: rdFlipDown 0.34s var(--rd-ease);
+  transform-origin: 50% 0%;
+}
+.cdUnit {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #d6dccb;
+}
+.cdTrip { line-height: 1.4; }
+.cdTrip b { color: var(--rd-yellow); }
+@keyframes rdFlipDown {
+  from { transform: perspective(500px) rotateX(-70deg); opacity: 0.4; }
+  to { transform: perspective(500px) rotateX(0); opacity: 1; }
+}
+.board {
+  border: 2px solid var(--rd-paper);
+  border-radius: 14px;
+  background: #1a2a21;
+  overflow: hidden;
+}
+.boardRow {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr) auto;
+  gap: 8px 14px;
+  align-items: center;
+  padding: 12px 14px;
+  border-top: 1px solid rgba(245, 240, 227, 0.22);
+}
+.boardRow:first-child { border-top: 0; }
+.boardHeadRow {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #d6dccb;
+  padding-block: 10px;
+}
+.boardHeadRow span:nth-child(2),
+.boardHeadRow span:nth-child(1) { white-space: nowrap; }
+.flapRow {
+  display: inline-flex;
+  gap: 3px;
+}
+.flap {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.15ch;
+  padding: 3px 5px;
+  border-radius: 4px;
+  background: #0f1913;
+  border: 1px solid rgba(245, 240, 227, 0.2);
+  color: var(--rd-yellow);
+  font-family: var(--rd-head);
+  font-weight: 800;
+  font-size: clamp(0.95rem, 1.8vw, 1.3rem);
+  line-height: 1.2;
+  position: relative;
+  transform-origin: 50% 50%;
+}
+.flap::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.55);
+}
+.flap[data-flap="1"] { animation: rdFlap 0.12s linear; }
+@keyframes rdFlap {
+  from { transform: perspective(300px) rotateX(-80deg); }
+  to { transform: perspective(300px) rotateX(0); }
+}
+.boardTrip { display: grid; gap: 2px; min-width: 0; }
+.boardName { font-weight: 600; line-height: 1.3; }
+.boardDaily {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rd-yellow);
+}
+.boardMeta { font-size: 0.88rem; color: #d6dccb; line-height: 1.35; }
+.boardBtn {
+  min-width: 44px;
+  min-height: 44px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--rd-yellow);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--rd-yellow);
+  font-weight: 800;
+  cursor: pointer;
+}
+@media (hover: hover) and (pointer: fine) {
+  .boardBtn:hover { background: var(--rd-yellow); color: var(--rd-forest); }
+}
+.hideSm { display: none; }
+@media (min-width: 900px) {
+  .boardHead { grid-template-columns: minmax(0, 1.4fr) minmax(300px, 0.8fr); align-items: end; }
+  .boardRow { grid-template-columns: 172px 172px minmax(0, 1.4fr) minmax(0, 1.1fr) 100px 56px; padding: 14px 20px; }
+  .hideSm { display: block; }
+}
+
+/* ---------- Vé tour lật hai mặt ---------- */
+.ticketWrap { position: relative; perspective: 1400px; }
+.flipInner {
+  display: grid;
+  transform-style: preserve-3d;
+  transition: transform 0.7s var(--rd-ease);
+}
+.ticketWrap[data-flipped="1"] .flipInner { transform: rotateY(180deg); }
+.faceFront,
+.faceBack {
+  grid-area: 1 / 1;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.faceBack {
+  transform: rotateY(180deg);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--rd-yellow);
+  background-image: repeating-linear-gradient(90deg, transparent 0 11px, rgba(36, 57, 45, 0.12) 11px 12px);
+}
+.faceBack .btn { margin-top: auto; align-self: flex-start; }
+.backHead { display: grid; gap: 8px; justify-items: start; }
+.backCols { display: grid; gap: 14px; }
+.backCols h4 { margin-bottom: 2px; }
+.backPolicy {
+  padding: 10px 12px;
+  background: var(--rd-white);
+  border: 2px dashed var(--rd-forest);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+.ticketActions { display: grid; gap: 8px; margin-top: auto; }
+.flipBtn {
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 2px dashed var(--rd-forest);
+  border-radius: 999px;
+  background: transparent;
+  font-weight: 600;
+  cursor: pointer;
+}
+@media (hover: hover) and (pointer: fine) {
+  .flipBtn:hover { background: var(--rd-yellow); }
+}
+@media (min-width: 560px) {
+  .backCols { grid-template-columns: 1fr 1fr; }
+}
+/* hộp .ticket lúc này nằm trong .flipInner nên cần chiều cao đủ cả hai mặt */
+.ticketWrap .ticket { height: 100%; }
+
+/* ---------- Bảng giá theo nhóm ---------- */
+.priceTable {
+  margin-top: clamp(28px, 4vw, 52px);
+  padding: 20px 20px 22px;
+  background: var(--rd-white);
+  border: 2px solid var(--rd-forest);
+  border-radius: 14px;
+  box-shadow: 6px 6px 0 var(--rd-forest);
+  display: grid;
+  gap: 14px;
+}
+.ptHead { display: grid; gap: 12px; }
+.ptScroll {
+  overflow-x: auto;
+  border: 2px solid var(--rd-forest);
+  border-radius: 10px;
+}
+.ptScroll table { border-collapse: collapse; width: 100%; min-width: 760px; font-variant-numeric: tabular-nums; }
+.ptScroll th,
+.ptScroll td { padding: 10px 12px; text-align: right; border-bottom: 1px solid var(--rd-line); white-space: nowrap; }
+.ptScroll thead th { background: var(--rd-forest); color: var(--rd-paper); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.ptScroll tbody th { text-align: left; white-space: normal; min-width: 220px; font-weight: 500; position: sticky; left: 0; background: var(--rd-white); }
+.ptScroll tbody th b { color: var(--rd-red); margin-right: 4px; }
+.ptScroll tbody tr:last-child th,
+.ptScroll tbody tr:last-child td { border-bottom: 0; }
+.ptScroll thead th:first-child { text-align: left; position: sticky; left: 0; }
+@media (min-width: 800px) {
+  .ptHead { grid-template-columns: 1fr auto; align-items: end; }
+}
+
+/* ---------- Combo 3 ngày (cuộn ngang ghim) ---------- */
+.comboSec {
+  scroll-margin-top: 84px;
+  background: var(--rd-blue);
+  border-block: 2px solid var(--rd-forest);
+  padding-top: var(--rd-space);
+}
+.comboHead { padding-bottom: clamp(20px, 3vw, 36px); }
+.comboPin { padding-bottom: var(--rd-space); }
+.comboPin [data-fx-viewport] { padding-inline: var(--rd-gutter); }
+.comboTrack { gap: 22px; align-items: stretch; padding-right: var(--rd-gutter); }
+.dayCard {
+  position: relative;
+  width: min(84vw, 460px);
+  height: 100%;
+  min-height: 420px;
+  padding: 24px 24px 28px;
+  background: var(--rd-white);
+  border: 2px solid var(--rd-forest);
+  border-radius: 14px;
+  box-shadow: 6px 6px 0 var(--rd-forest);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.dayIntro { background: var(--rd-yellow); }
+.dayNo {
+  font-family: var(--rd-head);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--rd-red);
+}
+.dayPrice { font-family: var(--rd-head); font-weight: 800; font-size: 1.6rem; letter-spacing: -0.03em; }
+.dayStops { display: grid; gap: 6px; margin-top: 4px; }
+.dayStops li {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 2px 10px;
+  padding: 8px 0;
+  border-top: 2px dashed var(--rd-line);
+  line-height: 1.35;
+}
+.dayStops li b { font-variant-numeric: tabular-nums; color: var(--rd-red); grid-row: span 2; }
+.dayStops li em { font-style: normal; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rd-muted); }
+
+/* ---------- Đội ngũ và xe ---------- */
+.teamSec { background: var(--rd-paper); }
+.roleGrid { display: grid; gap: 16px; margin-top: clamp(24px, 3.4vw, 44px); }
+.role {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 22px;
+  background: var(--rd-white);
+  border: 2px solid var(--rd-forest);
+  border-radius: 14px;
+  box-shadow: 5px 5px 0 var(--rd-forest);
+}
+.roleIcon { width: 64px; height: 64px; padding: 8px; border: 2px solid var(--rd-forest); border-radius: 50%; background: var(--rd-yellow); color: var(--rd-forest); }
+.roleMeet { color: var(--rd-red); }
+.carBox {
+  display: grid;
+  gap: 22px;
+  margin-top: clamp(24px, 3.4vw, 44px);
+  padding: 24px;
+  background: var(--rd-blue);
+  border: 2px solid var(--rd-forest);
+  border-radius: 14px;
+  align-items: center;
+}
+.carArt { width: min(100%, 360px); color: var(--rd-forest); }
+@media (min-width: 700px) { .roleGrid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) {
+  .roleGrid { grid-template-columns: repeat(4, 1fr); }
+  .carBox { grid-template-columns: minmax(260px, 0.8fr) 1.2fr; padding: 32px; }
+}
+
+/* ---------- Đặt tour ---------- */
+.bookSec { background: var(--rd-paper); }
+.bookGrid { display: grid; gap: 28px; margin-top: clamp(24px, 3.4vw, 44px); align-items: start; }
+.steps { display: grid; gap: 14px; counter-reset: s; }
+.step {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 14px;
+  padding: 16px 18px;
+  background: var(--rd-white);
+  border: 2px solid var(--rd-forest);
+  border-radius: 12px;
+}
+.stepNo {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--rd-red);
+  color: var(--rd-white);
+  font-family: var(--rd-head);
+  font-weight: 800;
+  font-size: 1.3rem;
+  border: 2px solid var(--rd-forest);
+}
+.summary {
+  display: grid;
+  gap: 14px;
+  padding: 22px;
+  background: var(--rd-white);
+  border: 2px solid var(--rd-forest);
+  border-radius: 14px;
+  box-shadow: 6px 6px 0 var(--rd-forest);
+}
+.sumList { display: grid; gap: 10px; }
+.sumList > div { display: grid; gap: 2px; padding-bottom: 10px; border-bottom: 2px dashed var(--rd-line); }
+.sumList dt { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rd-muted); }
+.sumList dd { font-weight: 600; line-height: 1.35; }
+.sumTotal { font-family: var(--rd-head); font-size: 1.8rem; font-weight: 800; letter-spacing: -0.03em; color: var(--rd-red); }
+.depositBox { padding: 12px 14px; background: var(--rd-paper); border: 2px dashed var(--rd-forest); border-radius: 10px; font-size: 0.9rem; }
+.depositBox li { margin-top: 6px; line-height: 1.4; }
+@media (min-width: 960px) { .bookGrid { grid-template-columns: 1.1fr 0.9fr; } .summary { position: sticky; top: 110px; } }
+
+/* ---------- Đồng hồ hành trình trên bản đồ ---------- */
+.clockBar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: center;
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: var(--rd-white);
+  border: 2px solid var(--rd-forest);
+  border-radius: 12px;
+}
+.clockPlay {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--rd-forest);
+  background: var(--rd-yellow);
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--rd-forest);
+}
+.clockLabel { display: grid; gap: 4px; min-width: 0; }
+.clockLabel input[type="range"] { width: 100%; min-height: 32px; accent-color: var(--rd-red); }
+.clockOut { font-family: var(--rd-head); font-weight: 800; font-size: 1.4rem; font-variant-numeric: tabular-nums; min-width: 4.2ch; text-align: right; }
+
+/* 4 mục "cách làm việc" */
+.whyGrid { grid-template-columns: 1fr; }
+@media (min-width: 800px) { .whyGrid { grid-template-columns: repeat(2, 1fr); } .whyGrid > :nth-child(2) { transform: none; } }
+@media (min-width: 1200px) { .whyGrid { grid-template-columns: repeat(4, 1fr); } }
+
+/* thu nhỏ hero trên điện thoại */
+@media (max-width: 640px) {
+  .facts { grid-template-columns: 1fr; }
+  .fact { grid-template-columns: 1fr auto; align-items: baseline; }
+  .fact dt { grid-column: 1; }
+  .fact dd:not(.factSub) { grid-column: 2; grid-row: 1; }
+  .factSub { grid-column: 1 / -1; }
+  .routeDoodle { display: none; }
+  .clockBar { grid-template-columns: auto 1fr; }
+  .clockOut { grid-column: 1 / -1; text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .flipInner { transition: none; }
+  .cdNum[data-changed="1"], .flap[data-flap="1"] { animation: none; }
+}
+
+/* bảng giờ trên điện thoại: giờ + mã cùng một dòng, tên chuyến xuống dòng dưới */
+@media (max-width: 899px) {
+  .boardHeadRow { display: none; }
+  .boardRow {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: "time code go" "trip trip trip";
+    gap: 10px 12px;
+  }
+  .boardTime { grid-area: time; }
+  .boardCode { grid-area: code; justify-self: start; }
+  .boardTrip { grid-area: trip; }
+  .boardGo { grid-area: go; }
+  .flap { font-size: 0.95rem; padding: 2px 3px; }
+  .flapRow { gap: 2px; }
+}
+@media (max-width: 640px) {
+  .demoStripRow > span:last-child { display: none; }
 }

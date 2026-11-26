@@ -1,12 +1,12 @@
 export const ZONES = [
-  { id: "san-thuong", name: "Sân thượng mở", note: "Ngoài trời, nhìn thành phố lên đèn. Hợp nhóm nhỏ và buổi tối trời đẹp." },
-  { id: "hien-kinh", name: "Hiên kính", note: "Có mái, kính chắn gió, vẫn thấy toàn cảnh. Hợp khi trời nhiều gió." },
-  { id: "quay-bar", name: "Quầy bar", note: "Ngồi sát bartender, 1-3 người. Tiện vừa uống vừa hỏi vị." },
-  { id: "goc-neon", name: "Góc neon", note: "Sofa dưới bảng đèn hồng-cyan, hợp nhóm 4-8 người." },
+  { id: "san-thuong", name: "Sân thượng mở", note: "40 chỗ, ngoài trời, nhìn thành phố lên đèn. Hợp nhóm nhỏ, tối trời đẹp." },
+  { id: "hien-kinh", name: "Hiên kính", note: "24 chỗ, có mái, kính chắn gió. Hợp khi trời nhiều gió." },
+  { id: "quay-bar", name: "Quầy bar", note: "8 ghế, 1-3 người, ghế còn lại ưu tiên khách đến sớm." },
+  { id: "goc-neon", name: "Góc neon", note: "18 chỗ, sofa dưới đèn hồng-cyan, nhóm 4-8 người." },
 ] as const;
 export type ZoneId = (typeof ZONES)[number]["id"];
 
-export const TIMES = ["18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00"] as const;
+export const TIMES = ["17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30"] as const;
 export const MAX_GUESTS = 12;
 
 export type ReserveInput = { date: string; time: string; guests: number; zone: ZoneId | ""; drink: string };

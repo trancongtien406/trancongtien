@@ -29,7 +29,7 @@ export function CoffeeSelector() {
       <div className={styles.wrap}>
         <div className={styles.selectorGrid}>
           <div className={styles.selectorIntro}>
-            <span className={`${styles.label} ${styles.eyebrow}`}>02 / FIND YOUR COFFEE</span>
+            <span className={`${styles.label} ${styles.eyebrow}`}>02 / TÌM GU CÀ PHÊ</span>
             <h2 id="rn-sel-h" className={`${styles.display} ${styles.h2}`}>Gu của bạn?</h2>
             <p className={styles.lead}>Không cần hiểu hết về cà phê mới chọn được một ly ngon. Trả lời ba câu hỏi, Rót Nhiệt sẽ gợi ý một loại hạt và cách pha phù hợp với sở thích của bạn.</p>
           </div>

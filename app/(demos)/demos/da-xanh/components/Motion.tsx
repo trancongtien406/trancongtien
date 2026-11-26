@@ -5,8 +5,7 @@ import { gsap, ScrollTrigger, hasFinePointer, on, registerGsap, useIsoLayoutEffe
 
 /**
  * Chuyển động chung của trang NÉA.
- * 1) Hero choreography ~2.6 giây: vòng sáng nở, vòm ảnh mở từ dưới lên, chữ, mô tả, nút, các thẻ kính bay vào từ chiều sâu
- *    (blur 12px về nét), gợi ý cuộn. Cuộn sớm thì timeline tua nhanh.
+ * 1) Hero choreography ~2.6 giây: vòng sáng nở, vòm ảnh mở từ dưới lên, chữ/mô tả/nút/sự thật lộ ra theo tấm kính lướt (clip-path), các thẻ kính trượt vào từ phải, gợi ý cuộn. Cuộn sớm thì timeline tua nhanh.
  * 2) Depth parallax nhiều lớp: con trỏ (chỉ chuột) dịch từng lớp `data-depth` theo hệ số; cuộn dịch ngược theo hệ số.
  * 3) Ảnh `data-dx="pimg"` trôi nhẹ theo cuộn; đường kẻ `data-dx="rule"` vẽ ra.
  * Reduced-motion: không chạy gì, nội dung hiện đủ. Trạng thái ẩn đầu chỉ đặt sau khi JS chạy.
@@ -20,22 +19,24 @@ export function Motion() {
     const q = (sel: string) => Array.from(root.querySelectorAll<HTMLElement>(sel));
 
     mm.add("(prefers-reduced-motion: no-preference)", () => {
+      // ngôn ngữ chuyển động: LƯỚT KÍNH. Mỗi khối được một tấm kính mờ lướt từ trái sang phải để lộ nội dung (clip-path), không blur, không fade-up.
+      const OPEN = "inset(-14px -40px -14px -40px)", SHUT = "inset(-14px 100% -14px -40px)";
+      const wipe = (sel: string, at: number, dur = 1.1, stagger = 0) => tl.fromTo(q(sel), { clipPath: SHUT, x: -22 }, { clipPath: OPEN, x: 0, duration: dur, stagger, ease: "power3.inOut", clearProps: "clipPath,transform" }, at);
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
       tl.fromTo(q('[data-dx="halo"]'), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.6, ease: "expo.out" }, 0)
         .fromTo(q('[data-dx="arch"]'), { clipPath: "inset(100% 0% 0% 0% round 999px 999px 28px 28px)" }, { clipPath: "inset(0% 0% 0% 0% round 999px 999px 28px 28px)", duration: 1.4, ease: "power4.inOut" }, 0.25)
         .fromTo(q('[data-dx="arch-img"]'), { scale: 1.3 }, { scale: 1, duration: 1.8, ease: "power3.out" }, 0.25)
-        .from(q('[data-dx="logo"]'), { opacity: 0, y: -10, filter: "blur(8px)", duration: 0.8 }, 0.2)
-        .from(q('[data-dx="eyebrow"]'), { opacity: 0, y: 14, filter: "blur(8px)", duration: 0.8 }, 0.45)
-        .from(q('[data-dx="lead"]'), { opacity: 0, y: 18, filter: "blur(10px)", duration: 0.9 }, 1.25)
-        .from(q('[data-dx="cta"]'), { opacity: 0, y: 16, filter: "blur(8px)", duration: 0.8, stagger: 0.12 }, 1.5)
-        .from(q('[data-dx="facts"] li'), { opacity: 0, y: 12, filter: "blur(6px)", duration: 0.7, stagger: 0.1 }, 1.85)
-        .from(q('[data-dx="card"]'), { opacity: 0, scale: 0.78, y: 46, filter: "blur(12px)", duration: 1.1, stagger: 0.2, ease: "back.out(1.2)" }, 1.0)
+        .from(q('[data-dx="logo"]'), { opacity: 0, duration: 0.8 }, 0.2);
+      wipe('[data-dx="eyebrow"]', 0.45, 0.9);
+      wipe('[data-dx="line"]', 0.6, 1.2, 0.28);
+      wipe('[data-dx="lead"]', 1.3, 1.1);
+      wipe('[data-dx="cta"]', 1.55, 0.9, 0.14);
+      wipe('[data-dx="facts"] > div', 1.8, 0.9, 0.12);
+      tl.from(q('[data-dx="card"]'), { opacity: 0, scale: 0.82, x: 60, duration: 1.1, stagger: 0.2, ease: "back.out(1.2)" }, 1.0)
         .from(q('[data-dx="hint"]'), { opacity: 0, duration: 0.8 }, 2.4);
       let yielded = false;
       const early = () => { if (!yielded && window.scrollY > 60 && tl.time() < 2.2) { yielded = true; tl.timeScale(5); } };
       const off = on(window, "scroll", early, { passive: true });
-      const done = () => { q('[data-dx]').forEach((el) => { if (el.style.filter === "blur(0px)") el.style.filter = ""; }); };
-      tl.eventCallback("onComplete", done);
 
       // depth: cuộn (mọi cỡ, nhẹ hơn trên di động)
       const hero = root.querySelector<HTMLElement>('[data-dx="hero"]');

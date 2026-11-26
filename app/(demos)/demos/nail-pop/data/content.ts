@@ -58,38 +58,40 @@ export const CHARM_MIN = 4;
 
 export const SERVICES = [
   {
-    id: "gel-co-ban", name: "Sơn gel cơ bản", desc: "Một màu bóng gương, viền móng gọn, giữ màu đều.", time: "45 – 60 phút", price: "150.000 – 220.000 ₫",
+    id: "gel-co-ban", mins: 60, name: "Sơn gel cơ bản", desc: "Một màu bóng gương, viền móng gọn, giữ màu đều.", time: "45 – 60 phút", price: "150.000 – 220.000 ₫",
     flood: "#ff2e93", on: "#0d0d0f", preset: { pattern: "tron", length: "ngan" },
   },
   {
-    id: "gel-design", name: "Gel design", desc: "Ombre, french, chấm bi: phối màu theo tâm trạng của bạn.", time: "60 – 90 phút", price: "220.000 – 350.000 ₫",
+    id: "gel-design", mins: 90, name: "Gel design", desc: "Ombre, french, chấm bi: phối màu theo tâm trạng của bạn.", time: "60 – 90 phút", price: "220.000 – 350.000 ₫",
     flood: "#e6ff00", on: "#0d0d0f", preset: { pattern: "ombre", length: "vua" },
   },
   {
-    id: "nail-art", name: "Nail art vẽ tay", desc: "Mang moodboard của bạn tới, tụi mình vẽ lại trên từng móng.", time: "90 – 150 phút", price: "350.000 – 550.000 ₫",
+    id: "nail-art", mins: 150, name: "Nail art vẽ tay", desc: "Mang moodboard của bạn tới, tụi mình vẽ lại trên từng móng.", time: "90 – 150 phút", price: "350.000 – 550.000 ₫",
     flood: "#1f3bff", on: "#ffffff", preset: { pattern: "cham", length: "vua", charm: "sao" },
   },
   {
-    id: "dap-gel", name: "Đắp gel nối móng", desc: "Tạo độ dài và dáng móng như ý: vuông, almond hay coffin.", time: "90 – 120 phút", price: "350.000 – 500.000 ₫",
+    id: "dap-gel", mins: 120, name: "Đắp gel nối móng", desc: "Tạo độ dài và dáng móng như ý: vuông, almond hay coffin.", time: "90 – 120 phút", price: "350.000 – 500.000 ₫",
     flood: "#ff7a1a", on: "#0d0d0f", preset: { pattern: "tron", length: "dai", shape: "coffin" },
   },
   {
-    id: "chrome", name: "Chrome và mắt mèo", desc: "Ánh kim bắt sáng, đổi tông theo góc nhìn.", time: "60 – 90 phút", price: "250.000 – 350.000 ₫",
+    id: "chrome", mins: 90, name: "Chrome và mắt mèo", desc: "Ánh kim bắt sáng, đổi tông theo góc nhìn.", time: "60 – 90 phút", price: "250.000 – 350.000 ₫",
     flood: "#4cc9ff", on: "#0d0d0f", preset: { pattern: "chrome", length: "vua" },
   },
   {
-    id: "thao-gel", name: "Tháo gel và chăm sóc", desc: "Tháo lớp cũ nhẹ tay, dưỡng viền móng trước khi lên bộ mới.", time: "30 – 45 phút", price: "80.000 – 150.000 ₫",
+    id: "thao-gel", mins: 45, name: "Tháo gel và chăm sóc", desc: "Tháo lớp cũ nhẹ tay, dưỡng viền móng trước khi lên bộ mới.", time: "30 – 45 phút", price: "80.000 – 150.000 ₫",
     flood: "#0d0d0f", on: "#e6ff00", preset: { pattern: "tron", length: "ngan" },
   },
 ] as const;
 
 export const FAQ = [
-  { q: "Có cần đặt lịch trước không?", a: "Nên đặt trước để tụi mình giữ chỗ đủ thời gian cho bộ bạn chọn. Bạn có thể dựng bộ móng trong công cụ ở trên rồi gửi bản tóm tắt qua form tư vấn." },
+  { q: "Có cần đặt lịch trước không?", a: "Nên đặt trước để tụi mình giữ chỗ đủ thời gian cho bộ bạn chọn. Chọn khung giờ ở mục Đặt lịch rồi gửi yêu cầu qua form tư vấn; khách đi lẻ vẫn được nhận nếu còn trống." },
+  { q: "Đặt cọc bao nhiêu, khi nào mất cọc?", a: "Nail art và đắp gel đặt cọc 100.000 ₫, trừ vào tổng khi thanh toán. Báo đổi hoặc huỷ trước ít nhất 4 giờ thì không mất cọc; báo muộn hơn, cọc được giữ cho lần đặt kế tiếp trong 14 ngày." },
   { q: "Mang mẫu của riêng mình tới được không?", a: "Được. Gửi ảnh tham khảo trước, tụi mình sẽ điều chỉnh theo dáng và độ dài móng thật của bạn để bộ móng lên tay đẹp." },
   { q: "Làm một bộ mất bao lâu?", a: "Thường từ 45 đến 150 phút tuỳ dịch vụ, hoạ tiết và độ dài. Công cụ dựng móng cho bạn thời gian ước tính theo lựa chọn." },
+  { q: "Bộ móng giữ được bao lâu, bong thì sao?", a: "Độ bền phụ thuộc thói quen sinh hoạt và tốc độ mọc móng của mỗi người. Trong 5 ngày sau khi làm, nếu móng bong hoặc sứt do kỹ thuật, tụi mình chỉnh lại miễn phí." },
   { q: "Tháo gel cũ có mất thêm phí không?", a: "Có dịch vụ tháo gel riêng. Nếu bạn đang đeo bộ cũ, hãy báo trước để tụi mình cộng thêm thời gian vào lịch." },
   { q: "Mình dị ứng hoá chất thì sao?", a: "Hãy báo trước nếu bạn dị ứng hoá chất, keo, gel hay acrylic. Tụi mình sẽ trao đổi về sản phẩm sẽ dùng và cùng bạn quyết định có phù hợp để làm hay không." },
-  { q: "Dụng cụ được vệ sinh thế nào?", a: "Dụng cụ được làm sạch và xử lý sau mỗi khách theo quy trình của tiệm. Tụi mình không cam kết vô trùng tuyệt đối; nếu bạn có yêu cầu riêng, hãy nói trước khi làm." },
+  { q: "Dụng cụ được vệ sinh thế nào?", a: "Dụng cụ kim loại được làm sạch và xử lý sau mỗi khách theo quy trình của tiệm, vật dụng dùng một lần được thay mới. Tụi mình không cam kết vô trùng tuyệt đối; nếu bạn có yêu cầu riêng, hãy nói trước khi làm." },
 ] as const;
 
 export const STEPS = [
@@ -106,3 +108,42 @@ export const MOODBOARD = [
   { file: "tay-nen-xanh-la", alt: "Bàn tay xoè với móng nhiều màu dưới bóng nắng trên nền xanh lá", label: "Bóng nắng, móng tươi", w: 1200, h: 1800 },
   { file: "hai-tay-bong-do", alt: "Hai bàn tay xoè đổ bóng trên nền xanh lá, móng nhiều màu", label: "Hai tay, một mood", w: 1200, h: 800 },
 ] as const;
+
+export const STUDIO = {
+  area: "Quận Hải Châu, Đà Nẵng",
+  hours: "9:00 – 20:00, mỗi ngày",
+  deposit: "100.000 ₫",
+} as const;
+
+export const HERO_FACTS = [
+  { k: "Giá từ", v: "150.000 ₫", sub: "sơn gel một màu, 45 – 60 phút" },
+  { k: "Mở cửa", v: "9:00 – 20:00", sub: "mỗi ngày, nên đặt lịch trước" },
+  { k: "Đặt cọc", v: "100.000 ₫", sub: "chỉ nail art và đắp gel, trừ vào tổng" },
+] as const;
+
+export const POLICIES = [
+  { t: "Đặt lịch và đặt cọc", d: "Giữ chỗ qua form tư vấn. Nail art và đắp gel cần cọc 100.000 ₫, trừ vào tổng khi thanh toán. Sơn gel cơ bản và tháo gel không cần cọc." },
+  { t: "Đổi hoặc huỷ lịch", d: "Báo trước ít nhất 4 giờ thì đổi sang khung khác hoặc huỷ không mất cọc. Báo muộn hơn, cọc được giữ cho lần đặt kế tiếp trong 14 ngày." },
+  { t: "Đến trễ", d: "Trễ đến 15 phút vẫn giữ lịch. Trễ hơn, tụi mình có thể rút gọn hoạ tiết hoặc dời sang khung gần nhất còn trống." },
+  { t: "Chỉnh sửa miễn phí", d: "Trong 5 ngày sau khi làm, móng bong hoặc sứt do kỹ thuật sẽ được chỉnh lại miễn phí. Không áp dụng khi móng bị va đập mạnh hoặc tự gỡ." },
+  { t: "Dị ứng và sức khoẻ móng", d: "Hãy báo trước nếu bạn dị ứng hoá chất, keo, gel. Móng đang viêm, có vết thương hoặc nghi nhiễm nấm nên hoãn làm. Tụi mình không tư vấn y tế." },
+  { t: "Dụng cụ và vệ sinh", d: "Dụng cụ kim loại được làm sạch và xử lý sau mỗi khách; giũa giấy, que gỗ dùng một lần được thay mới. Tụi mình không cam kết vô trùng tuyệt đối." },
+] as const;
+
+/* ---- Đặt lịch: khung giờ ---- */
+export const BOOK_DAYS = ["Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy", "Chủ nhật"] as const;
+export const OPEN_MIN = 9 * 60;
+export const CLOSE_MIN = 20 * 60;
+export const SLOT_MIN = 30;
+/** Khung giờ đã có khách, theo ngày (chỉ số 0 = Thứ Hai), tính bằng chỉ số ô 30 phút từ 9:00. */
+export const BUSY: Record<number, number[]> = {
+  0: [0, 1, 2, 9, 10, 11, 12],
+  1: [4, 5, 6, 7, 16, 17],
+  2: [2, 3, 8, 9, 10, 18, 19, 20],
+  3: [0, 1, 6, 7, 8, 13, 14],
+  4: [5, 6, 7, 8, 9, 10, 11, 12, 13],
+  5: [0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 14, 15, 16],
+  6: [2, 3, 4, 5, 6, 12, 13, 14, 15],
+};
+
+export const FEE_NOTE = "Phụ phí tính trên một bộ móng 10 ngón (nghìn đồng), cộng vào giá dịch vụ cơ bản.";

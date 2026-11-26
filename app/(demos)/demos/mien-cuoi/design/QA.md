@@ -7,3 +7,6 @@ Lệnh: `BASE=http://localhost:3100 node tests/showroom/mien-cuoi/e2e.mjs` (Play
 Ảnh chụp (tự xem và sửa): `tests/showroom/mien-cuoi/screenshots/` hero 1440/1024/768/390, part-1440-0..4, full-390-0..3, navigator/scheduler 390 và 1440, credits-390, logo-sheet. Đã sửa sau khi xem: H1 hero bị xuống 3 dòng (giảm cỡ), logo header quá nhỏ (tăng), ô ngày tràn chữ ở 390 (giảm cỡ), crop ảnh Về Miền Cười, DemoNotice cố định che checkbox (scroll-padding-bottom).
 
 Chưa kiểm: Safari/Firefox; thử người dùng thật; screen reader thật; Lighthouse/bundle; differentiation gate chung của điều phối viên; nội dung y tế chưa được bác sĩ thẩm định (ChatGPT cũng ghi rõ); tra trùng tên thương hiệu. Một lần chạy bị lỗi do route khác (hien-man/fonts.ts) biên dịch lỗi tạm thời, chạy lại thì qua.
+
+## Rework 2026-11-25
+`BASE=http://localhost:3100 node tests/showroom/mien-cuoi/e2e.mjs`: **150 pass, 0 fail** (thêm nội dung đề tài, sơ đồ hàm răng, timeline, checklist, reduced-motion, long task 0 ở 1440 và 390). Đã sửa Care Navigator thành "Kiểm tra nhanh", bác sĩ theo vai trò. Chụp lại và tự xem.

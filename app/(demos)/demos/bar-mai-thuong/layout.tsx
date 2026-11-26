@@ -4,9 +4,9 @@ import { fontVars } from "./fonts";
 const base = "/images/demos/bar-mai-thuong/identity";
 
 export const metadata: Metadata = {
-  title: "Tầng Mây · Rooftop bar & cocktail Đà Nẵng",
+  title: "Tầng Mây · Rooftop bar & cocktail ở Sơn Trà, Đà Nẵng",
   description:
-    "Rooftop bar & cocktail trên mái nhà Đà Nẵng: chọn ly theo vị ngọt, chua, đắng, khói và chuẩn bị tóm tắt đặt bàn. Dành cho khách từ 18 tuổi.",
+    "Tầng Mây: rooftop bar & cocktail ở Quận Sơn Trà, Đà Nẵng. Mở 17:00–00:00, happy hour 17:00–19:00, thực đơn cocktail, mocktail, món nhắm, đặt bàn nhóm và sự kiện riêng. Dành cho khách từ 18 tuổi.",
   icons: {
     icon: [
       { url: `${base}/favicon.svg`, type: "image/svg+xml" },
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Tầng Mây · Rooftop bar & cocktail",
-    description: "Chạm tầng mây, chạm vị đêm.",
+    description: "Rooftop bar & cocktail ở Quận Sơn Trà, Đà Nẵng.",
     images: [{ url: `${base}/og-image.webp`, width: 1200, height: 630, alt: "Tầng Mây, rooftop bar và cocktail" }],
     locale: "vi_VN",
     type: "website",

@@ -1,3 +1,8 @@
+# QA · Tháng Mơ — cập nhật rework 2026-11-25
+
+Lệnh: `BASE=http://localhost:3100 node tests/showroom/thang-mo/e2e.mjs` chạy foreground tới dòng cuối: **186 pass, 0 fail** (lần cuối, sau mọi chỉnh sửa). Test mới ([7b]): hero nêu loại hình/quận/đối tượng + 3 sự thật + CTA; 4 dịch vụ; mỗi gói có Bao gồm/Không bao gồm; bảng Album/ảnh in/file 7 hàng; phong cách trong DraggableGallery (4 thẻ, mỗi thẻ địa điểm/giờ/trang phục); 6 chính sách; bảng trang phục 6 hàng; GoldenHour (16:45 là Giờ vàng, 12:00 Nắng cao, mặt trời di chuyển, mùa 9–12 hoàng hôn sớm); Lịch giao ảnh (rỗng, P02 từ 01/03/2099 => 22/03–31/03 có album, P01 không có mốc album, ngày quá khứ báo lỗi); không còn chữ "stock" trên trang chính. Sửa e2e cũ cho khớp (3 gói, giá P02 11.900.000, 7 bước, FAQ 12, nút mở album theo aria-label). Phát hiện khi test: DraggableGallery bắt con trỏ nên click chuột vào nút con không chạy; đã thêm StyleGallery.tsx chuyển click không-kéo về nút dưới con trỏ. Ma trận: `node scripts/showroom-effects-matrix.mjs thang-mo`: đại trà 2 (ClipReveal, ScrollScrubText), chữ ký thư viện 1 (DraggableGallery); trước: 0/0/0. Ảnh chụp lại 1440/390 (hero, part-*, full) và tự xem. Chưa kiểm: Safari/Firefox, thiết bị thật, screen reader, Lighthouse. Phần dưới là QA của lần trước (một số số liệu đã cũ: 166 pass, chip ảnh, 4 gói...).
+
+---
 # QA, Tháng Mơ
 
 Lệnh: `BASE=http://localhost:3100 node tests/showroom/thang-mo/e2e.mjs` (Playwright + Chrome headless, dev server chung). Lần chạy cuối, sau mọi chỉnh sửa: **166 pass, 0 fail** (đã thêm quét từ cấm ở mọi trạng thái chính). `npx tsc --noEmit -p . | grep thang-mo`: không lỗi. Sau khi chạy, `/demos/mien-cuoi` và `/demos/ben-vi` vẫn 200.

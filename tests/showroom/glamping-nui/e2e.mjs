@@ -160,10 +160,15 @@ console.log("[4] Hero choreography, tàn lửa, đếm ngược hoàng hôn, n�
   // lửa SVG nhấp nháy: animation chạy
   ok(await page.evaluate(() => getComputedStyle(document.querySelector("svg g[class*=fireOuter]")).animationName !== "none"), "lửa SVG đang nhấp nháy (CSS animation)");
   // đếm ngược
-  const t1 = norm(await page.locator('[data-testid="countdown"] [class*=cdClock] span').innerText());
-  await page.waitForTimeout(2200);
-  const t2 = norm(await page.locator('[data-testid="countdown"] [class*=cdClock] span').innerText());
-  ok(/^\d{2}:\d{2}:\d{2}$/.test(t1) && t1 !== t2, "đếm ngược định dạng HH:MM:SS và đang chạy", `${t1} -> ${t2}`);
+  const cdSel = '[data-testid="countdown"] [class*=cdClock] span';
+  const during = (await page.locator('[data-testid="countdown"] [class*=cdNow]').count()) > 0;
+  if (during) ok(/Hoàng hôn đang bắt đầu/.test(norm(await page.locator('[data-testid="countdown"]').innerText())), "đang trong khung hoàng hôn: hiện trạng thái 'đang bắt đầu'");
+  else {
+    const t1 = norm(await page.locator(cdSel).innerText());
+    await page.waitForTimeout(2200);
+    const t2 = norm(await page.locator(cdSel).innerText());
+    ok(/^\d{2}:\d{2}:\d{2}$/.test(t1) && t1 !== t2, "đếm ngược định dạng HH:MM:SS và đang chạy", `${t1} -> ${t2}`);
+  }
   const foot = norm(await page.locator('[data-testid="countdown"]').innerText());
   ok(/khoảng \d{2}:\d{2}/.test(foot), "có giờ hoàng hôn tính theo ngày", foot);
   // nền sáng → tối
@@ -330,7 +335,7 @@ console.log("[8] FAQ, thẻ lều, ảnh, credits");
 {
   const { ctx, page } = await newPage();
   await load(page);
-  ok((await page.locator("details[name=gl-faq]").count()) === 5, "5 câu hỏi");
+  ok((await page.locator("details[name=gl-faq]").count()) === 8, "8 câu hỏi");
   await page.locator("details.qa summary, #giai-dap summary").nth(1).click();
   ok(await page.evaluate(() => document.querySelectorAll("#giai-dap details[open]").length === 1), "mở câu 2 thì câu 1 đóng (accordion)");
   ok((await page.locator("#luu-tru article").count()) === 3, "3 loại lều");
@@ -346,6 +351,31 @@ console.log("[8] FAQ, thẻ lều, ảnh, credits");
   ok((await page.locator("li img").count()) === 14, "credits liệt kê 14 ảnh", String(await page.locator("li img").count()));
   ok(/do Trần Công Tiến thiết kế/.test(await page.locator("main").innerText()), "credits có lời công khai trung thực");
   ok(!(await bannedHits(page)).length, "credits không chữ cấm");
+  await ctx.close();
+}
+
+// ---------- 8b. Nội dung ngành glamping
+console.log("[8b] Nội dung khu glamping thật");
+{
+  const { ctx, page } = await newPage();
+  await load(page);
+  const hero = norm(await page.locator("section#top").innerText());
+  ok(/Khu glamping/.test(hero) && /Hòa Vang/.test(hero) && /890\.000/.test(hero) && /14:00/.test(hero) && /11:00/.test(hero), "hero: loại hình, khu vực, giá từ, nhận/trả lều", hero.slice(0, 120));
+  ok(/Xem lều và giá/.test(hero) && /hỏi đặt lều/i.test(hero), "hero: CTA đúng ngành");
+  for (const id of ["luu-tru", "hanh-trinh", "hoat-dong", "lua-trai", "lich-trinh", "quy-dinh", "lap-ke-hoach", "giai-dap"]) ok((await page.locator("#" + id).count()) === 1, "có section #" + id);
+  const stay = norm(await page.locator("#luu-tru").innerText());
+  ok(/1\.090\.000/.test(stay) && /1\.390\.000/.test(stay) && /cuối tuần/i.test(stay), "bảng giá ngày thường/cuối tuần/lễ");
+  ok(/Sức chứa: 2/.test(stay) && /Sức chứa: 4/.test(stay), "sức chứa + giường từng lều");
+  ok(/Set BBQ 2 người/.test(norm(await page.locator("#lua-trai").innerText())), "menu BBQ có giá");
+  ok((await page.locator("#lich-trinh time").count()) >= 10, "lịch trình 2N1Đ có >= 10 mốc");
+  const rules = norm(await page.locator("#quy-dinh").innerText());
+  ok(/đặt cọc 50%/i.test(rules) && /hoàn đủ cọc/i.test(rules) && /Hòa Vang/.test(rules) && /Tháng 9 đến 12/.test(rules), "quy định cọc/huỷ, cách đến, mùa");
+  const body = await page.evaluate(() => document.getElementById("main").innerText);
+  ok(!/an toàn tuyệt đối|giấy phép|chứng nhận|đạt chuẩn/i.test(body), "không cam kết an toàn tuyệt đối/giấy phép");
+  const fxs = await page.evaluate(() => [...new Set([...document.querySelectorAll("[data-fx]")].map((e) => e.getAttribute("data-fx")))]);
+  ok(!fxs.includes("SplitReveal") && !fxs.includes("VelocityMarquee") && !fxs.includes("ClipReveal") && !fxs.includes("MagneticButton"), "đã bỏ SplitWords/Marquee/ClipReveal/Magnetic", fxs.join(","));
+  ok(fxs.includes("Ignite") && fxs.includes("Unfold"), "chữ ký riêng Ignite + Unfold chạy");
+  ok(await page.evaluate(() => [...document.querySelectorAll('[data-fx="Ignite"]')].every((e) => e.getAttribute("data-fx-ready") === "1")), "mọi Ignite sẵn sàng");
   await ctx.close();
 }
 

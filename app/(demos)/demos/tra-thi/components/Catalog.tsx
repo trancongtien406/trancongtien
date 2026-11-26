@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import s from "../brand.module.css";
-import { TEAS, vnd, fmtSec, type Tea } from "../data/tea";
+import { TEAS, vnd, fmtSec, cupPrice, type Tea } from "../data/tea";
 import { InkReveal, InkTitle } from "./Ink";
 
 const GROUPS = [
@@ -18,14 +18,14 @@ const GROUPS = [
 function Detail({ tea, onBrew }: { tea: Tea; onBrew: (t: Tea) => void }) {
   return (
     <>
-      <p className={s.teaKind}><i className={s.swatch} style={{ background: tea.swatch }} />{tea.kind} · {tea.origin}</p>
+      <p className={s.teaKind}><i className={s.swatch} style={{ background: tea.swatch }} />{tea.kind}</p>
       <h3 className={s.h3}>{tea.name}</h3>
       <p>{tea.flavor}.</p>
       <dl className={s.specs}>
         <div><dt>Nhiệt độ</dt><dd>{tea.tempC}&nbsp;°C</dd></div>
         <div><dt>Lượng trà</dt><dd>{tea.grams}&nbsp;g / {tea.ml}&nbsp;ml</dd></div>
         <div><dt>Nước đầu</dt><dd>{fmtSec(tea.steeps[0])}</dd></div>
-        <div><dt>Giá tham khảo</dt><dd>{vnd(tea.price)}</dd></div>
+        <div><dt>Giá ấm / chén</dt><dd>{vnd(tea.price)} / {vnd(cupPrice(tea))}</dd></div>
       </dl>
       <button type="button" className={`${s.btn} ${s.btnLine}`} onClick={() => onBrew(tea)}>Xem cách pha và bấm giờ</button>
     </>
@@ -35,6 +35,7 @@ function Detail({ tea, onBrew }: { tea: Tea; onBrew: (t: Tea) => void }) {
 export function Catalog() {
   const [group, setGroup] = useState("all");
   const [active, setActive] = useState<string>(TEAS[0].id);
+  const [unit, setUnit] = useState<"am" | "chen">("am");
   const list = useMemo(() => TEAS.filter(GROUPS.find((g) => g.id === group)!.test), [group]);
   const cur = TEAS.find((t) => t.id === active) ?? TEAS[0];
   const inList = list.some((t) => t.id === cur.id);
@@ -48,9 +49,13 @@ export function Catalog() {
   return (
     <div className={`${s.wrap} ${s.catalog}`}>
       <div className={s.catalogHead}>
-        <p className={s.kicker}>Danh mục trà</p>
-        <InkTitle as="h2" className={s.h2}>Những sắc vị trong một chiếc chén.</InkTitle>
-        <p className={s.lead}>Giá là giá tham khảo cho một ấm thưởng trà tại bàn, có thể thay đổi theo mùa vụ và nguồn cung.</p>
+        <p className={s.kicker}>Menu trà</p>
+        <InkTitle as="h2" className={s.h2}>Mười hai loại trà, pha tại bàn.</InkTitle>
+        <p className={s.lead}>Một ấm đủ cho 2 đến 3 người và pha được nhiều nước. Chén lẻ dành cho người ngồi một mình. Giá tham khảo, có thể thay đổi theo mùa vụ.</p>
+        <div className={s.chips} role="group" aria-label="Xem giá theo">
+          <button type="button" className={s.chip} aria-pressed={unit === "am"} onClick={() => setUnit("am")}>Giá theo ấm</button>
+          <button type="button" className={s.chip} aria-pressed={unit === "chen"} onClick={() => setUnit("chen")}>Giá theo chén</button>
+        </div>
         <div className={s.chips} role="group" aria-label="Lọc theo nhóm trà">
           {GROUPS.map((g) => (
             <button key={g.id} type="button" className={s.chip} aria-pressed={group === g.id} onClick={() => setGroup(g.id)}>{g.label}</button>
@@ -67,8 +72,8 @@ export function Catalog() {
             >
               <span className={s.teaNo}>{String(i + 1).padStart(2, "0")}</span>
               <span className={s.teaName}><i className={s.swatch} style={{ background: t.swatch }} />{t.name}</span>
-              <span className={s.teaFlavor}>{t.kind} · {t.origin}</span>
-              <span className={s.teaPrice}>{vnd(t.price)}</span>
+              <span className={s.teaFlavor}>{t.kind}</span>
+              <span className={s.teaPrice}>{vnd(unit === "am" ? t.price : cupPrice(t))}<small>{unit === "am" ? " / ấm" : " / chén"}</small></span>
             </button>
             {shown.id === t.id && <div className={s.rowDetail}><Detail tea={t} onBrew={brew} /></div>}
           </li>

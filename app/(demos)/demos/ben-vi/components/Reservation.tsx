@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useState } from "react";
 import { buildConsultHref } from "@/features/showroom/consultation";
+import { HOURS } from "../data/restaurant";
 import s from "../brand.module.css";
 
 const SLOTS = ["11:00", "11:30", "12:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30"] as const;
@@ -51,7 +52,7 @@ export function Reservation() {
     : "";
   const ready = !!day && !!slot && areaOk;
 
-  const text = ready ? `Yêu cầu đặt bàn (xem trước): ${fmt(day!.d)} lúc ${slot}, ${guests} khách, khu ${areaObj.name}. Phiếu này chưa phải xác nhận giữ bàn.` : "";
+  const text = ready ? `Yêu cầu đặt bàn: ${fmt(day!.d)} lúc ${slot}, ${guests} khách, khu ${areaObj.name}. Phiếu này chưa phải xác nhận giữ bàn.` : "";
 
   const copy = async () => {
     try { await navigator.clipboard.writeText(text); setCopied("Đã sao chép nội dung phiếu."); } catch { setCopied("Trình duyệt không cho sao chép tự động. Hãy chọn và sao chép thủ công."); }
@@ -62,9 +63,12 @@ export function Reservation() {
       <div className={s.wrap}>
         <div className={s.secHead} data-bv="reveal">
           <span className={s.eyebrow}>Đặt bàn</span>
-          <h2 id="res-h" className={`${s.display} ${s.h2}`}>Chọn giờ, <span className={s.italic}>xem phiếu giữ chỗ</span></h2>
-          <p className={s.lead}>Chọn ngày, giờ và khu vực để có phiếu tóm tắt yêu cầu. Phiếu này chưa giữ bàn và trang không gửi thông tin đi đâu. Ngày giờ báo kín chỉ mang tính tham khảo.</p>
+          <h2 id="res-h" className={`${s.display} ${s.h2}`}>Đặt bàn và tiệc đoàn, <span className={s.italic}>chọn giờ trước</span></h2>
+          <p className={s.lead}>Chọn ngày, giờ, số khách và khu vực để có phiếu tóm tắt yêu cầu. Phiếu này chưa giữ bàn và trang không gửi thông tin đi đâu. Nhóm từ 10 khách dùng phòng riêng, cần chốt thực đơn và đặt cọc (xem chính sách bên dưới).</p>
         </div>
+        <dl className={s.hours} data-bv="reveal">
+          {HOURS.map((h) => (<div key={h.d}><dt>{h.d}</dt><dd>{h.t}</dd></div>))}
+        </dl>
         <div className={s.resGrid}>
           <div className={s.panel} data-bv="reveal">
             <div className={s.fld}>
@@ -127,7 +131,7 @@ export function Reservation() {
                 <span className={s.stamp}>Xem trước · chưa giữ bàn</span>
                 <p className={s.ok}>Bàn chỉ được giữ khi nhà hàng xác nhận. Trang này không gửi thông tin đi đâu.</p>
                 <div className={s.sheetActions}>
-                  <a className={`${s.btn} ${s.btnInk}`} href={buildConsultHref("ben-vi")} data-testid="cta-consult">Tư vấn website đặt bàn như thế này</a>
+                  <a className={`${s.btn} ${s.btnInk}`} href={buildConsultHref("ben-vi")} data-testid="cta-consult">Chuyển sang form liên hệ</a>
                   <button type="button" className={`${s.btn} ${s.btnInkLine}`} onClick={copy}>Sao chép nội dung</button>
                 </div>
                 <p className={s.saved} role="status">{copied}</p>

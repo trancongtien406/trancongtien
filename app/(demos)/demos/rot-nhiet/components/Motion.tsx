@@ -5,9 +5,10 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 /**
- * Chữ ký chuyển động: "áp phích được dán lên tường" - chữ rơi vào nhịp, tem đóng dấu,
- * dải đỏ trượt theo cuộn, manifesto sáng dần từng từ. Chỉ transform/opacity.
- * Tôn trọng prefers-reduced-motion: không hiệu ứng, nội dung hiện đủ.
+ * Ngôn ngữ chuyển động của Rót Nhiệt: "rót". Chữ H1 rơi từ trên xuống như giọt, đáy chạm là nảy nhẹ;
+ * khung ảnh được rót đầy từ trên (clip-path), các khối cuộn tới được rót xuống từ mép trên như dòng cà phê.
+ * Không có fade-up kiểu chung: mọi reveal là một đường rót từ trên xuống.
+ * Chỉ transform/opacity/clip-path. Tôn trọng prefers-reduced-motion: không hiệu ứng, nội dung hiện đủ.
  */
 export function Motion() {
   useEffect(() => {
@@ -16,29 +17,23 @@ export function Motion() {
     const mm = gsap.matchMedia();
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       const q = (s: string) => Array.from(document.querySelectorAll<HTMLElement>(s));
-      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-      const one = (sel: string) => q(sel);
-      tl.fromTo(one('[data-rn="meta"]'), { yPercent: -100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.4 }, 0)
-        .fromTo(one(".rn-ch"), { yPercent: 70, rotate: 5, opacity: 0 }, { yPercent: 0, rotate: 0, opacity: 1, duration: 0.7, stagger: 0.06 }, 0.1)
-        .fromTo(one('[data-rn="frame"]'), { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, 0.35)
-        .fromTo(one('[data-rn="sub"]'), { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5 }, 0.9)
-        .fromTo(one('[data-rn="stamp"]'), { scale: 1.8, rotate: -40, opacity: 0 }, { scale: 1, rotate: -8, opacity: 1, duration: 0.4, ease: "back.out(1.6)" }, 1.0)
-        .fromTo(one('[data-rn="desc"],[data-rn="cta"]'), { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, stagger: 0.12 }, 1.05);
+      const tl = gsap.timeline();
+      tl.fromTo(q('[data-rn="meta"]'), { clipPath: "inset(0 0 100% 0)", opacity: 1 }, { clipPath: "inset(0 0 0% 0)", duration: 0.45, ease: "power2.out", clearProps: "clipPath" }, 0)
+        // giọt rơi: từ trên xuống, chạm đáy thì nén lại rồi bật về
+        .fromTo(q(".rn-ch"), { yPercent: -130, scaleY: 1.35, opacity: 0 }, { yPercent: 0, scaleY: 1, opacity: 1, duration: 0.62, stagger: 0.07, ease: "bounce.out" }, 0.1)
+        .fromTo(q('[data-rn="frame"]'), { clipPath: "inset(0 0 100% 0)", opacity: 1 }, { clipPath: "inset(0 0 0% 0)", duration: 0.9, ease: "power3.inOut", clearProps: "clipPath" }, 0.3)
+        .fromTo(q('[data-rn="sub"]'), { clipPath: "inset(0 0 100% 0)", opacity: 1 }, { clipPath: "inset(0 0 0% 0)", duration: 0.45, ease: "power2.out", clearProps: "clipPath" }, 0.95)
+        .fromTo(q('[data-rn="stamp"]'), { scale: 1.8, rotate: -40, opacity: 0 }, { scale: 1, rotate: -8, opacity: 1, duration: 0.4, ease: "back.out(1.6)" }, 1.1)
+        .fromTo(q('[data-rn="desc"],[data-rn="cta"],[data-rn="specs"]'), { clipPath: "inset(0 0 100% 0)", opacity: 1 }, { clipPath: "inset(0 0 0% 0)", duration: 0.55, stagger: 0.12, ease: "power2.out", clearProps: "clipPath" }, 1.05);
 
-      // scroll moment 1: dải nhiệt trượt ngang theo cuộn
-      const track = document.querySelector<HTMLElement>("[data-rn-track]");
-      if (track) {
-        gsap.fromTo(track, { x: 0 }, { x: () => -(track.scrollWidth - window.innerWidth) * 0.6, ease: "none", scrollTrigger: { trigger: track.parentElement, start: "top bottom", end: "bottom top", scrub: 0.6 } });
-      }
-      // reveal section heads / cards
+      // mọi khối reveal: rót xuống từ mép trên
       q("[data-rn-reveal]").forEach((el) => {
-        gsap.from(el, { y: 40, opacity: 0, duration: 0.7, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+        gsap.fromTo(el, { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0 0 0% 0)", duration: 0.85, ease: "power2.inOut", clearProps: "clipPath", scrollTrigger: { trigger: el, start: "top 88%", once: true } });
       });
-      // scroll moment 2: manifesto sáng dần theo từng từ
-      const words = q("[data-rn-word]");
-      if (words.length) {
-        gsap.fromTo(words, { opacity: 0.18 }, { opacity: 1, ease: "none", stagger: 0.12, scrollTrigger: { trigger: words[0].closest("section"), start: "top 60%", end: "center 40%", scrub: 0.5 } });
-      }
+      // ảnh trong menu/hạt: lớp ảnh co từ lớn về vừa khi khung được rót
+      q("[data-rn-reveal] img").forEach((img) => {
+        gsap.fromTo(img, { scale: 1.18 }, { scale: 1, duration: 1.1, ease: "power2.out", scrollTrigger: { trigger: img, start: "top 92%", once: true } });
+      });
       return () => { /* matchMedia tự revert */ };
     });
     return () => { mm.revert(); document.documentElement.removeAttribute("data-rn-js"); };

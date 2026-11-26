@@ -4,9 +4,9 @@ import { fontVars } from "./fonts";
 const base = "/images/demos/nail-pop/identity";
 
 export const metadata: Metadata = {
-  title: "Chấm Chanh · Nail studio màu gắt tại Đà Nẵng",
+  title: "Chấm Chanh · Tiệm nail tại Quận Hải Châu, Đà Nẵng",
   description:
-    "Sơn gel, ombre, chrome, chấm bi và charm tại Đà Nẵng. Dựng bộ móng của bạn trên bàn tay SVG, xem thời gian, giá tham khảo và các bước thực hiện trước khi đặt lịch.",
+    "Tiệm nail ở Quận Hải Châu, Đà Nẵng: sơn gel từ 150.000 ₫, đắp gel, nail art, chrome, charm. Xem bảng giá và chính sách, dựng thử bộ móng trên bàn tay và chọn khung giờ trống để đặt lịch.",
   icons: {
     icon: [
       { url: `${base}/favicon.svg`, type: "image/svg+xml" },
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
     apple: `${base}/apple-touch-icon.png`,
   },
   openGraph: {
-    title: "Chấm Chanh · Nail studio",
-    description: "Móng xinh, mood đỉnh. Dựng bộ móng của bạn ngay trên trang.",
+    title: "Chấm Chanh · Tiệm nail ở Đà Nẵng",
+    description: "Sơn gel, đắp gel, nail art và chrome. Báo giá rõ, đặt lịch theo khung giờ trống.",
     images: [{ url: `${base}/og-image.webp`, width: 1200, height: 630, alt: "Chấm Chanh, nail studio ở Đà Nẵng" }],
     locale: "vi_VN",
     type: "website",

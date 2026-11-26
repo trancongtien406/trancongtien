@@ -1,5 +1,11 @@
-import { ScrollScrubText, SplitWords } from "@/features/showroom/effects";
 import styles from "../brand.module.css";
+import { Ignite } from "./Ignite";
+
+const FACTS = [
+  ["3 loại lều", "Mộc 2 người, Rừng 3 người, Mây 4 người. Mỗi lều có giường, chăn đệm dày, đèn và ổ sạc."],
+  ["Ăn uống tại khu", "Bữa sáng, BBQ tối và cà phê pha tại bếp chung. Gọi BBQ trước 18:00."],
+  ["Ngủ đêm hoặc 2N1Đ", "Nhận lều 14:00, trả lều 11:00. Nhóm đến 8 người ghép 2 đến 3 lều cạnh nhau."],
+];
 
 export function Manifesto() {
   return (
@@ -7,15 +13,17 @@ export function Manifesto() {
       <div className={styles.wrap}>
         <p className={styles.eyebrow}>Về Rừng Thức</p>
         <h2 id="manifesto-title" className={styles.h2Big}>
-          <SplitWords as="span" duration={1}>Có những nơi, ta đến không phải để đi đâu cả.</SplitWords>
+          <Ignite as="span">Một khu cắm trại có lều dựng sẵn, cách thành phố một buổi chiều.</Ignite>
         </h2>
         <div className={styles.manifestoBody}>
-          <ScrollScrubText as="p" className={styles.scrub} dim={0.22}>
-            Chỉ để chậm lại. Để nghe tiếng gió đi qua những tán cây. Để một buổi chiều trôi qua mà không cần nhìn đồng hồ. Để bữa tối ngon hơn bên ánh lửa, và câu chuyện dài hơn dưới bầu trời đêm.
-          </ScrollScrubText>
-          <p className={styles.manifestoNote}>
-            <span translate="no">Rừng Thức</span> dành cho những khoảnh khắc như thế: gần thiên nhiên hơn, gần những người mình thương hơn và gần chính mình hơn.
+          <p className={styles.scrub}>
+            <span translate="no">Rừng Thức</span> là khu glamping trên đồi thông ở chân núi Bà Nà, Hòa Vang. Bạn đến với một chiếc ba lô, chúng tôi lo lều, giường, bếp và củi. Buổi tối nướng BBQ bên lửa trại, sáng dậy cà phê trong sương.
           </p>
+          <ul className={styles.factList}>
+            {FACTS.map(([k, v]) => (
+              <li key={k}><b>{k}</b><span>{v}</span></li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

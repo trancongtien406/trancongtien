@@ -6,7 +6,7 @@ import { gsap, hasFinePointer, on, registerGsap, ScrollTrigger, useIsoLayoutEffe
  * Chuyển động chung của trang.
  * 1) Hero choreography ~2.4 giây: ảnh nền hiện, đường lưới kẻ, nhãn stencil mở, chữ SẬT đóng dấu rồi quét axit, dòng khẩu hiệu, mô tả, nút, thanh thông số trượt lên.
  *    Người dùng cuộn sớm thì timeline nhường (tua nhanh mốc còn lại).
- * 2) Moment cuộn: ảnh hero trôi chậm, chữ SẬT tô axit theo cuộn khi rời hero, nhãn stencil mở theo lô, khối nổi lên theo lô.
+ * 2) Moment cuộn: ảnh hero trôi chậm, chữ SẬT tô axit theo cuộn khi rời hero, nhãn stencil mở theo lô, khối [data-sg=slam] "đóng dấu" rơi xuống theo lô, ảnh [data-sg=wipe] quét mở ngang.
  * 3) Hero: chuột trượt ngang qua chữ SẬT tô axit theo vị trí chuột (chỉ pointer fine).
  * Reduced-motion: không chạy gì, nội dung hiện đủ. Trạng thái ẩn ban đầu chỉ được đặt sau khi JS chạy.
  */
@@ -73,11 +73,16 @@ export function Motion() {
         start: "top 92%", once: true,
         onEnter: (els) => gsap.to(els, { clipPath: "inset(0 0% 0 0)", duration: 0.7, ease: "power3.inOut", stagger: 0.12, overwrite: true, onComplete: () => { gsap.set(els, { clearProps: "clipPath" }); } }),
       });
-      const rv = q('[data-sg="reveal"]');
-      gsap.set(rv, { y: 34, opacity: 0 });
-      ScrollTrigger.batch(rv, {
-        start: "top 90%", once: true,
-        onEnter: (els) => gsap.to(els, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", stagger: 0.1, overwrite: true }),
+      // ngôn ngữ chuyển động chính: "đóng dấu" như đĩa tạ hạ xuống sàn (rơi từ trên, chạm, nảy nhẹ)
+      const sl = q('[data-sg="slam"]');
+      gsap.set(sl, { clipPath: "inset(0 0 100% 0)", y: -40, opacity: 1 });
+      ScrollTrigger.batch(sl, {
+        start: "top 92%", once: true,
+        onEnter: (els) => gsap.to(els, { keyframes: [{ clipPath: "inset(0 0 0% 0)", y: 6, duration: 0.32, ease: "power3.in" }, { y: 0, duration: 0.22, ease: "bounce.out" }], stagger: 0.09, overwrite: true, onComplete: () => { gsap.set(els, { clearProps: "clipPath,transform" }); } }),
+      });
+      // ảnh/khối "quét" mở từ trái sang phải như tấm bê tông trượt ra
+      q('[data-sg="wipe"]').forEach((el) => {
+        gsap.fromTo(el, { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.9, ease: "power4.inOut", clearProps: "clipPath", scrollTrigger: { trigger: el, start: "top 88%", once: true } });
       });
 
       const refresh = () => ScrollTrigger.refresh();

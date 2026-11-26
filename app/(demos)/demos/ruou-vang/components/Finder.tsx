@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { CursorSpotlight, MagneticButton, SplitWords } from "@/features/showroom/effects";
+import { CursorSpotlight } from "@/features/showroom/effects";
 import s from "../brand.module.css";
 import { BUDGETS, FOODS, KINDS, MOODS, vnd, type FoodKey, type MoodKey, type WineKind } from "../data/wines";
 import { BODY_LABEL, SWEET_LABEL, pair, validate, type PairInput, type PairResult } from "../lib/pairing";
@@ -37,8 +37,8 @@ export function Finder({ consultHref }: Props) {
     <section className={s.finder} id="chon-vang" aria-label="Chọn vang theo món và dịp">
       <div className={s.wrap}>
         <header className={s.secHead}>
-          <p className={s.kicker}>Chọn vang</p>
-          <SplitWords as="h2" className={s.h2} trigger="view">Bạn gọi món gì, mình gợi ý ly đó.</SplitWords>
+          <p className={s.kicker}>Gợi ý ly theo món</p>
+          <h2 className={s.h2} data-rv="rv">Bạn gọi món gì, mình gợi ý ly đó.</h2>
           <p className={s.mutedP}>Chọn món, dịp và khẩu vị. Công cụ đưa ra ba phong cách vang hợp nhất, kèm món đi cùng. Gợi ý theo kiểu nho, không theo nhãn hiệu. Dành cho khách từ 18 tuổi.</p>
         </header>
         <div className={s.finderGrid}>
@@ -97,7 +97,7 @@ export function Finder({ consultHref }: Props) {
                 </select>
               </div>
               <div className={s.formActs}>
-                <MagneticButton><button type="submit" className={`${s.btn} ${s.btnGold}`}>Tìm ba gợi ý</button></MagneticButton>
+                <button type="submit" className={`${s.btn} ${s.btnGold}`}>Tìm ba gợi ý</button>
                 <button type="button" className={s.linkBtn} onClick={reset}>Làm lại</button>
               </div>
             </form>

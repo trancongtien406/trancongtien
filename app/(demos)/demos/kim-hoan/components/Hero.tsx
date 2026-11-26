@@ -1,7 +1,8 @@
-import { Counter, GrainOverlay, ShineSweep } from "@/features/showroom/effects";
+import { GrainOverlay, ShineSweep } from "@/features/showroom/effects";
 import { HERO_PRESET, IMGS } from "../data/content";
 import { Photo } from "./Photo";
 import { PresetButton } from "./PresetButton";
+import { CHEAPEST } from "./Sections";
 import { Shimmer } from "./Shimmer";
 import { Sparkle } from "./Sparkle";
 import styles from "../brand.module.css";
@@ -15,25 +16,25 @@ export function Hero() {
         <div className={styles.heroText}>
           <p className={styles.eyebrow} data-kn="hero-eyebrow">
             <span className={styles.eyebrowRule} aria-hidden="true" />
-            Trang sức vàng · Đà Nẵng
+            Tiệm kim hoàn · Quận Hải Châu, Đà Nẵng
           </p>
           <h1 id="hero-title" className={styles.h1}>
-            <span className={styles.line}><span className={styles.lineIn} data-kn="hero-line">Vẻ đẹp lưu dấu</span></span>
-            <span className={styles.line}><span className={styles.lineIn} data-kn="hero-line"><Shimmer loop className={styles.h1Accent}>thời gian.</Shimmer></span></span>
+            <span className={styles.line}><span className={styles.lineIn} data-kn="hero-line">Nhẫn cưới, trang sức vàng</span></span>
+            <span className={styles.line}><span className={styles.lineIn} data-kn="hero-line"><Shimmer loop className={styles.h1Accent}>chế tác theo ý bạn.</Shimmer></span></span>
           </h1>
           <p className={styles.lede} data-kn="hero-copy">
-            Nhẫn, mặt dây, bông tai và lắc tay chế tác từ vàng 10K, 14K, 18K, vàng trắng và bạc. Chọn chất liệu, đá, kích cỡ rồi xem ngay khoảng giá tham khảo, tính ra từng khoản.
+            Tiệm kim hoàn cho cặp đôi chuẩn bị cưới, người tìm quà và người muốn làm lại món vàng cũ: nhẫn cưới, nhẫn đính hôn, dây chuyền, bông tai, lắc, vòng. Làm sẵn hoặc đặt theo ý, báo giá từng khoản.
           </p>
           <div className={styles.ctaRow} data-kn="hero-copy">
             <ShineSweep trigger="loop" every={4.5} duration={1.1} color="rgba(255,244,200,0.7)" className={styles.btnWrap}>
-              <a className={styles.btnGold} href="#cau-hinh" data-cursor="">Thiết kế trang sức của bạn</a>
+              <a className={styles.btnGold} href="#lien-he" data-cursor="">Đặt làm trang sức</a>
             </ShineSweep>
-            <a className={styles.btnLine} href="#bo-suu-tap" data-cursor="">Xem bộ sưu tập</a>
+            <a className={styles.btnLine} href="#danh-muc" data-cursor="">Xem danh mục</a>
           </div>
-          <ul className={styles.facts} data-kn="hero-copy" aria-label="Lựa chọn trong công cụ thiết kế">
-            <li><Counter value={4} className={styles.factN} /><span>dòng trang sức</span></li>
-            <li><Counter value={6} className={styles.factN} /><span>chất liệu</span></li>
-            <li><Counter value={3} className={styles.factN} /><span>lựa chọn đá</span></li>
+          <ul className={styles.facts} data-kn="hero-copy" aria-label="Thông tin nhanh về tiệm">
+            <li><b className={styles.factN}>10K – 24K</b><span>tuổi vàng, giải thích rõ</span></li>
+            <li><b className={styles.factN}>9:00 – 20:00</b><span>mở cửa mỗi ngày</span></li>
+            <li><b className={styles.factN}>{CHEAPEST}</b><span>nhẫn trơn vàng 10K</span></li>
           </ul>
         </div>
         <figure className={styles.moon} data-kn="hero-moon">
@@ -50,8 +51,8 @@ export function Hero() {
           </div>
           </div>
           <figcaption className={styles.moonCap}>
-            <span>Nhẫn Trăng Non</span>
-            <PresetButton preset={HERO_PRESET} className={styles.capLink} cursor="Chọn">Cấu hình mẫu này</PresetButton>
+            <span>Nhẫn đính hôn Trăng Non</span>
+            <PresetButton preset={HERO_PRESET} className={styles.capLink} cursor="Chọn">Ước tính giá mẫu này</PresetButton>
           </figcaption>
         </figure>
       </div>
