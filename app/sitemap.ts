@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/db";
 import { siteConfig } from "@/lib/site";
+import { landings } from "@/features/landing/landings";
 
 export const dynamic = "force-dynamic";
 
@@ -22,6 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   const staticRoutes = [
+    ...landings.map((l) => ({ path: l.path, images: [] as string[] })),
     {
       path: "",
       images: [siteConfig.personImage, "/og-image.png"],
@@ -35,7 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       images: ["/images/illustrations/projects-hero-devices.webp"],
     },
     { path: "/solutions", images: [] },
-    { path: "/doi-tac", images: [] },
+    { path: "/demos", images: [] },
     {
       path: "/quy-trinh",
       images: ["/images/illustrations/process-roadmap.webp"],

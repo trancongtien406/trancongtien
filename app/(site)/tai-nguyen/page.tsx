@@ -5,7 +5,7 @@ import { breadcrumbJsonLd, buildMetadata, JsonLd } from "@/lib/seo";
 export const dynamic = "force-dynamic";
 
 export const metadata = buildMetadata({
-  title: "Tài nguyên",
+  title: "Tài nguyên miễn phí: template PRD, checklist, UI Kit",
   description:
     "Kiến thức, template miễn phí, UI Kit, checklist và công cụ hỗ trợ full-stack development, thiết kế app, AI Agent — PRD, estimate, architecture guide.",
   path: "/tai-nguyen",

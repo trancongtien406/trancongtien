@@ -10,6 +10,7 @@ export const metadata = buildMetadata({
   description:
     "Đăng nhập chương trình giới thiệu để gửi giải pháp, đăng ký lead và theo dõi trạng thái.",
   path: "/doi-tac",
+  noindex: true,
 });
 
 export default async function PartnerLoginPage() {

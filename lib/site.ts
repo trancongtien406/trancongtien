@@ -77,6 +77,10 @@ export const aboutJourney = [
 
 export const footerLinks = {
   services: [
+    { href: "/thiet-ke-website-da-nang", label: "Thiết kế website Đà Nẵng" },
+    { href: "/lap-trinh-app-mobile-flutter", label: "Lập trình app Flutter" },
+    { href: "/ai-agent-tu-dong-hoa", label: "AI Agent & tự động hoá" },
+    { href: "/thue-lap-trinh-vien-freelance", label: "Thuê lập trình viên freelance" },
     { href: "/dich-vu#kham-pha", label: "Khám phá & Tư vấn" },
     { href: "/dich-vu#thiet-ke", label: "Thiết kế UI/UX" },
     { href: "/dich-vu#phat-trien", label: "Phát triển sản phẩm" },

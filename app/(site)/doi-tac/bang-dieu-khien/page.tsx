@@ -10,6 +10,7 @@ export const metadata = buildMetadata({
   title: "Bảng điều khiển đối tác",
   description: "Đăng ký lead và theo dõi trạng thái chương trình đối tác.",
   path: "/doi-tac/bang-dieu-khien",
+  noindex: true,
 });
 
 export default async function PartnerDashboardPage() {

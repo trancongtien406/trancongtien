@@ -9,7 +9,7 @@ import {
 export const dynamic = "force-dynamic";
 
 export const metadata = buildMetadata({
-  title: "Liên hệ",
+  title: "Liên hệ tư vấn thiết kế website, app tại Đà Nẵng",
   description:
     "Đặt lịch tư vấn miễn phí với Trần Công Tiến — Full-stack Developer, thiết kế app ứng dụng và AI Agent tại Đà Nẵng. Phản hồi trong 24 giờ.",
   path: "/lien-he",

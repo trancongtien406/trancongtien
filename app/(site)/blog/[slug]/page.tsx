@@ -29,6 +29,9 @@ export async function generateMetadata({ params }: Props) {
     imageWidth: post.coverUrl?.startsWith("/images/blog/") ? 1600 : undefined,
     imageHeight: post.coverUrl?.startsWith("/images/blog/") ? 900 : undefined,
     type: "article",
+    publishedTime: (post.publishedAt || post.createdAt).toISOString(),
+    modifiedTime: post.updatedAt.toISOString(),
+    tags: parseJsonArray(post.tags),
   });
 }
 

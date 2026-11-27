@@ -20,6 +20,7 @@ export async function generateMetadata({
     title: `Estimate chia sẻ ${code.toUpperCase()}`,
     description: "Bản ước tính dự án được chia sẻ.",
     path: `/e/${code}`,
+    noindex: true,
   });
 }
 

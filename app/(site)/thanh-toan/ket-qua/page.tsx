@@ -8,6 +8,7 @@ export const metadata = buildMetadata({
   title: "Thanh toán thành công",
   description: "Kết quả thanh toán PayOS",
   path: "/thanh-toan/ket-qua",
+  noindex: true,
 });
 
 export default async function PaymentSuccessPage({

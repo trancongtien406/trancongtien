@@ -6,12 +6,12 @@ import {
   getPublishedSolutions,
 } from "@/lib/content";
 import { buildMetadata, homePageJsonLd, JsonLd } from "@/lib/seo";
-import { siteConfig } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 
 export const metadata = buildMetadata({
-  title: `${siteConfig.fullName} — Xưởng kỹ thuật sản phẩm`,
+  title: "Thiết kế website, app & AI Agent Đà Nẵng | Trần Công Tiến",
+  absoluteTitle: true,
   description:
     "Xây website, ứng dụng di động, phần mềm vận hành và AI từ khám phá đến production cho startup và doanh nghiệp Việt Nam.",
   path: "/",

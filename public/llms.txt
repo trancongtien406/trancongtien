@@ -1,6 +1,12 @@
 # Trần Công Tiến
 > Full-stack Developer và AI Agent Builder tại Đà Nẵng, Việt Nam. Website chia sẻ dịch vụ, dự án thực tế và kiến thức xây dựng sản phẩm số.
 
+## Dịch vụ chính
+- [Thiết kế website Đà Nẵng](https://trancongtien.com/thiet-ke-website-da-nang): Website giới thiệu, bán hàng, đặt lịch, chuẩn SEO.
+- [Lập trình app mobile Flutter](https://trancongtien.com/lap-trinh-app-mobile-flutter): Ứng dụng iOS và Android từ một codebase.
+- [AI Agent và tự động hoá](https://trancongtien.com/ai-agent-tu-dong-hoa): Tự động hoá quy trình cho doanh nghiệp nhỏ.
+- [Thuê lập trình viên freelance](https://trancongtien.com/thue-lap-trinh-vien-freelance): Làm trọn dự án full-stack theo hợp đồng.
+
 ## Nội dung chính
 - [Trang chủ](https://trancongtien.com/): Tổng quan năng lực, dịch vụ và các sản phẩm tiêu biểu.
 - [Dịch vụ](https://trancongtien.com/dich-vu): Tư vấn, UI/UX, web app, mobile app, backend, DevOps và AI Agent.

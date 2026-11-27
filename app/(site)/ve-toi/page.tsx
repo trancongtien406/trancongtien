@@ -7,7 +7,7 @@ import { aboutJourney, siteConfig } from "@/lib/site";
 export const dynamic = "force-dynamic";
 
 export const metadata = buildMetadata({
-  title: `Về ${siteConfig.fullName}`,
+  title: `${siteConfig.fullName} – Full-stack Developer & AI tại Đà Nẵng`,
   description: `${siteConfig.fullName} — solo Full-stack Developer tại Đà Nẵng, nhận freelance và hợp đồng dự án website, backend, mobile app, AI, CRM, booking và e-commerce.`,
   path: "/ve-toi",
   image: siteConfig.personImage,

@@ -9,7 +9,7 @@ import { buildMetadata } from "@/lib/seo";
 export const dynamic = "force-dynamic";
 
 export const metadata = buildMetadata({
-  title: "Giải pháp theo ngành",
+  title: "Giải pháp website & phần mềm theo ngành",
   description:
     "Bộ giải pháp website, CRM và phần mềm vận hành theo bài toán Spa, BĐS, Xây dựng, F&B, Giáo dục, Logistics và nhiều ngành khác.",
   path: "/solutions",

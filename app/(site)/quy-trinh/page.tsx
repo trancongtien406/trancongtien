@@ -5,7 +5,7 @@ import { breadcrumbJsonLd, buildMetadata, JsonLd } from "@/lib/seo";
 export const dynamic = "force-dynamic";
 
 export const metadata = buildMetadata({
-  title: "Quy trình làm việc",
+  title: "Quy trình làm website, app & phần mềm 6 bước",
   description:
     "Quy trình 6 bước phát triển sản phẩm: khám phá, lập kế hoạch, thiết kế, phát triển, triển khai và tối ưu liên tục.",
   path: "/quy-trinh",

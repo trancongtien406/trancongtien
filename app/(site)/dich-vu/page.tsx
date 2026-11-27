@@ -9,7 +9,7 @@ import { breadcrumbJsonLd, buildMetadata, JsonLd } from "@/lib/seo";
 export const dynamic = "force-dynamic";
 
 export const metadata = buildMetadata({
-  title: "Dịch vụ",
+  title: "Dịch vụ thiết kế website, app & AI tại Đà Nẵng",
   description:
     "Giải pháp phát triển sản phẩm toàn diện: khám phá, thiết kế UI/UX, phát triển Web/Mobile, triển khai DevOps và tối ưu tăng trưởng.",
   path: "/dich-vu",

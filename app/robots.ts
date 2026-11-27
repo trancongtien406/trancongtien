@@ -8,10 +8,8 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: [
           "Googlebot",
           "Bingbot",
-          "GPTBot",
           "OAI-SearchBot",
           "ChatGPT-User",
-          "ClaudeBot",
           "Claude-SearchBot",
           "Claude-User",
           "PerplexityBot",
@@ -19,6 +17,8 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
         disallow: ["/admin/", "/api/admin/"],
       },
+      // Bot huấn luyện mô hình: chặn (khớp Content-Signal ai-train=no của Cloudflare).
+      { userAgent: ["GPTBot", "ClaudeBot", "CCBot", "Google-Extended"], disallow: "/" },
       {
         userAgent: "*",
         allow: "/",

@@ -87,6 +87,8 @@ export function EstimatorManager({
 
   useEffect(() => {
     if (!activePricing) return;
+    // Đồng bộ form với bảng giá đang chọn.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setUnitValueVnd(String(activePricing.unitValueVnd));
     setMinimumProjectVnd(String(activePricing.minimumProjectVnd));
   }, [activePricing]);

@@ -9,6 +9,13 @@ type BuildMetadataInput = {
   imageWidth?: number;
   imageHeight?: number;
   type?: "website" | "article";
+  /** Trang riêng tư/giao dịch: không cho index. */
+  noindex?: boolean;
+  /** Bỏ hậu tố thương hiệu, dùng title làm tiêu đề đầy đủ. */
+  absoluteTitle?: boolean;
+  publishedTime?: string;
+  modifiedTime?: string;
+  tags?: string[];
 };
 
 export function buildMetadata({
@@ -19,6 +26,11 @@ export function buildMetadata({
   imageWidth,
   imageHeight,
   type = "website",
+  noindex = false,
+  absoluteTitle = false,
+  publishedTime,
+  modifiedTime,
+  tags,
 }: BuildMetadataInput): Metadata {
   const shorten = (value: string, maxLength: number) => {
     if (value.length <= maxLength) return value;
@@ -26,10 +38,10 @@ export function buildMetadata({
     return `${shortened.replace(/[\s,;:–—-]+$/, "")}…`;
   };
   const url = `${siteConfig.url}${path}`;
+  // Title ≤ 60 ký tự: ưu tiên giữ nguyên cụm từ khoá, chỉ thêm tên thương hiệu khi còn chỗ.
+  const withBrand = `${title} | ${siteConfig.fullName}`;
   const rawTitle =
-    path === "/"
-      ? `${siteConfig.fullName} | Full-stack & AI Developer`
-      : `${title} | ${siteConfig.name}`;
+    absoluteTitle || path === "/" || withBrand.length > 60 ? title : withBrand;
   const fullTitle = shorten(rawTitle, 60);
   const seoDescription = shorten(description, 160);
   const imageUrl = new URL(image, siteConfig.url).toString();
@@ -80,6 +92,14 @@ export function buildMetadata({
       siteName: siteConfig.brand,
       locale: siteConfig.locale,
       type,
+      ...(type === "article"
+        ? {
+            publishedTime,
+            modifiedTime,
+            authors: [siteConfig.fullName],
+            tags,
+          }
+        : {}),
       images: [
         {
           url: imageUrl,
@@ -95,17 +115,19 @@ export function buildMetadata({
       description: seoDescription,
       images: [imageUrl],
     },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-        "max-video-preview": -1,
-      },
-    },
+    robots: noindex
+      ? { index: false, follow: false }
+      : {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+            "max-video-preview": -1,
+          },
+        },
   };
 }
 
@@ -146,7 +168,6 @@ export function siteIdentityJsonLd() {
           caption: `${siteConfig.fullName} — ${siteConfig.tagline}`,
         },
         jobTitle: siteConfig.tagline,
-        birthDate: siteConfig.birthDate,
         email: siteConfig.email,
         telephone: siteConfig.phone,
         worksFor: { "@id": organizationId },
@@ -197,6 +218,17 @@ export function siteIdentityJsonLd() {
         email: siteConfig.email,
         telephone: siteConfig.phone,
         founder: { "@id": personId },
+        areaServed: [
+          { "@type": "City", name: "Đà Nẵng" },
+          { "@type": "Country", name: "Việt Nam" },
+        ],
+        serviceType: [
+          "Thiết kế website",
+          "Phát triển ứng dụng di động",
+          "Phát triển phần mềm theo yêu cầu",
+          "AI Agent và tự động hoá",
+        ],
+        knowsLanguage: ["vi", "en"],
         address: {
           "@type": "PostalAddress",
           addressLocality: "Đà Nẵng",

@@ -6,7 +6,7 @@ import { siteConfig } from "@/lib/site";
 export const dynamic = "force-dynamic";
 
 export const metadata = buildMetadata({
-  title: "Blog",
+  title: "Blog lập trình web, app & AI Agent thực chiến",
   description:
     "Blog kiến thức thực chiến về full-stack development: kiến trúc hệ thống, Next.js, Clean Code, thiết kế app, AI Agent và tư duy sản phẩm.",
   path: "/blog",

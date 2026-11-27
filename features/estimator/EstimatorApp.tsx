@@ -294,6 +294,8 @@ export function EstimatorApp({
 
   useEffect(() => {
     if (!question) return;
+    // Reset input khi câu hỏi đổi.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTextValue("");
     setMultiValue([]);
     if (question.type === "FEATURE_SELECTOR") {

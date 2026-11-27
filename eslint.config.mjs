@@ -23,7 +23,15 @@ const eslintConfig = defineConfig([
       "react-hooks/set-state-in-effect": "off",
       "react-hooks/preserve-manual-memoization": "off",
       "react-hooks/immutability": "off",
+      "react-hooks/refs": "off",
+      "react-hooks/use-memo": "off",
+      "react/no-unescaped-entities": "off",
     },
+  },
+  // Script test/e2e của showroom chạy bằng Node, được phép dùng require.
+  {
+    files: ["tests/**/*.{ts,tsx,js,mjs,cjs}"],
+    rules: { "@typescript-eslint/no-require-imports": "off" },
   },
 ]);
 

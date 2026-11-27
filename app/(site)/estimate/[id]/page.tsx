@@ -21,6 +21,7 @@ export async function generateMetadata({
     title: `Estimate ${id}`,
     description: "Kết quả ước tính phạm vi và ngân sách dự án.",
     path: `/estimate/${id}`,
+    noindex: true,
   });
 }
 

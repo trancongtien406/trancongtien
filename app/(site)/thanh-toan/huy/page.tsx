@@ -8,6 +8,7 @@ export const metadata = buildMetadata({
   title: "Huỷ thanh toán",
   description: "Thanh toán PayOS đã bị huỷ",
   path: "/thanh-toan/huy",
+  noindex: true,
 });
 
 export default function PaymentCancelPage() {
