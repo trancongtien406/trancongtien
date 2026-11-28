@@ -171,7 +171,7 @@ fi
 
 npm ci --include=dev
 npx prisma migrate deploy
-npm run build
+NEXT_CPU_COUNT=1 NODE_OPTIONS="--max-old-space-size=1536" npm run build
 npm run seed || true
 
 pm2 delete '${APP_NAME}' >/dev/null 2>&1 || true
