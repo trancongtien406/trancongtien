@@ -1,0 +1,1431 @@
+/* Mặc Thạch Parfums — The Night Collection (LP-71)
+   Obsidian basalt architectural gallery with per-flacon volumetric spotlights */
+
+.root {
+  --mt-bg: #030305;
+  --mt-surface: #090a0e;
+  --mt-surface-elevated: #101218;
+  --mt-border: rgba(255, 255, 255, 0.08);
+  --mt-border-strong: rgba(255, 255, 255, 0.16);
+  --mt-ink: #f4f1ec;
+  --mt-ink-muted: #9b968f;
+  --mt-ink-faint: #64605b;
+  --mt-accent: #e03e62;
+  --mt-accent-rgb: 224, 62, 98;
+
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--mt-bg);
+  color: var(--mt-ink);
+  font-family: var(--mt-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+.root ::selection {
+  background: rgba(var(--mt-accent-rgb), 0.35);
+  color: #fff;
+}
+
+.skip {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  z-index: 100;
+  padding: 10px 16px;
+  background: var(--mt-ink);
+  color: var(--mt-bg);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 999px;
+  transition: top 0.2s ease;
+}
+
+.skip:focus {
+  top: 16px;
+}
+
+/* Subtle volcanic basalt grain overlay */
+.grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Top Navigation ─────────────────────────────────────────────────── */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px clamp(20px, 4vw, 48px);
+  background: linear-gradient(180deg, rgba(3, 3, 5, 0.88) 0%, rgba(3, 3, 5, 0.35) 70%, transparent 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.brandLockup {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-decoration: none;
+  color: var(--mt-ink);
+}
+
+.brandName {
+  font-family: var(--mt-serif), Georgia, serif;
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  line-height: 1;
+}
+
+.brandSub {
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.36em;
+  color: var(--mt-ink-muted);
+}
+
+.navLinks {
+  display: none;
+  align-items: center;
+  gap: 32px;
+}
+
+@media (min-width: 900px) {
+  .navLinks {
+    display: flex;
+  }
+}
+
+.navLink {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--mt-ink-muted);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: color 0.25s ease;
+}
+
+.navLink:hover,
+.navLink:focus-visible {
+  color: var(--mt-ink);
+  outline: none;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cartBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--mt-border-strong);
+  background: rgba(16, 18, 24, 0.72);
+  color: var(--mt-ink);
+  font-size: 13px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.2s ease;
+}
+
+.cartBtn:hover {
+  border-color: rgba(var(--mt-accent-rgb), 0.7);
+  background: rgba(24, 26, 34, 0.9);
+}
+
+.cartCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--mt-accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  transition: background-color 0.45s ease;
+}
+
+/* ── HERO: 5-Niche Architectural Basalt Stage ───────────────────────── */
+.heroStage {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 78px clamp(16px, 4vw, 48px) 72px;
+  background: #030305;
+  overflow: hidden;
+}
+
+.heroStageExpanded {
+  height: 100svh;
+}
+
+/* Dynamic ambient room wash matching hovered/selected flacon */
+.stageAmbient {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 70% 55% at 54% 48%,
+      rgba(var(--stage-glow-rgb, 224, 62, 98), 0.16) 0%,
+      rgba(var(--stage-glow-rgb, 224, 62, 98), 0.05) 44%,
+      transparent 76%
+    ),
+    radial-gradient(
+      ellipse 90% 30% at 50% 92%,
+      rgba(var(--stage-glow-rgb, 224, 62, 98), 0.09) 0%,
+      transparent 70%
+    );
+  transition: opacity 0.6s ease;
+}
+
+/* Glossy obsidian gallery floor line */
+.galleryFloorLine {
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 110px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.06) 15%,
+    rgba(var(--stage-glow-rgb, 224, 62, 98), 0.25) 50%,
+    rgba(255, 255, 255, 0.06) 85%,
+    transparent 100%
+  );
+  opacity: 0.7;
+}
+
+/* 5-Niche Grid (Single Continuous Camera Track) */
+.nicheGrid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+  max-width: 1440px;
+  margin: auto;
+  padding: 12px 0 24px;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+@media (min-width: 640px) {
+  .nicheGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .nicheGrid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: clamp(16px, 2vw, 32px);
+    padding: 20px 0 28px;
+  }
+}
+
+.nicheGridZoomed .nicheCard {
+  transition: none;
+}
+
+.nicheGridZoomed .nicheCard:hover .nicheAlcove {
+  transform: none;
+}
+
+.nicheGridZoomed .nicheCard:hover .nichePhoto {
+  transform: none;
+}
+
+.nicheCardActive .nicheAlcove {
+  box-shadow:
+    inset 0 24px 48px rgba(0, 0, 0, 0.85),
+    inset 0 -28px 44px rgba(0, 0, 0, 0.78),
+    inset 0 0 0 1px rgba(var(--flacon-rgb), 0.34),
+    0 32px 86px rgba(var(--flacon-rgb), 0.22);
+}
+
+.nicheCardActive .nicheLightBar {
+  opacity: 1;
+  left: 14%;
+  right: 14%;
+}
+
+.nicheCardActive .nicheSpotlight {
+  opacity: 1;
+}
+
+.nicheCardActive .nichePhoto {
+  filter: brightness(1.04) contrast(1.06);
+}
+
+/* Individual Recessed Stone Niche */
+.nicheCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: center;
+  color: inherit;
+  outline: none;
+  transition: opacity 0.45s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Dim sibling niches slightly when hovering one in idle gallery mode */
+.nicheGrid:not(.nicheGridZoomed):has(.nicheCard:hover) .nicheCard:not(:hover) {
+  opacity: 0.58;
+}
+
+.nicheAlcove {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  max-height: 52svh;
+  border-radius: 3px;
+  overflow: hidden;
+  background: #07080b;
+  box-shadow:
+    inset 0 26px 48px rgba(0, 0, 0, 0.92),
+    inset 0 -30px 44px rgba(0, 0, 0, 0.85),
+    inset 1px 0 0 rgba(255, 255, 255, 0.045),
+    inset -1px 0 0 rgba(255, 255, 255, 0.03),
+    0 24px 54px rgba(0, 0, 0, 0.85);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.6s ease;
+}
+
+.nicheCard:hover .nicheAlcove,
+.nicheCard:focus-visible .nicheAlcove {
+  transform: translateY(-6px);
+  box-shadow:
+    inset 0 20px 40px rgba(0, 0, 0, 0.82),
+    inset 0 -24px 36px rgba(0, 0, 0, 0.72),
+    inset 0 0 0 1px rgba(var(--flacon-rgb), 0.38),
+    0 28px 68px rgba(var(--flacon-rgb), 0.16);
+}
+
+.nicheCard:focus-visible .nicheAlcove {
+  outline: 2px solid var(--flacon-hex);
+  outline-offset: 4px;
+}
+
+/* Top recessed light source bar */
+.nicheLightBar {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 24%;
+  right: 24%;
+  height: 2px;
+  z-index: 4;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.85) 50%,
+    transparent
+  );
+  box-shadow:
+    0 0 14px 2px rgba(var(--flacon-rgb), 0.65),
+    0 6px 28px 6px rgba(var(--flacon-rgb), 0.35);
+  opacity: 0.65;
+  transition: opacity 0.5s ease, left 0.5s ease, right 0.5s ease;
+}
+
+.nicheCard:hover .nicheLightBar,
+.nicheCard:focus-visible .nicheLightBar {
+  opacity: 1;
+  left: 16%;
+  right: 16%;
+}
+
+/* Overhead Volumetric Spotlight Cone */
+.nicheSpotlight {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background:
+    radial-gradient(
+      ellipse 72% 52% at 50% 0%,
+      rgba(var(--flacon-rgb), 0.34) 0%,
+      rgba(var(--flacon-rgb), 0.1) 46%,
+      transparent 78%
+    ),
+    radial-gradient(
+      ellipse 65% 22% at 50% 92%,
+      rgba(var(--flacon-rgb), 0.24) 0%,
+      transparent 70%
+    );
+  mix-blend-mode: screen;
+  opacity: 0.72;
+  transition: opacity 0.5s ease;
+}
+
+.nicheCard:hover .nicheSpotlight,
+.nicheCard:focus-visible .nicheSpotlight {
+  opacity: 1;
+}
+
+/* Bottle photograph inside niche */
+.nichePhoto {
+  object-fit: cover;
+  object-position: center 54%;
+  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease;
+  filter: brightness(0.92) contrast(1.06);
+}
+
+.nicheCard:hover .nichePhoto,
+.nicheCard:focus-visible .nichePhoto {
+  transform: scale(1.055);
+  filter: brightness(1.05) contrast(1.08);
+}
+
+/* Deep architectural vignette around niche edges so image melts into obsidian */
+.nicheVignette {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(180deg, rgba(3, 3, 5, 0.36) 0%, transparent 24%, transparent 74%, rgba(3, 3, 5, 0.88) 100%),
+    linear-gradient(90deg, rgba(3, 3, 5, 0.52) 0%, transparent 18%, transparent 82%, rgba(3, 3, 5, 0.52) 100%);
+}
+
+/* Subtle glossy reflection shadow below the alcove */
+.nicheFloorGlow {
+  pointer-events: none;
+  width: 78%;
+  height: 18px;
+  margin-top: 2px;
+  background: radial-gradient(
+    ellipse 55% 80% at 50% 0%,
+    rgba(var(--flacon-rgb), 0.28) 0%,
+    transparent 78%
+  );
+  filter: blur(5px);
+  opacity: 0.55;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.nicheCard:hover .nicheFloorGlow,
+.nicheCard:focus-visible .nicheFloorGlow {
+  opacity: 1;
+  transform: scaleX(1.18);
+}
+
+.nicheCaption {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  opacity: 0.72;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.nicheCard:hover .nicheCaption,
+.nicheCard:focus-visible .nicheCaption {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.nicheName {
+  font-family: var(--mt-serif), Georgia, serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--mt-ink);
+}
+
+.nicheNameAccent {
+  font-style: italic;
+  color: var(--flacon-hex);
+}
+
+.nicheMeta {
+  font-size: 11px;
+  color: var(--mt-ink-muted);
+  letter-spacing: 0.04em;
+}
+
+/* ── Hero Bottom Bar ("The night collection" lockup) ────────────────── */
+.heroFooter {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-top: 8px;
+  transition: opacity 0.35s ease, transform 0.4s ease;
+}
+
+.heroFooterHidden {
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+}
+
+.heroTitle {
+  font-family: var(--mt-serif), Georgia, serif;
+  font-size: clamp(32px, 4.4vw, 56px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--mt-ink);
+  margin: 0;
+}
+
+.heroTitleAccent {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--stage-accent-hex, #e03e62);
+  transition: color 0.5s ease;
+}
+
+.heroSubtitle {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--mt-ink-muted);
+  letter-spacing: 0.02em;
+  max-width: 46ch;
+}
+
+.heroHint {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--mt-ink-muted);
+}
+
+.scrollCue {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--mt-border);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--mt-ink);
+  font-size: 12px;
+  text-decoration: none;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.scrollCue:hover {
+  border-color: var(--mt-border-strong);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ── FLOATING SINGLE-COLUMN DETAIL HUD (NEVER COVERS BOTTLE) ────────── */
+.detailHud {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 72px clamp(16px, 4vw, 48px) 20px;
+  opacity: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 46%,
+    rgba(3, 3, 5, 0.88) 54%,
+    rgba(3, 3, 5, 0.96) 100%
+  );
+}
+
+.detailHudInteractive {
+  pointer-events: auto;
+}
+
+.detailInfoCol > * {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+@media (min-width: 960px) {
+  .detailHud {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 84px clamp(28px, 4.5vw, 64px) 32px;
+    background: linear-gradient(
+      90deg,
+      rgba(3, 3, 5, 0.94) 0%,
+      rgba(3, 3, 5, 0.78) 28%,
+      transparent 44%,
+      transparent 100%
+    );
+  }
+}
+
+.detailInfoCol {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 960px) {
+  .detailInfoCol {
+    gap: 14px;
+    max-width: min(340px, 30vw);
+  }
+}
+
+.detailStepControls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Minimal text-only tabs to switch between the 5 fragrances */
+.fragranceTabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+
+.fragranceTabs::-webkit-scrollbar {
+  display: none;
+}
+
+.fragranceTab {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--mt-border);
+  background: transparent;
+  color: var(--mt-ink-faint);
+  font-size: 11px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.fragranceTab:hover {
+  color: var(--mt-ink);
+  border-color: var(--mt-border-strong);
+}
+
+.fragranceTabActive {
+  color: var(--mt-ink);
+  border-color: rgba(var(--tab-rgb), 0.65);
+  background: rgba(var(--tab-rgb), 0.14);
+}
+
+.fragranceTabIndex {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--tab-hex);
+}
+
+.fragranceTabName {
+  display: none;
+}
+
+.fragranceTabActive .fragranceTabName {
+  display: inline;
+}
+
+.detailTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--mt-border);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--mt-ink-muted);
+  font-size: 12px;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.backBtn:hover {
+  color: var(--mt-ink);
+  border-color: var(--mt-border-strong);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.detailCounter {
+  font-size: 12px;
+  color: var(--mt-ink-faint);
+  letter-spacing: 0.14em;
+}
+
+.detailTitle {
+  font-family: var(--mt-serif), Georgia, serif;
+  font-size: clamp(38px, 4.4vw, 58px);
+  font-weight: 300;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--mt-ink);
+}
+
+.detailTitleAccent {
+  font-style: italic;
+  color: var(--detail-hex);
+}
+
+.detailSubtitle {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--mt-ink-muted);
+  margin: -6px 0 0;
+}
+
+.detailStory {
+  font-size: 14px;
+  line-height: 1.75;
+  color: #ccc7bf;
+  margin: 0;
+  max-width: 44ch;
+}
+
+.notesBlock {
+  display: grid;
+  gap: 10px;
+  padding: 16px 0;
+  border-top: 1px solid var(--mt-border);
+  border-bottom: 1px solid var(--mt-border);
+}
+
+.noteRow {
+  display: grid;
+  grid-template-columns: 78px 1fr;
+  gap: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.noteLabel {
+  color: var(--mt-ink-faint);
+  font-size: 12px;
+}
+
+.noteVal {
+  color: var(--mt-ink);
+}
+
+.volumeRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.volumeGroup {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.volumeBtn {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--mt-border);
+  background: transparent;
+  color: var(--mt-ink-muted);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.volumeBtnActive {
+  border-color: var(--detail-hex);
+  background: rgba(var(--detail-rgb), 0.14);
+  color: var(--mt-ink);
+}
+
+.detailPrice {
+  font-family: var(--mt-serif), Georgia, serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--mt-ink);
+  letter-spacing: 0.01em;
+}
+
+.addBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 15px 24px;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--detail-rgb), 0.55);
+  background: linear-gradient(135deg, rgba(var(--detail-rgb), 0.26) 0%, rgba(var(--detail-rgb), 0.12) 100%);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.25s ease, box-shadow 0.3s ease;
+}
+
+.addBtn:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, rgba(var(--detail-rgb), 0.42) 0%, rgba(var(--detail-rgb), 0.22) 100%);
+  box-shadow: 0 14px 36px rgba(var(--detail-rgb), 0.22);
+}
+
+@media (max-width: 959px) {
+  .detailInfoCol {
+    gap: 8px;
+  }
+  .detailTitle {
+    font-size: 36px;
+  }
+  .detailStory {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .notesBlock {
+    display: none;
+  }
+  .addBtn {
+    padding: 12px 18px;
+  }
+}
+
+/* Expanded Center Spotlight Alcove */
+.expandedAlcove {
+  position: relative;
+  width: min(100%, 420px);
+  aspect-ratio: 3 / 4;
+  max-height: 68svh;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #07080b;
+  box-shadow:
+    inset 0 32px 64px rgba(0, 0, 0, 0.9),
+    inset 0 -36px 56px rgba(0, 0, 0, 0.85),
+    inset 0 0 0 1px rgba(var(--detail-rgb), 0.28),
+    0 36px 96px rgba(var(--detail-rgb), 0.18);
+}
+
+@media (min-width: 960px) {
+  .detailInfoCol {
+    gap: 14px;
+    max-width: min(340px, 30vw);
+  }
+}
+
+@media (max-width: 959px) {
+  .expandedAlcove {
+    width: min(100%, 340px);
+    aspect-ratio: 3 / 3.8;
+  }
+}
+
+.expandedLightBar {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 14%;
+  right: 14%;
+  height: 2px;
+  z-index: 4;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.95) 50%, transparent);
+  box-shadow:
+    0 0 22px 4px rgba(var(--detail-rgb), 0.8),
+    0 12px 48px 14px rgba(var(--detail-rgb), 0.42);
+}
+
+.expandedSpotlight {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background:
+    radial-gradient(
+      ellipse 78% 58% at 50% 0%,
+      rgba(var(--detail-rgb), 0.42) 0%,
+      rgba(var(--detail-rgb), 0.12) 50%,
+      transparent 80%
+    ),
+    radial-gradient(
+      ellipse 70% 24% at 50% 94%,
+      rgba(var(--detail-rgb), 0.28) 0%,
+      transparent 72%
+    );
+  mix-blend-mode: screen;
+}
+
+.expandedPhoto {
+  object-fit: cover;
+  object-position: center 54%;
+}
+
+/* Right-side fragrance quick switcher rail */
+.railDot {
+  position: relative;
+  width: 44px;
+  height: 58px;
+  padding: 0;
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #0a0b0f;
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.railDot:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
+.railDotActive {
+  opacity: 1;
+  border-color: var(--dot-hex);
+  box-shadow: 0 0 18px rgba(var(--dot-rgb), 0.35);
+}
+
+/* ── BELOW-THE-FOLD LANDING SECTIONS ────────────────────────────────── */
+.section {
+  position: relative;
+  padding: clamp(72px, 10vw, 132px) clamp(20px, 4vw, 48px);
+  border-top: 1px solid var(--mt-border);
+}
+
+.container {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.sectionHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: clamp(36px, 5vw, 56px);
+}
+
+.sectionTitle {
+  font-family: var(--mt-serif), Georgia, serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  margin: 0;
+  max-width: 18ch;
+}
+
+.sectionLead {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--mt-ink-muted);
+  max-width: 46ch;
+  margin: 0;
+}
+
+/* Mood Filter Bar */
+.moodBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.moodPill {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--mt-border);
+  background: transparent;
+  color: var(--mt-ink-muted);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.moodPill:hover {
+  color: var(--mt-ink);
+  border-color: var(--mt-border-strong);
+}
+
+.moodPillActive {
+  border-color: var(--mt-ink);
+  background: var(--mt-ink);
+  color: var(--mt-bg);
+  font-weight: 500;
+}
+
+/* Scent Architecture Cards */
+.scentList {
+  display: grid;
+  gap: 16px;
+}
+
+.scentRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  align-items: center;
+  padding: 20px;
+  border-radius: 6px;
+  border: 1px solid var(--mt-border);
+  background: linear-gradient(90deg, rgba(var(--row-rgb), 0.06) 0%, rgba(12, 13, 18, 0.72) 42%, rgba(9, 10, 14, 0.9) 100%);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+@media (min-width: 900px) {
+  .scentRow {
+    grid-template-columns: 92px 220px 1fr 180px auto;
+    gap: 28px;
+    padding: 20px 26px;
+  }
+}
+
+.scentRow:hover {
+  border-color: rgba(var(--row-rgb), 0.42);
+}
+
+.scentThumb {
+  position: relative;
+  width: 84px;
+  height: 112px;
+  border-radius: 3px;
+  overflow: hidden;
+  background: #06070a;
+  border: 1px solid rgba(var(--row-rgb), 0.22);
+}
+
+.scentName {
+  font-family: var(--mt-serif), Georgia, serif;
+  font-size: 28px;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.05;
+}
+
+.scentSub {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: var(--mt-ink-muted);
+}
+
+.scentNotesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px;
+}
+
+.scentNoteCol {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.scentNoteHeading {
+  font-size: 11px;
+  color: var(--mt-ink-faint);
+}
+
+.scentNoteText {
+  font-size: 13px;
+  color: #d6d2cb;
+  line-height: 1.5;
+}
+
+.intensityTrack {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 6px;
+}
+
+.intensityDot {
+  width: 14px;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.intensityDotFilled {
+  background: var(--row-hex);
+}
+
+.scentActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ghostBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--mt-border-strong);
+  background: transparent;
+  color: var(--mt-ink);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.ghostBtn:hover {
+  border-color: var(--mt-ink);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Atelier Split Section */
+.atelierGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+
+@media (min-width: 960px) {
+  .atelierGrid {
+    grid-template-columns: 1.12fr 0.88fr;
+  }
+}
+
+.atelierMedia {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--mt-border);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.8);
+}
+
+.pillarList {
+  display: grid;
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.pillarItem {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 18px;
+  padding-top: 20px;
+  border-top: 1px solid var(--mt-border);
+}
+
+.pillarMetric {
+  font-family: var(--mt-serif), Georgia, serif;
+  font-size: 24px;
+  font-style: italic;
+  color: #e3a857;
+  line-height: 1.1;
+}
+
+.pillarTitle {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0 0 6px;
+  color: var(--mt-ink);
+}
+
+.pillarDesc {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--mt-ink-muted);
+  margin: 0;
+}
+
+/* Discovery Coffret & Salon Split */
+.dualGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 960px) {
+  .dualGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.featureCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  padding: clamp(28px, 4vw, 44px);
+  border-radius: 6px;
+  border: 1px solid var(--mt-border);
+  background: linear-gradient(180deg, rgba(18, 20, 28, 0.65) 0%, rgba(7, 8, 12, 0.95) 100%);
+  overflow: hidden;
+}
+
+.vialStrip {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.vialChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--mt-border);
+  background: rgba(255, 255, 255, 0.02);
+  font-size: 12px;
+  color: #d6d2cb;
+}
+
+.vialSwatch {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+}
+
+.primaryBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: var(--mt-ink);
+  color: var(--mt-bg);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.primaryBtn:hover {
+  transform: translateY(-1px);
+  opacity: 0.92;
+}
+
+/* Salon Booking Form */
+.formGrid {
+  display: grid;
+  gap: 14px;
+}
+
+.inputRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 560px) {
+  .inputRow {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.field {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 4px;
+  border: 1px solid var(--mt-border);
+  background: rgba(3, 3, 5, 0.72);
+  color: var(--mt-ink);
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.25s ease;
+}
+
+.field:focus {
+  border-color: rgba(255, 255, 255, 0.36);
+}
+
+.bookingSuccess {
+  padding: 16px;
+  border-radius: 4px;
+  border: 1px solid rgba(196, 214, 190, 0.35);
+  background: rgba(196, 214, 190, 0.08);
+  font-size: 13px;
+  line-height: 1.65;
+  color: #e4ede1;
+}
+
+/* ── Slide-Over Cart Drawer ─────────────────────────────────────────── */
+.drawerBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.drawerPanel {
+  width: min(100vw, 430px);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #08090d;
+  border-left: 1px solid var(--mt-border);
+  padding: 24px;
+}
+
+.drawerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--mt-border);
+}
+
+.drawerTitle {
+  font-family: var(--mt-serif), Georgia, serif;
+  font-size: 26px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.iconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid var(--mt-border);
+  background: transparent;
+  color: var(--mt-ink);
+  cursor: pointer;
+}
+
+.drawerBody {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cartItem {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--mt-border);
+}
+
+.cartThumb {
+  position: relative;
+  width: 60px;
+  height: 78px;
+  border-radius: 3px;
+  overflow: hidden;
+  background: #050507;
+}
+
+.qtyControls {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.qtyBtn {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid var(--mt-border);
+  background: transparent;
+  color: var(--mt-ink);
+  cursor: pointer;
+}
+
+.drawerFooter {
+  padding-top: 18px;
+  border-top: 1px solid var(--mt-border);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────── */
+.footer {
+  padding: 48px clamp(20px, 4vw, 48px) 64px;
+  border-top: 1px solid var(--mt-border);
+  background: #020203;
+}
+
+.footerInner {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 12px;
+  color: var(--mt-ink-faint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nicheAlcove,
+  .nichePhoto,
+  .nicheSpotlight,
+  .nicheGrid,
+  .heroFooter,
+  .stageAmbient {
+    transition: none !important;
+  }
+}

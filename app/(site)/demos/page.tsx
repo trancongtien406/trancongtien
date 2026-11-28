@@ -9,7 +9,7 @@ import { breadcrumbJsonLd, buildMetadata, JsonLd } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Website demo mẫu theo ngành nghề",
   description:
-    "Năm mươi website demo cho spa, villa, tour, cafe, nhà hàng, nha khoa, pilates, nội thất, ảnh cưới, tiệm tóc, bar, tiệm bánh, gym, trang sức, căn hộ và nhiều ngành khác. Thương hiệu minh hoạ do Trần Công Tiến thiết kế, mỗi demo một nhận diện riêng.",
+    "Bảy mươi website demo cho spa, villa, tour, cafe, nhà hàng, nha khoa, pilates, nội thất, ảnh cưới, tiệm tóc, bar, tiệm bánh, gym, trang sức, căn hộ và nhiều ngành khác. Thương hiệu minh hoạ do Trần Công Tiến thiết kế, mỗi demo một nhận diện riêng.",
   path: "/demos",
 });
 
@@ -29,7 +29,7 @@ export default function DemosIndexPage() {
             Website của bạn có thể trông như thế này
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-ink-muted">
-            Năm mươi website demo cho năm mươi ngành nghề, mỗi cái một nhận diện riêng: tên thương hiệu,
+            Bảy mươi website demo cho bảy mươi ngành nghề, mỗi cái một nhận diện riêng: tên thương hiệu,
             logo, ảnh, chữ, màu và chuyển động. Bấm vào để dùng thử như một khách hàng.
           </p>
           <div className="mt-6 max-w-3xl rounded-2xl border border-border bg-surface p-5 text-sm leading-7 text-ink-muted">

@@ -58,7 +58,7 @@ async function main() {
   });
 
   const cats = [
-    { name: "Tự duy sản phẩm", slug: "tu-duy-san-pham" },
+    { name: "Tư duy sản phẩm", slug: "tu-duy-san-pham" },
     { name: "Kiến trúc hệ thống", slug: "kien-truc-he-thong" },
     { name: "Frontend", slug: "frontend" },
     { name: "AI Agent", slug: "ai-san-pham" },
@@ -411,7 +411,7 @@ async function main() {
 <p>Trần Công Tiến không chỉ là một cái tên trên portfolio. Đó là định vị tôi muốn xây dựng: một người đồng hành kỹ thuật có tư duy sản phẩm, giúp ý tưởng trở thành hệ thống có thể dùng, đo và phát triển lâu dài.</p>`,
       coverUrl: "/images/blog/tran-cong-tien-la-ai-fullstack-ai-agent-builder.webp",
       coverAlt:
-        "Không gian làm việc của Trần Công Tiến với web app AI Agent code và sản phẩm số",
+        "Không gian làm việc của Trần Công Tiến tại Đà Nẵng với laptop lập trình và bảng workflow AI Agent",
       tags: JSON.stringify([
         "Trần Công Tiến",
         "Tran Cong Tien",
@@ -420,18 +420,287 @@ async function main() {
       ]),
       categoryId: product?.id,
       readTime: "7 phút đọc",
+      publishedAt: new Date("2026-08-13T09:00:00+07:00"),
+    },
+    {
+      slug: "rag-cho-doanh-nghiep-tra-cuu-tai-lieu-noi-bo",
+      title: "Xây hệ thống RAG tra cứu tài liệu nội bộ: vì sao chunking và trích dẫn quan trọng hơn chọn LLM",
+      excerpt:
+        "Kinh nghiệm triển khai RAG thực tế cho doanh nghiệp SME: tách đoạn giữ ngữ cảnh, hybrid search, phân quyền tài liệu và bắt buộc trả về nguồn trích dẫn.",
+      content: `<h2>RAG thất bại hiếm khi vì model yếu</h2>
+<p>Nhiều doanh nghiệp thử làm trợ lý tra cứu SOP, hợp đồng, bảng giá hoặc tài liệu kỹ thuật nội bộ nhưng nhanh chóng bỏ cuộc vì AI trả lời chung chung hoặc bịa số liệu. Nguyên nhân phổ biến nhất không nằm ở việc chọn model nào, mà nằm ở pipeline xử lý dữ liệu đầu vào và bước truy xuất (retrieval).</p>
+<p>Nếu đoạn văn bản đưa vào prompt bị cắt cụt bảng biểu, thiếu tiêu đề mục hoặc lẫn tài liệu đã hết hạn, ngay cả model mạnh nhất cũng không thể trả lời chính xác.</p>
+<h2>1. Chunking theo cấu trúc thay vì cắt cứng theo ký tự</h2>
+<p>Cắt văn bản mỗi 500 ký tự là cách nhanh nhất để phá vỡ ngữ nghĩa. Một bảng báo giá hoặc quy trình phê duyệt khi bị cắt đôi sẽ mất hoàn toàn điều kiện áp dụng.</p>
+<ul><li>Ưu tiên tách theo heading (H1, H2, H3) và giữ nguyên bảng biểu hoặc chuyển bảng sang Markdown có tiêu đề cột</li><li>Đính kèm metadata vào mỗi chunk: tên tài liệu, phiên bản, phòng ban, ngày cập nhật, đường dẫn gốc</li><li>Dùng overlap hợp lý (10–15%) cho văn bản dài để không đứt mạch lập luận</li></ul>
+<h2>2. Hybrid Search đánh bại Vector Search thuần</h2>
+<p>Vector search mạnh về ngữ nghĩa nhưng hay bỏ sót mã sản phẩm, mã hợp đồng, tên riêng hoặc số hiệu văn bản. Kết hợp BM25 (full-text search trên PostgreSQL hoặc công cụ search) với vector similarity rồi rerank lại top kết quả giúp độ chính xác tăng rõ rệt.</p>
+<p>Với hầu hết doanh nghiệp SME dưới vài trăm nghìn đoạn văn bản, PostgreSQL kèm pgvector và full-text index đã đủ nhanh, gọn và dễ vận hành mà chưa cần thêm một vector database riêng.</p>
+<h2>3. Phân quyền tài liệu ngay ở tầng truy vấn</h2>
+<p>Tài liệu nhân sự, bảng lương hay hợp đồng khách hàng VIP không thể để mọi nhân viên đều hỏi ra được. Phân quyền phải được lọc ngay trong câu truy vấn retrieval theo vai trò (RBAC) hoặc phòng ban, tuyệt đối không trông chờ vào câu lệnh prompt kiểu "đừng tiết lộ nếu người dùng không có quyền".</p>
+<h2>4. Bắt buộc trích dẫn nguồn và biết nói "không tìm thấy"</h2>
+<p>Một hệ thống RAG đáng tin trong doanh nghiệp phải luôn trả kèm tên tài liệu, mục/trang trích dẫn và link mở thẳng bản gốc. Khi điểm tương đồng thấp hoặc thiếu dữ liệu, hệ thống nên trả lời rõ là chưa có thông tin trong kho tài liệu thay vì cố đoán.</p>
+<h2>Kết luận</h2>
+<p>Muốn RAG thực sự được nhân sự dùng mỗi ngày, hãy đầu tư 70% công sức vào làm sạch tài liệu, chunking theo cấu trúc, hybrid search, phân quyền và trích dẫn nguồn. Khi dữ liệu đầu vào sạch và truy xuất đúng, câu trả lời sẽ tự nhiên sắc nét và đáng tin hơn rất nhiều.</p>`,
+      coverUrl: "/images/blog/rag-cho-doanh-nghiep-tra-cuu-tai-lieu-noi-bo.webp",
+      coverAlt:
+        "Minh họa hệ thống RAG doanh nghiệp tách chunk tài liệu nội bộ, tìm kiếm ngữ nghĩa và trích dẫn nguồn",
+      tags: JSON.stringify(["RAG", "AI Agent", "PostgreSQL", "Enterprise AI"]),
+      categoryId: ai?.id,
+      readTime: "9 phút đọc",
+      publishedAt: new Date("2026-09-02T09:00:00+07:00"),
+    },
+    {
+      slug: "mcp-model-context-protocol-tich-hop-ai-vao-crm",
+      title: "MCP (Model Context Protocol) trong thực tế: kết nối AI Agent với CRM và database an toàn",
+      excerpt:
+        "Cách dùng chuẩn MCP để chuẩn hóa lớp công cụ cho AI Agent: tách biệt quyền đọc/ghi, kiểm soát schema đầu vào và tránh viết lại connector cho từng model.",
+      content: `<h2>Bài toán tích hợp công cụ trước khi có MCP</h2>
+<p>Khi xây AI Agent cho doanh nghiệp, phần tốn công nhất không phải gọi API model mà là kết nối AI với hệ thống đang chạy: CRM, bảng booking, database đơn hàng, kho tài liệu hay CMS. Trước đây, mỗi khi đổi giao diện chat hoặc đổi nhà cung cấp model, team thường phải viết lại lớp tool-calling và xử lý xác thực.</p>
+<p>Model Context Protocol (MCP) giải quyết đúng điểm nghẽn này bằng một giao thức chuẩn giữa AI client và các server cung cấp tài nguyên (resources) cùng công cụ (tools).</p>
+<h2>1. Thiết kế MCP tools theo nghiệp vụ, không phơi trần SQL</h2>
+<p>Sai lầm phổ biến khi kết nối AI với database là cấp thẳng một tool chạy câu lệnh SQL tự do. Cách đó vừa nguy hiểm vừa dễ sinh lỗi truy vấn.</p>
+<ul><li>Tạo các tool hẹp, rõ mục đích: ví dụ <code>search_leads</code>, <code>get_booking_slots</code>, <code>create_draft_quote</code></li><li>Validate toàn bộ tham số bằng Zod hoặc JSON Schema trước khi chạm vào database</li><li>Trả về dữ liệu đã được chọn lọc (chỉ các cột cần thiết), tránh đổ hàng nghìn dòng JSON làm tràn context</li></ul>
+<h2>2. Tách rõ công cụ chỉ đọc và công cụ có tác động ghi</h2>
+<p>Với các thao tác đọc như tra cứu lịch sử khách hàng hay tổng hợp doanh thu tuần, Agent có thể tự chạy ngay. Nhưng với thao tác ghi như đổi trạng thái lead, gửi email khách hàng hay hủy đơn, hãy thiết kế bước xác nhận (human-in-the-loop) hoặc chỉ tạo bản nháp (draft) để nhân sự bấm duyệt.</p>
+<h2>3. Audit log cho từng lần gọi tool</h2>
+<p>Mỗi lời gọi MCP tool cần lưu lại: ai kích hoạt, gọi tool nào, tham số đầu vào là gì, mất bao nhiêu mili-giây và kết quả thành công hay lỗi. Khi vận hành thật, audit log là thứ giúp bạn kiểm soát rủi ro và tối ưu tốc độ phản hồi nhanh nhất.</p>
+<h2>Kết luận</h2>
+<p>MCP không làm AI thông minh hơn một cách thần kỳ, nhưng nó biến việc tích hợp AI vào CRM và dữ liệu nội bộ trở nên có kỷ luật, tái sử dụng được và an toàn hơn hẳn cho môi trường production.</p>`,
+      coverUrl: "/images/blog/mcp-model-context-protocol-tich-hop-ai-vao-crm.webp",
+      coverAlt:
+        "Kiến trúc MCP Model Context Protocol kết nối AI Agent với CRM, cơ sở dữ liệu và lớp bảo mật",
+      tags: JSON.stringify(["MCP", "AI Agent", "CRM", "Backend"]),
+      categoryId: ai?.id,
+      readTime: "8 phút đọc",
+      publishedAt: new Date("2026-09-14T09:00:00+07:00"),
+    },
+    {
+      slug: "danh-gia-kiem-soat-chi-phi-ai-agent-production",
+      title: "Đưa AI Agent lên production: kiểm soát chi phí token, latency và giảm hallucination",
+      excerpt:
+        "Những kỹ thuật thực chiến để AI Agent chạy ổn định trên production: routing model theo độ khó, caching, structured output và bộ test eval tự động.",
+      content: `<h2>Khoảng cách giữa bản demo và hệ thống chạy thật</h2>
+<p>Một AI Agent chạy thử trên máy với 5 câu hỏi mẫu thường rất ấn tượng. Nhưng khi đưa lên production phục vụ hàng trăm lượt mỗi ngày, ba vấn đề lập tức xuất hiện: hóa đơn API tăng vọt, thời gian chờ 10–15 giây khiến người dùng thoát trang và thỉnh thoảng Agent trả lời sai sự thật một cách rất tự tin.</p>
+<h2>1. Model Routing: không dùng model đắt nhất cho mọi tác vụ</h2>
+<p>Không phải bước nào trong workflow cũng cần model suy luận nặng nhất. Hãy chia tầng rõ ràng:</p>
+<ul><li>Tác vụ phân loại intent, trích xuất JSON, tóm tắt ngắn: dùng model nhỏ, nhanh và chi phí thấp</li><li>Tác vụ lập luận nhiều bước, viết báo cáo phân tích sâu: mới chuyển sang model mạnh hơn</li><li>Tận dụng prompt caching cho phần system prompt và hướng dẫn nghiệp vụ lặp lại</li></ul>
+<h2>2. Ép kiểu dữ liệu đầu ra (Structured Output)</h2>
+<p>Khi Agent cần truyền dữ liệu sang bước code tiếp theo (ví dụ tạo lead, chọn gói dịch vụ hoặc tính báo giá), luôn yêu cầu JSON tuân theo schema chặt chẽ và kiểm tra lại phía server. Điều này loại bỏ gần hết lỗi parse và buộc model chỉ chọn trong tập giá trị hợp lệ.</p>
+<h2>3. Xây bộ Eval nhỏ nhưng chạy mỗi khi sửa prompt</h2>
+<p>Đừng sửa prompt theo cảm giác. Chỉ cần chuẩn bị 30–50 tình huống thật (gồm cả câu hỏi bẫy, thiếu thông tin và ngoại lệ) kèm tiêu chí chấm điểm rõ ràng. Mỗi lần chỉnh prompt hoặc đổi model, chạy lại bộ eval để chắc chắn sửa chỗ này không làm hỏng chỗ khác.</p>
+<h2>4. Giới hạn vòng lặp và theo dõi latency từng bước</h2>
+<p>Luôn đặt <code>maxSteps</code> cho agent loop, timeout cho từng tool call và stream phản hồi ra giao diện để người dùng thấy tiến trình ngay thay vì nhìn màn hình trắng. Đồng thời ghi metric chi phí token theo từng tính năng để biết workflow nào đang mang lại ROI tốt nhất.</p>
+<h2>Kết luận</h2>
+<p>Đưa AI Agent lên production là bài toán kỹ thuật phần mềm nghiêm túc: đo lường, tối ưu chi phí, kiểm soát sai số và có phương án dự phòng. Làm chắc bốn điểm trên sẽ giúp hệ thống AI của bạn bền bỉ và dễ mở rộng.</p>`,
+      coverUrl: "/images/blog/danh-gia-kiem-soat-chi-phi-ai-agent-production.webp",
+      coverAlt:
+        "Dashboard giám sát AI Agent trên production với biểu đồ latency, chi phí token và guardrail bảo vệ",
+      tags: JSON.stringify(["AI Agent", "LLMOps", "Production", "Performance"]),
+      categoryId: ai?.id,
+      readTime: "8 phút đọc",
+      publishedAt: new Date("2026-09-25T09:00:00+07:00"),
+    },
+    {
+      slug: "thiet-ke-database-postgresql-cho-saas-da-chi-nhanh",
+      title: "Thiết kế database PostgreSQL cho SaaS đa chi nhánh: multi-tenant, index và migration an toàn",
+      excerpt:
+        "Các nguyên tắc thiết kế lược đồ PostgreSQL cho web app B2B/SaaS: cô lập dữ liệu theo tenant, composite index đúng thứ tự và migration không gây downtime.",
+      content: `<h2>Vì sao thiết kế database quyết định tuổi thọ của SaaS</h2>
+<p>Ở giai đoạn đầu, nhiều hệ thống chỉ làm cho 1 cửa hàng hoặc 1 doanh nghiệp. Nhưng chỉ sau 6 tháng khi có thêm chi nhánh thứ hai hoặc bán cho khách hàng mới, toàn bộ truy vấn và báo cáo phải đập đi viết lại nếu cấu trúc dữ liệu không tính trước yếu tố multi-tenant.</p>
+<h2>1. Chọn mô hình Multi-tenant thực dụng cho giai đoạn đầu</h2>
+<p>Với hầu hết SaaS SME (booking, CRM, quản lý phòng khám, F&B), mô hình <strong>Shared Database + Shared Schema kèm cột <code>tenantId</code> / <code>branchId</code></strong> là lựa chọn cân bằng nhất giữa chi phí, tốc độ phát triển và dễ bảo trì migration.</p>
+<ul><li>Mọi bảng dữ liệu nghiệp vụ đều có <code>tenantId</code> bắt buộc (NOT NULL)</li><li>Luôn truyền <code>tenantId</code> từ session đã xác thực ở server, không bao giờ tin giá trị gửi từ client</li><li>Có thể bật Row Level Security (RLS) của PostgreSQL như lớp bảo vệ thứ hai chống rò rỉ dữ liệu chéo</li></ul>
+<h2>2. Đánh Composite Index theo đúng mẫu truy vấn thật</h2>
+<p>Đừng chỉ đánh index đơn lẻ lên <code>createdAt</code> hay <code>status</code>. Khi hệ thống lọc danh sách đơn hàng hoặc lịch hẹn của một chi nhánh theo trạng thái và ngày, composite index dạng <code>(tenantId, status, createdAt DESC)</code> sẽ giúp PostgreSQL tìm dữ liệu nhanh hơn hàng chục lần khi bảng lớn lên hàng triệu dòng.</p>
+<h2>3. Quy tắc Migration không làm sập production</h2>
+<p>Khi hệ thống đã có người dùng thật, hãy tuân theo mô hình <strong>Expand and Contract</strong>:</p>
+<ol><li>Thêm cột mới cho phép NULL trước (không khóa bảng lâu)</li><li>Deploy code ghi song song cả cột cũ và cột mới, sau đó backfill dữ liệu theo từng lô nhỏ</li><li>Chuyển code sang đọc cột mới rồi mới xóa cột cũ ở đợt deploy sau</li></ol>
+<h2>4. Dùng Ledger thay vì ghi đè số dư</h2>
+<p>Với ví liệu trình, tồn kho vật tư hay công nợ khách hàng, đừng chỉ lưu một con số <code>balance</code> rồi cộng trừ trực tiếp. Hãy lưu bảng giao dịch (ledger) bất biến và dùng transaction khi cập nhật để luôn đối soát và audit được mọi biến động.</p>
+<h2>Kết luận</h2>
+<p>Một lược đồ PostgreSQL sạch sẽ, có <code>tenantId</code> nhất quán, index đúng truy vấn và quy trình migration kỷ luật sẽ giúp SaaS của bạn mở rộng từ 1 lên hàng trăm chi nhánh mà không rơi vào cảnh "vừa chạy vừa vá".</p>`,
+      coverUrl: "/images/blog/thiet-ke-database-postgresql-cho-saas-da-chi-nhanh.webp",
+      coverAlt:
+        "Sơ đồ kiến trúc cơ sở dữ liệu PostgreSQL multi-tenant cho SaaS đa chi nhánh với lớp cô lập dữ liệu",
+      tags: JSON.stringify(["PostgreSQL", "SaaS", "Database", "Kiến trúc"]),
+      categoryId: arch?.id,
+      readTime: "9 phút đọc",
+      publishedAt: new Date("2026-10-04T09:00:00+07:00"),
+    },
+    {
+      slug: "idempotency-va-webhook-thanh-toan-payos-vnpay",
+      title: "Xử lý webhook thanh toán (PayOS, VNPay) không trùng đơn: Idempotency và đối soát giao dịch",
+      excerpt:
+        "Cách xây luồng thanh toán online đáng tin cậy tại Việt Nam: xác thực chữ ký, chống xử lý trùng webhook, lưu raw event và cơ chế đối soát tự động.",
+      content: `<h2>Thanh toán online lỗi thường xảy ra ở những chỗ ít ngờ nhất</h2>
+<p>Khách đã chuyển khoản thành công qua VietQR/PayOS nhưng đơn hàng vẫn ở trạng thái "chờ thanh toán", hoặc ngược lại cổng thanh toán gửi webhook 2 lần khiến hệ thống cộng tiền/cấp gói 2 lần. Đây là hai lỗi kinh điển nếu luồng thanh toán chỉ xử lý theo kiểu gọi API đơn giản.</p>
+<h2>1. Không bao giờ tin redirect từ trình duyệt khách hàng</h2>
+<p>Trang "Thanh toán thành công" mà khách được chuyển hướng về chỉ dùng để hiển thị giao diện. Người dùng có thể đóng tab ngay sau khi quét QR, hoặc tự sửa tham số trên URL. Nguồn sự thật duy nhất để cập nhật trạng thái đơn hàng phải là <strong>Webhook phía server</strong> đã xác thực chữ ký HMAC/checksum.</p>
+<h2>2. Idempotency là bắt buộc với mọi Webhook</h2>
+<p>Cổng thanh toán có thể gửi lại cùng một webhook nhiều lần khi mạng chập chờn hoặc server phản hồi chậm. Để đảm bảo xử lý 1 lần hay 5 lần đều cho đúng 1 kết quả:</p>
+<ul><li>Tạo bảng <code>PaymentWebhookEvent</code> với ràng buộc UNIQUE trên <code>providerEventId</code> hoặc <code>transactionReference</code></li><li>Thực hiện kiểm tra và cập nhật trạng thái đơn hàng trong cùng một database transaction</li><li>Chỉ chuyển trạng thái từ <code>PENDING</code> sang <code>PAID</code> bằng điều kiện có kiểm soát (state machine), bỏ qua nếu đơn đã hoàn tất</li></ul>
+<h2>3. Lưu nguyên văn payload và trả HTTP 200 sớm</h2>
+<p>Luôn lưu raw payload (đã ẩn thông tin nhạy cảm nếu có) để dễ điều tra khi đối soát với kế toán. Với các tác vụ nặng sau khi thanh toán như xuất PDF hóa đơn hay gửi email, hãy đẩy sang hàng đợi xử lý bất đồng bộ thay vì làm chậm phản hồi webhook.</p>
+<h2>4. Có job đối soát dự phòng</h2>
+<p>Đề phòng trường hợp webhook bị rớt do sự cố mạng, hãy có một cron job định kỳ kiểm tra các đơn <code>PENDING</code> quá 5–10 phút bằng API truy vấn trạng thái giao dịch từ cổng thanh toán để tự động đồng bộ lại.</p>
+<h2>Kết luận</h2>
+<p>Hệ thống thanh toán tốt không phải hệ thống không bao giờ gặp lỗi mạng, mà là hệ thống vẫn giữ đúng số tiền và đúng trạng thái đơn hàng ngay cả khi mạng rớt hoặc webhook bị gửi lặp nhiều lần.</p>`,
+      coverUrl: "/images/blog/idempotency-va-webhook-thanh-toan-payos-vnpay.webp",
+      coverAlt:
+        "Minh họa luồng xử lý webhook thanh toán PayOS VNPay với lớp chống trùng lặp idempotency và bảng đối soát",
+      tags: JSON.stringify(["Payment", "PayOS", "Webhook", "Backend"]),
+      categoryId: arch?.id,
+      readTime: "8 phút đọc",
+      publishedAt: new Date("2026-10-12T09:00:00+07:00"),
+    },
+    {
+      slug: "modular-monolith-hay-microservices-cho-team-nho",
+      title: "Modular Monolith vs Microservices: kiến trúc nào giúp team 2–5 người ship nhanh và bền?",
+      excerpt:
+        "Phân tích thực tế chi phí vận hành, tốc độ phát triển và cách tổ chức Modular Monolith để sẵn sàng tách service khi thực sự cần.",
+      content: `<h2>Bẫy Microservices ở giai đoạn quá sớm</h2>
+<p>Nhiều startup chỉ có 2–4 lập trình viên nhưng lại bắt đầu bằng 6–8 microservices riêng biệt, kèm message broker, API gateway và pipeline CI/CD phức tạp. Hệ quả là thay vì dành thời gian xây tính năng cho khách hàng, cả team mất nửa tuần chỉ để debug một lỗi gọi chéo giữa hai service và đồng bộ schema.</p>
+<h2>Vì sao Modular Monolith là điểm xuất phát tối ưu</h2>
+<p>Modular Monolith không phải là "code rối cục" (Big Ball of Mud). Đó là một ứng dụng deploy chung một đơn vị, nhưng bên trong được chia ranh giới nghiệp vụ rõ ràng theo từng module độc lập (ví dụ: <code>leads</code>, <code>bookings</code>, <code>payments</code>, <code>partners</code>).</p>
+<ul><li><strong>Tốc độ ship cao:</strong> Một PR có thể sửa trọn luồng từ database đến UI, test tích hợp dễ dàng và deploy trong một bước</li><li><strong>Transaction đơn giản:</strong> Dùng trực tiếp ACID transaction của PostgreSQL thay vì phải xử lý Saga hay distributed lock phức tạp</li><li><strong>Chi phí hạ tầng thấp:</strong> Một VPS hoặc cụm container gọn nhẹ đủ phục vụ hàng chục nghìn người dùng mỗi ngày</li></ul>
+<h2>3 nguyên tắc giữ Modular Monolith không bị rối</h2>
+<ol><li><strong>Giao tiếp qua public interface của module:</strong> Module A không import trực tiếp truy vấn nội bộ của Module B, mà gọi qua service/facade đã định nghĩa</li><li><strong>Tách rõ quyền sở hữu bảng dữ liệu:</strong> Mỗi module chịu trách nhiệm ghi cho nhóm bảng của mình</li><li><strong>Tránh phụ thuộc vòng tròn:</strong> Kiểm soát hướng phụ thuộc giữa core domain và các module tiện ích</li></ol>
+<h2>Khi nào mới thực sự nên tách Microservice?</h2>
+<p>Chỉ nên tách một phần ra thành service riêng khi có lý do rõ ràng: khác biệt lớn về tài nguyên phần cứng (ví dụ worker xử lý video/AI nặng cần GPU), khác ngôn ngữ bắt buộc, hoặc quy mô tổ chức đã lên nhiều team độc lập bị dẫm chân nhau khi release.</p>
+<h2>Kết luận</h2>
+<p>Kiến trúc tốt nhất là kiến trúc phù hợp với quy mô team và giai đoạn kinh doanh. Với team 2–5 người, một Modular Monolith kỷ luật sẽ giúp bạn ra sản phẩm nhanh gấp đôi mà vẫn giữ được đường lui sạch sẽ để mở rộng về sau.</p>`,
+      coverUrl: "/images/blog/modular-monolith-hay-microservices-cho-team-nho.webp",
+      coverAlt:
+        "So sánh kiến trúc Modular Monolith gọn gàng và Microservices phân tán cho team phát triển nhỏ",
+      tags: JSON.stringify(["Architecture", "Modular Monolith", "Microservices", "System Design"]),
+      categoryId: arch?.id,
+      readTime: "8 phút đọc",
+      publishedAt: new Date("2026-10-20T09:00:00+07:00"),
+    },
+    {
+      slug: "toi-uu-core-web-vitals-nextjs-app-router",
+      title: "Tối ưu Core Web Vitals cho Next.js App Router: LCP, INP, CLS từ dự án thực tế",
+      excerpt:
+        "Checklist tối ưu hiệu năng thực tế trên Next.js App Router: giảm JS phía client, tối ưu ảnh hero LCP, chống nhảy layout CLS và cải thiện độ mượt phản hồi INP.",
+      content: `<h2>Tốc độ trang ảnh hưởng trực tiếp tới SEO và tỷ lệ chuyển đổi</h2>
+<p>Một website dịch vụ hay landing page đẹp nhưng mất 4–5 giây mới hiện nội dung chính trên 4G sẽ mất phần lớn khách hàng trước khi họ kịp đọc dòng đầu tiên. Core Web Vitals (LCP, INP, CLS) là thước đo khách quan nhất để biết người dùng thật đang trải nghiệm trang web mượt hay chậm.</p>
+<h2>1. Tối ưu LCP (Largest Contentful Paint) dưới 2.5 giây</h2>
+<p>Phần tử LCP thường là ảnh hero hoặc tiêu đề lớn ở màn hình đầu tiên.</p>
+<ul><li>Luôn chuyển ảnh sang định dạng WebP/AVIF đúng kích thước hiển thị và khai báo thuộc tính <code>sizes</code> chuẩn xác trong <code>next/image</code></li><li>Đánh dấu preload/priority cho duy nhất ảnh hero trên màn hình đầu, tránh lazy-load nhầm ảnh LCP</li><li>Tối ưu font chữ bằng <code>next/font</code> để tránh tải font từ domain ngoài gây chặn render</li></ul>
+<h2>2. Giảm CLS (Cumulative Layout Shift) về gần 0</h2>
+<p>Nhảy bố cục khiến người dùng bấm nhầm nút là trải nghiệm rất khó chịu. Cách xử lý triệt để là luôn định rõ <code>aspect-ratio</code> hoặc <code>width/height</code> cho mọi khung ảnh, video, banner và dùng skeleton cùng kích thước với nội dung thật cho các khối tải động.</p>
+<h2>3. Cải thiện INP (Interaction to Next Paint) bằng Server Components</h2>
+<p>Điểm mạnh lớn nhất của Next.js App Router là mặc định render trên Server. Hãy giữ các trang nội dung, bài blog, bảng dữ liệu tĩnh ở Server Component, chỉ đẩy phần thực sự cần tương tác (bộ lọc, modal, form) sang Client Component nhỏ gọn. Giảm bundle JavaScript phía trình duyệt sẽ giúp mọi cú bấm nút phản hồi gần như tức thì.</p>
+<h2>4. Đo bằng dữ liệu thật thay vì chỉ nhìn máy cá nhân</h2>
+<p>Đừng chỉ kiểm tra trên MacBook mạng cáp quang. Hãy test bằng Lighthouse ở chế độ Mobile Slow 4G, theo dõi Chrome DevTools Performance và xem dữ liệu trường (field data) trong Google Search Console.</p>
+<h2>Kết luận</h2>
+<p>Tối ưu Core Web Vitals trên Next.js App Router không cần các thủ thuật phức tạp. Chỉ cần tận dụng đúng Server Components, tối ưu ảnh hero, khóa kích thước khung hiển thị và giữ bundle client tinh gọn, website sẽ vừa đạt điểm xanh vừa mang lại cảm giác nhanh rõ rệt cho khách hàng.</p>`,
+      coverUrl: "/images/blog/toi-uu-core-web-vitals-nextjs-app-router.webp",
+      coverAlt:
+        "Màn hình laptop tối ưu hiệu năng Core Web Vitals LCP INP CLS trên Next.js App Router",
+      tags: JSON.stringify(["Next.js", "Core Web Vitals", "Performance", "Frontend"]),
+      categoryId: frontend?.id,
+      readTime: "8 phút đọc",
+      publishedAt: new Date("2026-10-29T09:00:00+07:00"),
+    },
+    {
+      slug: "flutter-vs-react-native-2026-chon-stack-mobile-app",
+      title: "Flutter hay React Native cho app doanh nghiệp? So sánh thực tế hiệu năng, chi phí và bảo trì",
+      excerpt:
+        "Góc nhìn thực tế từ các dự án mobile app thương mại: khi nào chọn Flutter, khi nào chọn React Native dựa trên đội ngũ, tính năng phần cứng và lộ trình bảo trì.",
+      content: `<h2>Không có framework nào thắng tuyệt đối — chỉ có lựa chọn đúng bối cảnh</h2>
+<p>Khi startup hoặc doanh nghiệp cần làm app cho cả iOS và Android, câu hỏi đầu tiên hầu như luôn là chọn Flutter hay React Native. Cả hai đều đã đủ trưởng thành để chạy các sản phẩm hàng triệu người dùng. Quyết định đúng phụ thuộc vào đặc thù sản phẩm và đội ngũ của bạn.</p>
+<h2>1. Khi nào Flutter là lựa chọn vượt trội</h2>
+<ul><li>Sản phẩm đòi hỏi giao diện đồng nhất tuyệt đối giữa iOS và Android, nhiều animation mượt hoặc custom UI đặc thù</li><li>App vận hành hiện trường cần độ ổn định cao, xử lý offline-first, camera, quét mã hoặc kết nối thiết bị ngoại vi như máy in Bluetooth</li><li>Doanh nghiệp muốn một bộ công cụ thống nhất (widget, routing, state) ít phụ thuộc thư viện bên thứ ba dễ vỡ khi nâng cấp OS</li></ul>
+<h2>2. Khi nào React Native hợp lý hơn</h2>
+<ul><li>Team của bạn đã rất mạnh về TypeScript/React/Next.js và muốn chia sẻ logic validation, API types hoặc nhân sự giữa web và mobile</li><li>Sản phẩm cần tận dụng hệ sinh thái JavaScript/Expo để đẩy bản cập nhật giao diện nhanh (OTA updates) cho các luồng thương mại điện tử hay nội dung</li></ul>
+<h2>3. Chi phí ẩn thường bị bỏ qua khi làm Mobile App</h2>
+<p>Code giao diện chỉ chiếm một phần chi phí. Dù chọn Flutter hay React Native, bạn vẫn cần dự trù công sức cho:</p>
+<ul><li>Quy trình duyệt App Store và Google Play (chính sách quyền riêng tư, thanh toán in-app, tài khoản test)</li><li>Cơ chế push notification, deep link và theo dõi crash trên nhiều dòng máy Android tầm trung</li><li>Chiến lược tương thích ngược API khi người dùng chưa chịu cập nhật lên phiên bản app mới</li></ul>
+<h2>Kết luận</h2>
+<p>Nếu cần hiệu năng đồ họa ổn định, UI nhất quán và vận hành offline chắc chắn, Flutter là lựa chọn rất đáng tin. Nếu team đã sẵn nền tảng TypeScript/React mạnh và ưu tiên chia sẻ nguồn lực web–mobile, React Native sẽ giúp đi nhanh hơn. Quan trọng nhất vẫn là kiến trúc sạch và kỷ luật release.</p>`,
+      coverUrl: "/images/blog/flutter-vs-react-native-2026-chon-stack-mobile-app.webp",
+      coverAlt:
+        "So sánh phát triển ứng dụng di động đa nền tảng Flutter và React Native trên iOS và Android",
+      tags: JSON.stringify(["Flutter", "React Native", "Mobile App", "Frontend"]),
+      categoryId: frontend?.id,
+      readTime: "8 phút đọc",
+      publishedAt: new Date("2026-11-06T09:00:00+07:00"),
+    },
+    {
+      slug: "he-thong-design-token-va-component-cho-web-app",
+      title: "Xây Design System gọn nhẹ với Tailwind CSS cho web app: đủ dùng, không over-engineer",
+      excerpt:
+        "Cách tổ chức design token màu sắc, typography, spacing và bộ component lõi trên Tailwind CSS giúp web app nhất quán mà không tốn hàng tháng dựng thư viện.",
+      content: `<h2>Đừng tốn 2 tháng xây Design System trước khi có người dùng</h2>
+<p>Một thái cực là không có chuẩn giao diện nào — mỗi trang một kiểu nút, mỗi form một kiểu báo lỗi. Thái cực ngược lại là over-engineer một thư viện component đồ sộ khi sản phẩm còn chưa launch. Điểm ngọt cho startup và SME là một <strong>Lightweight Design System</strong> xây trực tiếp trên CSS variables và Tailwind CSS.</p>
+<h2>1. Chốt bộ Semantic Tokens thay vì gọi màu cứng</h2>
+<p>Thay vì rải <code>text-slate-600</code> hay <code>bg-indigo-600</code> khắp 50 file, hãy định nghĩa lớp token theo ngữ nghĩa trong file CSS gốc:</p>
+<ul><li><strong>Surface & Border:</strong> <code>--surface</code>, <code>--surface-soft</code>, <code>--border</code></li><li><strong>Text hierarchy:</strong> <code>--ink</code> (tiêu đề), <code>--ink-muted</code> (nội dung), <code>--ink-subtle</code> (nhãn phụ)</li><li><strong>Brand & Status:</strong> <code>--brand</code>, <code>--brand-soft</code>, <code>--success</code>, <code>--warning</code>, <code>--danger</code></li></ul>
+<p>Khi cần tinh chỉnh nhận diện thương hiệu hoặc thêm chế độ nền tối sau này, bạn chỉ cần sửa một chỗ thay vì tìm kiếm thay thế hàng trăm dòng.</p>
+<h2>2. Chuẩn hóa 8 component xuất hiện ở 90% màn hình</h2>
+<p>Với hầu hết web app quản trị hoặc SaaS, chỉ cần làm thật kỹ 8 khối nền tảng trước: Button, Input/Select, Badge trạng thái, Card, Table, Modal/Drawer, Toast thông báo và Empty/Error State. Mọi màn hình mới đều lắp ghép từ 8 khối này.</p>
+<h2>3. Quy tắc khoảng cách và mật độ thông tin</h2>
+<p>Dashboard doanh nghiệp cần đủ thoáng để dễ quét mắt nhưng không quá loãng khiến người dùng phải cuộn liên tục. Thống nhất thang spacing (4px/8px), bo góc (<code>rounded-xl</code>, <code>rounded-2xl</code>) và thứ bậc tiêu đề giúp toàn bộ sản phẩm trông sắc nét như có đội ngũ thiết kế chuyên nghiệp đứng sau.</p>
+<h2>Kết luận</h2>
+<p>Design System tốt không phải thứ để trưng bày trên Storybook, mà là bộ quy ước gọn nhẹ giúp developer dựng màn hình mới trong nửa giờ với chất lượng thẩm mỹ đồng đều trên toàn sản phẩm.</p>`,
+      coverUrl: "/images/blog/he-thong-design-token-va-component-cho-web-app.webp",
+      coverAlt:
+        "Hệ thống design token, bảng màu và thư viện UI component gọn nhẹ xây dựng bằng Tailwind CSS",
+      tags: JSON.stringify(["Design System", "Tailwind CSS", "UI/UX", "Frontend"]),
+      categoryId: frontend?.id,
+      readTime: "7 phút đọc",
+      publishedAt: new Date("2026-11-15T09:00:00+07:00"),
+    },
+    {
+      slug: "seo-ky-thuat-cho-website-dich-vu-va-saas",
+      title: "SEO kỹ thuật cho website dịch vụ & SaaS: cấu trúc URL, Schema JSON-LD và nội dung chuyển đổi",
+      excerpt:
+        "Khung triển khai Technical SEO thực tế cho website B2B/SaaS: kiến trúc cụm chủ đề, JSON-LD chuẩn xác, sitemap động và biến traffic tự nhiên thành lead thật.",
+      content: `<h2>Traffic nhiều không có ý nghĩa nếu không tạo ra khách hàng</h2>
+<p>Nhiều website viết hàng chục bài blog chung chung để kéo lượt xem nhưng gần như không mang về yêu cầu tư vấn nào. Với website dịch vụ hoặc SaaS, SEO kỹ thuật và chiến lược nội dung phải đi cùng phễu chuyển đổi ngay từ đầu.</p>
+<h2>1. Kiến trúc URL và cụm chủ đề (Topic Cluster)</h2>
+<p>Thay vì đăng bài rời rạc, hãy tổ chức website thành hai lớp liên kết chặt chẽ:</p>
+<ul><li><strong>Trang tiền (Money pages):</strong> Trang dịch vụ, trang giải pháp theo ngành, trang báo giá/ước tính chi phí — tối ưu cho từ khóa có ý định mua hàng cao</li><li><strong>Trang kiến thức & case study (Blog / Dự án):</strong> Trả lời câu hỏi chuyên sâu, chứng minh năng lực thực chiến và dẫn liên kết nội bộ tự nhiên về trang dịch vụ tương ứng</li></ul>
+<h2>2. Triển khai Schema JSON-LD đúng bản chất trang</h2>
+<p>Google và các công cụ tìm kiếm AI hiểu trang web nhanh hơn nhiều khi có dữ liệu có cấu trúc sạch sẽ: <code>Organization</code> & <code>Person</code> cho thương hiệu, <code>BreadcrumbList</code> cho phân cấp điều hướng, <code>BlogPosting</code> cho bài viết, <code>CreativeWork</code> cho dự án và <code>FAQPage</code> khi có mục hỏi đáp thật.</p>
+<h2>3. Sitemap động, Canonical và Robots không để sót lỗi</h2>
+<p>Đảm bảo mọi bài viết hoặc dự án mới publish đều tự động xuất hiện trong <code>sitemap.xml</code>, không để các trang filter/admin bị index nhầm và kiểm tra canonical URL nhất quán (có hoặc không có www, dùng HTTPS).</p>
+<h2>4. Chuyển đổi ngay trong ngữ cảnh bài đọc</h2>
+<p>Người đọc một bài chuyên sâu về chi phí làm website hay xây hệ thống booking đang có nhu cầu rất sát. Một khối CTA gọn gàng dẫn sang công cụ ước tính chi phí hoặc form đặt lịch tư vấn ở cuối bài sẽ chuyển đổi tốt hơn nhiều so với banner quảng cáo chung chung.</p>
+<h2>Kết luận</h2>
+<p>SEO kỹ thuật sạch sẽ là nền móng giúp Google và AI search hiểu rõ bạn làm gì và giỏi lĩnh vực nào. Khi kết hợp với nội dung thực chiến và lộ trình chuyển đổi hợp lý, website sẽ trở thành kênh tạo lead bền vững mỗi tháng.</p>`,
+      coverUrl: "/images/blog/seo-ky-thuat-cho-website-dich-vu-va-saas.webp",
+      coverAlt:
+        "Sơ đồ SEO kỹ thuật cho website dịch vụ và SaaS gồm cấu trúc sitemap, schema JSON-LD và tăng trưởng traffic",
+      tags: JSON.stringify(["SEO", "Technical SEO", "SaaS", "Growth"]),
+      categoryId: product?.id,
+      readTime: "8 phút đọc",
+      publishedAt: new Date("2026-11-24T09:00:00+07:00"),
     },
   ];
 
-  for (const p of posts) {
+  const baseDate = new Date("2026-06-10T09:00:00+07:00").getTime();
+  for (let i = 0; i < posts.length; i++) {
+    const p = posts[i];
+    const publishedAt =
+      "publishedAt" in p && p.publishedAt
+        ? p.publishedAt
+        : new Date(baseDate + i * 7 * 24 * 60 * 60 * 1000);
     await prisma.post.upsert({
       where: { slug: p.slug },
-      update: { ...p, status: ContentStatus.PUBLISHED, authorId: admin.id },
+      update: {
+        ...p,
+        publishedAt,
+        status: ContentStatus.PUBLISHED,
+        authorId: admin.id,
+      },
       create: {
         ...p,
         status: ContentStatus.PUBLISHED,
         authorId: admin.id,
-        publishedAt: new Date(),
+        publishedAt,
       },
     });
   }

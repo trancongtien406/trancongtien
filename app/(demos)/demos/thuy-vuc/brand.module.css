@@ -81,18 +81,18 @@
 [data-pinned] .dChapters{position:absolute;left:0;right:0;bottom:14svh;z-index:4;padding-top:0;padding-bottom:0;display:block;pointer-events:none}
 [data-pinned] .ch{position:absolute;left:var(--tv-pad);bottom:0;max-width:min(560px,86vw);visibility:hidden;text-shadow:0 2px 24px rgba(1,10,16,.6)}
 [data-pinned] .ch:first-child{visibility:visible}
-:global(.tvRay){animation:tv-ray 7s ease-in-out infinite alternate}
-:global(.tvFish){animation:tv-swim 14s ease-in-out infinite alternate}
-:global(.tvF1){animation-duration:19s;animation-direction:alternate-reverse}
-:global(.tvF2){animation-duration:11s}
-:global(.tvCoral){animation:tv-sway2 6s ease-in-out infinite alternate}
-:global(.tvGlow){animation:tv-glow 5s ease-in-out infinite alternate}
+.dBg :global(.tvRay){animation:tv-ray 7s ease-in-out infinite alternate}
+.dBg :global(.tvFish){animation:tv-swim 14s ease-in-out infinite alternate}
+.dBg :global(.tvF1){animation-duration:19s;animation-direction:alternate-reverse}
+.dBg :global(.tvF2){animation-duration:11s}
+.dBg :global(.tvCoral){animation:tv-sway2 6s ease-in-out infinite alternate}
+.dBg :global(.tvGlow){animation:tv-glow 5s ease-in-out infinite alternate}
 @keyframes tv-ray{from{opacity:.15}to{opacity:.6}}
 @keyframes tv-swim{from{translate:-60px 0}to{translate:90px -14px}}
 @keyframes tv-sway{from{transform:rotate(-7deg)}to{transform:rotate(9deg)}}
 @keyframes tv-sway2{from{transform:rotate(-2.5deg)}to{transform:rotate(2.5deg)}}
 @keyframes tv-glow{from{opacity:.1}to{opacity:.95}}
-@media(prefers-reduced-motion:reduce){:global(.tvRay),:global(.tvFish),:global(.tvCoral),:global(.tvGlow),.heroRays i{animation:none}}
+@media(prefers-reduced-motion:reduce){.dBg :global(.tvRay),.dBg :global(.tvFish),.dBg :global(.tvCoral),.dBg :global(.tvGlow),.heroRays i{animation:none}}
 
 /* tours */
 .tourGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:64px}

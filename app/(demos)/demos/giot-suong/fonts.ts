@@ -1,0 +1,11 @@
+import localFont from "next/font/local";
+
+/** Phông tự lưu cục bộ (OFL, tải từ Google Fonts): mỗi subset một file, xếp chồng vietnamese -> latin -> latin-ext. */
+export const gsHeadvi = localFont({ src: [{ path: "./fonts/lexend-vietnamese-normal-300_700.woff2", weight: "300 700", style: "normal" }], variable: "--gs-fh-vi", display: "swap", adjustFontFallback: false });
+export const gsHeadlat = localFont({ src: [{ path: "./fonts/lexend-latin-normal-300_700.woff2", weight: "300 700", style: "normal" }], variable: "--gs-fh-lat", display: "swap", adjustFontFallback: false });
+export const gsHeadext = localFont({ src: [{ path: "./fonts/lexend-latin-ext-normal-300_700.woff2", weight: "300 700", style: "normal" }], variable: "--gs-fh-ext", display: "swap", adjustFontFallback: false, preload: false });
+export const gsBodyvi = localFont({ src: [{ path: "./fonts/bevn-vietnamese-normal-300.woff2", weight: "300", style: "normal" }, { path: "./fonts/bevn-vietnamese-normal-400.woff2", weight: "400", style: "normal" }, { path: "./fonts/bevn-vietnamese-normal-500.woff2", weight: "500", style: "normal" }, { path: "./fonts/bevn-vietnamese-normal-600.woff2", weight: "600", style: "normal" }], variable: "--gs-fb-vi", display: "swap", adjustFontFallback: false });
+export const gsBodylat = localFont({ src: [{ path: "./fonts/bevn-latin-normal-300.woff2", weight: "300", style: "normal" }, { path: "./fonts/bevn-latin-normal-400.woff2", weight: "400", style: "normal" }, { path: "./fonts/bevn-latin-normal-500.woff2", weight: "500", style: "normal" }, { path: "./fonts/bevn-latin-normal-600.woff2", weight: "600", style: "normal" }], variable: "--gs-fb-lat", display: "swap", adjustFontFallback: false });
+export const gsBodyext = localFont({ src: [{ path: "./fonts/bevn-latin-ext-normal-300.woff2", weight: "300", style: "normal" }, { path: "./fonts/bevn-latin-ext-normal-400.woff2", weight: "400", style: "normal" }, { path: "./fonts/bevn-latin-ext-normal-500.woff2", weight: "500", style: "normal" }, { path: "./fonts/bevn-latin-ext-normal-600.woff2", weight: "600", style: "normal" }], variable: "--gs-fb-ext", display: "swap", adjustFontFallback: false, preload: false });
+
+export const fontVars = [gsHeadvi, gsHeadlat, gsHeadext, gsBodyvi, gsBodylat, gsBodyext].map((f) => f.variable).join(" ");

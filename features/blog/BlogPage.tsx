@@ -25,17 +25,17 @@ export type BlogListItem = {
 
 const categories = [
   "Tất cả bài viết",
-  "Tự duy sản phẩm",
+  "Tư duy sản phẩm",
   "Kiến trúc hệ thống",
   "Frontend",
   "AI Agent",
 ] as const;
 
 const popularTopics = [
-  "Tự duy sản phẩm",
+  "Tư duy sản phẩm",
   "Kiến trúc hệ thống",
   "Next.js",
-  "Clean Code",
+  "RAG",
   "AI Agent",
 ];
 
@@ -46,13 +46,16 @@ export function BlogPage({ posts }: { posts: BlogListItem[] }) {
   const [query, setQuery] = useState("");
 
   const filtered = useMemo(() => {
+    const normalizedQuery = query.trim().toLowerCase();
     return posts.filter((post) => {
       const matchCat =
         filter === "Tất cả bài viết" || post.category === filter;
       const matchQuery =
-        !query ||
-        post.title.toLowerCase().includes(query.toLowerCase()) ||
-        post.excerpt.toLowerCase().includes(query.toLowerCase());
+        !normalizedQuery ||
+        post.title.toLowerCase().includes(normalizedQuery) ||
+        post.excerpt.toLowerCase().includes(normalizedQuery) ||
+        post.category.toLowerCase().includes(normalizedQuery) ||
+        post.tags.some((tag) => tag.toLowerCase().includes(normalizedQuery));
       return matchCat && matchQuery;
     });
   }, [filter, query, posts]);
@@ -92,12 +95,13 @@ export function BlogPage({ posts }: { posts: BlogListItem[] }) {
                   key={topic}
                   type="button"
                   onClick={() => {
-                    setFilter(
-                      categories.includes(topic as (typeof categories)[number])
-                        ? (topic as (typeof categories)[number])
-                        : "Tất cả bài viết",
-                    );
-                    setQuery(topic);
+                    if (categories.includes(topic as (typeof categories)[number])) {
+                      setFilter(topic as (typeof categories)[number]);
+                      setQuery("");
+                    } else {
+                      setFilter("Tất cả bài viết");
+                      setQuery(topic);
+                    }
                   }}
                   className="rounded-full bg-surface-soft px-2.5 py-1 text-xs font-medium text-ink-muted hover:bg-brand-soft hover:text-brand"
                 >
@@ -238,7 +242,7 @@ export function BlogPage({ posts }: { posts: BlogListItem[] }) {
                       >
                         <span>{cat}</span>
                         <span className="rounded-full bg-surface-soft px-2 py-0.5 text-xs">
-                          {count || 1}
+                          {count}
                         </span>
                       </button>
                     </li>

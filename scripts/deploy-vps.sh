@@ -16,15 +16,23 @@ WEB_PORT="${WEB_PORT:-3342}"
 APP_NAME="${APP_NAME:-trancongtien-web}"
 
 SSH_BASE_OPTS=(-o StrictHostKeyChecking=accept-new -o ConnectTimeout=20)
+CONTROL_SOCKET="/tmp/ssh-vps-${$}.sock"
+
+cleanup() {
+  ssh -O exit -S "$CONTROL_SOCKET" "${VPS_USER}@${VPS_HOST}" 2>/dev/null || true
+  rm -f "$CONTROL_SOCKET"
+}
+trap cleanup EXIT INT TERM
+
 if [[ -n "${SSHPASS:-}" ]] && command -v sshpass >/dev/null 2>&1; then
-  # Prefer -e: passwords with @/#/$ break with sshpass -p
   export SSHPASS
-  SSH=(sshpass -e ssh "${SSH_BASE_OPTS[@]}" -o PreferredAuthentications=password -o PubkeyAuthentication=no "${VPS_USER}@${VPS_HOST}")
-  RSYNC_SSH="sshpass -e ssh ${SSH_BASE_OPTS[*]} -o PreferredAuthentications=password -o PubkeyAuthentication=no"
+  sshpass -e ssh "${SSH_BASE_OPTS[@]}" -o PreferredAuthentications=password -o PubkeyAuthentication=no -M -S "$CONTROL_SOCKET" -f -N "${VPS_USER}@${VPS_HOST}"
 else
-  SSH=(ssh "${SSH_BASE_OPTS[@]}" "${VPS_USER}@${VPS_HOST}")
-  RSYNC_SSH="ssh ${SSH_BASE_OPTS[*]}"
+  ssh "${SSH_BASE_OPTS[@]}" -M -S "$CONTROL_SOCKET" -f -N "${VPS_USER}@${VPS_HOST}"
 fi
+
+SSH=(ssh -S "$CONTROL_SOCKET" "${VPS_USER}@${VPS_HOST}")
+RSYNC_SSH="ssh -S $CONTROL_SOCKET"
 
 echo "==> Check SSH ${VPS_USER}@${VPS_HOST}"
 "${SSH[@]}" "echo ok && uname -a && node -v && npm -v"
@@ -43,6 +51,10 @@ rsync -az --delete \
   --exclude .env.production \
   --exclude connect.md \
   --exclude '*.db' \
+  --exclude .DS_Store \
+  --exclude '*.log' \
+  --exclude video1.mp4 \
+  --exclude 0_NaN.jpg \
   -e "$RSYNC_SSH" \
   "$ROOT/" "${VPS_USER}@${VPS_HOST}:${VPS_PATH}/"
 
@@ -160,12 +172,14 @@ fi
 npm ci --include=dev
 npx prisma migrate deploy
 npm run build
+npm run seed || true
 
 pm2 delete '${APP_NAME}' >/dev/null 2>&1 || true
 pm2 start npm --name '${APP_NAME}' --cwd '${VPS_PATH}' -- start
+pm2 reload trancongtien-mcp >/dev/null 2>&1 || true
 pm2 save
 pm2 status '${APP_NAME}'
-sleep 2
+sleep 3
 curl -fsS "http://127.0.0.1:\${PORT:-${WEB_PORT}}/api/health"
 EOF
 

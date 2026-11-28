@@ -26,28 +26,58 @@ type SeedProjectItem = {
   role?: string;
 };
 
-const covers = [
-  {
-    url: "/images/illustrations/projects-hero-devices.webp",
-    alt: "Mockup sản phẩm trên thiết bị",
-  },
-  {
-    url: "/images/illustrations/services-devices.webp",
-    alt: "Giao diện dịch vụ trên desktop và mobile",
-  },
-  {
-    url: "/images/illustrations/blog-hero-desk.webp",
-    alt: "Không gian làm việc với dashboard sản phẩm",
-  },
-  {
-    url: "/images/illustrations/about-outdoors.webp",
-    alt: "Bối cảnh vận hành thực tế ngoài hiện trường",
-  },
-  {
-    url: "/images/illustrations/process-roadmap.webp",
-    alt: "Sơ đồ quy trình và roadmap sản phẩm",
-  },
-];
+const projectCoverAlts: Record<string, string> = {
+  "smart-booking":
+    "Giao diện Smart Booking đặt lịch spa/clinic đa nhân sự trên laptop với lịch ca trực quan",
+  "lieu-trinh-wallet":
+    "Giao diện Ví liệu trình quản lý gói buổi spa và thẻ check-in QR trên tablet và điện thoại",
+  "lead-pipeline-bds":
+    "Giao diện Pipeline lead môi giới BĐS với bảng Kanban chăm sóc khách hàng và nhắc SLA",
+  "du-an-landing-utm":
+    "Landing page mở bán dự án bất động sản kèm phễu đo lường nguồn UTM và cộng tác viên",
+  "nhat-ky-cong-trinh":
+    "Ứng dụng di động Nhật ký công trình ghi tiến độ và album ảnh hiện trường theo hạng mục",
+  "phieu-vat-tu":
+    "Giao diện quản lý phiếu xuất nhập vật tư công trình và cảnh báo vượt định mức trên tablet",
+  "lich-kham-emr-nhe":
+    "Hệ thống lịch khám theo bác sĩ và hồ sơ bệnh án tái khám EMR tối giản cho phòng khám tư",
+  "hang-doi-goi-so":
+    "Màn hình TV gọi số hàng đợi và kiosk lấy số thứ tự cho phòng khám hiện đại",
+  "qr-order-kds":
+    "Hệ thống QR order tại bàn trên điện thoại kết nối màn hình KDS bếp theo station",
+  "fnb-ca-doanh-thu":
+    "Dashboard đóng ca thu ngân và đối chiếu doanh thu tiền mặt, chuyển khoản đa chi nhánh F&B",
+  "crm-tuyen-sinh":
+    "Hệ thống CRM tuyển sinh trung tâm đào tạo với phễu học viên và lịch tư vấn",
+  "lop-bai-tap-lite":
+    "Giao diện LMS nhẹ quản lý lớp học, nộp bài tập và theo dõi điểm số học viên",
+  "fashion-move":
+    "Nền tảng thương mại điện tử thời trang Fashion Move hiển thị trên desktop và mobile",
+  "don-da-kenh":
+    "Console gom đơn đa kênh tập trung đồng bộ trạng thái vận chuyển cho shop bán lẻ",
+  "dieu-phoi-chuyen":
+    "Hệ thống điều phối chuyến vận tải theo tuyến bản đồ kết hợp ứng dụng tài xế di động",
+  "tracking-b2b":
+    "Portal tra cứu hành trình đơn hàng B2B kèm ảnh chứng từ giao hàng POD trực tuyến",
+  "booking-truc-tiep":
+    "Booking engine đặt phòng trực tiếp cho khách sạn boutique với bộ chọn ngày và thư viện phòng",
+  "buong-phong-checklist":
+    "Ứng dụng Housekeeping trên tablet cập nhật trạng thái dọn phòng khách sạn theo thời gian thực",
+  "gym-checkin-goi":
+    "Hệ thống check-in QR và quản lý gói hội viên phòng gym tại quầy lễ tân",
+  "pt-session-wallet":
+    "Ứng dụng lịch tập PT cá nhân và ví buổi tập theo dõi tiến độ trên tablet và điện thoại",
+  "sales-crm":
+    "Dashboard Sales CRM theo dõi pipeline cơ hội, doanh thu và hiệu suất đội ngũ kinh doanh",
+  "portal-khach-agency":
+    "Portal khách hàng agency quản lý tiến độ milestone, tài liệu bàn giao và ticket hỗ trợ",
+  "ai-search":
+    "Hệ thống AI Search tra cứu tài liệu nội bộ doanh nghiệp tích hợp trích dẫn nguồn chính xác",
+  "phe-duyet-chi-phi":
+    "Ứng dụng luồng phê duyệt đề xuất chi phí và chứng từ nội bộ đa cấp cho doanh nghiệp SME",
+  "photo-booth":
+    "Ứng dụng di động Photo Booth sự kiện với khung ảnh strip, bộ lọc và in Bluetooth tại chỗ",
+};
 
 const tones = [
   "bg-violet-50",
@@ -1868,7 +1898,10 @@ export function buildSeedProjects(caseStudyHtml: CaseStudyHtml): SeedProjectRow[
     category: string,
     solutionSlug: string | null,
   ) => {
-    const cover = covers[(sortOrder - 1) % covers.length];
+    const coverUrl = `/images/projects/${item.slug}.webp`;
+    const coverAlt =
+      projectCoverAlts[item.slug] ||
+      `Giao diện sản phẩm dự án ${item.title}`;
     const fallback = caseStudyHtml({
       problem: item.problem,
       solution: item.solutionText,
@@ -1880,8 +1913,8 @@ export function buildSeedProjects(caseStudyHtml: CaseStudyHtml): SeedProjectRow[
       category,
       description: item.description,
       content: item.contentHtml || fallback,
-      coverUrl: cover.url,
-      coverAlt: `${item.title} — ${cover.alt}`,
+      coverUrl,
+      coverAlt,
       features: JSON.stringify(item.features),
       stack: JSON.stringify(item.stack),
       role: item.role || "Product Engineer",

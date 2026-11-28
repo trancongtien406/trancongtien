@@ -28,16 +28,6 @@ export type ProjectListItem = {
   coverAlt: string;
 };
 
-const filters = [
-  "Tất cả dự án",
-  "Marketplace",
-  "Booking",
-  "CRM / SaaS",
-  "Mobile App",
-  "AI Agent",
-  "Web App",
-] as const;
-
 const stats = [
   { value: siteConfig.stats.projects, label: "Dự án hoàn thành" },
   { value: siteConfig.stats.domains, label: "Lĩnh vực" },
@@ -46,7 +36,12 @@ const stats = [
 ];
 
 export function ProjectsPage({ projects }: { projects: ProjectListItem[] }) {
-  const [filter, setFilter] = useState<(typeof filters)[number]>("Tất cả dự án");
+  const filters = useMemo(() => {
+    const cats = Array.from(new Set(projects.map((p) => p.category)));
+    return ["Tất cả dự án", ...cats];
+  }, [projects]);
+
+  const [filter, setFilter] = useState<string>("Tất cả dự án");
 
   const filtered = useMemo(() => {
     if (filter === "Tất cả dự án") return projects;
